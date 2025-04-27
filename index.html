@@ -9,7 +9,8 @@
     :root {
       --primary-color: #6C3483;
       --secondary-color: #EDBB99;
-      --text-color: #2C3E50;
+      --card-color: rgba(245, 230, 250, 0.95);
+      --text-color: #4A235A;
     }
 
     * {
@@ -56,14 +57,14 @@
     }
 
     .app-card {
-      background: rgba(255,255,255,0.95);
+      background: linear-gradient(145deg, var(--card-color) 0%, #F8EDF8 100%);
       border-radius: 20px;
       padding: 30px;
       text-align: center;
       transition: transform 0.3s ease;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.4);
     }
 
     .app-card:hover {
@@ -96,6 +97,7 @@
       font-size: 1rem;
       line-height: 1.6;
       margin-bottom: 25px;
+      opacity: 0.9;
     }
 
     .app-button {
@@ -111,6 +113,7 @@
       transition: all 0.3s ease;
       width: 100%;
       border: 2px solid transparent;
+      box-shadow: 0 4px 15px rgba(108,52,131,0.3);
     }
 
     .app-button:hover {
