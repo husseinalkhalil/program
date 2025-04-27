@@ -6,35 +6,51 @@
   <title>الصفحة الرئيسية</title>
   <style>
     body {
-      background: #f0f0f0;
+      background: linear-gradient(135deg, #f0e1d2, #9b59b6); /* تدرج بين البيج والبنفسجي */
       font-family: 'Tajawal', sans-serif;
       text-align: center;
       padding: 50px;
+      margin: 0;
     }
     h1 {
+      font-size: 32px;
       margin-bottom: 40px;
-      color: #333;
+      color: #4a2c92; /* لون بنفسجي داكن للنص */
+      font-weight: 600;
     }
     .container {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      max-width: 300px;
+      align-items: center;
+      gap: 30px;
+      max-width: 400px;
       margin: auto;
     }
     .button {
-      background: #6200ea;
+      background: #9b59b6; /* لون بنفسجي فاتح */
       color: white;
-      padding: 15px;
+      padding: 18px 30px;
       border: none;
       border-radius: 10px;
-      font-size: 18px;
+      font-size: 20px;
       cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .button:hover {
-      background: #3700b3;
-      transform: scale(1.05);
+      background: #8e44ad; /* بنفسجي داكن عند التمرير */
+      transform: translateY(-5px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    }
+    .button:active {
+      transform: translateY(1px);
+    }
+    .button:focus {
+      outline: none;
+    }
+    .button:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
     }
   </style>
 </head>
