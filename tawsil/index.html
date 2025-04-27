@@ -348,207 +348,153 @@
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="orderDate">تاريخ الطلب</label>
-          <input type="date" id="orderDate" name="orderDate" required />
-        </div>
-        <div class="form-group">
-          <label for="notes">ملاحظات</label>
-          <input type="text" id="notes" name="notes" />
-        </div>
-      </div>
+      <label for="orderDate">تاريخ الطلب</label>
+      <input type="date" id="orderDate" name="orderDate" required />
 
-      <div class="form-group">
-        <label for="invoiceFile">رفع فاتورة (اختياري)</label>
-        <div class="file-input-wrapper">
-          <button type="button" class="file-clear-btn" id="clearFileBtn">×</button>
-          <input 
-            type="file" 
-            id="invoiceFile" 
-            name="invoiceFile" 
-            class="file-input"
-            accept="image/*, application/pdf"
-          >
-          <small>الحد الأقصى لحجم الملف: 2MB (مسموح ب: JPG, PNG, PDF)</small>
-        </div>
-      </div>
+      <label for="notes">ملاحظات</label>
+      <textarea id="notes" name="notes"></textarea>
 
-      <button type="submit">إدخال الطلب</button>
+      <label for="file">إرفاق فاتورة</label>
+      <div class="file-input-wrapper">
+        <div id="fileInput" class="file-input">
+          <input type="file" id="file" name="file" class="file-input" />
+        </div>
+        <button class="file-clear-btn" onclick="clearFileInput()">×</button>
+      </div>
+      
+      <div id="orderAlert" class="order-alert"></div>
+
+      <button type="submit" class="view-data-btn">عرض البيانات</button>
     </form>
-    
-    <a href="index.html">
-      <button class="refresh-btn">تحديث الصفحة</button>
-    </a>
-    
-    <a href="view.html">
-      <button class="view-data-btn">عرض البيانات</button>
-    </a>
   </div>
 
-  <div class="modal-overlay" id="modalOverlay"></div>
-  <div class="custom-modal" id="clientModal">
-    <h3 style="margin: 0 0 15px 0; color: #6a1b9a;">أدخل اسم العميل الجديد</h3>
-    <input type="text" id="newClientName" placeholder="اسم العميل">
+  <div id="modalOverlay" class="modal-overlay"></div>
+
+  <div id="clientModal" class="custom-modal">
+    <input type="text" id="newClientName" placeholder="اسم العميل الجديد" />
     <div class="modal-buttons">
+      <button class="confirm-btn" onclick="saveClient()">حفظ</button>
       <button class="cancel-btn" onclick="closeModal()">إلغاء</button>
-      <button class="confirm-btn" onclick="confirmClient()">موافق</button>
     </div>
   </div>
 
-  <div id="orderAlert" class="order-alert"></div>
-
   <script>
-    const orderForm = document.getElementById("orderForm");
     const clientSelect = document.getElementById("clientName");
-    const orderDateInput = document.getElementById("orderDate");
+    const orderForm = document.getElementById("orderForm");
+    const fileInput = document.getElementById("file");
+    const fileClearBtn = document.querySelector(".file-clear-btn");
     const clientAlert = document.getElementById("clientAlert");
     const orderAlert = document.getElementById("orderAlert");
+    const clientModal = document.getElementById("clientModal");
+    const modalOverlay = document.getElementById("modalOverlay");
 
     let clients = JSON.parse(localStorage.getItem("clients") || "[]");
 
-    document.querySelectorAll('input[type="number"]').forEach(input => {
-      input.addEventListener('keypress', (e) => {
-        if (isNaN(String.fromCharCode(e.keyCode))) {
-          e.preventDefault();
-        }
-      });
-    });
-
-    const fileInput = document.getElementById('invoiceFile');
-    const clearBtn = document.getElementById('clearFileBtn');
-
-    fileInput.addEventListener('change', function() {
-      clearBtn.style.display = this.files.length ? 'flex' : 'none';
-    });
-
-    clearBtn.addEventListener('click', function() {
-      fileInput.value = '';
-      this.style.display = 'none';
-    });
-
     function addClient() {
-      document.getElementById('modalOverlay').style.display = 'block';
-      document.getElementById('clientModal').style.display = 'block';
-      document.getElementById('newClientName').value = '';
+      clientModal.style.display = "block";
+      modalOverlay.style.display = "block";
     }
 
     function closeModal() {
-      document.getElementById('modalOverlay').style.display = 'none';
-      document.getElementById('clientModal').style.display = 'none';
+      clientModal.style.display = "none";
+      modalOverlay.style.display = "none";
     }
 
-    function confirmClient() {
-      const newClient = document.getElementById('newClientName').value.trim();
-      
-      if (newClient) {
-        if (!clients.includes(newClient)) {
-          clients.push(newClient);
+    function saveClient() {
+      const newClientName = document.getElementById("newClientName").value.trim();
+      if (newClientName) {
+        if (!clients.includes(newClientName)) {
+          clients.push(newClientName);
           localStorage.setItem("clients", JSON.stringify(clients));
-          localStorage.setItem("clientUpdateTrigger", Date.now().toString());
-          
-          clientAlert.textContent = "تمت إضافة العميل بنجاح!";
-          clientAlert.style.display = "block";
+          clientAlert.textContent = "تم إضافة العميل بنجاح! يمكنك الآن تحديده من القائمة.";
+          clientAlert.style.display = 'block';
           setTimeout(() => {
-            clientAlert.style.display = "none";
+            clientAlert.style.display = 'none';
+            closeModal();
+            updateClientSelect();
           }, 3000);
-          
-          loadClients();
-          closeModal();
         } else {
-          alert("العميل موجود بالفعل!");
+          clientAlert.textContent = "العميل موجود بالفعل في القائمة.";
+          clientAlert.style.display = 'block';
+          setTimeout(() => {
+            clientAlert.style.display = 'none';
+          }, 3000);
         }
+      } else {
+        clientAlert.textContent = "الرجاء إدخال اسم العميل.";
+        clientAlert.style.display = 'block';
+        setTimeout(() => {
+          clientAlert.style.display = 'none';
+        }, 3000);
       }
-      closeModal();
     }
 
-    function loadClients() {
+    function updateClientSelect() {
       clientSelect.innerHTML = '<option value="">اختر عميل</option>';
       clients.forEach(client => {
-        const option = document.createElement("option");
+        const option = document.createElement('option');
         option.value = client;
         option.textContent = client;
         clientSelect.appendChild(option);
       });
     }
 
-    function setTodayDate() {
-      const today = new Date().toISOString().split('T')[0];
-      orderDateInput.value = today;
-    }
+    updateClientSelect();
 
-    async function convertFileToBase64(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-      });
-    }
+    orderForm.addEventListener('submit', function(event) {
+      event.preventDefault();
 
-    orderForm.addEventListener("submit", async function(e) {
-      e.preventDefault();
+      const clientName = clientSelect.value;
+      const orderDescription = document.getElementById("orderDescription").value.trim();
+      const orderPrice = parseFloat(document.getElementById("orderPrice").value);
+      const deliveryPrice = parseFloat(document.getElementById("deliveryPrice").value);
+      const paidAmount = parseFloat(document.getElementById("paidAmount").value);
+      const orderDate = document.getElementById("orderDate").value;
+      const notes = document.getElementById("notes").value.trim();
+      const invoiceFile = fileInput.files[0];
 
-      const invoiceFile = document.getElementById("invoiceFile").files[0];
-      let invoiceData = null;
-
-      if (invoiceFile) {
-        if (invoiceFile.size > 2 * 1024 * 1024) {
-          alert("حجم الملف يجب ألا يتجاوز 2MB!");
-          return;
-        }
-
-        const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
-        if (!allowedTypes.includes(invoiceFile.type)) {
-          alert("نوع الملف غير مسموح به! المسموح: JPG, PNG, PDF");
-          return;
-        }
-
-        try {
-          invoiceData = await convertFileToBase64(invoiceFile);
-        } catch (error) {
-          alert("حدث خطأ أثناء قراءة الملف!");
-          return;
-        }
+      if (!clientName || !orderDescription || !orderPrice || !deliveryPrice || !paidAmount || !orderDate) {
+        orderAlert.textContent = "يرجى ملء جميع الحقول المطلوبة.";
+        orderAlert.style.display = 'block';
+        setTimeout(() => {
+          orderAlert.style.display = 'none';
+        }, 3000);
+        return;
       }
 
-      const order = {
-        id: new Date().getTime(),
-        client: clientSelect.value,
-        description: document.getElementById("orderDescription").value,
-        orderPrice: parseFloat(document.getElementById("orderPrice").value),
-        deliveryPrice: parseFloat(document.getElementById("deliveryPrice").value),
-        paidAmount: parseFloat(document.getElementById("paidAmount").value),
-        orderDate: document.getElementById("orderDate").value,
-        notes: document.getElementById("notes").value,
-        invoice: invoiceData
+      const orderData = {
+        clientName,
+        orderDescription,
+        orderPrice,
+        deliveryPrice,
+        paidAmount,
+        orderDate,
+        notes,
+        invoiceFile,
       };
 
-      let orders = JSON.parse(localStorage.getItem("orders") || "[]");
-      orders.push(order);
-      localStorage.setItem("orders", JSON.stringify(orders));
+      const orderList = JSON.parse(localStorage.getItem("orders") || "[]");
+      orderList.push(orderData);
+      localStorage.setItem("orders", JSON.stringify(orderList));
 
-      orderAlert.textContent = "تم إضافة الطلب بنجاح!";
-      orderAlert.style.display = "block";
+      orderAlert.textContent = "تم إضافة الطلب بنجاح.";
+      orderAlert.style.display = 'block';
       setTimeout(() => {
-        orderAlert.style.display = "none";
+        orderAlert.style.display = 'none';
+        orderForm.reset();
       }, 3000);
-
-      orderForm.reset();
-      setTodayDate();
     });
 
-    window.addEventListener('storage', function(e) {
-      if (e.key === 'clients' || e.key === 'clientUpdateTrigger') {
-        clients = JSON.parse(localStorage.getItem("clients") || "[]");
-        loadClients();
+    function clearFileInput() {
+      fileInput.value = '';
+      fileClearBtn.style.display = 'none';
+    }
+
+    fileInput.addEventListener('change', function() {
+      if (fileInput.files.length > 0) {
+        fileClearBtn.style.display = 'flex';
       }
     });
-
-    window.onload = () => {
-      loadClients();
-      setTodayDate();
-    };
   </script>
 </body>
 </html>
