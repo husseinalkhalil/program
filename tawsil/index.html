@@ -1,258 +1,108 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إدخال الطلبات</title>
-  <link rel="manifest" href="manifest.json">
+  <title>برنامج توصيل الطلبات</title>
   <style>
-    /* أنماط الصفحة الأصلية */
     body {
-      font-family: 'Tahoma', sans-serif;
-      background-color: #f3e5f5;
-      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      direction: rtl;
       padding: 20px;
-      color: #333;
     }
-
-    h1 {
-      text-align: center;
-      color: #6a1b9a;
+    .container {
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto;
     }
-
-    .form-container {
-      background-color: #f3e5f5;
-      border-radius: 20px;
-      padding: 30px;
-      max-width: 700px;
-      margin: 30px auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    label {
-      font-size: 18px;
-      color: #6a1b9a;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    input, select, textarea, .file-input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 16px;
-      box-sizing: border-box;
-      margin-bottom: 10px;
-    }
-
-    .form-row {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
     .form-group {
-      flex: 1;
+      margin-bottom: 15px;
     }
-
-    button {
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 20px;
-      width: 100%;
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
     }
-
-    /* أنماط الأيقونات الجديدة */
     .input-with-icon {
-      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: #f0f0f0;
+      padding: 5px;
+      border-radius: 5px;
     }
-    
     .currency-icon {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
       width: 20px;
       height: 20px;
-      z-index: 2;
+      margin-left: 5px;
     }
-    
-    input[type="number"] {
-      padding-left: 40px !important;
-    }
-
-    button[type="submit"] {
-      background-color: #8e24aa;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #6a1b9a;
-    }
-
-    .view-data-btn {
-      background-color: #0288d1;
-      margin-top: 15px;
-    }
-
-    .view-data-btn:hover {
-      background-color: #0277bd;
-    }
-
-    .add-client-btn {
-      background-color: #8e24aa;
-      margin-top: 10px;
-    }
-
-    .refresh-btn {
-      background-color: #4CAF50;
-      margin-top: 10px;
-    }
-
-    .refresh-btn:hover {
-      background-color: #45a049;
-    }
-
     .file-input-wrapper {
       position: relative;
     }
-
+    .file-input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+    }
     .file-clear-btn {
       position: absolute;
       top: 10px;
-      left: 10px;
-      background: #ff4444;
+      right: 10px;
+      background: red;
       color: white;
       border: none;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
+      padding: 5px;
       cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-      font-size: 18px;
     }
-
-    .file-clear-btn:hover {
-      background: #cc0000;
-    }
-
-    .file-input {
-      background-color: #F3E5F5;
-      color: #6a1b9a;
-      padding: 15px;
-      border: 2px dashed #D1C4E9;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .file-input:hover {
-      background-color: #E1BEE7;
-      border-color: #8e24aa;
-    }
-
-    .file-input::before {
-      content: "اختر ملف أو اسحبه هنا";
-      display: block;
-      color: #6a1b9a;
-    }
-
-    .file-input::-webkit-file-upload-button {
-      visibility: hidden;
-    }
-
-    .client-alert {
-      background-color: #E1BEE7;
-      color: #6a1b9a;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 10px;
-      text-align: center;
-      display: none;
-      animation: fadeOut 3s forwards;
-      border: 2px solid #8e24aa;
-    }
-
     .order-alert {
-      background-color: #E1BEE7;
-      color: #6a1b9a;
-      padding: 20px 40px;
-      border-radius: 8px;
-      text-align: center;
+      color: red;
+      margin-top: 10px;
       display: none;
-      animation: fadeOut 3s forwards;
-      border: 2px solid #8e24aa;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1001;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      font-size: 18px;
     }
-
-    @keyframes fadeOut {
-      from {opacity: 1;}
-      to {opacity: 0;}
+    .view-data-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
     }
-
+    .view-data-btn:hover {
+      background-color: #0056b3;
+    }
     .custom-modal {
       display: none;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: #E1BEE7;
-      padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      z-index: 1000;
       width: 300px;
-      text-align: center;
     }
-
-    .custom-modal input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 2px solid #8e24aa;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
     .modal-buttons {
       display: flex;
-      gap: 10px;
-      justify-content: center;
+      justify-content: space-between;
+      margin-top: 10px;
     }
-
-    .modal-buttons button {
-      padding: 8px 20px;
+    .confirm-btn, .cancel-btn {
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 14px;
-      margin: 0;
-      width: auto;
     }
-
-    .confirm-btn {
-      background-color: #8e24aa;
-      color: white;
-    }
-
     .cancel-btn {
-      background-color: #757575;
-      color: white;
+      background-color: red;
     }
-
     .modal-overlay {
       display: none;
       position: fixed;
@@ -260,91 +110,73 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      z-index: 999;
-    }
-
-    #orderPrice::-webkit-outer-spin-button,
-    #orderPrice::-webkit-inner-spin-button,
-    #deliveryPrice::-webkit-outer-spin-button,
-    #deliveryPrice::-webkit-inner-spin-button,
-    #paidAmount::-webkit-outer-spin-button,
-    #paidAmount::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    #orderPrice,
-    #deliveryPrice,
-    #paidAmount {
-        -moz-appearance: textfield;
-        appearance: textfield;
+      background: rgba(0, 0, 0, 0.5);
     }
   </style>
 </head>
 <body>
-  <h1>إدخال طلب جديد</h1>
-  <div class="form-container">
+  <div class="container">
+    <h1>إدخال طلب جديد</h1>
     <form id="orderForm">
-      <label for="clientName">اسم العميل</label>
-      <select id="clientName" name="clientName" required>
-        <option value="">اختر عميل</option>
-      </select>
-      <button type="button" class="add-client-btn" onclick="addClient()">إضافة عميل جديد</button>
-      <div id="clientAlert" class="client-alert"></div>
+      <div class="form-group">
+        <label for="clientName">اسم العميل</label>
+        <select id="clientName" name="clientName" required>
+          <option value="">اختر عميل</option>
+        </select>
+        <button type="button" onclick="addClient()">إضافة عميل جديد</button>
+        <div id="clientAlert" class="order-alert"></div>
+      </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="orderDescription">وصف الطلب</label>
-          <input type="text" id="orderDescription" name="orderDescription" required />
-        </div>
-        <div class="form-group">
-          <label for="orderPrice">سعر الطلب</label>
-          <div class="input-with-icon">
-            <img src="icons/real.png" class="currency-icon" alt="ريال سعودي">
-            <input 
-              type="number" 
-              id="orderPrice" 
-              name="orderPrice" 
-              required
-              inputmode="numeric"
-              pattern="[0-9]*"
-              title="يُسمح بالأرقام فقط"
-            />
-          </div>
+      <div class="form-group">
+        <label for="orderDescription">وصف الطلب</label>
+        <textarea id="orderDescription" name="orderDescription" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="orderPrice">قيمة الطلب</label>
+        <div class="input-with-icon">
+          <img src="icons/real.png" class="currency-icon" alt="ريال سعودي">
+          <input 
+            type="number" 
+            id="orderPrice" 
+            name="orderPrice" 
+            required
+            inputmode="numeric"
+            pattern="[0-9]*"
+            title="يُسمح بالأرقام فقط"
+          />
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="deliveryPrice">سعر التوصيل</label>
-          <div class="input-with-icon">
-            <img src="icons/real.png" class="currency-icon" alt="ريال سعودي">
-            <input 
-              type="number" 
-              id="deliveryPrice" 
-              name="deliveryPrice" 
-              required
-              inputmode="numeric"
-              pattern="[0-9]*"
-              title="يُسمح بالأرقام فقط"
-            />
-          </div>
+      <div class="form-group">
+        <label for="deliveryPrice">تكلفة التوصيل</label>
+        <div class="input-with-icon">
+          <img src="icons/real.png" class="currency-icon" alt="ريال سعودي">
+          <input 
+            type="number" 
+            id="deliveryPrice" 
+            name="deliveryPrice" 
+            required
+            inputmode="numeric"
+            pattern="[0-9]*"
+            title="يُسمح بالأرقام فقط"
+          />
         </div>
-        <div class="form-group">
-          <label for="paidAmount">المبلغ المدفوع</label>
-          <div class="input-with-icon">
-            <img src="icons/real.png" class="currency-icon" alt="ريال سعودي">
-            <input 
-              type="number" 
-              id="paidAmount" 
-              name="paidAmount" 
-              required
-              inputmode="numeric"
-              pattern="[0-9]*"
-              title="يُسمح بالأرقام فقط"
-            />
-          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="paidAmount">المبلغ المدفوع</label>
+        <div class="input-with-icon">
+          <img src="icons/real.png" class="currency-icon" alt="ريال سعودي">
+          <input 
+            type="number" 
+            id="paidAmount" 
+            name="paidAmount" 
+            required
+            inputmode="numeric"
+            pattern="[0-9]*"
+            title="يُسمح بالأرقام فقط"
+          />
         </div>
       </div>
 
@@ -359,7 +191,7 @@
         <div id="fileInput" class="file-input">
           <input type="file" id="file" name="file" class="file-input" />
         </div>
-        <button class="file-clear-btn" onclick="clearFileInput()">×</button>
+        <button type="button" class="file-clear-btn" onclick="clearFileInput()">×</button>
       </div>
       
       <div id="orderAlert" class="order-alert"></div>
