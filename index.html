@@ -65,6 +65,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.4);
+      cursor: pointer;
     }
 
     .app-card:hover {
@@ -165,14 +166,14 @@
   </div>
 
   <div class="grid-container">
-    <div class="app-card">
+    <div class="app-card" data-link="hawalat/index.html">
       <div class="app-icon">💸</div>
       <h2 class="app-title">الحوالات المالية</h2>
       <p class="app-description">إدارة الحوالات المالية وتتبع العمليات اليومية</p>
       <a href="hawalat/index.html" class="app-button">فتح البرنامج</a>
     </div>
 
-    <div class="app-card">
+    <div class="app-card" data-link="tawsil/index.html">
       <div class="app-icon">🚚</div>
       <h2 class="app-title">خدمات التوصيل</h2>
       <p class="app-description">إدارة طلبات التوصيل ومتابعة الشحنات</p>
@@ -183,5 +184,15 @@
   <div class="footer">
     © 2024 جميع الحقوق محفوظة | نظام إدارة متكامل
   </div>
+
+  <script>
+    document.querySelectorAll('.app-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('.app-button')) {
+          window.location.href = card.dataset.link;
+        }
+      });
+    });
+  </script>
 </body>
 </html>
