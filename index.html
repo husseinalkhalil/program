@@ -4,18 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>النظام الإلكتروني</title>
-  <meta name="theme-color" content="#6C3483">
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    @font-face {
-      font-family: 'Tajawal';
-      src: url('fonts/Tajawal-Regular.woff2') format('woff2'),
-           url('fonts/Tajawal-Bold.woff2') format('woff2');
-      font-weight: normal;
-      font-style: normal;
-    }
-
     :root {
       --primary-color: #6C3483;
       --secondary-color: #EDBB99;
@@ -27,7 +17,6 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -38,30 +27,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    .loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255,255,255,0.9);
-      display: none;
-      z-index: 9999;
-    }
-
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid var(--primary-color);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
     }
 
     .header {
@@ -101,12 +66,10 @@
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.4);
       cursor: pointer;
-      touch-action: manipulation;
-      position: relative;
     }
 
-    .app-card:active {
-      transform: scale(0.98);
+    .app-card:hover {
+      transform: translateY(-5px);
     }
 
     .app-icon {
@@ -154,46 +117,25 @@
       box-shadow: 0 4px 15px rgba(108,52,131,0.3);
     }
 
-    .app-button:hover,
-    .app-button:focus {
+    .app-button:hover {
       background: white;
       color: var(--primary-color);
       border-color: var(--primary-color);
     }
 
-    .footer {
-      margin-top: auto;
-      padding: 20px;
-      color: rgba(255,255,255,0.8);
-      font-size: 0.9rem;
-      text-align: center;
-    }
-
     @media (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
-      
       .header h1 {
         font-size: 2rem;
       }
 
       .app-card {
-        padding: 20px;
-        border-radius: 15px;
+        padding: 25px;
       }
 
-      .app-title {
-        font-size: 1.5rem;
-      }
-
-      .app-button {
-        padding: 12px 25px;
-        font-size: 0.95rem;
-      }
-
-      .footer {
-        font-size: 0.8rem;
+      .app-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
       }
     }
 
@@ -208,32 +150,31 @@
       }
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .footer {
+      margin-top: auto;
+      padding: 20px;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="loader" id="loader">
-    <div class="spinner"></div>
-  </div>
-
   <div class="header">
     <h1>النظام الإلكتروني</h1>
     <p>اختر الخدمة المطلوبة من القائمة التالية</p>
   </div>
 
   <div class="grid-container">
-    <div class="app-card" data-link="hawalat/index.html" role="button" aria-label="برنامج الحوالات المالية" tabindex="0">
-      <div class="app-icon"><i class="fas fa-money-bill-transfer"></i></div>
+    <div class="app-card" data-link="hawalat/index.html">
+      <div class="app-icon">💸</div>
       <h2 class="app-title">الحوالات المالية</h2>
       <p class="app-description">إدارة الحوالات المالية وتتبع العمليات اليومية</p>
       <a href="hawalat/index.html" class="app-button">فتح البرنامج</a>
     </div>
 
-    <div class="app-card" data-link="tawsil/index.html" role="button" aria-label="برنامج خدمات التوصيل" tabindex="0">
-      <div class="app-icon"><i class="fas fa-truck-fast"></i></div>
+    <div class="app-card" data-link="tawsil/index.html">
+      <div class="app-icon">🚚</div>
       <h2 class="app-title">خدمات التوصيل</h2>
       <p class="app-description">إدارة طلبات التوصيل ومتابعة الشحنات</p>
       <a href="tawsil/index.html" class="app-button">فتح البرنامج</a>
@@ -245,31 +186,12 @@
   </div>
 
   <script>
-    // تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', () => {
-      // مؤشر التحميل
-      const loader = document.getElementById('loader');
-      
-      document.querySelectorAll('.app-card, .app-button').forEach(element => {
-        element.addEventListener('click', (e) => {
-          if (!e.target.closest('.app-button')) {
-            loader.style.display = 'block';
-          }
-        });
+    document.querySelectorAll('.app-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('.app-button')) {
+          window.location.href = card.dataset.link;
+        }
       });
-
-      // Service Worker
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js')
-          .then(registration => console.log('ServiceWorker registered'))
-          .catch(err => console.log('ServiceWorker registration failed: ', err));
-      }
-
-      // التحليلات
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-XXXXX-Y'); // استبدل بمعرف التتبع الخاص بك
     });
   </script>
 </body>
