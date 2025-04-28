@@ -46,6 +46,16 @@
     td {
       text-align: center;
     }
+    
+    /* التعديلات الجديدة للعمود الأول */
+    #data-table td:first-child,
+    #data-table th:first-child {
+        width: 30px;
+        min-width: 30px;
+        max-width: 30px;
+        white-space: nowrap;
+    }
+
     td:nth-child(2), td:nth-child(5), td:nth-child(7) {
       text-align: right;
       white-space: normal;
@@ -58,7 +68,6 @@
       max-width: 200px;
       vertical-align: top;
     }
-    td:nth-child(1) { width: 50px; }
     td:nth-child(2) { width: 160px; }
     td:nth-child(3) { width: 70px; }
     td:nth-child(4) { width: 70px; }
@@ -358,6 +367,12 @@
         padding: 6px;
       }
 
+      /* تعديل العمود الأول للجوال */
+      #data-table td:first-child,
+      #data-table th:first-child {
+          min-width: 30px;
+      }
+
       .summary-bar {
         flex-direction: column;
         gap: 8px;
@@ -420,6 +435,7 @@
   </style>
 </head>
 <body>
+  <!-- باقي الكود بدون تغيير -->
   <div class="top-controls">
     <div>
       <a class="top-back" href="index.html">➔ السابقة</a>
