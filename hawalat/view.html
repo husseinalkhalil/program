@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عرض البيانات</title>
     <style>
-        /* الأنماط الأصلية تبقى كما هي */
+        /* كل الأنماط الأصلية بدون تغيير */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f5f5f5;
@@ -34,22 +34,20 @@
             background-color: #f5f5f5;
         }
 
-        /* 🔵 التعديلات الجديدة للتفاف النص */
+        /* التعديلات الجديدة فقط */
         .notes-cell, .reason-cell {
-            max-width: 200px;
+            max-width: 250px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             cursor: pointer;
             position: relative;
-            transition: all 0.3s ease;
         }
 
         .notes-cell.expanded, .reason-cell.expanded {
             white-space: normal;
             overflow: visible;
             text-overflow: clip;
-            background-color: #f8f8f8;
         }
 
         .show-more {
@@ -61,11 +59,12 @@
 
         .notes-cell:hover .show-more,
         .reason-cell:hover .show-more {
-            display: inline-block;
+            display: inline;
         }
     </style>
 </head>
 <body>
+
     <table>
         <thead>
             <tr>
@@ -92,13 +91,14 @@
     </table>
 
     <script>
-        // 🔵 الكود الجديد لعرض المزيد
+        // الكود الجديد المضاف فقط
         document.querySelectorAll('.notes-cell, .reason-cell').forEach(cell => {
             const originalText = cell.textContent.trim();
+            const maxLength = 25; // عدد الأحرف قبل القص
             
-            if (originalText.length > 30) {
+            if (originalText.length > maxLength) {
                 cell.innerHTML = `
-                    <span class="truncated-text">${originalText.slice(0, 30)}...</span>
+                    <span class="truncated-text">${originalText.slice(0, maxLength)}...</span>
                     <span class="show-more">عرض المزيد</span>
                 `;
 
@@ -108,14 +108,14 @@
                         const span = this.querySelector('.truncated-text');
                         span.textContent = this.classList.contains('expanded') 
                             ? originalText 
-                            : originalText.slice(0, 30) + '...';
+                            : originalText.slice(0, maxLength) + '...';
                     }
                 });
             }
         });
 
-        // الكود الأصلي يبقى كما هو
-        // ... (أي أكواد برمجية موجودة مسبقًا)
+        // أي أكواد برمجية موجودة مسبقًا تبقى كما هي
     </script>
+
 </body>
 </html>
