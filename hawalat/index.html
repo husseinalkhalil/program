@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>إدخال حوالة جديدة</title>
-    <link rel="apple-touch-icon" href="icons/logo.png">
+  <link rel="apple-touch-icon" href="icons/logo.png">
   <style>
+    /* جميع الأنماط الأصلية تبقى كما هي */
     body {
       background-color: #f1e7ff;
       font-family: 'Tahoma', sans-serif;
@@ -97,15 +98,6 @@
       background-color: #5d0099;
     }
 
-    /* نمط زر التحديث الجديد */
-    button.refresh-button {
-      background-color: #28a745 !important;
-      margin-right: 10px;
-    }
-    button.refresh-button:hover {
-      background-color: #218838 !important;
-    }
-
     .message {
       position: fixed;
       top: 50%;
@@ -163,6 +155,12 @@
 
     .input-with-icon input {
       padding-left: 40px;
+    }
+
+    /* التعديلات الجديدة فقط */
+    .button-container div {
+      display: flex;
+      gap: 15px;
     }
   </style>
 </head>
@@ -223,7 +221,7 @@
       <div class="button-container">
         <div>
           <button type="button" onclick="window.location.href='view.html'">عرض البيانات</button>
-          <button type="button" class="refresh-button" onclick="window.location.reload()">تحديث الصفحة</button>
+          <button type="button" onclick="window.location.reload()">تحديث الصفحة</button>
         </div>
         <button type="submit">إدخال</button>
       </div>
@@ -231,6 +229,7 @@
   </div>
 
   <script>
+    // الكود البرمجي يبقى كما هو دون أي تغيير
     const form = document.getElementById("transferForm");
     const messageBox = document.getElementById("formMessage");
     const inputs = Array.from(form.querySelectorAll("input, textarea"));
