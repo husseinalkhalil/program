@@ -46,83 +46,36 @@
     td {
       text-align: center;
     }
-    
-    /* التعديلات الجديدة للتفاف النص */
-    td:nth-child(2), 
-    td:nth-child(5), 
-    td:nth-child(7), 
-    td:nth-child(8) {
-        white-space: normal;
-        position: relative;
-        max-height: 3em;
-        overflow: hidden;
-        transition: all 0.3s;
-    }
-
-    .show-more {
-        color: #663399;
-        cursor: pointer;
-        font-size: 12px;
-        display: inline-block;
-        margin-right: 5px;
-        text-decoration: underline;
-    }
-
-    .expanded {
-        max-height: none !important;
-        overflow: visible !important;
-    }
-
     #data-table td:first-child,
     #data-table th:first-child {
         width: 30px;
         min-width: 30px;
         max-width: 30px;
     }
-
     #data-table td:nth-child(9),
     #data-table th:nth-child(9) {
         width: 50px;
         min-width: 50px;
         max-width: 50px;
     }
-
     #data-table td:nth-child(10),
     #data-table th:nth-child(10) {
         width: 40px;
         min-width: 40px;
         max-width: 40px;
     }
-
     .edit-btn, .delete-btn {
         padding: 4px 6px !important;
         margin: 0 auto;
         display: inline-block;
     }
-
-    /* باقي الأنماط كما هي */
-    .top-controls { /* ... */ }
-    .top-back { /* ... */ }
-    .export-buttons { /* ... */ }
-    .search-container { /* ... */ }
-    .summary-bar { /* ... */ }
-    .delete-btn { /* ... */ }
-    .edit-btn { /* ... */ }
-    .confirm-overlay { /* ... */ }
-    .edit-modal { /* ... */ }
-
-    @media screen and (max-width: 768px) {
-        /* التعديلات للجوال */
-        td:nth-child(2), 
-        td:nth-child(5), 
-        td:nth-child(7), 
-        td:nth-child(8) {
-            max-height: 2.5em;
-        }
-        
-        .show-more {
-            font-size: 10px;
-        }
+    .show-more {
+        color: #663399;
+        cursor: pointer;
+        font-size: 12px;
+        text-decoration: underline;
+        display: inline-block;
+        margin-right: 5px;
     }
   </style>
 </head>
@@ -174,30 +127,75 @@
 
   <button class="delete-all-btn" onclick="confirmDeleteAll()">حذف جميع البيانات</button>
 
-  <!-- بقية العناصر كما هي -->
-  <div class="edit-modal" id="editModal"><!-- ... --></div>
+  <div class="edit-modal" id="editModal">
+    <div class="edit-modal-content">
+      <h2>تعديل بيانات الحوالة</h2>
+      <form id="editForm">
+        <div class="edit-modal-group">
+          <label for="editName">اسم المستلم:</label>
+          <input type="text" id="editName" required>
+        </div>
+        
+        <div class="edit-modal-group">
+          <label for="editSAR">المبلغ (ريال):</label>
+          <input type="number" id="editSAR" required>
+        </div>
+
+        <div class="edit-modal-group">
+          <label for="editSYP">المبلغ (ليرة):</label>
+          <input type="number" id="editSYP" required>
+        </div>
+
+        <div class="edit-modal-group">
+          <label for="editPurpose">سبب الحوالة:</label>
+          <input type="text" id="editPurpose" required>
+        </div>
+
+        <div class="edit-modal-group">
+          <label for="editMethod">طريقة التحويل:</label>
+          <input type="text" id="editMethod">
+        </div>
+
+        <div class="edit-modal-group">
+          <label for="editDate">التاريخ:</label>
+          <input type="date" id="editDate" required>
+        </div>
+
+        <div class="edit-modal-group">
+          <label for="editNotes">ملاحظات:</label>
+          <textarea id="editNotes" rows="3"></textarea>
+        </div>
+
+        <div class="edit-modal-buttons">
+          <button type="button" class="edit-cancel" onclick="closeEditModal()">إلغاء</button>
+          <button type="submit" class="edit-save">حفظ التعديلات</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
   <script>
-    // الدوال الجديدة
-    function toggleText(element) {
-        const container = element.closest('.text-container');
-        const fullText = container.querySelector('.full-text');
-        const preview = container.querySelector('span:not(.full-text):not(.show-more)');
-        
-        if (fullText.style.display === 'none') {
-            fullText.style.display = 'inline';
-            preview.style.display = 'none';
-            element.textContent = ' إخفاء';
-        } else {
-            fullText.style.display = 'none';
-            preview.style.display = 'inline';
-            element.textContent = '... عرض المزيد';
-        }
-        
-        container.closest('td').classList.toggle('expanded');
+    const tableBody = document.querySelector("#data-table tbody");
+    let data = JSON.parse(localStorage.getItem("transfers") || "[]");
+    let currentEditIndex = null;
+    const editModal = document.getElementById('editModal');
+    const editForm = document.getElementById('editForm');
+
+    document.addEventListener('DOMContentLoaded', renderTable);
+
+    function renderTable() {
+      renderFilteredTable(data);
+    }
+
+    function filterTable() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const filteredData = data.filter(item => 
+        item.name.toLowerCase().includes(searchTerm)
+      );
+      renderFilteredTable(filteredData);
     }
 
     function renderFilteredTable(filteredData) {
@@ -213,54 +211,17 @@
         filteredData.forEach((item, index) => {
           totalSAR += parseFloat(item.sar || 0);
           totalSYP += parseFloat(item.syp || 0);
-          
           const row = document.createElement("tr");
-          const name = item.name || '';
-          const purpose = item.purpose || '';
-          const method = item.method || '';
-          const notes = item.notes || '';
-
+          
           row.innerHTML = `
             <td>${index + 1}</td>
-            <td>
-                <div class="text-container">
-                    ${name.length > 20 ? 
-                        `<span>${name.substring(0,20)}</span>
-                         <span class="show-more" onclick="toggleText(this)">... عرض المزيد</span>
-                         <span class="full-text" style="display:none">${name}</span>` 
-                        : name}
-                </div>
-            </td>
+            <td>${truncateText(item.name)}</td>
             <td>${item.sar}</td>
             <td>${item.syp}</td>
-            <td>
-                <div class="text-container">
-                    ${purpose.length > 20 ? 
-                        `<span>${purpose.substring(0,20)}</span>
-                         <span class="show-more" onclick="toggleText(this)">... عرض المزيد</span>
-                         <span class="full-text" style="display:none">${purpose}</span>` 
-                        : purpose}
-                </div>
-            </td>
+            <td>${truncateText(item.purpose)}</td>
             <td>${item.date}</td>
-            <td>
-                <div class="text-container">
-                    ${method.length > 20 ? 
-                        `<span>${method.substring(0,20)}</span>
-                         <span class="show-more" onclick="toggleText(this)">... عرض المزيد</span>
-                         <span class="full-text" style="display:none">${method}</span>` 
-                        : method}
-                </div>
-            </td>
-            <td>
-                <div class="text-container">
-                    ${notes.length > 20 ? 
-                        `<span>${notes.substring(0,20)}</span>
-                         <span class="show-more" onclick="toggleText(this)">... عرض المزيد</span>
-                         <span class="full-text" style="display:none">${notes}</span>` 
-                        : notes}
-                </div>
-            </td>
+            <td>${truncateText(item.method)}</td>
+            <td>${truncateText(item.notes)}</td>
             <td><button class="edit-btn" onclick="handleEdit(${index})">✏️</button></td>
             <td><button class="delete-btn" onclick="deleteRow(${index})">🗑️</button></td>
           `;
@@ -273,27 +234,160 @@
       document.getElementById("total-syp").textContent = `الإجمالي (ليرة): ${totalSYP}`;
     }
 
-    // باقي الدوال كما هي بدون تغيير
-    const tableBody = document.querySelector("#data-table tbody");
-    let data = JSON.parse(localStorage.getItem("transfers") || "[]");
-    let currentEditIndex = null;
-    const editModal = document.getElementById('editModal');
-    const editForm = document.getElementById('editForm');
-
-    document.addEventListener('DOMContentLoaded', renderTable);
-
-    function renderTable() { renderFilteredTable(data); }
-
-    function filterTable() {
-      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      const filteredData = data.filter(item => 
-        item.name.toLowerCase().includes(searchTerm)
-      );
-      renderFilteredTable(filteredData);
+    function truncateText(text) {
+      if (!text) return '';
+      if (text.length <= 20) return text;
+      
+      const shortText = text.substring(0, 20);
+      return `
+        <span class="text-container">
+          ${shortText}...
+          <span class="show-more" onclick="toggleText(this)">عرض المزيد</span>
+          <span class="full-text" style="display:none">${text}</span>
+        </span>
+      `;
     }
 
-    // باقي الدوال (handleEdit, closeEditModal, deleteRow, etc...) بدون تغيير
-    // ... [كل الدوال الأخرى تبقى كما هي] ...
+    function toggleText(element) {
+      const container = element.parentElement;
+      const fullText = container.querySelector('.full-text');
+      
+      if (fullText.style.display === 'none') {
+        fullText.style.display = 'inline';
+        element.textContent = ' إخفاء';
+      } else {
+        fullText.style.display = 'none';
+        element.textContent = 'عرض المزيد';
+      }
+    }
+
+    // باقي الدوال بدون تغيير
+    function handleEdit(index) {
+      currentEditIndex = index;
+      const item = data[index];
+      
+      document.getElementById('editName').value = item.name;
+      document.getElementById('editSAR').value = item.sar;
+      document.getElementById('editSYP').value = item.syp;
+      document.getElementById('editPurpose').value = item.purpose;
+      document.getElementById('editMethod').value = item.method || '';
+      document.getElementById('editDate').value = item.date;
+      document.getElementById('editNotes').value = item.notes || '';
+      
+      editModal.style.display = 'flex';
+    }
+
+    function closeEditModal() {
+      editModal.style.display = 'none';
+      currentEditIndex = null;
+      editForm.reset();
+    }
+
+    editForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (currentEditIndex !== null) {
+        data[currentEditIndex] = {
+          name: document.getElementById('editName').value.trim(),
+          sar: document.getElementById('editSAR').value.trim(),
+          syp: document.getElementById('editSYP').value.trim(),
+          purpose: document.getElementById('editPurpose').value.trim(),
+          method: document.getElementById('editMethod').value.trim(),
+          date: document.getElementById('editDate').value,
+          notes: document.getElementById('editNotes').value.trim()
+        };
+        
+        localStorage.setItem("transfers", JSON.stringify(data));
+        renderTable();
+        showSuccess("تم التعديل بنجاح ✅");
+        closeEditModal();
+      }
+    });
+
+    function deleteRow(index) {
+      showConfirm(() => {
+        data.splice(index, 1);
+        localStorage.setItem("transfers", JSON.stringify(data));
+        renderTable();
+        showSuccess("تم الحذف بنجاح ✅");
+      });
+    }
+
+    function confirmDeleteAll() {
+      if (data.length === 0) {
+        showSuccess("لا توجد بيانات لحذفها ❗");
+        return;
+      }
+      showConfirm(() => {
+        localStorage.removeItem("transfers");
+        data = [];
+        renderTable();
+        showSuccess("تم حذف جميع البيانات بنجاح ✅");
+      });
+    }
+
+    function showConfirm(onConfirm) {
+      const overlay = document.createElement("div");
+      overlay.className = "confirm-overlay";
+      overlay.innerHTML = `
+        <div class="confirm-box">
+          <p>هل أنت متأكد من الحذف؟</p>
+          <button class="yes">نعم</button>
+          <button class="no">إلغاء</button>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+
+      overlay.querySelector(".yes").onclick = () => {
+        onConfirm();
+        overlay.remove();
+      };
+      overlay.querySelector(".no").onclick = () => overlay.remove();
+    }
+
+    function showSuccess(message) {
+      const container = document.getElementById("success-container");
+      const msg = document.createElement("div");
+      msg.className = "success-message";
+      msg.textContent = message;
+      container.appendChild(msg);
+      setTimeout(() => msg.remove(), 3000);
+    }
+
+    async function exportPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const dateStr = new Date().toLocaleDateString("ar-EG");
+
+      doc.setFont("Helvetica");
+      doc.setFontSize(12);
+      doc.text("تقرير جميع الحوالات", 105, 10, { align: "center" });
+      doc.text(`التاريخ: ${dateStr}`, 200, 10, { align: "right" });
+
+      const tableData = data.map((item, index) => [
+        index + 1,
+        item.name,
+        item.sar,
+        item.syp,
+        item.purpose,
+        item.date,
+        item.method || '',
+        item.notes || ''
+      ]);
+
+      doc.autoTable({
+        head: [["#", "اسم المستلم", "ريال", "ليرة", "الغاية", "التاريخ", "التحويل", "ملاحظات"]],
+        body: tableData,
+        styles: { font: "Helvetica", fontSize: 10, cellPadding: 2 },
+        startY: 20,
+        margin: { right: 10, left: 10 },
+        headStyles: { fillColor: [102, 51, 153], halign: 'center', textColor: 255 },
+        bodyStyles: { halign: 'right' },
+        theme: "grid"
+      });
+
+      doc.save("الحوالات.pdf");
+    }
   </script>
 </body>
 </html>
