@@ -2,256 +2,170 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>عرض البيانات</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f2e6ff;
-      margin: 0;
-      padding: 0;
+      margin: 20px;
+      background-color: #f5e6ff;
     }
-
-    header {
-      background-color: #800080;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-      font-size: 24px;
-    }
-
-    main {
-      padding: 20px;
-    }
-
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
+      margin-top: 20px;
     }
-
     th, td {
       border: 1px solid #ccc;
       padding: 8px;
       text-align: center;
-      word-wrap: break-word; /* تمت إضافة هذه الخاصية فقط */
-      white-space: normal;   /* للتأكد من التفاف النص */
+      vertical-align: middle;
     }
-
     th {
-      background-color: #d9b3ff;
+      background-color: #d1b3ff;
     }
-
-    .summary {
+    td.wrap-text {
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    .totals {
+      margin-top: 20px;
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .summary div {
-      background-color: #d9b3ff;
-      padding: 10px;
-      border-radius: 5px;
-      flex: 1;
-      min-width: 150px;
-      text-align: center;
-    }
-
-    .summary .total {
-      flex-basis: 100%;
-      background-color: #b366ff;
-    }
-
-    .buttons {
-      margin-bottom: 20px;
-      display: flex;
       flex-wrap: wrap;
-      gap: 10px;
     }
-
-    button {
+    .totals div {
+      background-color: #d1b3ff;
       padding: 10px 20px;
-      background-color: #800080;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .controls button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #b266ff;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
     }
-
-    button:hover {
-      background-color: #a64dff;
-    }
-
-    .action-buttons {
-      display: flex;
-      gap: 5px;
-      justify-content: center;
-    }
-
-    .action-buttons button {
-      padding: 5px 10px;
-      font-size: 14px;
-    }
-
-    @media print {
-      .buttons {
-        display: none;
-      }
-      .action-buttons {
-        display: none;
-      }
+    .controls button:hover {
+      background-color: #9933ff;
     }
   </style>
 </head>
 <body>
-  <header>عرض البيانات</header>
-  <main>
-    <div class="summary">
-      <div id="totalRequests">إجمالي الطلبات: 0</div>
-      <div id="totalDelivery">إجمالي التوصيل: 0</div>
-      <div id="totalPaid">إجمالي المدفوع: 0</div>
-      <div class="total" id="grandTotal">المجموع الكلي: 0</div>
-    </div>
 
-    <div class="buttons">
-      <button onclick="printPage()">طباعة الصفحة</button>
-      <button onclick="exportTableToCSV()">تصدير Excel</button>
-      <button onclick="clearAllData()">حذف الكل</button>
-    </div>
+<h1>عرض البيانات</h1>
 
-    <table id="dataTable">
-      <thead>
-        <tr>
-          <th>الرقم</th>
-          <th>اسم العميل</th>
-          <th>التاريخ</th>
-          <th>التكلفة</th>
-          <th>التوصيل</th>
-          <th>المدفوع</th>
-          <th>ملاحظات</th>
-          <th>الإجراء</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </main>
+<table id="data-table">
+  <thead>
+    <tr>
+      <th>اسم المستلم</th>
+      <th>المبلغ بالريال</th>
+      <th>المبلغ بالليرة</th>
+      <th>سبب التحويل</th>
+      <th>تاريخ الإرسال</th>
+      <th>ملاحظات</th>
+      <th>إجراءات</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- ستتم تعبئة البيانات هنا بواسطة JavaScript -->
+  </tbody>
+</table>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', loadData);
+<div class="totals">
+  <div id="total-riyal">إجمالي بالريال: 0</div>
+  <div id="total-lira">إجمالي بالليرة: 0</div>
+</div>
 
-    function loadData() {
-      const data = JSON.parse(localStorage.getItem('requests')) || [];
-      const tableBody = document.querySelector('#dataTable tbody');
-      tableBody.innerHTML = '';
+<div class="controls">
+  <button onclick="printPage()">طباعة</button>
+  <button onclick="exportTableToCSV()">تصدير CSV</button>
+  <button onclick="clearData()">مسح جميع البيانات</button>
+</div>
 
-      let totalRequests = 0;
-      let totalDelivery = 0;
-      let totalPaid = 0;
+<script>
+  // جلب البيانات من Local Storage
+  const data = JSON.parse(localStorage.getItem('transfers')) || [];
 
-      data.forEach((item, index) => {
-        const row = document.createElement('tr');
+  const tableBody = document.querySelector('#data-table tbody');
+  const totalRiyal = document.getElementById('total-riyal');
+  const totalLira = document.getElementById('total-lira');
 
-        row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${item.name}</td>
-          <td>${item.date}</td>
-          <td>${item.amount}</td>
-          <td>${item.delivery}</td>
-          <td>${item.paid}</td>
-          <td>${item.notes}</td>
-          <td class="action-buttons">
-            <button onclick="editRow(${index})">تعديل</button>
-            <button onclick="deleteRow(${index})">حذف</button>
-          </td>
-        `;
+  let sumRiyal = 0;
+  let sumLira = 0;
 
-        tableBody.appendChild(row);
+  data.forEach((item, index) => {
+    const row = document.createElement('tr');
 
-        totalRequests += Number(item.amount) || 0;
-        totalDelivery += Number(item.delivery) || 0;
-        totalPaid += Number(item.paid) || 0;
-      });
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>${item.riyal}</td>
+      <td>${item.lira}</td>
+      <td class="wrap-text">${item.reason}</td>
+      <td>${item.date}</td>
+      <td class="wrap-text">${item.notes}</td>
+      <td>
+        <button onclick="deleteRow(${index})">حذف</button>
+      </td>
+    `;
 
-      document.getElementById('totalRequests').textContent = `إجمالي الطلبات: ${totalRequests}`;
-      document.getElementById('totalDelivery').textContent = `إجمالي التوصيل: ${totalDelivery}`;
-      document.getElementById('totalPaid').textContent = `إجمالي المدفوع: ${totalPaid}`;
+    tableBody.appendChild(row);
 
-      const grandTotal = totalPaid - (totalRequests + totalDelivery);
-      document.getElementById('grandTotal').textContent = `المجموع الكلي: ${grandTotal}`;
+    sumRiyal += Number(item.riyal);
+    sumLira += Number(item.lira);
+  });
+
+  totalRiyal.textContent = `إجمالي بالريال: ${sumRiyal}`;
+  totalLira.textContent = `إجمالي بالليرة: ${sumLira}`;
+
+  function deleteRow(index) {
+    if (confirm('هل أنت متأكد أنك تريد حذف هذا السطر؟')) {
+      data.splice(index, 1);
+      localStorage.setItem('transfers', JSON.stringify(data));
+      location.reload();
+    }
+  }
+
+  function printPage() {
+    window.print();
+  }
+
+  function exportTableToCSV() {
+    let csv = [];
+    const rows = document.querySelectorAll("table tr");
+
+    for (const row of rows) {
+      const cols = row.querySelectorAll("td, th");
+      const rowData = Array.from(cols).map(col => `"${col.innerText}"`);
+      csv.push(rowData.join(","));
     }
 
-    function deleteRow(index) {
-      const data = JSON.parse(localStorage.getItem('requests')) || [];
-      if (confirm('هل أنت متأكد أنك تريد حذف هذا السجل؟')) {
-        data.splice(index, 1);
-        localStorage.setItem('requests', JSON.stringify(data));
-        loadData();
-      }
+    const csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+    const downloadLink = document.createElement("a");
+    downloadLink.download = "transfers.csv";
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+  }
+
+  function clearData() {
+    if (confirm('هل أنت متأكد أنك تريد مسح جميع البيانات؟')) {
+      localStorage.removeItem('transfers');
+      location.reload();
     }
+  }
+</script>
 
-    function clearAllData() {
-      if (confirm('هل أنت متأكد أنك تريد حذف جميع البيانات؟')) {
-        localStorage.removeItem('requests');
-        loadData();
-      }
-    }
-
-    function printPage() {
-      window.print();
-    }
-
-    function exportTableToCSV() {
-      const table = document.getElementById('dataTable');
-      let csv = [];
-      for (let i = 0; i < table.rows.length; i++) {
-        const row = [], cols = table.rows[i].querySelectorAll('td, th');
-        for (let j = 0; j < cols.length - 1; j++) { // تجاهل عمود الإجراءات
-          row.push('"' + cols[j].innerText + '"');
-        }
-        csv.push(row.join(','));
-      }
-
-      const csvString = csv.join('\n');
-      const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-      const link = document.createElement('a');
-      const url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      link.setAttribute('download', 'table-data.csv');
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-    function editRow(index) {
-      const data = JSON.parse(localStorage.getItem('requests')) || [];
-      const item = data[index];
-
-      const newName = prompt('تعديل اسم العميل:', item.name);
-      if (newName !== null) item.name = newName;
-
-      const newDate = prompt('تعديل التاريخ:', item.date);
-      if (newDate !== null) item.date = newDate;
-
-      const newAmount = prompt('تعديل التكلفة:', item.amount);
-      if (newAmount !== null) item.amount = newAmount;
-
-      const newDelivery = prompt('تعديل التوصيل:', item.delivery);
-      if (newDelivery !== null) item.delivery = newDelivery;
-
-      const newPaid = prompt('تعديل المدفوع:', item.paid);
-      if (newPaid !== null) item.paid = newPaid;
-
-      const newNotes = prompt('تعديل الملاحظات:', item.notes);
-      if (newNotes !== null) item.notes = newNotes;
-
-      data[index] = item;
-      localStorage.setItem('requests', JSON.stringify(data));
-      loadData();
-      alert('تم التعديل بنجاح');
-    }
-  </script>
 </body>
 </html>
