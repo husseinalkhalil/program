@@ -38,7 +38,7 @@
     }
 
     @media print {
-      .no-print, #clientSelect, .back-btn-top, .buttons, #editModal, .toast, .back-btn-bottom {
+      .no-print, #clientSelect, .back-btn-top, .buttons, #editModal, .toast {
         display: none !important;
       }
       
@@ -90,6 +90,13 @@
     th {
       background-color: #ce93d8 !important;
       color: #4a148c;
+      white-space: nowrap;
+    }
+
+    td {
+      white-space: normal !important;
+      word-wrap: break-word;
+      min-width: 120px;
     }
 
     tr:nth-child(even) {
@@ -277,7 +284,8 @@
       font-weight: bold;
     }
 
-    .form-group input, .form-group textarea {
+    .form-group input,
+    .form-group textarea {
       width: 100%;
       padding: 8px;
       border: 1px solid #ddd;
@@ -453,10 +461,12 @@
       table {
         font-size: 12px;
         margin-top: 15px;
+        white-space: normal;
       }
 
       th, td {
         padding: 8px 4px;
+        white-space: normal;
       }
 
       button {
