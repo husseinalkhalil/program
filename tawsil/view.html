@@ -7,7 +7,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
   <style>
-    /* الأنماط الأساسية */
     .back-btn-top {
         position: fixed;
         top: 10px;
@@ -39,7 +38,7 @@
     }
 
     @media print {
-      .no-print, #clientSelect, .back-btn-top, .buttons, #editModal, .toast {
+      .no-print, #clientSelect, .back-btn-top, .buttons, #editModal, .toast, .back-btn-bottom {
         display: none !important;
       }
       
@@ -77,69 +76,20 @@
       margin-top: 30px;
       background-color: #f8f0fc;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      table-layout: fixed;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
     }
 
     th, td {
       border: 1px solid #ccc;
       padding: 12px;
       text-align: center;
-      vertical-align: top;
     }
 
     th {
       background-color: #ce93d8 !important;
       color: #4a148c;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      min-width: 120px;
-    }
-
-    td {
-      white-space: normal !important;
-      word-wrap: break-word;
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
-
-    /* أنماط خاصة بخانة الملاحظات */
-    td[data-column="ملاحظات"] {
-      position: relative;
-      max-width: 300px;
-      max-height: 4.5em;
-      line-height: 1.5em;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    td[data-column="ملاحظات"].expanded {
-      max-height: none;
-      overflow: visible;
-    }
-
-    .show-more {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      padding: 3px 0;
-      background: linear-gradient(to bottom, transparent, #f3e5f5 70%);
-      color: #8e24aa;
-      font-weight: bold;
-      display: none;
-    }
-
-    td[data-column="ملاحظات"]:hover .show-more {
-      display: block;
-    }
-
-    td[data-column="ملاحظات"].expanded .show-more {
-      position: static;
-      background: none;
-      padding: 5px 0;
     }
 
     tr:nth-child(even) {
@@ -327,8 +277,7 @@
       font-weight: bold;
     }
 
-    .form-group input,
-    .form-group textarea {
+    .form-group input, .form-group textarea {
       width: 100%;
       padding: 8px;
       border: 1px solid #ddd;
@@ -502,16 +451,12 @@
       }
 
       table {
-        display: block;
-        overflow-x: auto;
         font-size: 12px;
         margin-top: 15px;
-        white-space: normal;
       }
 
       th, td {
         padding: 8px 4px;
-        white-space: normal;
       }
 
       button {
@@ -599,9 +544,9 @@
   </div>
 
   <div class="buttons no-print">
-    <button class="refresh-btn" onclick="window.location.reload()">تحديث</button>
+    <button class="refresh-btn" onclick="window.location.reload()">تحديث الصفحة</button>
     <button class="pdf-btn" onclick="exportToPDF()">تصدير PDF</button>
-    <button class="delete-btn" onclick="deleteAllOrders()">حذف الكل</button>
+    <button class="delete-btn" onclick="deleteAllOrders()">حذف جميع البيانات</button>
     <button onclick="window.print()">طباعة</button>
   </div>
 
@@ -749,8 +694,6 @@
 
       filteredOrders.forEach((order, index) => {
         const row = document.createElement("tr");
-        const notesContent = order.notes || "";
-        
         row.innerHTML = `
           <td>${index + 1}</td>
           <td>${order.client}</td>
@@ -759,10 +702,7 @@
           <td>${order.deliveryPrice.toFixed(2)}</td>
           <td>${order.paidAmount.toFixed(2)}</td>
           <td>${order.orderDate}</td>
-          <td data-column="ملاحظات" onclick="toggleNotes(this)">
-            ${notesContent}
-            <span class="show-more">عرض المزيد</span>
-          </td>
+          <td>${order.notes || ""}</td>
           <td>
             ${order.invoice ? 
               `<span class="invoice-preview" onclick="showInvoice('${order.invoice}')">عرض</span>` : 
@@ -780,8 +720,6 @@
             </span>
           </td>
         `;
-
-        autoCollapseNotes(row.querySelector('[data-column="ملاحظات"]'));
         tableBody.appendChild(row);
 
         totalRequests++;
@@ -801,18 +739,6 @@
       totalPaidElem.innerHTML = totalPaid.toFixed(2) + ' <img src="icons/real.png" alt="ريال" class="currency-icon">';
       remainingAmountElem.innerHTML = 
         Math.abs(remainingBalance).toFixed(2) + ' <img src="icons/real.png" alt="ريال" class="currency-icon"> ' + balanceStatus;
-    }
-
-    function toggleNotes(cell) {
-      cell.classList.toggle('expanded');
-      const btn = cell.querySelector('.show-more');
-      btn.textContent = cell.classList.contains('expanded') ? 'عرض أقل' : 'عرض المزيد';
-    }
-
-    function autoCollapseNotes(cell) {
-      if (cell.scrollHeight <= cell.clientHeight) {
-        cell.querySelector('.show-more').style.display = 'none';
-      }
     }
 
     function filterOrdersByClient() {
