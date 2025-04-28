@@ -16,9 +16,9 @@
     }
 
     h1 {
-      color: #6a1b9a;
-      margin-top: 70px; /* زيادة الهامش العلوي */
       text-align: center;
+      color: #6a1b9a;
+      margin-top: 70px; /* التعديل الوحيد هنا */
     }
 
     .form-container {
@@ -30,35 +30,6 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* أنماط زر العودة الجديدة */
-    .back-button-container {
-      position: fixed;
-      top: 20px;
-      right: 20px; /* التعديل إلى الجانب الأيمن */
-      z-index: 1000;
-    }
-
-    .view-data-btn {
-      background: #6a1b9a;
-      color: white;
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .view-data-btn:hover {
-      background: #4a2c92;
-      transform: translateY(-1px);
-    }
-
-    /* بقية الأنماط كما هي */
     label {
       font-size: 18px;
       color: #6a1b9a;
@@ -86,8 +57,7 @@
       flex: 1;
     }
 
-    button[type="submit"] {
-      background-color: #8e24aa;
+    button {
       color: white;
       padding: 12px 20px;
       border: none;
@@ -98,12 +68,231 @@
       width: 100%;
     }
 
-    /* ... بقية الأنماط بدون تغيير ... */
+    /* أنماط الأيقونات */
+    .input-with-icon {
+      position: relative;
+    }
+    
+    .currency-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      z-index: 2;
+    }
+    
+    input[type="number"] {
+      padding-left: 40px !important;
+    }
 
+    button[type="submit"] {
+      background-color: #8e24aa;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #6a1b9a;
+    }
+
+    .view-data-btn {
+      background-color: #0288d1;
+      margin-top: 15px;
+    }
+
+    .view-data-btn:hover {
+      background-color: #0277bd;
+    }
+
+    .add-client-btn {
+      background-color: #8e24aa;
+      margin-top: 10px;
+    }
+
+    .refresh-btn {
+      background-color: #4CAF50;
+      margin-top: 10px;
+    }
+
+    .refresh-btn:hover {
+      background-color: #45a049;
+    }
+
+    .file-input-wrapper {
+      position: relative;
+    }
+
+    .file-clear-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ff4444;
+      color: white;
+      border: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      font-size: 18px;
+    }
+
+    .file-clear-btn:hover {
+      background: #cc0000;
+    }
+
+    .file-input {
+      background-color: #F3E5F5;
+      color: #6a1b9a;
+      padding: 15px;
+      border: 2px dashed #D1C4E9;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .file-input:hover {
+      background-color: #E1BEE7;
+      border-color: #8e24aa;
+    }
+
+    .file-input::before {
+      content: "اختر ملف أو اسحبه هنا";
+      display: block;
+      color: #6a1b9a;
+    }
+
+    .file-input::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+
+    .client-alert {
+      background-color: #E1BEE7;
+      color: #6a1b9a;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+      text-align: center;
+      display: none;
+      animation: fadeOut 3s forwards;
+      border: 2px solid #8e24aa;
+    }
+
+    .order-alert {
+      background-color: #E1BEE7;
+      color: #6a1b9a;
+      padding: 20px 40px;
+      border-radius: 8px;
+      text-align: center;
+      display: none;
+      animation: fadeOut 3s forwards;
+      border: 2px solid #8e24aa;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1001;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-size: 18px;
+    }
+
+    @keyframes fadeOut {
+      from {opacity: 1;}
+      to {opacity: 0;}
+    }
+
+    .custom-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #E1BEE7;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      width: 300px;
+      text-align: center;
+    }
+
+    .custom-modal input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #8e24aa;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .modal-buttons button {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 0;
+      width: auto;
+    }
+
+    .confirm-btn {
+      background-color: #8e24aa;
+      color: white;
+    }
+
+    .cancel-btn {
+      background-color: #757575;
+      color: white;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+
+    /* التعديلات المطلوبة */
+    .back-button-container {
+      position: fixed;
+      top: 20px;
+      right: 20px; /* تغيير الاتجاه إلى اليمين */
+      z-index: 1000;
+    }
+
+    .back-button-container .view-data-btn {
+      background: #6a1b9a;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+    }
+
+    .back-button-container .view-data-btn:hover {
+      background: #4a2c92;
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 <body>
-  <!-- زر العودة المعدل -->
+  <!-- الزر المعدل -->
   <div class="back-button-container">
     <button 
       class="view-data-btn" 
@@ -115,7 +304,6 @@
   <h1>إدخال طلب جديد</h1>
   <div class="form-container">
     <form id="orderForm">
-      <!-- بقية المحتوى دون تغيير -->
       <label for="clientName">اسم العميل</label>
       <select id="clientName" name="clientName" required>
         <option value="">اختر عميل</option>
@@ -124,23 +312,261 @@
       <div id="clientAlert" class="client-alert"></div>
 
       <div class="form-row">
-        <!-- ... بقية العناصر ... -->
+        <div class="form-group">
+          <label for="orderDescription">وصف الطلب</label>
+          <input type="text" id="orderDescription" name="orderDescription" required />
+        </div>
+        <div class="form-group">
+          <label for="orderPrice">سعر الطلب</label>
+          <div class="input-with-icon">
+            <img src="icons/real.png" class="currency-icon" alt="ريال سعودي">
+            <input 
+              type="number" 
+              id="orderPrice" 
+              name="orderPrice" 
+              required
+              inputmode="numeric"
+              pattern="[0-9]*"
+              title="يُسمح بالأرقام فقط"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="deliveryPrice">سعر التوصيل</label>
+          <div class="input-with-icon">
+            <img src="icons/real.png" class="currency-icon" alt="ريال سعودي">
+            <input 
+              type="number" 
+              id="deliveryPrice" 
+              name="deliveryPrice" 
+              required
+              inputmode="numeric"
+              pattern="[0-9]*"
+              title="يُسمح بالأرقام فقط"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="paidAmount">المبلغ المدفوع</label>
+          <div class="input-with-icon">
+            <img src="icons/real.png" class="currency-icon" alt="ريال سعودي">
+            <input 
+              type="number" 
+              id="paidAmount" 
+              name="paidAmount" 
+              required
+              inputmode="numeric"
+              pattern="[0-9]*"
+              title="يُسمح بالأرقام فقط"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="orderDate">تاريخ الطلب</label>
+          <input type="date" id="orderDate" name="orderDate" required />
+        </div>
+        <div class="form-group">
+          <label for="notes">ملاحظات</label>
+          <input type="text" id="notes" name="notes" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="invoiceFile">رفع فاتورة (اختياري)</label>
+        <div class="file-input-wrapper">
+          <button type="button" class="file-clear-btn" id="clearFileBtn">×</button>
+          <input 
+            type="file" 
+            id="invoiceFile" 
+            name="invoiceFile" 
+            class="file-input"
+            accept="image/*, application/pdf"
+          >
+          <small>الحد الأقصى لحجم الملف: 2MB (مسموح ب: JPG, PNG, PDF)</small>
+        </div>
       </div>
 
       <button type="submit">إدخال الطلب</button>
     </form>
     
-    <!-- ... بقية العناصر ... -->
+    <a href="index.html">
+      <button class="refresh-btn">تحديث الصفحة</button>
+    </a>
     
+    <a href="view.html">
+      <button class="view-data-btn">عرض البيانات</button>
+    </a>
   </div>
 
-  <!-- ... الأقسام الأخرى دون تغيير ... -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="custom-modal" id="clientModal">
+    <h3 style="margin: 0 0 15px 0; color: #6a1b9a;">أدخل اسم العميل الجديد</h3>
+    <input type="text" id="newClientName" placeholder="اسم العميل">
+    <div class="modal-buttons">
+      <button class="cancel-btn" onclick="closeModal()">إلغاء</button>
+      <button class="confirm-btn" onclick="confirmClient()">موافق</button>
+    </div>
+  </div>
+
+  <div id="orderAlert" class="order-alert"></div>
 
   <script>
-    // الكود البرمجي يبقى كما هو دون تعديل
     const orderForm = document.getElementById("orderForm");
     const clientSelect = document.getElementById("clientName");
-    // ... بقية الكود البرمجي ...
+    const orderDateInput = document.getElementById("orderDate");
+    const clientAlert = document.getElementById("clientAlert");
+    const orderAlert = document.getElementById("orderAlert");
+
+    let clients = JSON.parse(localStorage.getItem("clients") || "[]");
+
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+      input.addEventListener('keypress', (e) => {
+        if (isNaN(String.fromCharCode(e.keyCode))) {
+          e.preventDefault();
+        }
+      });
+    });
+
+    const fileInput = document.getElementById('invoiceFile');
+    const clearBtn = document.getElementById('clearFileBtn');
+
+    fileInput.addEventListener('change', function() {
+      clearBtn.style.display = this.files.length ? 'flex' : 'none';
+    });
+
+    clearBtn.addEventListener('click', function() {
+      fileInput.value = '';
+      this.style.display = 'none';
+    });
+
+    function addClient() {
+      document.getElementById('modalOverlay').style.display = 'block';
+      document.getElementById('clientModal').style.display = 'block';
+      document.getElementById('newClientName').value = '';
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').style.display = 'none';
+      document.getElementById('clientModal').style.display = 'none';
+    }
+
+    function confirmClient() {
+      const newClient = document.getElementById('newClientName').value.trim();
+      
+      if (newClient) {
+        if (!clients.includes(newClient)) {
+          clients.push(newClient);
+          localStorage.setItem("clients", JSON.stringify(clients));
+          localStorage.setItem("clientUpdateTrigger", Date.now().toString());
+          
+          clientAlert.textContent = "تمت إضافة العميل بنجاح!";
+          clientAlert.style.display = "block";
+          setTimeout(() => {
+            clientAlert.style.display = "none";
+          }, 3000);
+          
+          loadClients();
+          closeModal();
+        } else {
+          alert("العميل موجود بالفعل!");
+        }
+      }
+      closeModal();
+    }
+
+    function loadClients() {
+      clientSelect.innerHTML = '<option value="">اختر عميل</option>';
+      clients.forEach(client => {
+        const option = document.createElement("option");
+        option.value = client;
+        option.textContent = client;
+        clientSelect.appendChild(option);
+      });
+    }
+
+    function setTodayDate() {
+      const today = new Date().toISOString().split('T')[0];
+      orderDateInput.value = today;
+    }
+
+    async function convertFileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
+    }
+
+    orderForm.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const invoiceFile = document.getElementById("invoiceFile").files[0];
+      let invoiceData = null;
+
+      if (invoiceFile) {
+        if (invoiceFile.size > 2 * 1024 * 1024) {
+          alert("حجم الملف يجب ألا يتجاوز 2MB!");
+          return;
+        }
+
+        const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+        if (!allowedTypes.includes(invoiceFile.type)) {
+          alert("نوع الملف غير مسموح به! المسموح: JPG, PNG, PDF");
+          return;
+        }
+
+        try {
+          invoiceData = await convertFileToBase64(invoiceFile);
+        } catch (error) {
+          alert("حدث خطأ أثناء قراءة الملف!");
+          return;
+        }
+      }
+
+      const order = {
+        id: new Date().getTime(),
+        client: clientSelect.value,
+        description: document.getElementById("orderDescription").value,
+        orderPrice: parseFloat(document.getElementById("orderPrice").value),
+        deliveryPrice: parseFloat(document.getElementById("deliveryPrice").value),
+        paidAmount: parseFloat(document.getElementById("paidAmount").value),
+        orderDate: document.getElementById("orderDate").value,
+        notes: document.getElementById("notes").value,
+        invoice: invoiceData
+      };
+
+      let orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      orders.push(order);
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      orderAlert.textContent = "تم إضافة الطلب بنجاح!";
+      orderAlert.style.display = "block";
+      setTimeout(() => {
+        orderAlert.style.display = "none";
+      }, 3000);
+
+      orderForm.reset();
+      setTodayDate();
+    });
+
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'clients' || e.key === 'clientUpdateTrigger') {
+        clients = JSON.parse(localStorage.getItem("clients") || "[]");
+        loadClients();
+      }
+    });
+
+    window.onload = () => {
+      loadClients();
+      setTodayDate();
+    };
   </script>
 </body>
 </html>
