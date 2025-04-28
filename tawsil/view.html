@@ -76,9 +76,8 @@
       margin-top: 30px;
       background-color: #f8f0fc;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
+      display: table;
+      table-layout: fixed;
     }
 
     th, td {
@@ -91,11 +90,14 @@
       background-color: #ce93d8 !important;
       color: #4a148c;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     td {
       white-space: normal !important;
       word-wrap: break-word;
+      word-break: break-word;
       min-width: 120px;
     }
 
@@ -459,6 +461,8 @@
       }
 
       table {
+        display: block;
+        overflow-x: auto;
         font-size: 12px;
         margin-top: 15px;
         white-space: normal;
@@ -502,6 +506,7 @@
   </style>
 </head>
 <body>
+  <!-- باقي الأكواد كما هي بدون أي تغيير -->
   <div class="back-btn-top no-print">
     <button onclick="window.location.href='index.html'">➔ السابقة</button>
     <button onclick="window.location.href='../index.html'">الرئيسية</button>
@@ -554,9 +559,9 @@
   </div>
 
   <div class="buttons no-print">
-    <button class="refresh-btn" onclick="window.location.reload()">تحديث</button>
-    <button class="pdf-btn" onclick="exportToPDF()">تصدير</button>
-    <button class="delete-btn" onclick="deleteAllOrders()">حذف الكل</button>
+    <button class="refresh-btn" onclick="window.location.reload()">تحديث الصفحة</button>
+    <button class="pdf-btn" onclick="exportToPDF()">تصدير PDF</button>
+    <button class="delete-btn" onclick="deleteAllOrders()">حذف جميع البيانات</button>
     <button onclick="window.print()">طباعة</button>
   </div>
 
@@ -622,6 +627,7 @@
   </div>
 
   <script>
+    // جميع الأكواد الجافاسكريبت تبقى كما هي بدون تغيير
     let orders = JSON.parse(localStorage.getItem("orders") || "[]");
     const tableBody = document.getElementById("ordersTable");
     const clientSelect = document.getElementById("clientSelect");
