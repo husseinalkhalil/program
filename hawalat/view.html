@@ -46,13 +46,16 @@
     td {
       text-align: center;
     }
+    
+    /* التعديلات الجديدة للعمود الأول */
     #data-table td:first-child,
     #data-table th:first-child {
-      width: 30px;
-      min-width: 30px;
-      max-width: 30px;
-      white-space: nowrap;
+        width: 30px;
+        min-width: 30px;
+        max-width: 30px;
+        white-space: nowrap;
     }
+
     td:nth-child(2), td:nth-child(5), td:nth-child(7) {
       text-align: right;
       white-space: normal;
@@ -65,30 +68,36 @@
       max-width: 200px;
       vertical-align: top;
     }
+    
+    /* التعديلات الجديدة لأعمدة التعديل والحذف */
     #data-table td:nth-child(9),
     #data-table th:nth-child(9) {
-      width: 50px;
-      min-width: 50px;
-      max-width: 50px;
+        width: 50px;
+        min-width: 50px;
+        max-width: 50px;
     }
+
     #data-table td:nth-child(10),
     #data-table th:nth-child(10) {
-      width: 40px;
-      min-width: 40px;
-      max-width: 40px;
+        width: 40px;
+        min-width: 40px;
+        max-width: 40px;
     }
+
     .edit-btn, .delete-btn {
-      padding: 4px 6px !important;
-      margin: 0 auto;
-      display: inline-block;
-      white-space: nowrap;
+        padding: 4px 6px !important;
+        margin: 0 auto;
+        display: inline-block;
+        white-space: nowrap;
     }
+
     .top-controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
     }
+
     .top-back {
       background-color: #bfa1e3;
       color: white;
@@ -97,14 +106,17 @@
       border-radius: 5px;
       transition: background-color 0.3s ease;
     }
+
     .top-back:hover {
       background-color: #a67de3;
     }
+
     .export-buttons {
       display: flex;
       gap: 10px;
       align-items: center;
     }
+
     .export-buttons button {
       background-color: #663399;
       color: white;
@@ -113,21 +125,26 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
     .export-buttons button.refresh-btn {
       background-color: #28a745 !important;
     }
+
     .export-buttons button.refresh-btn:hover {
       background-color: #218838 !important;
     }
+
     .export-buttons button:hover {
       background-color: #5a2f91;
     }
+
     .search-container {
       display: flex;
       gap: 10px;
       align-items: center;
       margin-left: 15px;
     }
+
     .search-input {
       padding: 8px 12px;
       border: 1px solid #663399;
@@ -135,6 +152,7 @@
       width: 200px;
       background-color: #f5eefe;
     }
+
     .search-button {
       background-color: #663399;
       color: white;
@@ -144,9 +162,11 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     .search-button:hover {
       background-color: #5a2f91;
     }
+
     .summary-bar {
       background-color: #ede3ff;
       padding: 10px;
@@ -157,6 +177,7 @@
       margin-bottom: 15px;
       font-weight: bold;
     }
+
     .delete-btn {
       background-color: #ffdddd;
       border: 1px solid #ff4444;
@@ -165,6 +186,7 @@
       cursor: pointer;
       font-size: 14px;
     }
+
     .edit-btn {
       background-color: #e6e6fa;
       border: 1px solid #663399;
@@ -174,9 +196,11 @@
       font-size: 14px;
       margin-left: 5px;
     }
+
     .edit-btn:hover {
       background-color: #d8bfd8;
     }
+
     .delete-all-btn {
       background-color: #fff0f0;
       color: #c00;
@@ -188,9 +212,11 @@
       display: block;
       font-size: 16px;
     }
+
     .delete-btn:hover {
       background-color: #ffcccc;
     }
+
     .confirm-overlay {
       position: fixed;
       top: 0; left: 0;
@@ -201,6 +227,7 @@
       justify-content: center;
       z-index: 9999;
     }
+
     .confirm-box {
       background: #ede3ff;
       padding: 20px;
@@ -210,10 +237,12 @@
       width: 100%;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     }
+
     .confirm-box p {
       margin-bottom: 15px;
       font-size: 16px;
     }
+
     .confirm-box button {
       margin: 5px;
       padding: 8px 14px;
@@ -222,14 +251,17 @@
       cursor: pointer;
       font-size: 14px;
     }
+
     .confirm-box .yes {
       background-color: #ff4444;
       color: white;
     }
+
     .confirm-box .no {
       background-color: #f0e9ff;
       color: black;
     }
+
     .edit-modal {
       position: fixed;
       top: 0;
@@ -242,6 +274,7 @@
       align-items: center;
       z-index: 9999;
     }
+
     .edit-modal-content {
       background: #f5eefe;
       padding: 25px;
@@ -251,20 +284,24 @@
       max-height: 90vh;
       overflow-y: auto;
     }
+
     .edit-modal h2 {
       color: #663399;
       margin-top: 0;
       text-align: center;
     }
+
     .edit-modal-group {
       margin-bottom: 15px;
     }
+
     .edit-modal label {
       display: block;
       margin-bottom: 5px;
       color: #4b0082;
       font-weight: bold;
     }
+
     .edit-modal input,
     .edit-modal textarea {
       width: 100%;
@@ -273,92 +310,445 @@
       border-radius: 5px;
       font-size: 14px;
     }
+
     .edit-modal-buttons {
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
     }
+
     .edit-modal-buttons button {
       padding: 8px 20px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
+
     .edit-save {
       background-color: #663399;
       color: white;
     }
+
     .edit-cancel {
       background-color: #f0e9ff;
       color: #663399;
     }
+
     .edit-modal input[type="number"]::-webkit-outer-spin-button,
     .edit-modal input[type="number"]::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
+
     .edit-modal input[type="number"] {
       -moz-appearance: textfield;
     }
+
     @media screen and (max-width: 768px) {
       .top-controls {
         flex-direction: column-reverse;
         gap: 15px;
         align-items: stretch;
       }
+
       .export-buttons {
         flex-direction: column;
         gap: 8px;
       }
+
       .search-container {
         margin-left: 0;
         width: 100%;
       }
+
       .search-input {
         width: 100%;
         max-width: none;
       }
+
       table {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
       }
+
       th, td {
         min-width: 120px;
         font-size: 13px;
         padding: 6px;
       }
+
+      /* تعديلات العمود الأول للجوال */
       #data-table td:first-child,
       #data-table th:first-child {
           min-width: 30px;
       }
+
+      /* تعديلات أعمدة التعديل والحذف للجوال */
       #data-table td:nth-child(9),
-      #data-table th:nth-child(9),
+      #data-table th:nth-child(9) {
+          min-width: 50px;
+      }
+
       #data-table td:nth-child(10),
       #data-table th:nth-child(10) {
           min-width: 40px;
       }
+
       .edit-btn, .delete-btn {
           padding: 3px 5px !important;
           font-size: 13px;
       }
+
       .summary-bar {
         flex-direction: column;
         gap: 8px;
         font-size: 14px;
       }
+
       .edit-modal-content {
         width: 90%;
         padding: 15px;
         margin: 10px;
       }
+
+      .edit-modal-buttons {
+        flex-direction: column-reverse;
+        gap: 10px;
+      }
+
+      .edit-modal-buttons button {
+        width: 100%;
+        padding: 12px;
+      }
+
+      .edit-modal-group input,
+      .edit-modal-group textarea {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      .edit-modal-group {
+        margin-bottom: 12px;
+      }
+
+      .delete-all-btn {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+      }
+
+      .top-back, 
+      .export-buttons button {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      .confirm-box {
+        margin: 0 10px;
+      }
+
+      th, td {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- باقي الكود بدون تغيير -->
+  <div class="top-controls">
+    <div>
+      <a class="top-back" href="index.html">➔ السابقة</a>
+      <a class="top-back" href="../index.html" style="margin-right: 10px;">الرئيسية</a>
+    </div>
+    
+    <div class="export-buttons">
+      <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="بحث باسم المستلم">
+        <button class="search-button" onclick="filterTable()">بحث</button>
+      </div>
+      <button onclick="window.print()">طباعة</button>
+      <button onclick="exportPDF()"> PDF</button>
+      <button class="refresh-btn" onclick="window.location.reload()">تحديث</button>
+    </div>
+  </div>
 
-<!-- هنا تبدأ باقي عناصر الصفحة: -->
-<!-- يمكنك الآن إضافة الكود البرمجي والجدول وزر الرجوع وغيره حسب ما تريد -->
+  <h1>جميع الحوالات</h1>
 
+  <div class="summary-bar">
+    <span id="total-count">عدد الحوالات: 0</span>
+    <span id="total-sar">الإجمالي (ريال): 0</span>
+    <span id="total-syp">الإجمالي (ليرة): 0</span>
+  </div>
+
+  <div id="success-container"></div>
+
+  <table id="data-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>اسم المستلم</th>
+        <th>ريال</th>
+        <th>ليرة</th>
+        <th>سبب الحوالة</th>
+        <th>التاريخ</th>
+        <th>طريقة التحويل</th>
+        <th>ملاحظات</th>
+        <th>تعديل</th>
+        <th>🗑️</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <button class="delete-all-btn" onclick="confirmDeleteAll()">حذف جميع البيانات</button>
+
+  <div class="edit-modal" id="editModal">
+    <div class="edit-modal-content">
+      <h2>تعديل بيانات الحوالة</h2>
+      <form id="editForm">
+        <div class="edit-modal-group">
+          <label for="editName">اسم المستلم:</label>
+          <input type="text" id="editName" required>
+        </div>
+        
+        <div class="edit-modal-group">
+          <label for="editSAR">المبلغ (ريال):</label>
+          <input type="number" id="editSAR" required>
+        </div>
+
+        <div class="edit-modal-group">
+          <label for="editSYP">المبلغ (ليرة):</label>
+          <input type="number" id="editSYP" required>
+        </div>
+
+        <div class="edit-modal-group">
+          <label for="editPurpose">سبب الحوالة:</label>
+          <input type="text" id="editPurpose" required>
+        </div>
+
+        <div class="edit-modal-group">
+          <label for="editMethod">طريقة التحويل:</label>
+          <input type="text" id="editMethod">
+        </div>
+
+        <div class="edit-modal-group">
+          <label for="editDate">التاريخ:</label>
+          <input type="date" id="editDate" required>
+        </div>
+
+        <div class="edit-modal-group">
+          <label for="editNotes">ملاحظات:</label>
+          <textarea id="editNotes" rows="3"></textarea>
+        </div>
+
+        <div class="edit-modal-buttons">
+          <button type="button" class="edit-cancel" onclick="closeEditModal()">إلغاء</button>
+          <button type="submit" class="edit-save">حفظ التعديلات</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+  <script>
+    // الكود البرمجي JavaScript يبقى كما هو بدون أي تغييرات
+    const tableBody = document.querySelector("#data-table tbody");
+    let data = JSON.parse(localStorage.getItem("transfers") || "[]");
+    let currentEditIndex = null;
+    const editModal = document.getElementById('editModal');
+    const editForm = document.getElementById('editForm');
+
+    document.addEventListener('DOMContentLoaded', renderTable);
+
+    function renderTable() {
+      renderFilteredTable(data);
+    }
+
+    function filterTable() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const filteredData = data.filter(item => 
+        item.name.toLowerCase().includes(searchTerm)
+      );
+      renderFilteredTable(filteredData);
+    }
+
+    function renderFilteredTable(filteredData) {
+      tableBody.innerHTML = "";
+      let totalSAR = 0;
+      let totalSYP = 0;
+
+      if (filteredData.length === 0) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="10" style="text-align:center; color:#999;">لا توجد نتائج</td>`;
+        tableBody.appendChild(row);
+      } else {
+        filteredData.forEach((item, index) => {
+          totalSAR += parseFloat(item.sar || 0);
+          totalSYP += parseFloat(item.syp || 0);
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>${item.sar}</td>
+            <td>${item.syp}</td>
+            <td>${item.purpose}</td>
+            <td>${item.date}</td>
+            <td>${item.method || ''}</td>
+            <td>${item.notes || ''}</td>
+            <td><button class="edit-btn" onclick="handleEdit(${index})">✏️</button></td>
+            <td><button class="delete-btn" onclick="deleteRow(${index})">🗑️</button></td>
+          `;
+          tableBody.appendChild(row);
+        });
+      }
+
+      document.getElementById("total-count").textContent = `عدد الحوالات: ${filteredData.length}`;
+      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${totalSAR}`;
+      document.getElementById("total-syp").textContent = `الإجمالي (ليرة): ${totalSYP}`;
+    }
+
+    function handleEdit(index) {
+      currentEditIndex = index;
+      const item = data[index];
+      
+      document.getElementById('editName').value = item.name;
+      document.getElementById('editSAR').value = item.sar;
+      document.getElementById('editSYP').value = item.syp;
+      document.getElementById('editPurpose').value = item.purpose;
+      document.getElementById('editMethod').value = item.method || '';
+      document.getElementById('editDate').value = item.date;
+      document.getElementById('editNotes').value = item.notes || '';
+      
+      editModal.style.display = 'flex';
+    }
+
+    function closeEditModal() {
+      editModal.style.display = 'none';
+      currentEditIndex = null;
+      editForm.reset();
+    }
+
+    editForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (currentEditIndex !== null) {
+        data[currentEditIndex] = {
+          name: document.getElementById('editName').value.trim(),
+          sar: document.getElementById('editSAR').value.trim(),
+          syp: document.getElementById('editSYP').value.trim(),
+          purpose: document.getElementById('editPurpose').value.trim(),
+          method: document.getElementById('editMethod').value.trim(),
+          date: document.getElementById('editDate').value,
+          notes: document.getElementById('editNotes').value.trim()
+        };
+        
+        localStorage.setItem("transfers", JSON.stringify(data));
+        renderTable();
+        showSuccess("تم التعديل بنجاح ✅");
+        closeEditModal();
+      }
+    });
+
+    window.onclick = function(event) {
+      if (event.target === editModal) {
+        closeEditModal();
+      }
+    };
+
+    function deleteRow(index) {
+      showConfirm(() => {
+        data.splice(index, 1);
+        localStorage.setItem("transfers", JSON.stringify(data));
+        renderTable();
+        showSuccess("تم الحذف بنجاح ✅");
+      });
+    }
+
+    function confirmDeleteAll() {
+      if (data.length === 0) {
+        showSuccess("لا توجد بيانات لحذفها ❗");
+        return;
+      }
+      showConfirm(() => {
+        localStorage.removeItem("transfers");
+        data = [];
+        renderTable();
+        showSuccess("تم حذف جميع البيانات بنجاح ✅");
+      });
+    }
+
+    function showConfirm(onConfirm) {
+      const overlay = document.createElement("div");
+      overlay.className = "confirm-overlay";
+      overlay.innerHTML = `
+        <div class="confirm-box">
+          <p>هل أنت متأكد من الحذف؟</p>
+          <button class="yes">نعم</button>
+          <button class="no">إلغاء</button>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+
+      overlay.querySelector(".yes").onclick = () => {
+        onConfirm();
+        overlay.remove();
+      };
+      overlay.querySelector(".no").onclick = () => overlay.remove();
+    }
+
+    function showSuccess(message) {
+      const container = document.getElementById("success-container");
+      const msg = document.createElement("div");
+      msg.className = "success-message";
+      msg.textContent = message;
+      container.appendChild(msg);
+      setTimeout(() => msg.remove(), 3000);
+    }
+
+    async function exportPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const dateStr = new Date().toLocaleDateString("ar-EG");
+
+      doc.setFont("Helvetica");
+      doc.setFontSize(12);
+      doc.text("تقرير جميع الحوالات", 105, 10, { align: "center" });
+      doc.text(`التاريخ: ${dateStr}`, 200, 10, { align: "right" });
+
+      const tableData = data.map((item, index) => [
+        index + 1,
+        item.name,
+        item.sar,
+        item.syp,
+        item.purpose,
+        item.date,
+        item.method || '',
+        item.notes || ''
+      ]);
+
+      doc.autoTable({
+        head: [["#", "اسم المستلم", "ريال", "ليرة", "الغاية", "التاريخ", "التحويل", "ملاحظات"]],
+        body: tableData,
+        styles: { font: "Helvetica", fontSize: 10, cellPadding: 2 },
+        startY: 20,
+        margin: { right: 10, left: 10 },
+        headStyles: { fillColor: [102, 51, 153], halign: 'center', textColor: 255 },
+        bodyStyles: { halign: 'right' },
+        theme: "grid"
+      });
+
+      doc.save("الحوالات.pdf");
+    }
+  </script>
 </body>
 </html>
