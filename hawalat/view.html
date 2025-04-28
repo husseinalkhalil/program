@@ -5,45 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>عرض البيانات</title>
   <style>
-    /* كل الأنماط الأصلية كما هي */
+    /* جميع الأنماط الأصلية كما كانت */
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
       background-color: #f5f5ff;
       direction: rtl;
     }
-    
-    /* التعديلات الجديدة فقط */
-    td:nth-child(5),
-    td:nth-child(8) {
-      max-width: 200px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      cursor: pointer;
-      position: relative;
-    }
-
-    td:nth-child(5).expanded,
-    td:nth-child(8).expanded {
-      white-space: normal;
-      overflow: visible;
-      background-color: #f8f5ff;
-    }
-
-    .show-more {
-      color: #663399;
-      font-weight: bold;
-      display: none;
-      margin-right: 5px;
-    }
-
-    td:nth-child(5):hover .show-more,
-    td:nth-child(8):hover .show-more {
-      display: inline;
-    }
-
-    /* باقي الأنماط الأصلية تبقى كما هي دون تغيير */
     h1 {
       text-align: center;
       color: #663399;
@@ -95,12 +63,48 @@
     td:nth-child(9) { width: 70px; }
     td:nth-child(10) { width: 50px; }
 
-    /* ... جميع الأنماط الأخرى تبقى كما هي ... */
+    /* التعديلات الجديدة فقط */
+    td:nth-child(5),
+    td:nth-child(8) {
+      max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      position: relative;
+    }
 
+    td:nth-child(5).expanded,
+    td:nth-child(8).expanded {
+      white-space: normal;
+      overflow: visible;
+      background-color: #f8f5ff;
+    }
+
+    .show-more {
+      color: #663399;
+      font-weight: bold;
+      display: none;
+      margin-right: 5px;
+    }
+
+    td:nth-child(5):hover .show-more,
+    td:nth-child(8):hover .show-more {
+      display: inline;
+    }
+
+    /* باقي الأنماط دون تغيير */
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    /* ... جميع الأنماط الأخرى تبقى كما هي ... */
   </style>
 </head>
 <body>
-  <!-- الهيكل الأصلي دون أي تغيير -->
+  <!-- الهيكل الأصلي مع البيانات -->
   <div class="top-controls">
     <a class="top-back" href="index.html">الرجوع</a>
     
@@ -140,7 +144,9 @@
         <th>🗑️</th>
       </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+      <!-- البيانات ستعرض هنا عبر الجافاسكريبت -->
+    </tbody>
   </table>
 
   <button class="delete-all-btn" onclick="confirmDeleteAll()">حذف جميع البيانات</button>
@@ -149,88 +155,68 @@
     <div class="edit-modal-content">
       <h2>تعديل بيانات الحوالة</h2>
       <form id="editForm">
-        <!-- ... محتوى النموذج الأصلي ... -->
+        <!-- محتوى النموذج الأصلي -->
       </form>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
-
   <script>
-    // التعديلات على الكود البرمجي
+    // الكود البرمجي الأصلي مع التعديلات
+    const tableBody = document.querySelector("#data-table tbody");
+    let data = JSON.parse(localStorage.getItem("transfers") || []);
+    
     function renderFilteredTable(filteredData) {
       tableBody.innerHTML = "";
       let totalSAR = 0;
       let totalSYP = 0;
 
-      if (filteredData.length === 0) {
-        const row = document.createElement("tr");
-        row.innerHTML = `<td colspan="10" style="text-align:center; color:#999;">لا توجد نتائج</td>`;
-        tableBody.appendChild(row);
-      } else {
-        filteredData.forEach((item, index) => {
-          totalSAR += parseFloat(item.sar || 0);
-          totalSYP += parseFloat(item.syp || 0);
-          const row = document.createElement("tr");
-          
-          // إضافة خاصية التفاف النص للخلايا المحددة
-          const processCell = (text, maxLength) => {
-            if (text.length > maxLength) {
-              return `
-                <span class="truncated-text">${text.slice(0, maxLength)}...</span>
-                <span class="show-more">عرض المزيد</span>
-              `;
-            }
-            return text;
-          };
-
-          row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${item.name}</td>
-            <td>${item.sar}</td>
-            <td>${item.syp}</td>
-            <td>${processCell(item.purpose, 25)}</td>
-            <td>${item.date}</td>
-            <td>${item.method || ''}</td>
-            <td>${processCell(item.notes || '', 30)}</td>
-            <td><button class="edit-btn" onclick="handleEdit(${index})">✏️</button></td>
-            <td><button class="delete-btn" onclick="deleteRow(${index})">🗑️</button></td>
-          `;
-          tableBody.appendChild(row);
-        });
-      }
-
-      // تفعيل خاصية العرض/الطي
-      document.querySelectorAll('td:nth-child(5), td:nth-child(8)').forEach(cell => {
-        const originalText = cell.textContent.trim();
-        const maxLength = cell.cellIndex === 4 ? 25 : 30; // السبب 25 حرف، الملاحظات 30 حرف
+      filteredData.forEach((item, index) => {
+        totalSAR += parseFloat(item.sar || 0);
+        totalSYP += parseFloat(item.syp || 0);
         
-        if (originalText.length > maxLength) {
-          cell.innerHTML = `
-            <span class="truncated-text">${originalText.slice(0, maxLength)}...</span>
-            <span class="show-more">عرض المزيد</span>
-          `;
-
-          cell.addEventListener('click', function(e) {
-            if (e.target.classList.contains('show-more')) {
-              this.classList.toggle('expanded');
-              const span = this.querySelector('.truncated-text');
-              span.textContent = this.classList.contains('expanded') 
-                ? originalText 
-                : originalText.slice(0, maxLength) + '...';
-            }
-          });
-        }
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${item.name}</td>
+          <td>${item.sar}</td>
+          <td>${item.syp}</td>
+          <td>${item.purpose}</td>
+          <td>${item.date}</td>
+          <td>${item.method || ''}</td>
+          <td>${item.notes || ''}</td>
+          <td><button class="edit-btn" onclick="handleEdit(${index})">✏️</button></td>
+          <td><button class="delete-btn" onclick="deleteRow(${index})">🗑️</button></td>
+        `;
+        tableBody.appendChild(row);
       });
 
-      document.getElementById("total-count").textContent = `عدد الحوالات: ${filteredData.length}`;
-      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${totalSAR}`;
-      document.getElementById("total-syp").textContent = `الإجمالي (ليرة): ${totalSYP}`;
+      // تفعيل خاصية التفاف النص بعد عرض البيانات
+      setTimeout(() => {
+        document.querySelectorAll('td:nth-child(5), td:nth-child(8)').forEach(cell => {
+          const originalText = cell.textContent.trim();
+          const maxLength = cell.cellIndex === 4 ? 25 : 30;
+          
+          if (originalText.length > maxLength) {
+            cell.innerHTML = `
+              <span class="truncated-text">${originalText.slice(0, maxLength)}...</span>
+              <span class="show-more">عرض المزيد</span>
+            `;
+
+            cell.addEventListener('click', function(e) {
+              if (e.target.classList.contains('show-more')) {
+                this.classList.toggle('expanded');
+                const span = this.querySelector('.truncated-text');
+                span.textContent = this.classList.contains('expanded') 
+                  ? originalText 
+                  : originalText.slice(0, maxLength) + '...';
+              }
+            });
+          }
+        });
+      }, 0);
     }
 
-    /* ... باقي الكود البرمجي يبقى كما هو دون تغيير ... */
-
+    /* ... باقي الدوال البرمجية الأصلية دون تغيير ... */
   </script>
 </body>
 </html>
