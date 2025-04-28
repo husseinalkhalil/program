@@ -160,13 +160,38 @@
     /* التعديلات الجديدة فقط */
     .button-container div {
       display: flex;
-      gap: 15px;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    button.view-btn {
+      background-color: #a370d3 !important;
+      opacity: 0.9;
+    }
+
+    button.view-btn:hover {
+      background-color: #8a5eb5 !important;
+    }
+
+    button.refresh-btn {
+      background-color: #4CAF50 !important;
+    }
+
+    button.refresh-btn:hover {
+      background-color: #45a049 !important;
+    }
+
+    @media (min-width: 768px) {
+      .button-container div {
+        flex-direction: row;
+      }
     }
   </style>
 </head>
 
 <body>
-  <!-- زر العودة المضاف -->
+  <!-- زر العودة -->
   <div style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
     <button 
       class="button" 
@@ -180,6 +205,7 @@
     <h2>إدخال حوالة جديدة</h2>
     <div class="message" id="formMessage"></div>
     <form id="transferForm">
+      <!-- حقول الإدخال -->
       <div>
         <label for="name">اسم المستلم:</label>
         <input type="text" id="name" name="name" />
@@ -218,10 +244,11 @@
         <textarea id="notes" name="notes"></textarea>
       </div>
 
+      <!-- الأزرار المعدلة -->
       <div class="button-container">
         <div>
-          <button type="button" onclick="window.location.href='view.html'">عرض البيانات</button>
-          <button type="button" onclick="window.location.reload()">تحديث الصفحة</button>
+          <button type="button" class="view-btn" onclick="window.location.href='view.html'">عرض البيانات</button>
+          <button type="button" class="refresh-btn" onclick="window.location.reload()">تحديث الصفحة</button>
         </div>
         <button type="submit">إدخال</button>
       </div>
