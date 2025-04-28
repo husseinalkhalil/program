@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>عرض البيانات</title>
   <style>
-    /* كل الأنماط الأصلية كما هي */
+    /* الأنماط الأصلية */
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
@@ -56,17 +56,10 @@
         white-space: nowrap;
     }
 
-    td:nth-child(2), td:nth-child(5), td:nth-child(7) {
+    td:nth-child(5), td:nth-child(7), td:nth-child(8) {
       text-align: right;
       white-space: normal;
       word-wrap: break-word;
-    }
-    td:nth-child(8) {
-      text-align: right;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      max-width: 200px;
-      vertical-align: top;
     }
     
     #data-table td:nth-child(9),
@@ -90,6 +83,39 @@
         white-space: nowrap;
     }
 
+    /* الأنماط المضافة للتفاف النص */
+    .notes-cell, .purpose-cell {
+      position: relative;
+      max-width: 200px;
+    }
+    
+    .truncated-text {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 1.5em;
+      max-height: 3em;
+      cursor: pointer;
+      text-align: right;
+    }
+    
+    .read-more {
+      color: #663399;
+      font-weight: bold;
+      background: linear-gradient(90deg, rgba(245,238,254,0) 0%, rgba(245,238,254,0.9) 20%);
+      padding-left: 25px;
+      margin-right: -25px;
+      float: left;
+    }
+    
+    .expanded {
+      -webkit-line-clamp: unset !important;
+      max-height: none !important;
+      display: block !important;
+    }
+
+    /* باقي الأنماط الأصلية */
     .top-controls {
       display: flex;
       justify-content: space-between;
@@ -456,41 +482,10 @@
         font-size: 12px;
       }
     }
-
-    /* الأنماط المضافة للتفاف النص */
-    .notes-cell {
-      position: relative;
-      max-width: 200px;
-    }
-    
-    .truncated-text {
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      line-height: 1.5em;
-      max-height: 3em;
-      cursor: pointer;
-      text-align: right;
-    }
-    
-    .read-more {
-      color: #663399;
-      font-weight: bold;
-      background: linear-gradient(90deg, rgba(245,238,254,0) 0%, rgba(245,238,254,0.9) 20%);
-      padding-left: 25px;
-      margin-right: -25px;
-      float: left;
-    }
-    
-    .expanded {
-      -webkit-line-clamp: unset !important;
-      max-height: none !important;
-      display: block !important;
-    }
   </style>
 </head>
 <body>
+  <!-- المحتوى الأصلي -->
   <div class="top-controls">
     <div>
       <a class="top-back" href="index.html">➔ السابقة</a>
@@ -622,19 +617,31 @@
         filteredData.forEach((item, index) => {
           totalSAR += parseFloat(item.sar || 0);
           totalSYP += parseFloat(item.syp || 0);
+          
+          // معالجة حقلي السبب والملاحظات
+          const purposeContent = item.purpose || '';
+          const notesContent = item.notes || '';
+          const shouldTruncatePurpose = purposeContent.length > 50;
+          const shouldTruncateNotes = notesContent.length > 50;
+
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>${index + 1}</td>
             <td>${item.name}</td>
             <td>${item.sar}</td>
             <td>${item.syp}</td>
-            <td>${item.purpose}</td>
+            <td class="purpose-cell">
+              <div class="truncated-text" data-full="${purposeContent}">
+                ${shouldTruncatePurpose ? purposeContent.substring(0, 50) + '...' : purposeContent}
+                ${shouldTruncatePurpose ? '<span class="read-more">قراءة المزيد</span>' : ''}
+              </div>
+            </td>
             <td>${item.date}</td>
             <td>${item.method || ''}</td>
             <td class="notes-cell">
-              <div class="truncated-text">
-                ${item.notes || ''}
-                ${item.notes && item.notes.length > 50 ? '<span class="read-more">... قراءة المزيد</span>' : ''}
+              <div class="truncated-text" data-full="${notesContent}">
+                ${shouldTruncateNotes ? notesContent.substring(0, 50) + '...' : notesContent}
+                ${shouldTruncateNotes ? '<span class="read-more">قراءة المزيد</span>' : ''}
               </div>
             </td>
             <td><button class="edit-btn" onclick="handleEdit(${index})">✏️</button></td>
@@ -653,28 +660,22 @@
 
     function initReadMore() {
       document.querySelectorAll('.truncated-text').forEach(container => {
-        const originalText = container.textContent;
+        const originalText = container.dataset.full;
         if (originalText.length > 50) {
-          container.dataset.full = container.innerHTML;
-          container.innerHTML = `
-            ${originalText.substring(0, 50)}
-            <span class="read-more">... قراءة المزيد</span>
-          `;
-          
           container.addEventListener('click', function(e) {
             if (e.target.classList.contains('read-more') || e.target === this) {
               const isExpanded = this.classList.contains('expanded');
               this.classList.toggle('expanded');
               this.innerHTML = isExpanded ? 
-                `${originalText.substring(0, 50)}<span class="read-more">... قراءة المزيد</span>` :
-                `${container.dataset.full}<span class="read-more"> قراءة أقل</span>`;
+                `${originalText.substring(0, 50)}...<span class="read-more">قراءة المزيد</span>` :
+                `${originalText}<span class="read-more"> قراءة أقل</span>`;
             }
           });
         }
       });
     }
 
-    // باقي الدوال الأصلية بدون تغيير
+    // باقي الدوال الأصلية
     function handleEdit(index) {
       currentEditIndex = index;
       const item = data[index];
