@@ -1,523 +1,540 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>عرض البيانات</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f5f5ff;
-      direction: rtl;
-    }
-    h1 {
-      text-align: center;
-      color: #663399;
-      margin-bottom: 30px;
-    }
-    .success-message {
-      background-color: #ede3ff;
-      color: #155724;
-      padding: 10px;
-      border-radius: 8px;
-      margin: 10px auto;
-      width: fit-content;
-      text-align: center;
-      font-size: 15px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background-color: #f5eefe;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      font-size: 14px;
-      word-wrap: break-word; /* إضافة لتفعيل التفاف النص */
-    }
-    th {
-      background-color: #663399;
-      color: white;
-      text-align: center;
-    }
-    td {
-      text-align: center;
-    }
-    
-    /* التعديلات الجديدة للعمود الأول */
-    #data-table td:first-child,
-    #data-table th:first-child {
-        width: 30px;
-        min-width: 30px;
-        max-width: 30px;
-        white-space: nowrap;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>عرض البيانات</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5ff;
+            direction: rtl;
+        }
 
-    td:nth-child(2), td:nth-child(5), td:nth-child(7) {
-      text-align: right;
-      white-space: normal;
-    }
-    td:nth-child(8) {
-      text-align: right;
-      white-space: pre-wrap;
-      max-width: 200px;
-      vertical-align: top;
-    }
-    
-    /* التعديلات الجديدة لأعمدة التعديل والحذف */
-    #data-table td:nth-child(9),
-    #data-table th:nth-child(9) {
-        width: 50px;
-        min-width: 50px;
-        max-width: 50px;
-    }
+        h1 {
+            text-align: center;
+            color: #663399;
+            margin-bottom: 30px;
+        }
 
-    #data-table td:nth-child(10),
-    #data-table th:nth-child(10) {
-        width: 40px;
-        min-width: 40px;
-        max-width: 40px;
-    }
+        .success-message {
+            background-color: #ede3ff;
+            color: #155724;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px auto;
+            width: fit-content;
+            text-align: center;
+            font-size: 15px;
+        }
 
-    .edit-btn, .delete-btn {
-        padding: 4px 6px !important;
-        margin: 0 auto;
-        display: inline-block;
-        white-space: nowrap;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #f5eefe;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
 
-    .top-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-size: 14px;
+            word-wrap: break-word;
+            /* إضافة لتفعيل التفاف النص */
+        }
 
-    .top-back {
-      background-color: #bfa1e3;
-      color: white;
-      padding: 8px 16px;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
+        th {
+            background-color: #663399;
+            color: white;
+            text-align: center;
+        }
 
-    .top-back:hover {
-      background-color: #a67de3;
-    }
+        td {
+            text-align: center;
+        }
 
-    .export-buttons {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
+        /* التعديلات الجديدة للعمود الأول */
+        #data-table td:first-child,
+        #data-table th:first-child {
+            width: 30px;
+            min-width: 30px;
+            max-width: 30px;
+            white-space: nowrap;
+        }
 
-    .export-buttons button {
-      background-color: #663399;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+        td:nth-child(2),
+        td:nth-child(5),
+        td:nth-child(7) {
+            text-align: right;
+            white-space: normal;
+        }
 
-    .export-buttons button.refresh-btn {
-      background-color: #28a745 !important;
-    }
+        td:nth-child(8) {
+            text-align: right;
+            white-space: pre-wrap;
+            max-width: 200px;
+            vertical-align: top;
+        }
 
-    .export-buttons button.refresh-btn:hover {
-      background-color: #218838 !important;
-    }
+        /* التعديلات الجديدة لأعمدة التعديل والحذف */
+        #data-table td:nth-child(9),
+        #data-table th:nth-child(9) {
+            width: 50px;
+            min-width: 50px;
+            max-width: 50px;
+        }
 
-    .export-buttons button:hover {
-      background-color: #5a2f91;
-    }
+        #data-table td:nth-child(10),
+        #data-table th:nth-child(10) {
+            width: 40px;
+            min-width: 40px;
+            max-width: 40px;
+        }
 
-    .search-container {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-left: 15px;
-    }
+        .edit-btn,
+        .delete-btn {
+            padding: 4px 6px !important;
+            margin: 0 auto;
+            display: inline-block;
+            white-space: nowrap;
+        }
 
-    .search-input {
-      padding: 8px 12px;
-      border: 1px solid #663399;
-      border-radius: 5px;
-      width: 200px;
-      background-color: #f5eefe;
-    }
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-    .search-button {
-      background-color: #663399;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+        .top-back {
+            background-color: #bfa1e3;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
 
-    .search-button:hover {
-      background-color: #5a2f91;
-    }
+        .top-back:hover {
+            background-color: #a67de3;
+        }
 
-    .summary-bar {
-      background-color: #ede3ff;
-      padding: 10px;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-around;
-      font-size: 16px;
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
 
-    .delete-btn {
-      background-color: #ffdddd;
-      border: 1px solid #ff4444;
-      color: #c00;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+        .export-buttons button {
+            background-color: #663399;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    .edit-btn {
-      background-color: #e6e6fa;
-      border: 1px solid #663399;
-      color: #663399;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-      margin-left: 5px;
-    }
+        .export-buttons button.refresh-btn {
+            background-color: #28a745 !important;
+        }
 
-    .edit-btn:hover {
-      background-color: #d8bfd8;
-    }
+        .export-buttons button.refresh-btn:hover {
+            background-color: #218838 !important;
+        }
 
-    .delete-all-btn {
-      background-color: #fff0f0;
-      color: #c00;
-      padding: 10px 20px;
-      border: 1px solid #ff4444;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 20px auto;
-      display: block;
-      font-size: 16px;
-    }
+        .export-buttons button:hover {
+            background-color: #5a2f91;
+        }
 
-    .delete-btn:hover {
-      background-color: #ffcccc;
-    }
+        .search-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-left: 15px;
+        }
 
-    .confirm-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
+        .search-input {
+            padding: 8px 12px;
+            border: 1px solid #663399;
+            border-radius: 5px;
+            width: 200px;
+            background-color: #f5eefe;
+        }
 
-    .confirm-box {
-      background: #ede3ff;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    }
+        .search-button {
+            background-color: #663399;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-    .confirm-box p {
-      margin-bottom: 15px;
-      font-size: 16px;
-    }
+        .search-button:hover {
+            background-color: #5a2f91;
+        }
 
-    .confirm-box button {
-      margin: 5px;
-      padding: 8px 14px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-    }
+        .summary-bar {
+            background-color: #ede3ff;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-around;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
 
-    .confirm-box .yes {
-      background-color: #ff4444;
-      color: white;
-    }
+        .delete-btn {
+            background-color: #ffdddd;
+            border: 1px solid #ff4444;
+            color: #c00;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-    .confirm-box .no {
-      background-color: #f0e9ff;
-      color: black;
-    }
+        .edit-btn {
+            background-color: #e6e6fa;
+            border: 1px solid #663399;
+            color: #663399;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 5px;
+        }
 
-    .edit-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
+        .edit-btn:hover {
+            background-color: #d8bfd8;
+        }
 
-    .edit-modal-content {
-      background: #f5eefe;
-      padding: 25px;
-      border-radius: 10px;
-      width: 400px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
+        .delete-all-btn {
+            background-color: #fff0f0;
+            color: #c00;
+            padding: 10px 20px;
+            border: 1px solid #ff4444;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            font-size: 16px;
+        }
 
-    .edit-modal h2 {
-      color: #663399;
-      margin-top: 0;
-      text-align: center;
-    }
+        .delete-btn:hover {
+            background-color: #ffcccc;
+        }
 
-    .edit-modal-group {
-      margin-bottom: 15px;
-    }
+        .confirm-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
 
-    .edit-modal label {
-      display: block;
-      margin-bottom: 5px;
-      color: #4b0082;
-      font-weight: bold;
-    }
+        .confirm-box {
+            background: #ede3ff;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
 
-    .edit-modal input,
-    .edit-modal textarea {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 14px;
-    }
+        .confirm-box p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
 
-    .edit-modal-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
+        .confirm-box button {
+            margin: 5px;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-    .edit-modal-buttons button {
-      padding: 8px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+        .confirm-box .yes {
+            background-color: #ff4444;
+            color: white;
+        }
 
-    .edit-save {
-      background-color: #663399;
-      color: white;
-    }
+        .confirm-box .no {
+            background-color: #f0e9ff;
+            color: black;
+        }
 
-    .edit-cancel {
-      background-color: #f0e9ff;
-      color: #663399;
-    }
+        .edit-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
 
-    .edit-modal input[type="number"]::-webkit-outer-spin-button,
-    .edit-modal input[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+        .edit-modal-content {
+            background: #f5eefe;
+            padding: 25px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
 
-    .edit-modal input[type="number"] {
-      -moz-appearance: textfield;
-    }
+        .edit-modal h2 {
+            color: #663399;
+            margin-top: 0;
+            text-align: center;
+        }
 
-    @media screen and (max-width: 768px) {
-      .top-controls {
-        flex-direction: column-reverse;
-        gap: 15px;
-        align-items: stretch;
-      }
+        .edit-modal-group {
+            margin-bottom: 15px;
+        }
 
-      .export-buttons {
-        flex-direction: column;
-        gap: 8px;
-      }
+        .edit-modal label {
+            display: block;
+            margin-bottom: 5px;
+            color: #4b0082;
+            font-weight: bold;
+        }
 
-      .search-container {
-        margin-left: 0;
-        width: 100%;
-      }
+        .edit-modal input,
+        .edit-modal textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
 
-      .search-input {
-        width: 100%;
-        max-width: none;
-      }
+        .edit-modal-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
 
-      table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-      }
+        .edit-modal-buttons button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-      th, td {
-        min-width: 120px;
-        font-size: 13px;
-        padding: 6px;
-      }
+        .edit-save {
+            background-color: #663399;
+            color: white;
+        }
 
-      /* تعديلات العمود الأول للجوال */
-      #data-table td:first-child,
-      #data-table th:first-child {
-          min-width: 30px;
-      }
+        .edit-cancel {
+            background-color: #f0e9ff;
+            color: #663399;
+        }
 
-      /* تعديلات أعمدة التعديل والحذف للجوال */
-      #data-table td:nth-child(9),
-      #data-table th:nth-child(9) {
-          min-width: 50px;
-      }
+        .edit-modal input[type="number"]::-webkit-outer-spin-button,
+        .edit-modal input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
 
-      #data-table td:nth-child(10),
-      #data-table th:nth-child(10) {
-          min-width: 40px;
-      }
+        .edit-modal input[type="number"] {
+            -moz-appearance: textfield;
+        }
 
-      .edit-btn, .delete-btn {
-          padding: 3px 5px !important;
-          font-size: 13px;
-      }
+        @media screen and (max-width: 768px) {
+            .top-controls {
+                flex-direction: column-reverse;
+                gap: 15px;
+                align-items: stretch;
+            }
 
-      .summary-bar {
-        flex-direction: column;
-        gap: 8px;
-        font-size: 14px;
-      }
+            .export-buttons {
+                flex-direction: column;
+                gap: 8px;
+            }
 
-      .edit-modal-content {
-        width: 90%;
-        padding: 15px;
-        margin: 10px;
-      }
+            .search-container {
+                margin-left: 0;
+                width: 100%;
+            }
 
-      .edit-modal-buttons {
-        flex-direction: column-reverse;
-        gap: 10px;
-      }
+            .search-input {
+                width: 100%;
+                max-width: none;
+            }
 
-      .edit-modal-buttons button {
-        width: 100%;
-        padding: 12px;
-      }
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
 
-      .edit-modal-group input,
-      .edit-modal-group textarea {
-        font-size: 16px;
-        padding: 10px;
-      }
+            th,
+            td {
+                min-width: 120px;
+                font-size: 13px;
+                padding: 6px;
+            }
 
-      .edit-modal-group {
-        margin-bottom: 12px;
-      }
+            /* تعديلات العمود الأول للجوال */
+            #data-table td:first-child,
+            #data-table th:first-child {
+                min-width: 30px;
+            }
 
-      .delete-all-btn {
-        width: 100%;
-        padding: 8px;
-        font-size: 14px;
-      }
+            /* تعديلات أعمدة التعديل والحذف للجوال */
+            #data-table td:nth-child(9),
+            #data-table th:nth-child(9) {
+                min-width: 50px;
+            }
 
-      .top-back, 
-      .export-buttons button {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-      }
-    }
+            #data-table td:nth-child(10),
+            #data-table th:nth-child(10) {
+                min-width: 40px;
+            }
 
-    @media screen and (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
+            .edit-btn,
+            .delete-btn {
+                padding: 3px 5px !important;
+                font-size: 13px;
+            }
 
-      .confirm-box {
-        margin: 0 10px;
-      }
+            .summary-bar {
+                flex-direction: column;
+                gap: 8px;
+                font-size: 14px;
+            }
 
-      th, td {
-        font-size: 12px;
-      }
-    }
-  </style>
+            .edit-modal-content {
+                width: 90%;
+                padding: 15px;
+                margin: 10px;
+            }
+
+            .edit-modal-buttons {
+                flex-direction: column-reverse;
+                gap: 10px;
+            }
+
+            .edit-modal-buttons button {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .edit-modal-group input,
+            .edit-modal-group textarea {
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            .edit-modal-group {
+                margin-bottom: 12px;
+            }
+
+            .delete-all-btn {
+                width: 100%;
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .top-back,
+            .export-buttons button {
+                width: 100%;
+                text-align: center;
+                padding: 10px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .confirm-box {
+                margin: 0 10px;
+            }
+
+            th,
+            td {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="top-controls">
-    <div>
-      <a class="top-back" href="index.html">➔ السابقة</a>
-      <a class="top-back" href="../index.html" style="margin-right: 10px;">الرئيسية</a>
-    </div>
-    
-    <div class="export-buttons">
-      <div class="search-container">
-        <input type="text" class="search-input" id="searchInput" placeholder="بحث باسم المستلم">
-        <button class="search-button" onclick="filterTable()">بحث</button>
-      </div>
-      <button onclick="window.print()">طباعة</button>
-      <button onclick="exportPDF()"> PDF</button>
-      <button class="refresh-btn" onclick="window.location.reload()">تحديث</button>
-    </div>
-  </div>
-
-  <h1>جميع الحوالات</h1>
-
-  <div class="summary-bar">
-    <span id="total-count">عدد الحوالات: 0</span>
-    <span id="total-sar">الإجمالي (ريال): 0</span>
-    <span id="total-syp">الإجمالي (ليرة): 0</span>
-  </div>
-
-  <div id="success-container"></div>
-
-  <table id="data-table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>اسم المستلم</th>
-        <th>ريال</th>
-        <th>ليرة</th>
-        <th>سبب الحوالة</th>
-        <th>التاريخ</th>
-        <th>طريقة التحويل</th>
-        <th>ملاحظات</th>
-        <th>تعديل</th>
-        <th>🗑️</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-  <button class="delete-all-btn" onclick="confirmDeleteAll()">حذف جميع البيانات</button>
-
-  <div class="edit-modal" id="editModal">
-    <div class="edit-modal-content">
-      <h2>تعديل بيانات الحوالة</h2>
-      <form id="editForm">
-        <div class="edit-modal-group">
-          <label for="editName">اسم المستلم:</label>
-          <input type="text" id="editName" required>
+    <div class="top-controls">
+        <div>
+            <a class="top-back" href="index.html">➔ السابقة</a>
+            <a class="top-back" href="../index.html" style="margin-right: 10px;">الرئيسية</a>
         </div>
-        
-        <div class="edit-modal-group">
-          <label for="editSAR">المبلغ (ريال):</label>
-          <input type="number" id="editSAR" required>
+
+        <div class="export-buttons">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="بحث باسم المستلم">
+                <button class="search-button" onclick="filterTable()">بحث</button>
+            </div>
+            <button onclick="window.print()">طباعة</button>
+            <button onclick="exportPDF()"> PDF</button>
+            <button class="refresh-btn" onclick="window.location.reload()">تحديث</button>
         </div>
+    </div>
+
+    <h1>جميع الحوالات</h1>
+
+    <div class="summary-bar">
+        <span id="total-count">عدد الحوالات: 0</span>
+        <span id="total-sar">الإجمالي (ريال): 0</span>
+        <span id="total-syp">الإجمالي (ليرة): 0</span>
+    </div>
+
+    <div id="success-container"></div>
+
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>اسم المستلم</th>
+                <th>ريال</th>
+                <th>ليرة</th>
+                <th>سبب الحوالة</th>
+                <th>التاريخ</th>
+                <th>طريقة التحويل</th>
+                <th>ملاحظات</th>
+                <th>تعديل</th>
+                <th>🗑️</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <button class="delete-all-btn" onclick="confirmDeleteAll()">حذف جميع البيانات</button>
+
+    <div class="edit-modal" id="editModal">
+        <div class="edit-modal-content">
+            <h2>تعديل بيانات الحوالة</h2>
+            <form id="editForm">
+                <div class="edit-modal-group">
+                    <label for="editName">اسم المستلم:</label>
+                    <input type="text" id="editName" required>
+                </div>
+
+                <div class="edit-modal-group">
+                    <label for="editSAR">المبلغ (ريال):</
