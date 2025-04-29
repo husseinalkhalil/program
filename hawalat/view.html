@@ -37,7 +37,7 @@
     th, td {
       border: 1px solid #ddd;
       padding: 8px;
-      font-size: 16px; /* التعديل الأول: زيادة حجم الخط */
+      font-size: 14px;
     }
     th {
       background-color: #663399;
@@ -75,7 +75,6 @@
       margin: 0;
       padding: 0;
       word-break: break-word;
-      font-size: 16px; /* التعديل الثاني: تناسق حجم الخط */
     }
 
     .read-more {
@@ -386,7 +385,7 @@
 
       th, td {
         min-width: 120px;
-        font-size: 14px; /* التعديل الثالث: للشاشات المتوسطة */
+        font-size: 13px;
         padding: 6px;
       }
 
@@ -466,7 +465,7 @@
       }
 
       th, td {
-        font-size: 13px; /* التعديل الرابع: للشاشات الصغيرة */
+        font-size: 12px;
       }
     }
   </style>
@@ -570,8 +569,246 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
   <script>
-    // ... (نفس الكود السابق في الـ script دون أي تغييرات)
-    // [يُفضل ترك محتوى الـ script كما هو دون تعديل]
+    const tableBody = document.querySelector("#data-table tbody");
+    let data = JSON.parse(localStorage.getItem("transfers") || "[]");
+    let currentEditIndex = null;
+    const editModal = document.getElementById('editModal');
+    const editForm = document.getElementById('editForm');
+
+    document.addEventListener('DOMContentLoaded', renderTable);
+
+    function renderTable() {
+      renderFilteredTable(data);
+    }
+
+    function filterTable() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const filteredData = data.filter(item => 
+        item.name.toLowerCase().includes(searchTerm)
+      );
+      renderFilteredTable(filteredData);
+    }
+
+    function renderFilteredTable(filteredData) {
+      tableBody.innerHTML = "";
+      let totalSAR = 0;
+      let totalSYP = 0;
+
+      if (filteredData.length === 0) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="10" style="text-align:center; color:#999;">لا توجد نتائج</td>`;
+        tableBody.appendChild(row);
+      } else {
+        filteredData.forEach((item, index) => {
+          totalSAR += parseFloat(item.sar || 0);
+          totalSYP += parseFloat(item.syp || 0);
+          
+          const purposeContent = item.purpose || '';
+          const notesContent = item.notes || '';
+          
+          const shouldShowPurposeReadMore = purposeContent.trim().length > 30;
+          const shouldShowNotesReadMore = notesContent.trim().length > 30;
+
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>${item.sar}</td>
+            <td>${item.syp}</td>
+            <td class="purpose-cell">
+              <div class="truncated-text" data-full="${purposeContent}">
+                ${shouldShowPurposeReadMore ? purposeContent.substring(0, 30) + '...' : purposeContent}
+                ${shouldShowPurposeReadMore ? '<span class="read-more">قراءة المزيد</span>' : ''}
+              </div>
+            </td>
+            <td>${item.date}</td>
+            <td>${item.method || ''}</td>
+            <td class="notes-cell">
+              <div class="truncated-text" data-full="${notesContent}">
+                ${shouldShowNotesReadMore ? notesContent.substring(0, 30) + '...' : notesContent}
+                ${shouldShowNotesReadMore ? '<span class="read-more">قراءة المزيد</span>' : ''}
+              </div>
+            </td>
+            <td><button class="edit-btn" onclick="handleEdit(${index})">✏️</button></td>
+            <td><button class="delete-btn" onclick="deleteRow(${index})">🗑️</button></td>
+          `;
+          tableBody.appendChild(row);
+        });
+      }
+
+      document.getElementById("total-count").textContent = `عدد الحوالات: ${filteredData.length}`;
+      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${totalSAR}`;
+      document.getElementById("total-syp").textContent = `الإجمالي (ليرة): ${totalSYP}`;
+      
+      initReadMore();
+    }
+
+    function initReadMore() {
+      document.querySelectorAll('.truncated-text').forEach(container => {
+        const fullText = container.dataset.full;
+        if (fullText && fullText.trim().length > 25) {
+          container.innerHTML = `
+            ${fullText.substring(0, 25)}...
+            <span class="read-more">قراءة المزيد</span>
+          `;
+
+          container.addEventListener('click', function(e) {
+            if (e.target.classList.contains('read-more') || e.target === this) {
+              const isExpanded = this.classList.contains('expanded');
+              
+              if (isExpanded) {
+                this.classList.remove('expanded');
+                this.innerHTML = `
+                  ${fullText.substring(0, 25)}...
+                  <span class="read-more">قراءة المزيد</span>
+                `;
+              } else {
+                this.classList.add('expanded');
+                this.innerHTML = `
+                  ${fullText}
+                  <span class="read-more">قراءة أقل</span>
+                `;
+              }
+            }
+          });
+        } else if (fullText) {
+          container.innerHTML = fullText;
+        }
+      });
+    }
+
+    function handleEdit(index) {
+      currentEditIndex = index;
+      const item = data[index];
+      
+      document.getElementById('editName').value = item.name;
+      document.getElementById('editSAR').value = item.sar;
+      document.getElementById('editSYP').value = item.syp;
+      document.getElementById('editPurpose').value = item.purpose;
+      document.getElementById('editMethod').value = item.method || '';
+      document.getElementById('editDate').value = item.date;
+      document.getElementById('editNotes').value = item.notes || '';
+      
+      editModal.style.display = 'flex';
+    }
+
+    function closeEditModal() {
+      editModal.style.display = 'none';
+      currentEditIndex = null;
+      editForm.reset();
+    }
+
+    editForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      if (currentEditIndex !== null) {
+        data[currentEditIndex] = {
+          name: document.getElementById('editName').value.trim(),
+          sar: document.getElementById('editSAR').value.trim(),
+          syp: document.getElementById('editSYP').value.trim(),
+          purpose: document.getElementById('editPurpose').value.trim(),
+          method: document.getElementById('editMethod').value.trim(),
+          date: document.getElementById('editDate').value,
+          notes: document.getElementById('editNotes').value.trim()
+        };
+        
+        localStorage.setItem("transfers", JSON.stringify(data));
+        renderTable();
+        showSuccess("تم التعديل بنجاح ✅");
+        closeEditModal();
+      }
+    });
+
+    window.onclick = function(event) {
+      if (event.target === editModal) {
+        closeEditModal();
+      }
+    };
+
+    function deleteRow(index) {
+      showConfirm(() => {
+        data.splice(index, 1);
+        localStorage.setItem("transfers", JSON.stringify(data));
+        renderTable();
+        showSuccess("تم الحذف بنجاح ✅");
+      });
+    }
+
+    function confirmDeleteAll() {
+      if (data.length === 0) {
+        showSuccess("لا توجد بيانات لحذفها ❗");
+        return;
+      }
+      showConfirm(() => {
+        localStorage.removeItem("transfers");
+        data = [];
+        renderTable();
+        showSuccess("تم حذف جميع البيانات بنجاح ✅");
+      });
+    }
+
+    function showConfirm(onConfirm) {
+      const overlay = document.createElement("div");
+      overlay.className = "confirm-overlay";
+      overlay.innerHTML = `
+        <div class="confirm-box">
+          <p>هل أنت متأكد من الحذف؟</p>
+          <button class="yes">نعم</button>
+          <button class="no">إلغاء</button>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+
+      overlay.querySelector(".yes").onclick = () => {
+        onConfirm();
+        overlay.remove();
+      };
+      overlay.querySelector(".no").onclick = () => overlay.remove();
+    }
+
+    function showSuccess(message) {
+      const container = document.getElementById("success-container");
+      const msg = document.createElement("div");
+      msg.className = "success-message";
+      msg.textContent = message;
+      container.appendChild(msg);
+      setTimeout(() => msg.remove(), 3000);
+    }
+
+    async function exportPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const dateStr = new Date().toLocaleDateString("ar-EG");
+
+      doc.setFont("Helvetica");
+      doc.setFontSize(12);
+      doc.text("تقرير جميع الحوالات", 105, 10, { align: "center" });
+      doc.text(`التاريخ: ${dateStr}`, 200, 10, { align: "right" });
+
+      const tableData = data.map((item, index) => [
+        index + 1,
+        item.name,
+        item.sar,
+        item.syp,
+        item.purpose,
+        item.date,
+        item.method || '',
+        item.notes || ''
+      ]);
+
+      doc.autoTable({
+        head: [["#", "اسم المستلم", "ريال", "ليرة", "الغاية", "التاريخ", "التحويل", "ملاحظات"]],
+        body: tableData,
+        styles: { font: "Helvetica", fontSize: 10, cellPadding: 2 },
+        startY: 20,
+        margin: { right: 10, left: 10 },
+        headStyles: { fillColor: [102, 51, 153], halign: 'center', textColor: 255 },
+        bodyStyles: { halign: 'right' },
+        theme: "grid"
+      });
+
+      doc.save("الحوالات.pdf");
+    }
   </script>
 </body>
 </html>
