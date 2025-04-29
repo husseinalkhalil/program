@@ -606,9 +606,6 @@
           const purposeContent = item.purpose || '';
           const notesContent = item.notes || '';
           
-          const shouldShowPurposeReadMore = purposeContent.trim().length > 50;
-          const shouldShowNotesReadMore = notesContent.trim().length > 50;
-
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>${index + 1}</td>
@@ -616,17 +613,15 @@
             <td>${item.sar}</td>
             <td>${item.syp}</td>
             <td class="purpose-cell">
-              <div class="truncated-text">
+              <div class="truncated-text" data-full="${purposeContent}">
                 ${purposeContent}
-                ${shouldShowPurposeReadMore ? '<span class="read-more">... قراءة المزيد</span>' : ''}
               </div>
             </td>
             <td>${item.date}</td>
             <td>${item.method || ''}</td>
             <td class="notes-cell">
-              <div class="truncated-text">
+              <div class="truncated-text" data-full="${notesContent}">
                 ${notesContent}
-                ${shouldShowNotesReadMore ? '<span class="read-more">... قراءة المزيد</span>' : ''}
               </div>
             </td>
             <td><button class="edit-btn" onclick="handleEdit(${index})">✏️</button></td>
@@ -645,9 +640,8 @@
 
     function initReadMore() {
       document.querySelectorAll('.truncated-text').forEach(container => {
-        const fullText = container.textContent;
-        if (fullText.trim().length > 50) {
-          container.dataset.full = fullText;
+        const fullText = container.dataset.full;
+        if (fullText && fullText.trim().length > 50) {
           container.innerHTML = `
             ${fullText.substring(0, 50)}...
             <span class="read-more">قراءة المزيد</span>
@@ -656,13 +650,23 @@
           container.addEventListener('click', function(e) {
             if (e.target.classList.contains('read-more') || e.target === this) {
               const isExpanded = this.classList.contains('expanded');
-              this.classList.toggle('expanded');
-              this.innerHTML = isExpanded ? 
-                `${fullText.substring(0, 50)}...<span class="read-more">قراءة المزيد</span>` :
-                `${fullText}<span class="read-more"> قراءة أقل</span>`;
+              
+              if (isExpanded) {
+                this.classList.remove('expanded');
+                this.innerHTML = `
+                  ${fullText.substring(0, 50)}...
+                  <span class="read-more">قراءة المزيد</span>
+                `;
+              } else {
+                this.classList.add('expanded');
+                this.innerHTML = `
+                  ${fullText}
+                  <span class="read-more">قراءة أقل</span>
+                `;
+              }
             }
           });
-        } else {
+        } else if (fullText) {
           container.innerHTML = fullText;
         }
       });
