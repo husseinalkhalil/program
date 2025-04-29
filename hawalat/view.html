@@ -154,7 +154,7 @@
     }
 
     .search-input {
-      padding: 8px 35px 8px 12px;
+      padding: 8px 12px 8px 35px;
       border: 1px solid #663399;
       border-radius: 5px;
       width: 200px;
@@ -163,7 +163,7 @@
 
     .clear-search {
       position: absolute;
-      right: 10px;
+      left: 10px;
       top: 50%;
       transform: translateY(-50%);
       background: none;
@@ -487,7 +487,7 @@
       }
 
       .clear-search {
-        right: 5px;
+        left: 5px;
         font-size: 16px;
       }
 
@@ -496,7 +496,6 @@
       }
     }
 
-    /* تعديلات الطباعة */
     @media print {
         .top-controls,
         .delete-all-btn,
@@ -524,7 +523,6 @@
             margin: 1cm;
         }
 
-        /* إظهار النص الكامل عند الطباعة */
         .truncated-text {
             -webkit-line-clamp: unset !important;
             max-height: none !important;
@@ -552,13 +550,6 @@
     
     <div class="export-buttons">
       <div class="search-container">
-        <input 
-          type="text" 
-          class="search-input" 
-          id="searchInput" 
-          placeholder="بحث باسم المستلم"
-          onfocus="document.getElementById('clearSearch').style.display='block'"
-        >
         <button 
           id="clearSearch" 
           class="clear-search" 
@@ -566,6 +557,13 @@
           type="button"
           aria-label="إلغاء البحث"
         >&times;</button>
+        <input 
+          type="text" 
+          class="search-input" 
+          id="searchInput" 
+          placeholder="بحث باسم المستلم"
+          onfocus="document.getElementById('clearSearch').style.display='block'"
+        >
         <button class="search-button" onclick="filterTable()">بحث</button>
       </div>
       <button onclick="window.print()">طباعة</button>
@@ -681,6 +679,8 @@
       document.getElementById('clearSearch').style.display = 'none';
       renderTable();
     }
+
+    document.getElementById('searchInput').addEventListener('input', filterTable);
 
     function renderFilteredTable(filteredData) {
       tableBody.innerHTML = "";
