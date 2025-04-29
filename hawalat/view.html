@@ -495,7 +495,7 @@
       }
     }
 
-    /* التعديل الجديد للطباعة */
+    /* تعديلات الطباعة */
     @media print {
         .top-controls,
         .delete-all-btn,
@@ -521,6 +521,23 @@
 
         @page {
             margin: 1cm;
+        }
+
+        /* إظهار النص الكامل عند الطباعة */
+        .truncated-text {
+            -webkit-line-clamp: unset !important;
+            max-height: none !important;
+            display: block !important;
+        }
+
+        .read-more {
+            display: none !important;
+        }
+
+        .notes-cell, .purpose-cell {
+            max-width: none !important;
+            width: auto !important;
+            white-space: normal !important;
         }
     }
   </style>
