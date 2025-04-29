@@ -646,9 +646,9 @@
     function initReadMore() {
       document.querySelectorAll('.truncated-text').forEach(container => {
         const fullText = container.dataset.full;
-        if (fullText && fullText.trim().length > 30) {
+        if (fullText && fullText.trim().length > 25) {
           container.innerHTML = `
-            ${fullText.substring(0, 30)}...
+            ${fullText.substring(0, 25)}...
             <span class="read-more">قراءة المزيد</span>
           `;
 
@@ -659,7 +659,7 @@
               if (isExpanded) {
                 this.classList.remove('expanded');
                 this.innerHTML = `
-                  ${fullText.substring(0, 30)}...
+                  ${fullText.substring(0, 25)}...
                   <span class="read-more">قراءة المزيد</span>
                 `;
               } else {
