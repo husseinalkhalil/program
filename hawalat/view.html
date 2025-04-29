@@ -606,6 +606,9 @@
           const purposeContent = item.purpose || '';
           const notesContent = item.notes || '';
           
+          const shouldShowPurposeReadMore = purposeContent.trim().length > 30;
+          const shouldShowNotesReadMore = notesContent.trim().length > 30;
+
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>${index + 1}</td>
@@ -614,14 +617,16 @@
             <td>${item.syp}</td>
             <td class="purpose-cell">
               <div class="truncated-text" data-full="${purposeContent}">
-                ${purposeContent}
+                ${shouldShowPurposeReadMore ? purposeContent.substring(0, 30) + '...' : purposeContent}
+                ${shouldShowPurposeReadMore ? '<span class="read-more">قراءة المزيد</span>' : ''}
               </div>
             </td>
             <td>${item.date}</td>
             <td>${item.method || ''}</td>
             <td class="notes-cell">
               <div class="truncated-text" data-full="${notesContent}">
-                ${notesContent}
+                ${shouldShowNotesReadMore ? notesContent.substring(0, 30) + '...' : notesContent}
+                ${shouldShowNotesReadMore ? '<span class="read-more">قراءة المزيد</span>' : ''}
               </div>
             </td>
             <td><button class="edit-btn" onclick="handleEdit(${index})">✏️</button></td>
@@ -641,9 +646,9 @@
     function initReadMore() {
       document.querySelectorAll('.truncated-text').forEach(container => {
         const fullText = container.dataset.full;
-        if (fullText && fullText.trim().length > 50) {
+        if (fullText && fullText.trim().length > 30) {
           container.innerHTML = `
-            ${fullText.substring(0, 50)}...
+            ${fullText.substring(0, 30)}...
             <span class="read-more">قراءة المزيد</span>
           `;
 
@@ -654,7 +659,7 @@
               if (isExpanded) {
                 this.classList.remove('expanded');
                 this.innerHTML = `
-                  ${fullText.substring(0, 50)}...
+                  ${fullText.substring(0, 30)}...
                   <span class="read-more">قراءة المزيد</span>
                 `;
               } else {
