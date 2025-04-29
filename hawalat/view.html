@@ -1,152 +1,229 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض الطلبات</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f3e8ff;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #7e22ce;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .container {
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            font-size: 16px; /* تم تكبير حجم الخط هنا فقط */
-        }
-        th {
-            background-color: #7e22ce;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        .total-summary {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
-        .summary-box {
-            background-color: #9333ea;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 18px;
-        }
-        .buttons {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .buttons button {
-            background-color: #7e22ce;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .buttons button:hover {
-            background-color: #9333ea;
-        }
-        .client-select {
-            margin-bottom: 20px;
-        }
-        select {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            width: 100%;
-            max-width: 300px;
-        }
-        .edit-btn, .delete-btn {
-            cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 4px;
-            color: white;
-            border: none;
-        }
-        .edit-btn {
-            background-color: #3b82f6;
-        }
-        .edit-btn:hover {
-            background-color: #2563eb;
-        }
-        .delete-btn {
-            background-color: #ef4444;
-        }
-        .delete-btn:hover {
-            background-color: #dc2626;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عرض الطلبات</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f8;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #6a0dad;
+      color: white;
+      padding: 10px 0;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 95%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      font-size: 18px; /* <-- هنا كبرت حجم الخط للجدول فقط */
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+    th {
+      background-color: #6a0dad;
+      color: white;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      background-color: #6a0dad;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #580e9d;
+    }
+    #totals {
+      margin: 20px;
+      font-size: 18px;
+    }
+    select {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-    <header>عرض الطلبات</header>
-    <div class="container">
-        <div class="client-select">
-            <select id="clientSelect">
-                <option value="">اختيار عميل</option>
-            </select>
-        </div>
-        <table id="ordersTable">
-            <thead>
-                <tr>
-                    <th>اسم العميل</th>
-                    <th>التاريخ</th>
-                    <th>سعر الطلب</th>
-                    <th>سعر التوصيل</th>
-                    <th>المبلغ المدفوع</th>
-                    <th>الصورة</th>
-                    <th>ملاحظات</th>
-                    <th>تعديل</th>
-                    <th>حذف</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- سيتم تعبئة البيانات هنا -->
-            </tbody>
-        </table>
-        <div class="total-summary">
-            <div class="summary-box" id="totalOrders">إجمالي الطلبات: 0</div>
-            <div class="summary-box" id="totalDelivery">إجمالي التوصيل: 0</div>
-            <div class="summary-box" id="totalPaid">إجمالي المدفوع: 0</div>
-            <div class="summary-box" id="overallTotal">المجموع الكلي: 0</div>
-        </div>
-        <div class="buttons">
-            <button onclick="printTable()">طباعة</button>
-            <button onclick="exportToPDF()">تصدير PDF</button>
-            <button onclick="deleteAll()">حذف الكل</button>
-        </div>
-    </div>
 
-    <script>
-        // سكربت عرض وتعديل وحذف الطلبات سيتم وضعه هنا
-    </script>
+<header>
+  <h1>عرض الطلبات</h1>
+</header>
+
+<div id="controls">
+  <select id="clientSelect">
+    <option value="">اختيار عميل</option>
+  </select>
+  <button onclick="deleteAll()">حذف الكل</button>
+  <button onclick="printTable()">طباعة</button>
+  <button onclick="exportToPDF()">تصدير PDF</button>
+</div>
+
+<table id="ordersTable">
+  <thead>
+    <tr>
+      <th>اسم العميل</th>
+      <th>التاريخ</th>
+      <th>سعر الطلب</th>
+      <th>سعر التوصيل</th>
+      <th>المبلغ المدفوع</th>
+      <th>الصورة</th>
+      <th>ملاحظات</th>
+      <th>تعديل</th>
+      <th>حذف</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- يتم تعبئته بالجافاسكربت -->
+  </tbody>
+</table>
+
+<div id="totals">
+  <p id="totalOrders"></p>
+  <p id="totalDelivery"></p>
+  <p id="totalPaid"></p>
+  <p id="overallTotal"></p>
+</div>
+
+<script>
+let orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+function renderTable() {
+  const tableBody = document.querySelector('#ordersTable tbody');
+  const clientSelect = document.getElementById('clientSelect');
+  tableBody.innerHTML = '';
+  clientSelect.innerHTML = '<option value="">اختيار عميل</option>';
+
+  let totalOrders = 0;
+  let totalDelivery = 0;
+  let totalPaid = 0;
+  let clients = new Set();
+
+  orders.forEach((order, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${order.clientName}</td>
+      <td>${order.date}</td>
+      <td>${order.orderPrice}</td>
+      <td>${order.deliveryPrice}</td>
+      <td>${order.paidAmount}</td>
+      <td>${order.image ? `<a href="${order.image}" target="_blank">عرض</a>` : 'لا يوجد'}</td>
+      <td>${order.notes || ''}</td>
+      <td><button onclick="editOrder(${index})">تعديل</button></td>
+      <td><button onclick="deleteOrder(${index})">حذف</button></td>
+    `;
+    tableBody.appendChild(row);
+
+    totalOrders += Number(order.orderPrice) || 0;
+    totalDelivery += Number(order.deliveryPrice) || 0;
+    totalPaid += Number(order.paidAmount) || 0;
+    clients.add(order.clientName);
+  });
+
+  document.getElementById('totalOrders').textContent = `إجمالي الطلبات: ${totalOrders}`;
+  document.getElementById('totalDelivery').textContent = `إجمالي التوصيل: ${totalDelivery}`;
+  document.getElementById('totalPaid').textContent = `إجمالي المدفوع: ${totalPaid}`;
+  document.getElementById('overallTotal').textContent = `المجموع الكلي: ${totalPaid - (totalOrders + totalDelivery)}`;
+
+  clients.forEach(client => {
+    const option = document.createElement('option');
+    option.value = client;
+    option.textContent = client;
+    clientSelect.appendChild(option);
+  });
+}
+
+function editOrder(index) {
+  const order = orders[index];
+  const newOrderPrice = prompt('تعديل سعر الطلب:', order.orderPrice);
+  const newDeliveryPrice = prompt('تعديل سعر التوصيل:', order.deliveryPrice);
+  const newPaidAmount = prompt('تعديل المبلغ المدفوع:', order.paidAmount);
+  const newNotes = prompt('تعديل الملاحظات:', order.notes || '');
+
+  if (newOrderPrice !== null) orders[index].orderPrice = newOrderPrice;
+  if (newDeliveryPrice !== null) orders[index].deliveryPrice = newDeliveryPrice;
+  if (newPaidAmount !== null) orders[index].paidAmount = newPaidAmount;
+  if (newNotes !== null) orders[index].notes = newNotes;
+
+  localStorage.setItem('orders', JSON.stringify(orders));
+  alert('تم التعديل بنجاح');
+  renderTable();
+}
+
+function deleteOrder(index) {
+  if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
+    orders.splice(index, 1);
+    localStorage.setItem('orders', JSON.stringify(orders));
+    renderTable();
+  }
+}
+
+function deleteAll() {
+  if (confirm('هل أنت متأكد من حذف جميع الطلبات؟')) {
+    orders = [];
+    localStorage.removeItem('orders');
+    renderTable();
+  }
+}
+
+function printTable() {
+  window.print();
+}
+
+function exportToPDF() {
+  const table = document.getElementById('ordersTable');
+  const win = window.open('', '', 'height=700,width=700');
+  win.document.write('<html><head><title>تصدير PDF</title>');
+  win.document.write('<style>table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid #000; padding: 8px; font-size: 14px; }</style>');
+  win.document.write('</head><body>');
+  win.document.write(table.outerHTML);
+  win.document.write('</body></html>');
+  win.document.close();
+  win.print();
+}
+
+document.getElementById('clientSelect').addEventListener('change', function() {
+  const selectedClient = this.value;
+  if (selectedClient === "") {
+    renderTable();
+    return;
+  }
+
+  const tableBody = document.querySelector('#ordersTable tbody');
+  tableBody.innerHTML = '';
+
+  orders.forEach((order, index) => {
+    if (order.clientName === selectedClient) {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${order.clientName}</td>
+        <td>${order.date}</td>
+        <td>${order.orderPrice}</td>
+        <td>${order.deliveryPrice}</td>
+        <td>${order.paidAmount}</td>
+        <td>${order.image ? `<a href="${order.image}" target="_blank">عرض</a>` : 'لا يوجد'}</td>
+        <td>${order.notes || ''}</td>
+        <td><button onclick="editOrder(${index})">تعديل</button></td>
+        <td><button onclick="deleteOrder(${index})">حذف</button></td>
+      `;
+      tableBody.appendChild(row);
+    }
+  });
+});
+
+renderTable();
+</script>
+
 </body>
 </html>
