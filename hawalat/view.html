@@ -159,6 +159,7 @@
       border-radius: 5px;
       width: 200px;
       background-color: #f5eefe;
+      font-size: 14px;
     }
 
     .clear-search {
@@ -172,9 +173,11 @@
       cursor: pointer;
       display: none;
       padding: 0;
-      font-size: 18px;
+      font-size: 16px;
       z-index: 2;
       outline: none;
+      width: 20px;
+      height: 20px;
     }
 
     .search-input:focus + .clear-search,
@@ -190,6 +193,7 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      font-size: 14px;
     }
 
     .search-button:hover {
@@ -207,172 +211,7 @@
       font-weight: bold;
     }
 
-    .delete-btn {
-      background-color: #ffdddd;
-      border: 1px solid #ff4444;
-      color: #c00;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .edit-btn {
-      background-color: #e6e6fa;
-      border: 1px solid #663399;
-      color: #663399;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-      margin-left: 5px;
-    }
-
-    .edit-btn:hover {
-      background-color: #d8bfd8;
-    }
-
-    .delete-all-btn {
-      background-color: #fff0f0;
-      color: #c00;
-      padding: 10px 20px;
-      border: 1px solid #ff4444;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 20px auto;
-      display: block;
-      font-size: 16px;
-    }
-
-    .delete-btn:hover {
-      background-color: #ffcccc;
-    }
-
-    .confirm-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-
-    .confirm-box {
-      background: #ede3ff;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .confirm-box p {
-      margin-bottom: 15px;
-      font-size: 16px;
-    }
-
-    .confirm-box button {
-      margin: 5px;
-      padding: 8px 14px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .confirm-box .yes {
-      background-color: #ff4444;
-      color: white;
-    }
-
-    .confirm-box .no {
-      background-color: #f0e9ff;
-      color: black;
-    }
-
-    .edit-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .edit-modal-content {
-      background: #f5eefe;
-      padding: 25px;
-      border-radius: 10px;
-      width: 400px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .edit-modal h2 {
-      color: #663399;
-      margin-top: 0;
-      text-align: center;
-    }
-
-    .edit-modal-group {
-      margin-bottom: 15px;
-    }
-
-    .edit-modal label {
-      display: block;
-      margin-bottom: 5px;
-      color: #4b0082;
-      font-weight: bold;
-    }
-
-    .edit-modal input,
-    .edit-modal textarea {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 14px;
-    }
-
-    .edit-modal-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-
-    .edit-modal-buttons button {
-      padding: 8px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .edit-save {
-      background-color: #663399;
-      color: white;
-    }
-
-    .edit-cancel {
-      background-color: #f0e9ff;
-      color: #663399;
-    }
-
-    .edit-modal input[type="number"]::-webkit-outer-spin-button,
-    .edit-modal input[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    .edit-modal input[type="number"] {
-      -moz-appearance: textfield;
-    }
-
+    /* تعديلات خاصة للجوال */
     @media screen and (max-width: 768px) {
       .top-controls {
         flex-direction: column-reverse;
@@ -393,6 +232,21 @@
       .search-input {
         width: 100%;
         max-width: none;
+        padding-left: 30px;
+        font-size: 14px;
+      }
+
+      .clear-search {
+        left: 8px;
+        font-size: 14px;
+        width: 18px;
+        height: 18px;
+        top: 55%;
+      }
+
+      .search-button {
+        padding: 6px 12px;
+        font-size: 14px;
       }
 
       table {
@@ -433,32 +287,6 @@
         font-size: 14px;
       }
 
-      .edit-modal-content {
-        width: 90%;
-        padding: 15px;
-        margin: 10px;
-      }
-
-      .edit-modal-buttons {
-        flex-direction: column-reverse;
-        gap: 10px;
-      }
-
-      .edit-modal-buttons button {
-        width: 100%;
-        padding: 12px;
-      }
-
-      .edit-modal-group input,
-      .edit-modal-group textarea {
-        font-size: 16px;
-        padding: 10px;
-      }
-
-      .edit-modal-group {
-        margin-bottom: 12px;
-      }
-
       .delete-all-btn {
         width: 100%;
         padding: 8px;
@@ -478,17 +306,9 @@
         padding: 10px;
       }
 
-      .confirm-box {
-        margin: 0 10px;
-      }
-
-      th, td {
-        font-size: 12px;
-      }
-
       .clear-search {
         left: 5px;
-        font-size: 16px;
+        font-size: 14px;
       }
 
       .search-input {
@@ -496,6 +316,7 @@
       }
     }
 
+    /* تعديلات الطباعة */
     @media print {
         .top-controls,
         .delete-all-btn,
@@ -908,6 +729,20 @@
 
       doc.save("الحوالات.pdf");
     }
+
+    // تحسينات حجم الزر على الجوال
+    window.addEventListener('resize', function() {
+      const clearBtn = document.getElementById('clearSearch');
+      if (window.innerWidth <= 480) {
+        clearBtn.style.fontSize = '14px';
+        clearBtn.style.width = '18px';
+        clearBtn.style.height = '18px';
+      } else {
+        clearBtn.style.fontSize = '16px';
+        clearBtn.style.width = '20px';
+        clearBtn.style.height = '20px';
+      }
+    });
   </script>
 </body>
 </html>
