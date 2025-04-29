@@ -10,8 +10,6 @@ self.addEventListener('install', (event) => {
         // تطبيق الحوالات
         '/hawalat/index.html',
         '/hawalat/view.html',
-        '/hawalat/script.js',
-        '/hawalat/style.css',
         '/hawalat/fonts/Amiri-Regular.ttf',
         '/hawalat/icons/logo.png',
         '/hawalat/icons/real.png',
@@ -19,8 +17,6 @@ self.addEventListener('install', (event) => {
         // تطبيق التوصيل
         '/tawsil/index.html',
         '/tawsil/view.html',
-        '/tawsil/manifest.json',
-        '/tawsil/sw.js',
         '/tawsil/fonts/Amiri-Regular.ttf',
         '/tawsil/icons/app-icon.png',
         '/tawsil/icons/real.png',
