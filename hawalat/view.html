@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>عرض البيانات</title>
   <style>
-    /* الأنماط الأصلية */
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
@@ -56,7 +55,6 @@
         white-space: nowrap;
     }
 
-    /* أنماط الخانات المضافة */
     .notes-cell, .purpose-cell {
       max-width: 200px;
       width: 200px !important;
@@ -94,14 +92,12 @@
       display: block !important;
     }
 
-    /* تعديلات الأعمدة */
     #data-table td:nth-child(5), 
     #data-table td:nth-child(8) {
       white-space: normal !important;
       overflow: visible !important;
     }
 
-    /* باقي الأنماط الأصلية */
     .top-controls {
       display: flex;
       justify-content: space-between;
@@ -603,6 +599,9 @@
           totalSAR += parseFloat(item.sar || 0);
           totalSYP += parseFloat(item.syp || 0);
           
+          const sarFormatted = Number(item.sar).toLocaleString('en');
+          const sypFormatted = Number(item.syp).toLocaleString('en');
+          
           const purposeContent = item.purpose || '';
           const notesContent = item.notes || '';
           
@@ -613,8 +612,8 @@
           row.innerHTML = `
             <td>${index + 1}</td>
             <td>${item.name}</td>
-            <td>${item.sar}</td>
-            <td>${item.syp}</td>
+            <td>${sarFormatted}</td>
+            <td>${sypFormatted}</td>
             <td class="purpose-cell">
               <div class="truncated-text" data-full="${purposeContent}">
                 ${shouldShowPurposeReadMore ? purposeContent.substring(0, 30) + '...' : purposeContent}
@@ -637,8 +636,8 @@
       }
 
       document.getElementById("total-count").textContent = `عدد الحوالات: ${filteredData.length}`;
-      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${totalSAR}`;
-      document.getElementById("total-syp").textContent = `الإجمالي (ليرة): ${totalSYP}`;
+      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${totalSAR.toLocaleString('en')}`;
+      document.getElementById("total-syp").textContent = `الإجمالي (ليرة): ${totalSYP.toLocaleString('en')}`;
       
       initReadMore();
     }
@@ -682,8 +681,8 @@
       const item = data[index];
       
       document.getElementById('editName').value = item.name;
-      document.getElementById('editSAR').value = item.sar;
-      document.getElementById('editSYP').value = item.syp;
+      document.getElementById('editSAR').value = Number(item.sar).toLocaleString('en');
+      document.getElementById('editSYP').value = Number(item.syp).toLocaleString('en');
       document.getElementById('editPurpose').value = item.purpose;
       document.getElementById('editMethod').value = item.method || '';
       document.getElementById('editDate').value = item.date;
@@ -702,10 +701,13 @@
       e.preventDefault();
       
       if (currentEditIndex !== null) {
+        const rawSAR = document.getElementById('editSAR').value.replace(/,/g, '');
+        const rawSYP = document.getElementById('editSYP').value.replace(/,/g, '');
+        
         data[currentEditIndex] = {
           name: document.getElementById('editName').value.trim(),
-          sar: document.getElementById('editSAR').value.trim(),
-          syp: document.getElementById('editSYP').value.trim(),
+          sar: rawSAR,
+          syp: rawSYP,
           purpose: document.getElementById('editPurpose').value.trim(),
           method: document.getElementById('editMethod').value.trim(),
           date: document.getElementById('editDate').value,
@@ -788,8 +790,8 @@
       const tableData = data.map((item, index) => [
         index + 1,
         item.name,
-        item.sar,
-        item.syp,
+        Number(item.sar).toLocaleString('en'),
+        Number(item.syp).toLocaleString('en'),
         item.purpose,
         item.date,
         item.method || '',
