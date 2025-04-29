@@ -163,7 +163,7 @@
 
     .clear-search {
       position: absolute;
-      left: 10px;
+      right: 10px;
       top: 50%;
       transform: translateY(-50%);
       background: none;
@@ -174,6 +174,7 @@
       padding: 0;
       font-size: 18px;
       z-index: 2;
+      outline: none;
     }
 
     .search-input:focus + .clear-search,
@@ -486,7 +487,7 @@
       }
 
       .clear-search {
-        left: 5px;
+        right: 5px;
         font-size: 16px;
       }
 
@@ -556,6 +557,7 @@
           class="search-input" 
           id="searchInput" 
           placeholder="بحث باسم المستلم"
+          onfocus="document.getElementById('clearSearch').style.display='block'"
         >
         <button 
           id="clearSearch" 
@@ -677,13 +679,8 @@
     function clearSearch() {
       document.getElementById('searchInput').value = '';
       document.getElementById('clearSearch').style.display = 'none';
-      document.getElementById('searchInput').blur();
       renderTable();
     }
-
-    document.getElementById('searchInput').addEventListener('input', function() {
-      document.getElementById('clearSearch').style.display = this.value ? 'block' : 'none';
-    });
 
     function renderFilteredTable(filteredData) {
       tableBody.innerHTML = "";
