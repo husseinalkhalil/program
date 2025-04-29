@@ -5,16 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عرض البيانات</title>
     <style>
-        /* الأنماط العامة */
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f5f5ff;
-            direction: rtl;
-            margin: 0;
-        }
-
-        /* شريط التحكم العلوي الثابت */
+        /* الأنماط المعدلة فقط */
         .top-controls {
             position: fixed;
             top: 0;
@@ -30,37 +21,17 @@
         }
 
         h1 {
-            text-align: center;
-            color: #663399;
-            margin: 100px 0 30px;
+            margin-top: 100px;
         }
 
-        /* أنماط الجدول */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background-color: #f5eefe;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #663399;
-            color: white;
-        }
-
-        /* أنماط القراءة المزيد */
-        .notes-cell, .purpose-cell {
-            max-width: 200px;
-            width: 200px !important;
-            overflow: hidden;
+        @media (max-width: 768px) {
+            h1 {
+                margin-top: 140px;
+            }
+            
+            table {
+                margin-top: 120px !important;
+            }
         }
 
         .truncated-text {
@@ -74,70 +45,10 @@
             cursor: pointer;
             word-break: break-word;
         }
-
-        .read-more {
-            color: #663399;
-            font-weight: bold;
-            background: linear-gradient(90deg, rgba(245,238,254,0) 0%, rgba(245,238,254,0.9) 20%);
-            padding-left: 25px;
-            margin-left: -25px;
-            float: left;
-        }
-
-        .expanded {
-            -webkit-line-clamp: unset !important;
-            max-height: none !important;
-            display: block !important;
-        }
-
-        /* أنماط الأزرار */
-        .top-back {
-            background-color: #663399 !important;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-
-        .export-buttons button {
-            background-color: #663399;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* تعديلات الجوال */
-        @media (max-width: 768px) {
-            .top-controls {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            
-            h1 {
-                margin-top: 140px;
-            }
-            
-            table {
-                margin-top: 120px !important;
-            }
-            
-            .top-back {
-                font-size: 14px;
-                padding: 6px 12px;
-            }
-            
-            .export-buttons button {
-                padding: 6px 12px;
-                font-size: 14px;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- شريط التحكم العلوي الثابت -->
+    <!-- شريط التحكم العلوي -->
     <div class="top-controls">
         <div>
             <a class="top-back" href="index.html">➔ السابقة</a>
@@ -153,7 +64,7 @@
         </div>
     </div>
 
-    <!-- المحتوى الرئيسي -->
+    <!-- المحتوى الأصلي -->
     <h1>جميع الحوالات</h1>
     
     <div class="summary-bar">
@@ -183,37 +94,27 @@
     </table>
 
     <script>
-        // دالة عرض الجدول مع ميزة القراءة المزيد
+        // البيانات الأصلية
+        let data = JSON.parse(localStorage.getItem("transfers") || "[]");
+        
+        // دالة العرض الأصلية مع التعديلات
         function renderFilteredTable(filteredData) {
             const tableBody = document.querySelector("#data-table tbody");
             tableBody.innerHTML = "";
             
             filteredData.forEach((item, index) => {
-                const purposeContent = item.purpose || '';
-                const notesContent = item.notes || '';
-                
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${index + 1}</td>
                     <td>${item.name}</td>
                     <td>${item.sar}</td>
                     <td>${item.syp}</td>
-                    <td class="purpose-cell">
-                        <div class="truncated-text" data-full="${purposeContent}">
-                            ${purposeContent.length > 30 ? purposeContent.substring(0, 30) + '...' : purposeContent}
-                            ${purposeContent.length > 30 ? '<span class="read-more">قراءة المزيد</span>' : ''}
-                        </div>
-                    </td>
+                    <td><div class="truncated-text">${item.purpose}</div></td>
                     <td>${item.date}</td>
                     <td>${item.method || ''}</td>
-                    <td class="notes-cell">
-                        <div class="truncated-text" data-full="${notesContent}">
-                            ${notesContent.length > 30 ? notesContent.substring(0, 30) + '...' : notesContent}
-                            ${notesContent.length > 30 ? '<span class="read-more">قراءة المزيد</span>' : ''}
-                        </div>
-                    </td>
-                    <td><button class="edit-btn">✏️</button></td>
-                    <td><button class="delete-btn">🗑️</button></td>
+                    <td><div class="truncated-text">${item.notes || ''}</div></td>
+                    <td><button class="edit-btn" onclick="handleEdit(${index})">✏️</button></td>
+                    <td><button class="delete-btn" onclick="deleteRow(${index})">🗑️</button></td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -224,8 +125,10 @@
         // دالة إدارة القراءة المزيد
         function initReadMore() {
             document.querySelectorAll('.truncated-text').forEach(container => {
-                const fullText = container.dataset.full;
+                const fullText = container.textContent;
                 if (fullText.length > 30) {
+                    container.innerHTML = `${fullText.substring(0, 30)}...<span class="read-more">قراءة المزيد</span>`;
+                    
                     container.addEventListener('click', function(e) {
                         const isExpanded = this.classList.contains('expanded');
                         this.classList.toggle('expanded');
@@ -237,7 +140,14 @@
             });
         }
 
-        // ... (أضف هنا باقي الدوال الأصلية) ...
+        // باقي الدوال الأصلية
+        document.addEventListener('DOMContentLoaded', renderTable);
+        
+        function renderTable() {
+            renderFilteredTable(data);
+        }
+
+        // ... (جميع الدوال الأخرى كما كانت) ...
     </script>
 </body>
 </html>
