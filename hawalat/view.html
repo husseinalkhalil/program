@@ -605,6 +605,9 @@
           
           const purposeContent = item.purpose || '';
           const notesContent = item.notes || '';
+          
+          const shouldShowPurposeReadMore = purposeContent.trim().length > 50;
+          const shouldShowNotesReadMore = notesContent.trim().length > 50;
 
           const row = document.createElement("tr");
           row.innerHTML = `
@@ -615,7 +618,7 @@
             <td class="purpose-cell">
               <div class="truncated-text">
                 ${purposeContent}
-                ${purposeContent.length > 50 ? '<span class="read-more">... قراءة المزيد</span>' : ''}
+                ${shouldShowPurposeReadMore ? '<span class="read-more">... قراءة المزيد</span>' : ''}
               </div>
             </td>
             <td>${item.date}</td>
@@ -623,7 +626,7 @@
             <td class="notes-cell">
               <div class="truncated-text">
                 ${notesContent}
-                ${notesContent.length > 50 ? '<span class="read-more">... قراءة المزيد</span>' : ''}
+                ${shouldShowNotesReadMore ? '<span class="read-more">... قراءة المزيد</span>' : ''}
               </div>
             </td>
             <td><button class="edit-btn" onclick="handleEdit(${index})">✏️</button></td>
@@ -643,7 +646,7 @@
     function initReadMore() {
       document.querySelectorAll('.truncated-text').forEach(container => {
         const fullText = container.textContent;
-        if (fullText.length > 50) {
+        if (fullText.trim().length > 50) {
           container.dataset.full = fullText;
           container.innerHTML = `
             ${fullText.substring(0, 50)}...
@@ -659,11 +662,12 @@
                 `${fullText}<span class="read-more"> قراءة أقل</span>`;
             }
           });
+        } else {
+          container.innerHTML = fullText;
         }
       });
     }
 
-    // باقي الدوال الأصلية
     function handleEdit(index) {
       currentEditIndex = index;
       const item = data[index];
