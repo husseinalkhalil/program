@@ -1,25 +1,198 @@
-
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برنامج المحاسبة</title>
-    <link rel="manifest" href="manifest.json">
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then((registration) => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch((error) => {
-                    console.log('Service Worker registration failed:', error);
-                });
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>حسين الخليل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #6C3483;
+      --secondary-color: #EDBB99;
+      --card-color: rgba(245, 230, 250, 0.95);
+      --text-color: #4A235A;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(160deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+      font-family: 'Tajawal', sans-serif;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header {
+      text-align: center;
+      margin: 40px 0;
+      animation: fadeInDown 1s ease;
+    }
+
+    .header h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .header p {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.1rem;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .app-card {
+      background: linear-gradient(145deg, var(--card-color) 0%, #F8EDF8 100%);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.4);
+      cursor: pointer;
+    }
+
+    .app-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .app-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      box-shadow: 0 5px 15px rgba(108,52,131,0.3);
+    }
+
+    .app-title {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .app-description {
+      color: var(--text-color);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      opacity: 0.9;
+    }
+
+    .app-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 35px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      width: 100%;
+      border: 2px solid transparent;
+      box-shadow: 0 4px 15px rgba(108,52,131,0.3);
+    }
+
+    .app-button:hover {
+      background: white;
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .app-card {
+        padding: 25px;
+      }
+
+      .app-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .footer {
+      margin-top: auto;
+      padding: 20px;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <h1>مرحبًا بك في برنامج المحاسبة</h1>
-    <p>يمكنك الآن إضافة هذا التطبيق إلى شاشتك الرئيسية.</p>
+  <div class="header">
+    <h1>حسين الخليل</h1>
+    <p>اختر الخدمة المطلوبة من القائمة التالية</p>
+  </div>
+
+  <div class="grid-container">
+    <div class="app-card" data-link="hawalat/index.html">
+      <div class="app-icon">💸</div>
+      <h2 class="app-title">الحوالات المالية</h2>
+      <p class="app-description">إدارة الحوالات المالية وتتبع العمليات اليومية</p>
+      <a href="hawalat/index.html" class="app-button">فتح البرنامج</a>
+    </div>
+
+    <div class="app-card" data-link="tawsil/index.html">
+      <div class="app-icon">🚚</div>
+      <h2 class="app-title">خدمات التوصيل</h2>
+      <p class="app-description">إدارة طلبات التوصيل ومتابعة الشحنات</p>
+      <a href="tawsil/index.html" class="app-button">فتح البرنامج</a>
+    </div>
+  </div>
+
+  <div class="footer">
+جميع الحقوق محفوظة © 2025 | حسين الخليل 
+  </div>
+
+  <script>
+    document.querySelectorAll('.app-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('.app-button')) {
+          window.location.href = card.dataset.link;
+        }
+      });
+    });
+  </script>
 </body>
 </html>
