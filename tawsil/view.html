@@ -7,30 +7,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
   <style>
-    /* جميع أنماط الCSS السابقة */
     .back-btn-top {
         position: fixed;
         top: 10px;
         right: 10px;
         z-index: 1000;
-        display: flex;
-        gap: 10px;
-    }
-
-    .back-btn-top button {
-        background-color: #8e24aa;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-family: Tahoma;
-        font-size: 16px;
-        transition: background-color 0.3s;
-    }
-
-    .back-btn-top button:hover {
-        background-color: #6a1b9a;
     }
 
     h1 {
@@ -189,6 +170,21 @@
 
     .refresh-btn:hover {
       background-color: #45a049;
+    }
+
+    .back-btn-bottom {
+      background-color: #8e24aa;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 5px;
+    }
+
+    .back-btn-bottom:hover {
+      background-color: #6a1b9a;
     }
 
     .edit-icon {
@@ -490,63 +486,10 @@
         padding: 10px !important;
       }
     }
-
-    /* التعديلات الجديدة */
-    td:nth-child(8) {
-        max-width: 250px !important;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        position: relative;
-        padding-right: 100px !important;
-        text-align: right !important;
-    }
-
-    .read-more {
-        position: absolute;
-        left: 5px;
-        bottom: 2px;
-        color: #1a73e8 !important;
-        cursor: pointer;
-        font-size: 12px;
-        padding: 2px 5px;
-        text-decoration: underline;
-        background: transparent !important;
-        border: none !important;
-    }
-
-    .read-more:hover {
-        color: #0d47a1 !important;
-        text-decoration: none;
-    }
-
-    .full-text {
-        white-space: normal !important;
-        word-break: break-word;
-        text-align: right;
-        display: block;
-        padding-bottom: 20px;
-    }
-
-    @media print {
-        td:nth-child(8) {
-            white-space: normal !important;
-            text-overflow: clip !important;
-            max-width: none !important;
-            padding-right: 12px !important;
-        }
-        
-        .read-more {
-            display: none !important;
-        }
-    }
   </style>
 </head>
 <body>
-  <div class="back-btn-top no-print">
-    <button onclick="window.location.href='index.html'">➔ السابقة</button>
-    <button onclick="window.location.href='../index.html'">الرئيسية</button>
-  </div>
+  <button class="back-btn-top no-print" onclick="window.location.href='index.html'">الرجوع للصفحة الرئيسية</button>
 
   <h1>عرض الطلبات</h1>
   
@@ -595,10 +538,14 @@
   </div>
 
   <div class="buttons no-print">
-    <button class="refresh-btn" onclick="window.location.reload()">تحديث</button>
-    <button class="pdf-btn" onclick="exportToPDF()">PDF</button>
-    <button class="delete-btn" onclick="deleteAllOrders()">حذف الكل</button>
+    <button class="refresh-btn" onclick="window.location.reload()">تحديث الصفحة</button>
+    <button class="pdf-btn" onclick="exportToPDF()">تصدير PDF</button>
+    <button class="delete-btn" onclick="deleteAllOrders()">حذف جميع البيانات</button>
     <button onclick="window.print()">طباعة</button>
+  </div>
+
+  <div class="buttons no-print">
+    <button class="back-btn-bottom" onclick="window.location.href='index.html'">الرجوع للصفحة الرئيسية</button>
   </div>
 
   <!-- Modal التعديل -->
@@ -663,52 +610,86 @@
   </div>
 
   <script>
-    // تهيئة البيانات
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
-    let clients = JSON.parse(localStorage.getItem("clients")) || [];
-    
-    // تأكد من أن البيانات مصفوفات
-    if (!Array.isArray(orders)) orders = [];
-    if (!Array.isArray(clients)) clients = [];
-
-    // عناصر DOM
+    let orders = JSON.parse(localStorage.getItem("orders") || "[]");
     const tableBody = document.getElementById("ordersTable");
     const clientSelect = document.getElementById("clientSelect");
-    
-    // التهيئة الأولية
-    function initializeData() {
-      if (orders.length === 0) {
-        orders = [
-          {
-            id: 1,
-            client: "عميل تجريبي",
-            description: "طلب تجريبي 1",
-            orderPrice: 150.00,
-            deliveryPrice: 25.00,
-            paidAmount: 75.00,
-            orderDate: "2023-10-01",
-            notes: "ملاحظات تجريبية"
-          },
-          {
-            id: 2,
-            client: "عميل تجريبي",
-            description: "طلب تجريبي 2",
-            orderPrice: 200.00,
-            deliveryPrice: 30.00,
-            paidAmount: 100.00,
-            orderDate: "2023-10-02",
-            notes: "ملاحظات تجريبية"
-          }
-        ];
-        localStorage.setItem("orders", JSON.stringify(orders));
-        localStorage.setItem("clients", JSON.stringify(["عميل تجريبي"]));
-      }
-    }
-    initializeData();
+    const totalRequestsElem = document.getElementById("totalRequests");
+    const totalOrderPriceElem = document.getElementById("totalOrderPrice");
+    const totalPaidElem = document.getElementById("totalPaid");
+    const remainingAmountElem = document.getElementById("remainingAmount");
+    const modal = document.getElementById("editModal");
+    const toast = document.getElementById("toast");
+    let clients = JSON.parse(localStorage.getItem("clients") || []);
 
-    // دوال العرض
+    if (orders.length === 0) {
+      orders = [
+        {
+          id: 1,
+          client: "عميل تجريبي",
+          description: "طلب تجريبي 1",
+          orderPrice: 150.00,
+          deliveryPrice: 25.00,
+          paidAmount: 75.00,
+          orderDate: "2023-10-01",
+          notes: "ملاحظات تجريبية"
+        },
+        {
+          id: 2,
+          client: "عميل تجريبي",
+          description: "طلب تجريبي 2",
+          orderPrice: 200.00,
+          deliveryPrice: 30.00,
+          paidAmount: 100.00,
+          orderDate: "2023-10-02",
+          notes: "ملاحظات تجريبية"
+        }
+      ];
+      localStorage.setItem("orders", JSON.stringify(orders));
+      localStorage.setItem("clients", JSON.stringify(["عميل تجريبي"]));
+    }
+
+    let currentConfirmAction = null;
+
+    function showConfirm(message, callback) {
+      document.getElementById('confirmMessage').textContent = message;
+      document.getElementById('customConfirm').style.display = 'block';
+      document.getElementById('confirmOverlay').style.display = 'block';
+      currentConfirmAction = callback;
+    }
+
+    function hideConfirm() {
+      document.getElementById('customConfirm').style.display = 'none';
+      document.getElementById('confirmOverlay').style.display = 'none';
+      currentConfirmAction = null;
+    }
+
+    function handleConfirm() {
+      if (currentConfirmAction) {
+        currentConfirmAction();
+      }
+      hideConfirm();
+    }
+
     function loadOrders(filteredOrders = orders) {
       tableBody.innerHTML = "";
+      let totalRequests = 0;
+      let totalOrderPrice = 0;
+      let totalDeliveryPrice = 0;
+      let totalPaid = 0;
+
+      orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      clients = JSON.parse(localStorage.getItem("clients") || []);
+      
+      const currentClient = clientSelect.value;
+      clientSelect.innerHTML = '<option value="all" selected>الكل</option>';
+      clients.forEach(client => {
+        const option = document.createElement("option");
+        option.value = client;
+        option.textContent = client;
+        clientSelect.appendChild(option);
+      });
+      clientSelect.value = currentClient === "all" ? "all" : currentClient;
+
       filteredOrders.forEach((order, index) => {
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -719,7 +700,7 @@
           <td>${order.deliveryPrice.toFixed(2)}</td>
           <td>${order.paidAmount.toFixed(2)}</td>
           <td>${order.orderDate}</td>
-          <td data-full-text="${order.notes || ''}">${order.notes || ""}</td>
+          <td>${order.notes || ""}</td>
           <td>
             ${order.invoice ? 
               `<span class="invoice-preview" onclick="showInvoice('${order.invoice}')">عرض</span>` : 
@@ -738,44 +719,171 @@
           </td>
         `;
         tableBody.appendChild(row);
+
+        totalRequests++;
+        totalOrderPrice += order.orderPrice;
+        totalDeliveryPrice += order.deliveryPrice;
+        totalPaid += order.paidAmount;
       });
-      processNotesCells();
-      updateSummary(filteredOrders);
-    }
 
-    function updateSummary(filteredOrders) {
-      let totalRequests = filteredOrders.length;
-      let totalOrderPrice = filteredOrders.reduce((sum, order) => sum + order.orderPrice, 0);
-      let totalDeliveryPrice = filteredOrders.reduce((sum, order) => sum + order.deliveryPrice, 0);
-      let totalPaid = filteredOrders.reduce((sum, order) => sum + order.paidAmount, 0);
-      
       const remainingBalance = (totalOrderPrice + totalDeliveryPrice) - totalPaid;
-      let balanceStatus = remainingBalance > 0 ? "(باقي على العميل)" : 
-                         remainingBalance < 0 ? "(زيادة دفع)" : "(تم التسوية)";
+      let balanceStatus = "";
+      if (remainingBalance > 0) balanceStatus = "(باقي على العميل)";
+      else if (remainingBalance < 0) balanceStatus = "(زيادة دفع)";
+      else balanceStatus = "(تم التسوية)";
 
-      document.getElementById("totalRequests").textContent = totalRequests;
-      document.getElementById("totalOrderPrice").innerHTML = totalOrderPrice.toFixed(2) + ' <img src="icons/real.png" alt="ريال" class="currency-icon">';
-      document.getElementById("totalPaid").innerHTML = totalPaid.toFixed(2) + ' <img src="icons/real.png" alt="ريال" class="currency-icon">';
-      document.getElementById("remainingAmount").innerHTML = 
+      totalRequestsElem.textContent = totalRequests;
+      totalOrderPriceElem.innerHTML = totalOrderPrice.toFixed(2) + ' <img src="icons/real.png" alt="ريال" class="currency-icon">';
+      totalPaidElem.innerHTML = totalPaid.toFixed(2) + ' <img src="icons/real.png" alt="ريال" class="currency-icon">';
+      remainingAmountElem.innerHTML = 
         Math.abs(remainingBalance).toFixed(2) + ' <img src="icons/real.png" alt="ريال" class="currency-icon"> ' + balanceStatus;
     }
 
-    // بقية الدوال
     function filterOrdersByClient() {
       const selectedClient = clientSelect.value;
-      const filtered = selectedClient === "all" ? 
-        orders : 
-        orders.filter(order => order.client === selectedClient);
-      loadOrders(filtered);
+      orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      if (selectedClient === "all") {
+        loadOrders(orders);
+      } else {
+        const filteredOrders = orders.filter(order => order.client === selectedClient);
+        loadOrders(filteredOrders);
+      }
     }
 
-    // ... (بقية الدوال كما هي من الإصدار السابق)
+    function deleteClient(client) {
+      showConfirm(`هل أنت متأكد من حذف العميل ${client}؟`, () => {
+        orders = orders.filter(order => order.client !== client);
+        localStorage.setItem("orders", JSON.stringify(orders));
+        
+        clients = clients.filter(c => c !== client);
+        localStorage.setItem("clients", JSON.stringify(clients));
+        
+        localStorage.setItem("clientUpdateTrigger", Date.now().toString());
+        
+        loadOrders();
+      });
+    }
 
-    // التحميل الأولي عند فتح الصفحة
-    window.addEventListener('DOMContentLoaded', () => {
-      loadOrders(orders);
-      clientSelect.value = 'all';
-    });
+    function confirmDeleteOrder(orderId) {
+      showConfirm("هل أنت متأكد من حذف هذا الطلب؟", () => {
+        orders = orders.filter(order => order.id !== orderId);
+        localStorage.setItem("orders", JSON.stringify(orders));
+        loadOrders();
+      });
+    }
+
+    function deleteAllOrders() {
+      showConfirm("هل أنت متأكد من حذف جميع البيانات؟", () => {
+        localStorage.setItem("orders", "[]");
+        localStorage.setItem("clientUpdateTrigger", Date.now().toString());
+        orders = [];
+        loadOrders();
+      });
+    }
+
+    function editOrder(orderId) {
+      const order = orders.find(o => o.id === orderId);
+      if (order) {
+        document.getElementById("editOrderId").value = order.id;
+        document.getElementById("editClient").value = order.client;
+        document.getElementById("editDescription").value = order.description;
+        document.getElementById("editOrderPrice").value = order.orderPrice;
+        document.getElementById("editDeliveryPrice").value = order.deliveryPrice;
+        document.getElementById("editPaidAmount").value = order.paidAmount;
+        document.getElementById("editOrderDate").value = order.orderDate;
+        document.getElementById("editNotes").value = order.notes || "";
+        modal.style.display = "block";
+      }
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function saveEditedOrder() {
+      const orderId = parseInt(document.getElementById("editOrderId").value);
+      const index = orders.findIndex(o => o.id === orderId);
+      
+      if (index !== -1) {
+        orders[index] = {
+          id: orderId,
+          client: document.getElementById("editClient").value,
+          description: document.getElementById("editDescription").value,
+          orderPrice: parseFloat(document.getElementById("editOrderPrice").value),
+          deliveryPrice: parseFloat(document.getElementById("editDeliveryPrice").value),
+          paidAmount: parseFloat(document.getElementById("editPaidAmount").value),
+          orderDate: document.getElementById("editOrderDate").value,
+          notes: document.getElementById("editNotes").value
+        };
+        
+        localStorage.setItem("orders", JSON.stringify(orders));
+        loadOrders();
+        closeModal();
+        showToast();
+      }
+    }
+
+    function showToast() {
+      toast.className = "toast show";
+      setTimeout(() => toast.className = toast.className.replace("show", ""), 3000);
+    }
+
+    function showInvoice(imageData) {
+      const viewer = document.getElementById('invoiceViewer');
+      const container = document.getElementById('invoiceContainer');
+      
+      container.innerHTML = `<img src="${imageData}" style="max-width:100%; max-height:100%; display: block; margin: auto;">`;
+      
+      viewer.style.display = 'block';
+      
+      document.getElementById('invoiceCloseBtn').onclick = function() {
+          viewer.style.display = 'none';
+      };
+      
+      viewer.onclick = function(e) {
+          if(e.target === viewer) {
+              viewer.style.display = 'none';
+          }
+      };
+    }
+
+    function exportToPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'landscape' });
+      
+      doc.setFontSize(18);
+      doc.setTextColor(106, 27, 154);
+      doc.text("قائمة الطلبات", 14, 15);
+      
+      const headers = ["#", "العميل", "الوصف", "سعر الطلب", "سعر التوصيل", "المبلغ المدفوع", "تاريخ الطلب", "ملاحظات"];
+      const data = orders.map((order, index) => [
+        index + 1,
+        order.client,
+        order.description,
+        order.orderPrice.toFixed(2),
+        order.deliveryPrice.toFixed(2),
+        order.paidAmount.toFixed(2),
+        order.orderDate,
+        order.notes || "-"
+      ]);
+
+      doc.autoTable({
+        head: [headers],
+        body: data,
+        startY: 20,
+        styles: { font: 'Tahoma', fontSize: 10 },
+        headStyles: { fillColor: [206, 147, 216], textColor: [74, 20, 140] },
+        alternateRowStyles: { fillColor: [249, 249, 249] }
+      });
+      
+      doc.save("طلبات.pdf");
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) closeModal();
+    }
+
+    loadOrders();
   </script>
 </body>
 </html>
