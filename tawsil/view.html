@@ -489,6 +489,35 @@
         padding: 10px !important;
       }
     }
+
+    /* التعديلات المضافة */
+    td:nth-child(8) {
+        max-width: 250px !important;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        position: relative;
+    }
+
+    .read-more {
+        color: blue !important;
+        cursor: pointer;
+        font-size: 12px;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    @media print {
+        td:nth-child(8) {
+            white-space: normal !important;
+            text-overflow: clip !important;
+            max-width: none !important;
+        }
+        
+        .read-more {
+            display: none !important;
+        }
+    }
   </style>
 </head>
 <body>
@@ -739,6 +768,8 @@
       totalPaidElem.innerHTML = totalPaid.toFixed(2) + ' <img src="icons/real.png" alt="ريال" class="currency-icon">';
       remainingAmountElem.innerHTML = 
         Math.abs(remainingBalance).toFixed(2) + ' <img src="icons/real.png" alt="ريال" class="currency-icon"> ' + balanceStatus;
+
+      processNotesCells();
     }
 
     function filterOrdersByClient() {
@@ -880,6 +911,41 @@
       
       doc.save("طلبات.pdf");
     }
+
+    function processNotesCells() {
+        document.querySelectorAll('td:nth-child(8)').forEach(cell => {
+            const fullText = cell.textContent.trim();
+            if (fullText.length > 25) {
+                const truncated = fullText.substring(0, 25);
+                const moreLink = `<span class="read-more">... قراءة المزيد</span>`;
+                
+                cell.innerHTML = `${truncated}${moreLink}`;
+                cell.setAttribute('data-full-text', fullText);
+                
+                cell.querySelector('.read-more').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (this.textContent.includes('المزيد')) {
+                        cell.innerHTML = `${fullText} <span class="read-more">إخفاء</span>`;
+                    } else {
+                        cell.innerHTML = `${truncated}${moreLink}`;
+                    }
+                });
+            }
+        });
+    }
+
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.addedNodes.length) {
+                processNotesCells();
+            }
+        });
+    });
+
+    observer.observe(document.getElementById('ordersTable'), {
+        childList: true,
+        subtree: true
+    });
 
     window.onclick = function(event) {
       if (event.target === modal) closeModal();
