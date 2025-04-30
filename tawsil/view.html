@@ -497,20 +497,36 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         position: relative;
-        padding-right: 75px !important;
+        padding-right: 100px !important;
+        text-align: right !important;
     }
 
     .read-more {
         position: absolute;
-        left: 5px;
-        bottom: 0;
-        color: blue !important;
+        right: 5px;
+        bottom: 2px;
+        color: white !important;
         cursor: pointer;
         font-size: 12px;
-        background: white;
-        padding: 2px 5px;
-        border-radius: 3px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        background: #6a1b9a;
+        padding: 3px 8px;
+        border-radius: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+        border: 1px solid #4a148c;
+    }
+
+    .read-more:hover {
+        background: #4a148c;
+        transform: translateY(-1px);
+    }
+
+    .full-text {
+        white-space: normal !important;
+        word-break: break-word;
+        text-align: right;
+        display: block;
+        padding-bottom: 20px;
     }
 
     @media print {
@@ -924,14 +940,13 @@
       doc.save("طلبات.pdf");
     }
 
-    // ========== التعديلات المحسنة ==========
     function processNotesCells() {
       const cells = document.querySelectorAll('td:nth-child(8)');
       
       cells.forEach(cell => {
         const fullText = cell.getAttribute('data-full-text') || cell.textContent.trim();
         if (fullText.length <= 25) {
-          cell.innerHTML = fullText;
+          cell.innerHTML = `<div class="text-container">${fullText}</div>`;
           return;
         }
 
@@ -959,7 +974,7 @@
       } else {
         cell.innerHTML = `
           <div class="full-text">${fullText}</div>
-          <span class="read-more">إخفاء</span>
+          <span class="read-more" style="background: #d32f2f; border-color: #b71c1c;">إخفاء</span>
         `;
       }
     });
