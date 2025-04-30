@@ -497,7 +497,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         position: relative;
-        padding-right: 100px !important;
+        padding-right: 90px !important;
         text-align: right !important;
         direction: rtl;
     }
@@ -506,19 +506,23 @@
         text-align: right !important;
         direction: rtl;
         padding-right: 10px;
+        width: calc(100% - 85px);
+        float: right;
+        white-space: nowrap;
     }
 
     .read-more {
         position: absolute;
         right: 5px;
-        bottom: 2px;
+        bottom: 3px;
         color: #1a73e8 !important;
         cursor: pointer;
         font-size: 12px;
-        padding: 2px 5px;
+        padding: 2px 7px;
         text-decoration: underline;
         background: transparent !important;
         border: none !important;
+        z-index: 2;
     }
 
     .read-more:hover {
@@ -532,7 +536,8 @@
         text-align: right;
         direction: rtl;
         display: block;
-        padding-bottom: 20px;
+        padding: 5px 70px 25px 0;
+        width: 100%;
     }
 
     @media print {
@@ -952,13 +957,19 @@
       cells.forEach(cell => {
         const fullText = cell.getAttribute('data-full-text') || cell.textContent.trim();
         if (fullText.length <= 25) {
-          cell.innerHTML = `<div style="text-align: right; direction: rtl">${fullText}</div>`;
+          cell.innerHTML = `
+            <div style="text-align: right; direction: rtl; padding-right: 10px; width: calc(100% - 85px); float: right;">
+              ${fullText}
+            </div>
+          `;
           return;
         }
 
         const truncated = fullText.substring(0, 25);
         cell.innerHTML = `
-          <div style="text-align: right; direction: rtl">${truncated}</div>
+          <div style="text-align: right; direction: rtl; padding-right: 10px; width: calc(100% - 85px); float: right;">
+            ${truncated}
+          </div>
           <span class="read-more">... قراءة المزيد</span>
         `;
       });
@@ -974,13 +985,15 @@
 
       if (isExpanded) {
         cell.innerHTML = `
-          <div style="text-align: right; direction: rtl">${fullText.substring(0, 25)}</div>
+          <div style="text-align: right; direction: rtl; padding-right: 10px; width: calc(100% - 85px); float: right;">
+            ${fullText.substring(0, 25)}
+          </div>
           <span class="read-more">... قراءة المزيد</span>
         `;
       } else {
         cell.innerHTML = `
           <div class="full-text">${fullText}</div>
-          <span class="read-more">إخفاء</span>
+          <span class="read-more" style="bottom: 10px;">إخفاء</span>
         `;
       }
     });
