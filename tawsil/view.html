@@ -499,11 +499,18 @@
         position: relative;
         padding-right: 100px !important;
         text-align: right !important;
+        direction: rtl;
+    }
+
+    td:nth-child(8) > div {
+        text-align: right !important;
+        direction: rtl;
+        padding-right: 10px;
     }
 
     .read-more {
         position: absolute;
-        left: 5px;
+        right: 5px;
         bottom: 2px;
         color: #1a73e8 !important;
         cursor: pointer;
@@ -523,6 +530,7 @@
         white-space: normal !important;
         word-break: break-word;
         text-align: right;
+        direction: rtl;
         display: block;
         padding-bottom: 20px;
     }
@@ -944,13 +952,13 @@
       cells.forEach(cell => {
         const fullText = cell.getAttribute('data-full-text') || cell.textContent.trim();
         if (fullText.length <= 25) {
-          cell.innerHTML = `<div style="text-align: right">${fullText}</div>`;
+          cell.innerHTML = `<div style="text-align: right; direction: rtl">${fullText}</div>`;
           return;
         }
 
         const truncated = fullText.substring(0, 25);
         cell.innerHTML = `
-          <div style="text-align: right">${truncated}</div>
+          <div style="text-align: right; direction: rtl">${truncated}</div>
           <span class="read-more">... قراءة المزيد</span>
         `;
       });
@@ -966,7 +974,7 @@
 
       if (isExpanded) {
         cell.innerHTML = `
-          <div style="text-align: right">${fullText.substring(0, 25)}</div>
+          <div style="text-align: right; direction: rtl">${fullText.substring(0, 25)}</div>
           <span class="read-more">... قراءة المزيد</span>
         `;
       } else {
