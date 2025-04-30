@@ -503,22 +503,20 @@
 
     .read-more {
         position: absolute;
-        right: 5px;
+        left: 5px;
         bottom: 2px;
-        color: white !important;
+        color: #1a73e8 !important;
         cursor: pointer;
         font-size: 12px;
-        background: #6a1b9a;
-        padding: 3px 8px;
-        border-radius: 15px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        transition: all 0.3s;
-        border: 1px solid #4a148c;
+        padding: 2px 5px;
+        text-decoration: underline;
+        background: transparent !important;
+        border: none !important;
     }
 
     .read-more:hover {
-        background: #4a148c;
-        transform: translateY(-1px);
+        color: #0d47a1 !important;
+        text-decoration: none;
     }
 
     .full-text {
@@ -946,13 +944,13 @@
       cells.forEach(cell => {
         const fullText = cell.getAttribute('data-full-text') || cell.textContent.trim();
         if (fullText.length <= 25) {
-          cell.innerHTML = `<div class="text-container">${fullText}</div>`;
+          cell.innerHTML = `<div style="text-align: right">${fullText}</div>`;
           return;
         }
 
         const truncated = fullText.substring(0, 25);
         cell.innerHTML = `
-          <div class="truncated-text">${truncated}</div>
+          <div style="text-align: right">${truncated}</div>
           <span class="read-more">... قراءة المزيد</span>
         `;
       });
@@ -968,13 +966,13 @@
 
       if (isExpanded) {
         cell.innerHTML = `
-          <div class="truncated-text">${fullText.substring(0, 25)}</div>
+          <div style="text-align: right">${fullText.substring(0, 25)}</div>
           <span class="read-more">... قراءة المزيد</span>
         `;
       } else {
         cell.innerHTML = `
           <div class="full-text">${fullText}</div>
-          <span class="read-more" style="background: #d32f2f; border-color: #b71c1c;">إخفاء</span>
+          <span class="read-more">إخفاء</span>
         `;
       }
     });
