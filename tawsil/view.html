@@ -20,7 +20,7 @@
     }
 
     @media print {
-      .no-print, #clientSelect, .back-btn-top, .buttons, #editModal, .toast, .back-btn-bottom {
+      .no-print, #clientSelect, .back-btn-top, .buttons, #editModal, .toast, .back-btn-bottom, .notes-tooltip {
         display: none !important;
       }
       
@@ -78,7 +78,7 @@
       background-color: #f3e5f5;
     }
 
-    /* أنماط خاصة لخلايا الملاحظات */
+    /* أنماط خلايا الملاحظات */
     .notes-cell {
         position: relative;
         max-width: 150px;
@@ -86,26 +86,44 @@
         overflow: hidden;
         text-overflow: ellipsis;
         cursor: pointer;
+        transition: background-color 0.3s;
     }
 
     .notes-cell:hover {
         background-color: #f0e5ff;
     }
 
+    /* نافذة الملاحظات المنبثقة */
     .notes-tooltip {
-        position: absolute;
-        right: 0;
-        top: 100%;
-        z-index: 100;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        padding: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        max-width: 300px;
-        word-wrap: break-word;
-        white-space: normal;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: 2px solid #6a1b9a;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 80%;
+        max-height: 70vh;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         display: none;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .notes-tooltip.active {
+        display: block;
+    }
+
+    .notes-tooltip-close {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #6a1b9a;
     }
 
     .summary {
@@ -516,13 +534,13 @@
         padding: 10px !important;
       }
 
-      /* تعديلات للعرض على الجوال */
       .notes-cell {
         max-width: 100px;
       }
 
       .notes-tooltip {
-        max-width: 200px;
+        max-width: 90%;
+        padding: 15px;
       }
     }
   </style>
@@ -556,6 +574,12 @@
     </thead>
     <tbody id="ordersTable"></tbody>
   </table>
+
+  <!-- نافذة عرض الملاحظات الكاملة -->
+  <div id="notesTooltip" class="notes-tooltip">
+    <span class="notes-tooltip-close" onclick="closeNotesTooltip()">&times;</span>
+    <div id="notesTooltipContent"></div>
+  </div>
 
   <div class="summary">
     <div class="summary-item">
@@ -658,6 +682,8 @@
     const remainingAmountElem = document.getElementById("remainingAmount");
     const modal = document.getElementById("editModal");
     const toast = document.getElementById("toast");
+    const notesTooltip = document.getElementById("notesTooltip");
+    const notesTooltipContent = document.getElementById("notesTooltipContent");
     let clients = JSON.parse(localStorage.getItem("clients") || []);
 
     if (orders.length === 0) {
@@ -707,6 +733,15 @@
         currentConfirmAction();
       }
       hideConfirm();
+    }
+
+    function showNotesTooltip(content) {
+      notesTooltipContent.textContent = content;
+      notesTooltip.style.display = 'block';
+    }
+
+    function closeNotesTooltip() {
+      notesTooltip.style.display = 'none';
     }
 
     function loadOrders(filteredOrders = orders) {
@@ -761,21 +796,11 @@
           </td>
         `;
         
-        // إضافة النص الكامل للملاحظات كخاصية بيانات
         const notesCell = row.querySelector('.notes-cell');
         if (notes.length > 25) {
-            notesCell.setAttribute('data-fullnotes', notes);
-            
-            // إنشاء عنصر لعرض الملاحظات الكاملة
-            const tooltip = document.createElement('div');
-            tooltip.className = 'notes-tooltip';
-            tooltip.textContent = notes;
-            notesCell.appendChild(tooltip);
-            
-            // إضافة أحداث النقر
             notesCell.addEventListener('click', function(e) {
                 e.stopPropagation();
-                tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
+                showNotesTooltip(notes);
             });
         }
         
@@ -787,11 +812,11 @@
         totalPaid += order.paidAmount;
       });
 
-      // إغلاق الملاحظات عند النقر في أي مكان آخر
-      document.addEventListener('click', function() {
-          document.querySelectorAll('.notes-tooltip').forEach(tooltip => {
-              tooltip.style.display = 'none';
-          });
+      // إغلاق نافذة الملاحظات عند النقر خارجها
+      document.addEventListener('click', function(e) {
+          if (!notesTooltip.contains(e.target) {
+              closeNotesTooltip();
+          }
       });
 
       const remainingBalance = (totalOrderPrice + totalDeliveryPrice) - totalPaid;
