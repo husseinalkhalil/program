@@ -78,6 +78,36 @@
       background-color: #f3e5f5;
     }
 
+    /* خاصية التفاف النص في عمود الملاحظات */
+    td:nth-child(8) {
+      max-width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      position: relative;
+    }
+
+    td:nth-child(8):hover {
+      background-color: #f0e5ff;
+    }
+
+    .full-notes {
+      white-space: normal;
+      word-wrap: break-word;
+      background-color: #f9f9f9;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      z-index: 100;
+      max-width: 300px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      display: none;
+    }
+
     .summary {
       margin-top: 30px;
       background-color: #e1bee7;
@@ -485,6 +515,15 @@
         font-size: 14px !important;
         padding: 10px !important;
       }
+
+      /* تعديلات للعرض على الجوال */
+      td:nth-child(8) {
+        max-width: 100px;
+      }
+
+      .full-notes {
+        max-width: 200px;
+      }
     }
   </style>
 </head>
@@ -692,6 +731,9 @@
 
       filteredOrders.forEach((order, index) => {
         const row = document.createElement("tr");
+        const notes = order.notes || "";
+        const shortNotes = notes.length > 25 ? notes.substring(0, 25) + '...' : notes;
+        
         row.innerHTML = `
           <td>${index + 1}</td>
           <td>${order.client}</td>
@@ -700,7 +742,7 @@
           <td>${order.deliveryPrice.toFixed(2)}</td>
           <td>${order.paidAmount.toFixed(2)}</td>
           <td>${order.orderDate}</td>
-          <td>${order.notes || ""}</td>
+          <td class="notes-cell">${shortNotes}</td>
           <td>
             ${order.invoice ? 
               `<span class="invoice-preview" onclick="showInvoice('${order.invoice}')">عرض</span>` : 
@@ -718,12 +760,43 @@
             </span>
           </td>
         `;
+        
+        // إضافة النص الكامل للملاحظات كخاصية بيانات
+        const notesCell = row.querySelector('.notes-cell');
+        if (notes.length > 25) {
+          notesCell.setAttribute('data-fullnotes', notes);
+        }
+        
         tableBody.appendChild(row);
 
         totalRequests++;
         totalOrderPrice += order.orderPrice;
         totalDeliveryPrice += order.deliveryPrice;
         totalPaid += order.paidAmount;
+      });
+
+      // إضافة أحداث النقر لعرض الملاحظات الكاملة
+      document.querySelectorAll('.notes-cell').forEach(cell => {
+        const fullNotes = cell.getAttribute('data-fullnotes');
+        if (fullNotes) {
+          const fullNotesDiv = document.createElement('div');
+          fullNotesDiv.className = 'full-notes';
+          fullNotesDiv.textContent = fullNotes;
+          cell.appendChild(fullNotesDiv);
+          
+          cell.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const notesDiv = this.querySelector('.full-notes');
+            notesDiv.style.display = notesDiv.style.display === 'block' ? 'none' : 'block';
+          });
+        }
+      });
+
+      // إغلاق ملاحظات عند النقر في أي مكان آخر
+      document.addEventListener('click', function() {
+        document.querySelectorAll('.full-notes').forEach(div => {
+          div.style.display = 'none';
+        });
       });
 
       const remainingBalance = (totalOrderPrice + totalDeliveryPrice) - totalPaid;
