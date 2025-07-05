@@ -2,183 +2,393 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>عرض الطلبات</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>عرض الطلبات - الجوال</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f0ff;
+    :root {
+      --primary-color: #6a3093;
+      --secondary-color: #a044ff;
+      --danger-color: #e74c3c;
+      --light-color: #f9f9f9;
+      --text-color: #333;
+      --border-color: #ddd;
+    }
+    
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      font-family: 'Tajawal', sans-serif;
     }
+    
+    body {
+      background-color: #f5f0ff;
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: 0;
+    }
+    
     .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
-    h1 {
-      color: #6a3093;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    table {
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+      padding: 15px;
     }
-    th, td {
-      padding: 12px;
+    
+    .header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px;
       text-align: center;
-      border: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    th {
-      background-color: #6a3093;
-      color: white;
+    
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
     }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
+    
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 15px 0;
+      background-color: white;
+      position: sticky;
+      top: 60px;
+      z-index: 90;
     }
+    
+    .search-box {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .search-box input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
     .btn {
-      background-color: #6a3093;
-      color: white;
+      flex: 1;
+      padding: 12px;
       border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 14px;
+      text-align: center;
+      transition: all 0.3s;
     }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
     .btn-danger {
-      background-color: #dc3545;
+      background-color: var(--danger-color);
+      color: white;
     }
-    .btn-group {
+    
+    .btn-secondary {
+      background-color: #f0f0f0;
+      color: var(--text-color);
+    }
+    
+    .orders-list {
+      margin-top: 10px;
+    }
+    
+    .order-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .order-header {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 20px;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--border-color);
     }
-    .search-box {
-      padding: 10px;
-      width: 300px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
+    
+    .order-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--primary-color);
     }
-    .summary {
-      background-color: #f8f9fa;
-      padding: 15px;
-      border-radius: 5px;
-      margin-top: 20px;
+    
+    .order-price {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+    
+    .order-details {
+      margin-top: 10px;
+    }
+    
+    .detail-row {
       display: flex;
-      justify-content: space-around;
+      margin-bottom: 8px;
+    }
+    
+    .detail-label {
+      font-weight: bold;
+      min-width: 80px;
+      color: #666;
+    }
+    
+    .detail-value {
+      flex: 1;
+    }
+    
+    .order-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .action-btn {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    .summary-bar {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      position: sticky;
+      bottom: 15px;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+    }
+    
+    .empty-state i {
+      font-size: 3rem;
+      color: #ddd;
+      margin-bottom: 15px;
+    }
+    
+    /* رسوميات متحركة */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .order-card {
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    /* تحسينات للأجهزة الصغيرة جدًا */
+    @media (max-width: 400px) {
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .order-actions {
+        flex-direction: column;
+      }
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+  <div class="header">
+    <h1>طلباتي</h1>
+  </div>
+  
   <div class="container">
-    <h1>عرض جميع الطلبات</h1>
-    
-    <div class="btn-group">
-      <div>
-        <input type="text" id="searchInput" class="search-box" placeholder="بحث في الطلبات...">
-        <button onclick="searchOrders()" class="btn">بحث</button>
+    <div class="controls">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="ابحث في الطلبات...">
+        <button class="btn btn-primary" onclick="searchOrders()">
+          <i class="fas fa-search"></i>
+        </button>
       </div>
-      <div>
-        <button onclick="window.location.href='index.html'" class="btn">إضافة طلب جديد</button>
-        <button onclick="deleteAllOrders()" class="btn btn-danger">حذف الكل</button>
+      
+      <div class="action-buttons">
+        <button class="btn btn-secondary" onclick="window.location.href='index.html'">
+          <i class="fas fa-plus"></i> طلب جديد
+        </button>
+        <button class="btn btn-danger" onclick="confirmDeleteAll()">
+          <i class="fas fa-trash"></i> حذف الكل
+        </button>
       </div>
     </div>
     
-    <table id="ordersTable">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>وصف الطلب</th>
-          <th>سعر التوصيل</th>
-          <th>تاريخ الإرسال</th>
-          <th>ملاحظات</th>
-          <th>إجراءات</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div class="orders-list" id="ordersList">
+      <!-- سيتم ملؤها بالبيانات -->
+    </div>
     
-    <div class="summary">
-      <div>عدد الطلبات: <span id="totalOrders">0</span></div>
-      <div>إجمالي سعر التوصيل: <span id="totalPrice">0</span> ريال</div>
+    <div class="summary-bar">
+      <div>العدد: <span id="totalOrders">0</span></div>
+      <div>الإجمالي: <span id="totalPrice">0</span> ر.س</div>
     </div>
   </div>
-
+  
   <script>
+    // تحميل البيانات عند فتح الصفحة
     document.addEventListener('DOMContentLoaded', function() {
       loadOrders();
     });
-
+    
+    // دالة تحميل الطلبات
     function loadOrders() {
       const orders = JSON.parse(localStorage.getItem('orders')) || [];
-      const tbody = document.querySelector('#ordersTable tbody');
-      tbody.innerHTML = '';
+      const ordersList = document.getElementById('ordersList');
+      
+      // إفراغ القائمة أولاً
+      ordersList.innerHTML = '';
       
       let totalPrice = 0;
       
       if (orders.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">لا توجد طلبات مسجلة</td></tr>';
+        ordersList.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-box-open"></i>
+            <h3>لا توجد طلبات</h3>
+            <p>اضغط على "طلب جديد" لإضافة طلبك الأول</p>
+          </div>
+        `;
       } else {
+        // عرض كل الطلبات
         orders.forEach((order, index) => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${order.name || ''}</td>
-            <td>${order.sar || '0'} ريال</td>
-            <td>${order.date || ''}</td>
-            <td>${order.notes || ''}</td>
-            <td>
-              <button onclick="editOrder(${index})" class="btn">تعديل</button>
-              <button onclick="deleteOrder(${index})" class="btn btn-danger">حذف</button>
-            </td>
-          `;
-          tbody.appendChild(row);
-          
           totalPrice += parseFloat(order.sar) || 0;
+          
+          const orderCard = document.createElement('div');
+          orderCard.className = 'order-card';
+          orderCard.innerHTML = `
+            <div class="order-header">
+              <div class="order-title">${order.name || 'طلب بدون عنوان'}</div>
+              <div class="order-price">${order.sar || '0'} ر.س</div>
+            </div>
+            
+            <div class="order-details">
+              <div class="detail-row">
+                <div class="detail-label">التاريخ:</div>
+                <div class="detail-value">${order.date || 'غير محدد'}</div>
+              </div>
+              
+              <div class="detail-row">
+                <div class="detail-label">ملاحظات:</div>
+                <div class="detail-value">${order.notes || 'لا توجد ملاحظات'}</div>
+              </div>
+            </div>
+            
+            <div class="order-actions">
+              <button class="action-btn btn-secondary" onclick="editOrder(${index})">
+                <i class="fas fa-edit"></i> تعديل
+              </button>
+              <button class="action-btn btn-danger" onclick="deleteOrder(${index})">
+                <i class="fas fa-trash"></i> حذف
+              </button>
+            </div>
+          `;
+          
+          ordersList.appendChild(orderCard);
         });
       }
       
+      // تحديث الإحصائيات
       document.getElementById('totalOrders').textContent = orders.length;
       document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
     }
     
+    // دالة البحث
     function searchOrders() {
       const searchTerm = document.getElementById('searchInput').value.toLowerCase();
       const orders = JSON.parse(localStorage.getItem('orders')) || [];
       const filteredOrders = orders.filter(order => 
-        order.name.toLowerCase().includes(searchTerm) || 
+        (order.name && order.name.toLowerCase().includes(searchTerm)) ||
         (order.notes && order.notes.toLowerCase().includes(searchTerm))
       );
       
-      const tbody = document.querySelector('#ordersTable tbody');
-      tbody.innerHTML = '';
+      const ordersList = document.getElementById('ordersList');
+      ordersList.innerHTML = '';
       
       if (filteredOrders.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">لا توجد نتائج</td></tr>';
+        ordersList.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>لا توجد نتائج</h3>
+            <p>لم يتم العثور على طلبات تطابق بحثك</p>
+          </div>
+        `;
       } else {
+        let totalPrice = 0;
+        
         filteredOrders.forEach((order, index) => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${order.name || ''}</td>
-            <td>${order.sar || '0'} ريال</td>
-            <td>${order.date || ''}</td>
-            <td>${order.notes || ''}</td>
-            <td>
-              <button onclick="editOrder(${orders.findIndex(o => o.name === order.name)})" class="btn">تعديل</button>
-              <button onclick="deleteOrder(${orders.findIndex(o => o.name === order.name)})" class="btn btn-danger">حذف</button>
-            </td>
+          totalPrice += parseFloat(order.sar) || 0;
+          
+          const orderCard = document.createElement('div');
+          orderCard.className = 'order-card';
+          orderCard.innerHTML = `
+            <div class="order-header">
+              <div class="order-title">${order.name || 'طلب بدون عنوان'}</div>
+              <div class="order-price">${order.sar || '0'} ر.س</div>
+            </div>
+            
+            <div class="order-details">
+              <div class="detail-row">
+                <div class="detail-label">التاريخ:</div>
+                <div class="detail-value">${order.date || 'غير محدد'}</div>
+              </div>
+              
+              <div class="detail-row">
+                <div class="detail-label">ملاحظات:</div>
+                <div class="detail-value">${order.notes || 'لا توجد ملاحظات'}</div>
+              </div>
+            </div>
+            
+            <div class="order-actions">
+              <button class="action-btn btn-secondary" onclick="editOrder(${orders.findIndex(o => o.name === order.name)})">
+                <i class="fas fa-edit"></i> تعديل
+              </button>
+              <button class="action-btn btn-danger" onclick="deleteOrder(${orders.findIndex(o => o.name === order.name)})">
+                <i class="fas fa-trash"></i> حذف
+              </button>
+            </div>
           `;
-          tbody.appendChild(row);
+          
+          ordersList.appendChild(orderCard);
         });
+        
+        document.getElementById('totalOrders').textContent = filteredOrders.length;
+        document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
       }
     }
     
+    // دالة حذف طلب
     function deleteOrder(index) {
       if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
         const orders = JSON.parse(localStorage.getItem('orders'));
@@ -188,13 +398,7 @@
       }
     }
     
-    function deleteAllOrders() {
-      if (confirm('هل أنت متأكد من حذف جميع الطلبات؟')) {
-        localStorage.setItem('orders', JSON.stringify([]));
-        loadOrders();
-      }
-    }
-    
+    // دالة تعديل طلب
     function editOrder(index) {
       const orders = JSON.parse(localStorage.getItem('orders'));
       const order = orders[index];
@@ -220,6 +424,14 @@
       
       localStorage.setItem('orders', JSON.stringify(orders));
       loadOrders();
+    }
+    
+    // دالة حذف جميع الطلبات
+    function confirmDeleteAll() {
+      if (confirm('هل أنت متأكد من حذف جميع الطلبات؟ لا يمكن التراجع عن هذا الإجراء.')) {
+        localStorage.setItem('orders', JSON.stringify([]));
+        loadOrders();
+      }
     }
   </script>
 </body>
