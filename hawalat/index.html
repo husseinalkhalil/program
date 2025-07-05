@@ -2,114 +2,253 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>إدخال طلب جديد</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>إضافة طلب جديد</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f0ff;
+    :root {
+      --primary-color: #6a3093;
+      --secondary-color: #a044ff;
+      --success-color: #2ecc71;
+      --text-color: #333;
+      --border-color: #ddd;
+      --light-bg: #f9f9f9;
+    }
+    
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      font-family: 'Tajawal', sans-serif;
     }
+    
+    body {
+      background-color: #f5f0ff;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
     .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      width: 100%;
+      padding: 15px;
+      max-width: 100%;
     }
-    h1 {
-      color: #6a3093;
+    
+    .header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px;
       text-align: center;
-      margin-bottom: 30px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
+    
+    .header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+      flex: 1;
+    }
+    
+    .header-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 5px;
+    }
+    
+    .stats-container {
+      display: flex;
+      justify-content: space-around;
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .stat-box {
+      text-align: center;
+      padding: 10px;
+    }
+    
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .form-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      margin-bottom: 15px;
+    }
+    
     .form-group {
       margin-bottom: 20px;
     }
+    
     label {
       display: block;
       margin-bottom: 8px;
       font-weight: bold;
-      color: #6a3093;
+      color: var(--primary-color);
     }
+    
     input[type="text"],
     input[type="number"],
     input[type="date"],
     textarea {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 16px;
+      padding: 12px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: var(--light-bg);
     }
+    
     textarea {
-      height: 100px;
       resize: vertical;
+      min-height: 100px;
     }
+    
     .btn {
-      background-color: #6a3093;
-      color: white;
+      width: 100%;
+      padding: 15px;
       border: none;
-      padding: 12px 20px;
-      border-radius: 5px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 16px;
       margin-top: 10px;
+      transition: all 0.3s;
     }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
     .btn-secondary {
-      background-color: #6c757d;
+      background-color: var(--light-bg);
+      color: var(--text-color);
     }
-    .btn-group {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 30px;
-    }
+    
     .notification {
       position: fixed;
       top: 20px;
       right: 20px;
-      background-color: #4CAF50;
+      background-color: var(--success-color);
       color: white;
-      padding: 15px;
-      border-radius: 5px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
       display: none;
+      z-index: 1000;
+    }
+    
+    .tabs {
+      display: flex;
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .tab {
+      padding: 10px 15px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+    }
+    
+    .tab.active {
+      border-bottom-color: var(--primary-color);
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+    
+    @media (max-width: 400px) {
+      .stats-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .header h1 {
+        font-size: 1.3rem;
+      }
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+  <div class="header">
+    <button class="header-btn" onclick="window.location.href='view.html'">
+      <i class="fas fa-list"></i>
+    </button>
+    <h1>إضافة طلب جديد</h1>
+    <button class="header-btn" onclick="window.location.reload()">
+      <i class="fas fa-sync-alt"></i>
+    </button>
+  </div>
+  
   <div class="container">
-    <h1>إدخال طلب جديد</h1>
-    <form id="orderForm">
-      <div class="form-group">
-        <label for="orderDescription">وصف الطلب</label>
-        <input type="text" id="orderDescription" required>
+    <div class="stats-container">
+      <div class="stat-box">
+        <div class="stat-value" id="totalOrders">0</div>
+        <div class="stat-label">عدد الطلبات</div>
       </div>
-      
-      <div class="form-group">
-        <label for="deliveryPrice">سعر التوصيل (ريال)</label>
-        <input type="number" id="deliveryPrice" required>
+      <div class="stat-box">
+        <div class="stat-value" id="totalProfit">0 ر.س</div>
+        <div class="stat-label">إجمالي الربح</div>
       </div>
-      
-      <div class="form-group">
-        <label for="orderDate">تاريخ الإرسال</label>
-        <input type="date" id="orderDate" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="orderNotes">ملاحظات</label>
-        <textarea id="orderNotes"></textarea>
-      </div>
-      
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary" onclick="window.location.href='view.html'">عرض الطلبات</button>
-        <button type="submit" class="btn">حفظ الطلب</button>
-      </div>
-    </form>
+    </div>
+    
+    <div class="form-container">
+      <form id="orderForm">
+        <div class="form-group">
+          <label for="orderDescription">وصف الطلب</label>
+          <input type="text" id="orderDescription" required placeholder="أدخل وصفًا واضحًا للطلب">
+        </div>
+        
+        <div class="form-group">
+          <label for="deliveryPrice">سعر التوصيل (ريال سعودي)</label>
+          <input type="number" id="deliveryPrice" min="0" step="0.01" required placeholder="أدخل سعر التوصيل">
+        </div>
+        
+        <div class="form-group">
+          <label for="orderDate">تاريخ الإرسال</label>
+          <input type="date" id="orderDate" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="orderNotes">ملاحظات إضافية</label>
+          <textarea id="orderNotes" placeholder="أي ملاحظات أو تفاصيل إضافية"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-save"></i> حفظ الطلب
+        </button>
+      </form>
+    </div>
+    
+    <button class="btn btn-secondary" onclick="window.location.href='view.html'">
+      <i class="fas fa-eye"></i> عرض جميع الطلبات
+    </button>
   </div>
   
   <div id="notification" class="notification"></div>
-
+  
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // تعيين تاريخ اليوم كقيمة افتراضية
@@ -120,16 +259,31 @@
       if (!localStorage.getItem('orders')) {
         localStorage.setItem('orders', JSON.stringify([]));
       }
+      
+      // تحديث الإحصائيات
+      updateStats();
     });
-
+    
+    // تحديث إحصائيات الطلبات
+    function updateStats() {
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      const totalOrders = orders.length;
+      const totalProfit = orders.reduce((sum, order) => sum + (parseFloat(order.sar) || 0), 0);
+      
+      document.getElementById('totalOrders').textContent = totalOrders;
+      document.getElementById('totalProfit').textContent = totalProfit.toFixed(2) + ' ر.س';
+    }
+    
     document.getElementById('orderForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
+      // جمع بيانات النموذج
       const orderData = {
         name: document.getElementById('orderDescription').value.trim(),
         sar: document.getElementById('deliveryPrice').value.trim(),
         date: document.getElementById('orderDate').value,
-        notes: document.getElementById('orderNotes').value.trim()
+        notes: document.getElementById('orderNotes').value.trim(),
+        createdAt: new Date().toISOString()
       };
       
       // التحقق من البيانات المطلوبة
@@ -146,6 +300,9 @@
       // إظهار رسالة النجاح
       showNotification('تم حفظ الطلب بنجاح', 'success');
       
+      // تحديث الإحصائيات
+      updateStats();
+      
       // إعادة تعيين النموذج
       this.reset();
       
@@ -157,7 +314,7 @@
     function showNotification(message, type) {
       const notification = document.getElementById('notification');
       notification.textContent = message;
-      notification.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
+      notification.style.backgroundColor = type === 'success' ? '#2ecc71' : '#e74c3c';
       notification.style.display = 'block';
       
       setTimeout(() => {
