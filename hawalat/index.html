@@ -3,230 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>نظام إدارة الطلبات - إدخال طلب جديد</title>
+  <title>إدخال طلب جديد</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
     body {
+      font-family: Arial, sans-serif;
       background-color: #f5f0ff;
-      color: #333;
-      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
     }
-    
     .container {
       max-width: 800px;
-      margin: 30px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
-    
     h1 {
-      text-align: center;
       color: #6a3093;
+      text-align: center;
       margin-bottom: 30px;
-      font-size: 28px;
     }
-    
     .form-group {
       margin-bottom: 20px;
     }
-    
     label {
       display: block;
       margin-bottom: 8px;
       font-weight: bold;
       color: #6a3093;
     }
-    
     input[type="text"],
     input[type="number"],
     input[type="date"],
-    textarea,
-    select {
+    textarea {
       width: 100%;
       padding: 12px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
       font-size: 16px;
-      transition: border 0.3s;
     }
-    
-    input[type="text"]:focus,
-    input[type="number"]:focus,
-    input[type="date"]:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #6a3093;
-      outline: none;
-    }
-    
     textarea {
+      height: 100px;
       resize: vertical;
-      min-height: 100px;
     }
-    
-    .required-field::after {
-      content: " *";
-      color: red;
+    .btn {
+      background-color: #6a3093;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
     }
-    
-    .btn-container {
+    .btn-secondary {
+      background-color: #6c757d;
+    }
+    .btn-group {
       display: flex;
       justify-content: space-between;
       margin-top: 30px;
     }
-    
-    .btn {
-      padding: 12px 25px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    .btn-primary {
-      background-color: #6a3093;
-      color: white;
-    }
-    
-    .btn-primary:hover {
-      background-color: #5a2a7d;
-    }
-    
-    .btn-secondary {
-      background-color: #f0f0f0;
-      color: #333;
-    }
-    
-    .btn-secondary:hover {
-      background-color: #e0e0e0;
-    }
-    
     .notification {
       position: fixed;
       top: 20px;
       right: 20px;
-      padding: 15px 25px;
       background-color: #4CAF50;
       color: white;
-      border-radius: 8px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-      opacity: 0;
-      transition: opacity 0.5s;
-      z-index: 1000;
-    }
-    
-    .notification.show {
-      opacity: 1;
-    }
-    
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .home-btn {
-      background-color: #6a3093;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    
-    @media (max-width: 768px) {
-      .container {
-        margin: 15px;
-        padding: 15px;
-      }
-      
-      .btn-container {
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      .btn {
-        width: 100%;
-      }
+      padding: 15px;
+      border-radius: 5px;
+      display: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <h1>إدخال طلب جديد</h1>
-      <a href="../index.html" class="home-btn">الرئيسية</a>
-    </div>
-    
+    <h1>إدخال طلب جديد</h1>
     <form id="orderForm">
       <div class="form-group">
-        <label for="orderDescription" class="required-field">وصف الطلب</label>
-        <input type="text" id="orderDescription" required placeholder="أدخل وصفًا واضحًا للطلب">
+        <label for="orderDescription">وصف الطلب</label>
+        <input type="text" id="orderDescription" required>
       </div>
       
       <div class="form-group">
-        <label for="deliveryPrice" class="required-field">سعر التوصيل (ريال سعودي)</label>
-        <input type="number" id="deliveryPrice" min="0" step="0.01" required placeholder="أدخل سعر التوصيل">
+        <label for="deliveryPrice">سعر التوصيل (ريال)</label>
+        <input type="number" id="deliveryPrice" required>
       </div>
       
       <div class="form-group">
-        <label for="orderDate" class="required-field">تاريخ الإرسال</label>
+        <label for="orderDate">تاريخ الإرسال</label>
         <input type="date" id="orderDate" required>
       </div>
       
       <div class="form-group">
-        <label for="orderNotes">ملاحظات إضافية</label>
-        <textarea id="orderNotes" placeholder="أي ملاحظات أو تفاصيل إضافية"></textarea>
+        <label for="orderNotes">ملاحظات</label>
+        <textarea id="orderNotes"></textarea>
       </div>
       
-      <div class="btn-container">
+      <div class="btn-group">
         <button type="button" class="btn btn-secondary" onclick="window.location.href='view.html'">عرض الطلبات</button>
-        <button type="submit" class="btn btn-primary">حفظ الطلب</button>
+        <button type="submit" class="btn">حفظ الطلب</button>
       </div>
     </form>
   </div>
   
   <div id="notification" class="notification"></div>
-  
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // تعيين تاريخ اليوم كقيمة افتراضية
-      const today = new Date();
-      const formattedDate = today.toISOString().substr(0, 10);
-      document.getElementById('orderDate').value = formattedDate;
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('orderDate').value = today;
       
-      // تهيئة localStorage إذا لم يكن موجودًا
+      // تهيئة localStorage إذا لم يكن موجوداً
       if (!localStorage.getItem('orders')) {
         localStorage.setItem('orders', JSON.stringify([]));
       }
     });
-    
+
     document.getElementById('orderForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      // جمع بيانات النموذج
       const orderData = {
-        description: document.getElementById('orderDescription').value.trim(),
-        price: parseFloat(document.getElementById('deliveryPrice').value),
+        name: document.getElementById('orderDescription').value.trim(),
+        sar: document.getElementById('deliveryPrice').value.trim(),
         date: document.getElementById('orderDate').value,
-        notes: document.getElementById('orderNotes').value.trim(),
-        createdAt: new Date().toISOString()
+        notes: document.getElementById('orderNotes').value.trim()
       };
       
-      // التحقق من البيانات
-      if (!orderData.description || isNaN(orderData.price) || !orderData.date) {
+      // التحقق من البيانات المطلوبة
+      if (!orderData.name || !orderData.sar || !orderData.date) {
         showNotification('الرجاء تعبئة جميع الحقول المطلوبة', 'error');
         return;
       }
@@ -243,19 +150,18 @@
       this.reset();
       
       // تعيين تاريخ اليوم من جديد
-      const today = new Date();
-      const formattedDate = today.toISOString().substr(0, 10);
-      document.getElementById('orderDate').value = formattedDate;
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('orderDate').value = today;
     });
     
     function showNotification(message, type) {
       const notification = document.getElementById('notification');
       notification.textContent = message;
       notification.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
-      notification.classList.add('show');
+      notification.style.display = 'block';
       
       setTimeout(() => {
-        notification.classList.remove('show');
+        notification.style.display = 'none';
       }, 3000);
     }
   </script>
