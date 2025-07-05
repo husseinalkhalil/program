@@ -284,19 +284,22 @@
   <div id="notification" class="notification"></div>
   
   <script>
+    // بادئة خاصة بالبرنامج الأول
+    const APP_PREFIX = "delivery_app_1_";
+    
     document.addEventListener('DOMContentLoaded', function() {
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('orderDate').value = today;
       
-      if (!localStorage.getItem('orders')) {
-        localStorage.setItem('orders', JSON.stringify([]));
+      if (!localStorage.getItem(APP_PREFIX + 'orders')) {
+        localStorage.setItem(APP_PREFIX + 'orders', JSON.stringify([]));
       }
       
       updateStats();
     });
     
     function updateStats() {
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      const orders = JSON.parse(localStorage.getItem(APP_PREFIX + 'orders')) || [];
       const totalOrders = orders.length;
       const totalProfit = orders.reduce((sum, order) => sum + (parseFloat(order.sar) || 0), 0);
       
@@ -320,9 +323,9 @@
         return;
       }
       
-      const orders = JSON.parse(localStorage.getItem('orders'));
+      const orders = JSON.parse(localStorage.getItem(APP_PREFIX + 'orders'));
       orders.push(orderData);
-      localStorage.setItem('orders', JSON.stringify(orders));
+      localStorage.setItem(APP_PREFIX + 'orders', JSON.stringify(orders));
       
       showNotification('تم حفظ الطلب بنجاح', 'success');
       updateStats();
