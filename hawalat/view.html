@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>عرض الطلبات - برنامج التوصيل الخاص بي</title>
+  <title>عرض الطلبات - الجوال</title>
   <style>
     :root {
       --primary-purple: #7E57C2;
@@ -271,7 +271,7 @@
     <button class="header-btn" onclick="goBack()">
       <i class="fas fa-arrow-right"></i>
     </button>
-    <h1>طلبات التوصيل الخاص بي</h1>
+    <h1>طلباتي</h1>
     <button class="header-btn" onclick="refreshPage()">
       <i class="fas fa-sync-alt"></i>
     </button>
@@ -288,7 +288,7 @@
       
       <div class="action-buttons">
         <button class="btn btn-secondary" onclick="window.location.href='index.html'">
-          <i class="fas fa-plus"></i> طلب جديد
+          <i class="fas fa-plus"></i> جديد
         </button>
         <button class="btn btn-danger" onclick="confirmDeleteAll()">
           <i class="fas fa-trash"></i> حذف الكل
@@ -307,25 +307,8 @@
   </div>
   
   <script>
-    // البادئة الفريدة لهذا البرنامج (يجب أن تكون مطابقة لما في صفحة الإدخال)
-    const APP_PREFIX = "my_delivery_app_";
-    
-    let data = [];
-    
     document.addEventListener('DOMContentLoaded', function() {
-      // تهيئة localStorage إذا كان فارغاً
-      if (!localStorage.getItem(APP_PREFIX + "orders")) {
-        localStorage.setItem(APP_PREFIX + "orders", JSON.stringify([]));
-      }
-      
-      // جلب البيانات من localStorage باستخدام البادئة
-      const savedData = localStorage.getItem(APP_PREFIX + "orders");
-      if (savedData) {
-        data = JSON.parse(savedData);
-        renderTable();
-      } else {
-        console.error("لا توجد بيانات في localStorage");
-      }
+      loadOrders();
     });
     
     function goBack() {
@@ -336,42 +319,43 @@
       window.location.reload();
     }
     
-    function renderTable() {
+    function loadOrders() {
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
       const ordersList = document.getElementById('ordersList');
-      ordersList.innerHTML = "";
-      let totalSAR = 0;
-    
-      if (data.length === 0) {
+      
+      ordersList.innerHTML = '';
+      
+      let totalPrice = 0;
+      
+      if (orders.length === 0) {
         ordersList.innerHTML = `
           <div class="empty-state">
             <i class="fas fa-box-open"></i>
             <h3>لا توجد طلبات</h3>
-            <p>اضغط على "طلب جديد" لإضافة طلبك الأول</p>
+            <p>اضغط على "جديد" لإضافة طلبك الأول</p>
           </div>
         `;
       } else {
-        data.sort((a, b) => new Date(b.date) - new Date(a.date));
-        
-        data.forEach((item, index) => {
-          totalSAR += parseFloat(item.sar || 0);
+        orders.forEach((order, index) => {
+          totalPrice += parseFloat(order.sar) || 0;
           
           const orderCard = document.createElement('div');
           orderCard.className = 'order-card';
           orderCard.innerHTML = `
             <div class="order-header">
-              <div class="order-title">${item.name || 'طلب بدون عنوان'}</div>
-              <div class="order-price">${item.sar || '0'} ر.س</div>
+              <div class="order-title">${order.name || 'طلب بدون عنوان'}</div>
+              <div class="order-price">${order.sar || '0'} ر.س</div>
             </div>
             
             <div class="order-details">
               <div class="detail-row">
                 <div class="detail-label">التاريخ:</div>
-                <div class="detail-value">${formatDate(item.date) || 'غير محدد'}</div>
+                <div class="detail-value">${order.date || 'غير محدد'}</div>
               </div>
               
               <div class="detail-row">
                 <div class="detail-label">ملاحظات:</div>
-                <div class="detail-value">${item.notes || 'لا توجد ملاحظات'}</div>
+                <div class="detail-value">${order.notes || 'لا توجد ملاحظات'}</div>
               </div>
             </div>
             
@@ -388,37 +372,23 @@
           ordersList.appendChild(orderCard);
         });
       }
-    
-      document.getElementById("totalOrders").textContent = data.length;
-      document.getElementById("totalPrice").textContent = totalSAR.toFixed(2) + " ر.س";
-    }
-    
-    function formatDate(dateString) {
-      if (!dateString) return '';
-      const date = new Date(dateString);
-      if (isNaN(date.getTime())) return dateString;
       
-      const day = date.getDate().toString().padStart(2, '0');
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const year = date.getFullYear();
-      return `${year}-${month}-${day}`;
+      document.getElementById('totalOrders').textContent = orders.length;
+      document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
     }
     
     function searchOrders() {
       const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      const filteredData = data.filter(item => 
-        item.name.toLowerCase().includes(searchTerm) || 
-        (item.notes && item.notes.toLowerCase().includes(searchTerm))
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      const filteredOrders = orders.filter(order => 
+        (order.name && order.name.toLowerCase().includes(searchTerm)) ||
+        (order.notes && order.notes.toLowerCase().includes(searchTerm))
       );
-      renderFilteredTable(filteredData);
-    }
-    
-    function renderFilteredTable(filteredData) {
+      
       const ordersList = document.getElementById('ordersList');
-      ordersList.innerHTML = "";
-      let totalSAR = 0;
-    
-      if (filteredData.length === 0) {
+      ordersList.innerHTML = '';
+      
+      if (filteredOrders.length === 0) {
         ordersList.innerHTML = `
           <div class="empty-state">
             <i class="fas fa-search"></i>
@@ -427,34 +397,36 @@
           </div>
         `;
       } else {
-        filteredData.forEach((item, index) => {
-          totalSAR += parseFloat(item.sar || 0);
+        let totalPrice = 0;
+        
+        filteredOrders.forEach((order, index) => {
+          totalPrice += parseFloat(order.sar) || 0;
           
           const orderCard = document.createElement('div');
           orderCard.className = 'order-card';
           orderCard.innerHTML = `
             <div class="order-header">
-              <div class="order-title">${item.name || 'طلب بدون عنوان'}</div>
-              <div class="order-price">${item.sar || '0'} ر.س</div>
+              <div class="order-title">${order.name || 'طلب بدون عنوان'}</div>
+              <div class="order-price">${order.sar || '0'} ر.س</div>
             </div>
             
             <div class="order-details">
               <div class="detail-row">
                 <div class="detail-label">التاريخ:</div>
-                <div class="detail-value">${formatDate(item.date) || 'غير محدد'}</div>
+                <div class="detail-value">${order.date || 'غير محدد'}</div>
               </div>
               
               <div class="detail-row">
                 <div class="detail-label">ملاحظات:</div>
-                <div class="detail-value">${item.notes || 'لا توجد ملاحظات'}</div>
+                <div class="detail-value">${order.notes || 'لا توجد ملاحظات'}</div>
               </div>
             </div>
             
             <div class="order-actions">
-              <button class="action-btn btn-secondary" onclick="editOrder(${data.findIndex(d => d.name === item.name)})">
+              <button class="action-btn btn-secondary" onclick="editOrder(${orders.findIndex(o => o.name === order.name)})">
                 <i class="fas fa-edit"></i> تعديل
               </button>
-              <button class="action-btn btn-danger" onclick="deleteOrder(${data.findIndex(d => d.name === item.name)})">
+              <button class="action-btn btn-danger" onclick="deleteOrder(${orders.findIndex(o => o.name === order.name)})">
                 <i class="fas fa-trash"></i> حذف
               </button>
             </div>
@@ -462,82 +434,54 @@
           
           ordersList.appendChild(orderCard);
         });
+        
+        document.getElementById('totalOrders').textContent = filteredOrders.length;
+        document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
       }
-    
-      document.getElementById("totalOrders").textContent = filteredData.length;
-      document.getElementById("totalPrice").textContent = totalSAR.toFixed(2) + " ر.س";
-    }
-    
-    function clearSearch() {
-      document.getElementById('searchInput').value = '';
-      renderTable();
     }
     
     function deleteOrder(index) {
       if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
-        data.splice(index, 1);
-        localStorage.setItem(APP_PREFIX + "orders", JSON.stringify(data));
-        renderTable();
-        showNotification('تم الحذف بنجاح');
+        const orders = JSON.parse(localStorage.getItem('orders'));
+        orders.splice(index, 1);
+        localStorage.setItem('orders', JSON.stringify(orders));
+        loadOrders();
       }
     }
     
     function editOrder(index) {
-      const item = data[index];
-      const newName = prompt("وصف الطلب:", item.name);
+      const orders = JSON.parse(localStorage.getItem('orders'));
+      const order = orders[index];
+      
+      const newName = prompt('وصف الطلب:', order.name);
       if (newName === null) return;
       
-      const newSar = prompt("سعر التوصيل (ريال):", item.sar);
-      if (newSar === null) return;
+      const newPrice = prompt('سعر التوصيل:', order.sar);
+      if (newPrice === null) return;
       
-      const newDate = prompt("تاريخ الإرسال:", item.date);
+      const newDate = prompt('تاريخ الإرسال:', order.date);
       if (newDate === null) return;
       
-      const newNotes = prompt("ملاحظات:", item.notes);
+      const newNotes = prompt('ملاحظات:', order.notes);
       if (newNotes === null) return;
       
-      data[index] = {
+      orders[index] = {
         name: newName,
-        sar: newSar,
+        sar: newPrice,
         date: newDate,
         notes: newNotes
       };
       
-      localStorage.setItem(APP_PREFIX + "orders", JSON.stringify(data));
-      renderTable();
-      showNotification('تم التعديل بنجاح');
+      localStorage.setItem('orders', JSON.stringify(orders));
+      loadOrders();
     }
     
     function confirmDeleteAll() {
-      if (confirm('هل أنت متأكد من حذف جميع الطلبات؟ هذا الإجراء لا يمكن التراجع عنه.')) {
-        data = [];
-        localStorage.setItem(APP_PREFIX + "orders", JSON.stringify([]));
-        renderTable();
-        showNotification('تم حذف جميع البيانات');
+      if (confirm('هل أنت متأكد من حذف جميع الطلبات؟ لا يمكن التراجع عن هذا الإجراء.')) {
+        localStorage.setItem('orders', JSON.stringify([]));
+        loadOrders();
       }
     }
-    
-    function showNotification(message) {
-      const notification = document.createElement('div');
-      notification.className = 'notification';
-      notification.innerHTML = `
-        <div style="position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
-                    color: white; padding: 15px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.2); z-index: 1000;">
-          ${message}
-        </div>
-      `;
-      document.body.appendChild(notification);
-      
-      setTimeout(() => {
-        notification.remove();
-      }, 3000);
-    }
-    
-    document.getElementById('searchInput').addEventListener('input', function() {
-      if (this.value === '') {
-        renderTable();
-      }
-    });
   </script>
 </body>
 </html>
