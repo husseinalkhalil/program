@@ -55,7 +55,7 @@
         white-space: nowrap;
     }
 
-    .notes-cell, .purpose-cell {
+    .notes-cell {
       max-width: 200px;
       width: 200px !important;
       overflow: hidden;
@@ -92,8 +92,7 @@
       display: block !important;
     }
 
-    #data-table td:nth-child(5), 
-    #data-table td:nth-child(8) {
+    #data-table td:nth-child(5) {
       white-space: normal !important;
       overflow: visible !important;
     }
@@ -411,13 +410,13 @@
           min-width: 30px;
       }
 
-      #data-table td:nth-child(9),
-      #data-table th:nth-child(9) {
+      #data-table td:nth-child(6),
+      #data-table th:nth-child(6) {
           min-width: 50px;
       }
 
-      #data-table td:nth-child(10),
-      #data-table th:nth-child(10) {
+      #data-table td:nth-child(7),
+      #data-table th:nth-child(7) {
           min-width: 40px;
       }
 
@@ -538,7 +537,7 @@
           type="text" 
           class="search-input" 
           id="searchInput" 
-          placeholder="بحث باسم المستلم"
+          placeholder="بحث باسم الطلب"
         >
         <button 
           id="clearSearch" 
@@ -569,7 +568,7 @@
       <tr>
         <th>#</th>
         <th>وصف الطلب</th>
-        <th>ريال</th>
+        <th>سعر التوصيل (ريال)</th>
         <th>التاريخ</th>
         <th>ملاحظات</th>
         <th>تعديل</th>
@@ -591,7 +590,7 @@
         </div>
         
         <div class="edit-modal-group">
-          <label for="editSAR">المبلغ (ريال):</label>
+          <label for="editSAR">سعر التوصيل (ريال):</label>
           <input type="number" id="editSAR" required>
         </div>
 
@@ -652,24 +651,17 @@
     function renderFilteredTable(filteredData) {
       tableBody.innerHTML = "";
       let totalSAR = 0;
-      let totalSYP = 0;
 
       if (filteredData.length === 0) {
         const row = document.createElement("tr");
-        row.innerHTML = `<td colspan="10" style="text-align:center; color:#999;">لا توجد نتائج</td>`;
+        row.innerHTML = `<td colspan="7" style="text-align:center; color:#999;">لا توجد نتائج</td>`;
         tableBody.appendChild(row);
       } else {
         filteredData.forEach((item, index) => {
           totalSAR += parseFloat(item.sar || 0);
-          totalSYP += parseFloat(item.syp || 0);
           
           const sarFormatted = Number(item.sar).toLocaleString('en');
-          const sypFormatted = Number(item.syp).toLocaleString('en');
-          
-          const purposeContent = item.purpose || '';
           const notesContent = item.notes || '';
-          
-          const shouldShowPurposeReadMore = purposeContent.trim().length > 30;
           const shouldShowNotesReadMore = notesContent.trim().length > 30;
 
           const row = document.createElement("tr");
@@ -677,15 +669,7 @@
             <td>${index + 1}</td>
             <td>${item.name}</td>
             <td>${sarFormatted}</td>
-            <td>${sypFormatted}</td>
-            <td class="purpose-cell">
-              <div class="truncated-text" data-full="${purposeContent}">
-                ${shouldShowPurposeReadMore ? purposeContent.substring(0, 30) + '...' : purposeContent}
-                ${shouldShowPurposeReadMore ? '<span class="read-more">قراءة المزيد</span>' : ''}
-              </div>
-            </td>
             <td>${item.date}</td>
-            <td>${item.method || ''}</td>
             <td class="notes-cell">
               <div class="truncated-text" data-full="${notesContent}">
                 ${shouldShowNotesReadMore ? notesContent.substring(0, 30) + '...' : notesContent}
@@ -743,10 +727,7 @@
       const item = data[index];
       
       document.getElementById('editName').value = item.name;
-      document.getElementById('editSAR').value = Number(item.sar).toLocaleString('en');
-      document.getElementById('editSYP').value = Number(item.syp).toLocaleString('en');
-      document.getElementById('editPurpose').value = item.purpose;
-      document.getElementById('editMethod').value = item.method || '';
+      document.getElementById('editSAR').value = item.sar;
       document.getElementById('editDate').value = item.date;
       document.getElementById('editNotes').value = item.notes || '';
       
@@ -763,15 +744,9 @@
       e.preventDefault();
       
       if (currentEditIndex !== null) {
-        const rawSAR = document.getElementById('editSAR').value.replace(/,/g, '');
-        const rawSYP = document.getElementById('editSYP').value.replace(/,/g, '');
-        
         data[currentEditIndex] = {
           name: document.getElementById('editName').value.trim(),
-          sar: rawSAR,
-          syp: rawSYP,
-          purpose: document.getElementById('editPurpose').value.trim(),
-          method: document.getElementById('editMethod').value.trim(),
+          sar: document.getElementById('editSAR').value,
           date: document.getElementById('editDate').value,
           notes: document.getElementById('editNotes').value.trim()
         };
@@ -846,22 +821,19 @@
 
       doc.setFont("Helvetica");
       doc.setFontSize(12);
-      doc.text("تقرير جميع الحوالات", 105, 10, { align: "center" });
+      doc.text("تقرير جميع الطلبات", 105, 10, { align: "center" });
       doc.text(`التاريخ: ${dateStr}`, 200, 10, { align: "right" });
 
       const tableData = data.map((item, index) => [
         index + 1,
         item.name,
         Number(item.sar).toLocaleString('en'),
-        Number(item.syp).toLocaleString('en'),
-        item.purpose,
         item.date,
-        item.method || '',
         item.notes || ''
       ]);
 
       doc.autoTable({
-        head: [["#", "وصف الطلب", "ريال", "التاريخ", "ملاحظات"]],
+        head: [["#", "وصف الطلب", "سعر التوصيل (ريال)", "التاريخ", "ملاحظات"]],
         body: tableData,
         styles: { font: "Helvetica", fontSize: 10, cellPadding: 2 },
         startY: 20,
