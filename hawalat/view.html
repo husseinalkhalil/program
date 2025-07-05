@@ -264,14 +264,11 @@
   <button class="delete-all-btn" onclick="confirmDeleteAll()">حذف جميع البيانات</button>
 
   <script>
-    // تحميل البيانات عند فتح الصفحة
     document.addEventListener('DOMContentLoaded', function() {
-      // تهيئة localStorage إذا كان فارغاً
       if (!localStorage.getItem("transfers")) {
         localStorage.setItem("transfers", JSON.stringify([]));
       }
       
-      // جلب البيانات من localStorage
       const savedData = localStorage.getItem("transfers");
       if (savedData) {
         data = JSON.parse(savedData);
@@ -293,7 +290,6 @@
         row.innerHTML = `<td colspan="7" style="text-align:center; color:#999;">لا توجد بيانات مسجلة بعد</td>`;
         tableBody.appendChild(row);
       } else {
-        // ترتيب البيانات من الأحدث إلى الأقدم
         data.sort((a, b) => new Date(b.date) - new Date(a.date));
         
         data.forEach((item, index) => {
@@ -359,8 +355,8 @@
             <td>${formatNumber(item.sar)}</td>
             <td>${formatDate(item.date)}</td>
             <td class="notes-cell">${item.notes || ''}</td>
-            <td><button class="edit-btn" onclick="editRow(${index})">✏️</button></td>
-            <td><button class="delete-btn" onclick="deleteRow(${index})">🗑️</button></td>
+            <td><button class="edit-btn" onclick="editRow(${data.findIndex(d => d.name === item.name)})">✏️</button></td>
+            <td><button class="delete-btn" onclick="deleteRow(${data.findIndex(d => d.name === item.name)})">🗑️</button></td>
           `;
           tableBody.appendChild(row);
         });
@@ -398,7 +394,6 @@
       const newNotes = prompt("ملاحظات:", item.notes);
       if (newNotes === null) return;
       
-      // تحديث البيانات
       data[index] = {
         name: newName,
         sar: newSar,
@@ -442,7 +437,6 @@
       setTimeout(() => msg.remove(), 3000);
     }
 
-    // تحديث البحث أثناء الكتابة
     document.getElementById('searchInput').addEventListener('input', function() {
       document.getElementById('clearSearch').style.display = this.value ? 'block' : 'none';
       filterTable();
