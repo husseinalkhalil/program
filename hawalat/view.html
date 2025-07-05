@@ -252,7 +252,7 @@
         <th>#</th>
         <th>وصف الطلب</th>
         <th>سعر التوصيل (ريال)</th>
-        <th>التاريخ</th>
+        <th>تاريخ الإرسال</th>
         <th>ملاحظات</th>
         <th>تعديل</th>
         <th>حذف</th>
@@ -385,8 +385,30 @@
     }
 
     function editRow(index) {
-      // يمكنك إضافة منطق التعديل هنا
-      alert("سيتم تنفيذ التعديل في الخطوة القادمة");
+      const item = data[index];
+      const newName = prompt("وصف الطلب:", item.name);
+      if (newName === null) return;
+      
+      const newSar = prompt("سعر التوصيل (ريال):", item.sar);
+      if (newSar === null) return;
+      
+      const newDate = prompt("تاريخ الإرسال:", item.date);
+      if (newDate === null) return;
+      
+      const newNotes = prompt("ملاحظات:", item.notes);
+      if (newNotes === null) return;
+      
+      // تحديث البيانات
+      data[index] = {
+        name: newName,
+        sar: newSar,
+        date: newDate,
+        notes: newNotes
+      };
+      
+      localStorage.setItem("transfers", JSON.stringify(data));
+      renderTable();
+      showSuccess("تم التعديل بنجاح");
     }
 
     function confirmDeleteAll() {
