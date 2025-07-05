@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>عرض البيانات</title>
+  <title>عرض الطلبات</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -494,7 +494,6 @@
       }
     }
 
-    /* التعديل الجديد للطباعة */
     @media print {
         .top-controls,
         .delete-all-btn,
@@ -654,13 +653,16 @@
 
       if (filteredData.length === 0) {
         const row = document.createElement("tr");
-        row.innerHTML = `<td colspan="7" style="text-align:center; color:#999;">لا توجد نتائج</td>`;
+        row.innerHTML = `<td colspan="7" style="text-align:center; color:#999;">لا توجد بيانات مسجلة بعد</td>`;
         tableBody.appendChild(row);
       } else {
+        // ترتيب البيانات من الأحدث إلى الأقدم
+        filteredData.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
         filteredData.forEach((item, index) => {
           totalSAR += parseFloat(item.sar || 0);
           
-          const sarFormatted = Number(item.sar).toLocaleString('en');
+          const sarFormatted = Number(item.sar).toLocaleString('ar-SA');
           const notesContent = item.notes || '';
           const shouldShowNotesReadMore = notesContent.trim().length > 30;
 
@@ -669,7 +671,7 @@
             <td>${index + 1}</td>
             <td>${item.name}</td>
             <td>${sarFormatted}</td>
-            <td>${item.date}</td>
+            <td>${formatDate(item.date)}</td>
             <td class="notes-cell">
               <div class="truncated-text" data-full="${notesContent}">
                 ${shouldShowNotesReadMore ? notesContent.substring(0, 30) + '...' : notesContent}
@@ -684,8 +686,19 @@
       }
 
       document.getElementById("total-count").textContent = `عدد الطلبات: ${filteredData.length}`;
-      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${totalSAR.toLocaleString('en')}`;      
+      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${totalSAR.toLocaleString('ar-SA')}`;
       initReadMore();
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return dateString;
+      
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${year}-${month}-${day}`;
     }
 
     function initReadMore() {
@@ -728,7 +741,7 @@
       
       document.getElementById('editName').value = item.name;
       document.getElementById('editSAR').value = item.sar;
-      document.getElementById('editDate').value = item.date;
+      document.getElementById('editDate').value = formatDate(item.date);
       document.getElementById('editNotes').value = item.notes || '';
       
       editModal.style.display = 'flex';
@@ -827,8 +840,8 @@
       const tableData = data.map((item, index) => [
         index + 1,
         item.name,
-        Number(item.sar).toLocaleString('en'),
-        item.date,
+        Number(item.sar).toLocaleString('ar-SA'),
+        formatDate(item.date),
         item.notes || ''
       ]);
 
