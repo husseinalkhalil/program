@@ -555,12 +555,11 @@
     </div>
   </div>
 
-  <h1>جميع الحوالات</h1>
+  <h1>جميع الطلبات</h1>
 
   <div class="summary-bar">
-    <span id="total-count">عدد الحوالات: 0</span>
+    <span id="total-count">عدد الطلبات: 0</span>
     <span id="total-sar">الإجمالي (ريال): 0</span>
-    <span id="total-syp">الإجمالي (ليرة): 0</span>
   </div>
 
   <div id="success-container"></div>
@@ -569,12 +568,9 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>اسم المستلم</th>
+        <th>وصف الطلب</th>
         <th>ريال</th>
-        <th>ليرة</th>
-        <th>سبب الحوالة</th>
         <th>التاريخ</th>
-        <th>طريقة التحويل</th>
         <th>ملاحظات</th>
         <th>تعديل</th>
         <th>🗑️</th>
@@ -587,31 +583,16 @@
 
   <div class="edit-modal" id="editModal">
     <div class="edit-modal-content">
-      <h2>تعديل بيانات الحوالة</h2>
+      <h2>تعديل بيانات الطلب</h2>
       <form id="editForm">
         <div class="edit-modal-group">
-          <label for="editName">اسم المستلم:</label>
+          <label for="editName">وصف الطلب:</label>
           <input type="text" id="editName" required>
         </div>
         
         <div class="edit-modal-group">
           <label for="editSAR">المبلغ (ريال):</label>
           <input type="number" id="editSAR" required>
-        </div>
-
-        <div class="edit-modal-group">
-          <label for="editSYP">المبلغ (ليرة):</label>
-          <input type="number" id="editSYP" required>
-        </div>
-
-        <div class="edit-modal-group">
-          <label for="editPurpose">سبب الحوالة:</label>
-          <input type="text" id="editPurpose" required>
-        </div>
-
-        <div class="edit-modal-group">
-          <label for="editMethod">طريقة التحويل:</label>
-          <input type="text" id="editMethod">
         </div>
 
         <div class="edit-modal-group">
@@ -718,10 +699,8 @@
         });
       }
 
-      document.getElementById("total-count").textContent = `عدد الحوالات: ${filteredData.length}`;
-      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${totalSAR.toLocaleString('en')}`;
-      document.getElementById("total-syp").textContent = `الإجمالي (ليرة): ${totalSYP.toLocaleString('en')}`;
-      
+      document.getElementById("total-count").textContent = `عدد الطلبات: ${filteredData.length}`;
+      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${totalSAR.toLocaleString('en')}`;      
       initReadMore();
     }
 
@@ -882,7 +861,7 @@
       ]);
 
       doc.autoTable({
-        head: [["#", "اسم المستلم", "ريال", "ليرة", "الغاية", "التاريخ", "التحويل", "ملاحظات"]],
+        head: [["#", "وصف الطلب", "ريال", "التاريخ", "ملاحظات"]],
         body: tableData,
         styles: { font: "Helvetica", fontSize: 10, cellPadding: 2 },
         startY: 20,
@@ -892,7 +871,7 @@
         theme: "grid"
       });
 
-      doc.save("الحوالات.pdf");
+      doc.save("الطلبات.pdf");
     }
   </script>
 </body>
