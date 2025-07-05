@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>عرض الطلبات - البرنامج الثاني</title>
+  <title>عرض الطلبات</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
   <style>
@@ -491,7 +491,7 @@
 <body>
   <button class="back-btn-top no-print" onclick="window.location.href='index.html'">→ السابقة</button>
 
-  <h1>عرض الطلبات - البرنامج الثاني</h1>
+  <h1>عرض الطلبات</h1>
   
   <label for="clientSelect" class="no-print">اختيار عميل:</label>
   <select id="clientSelect" class="no-print" onchange="filterOrdersByClient()">
@@ -610,10 +610,7 @@
   </div>
 
   <script>
-    // البادئة المخصصة للبرنامج الثاني
-    const APP_PREFIX = "delivery_app_2_";
-    
-    let orders = JSON.parse(localStorage.getItem(APP_PREFIX + "orders") || "[]");
+    let orders = JSON.parse(localStorage.getItem("orders") || "[]");
     const tableBody = document.getElementById("ordersTable");
     const clientSelect = document.getElementById("clientSelect");
     const totalRequestsElem = document.getElementById("totalRequests");
@@ -622,7 +619,7 @@
     const remainingAmountElem = document.getElementById("remainingAmount");
     const modal = document.getElementById("editModal");
     const toast = document.getElementById("toast");
-    let clients = JSON.parse(localStorage.getItem(APP_PREFIX + "clients") || []);
+    let clients = JSON.parse(localStorage.getItem("clients") || []);
 
     if (orders.length === 0) {
       orders = [
@@ -647,8 +644,8 @@
           notes: "ملاحظات تجريبية"
         }
       ];
-      localStorage.setItem(APP_PREFIX + "orders", JSON.stringify(orders));
-      localStorage.setItem(APP_PREFIX + "clients", JSON.stringify(["عميل تجريبي"]));
+      localStorage.setItem("orders", JSON.stringify(orders));
+      localStorage.setItem("clients", JSON.stringify(["عميل تجريبي"]));
     }
 
     let currentConfirmAction = null;
@@ -680,8 +677,8 @@
       let totalDeliveryPrice = 0;
       let totalPaid = 0;
 
-      orders = JSON.parse(localStorage.getItem(APP_PREFIX + "orders") || "[]");
-      clients = JSON.parse(localStorage.getItem(APP_PREFIX + "clients") || []);
+      orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      clients = JSON.parse(localStorage.getItem("clients") || []);
       
       const currentClient = clientSelect.value;
       clientSelect.innerHTML = '<option value="all" selected>الكل</option>';
@@ -744,7 +741,7 @@
 
     function filterOrdersByClient() {
       const selectedClient = clientSelect.value;
-      orders = JSON.parse(localStorage.getItem(APP_PREFIX + "orders") || "[]");
+      orders = JSON.parse(localStorage.getItem("orders") || "[]");
       if (selectedClient === "all") {
         loadOrders(orders);
       } else {
@@ -756,12 +753,12 @@
     function deleteClient(client) {
       showConfirm(`هل أنت متأكد من حذف العميل ${client}؟`, () => {
         orders = orders.filter(order => order.client !== client);
-        localStorage.setItem(APP_PREFIX + "orders", JSON.stringify(orders));
+        localStorage.setItem("orders", JSON.stringify(orders));
         
         clients = clients.filter(c => c !== client);
-        localStorage.setItem(APP_PREFIX + "clients", JSON.stringify(clients));
+        localStorage.setItem("clients", JSON.stringify(clients));
         
-        localStorage.setItem(APP_PREFIX + "clientUpdateTrigger", Date.now().toString());
+        localStorage.setItem("clientUpdateTrigger", Date.now().toString());
         
         loadOrders();
       });
@@ -770,15 +767,15 @@
     function confirmDeleteOrder(orderId) {
       showConfirm("هل أنت متأكد من حذف هذا الطلب؟", () => {
         orders = orders.filter(order => order.id !== orderId);
-        localStorage.setItem(APP_PREFIX + "orders", JSON.stringify(orders));
+        localStorage.setItem("orders", JSON.stringify(orders));
         loadOrders();
       });
     }
 
     function deleteAllOrders() {
       showConfirm("هل أنت متأكد من حذف جميع البيانات؟", () => {
-        localStorage.setItem(APP_PREFIX + "orders", "[]");
-        localStorage.setItem(APP_PREFIX + "clientUpdateTrigger", Date.now().toString());
+        localStorage.setItem("orders", "[]");
+        localStorage.setItem("clientUpdateTrigger", Date.now().toString());
         orders = [];
         loadOrders();
       });
@@ -819,7 +816,7 @@
           notes: document.getElementById("editNotes").value
         };
         
-        localStorage.setItem(APP_PREFIX + "orders", JSON.stringify(orders));
+        localStorage.setItem("orders", JSON.stringify(orders));
         loadOrders();
         closeModal();
         showToast();
@@ -856,7 +853,7 @@
       
       doc.setFontSize(18);
       doc.setTextColor(106, 27, 154);
-      doc.text("قائمة الطلبات - البرنامج الثاني", 14, 15);
+      doc.text("قائمة الطلبات", 14, 15);
       
       const headers = ["#", "العميل", "الوصف", "سعر الطلب", "سعر التوصيل", "المبلغ المدفوع", "تاريخ الطلب", "ملاحظات"];
       const data = orders.map((order, index) => [
@@ -879,7 +876,7 @@
         alternateRowStyles: { fillColor: [249, 249, 249] }
       });
       
-      doc.save("طلبات_البرنامج_الثاني.pdf");
+      doc.save("طلبات.pdf");
     }
 
     window.onclick = function(event) {
