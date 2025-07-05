@@ -6,12 +6,15 @@
   <title>عرض الطلبات - الجوال</title>
   <style>
     :root {
-      --primary-color: #6a3093;
-      --secondary-color: #a044ff;
-      --danger-color: #e74c3c;
-      --light-color: #f9f9f9;
+      --primary-purple: #7E57C2;
+      --dark-purple: #5E35B1;
+      --light-purple: #B39DDB;
+      --beige: #F5F5DC;
+      --light-beige: #FFF8E1;
       --text-color: #333;
-      --border-color: #ddd;
+      --light-text: #757575;
+      --white: #FFFFFF;
+      --danger: #e53935;
     }
     
     * {
@@ -22,7 +25,7 @@
     }
     
     body {
-      background-color: #f5f0ff;
+      background-color: var(--light-beige);
       color: var(--text-color);
       line-height: 1.6;
       padding: 0;
@@ -34,14 +37,14 @@
     }
     
     .header {
-      background-color: var(--primary-color);
-      color: white;
+      background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
+      color: var(--white);
       padding: 15px;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 15px rgba(94, 53, 177, 0.3);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -51,20 +54,26 @@
       font-size: 1.5rem;
       margin: 0;
       flex: 1;
-      text-align: center;
-    }
-    
-    .header-actions {
-      display: flex;
-      gap: 10px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
     
     .header-btn {
-      background: none;
+      background: rgba(255,255,255,0.2);
       border: none;
-      color: white;
+      color: var(--white);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       font-size: 1.2rem;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    
+    .header-btn:hover {
+      background: rgba(255,255,255,0.3);
     }
     
     .controls {
@@ -72,10 +81,14 @@
       flex-direction: column;
       gap: 10px;
       padding: 15px 0;
-      background-color: white;
+      background-color: var(--white);
       position: sticky;
-      top: 60px;
+      top: 70px;
       z-index: 90;
+      border-radius: 10px;
+      margin: 10px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border: 1px solid rgba(126, 87, 194, 0.1);
     }
     
     .search-box {
@@ -86,9 +99,10 @@
     .search-box input {
       flex: 1;
       padding: 12px 15px;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--light-purple);
       border-radius: 8px;
       font-size: 1rem;
+      background-color: var(--beige);
     }
     
     .action-buttons {
@@ -106,21 +120,27 @@
       cursor: pointer;
       text-align: center;
       transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
     
     .btn-primary {
-      background-color: var(--primary-color);
-      color: white;
+      background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
+      color: var(--white);
+      box-shadow: 0 3px 10px rgba(94, 53, 177, 0.3);
     }
     
     .btn-danger {
-      background-color: var(--danger-color);
-      color: white;
+      background: linear-gradient(135deg, var(--danger), #c62828);
+      color: var(--white);
     }
     
     .btn-secondary {
-      background-color: #f0f0f0;
-      color: var(--text-color);
+      background-color: var(--white);
+      color: var(--dark-purple);
+      border: 1px solid var(--light-purple);
     }
     
     .orders-list {
@@ -128,11 +148,13 @@
     }
     
     .order-card {
-      background-color: white;
-      border-radius: 10px;
+      background-color: var(--white);
+      border-radius: 12px;
       padding: 15px;
       margin-bottom: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      border: 1px solid rgba(126, 87, 194, 0.1);
+      animation: fadeIn 0.3s ease-out;
     }
     
     .order-header {
@@ -140,22 +162,23 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--light-purple);
     }
     
     .order-title {
       font-weight: bold;
       font-size: 1.1rem;
-      color: var(--primary-color);
+      color: var(--dark-purple);
     }
     
     .order-price {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 5px 10px;
+      background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
+      color: var(--white);
+      padding: 5px 12px;
       border-radius: 20px;
       font-size: 0.9rem;
+      box-shadow: 0 2px 5px rgba(94, 53, 177, 0.2);
     }
     
     .order-details {
@@ -164,13 +187,13 @@
     
     .detail-row {
       display: flex;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     
     .detail-label {
       font-weight: bold;
       min-width: 80px;
-      color: #666;
+      color: var(--light-text);
     }
     
     .detail-value {
@@ -185,48 +208,51 @@
     
     .action-btn {
       flex: 1;
-      padding: 8px;
-      border-radius: 6px;
+      padding: 10px;
+      border-radius: 8px;
       text-align: center;
       font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
     }
     
     .summary-bar {
-      background-color: white;
+      background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
+      color: var(--white);
       padding: 15px;
-      border-radius: 10px;
+      border-radius: 12px;
       margin-top: 15px;
       display: flex;
       justify-content: space-between;
       font-weight: bold;
       position: sticky;
       bottom: 15px;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 -3px 15px rgba(94, 53, 177, 0.3);
     }
     
     .empty-state {
       text-align: center;
       padding: 40px 20px;
-      color: #666;
+      color: var(--light-text);
+      background-color: var(--white);
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
     
     .empty-state i {
       font-size: 3rem;
-      color: #ddd;
+      color: var(--light-purple);
       margin-bottom: 15px;
     }
     
-    /* رسوميات متحركة */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
     
-    .order-card {
-      animation: fadeIn 0.3s ease-out;
-    }
-    
-    /* تحسينات للأجهزة الصغيرة جدًا */
     @media (max-width: 400px) {
       .action-buttons {
         flex-direction: column;
@@ -242,17 +268,13 @@
 </head>
 <body>
   <div class="header">
-    <div class="header-actions">
-      <button class="header-btn" onclick="goBack()">
-        <i class="fas fa-arrow-right"></i>
-      </button>
-    </div>
+    <button class="header-btn" onclick="goBack()">
+      <i class="fas fa-arrow-right"></i>
+    </button>
     <h1>طلباتي</h1>
-    <div class="header-actions">
-      <button class="header-btn" onclick="refreshPage()">
-        <i class="fas fa-sync-alt"></i>
-      </button>
-    </div>
+    <button class="header-btn" onclick="refreshPage()">
+      <i class="fas fa-sync-alt"></i>
+    </button>
   </div>
   
   <div class="container">
@@ -266,7 +288,7 @@
       
       <div class="action-buttons">
         <button class="btn btn-secondary" onclick="window.location.href='index.html'">
-          <i class="fas fa-plus"></i> طلب جديد
+          <i class="fas fa-plus"></i> جديد
         </button>
         <button class="btn btn-danger" onclick="confirmDeleteAll()">
           <i class="fas fa-trash"></i> حذف الكل
@@ -285,27 +307,22 @@
   </div>
   
   <script>
-    // تحميل البيانات عند فتح الصفحة
     document.addEventListener('DOMContentLoaded', function() {
       loadOrders();
     });
     
-    // دالة العودة للصفحة السابقة
     function goBack() {
       window.history.back();
     }
     
-    // دالة تحديث الصفحة
     function refreshPage() {
       window.location.reload();
     }
     
-    // دالة تحميل الطلبات
     function loadOrders() {
       const orders = JSON.parse(localStorage.getItem('orders')) || [];
       const ordersList = document.getElementById('ordersList');
       
-      // إفراغ القائمة أولاً
       ordersList.innerHTML = '';
       
       let totalPrice = 0;
@@ -315,11 +332,10 @@
           <div class="empty-state">
             <i class="fas fa-box-open"></i>
             <h3>لا توجد طلبات</h3>
-            <p>اضغط على "طلب جديد" لإضافة طلبك الأول</p>
+            <p>اضغط على "جديد" لإضافة طلبك الأول</p>
           </div>
         `;
       } else {
-        // عرض كل الطلبات
         orders.forEach((order, index) => {
           totalPrice += parseFloat(order.sar) || 0;
           
@@ -357,12 +373,10 @@
         });
       }
       
-      // تحديث الإحصائيات
       document.getElementById('totalOrders').textContent = orders.length;
       document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
     }
     
-    // دالة البحث
     function searchOrders() {
       const searchTerm = document.getElementById('searchInput').value.toLowerCase();
       const orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -426,7 +440,6 @@
       }
     }
     
-    // دالة حذف طلب
     function deleteOrder(index) {
       if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
         const orders = JSON.parse(localStorage.getItem('orders'));
@@ -436,7 +449,6 @@
       }
     }
     
-    // دالة تعديل طلب
     function editOrder(index) {
       const orders = JSON.parse(localStorage.getItem('orders'));
       const order = orders[index];
@@ -464,7 +476,6 @@
       loadOrders();
     }
     
-    // دالة حذف جميع الطلبات
     function confirmDeleteAll() {
       if (confirm('هل أنت متأكد من حذف جميع الطلبات؟ لا يمكن التراجع عن هذا الإجراء.')) {
         localStorage.setItem('orders', JSON.stringify([]));
