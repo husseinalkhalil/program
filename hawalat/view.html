@@ -307,6 +307,9 @@
   </div>
   
   <script>
+    // بادئة خاصة بالبرنامج الأول
+    const APP_PREFIX = "delivery_app_1_";
+    
     document.addEventListener('DOMContentLoaded', function() {
       loadOrders();
     });
@@ -320,7 +323,7 @@
     }
     
     function loadOrders() {
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      const orders = JSON.parse(localStorage.getItem(APP_PREFIX + 'orders')) || [];
       const ordersList = document.getElementById('ordersList');
       
       ordersList.innerHTML = '';
@@ -379,7 +382,7 @@
     
     function searchOrders() {
       const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      const orders = JSON.parse(localStorage.getItem(APP_PREFIX + 'orders')) || [];
       const filteredOrders = orders.filter(order => 
         (order.name && order.name.toLowerCase().includes(searchTerm)) ||
         (order.notes && order.notes.toLowerCase().includes(searchTerm))
@@ -442,15 +445,15 @@
     
     function deleteOrder(index) {
       if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
-        const orders = JSON.parse(localStorage.getItem('orders'));
+        const orders = JSON.parse(localStorage.getItem(APP_PREFIX + 'orders'));
         orders.splice(index, 1);
-        localStorage.setItem('orders', JSON.stringify(orders));
+        localStorage.setItem(APP_PREFIX + 'orders', JSON.stringify(orders));
         loadOrders();
       }
     }
     
     function editOrder(index) {
-      const orders = JSON.parse(localStorage.getItem('orders'));
+      const orders = JSON.parse(localStorage.getItem(APP_PREFIX + 'orders'));
       const order = orders[index];
       
       const newName = prompt('وصف الطلب:', order.name);
@@ -472,13 +475,13 @@
         notes: newNotes
       };
       
-      localStorage.setItem('orders', JSON.stringify(orders));
+      localStorage.setItem(APP_PREFIX + 'orders', JSON.stringify(orders));
       loadOrders();
     }
     
     function confirmDeleteAll() {
       if (confirm('هل أنت متأكد من حذف جميع الطلبات؟ لا يمكن التراجع عن هذا الإجراء.')) {
-        localStorage.setItem('orders', JSON.stringify([]));
+        localStorage.setItem(APP_PREFIX + 'orders', JSON.stringify([]));
         loadOrders();
       }
     }
