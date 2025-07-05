@@ -3,130 +3,444 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>إدخال طلب جديد</title>
-  <link rel="apple-touch-icon" href="icons/logo.png">
+  <title>عرض الطلبات</title>
   <style>
-    /* نفس الأنماط السابقة... */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f5f5ff;
+      direction: rtl;
+    }
+    h1 {
+      text-align: center;
+      color: #663399;
+      margin-bottom: 30px;
+    }
+    .success-message {
+      background-color: #ede3ff;
+      color: #155724;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 10px auto;
+      width: fit-content;
+      text-align: center;
+      font-size: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #f5eefe;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      font-size: 14px;
+    }
+    th {
+      background-color: #663399;
+      color: white;
+      text-align: center;
+    }
+    td {
+      text-align: center;
+    }
+    #data-table td:first-child,
+    #data-table th:first-child {
+        width: 30px;
+        min-width: 30px;
+        max-width: 30px;
+        white-space: nowrap;
+    }
+    .notes-cell {
+      max-width: 200px;
+      width: 200px !important;
+      overflow: hidden;
+    }
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .top-back {
+      background-color: #663399 !important;
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .top-back:hover {
+      background-color: #5a2f91 !important;
+    }
+    .export-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .export-buttons button {
+      background-color: #663399;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .export-buttons button.refresh-btn {
+      background-color: #28a745 !important;
+    }
+    .export-buttons button.refresh-btn:hover {
+      background-color: #218838 !important;
+    }
+    .export-buttons button:hover {
+      background-color: #5a2f91;
+    }
+    .search-container {
+      position: relative;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-left: 15px;
+    }
+    .search-input {
+      padding: 8px 35px 8px 12px;
+      border: 1px solid #663399;
+      border-radius: 5px;
+      width: 200px;
+      background-color: #f5eefe;
+    }
+    .clear-search {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      display: none;
+      padding: 0;
+      font-size: 18px;
+      z-index: 2;
+    }
+    .search-button {
+      background-color: #663399;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .summary-bar {
+      background-color: #ede3ff;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-around;
+      font-size: 16px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    .delete-btn {
+      background-color: #ffdddd;
+      border: 1px solid #ff4444;
+      color: #c00;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .edit-btn {
+      background-color: #e6e6fa;
+      border: 1px solid #663399;
+      color: #663399;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 5px;
+    }
+    .delete-all-btn {
+      background-color: #fff0f0;
+      color: #c00;
+      padding: 10px 20px;
+      border: 1px solid #ff4444;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 20px auto;
+      display: block;
+      font-size: 16px;
+    }
+    .confirm-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .confirm-box {
+      background: #ede3ff;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+    @media screen and (max-width: 768px) {
+      .top-controls {
+        flex-direction: column-reverse;
+        gap: 15px;
+        align-items: stretch;
+      }
+      .export-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .search-container {
+        margin-left: 0;
+        width: 100%;
+      }
+      .search-input {
+        width: 100%;
+      }
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+      th, td {
+        min-width: 120px;
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
-
 <body>
-  <!-- زر الرئيسية -->
-  <div style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
-    <button 
-      class="button" 
-      onclick="window.location.href='../index.html'"
-      style="background: #8000c9; padding: 10px 15px; font-size: 14px;">
-       ➔ الرئيسية
-    </button>
+  <div class="top-controls">
+    <div>
+      <a class="top-back" href="index.html">➔ السابقة</a>
+      <a class="top-back" href="../index.html" style="margin-right: 10px;">الرئيسية</a>
+    </div>
+    
+    <div class="export-buttons">
+      <div class="search-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="بحث باسم الطلب">
+        <button id="clearSearch" class="clear-search" onclick="clearSearch()" type="button">&times;</button>
+        <button class="search-button" onclick="filterTable()">بحث</button>
+      </div>
+      <button onclick="window.print()">طباعة</button>
+      <button class="refresh-btn" onclick="window.location.reload()">تحديث</button>
+    </div>
   </div>
 
-  <div class="container">
-    <h2>إدخال طلب جديد</h2>
-    <div class="message" id="formMessage"></div>
-    <form id="transferForm">
-      <!-- حقول الإدخال -->
-      <div>
-        <label for="name">وصف الطلب:</label>
-        <input type="text" id="name" name="name" required />
-      </div>
+  <h1>جميع الطلبات</h1>
 
-      <div>
-        <label for="amount-sar">سعر التوصيل (ريال):</label>
-        <div class="input-with-icon">
-          <input type="number" id="amount-sar" name="amount-sar" required />
-          <img src="icons/real.png" alt="ريال سعودي">
-        </div>
-      </div>
-
-      <div>
-        <label for="date">تاريخ الإرسال:</label>
-        <input type="date" id="date" name="date" required />
-      </div>
-
-      <div>
-        <label for="notes">ملاحظات:</label>
-        <textarea id="notes" name="notes"></textarea>
-      </div>
-
-      <!-- الأزرار -->
-      <div class="button-container">
-        <div class="buttons-row">
-          <button type="button" class="view-btn" onclick="window.location.href='view.html'">عرض البيانات</button>
-          <button type="button" class="refresh-btn" onclick="window.location.reload()">تحديث الصفحة</button>
-        </div>
-        <button type="submit">إدخال</button>
-      </div>
-    </form>
+  <div class="summary-bar">
+    <span id="total-count">عدد الطلبات: 0</span>
+    <span id="total-sar">الإجمالي (ريال): 0</span>
   </div>
+
+  <div id="success-container"></div>
+
+  <table id="data-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>وصف الطلب</th>
+        <th>سعر التوصيل (ريال)</th>
+        <th>تاريخ الإرسال</th>
+        <th>ملاحظات</th>
+        <th>تعديل</th>
+        <th>حذف</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <button class="delete-all-btn" onclick="confirmDeleteAll()">حذف جميع البيانات</button>
 
   <script>
-    const form = document.getElementById("transferForm");
-    const messageBox = document.getElementById("formMessage");
-    const inputs = Array.from(form.querySelectorAll("input, textarea"));
-    const submitButton = document.querySelector('button[type="submit"]');
-
-    function showMessage(msg, isSuccess = false) {
-      messageBox.textContent = msg;
-      messageBox.className = 'message';
-      messageBox.classList.add('show');
-      if (isSuccess) messageBox.classList.add('success');
-      setTimeout(() => messageBox.classList.remove('show'), 3000);
-    }
-
-    // دالة لحفظ البيانات في localStorage
-    function saveToLocalStorage(data) {
-      let transfers = JSON.parse(localStorage.getItem("transfers") || [];
-      transfers.push(data);
-      localStorage.setItem("transfers", JSON.stringify(transfers));
-    }
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const amountSAR = document.getElementById("amount-sar").value.trim();
-      const date = document.getElementById("date").value;
-      const notes = document.getElementById("notes").value.trim();
-
-      // التحقق من الحقول المطلوبة
-      if (!name || !amountSAR || !date) {
-        showMessage("يرجى تعبئة جميع الحقول المطلوبة");
-        return;
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!localStorage.getItem("transfers")) {
+        localStorage.setItem("transfers", JSON.stringify([]));
       }
-
-      // إنشاء كائن البيانات
-      const transferData = {
-        name: name,
-        sar: amountSAR,
-        date: date,
-        notes: notes
-      };
-
-      // حفظ البيانات
-      saveToLocalStorage(transferData);
       
-      // إظهار رسالة النجاح
-      showMessage("تم إدخال البيانات بنجاح!", true);
-      
-      // إعادة تعيين النموذج
-      form.reset();
-      
-      // تحديث تاريخ اليوم تلقائياً
-      setupAutoDate();
+      const savedData = localStorage.getItem("transfers");
+      if (savedData) {
+        data = JSON.parse(savedData);
+        renderTable();
+      } else {
+        console.error("لا توجد بيانات في localStorage");
+      }
     });
 
-    function setupAutoDate() {
-      const dateField = document.getElementById('date');
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const day = String(now.getDate()).padStart(2, '0');
-      dateField.value = `${year}-${month}-${day}`;
+    let data = [];
+    const tableBody = document.querySelector("#data-table tbody");
+
+    function renderTable() {
+      tableBody.innerHTML = "";
+      let totalSAR = 0;
+
+      if (data.length === 0) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="7" style="text-align:center; color:#999;">لا توجد بيانات مسجلة بعد</td>`;
+        tableBody.appendChild(row);
+      } else {
+        data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        data.forEach((item, index) => {
+          totalSAR += parseFloat(item.sar || 0);
+          
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.name || ''}</td>
+            <td>${formatNumber(item.sar)}</td>
+            <td>${formatDate(item.date)}</td>
+            <td class="notes-cell">${item.notes || ''}</td>
+            <td><button class="edit-btn" onclick="editRow(${index})">✏️</button></td>
+            <td><button class="delete-btn" onclick="deleteRow(${index})">🗑️</button></td>
+          `;
+          tableBody.appendChild(row);
+        });
+      }
+
+      document.getElementById("total-count").textContent = `عدد الطلبات: ${data.length}`;
+      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${formatNumber(totalSAR)}`;
     }
 
-    // تعيين تاريخ اليوم عند تحميل الصفحة
-    window.addEventListener('load', setupAutoDate);
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return dateString;
+      
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${year}-${month}-${day}`;
+    }
+
+    function formatNumber(num) {
+      return parseFloat(num || 0).toLocaleString('ar-SA');
+    }
+
+    function filterTable() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const filteredData = data.filter(item => 
+        item.name.toLowerCase().includes(searchTerm)
+      );
+      renderFilteredTable(filteredData);
+    }
+
+    function renderFilteredTable(filteredData) {
+      tableBody.innerHTML = "";
+      let totalSAR = 0;
+
+      if (filteredData.length === 0) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="7" style="text-align:center; color:#999;">لا توجد نتائج</td>`;
+        tableBody.appendChild(row);
+      } else {
+        filteredData.forEach((item, index) => {
+          totalSAR += parseFloat(item.sar || 0);
+          
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.name || ''}</td>
+            <td>${formatNumber(item.sar)}</td>
+            <td>${formatDate(item.date)}</td>
+            <td class="notes-cell">${item.notes || ''}</td>
+            <td><button class="edit-btn" onclick="editRow(${data.findIndex(d => d.name === item.name)})">✏️</button></td>
+            <td><button class="delete-btn" onclick="deleteRow(${data.findIndex(d => d.name === item.name)})">🗑️</button></td>
+          `;
+          tableBody.appendChild(row);
+        });
+      }
+
+      document.getElementById("total-count").textContent = `عدد الطلبات: ${filteredData.length}`;
+      document.getElementById("total-sar").textContent = `الإجمالي (ريال): ${formatNumber(totalSAR)}`;
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      renderTable();
+    }
+
+    function deleteRow(index) {
+      showConfirm(() => {
+        data.splice(index, 1);
+        localStorage.setItem("transfers", JSON.stringify(data));
+        renderTable();
+        showSuccess("تم الحذف بنجاح");
+      });
+    }
+
+    function editRow(index) {
+      const item = data[index];
+      const newName = prompt("وصف الطلب:", item.name);
+      if (newName === null) return;
+      
+      const newSar = prompt("سعر التوصيل (ريال):", item.sar);
+      if (newSar === null) return;
+      
+      const newDate = prompt("تاريخ الإرسال:", item.date);
+      if (newDate === null) return;
+      
+      const newNotes = prompt("ملاحظات:", item.notes);
+      if (newNotes === null) return;
+      
+      data[index] = {
+        name: newName,
+        sar: newSar,
+        date: newDate,
+        notes: newNotes
+      };
+      
+      localStorage.setItem("transfers", JSON.stringify(data));
+      renderTable();
+      showSuccess("تم التعديل بنجاح");
+    }
+
+    function confirmDeleteAll() {
+      showConfirm(() => {
+        data = [];
+        localStorage.setItem("transfers", JSON.stringify([]));
+        renderTable();
+        showSuccess("تم حذف جميع البيانات");
+      });
+    }
+
+    function showConfirm(callback) {
+      const overlay = document.createElement("div");
+      overlay.className = "confirm-overlay";
+      overlay.innerHTML = `
+        <div class="confirm-box">
+          <p>هل أنت متأكد من الحذف؟</p>
+          <button class="yes" onclick="this.parentElement.parentElement.remove(); ${callback.toString().replace('function ()', '')}">نعم</button>
+          <button class="no" onclick="this.parentElement.parentElement.remove()">إلغاء</button>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    function showSuccess(message) {
+      const container = document.getElementById("success-container");
+      const msg = document.createElement("div");
+      msg.className = "success-message";
+      msg.textContent = message;
+      container.appendChild(msg);
+      setTimeout(() => msg.remove(), 3000);
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+      document.getElementById('clearSearch').style.display = this.value ? 'block' : 'none';
+      filterTable();
+    });
   </script>
 </body>
 </html>
