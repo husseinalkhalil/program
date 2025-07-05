@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>عرض الطلبات</title>
+  <title>عرض الطلبات - البرنامج الثاني</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
   <style>
@@ -610,10 +610,10 @@
   </div>
 
   <script>
-    // البادئة المخصصة للبرنامج الثاني
+    // بادئة خاصة بالبرنامج الثاني
     const APP_PREFIX = "delivery_app_2_";
     
-    let orders = JSON.parse(localStorage.getItem(APP_PREFIX + "orders") || "[]");
+    let orders = JSON.parse(localStorage.getItem(APP_PREFIX + "orders") || []);
     const tableBody = document.getElementById("ordersTable");
     const clientSelect = document.getElementById("clientSelect");
     const totalRequestsElem = document.getElementById("totalRequests");
