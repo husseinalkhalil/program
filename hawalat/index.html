@@ -6,7 +6,6 @@
   <title>إدخال طلب جديد</title>
   <link rel="apple-touch-icon" href="icons/logo.png">
   <style>
-    /* جميع الأنماط الأصلية تبقى كما هي */
     body {
       background-color: #f1e7ff;
       font-family: 'Tahoma', sans-serif;
@@ -16,9 +15,9 @@
 
     .container {
       max-width: 900px;
-      margin: 50px auto;
+      margin: 20px auto;
       background-color: #e6d4fb;
-      padding: 40px;
+      padding: 20px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       position: relative;
@@ -27,13 +26,13 @@
     h2 {
       text-align: center;
       color: #4b0082;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     label {
@@ -71,27 +70,33 @@
     }
 
     textarea {
-      grid-column: span 2;
       height: 80px;
       text-align: center;
     }
 
     .button-container {
-      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .buttons-row {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
+      gap: 10px;
     }
 
     button {
       background-color: #8000c9;
       color: white;
       border: none;
-      padding: 10px 25px;
+      padding: 10px;
       font-size: 16px;
       border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      flex: 1;
     }
 
     button:hover {
@@ -157,14 +162,6 @@
       padding-left: 40px;
     }
 
-    /* التعديلات الجديدة فقط */
-    .button-container div {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-    }
-
     button.view-btn {
       background-color: #a370d3 !important;
       opacity: 0.9;
@@ -183,20 +180,47 @@
     }
 
     @media (min-width: 768px) {
-      .button-container div {
+      .container {
+        margin: 50px auto;
+        padding: 40px;
+      }
+      
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      
+      textarea {
+        grid-column: span 2;
+      }
+      
+      .button-container {
+        grid-column: span 2;
         flex-direction: row;
+        justify-content: space-between;
+      }
+      
+      .buttons-row {
+        flex-direction: row;
+        gap: 10px;
+      }
+      
+      button {
+        padding: 10px 25px;
+        flex: none;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- 🔵 التعديل على زر الرئيسية -->
-  <div style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+  <!-- زر الرئيسية -->
+  <div style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
     <button 
       class="button" 
       onclick="window.location.href='../index.html'"
-      style="background: #8000c9; padding: 12px 25px; font-size: 16px;">
+      style="background: #8000c9; padding: 10px 15px; font-size: 14px;">
        ➔ الرئيسية
     </button>
   </div>
@@ -217,6 +241,7 @@
           <input type="number" id="amount-sar" name="amount-sar" />
           <img src="icons/real.png" alt="ريال سعودي">
         </div>
+      </div>
 
       <div>
         <label for="date">تاريخ الإرسال:</label>
@@ -228,9 +253,9 @@
         <textarea id="notes" name="notes"></textarea>
       </div>
 
-      <!-- الأزرار المعدلة -->
+      <!-- الأزرار -->
       <div class="button-container">
-        <div>
+        <div class="buttons-row">
           <button type="button" class="view-btn" onclick="window.location.href='view.html'">عرض البيانات</button>
           <button type="button" class="refresh-btn" onclick="window.location.reload()">تحديث الصفحة</button>
         </div>
@@ -240,7 +265,6 @@
   </div>
 
   <script>
-    // الكود البرمجي يبقى كما هو دون أي تغيير
     const form = document.getElementById("transferForm");
     const messageBox = document.getElementById("formMessage");
     const inputs = Array.from(form.querySelectorAll("input, textarea"));
