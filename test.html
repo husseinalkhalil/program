@@ -663,22 +663,23 @@
     
 @media (max-width: 480px) {
     .article-share-menu {
-        bottom: auto;
-        top: 60px;
-        left: 0;
-        right: 0;
-        margin: auto;
-        transform: none;
-        padding: 15px;
-        border-radius: 16px;
-        animation: fadeIn 0.4s ease-in-out;
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90% !important;
+        max-width: 320px;
+        padding: 18px;
+        border-radius: 18px;
+        z-index: 9999;
+        animation: fadeIn 0.3s ease-in-out;
     }
 
     .share-platforms {
         display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-around;
-        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
         margin-bottom: 15px;
     }
 
