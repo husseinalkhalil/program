@@ -323,17 +323,18 @@
         
         .article-share-menu {
             position: absolute;
-            bottom: 100%;
-            right: 0;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%);
             background: white;
             padding: 25px;
             border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             display: none;
             width: 280px;
-            z-index: 10;
+            z-index: 1000;
             border: 1px solid var(--border-color);
-            animation: fadeIn 0.3s ease-out forwards;
+            animation: slideIn 0.3s ease-out forwards;
         }
         
         .share-title {
@@ -346,15 +347,15 @@
         
         .share-platforms {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
             margin-bottom: 20px;
         }
         
         .share-platform {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -362,7 +363,7 @@
             transition: all 0.3s;
             background-color: white !important;
             border: 1px solid #ddd;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
         
         .share-platform:hover {
@@ -511,8 +512,8 @@
             }
             
             .share-platform {
-                width: 42px;
-                height: 42px;
+                width: 46px;
+                height: 46px;
             }
             
             .share-platform img {
@@ -566,13 +567,10 @@
         /* تم تحسين لوحة المشاركة على الجوال بشكل كبير */
         @media (max-width: 480px) {
             .article-share-menu {
-                width: 92vw; /* استخدمنا عرض نسبي للشاشة */
-                max-width: 300px; /* أقصى عرض للحفاظ على التناسق */
+                width: 92vw;
+                max-width: 300px;
                 padding: 18px 15px;
-                right: 50%;
-                transform: translateX(50%);
-                bottom: 120%;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                bottom: calc(100% + 12px);
             }
             
             .share-title {
@@ -581,29 +579,29 @@
             }
             
             .share-platforms {
-                flex-wrap: nowrap; /* أيقونات في صف واحد */
+                flex-wrap: nowrap;
                 justify-content: space-around;
                 gap: 12px;
                 margin-bottom: 15px;
                 overflow-x: auto;
                 padding-bottom: 5px;
-                scrollbar-width: none; /* إخفاء شريط التمرير في المتصفحات الحديثة */
+                scrollbar-width: none;
             }
             
             .share-platforms::-webkit-scrollbar {
-                display: none; /* إخفاء شريط التمرير في متصفحات webkit */
+                display: none;
             }
             
             .share-platform {
-                width: 46px;
-                height: 46px;
+                width: 44px;
+                height: 44px;
                 flex-shrink: 0;
                 box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             }
             
             .share-platform img {
-                width: 24px;
-                height: 24px;
+                width: 22px;
+                height: 22px;
             }
             
             .copy-link-btn {
@@ -629,8 +627,8 @@
             }
             
             .share-platform img {
-                width: 22px;
-                height: 22px;
+                width: 20px;
+                height: 20px;
             }
             
             .copy-link-btn {
@@ -650,8 +648,8 @@
             }
             
             .share-platform img {
-                width: 20px;
-                height: 20px;
+                width: 18px;
+                height: 18px;
             }
             
             .share-title {
@@ -670,8 +668,13 @@
         }
         
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translate(-50%, 20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translate(-50%, 0); }
+            to { opacity: 0; transform: translate(-50%, 20px); }
         }
         
         .article-card {
@@ -680,6 +683,10 @@
         
         .article-share-menu {
             animation: slideIn 0.3s ease-out forwards;
+        }
+        
+        .share-menu-closing {
+            animation: fadeOut 0.2s ease-out forwards;
         }
         
         /* طباعة */
@@ -925,7 +932,17 @@
     <script>
         function toggleShareMenu() {
             const shareMenu = document.getElementById('shareMenu');
-            shareMenu.style.display = shareMenu.style.display === 'block' ? 'none' : 'block';
+            const isOpen = shareMenu.style.display === 'block';
+            
+            if (isOpen) {
+                shareMenu.classList.add('share-menu-closing');
+                setTimeout(() => {
+                    shareMenu.style.display = 'none';
+                    shareMenu.classList.remove('share-menu-closing');
+                }, 200);
+            } else {
+                shareMenu.style.display = 'block';
+            }
             
             // إغلاق القائمة عند النقر خارجها
             if (shareMenu.style.display === 'block') {
@@ -942,8 +959,7 @@
             const shareButton = document.querySelector('.share-button-container button');
             
             if (!shareMenu.contains(e.target) && e.target !== shareButton) {
-                shareMenu.style.display = 'none';
-                document.removeEventListener('click', closeShareMenuOutside);
+                toggleShareMenu();
             }
         }
         
@@ -951,7 +967,7 @@
             const url = window.location.href;
             navigator.clipboard.writeText(url).then(() => {
                 alert('تم نسخ رابط المقالة بنجاح');
-                document.getElementById('shareMenu').style.display = 'none';
+                toggleShareMenu();
             }).catch(err => {
                 console.error('Failed to copy: ', err);
             });
@@ -978,14 +994,14 @@
             }
             
             window.open(shareUrl, '_blank', 'width=600,height=400');
+            toggleShareMenu();
         }
         
         // إغلاق قائمة المشاركة عند التمرير
         window.addEventListener('scroll', () => {
             const shareMenu = document.getElementById('shareMenu');
             if (shareMenu.style.display === 'block') {
-                shareMenu.style.display = 'none';
-                document.removeEventListener('click', closeShareMenuOutside);
+                toggleShareMenu();
             }
         });
     </script>
