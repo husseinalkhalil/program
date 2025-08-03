@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وهم الحقيقة المطلقة | حسين الخليل</title>
+    <title>كيف تُشيّطن أفكارك؟ | حسين الخليل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #3F51B5;
-            --secondary-color: #C5CAE9;
-            --accent-color: #FF4081;
+            --primary-color: #B71C1C;
+            --secondary-color: #FFCDD2;
+            --accent-color: #FF8A65;
             --text-color: #333333;
             --light-bg: #F5F5F5;
             --light-beige: #F8F3E6;
             --article-beige: #F5EFE1;
-            --light-purple: #E8EAF6;
+            --light-red: #FFEBEE;
             --border-color: #E0E0E0;
-            --header-color: #303F9F;
+            --header-color: #C62828;
             --mobile-header-height: 70px;
             --mind-color: #1565C0;
             --tradition-color: #7B1FA2;
             --reason-color: #2196F3;
-            --truth-color: #4CAF50;
-            --illusion-color: #FF5722;
+            --misconception-color: #B71C1C;
+            --dark-color: #7B1C1C;
         }
         
         * {
@@ -40,7 +40,7 @@
             color: var(--text-color);
             background-color: var(--light-beige);
             min-height: 100vh;
-            background: linear-gradient(135deg, #f8f3e6 0%, #e8eaf6 100%);
+            background: linear-gradient(135deg, #f8f3e6 0%, #ffebee 100%);
             padding-top: var(--mobile-header-height);
         }
         
@@ -110,7 +110,7 @@
             right: -100%;
             width: 100%;
             height: calc(100vh - var(--mobile-header-height));
-            background: rgba(48, 63, 159, 0.98);
+            background: rgba(198, 40, 40, 0.98);
             z-index: 999;
             transition: right 0.4s ease;
             overflow-y: auto;
@@ -150,7 +150,7 @@
         }
         
         .btn:hover {
-            background-color: #3949AB;
+            background-color: #A71A1A;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
@@ -191,7 +191,7 @@
             right: 0;
             width: 100%;
             height: 8px;
-            background: linear-gradient(to right, var(--illusion-color), var(--truth-color));
+            background: linear-gradient(to right, var(--dark-color), var(--accent-color));
         }
         
         .article-header {
@@ -210,12 +210,12 @@
             margin: 0 auto;
             width: 120px;
             height: 5px;
-            background: linear-gradient(to right, var(--illusion-color), var(--truth-color));
+            background: linear-gradient(to right, var(--dark-color), var(--accent-color));
             border-radius: 3px;
         }
         
         h1 {
-            color: var(--illusion-color);
+            color: var(--dark-color);
             font-size: 38px;
             margin-bottom: 20px;
             font-weight: 700;
@@ -234,7 +234,7 @@
         }
         
         .date-icon {
-            color: var(--illusion-color);
+            color: var(--dark-color);
         }
         
         .article-content {
@@ -250,7 +250,7 @@
         }
         
         .verse {
-            color: var(--truth-color);
+            color: var(--dark-color);
             font-weight: bold;
             font-size: 26px;
             display: block;
@@ -258,9 +258,9 @@
             text-align: center;
             line-height: 1.7;
             padding: 20px;
-            background-color: var(--light-purple);
+            background-color: var(--light-red);
             border-radius: 12px;
-            border-right: 5px solid var(--truth-color);
+            border-right: 5px solid var(--dark-color);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         
@@ -323,7 +323,7 @@
         }
         
         .conclusion {
-            background-color: var(--light-purple);
+            background-color: var(--light-red);
             padding: 30px;
             border-radius: 15px;
             margin-top: 40px;
@@ -341,7 +341,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(to right, var(--illusion-color), var(--truth-color));
+            background: linear-gradient(to right, var(--dark-color), var(--accent-color));
             border-radius: 3px;
         }
         
@@ -443,7 +443,7 @@
             justify-content: center;
             gap: 10px;
             padding: 12px 18px;
-            background-color: var(--light-purple);
+            background-color: var(--light-red);
             color: var(--primary-color);
             border-radius: 30px;
             font-weight: 500;
@@ -525,14 +525,14 @@
             }
         }
         
-        .truth-section {
+        .demonize-section {
             text-align: center;
             margin: 40px 0;
         }
         
-        .truth-icon {
+        .demonize-icon {
             font-size: 80px;
-            color: var(--illusion-color);
+            color: var(--dark-color);
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
@@ -543,15 +543,15 @@
             100% { transform: scale(1); }
         }
         
-        .examples-container {
-            background: linear-gradient(135deg, rgba(255, 87, 34, 0.1) 0%, rgba(255, 138, 101, 0.1) 100%);
+        .steps-container {
+            background: linear-gradient(135deg, rgba(123, 28, 28, 0.1) 0%, rgba(183, 28, 28, 0.1) 100%);
             padding: 35px;
             border-radius: 20px;
             margin: 40px 0;
-            border-left: 8px solid var(--illusion-color);
+            border-left: 8px solid var(--dark-color);
         }
         
-        .example-item {
+        .step-item {
             margin-bottom: 25px;
             padding: 15px;
             background: rgba(255, 255, 255, 0.8);
@@ -559,19 +559,26 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
         
-        .example-text {
+        .step-text {
             font-size: 24px;
             line-height: 1.7;
             text-align: center;
             margin-bottom: 10px;
-            color: var(--illusion-color);
+            color: var(--dark-color);
         }
         
-        .example-reference {
-            text-align: left;
-            font-size: 18px;
-            color: #666;
-            font-style: italic;
+        .step-number {
+            background-color: var(--dark-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+            font-size: 22px;
         }
         
         .contrast-section {
@@ -592,12 +599,12 @@
             overflow: hidden;
         }
         
-        .contrast-box.relative {
-            border-top: 5px solid var(--truth-color);
+        .contrast-box.truth {
+            border-top: 5px solid #4CAF50;
         }
         
-        .contrast-box.absolute {
-            border-top: 5px solid var(--illusion-color);
+        .contrast-box.demonize {
+            border-top: 5px solid var(--dark-color);
         }
         
         .contrast-title {
@@ -612,16 +619,16 @@
             font-size: 30px;
         }
         
-        .contrast-box.relative .contrast-title {
-            color: var(--truth-color);
+        .contrast-box.truth .contrast-title {
+            color: #4CAF50;
         }
         
-        .contrast-box.absolute .contrast-title {
-            color: var(--illusion-color);
+        .contrast-box.demonize .contrast-title {
+            color: var(--dark-color);
         }
         
         .key-point {
-            background: rgba(255, 64, 129, 0.1);
+            background: rgba(255, 138, 101, 0.1);
             border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
@@ -661,27 +668,6 @@
             line-height: 1;
         }
         
-        .question-section {
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(66, 165, 245, 0.1) 100%);
-            border-radius: 20px;
-            padding: 35px;
-            margin: 40px 0;
-            border-right: 8px solid var(--reason-color);
-        }
-        
-        .question-title {
-            color: var(--reason-color);
-            font-size: 26px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .question-icon {
-            font-size: 32px;
-        }
-        
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
@@ -693,7 +679,7 @@
         }
         
         .comparison-table th {
-            background-color: var(--primary-color);
+            background-color: var(--dark-color);
             color: white;
             padding: 20px;
             font-size: 22px;
@@ -710,43 +696,52 @@
             border-bottom: none;
         }
         
-        .comparison-table .relative-cell {
+        .comparison-table .truth-cell {
             background-color: rgba(76, 175, 80, 0.1);
             text-align: center;
         }
         
-        .comparison-table .absolute-cell {
-            background-color: rgba(255, 87, 34, 0.1);
+        .comparison-table .demonize-cell {
+            background-color: rgba(123, 28, 28, 0.1);
             text-align: center;
         }
         
-        .math-illustration {
+        .demonize-animation {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
             margin: 40px 0;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            height: 200px;
         }
         
-        .equation {
-            font-size: 32px;
-            margin: 15px 0;
-            padding: 10px 25px;
-            background: var(--light-purple);
-            border-radius: 10px;
-            font-family: monospace;
+        .devil {
+            position: absolute;
+            font-size: 100px;
+            color: var(--dark-color);
+            animation: devil-move 5s infinite alternate;
         }
         
-        .equation-label {
-            font-size: 20px;
+        .thoughts {
+            position: absolute;
+            font-size: 24px;
             color: var(--primary-color);
-            margin-top: 10px;
-            font-weight: 500;
+            font-weight: bold;
+            animation: thoughts-fade 5s infinite;
         }
+        
+        @keyframes devil-move {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(100px); }
+        }
+        
+        @keyframes thoughts-fade {
+            0%, 100% { opacity: 0; transform: translateY(20px); }
+            50% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .thought-1 { top: 20px; left: 50%; animation-delay: 0s; }
+        .thought-2 { top: 60px; left: 40%; animation-delay: 1s; }
+        .thought-3 { top: 100px; left: 60%; animation-delay: 2s; }
         
         @media (max-width: 992px) {
             .header-container {
@@ -831,21 +826,24 @@
                 font-size: 20px;
             }
             
-            .truth-icon {
+            .demonize-icon {
                 font-size: 60px;
             }
             
             .contrast-box {
                 min-width: 100%;
-            margin-bottom: 20px;
-            padding: 25px;
-            font-size: 20px;
-            flex: 1 0 100%;
-            max-width: 100%;
-        }
+            }
             
-            .contrast-section {
-                flex-direction: column;
+            .demonize-animation {
+                height: 150px;
+            }
+            
+            .devil {
+                font-size: 70px;
+            }
+            
+            .thoughts {
+                font-size: 18px;
             }
         }
         
@@ -936,9 +934,16 @@
                 border-radius: 25px;
             }
             
-            .equation {
-                font-size: 26px;
-                padding: 8px 15px;
+            .demonize-animation {
+                height: 120px;
+            }
+            
+            .devil {
+                font-size: 50px;
+            }
+            
+            .thoughts {
+                font-size: 16px;
             }
         }
         
@@ -972,11 +977,6 @@
             .copy-link-btn {
                 font-size: 15px;
                 padding: 10px;
-            }
-            
-            .equation {
-                font-size: 22px;
-                padding: 6px 12px;
             }
         }
     </style>
@@ -1018,109 +1018,110 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ وهم الحقيقة المطلقة</h1>
+                <h1>❖ كيف تُشيّطن أفكارك؟</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
             </div>
             
             <div class="article-content">
-                <div class="truth-section">
-                    <div class="truth-icon">❓</div>
-                    <p>لا توجد حقيقة_مطلقة يا صديقي. الحقيقة المطلقة الوحيدة التي أؤمن بها هو الله. جميع الأفكار والتدبرات هي حقائق نسبية، ترتفع نسبتها وتنخفض من شخص لآخر.</p>
+                <div class="demonize-section">
+                    <div class="demonize-icon">😈</div>
+                    <p>كيف تتحول الأفكار البسيطة إلى أدوات تشيطنة وتضليل؟ هذه المقالة تكشف الأساليب التي يستخدمها البعض لتحويل النقد البناء إلى مؤامرات خيالية، وتوضح كيفية حماية عقلك من هذه الأساليب.</p>
                 </div>
                 
                 <div class="key-point">
                     <div class="key-icon">⚠️</div>
-                    <div>فما أراه أنا حقيقة قد يراه غيري خرافة. وما يراه غيري حقيقة قد أراه أنا خرافة. لا تحتكر الحقيقة لنفسك وتصادر أفكار الآخرين، فكلنا في رحلة بحث والعلم لا يزال مستمرًا.</div>
+                    <div>دائمًا مثّل دور الضحية وأن العالم بأكمله يتآمر عليك لأنك احتكرت وصفة بول البعير التي تشفي الأمراض لنفسك ولم تعطهم اياها ولم تعطهم طريقة صناعة الأقمار الصناعية والتحكم بها من الأرض.</div>
+                </div>
+                
+                <div class="demonize-animation">
+                    <div class="devil">😈</div>
+                    <div class="thoughts thought-1">ماسونية!</div>
+                    <div class="thoughts thought-2">عملاء!</div>
+                    <div class="thoughts thought-3">دولار!</div>
+                </div>
+                
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-text">اتهم كل من يحاول توعية الناس بتشغيل العقل بأنهم عملاء للماسونية ومأجورين وموظفين من قِبَل أعداء الإسلام</div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-text">أنشئ مدونات أو مواقع بأسماء وهمية أو لأشخاص ذوي مكانة علمية لكتابة مقالات تحذر من "المؤامرة"</div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-text">اكتب مقالات عن فوائد بول البعير وذيّلها بأسماء علماء من جامعات مرموقة كجامعة اوكسفورد أو هارفرد</div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-text">قم بتصوير تلك المقالات (التي كتبتها أنت) وأرفقها في تقاريرك كـ"أدلة"</div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-text">اطلب من أتباعك التأكد من هذه المصادر بنفسهم وأرفق رابط المدونة التي أنشأتها أنت</div>
+                    </div>
                 </div>
                 
                 <div class="contrast-section">
-                    <div class="contrast-box relative">
+                    <div class="contrast-box truth">
                         <div class="contrast-title">
-                            <i class="fas fa-exchange-alt contrast-icon"></i>
-                            الحقيقة النسبية
+                            <i class="fas fa-lightbulb contrast-icon"></i>
+                            التفكير النقدي
                         </div>
-                        <p>الحقيقة النسبية هي ما ندركه من خلال تجاربنا وثقافتنا وبيئتنا. فهي تتغير وتتطور مع مرور الوقت ومع تطور المعرفة البشرية. ما نعتبره اليوم حقيقة قد يصبح غدًا خطأ أو يحتاج إلى تعديل.</p>
+                        <p>التفكير النقدي يعتمد على البحث والتحليل الموضوعي، والاستماع لجميع الآراء، وفحص الأدلة قبل الوصول إلى الاستنتاجات.</p>
                     </div>
                     
-                    <div class="contrast-box absolute">
+                    <div class="contrast-box demonize">
                         <div class="contrast-title">
-                            <i class="fas fa-ban contrast-icon"></i>
-                            وهم الحقيقة المطلقة
+                            <i class="fas fa-skull contrast-icon"></i>
+                            التشيطنة
                         </div>
-                        <p>هو اعتقاد البعض أنهم يمتلكون الحقيقة الكاملة والنهائية، وأن آرائهم هي المقياس الوحيد للصواب والخطأ. هذا الوهم يؤدي إلى احتكار الحقيقة ومصادرة آراء الآخرين وتكفيرهم أو اتهامهم بالجهل.</p>
+                        <p>التشيطنة تعتمد على التضليل، اختراع المؤامرات، استخدام الأدلة المزيفة، وتحويل الخلاف الفكري إلى حرب وجودية.</p>
                     </div>
                 </div>
                 
                 <div class="quote">
-                    "فالحقيقة هو الله، لكن طريقة الوصول إلى هذا الإله تختلف من شخص لآخر."
-                </div>
-                
-                <div class="math-illustration">
-                    <div class="equation">5 + 5 = 10</div>
-                    <div class="equation-label">إجابة الطالب الأول</div>
-                    
-                    <div class="equation">4 + 6 = 10</div>
-                    <div class="equation-label">إجابة الطالب الثاني</div>
-                    
-                    <div class="equation">2 + 8 = 10</div>
-                    <div class="equation-label">إجابة الطالب الثالث</div>
-                    
-                    <p class="equation-explanation" style="text-align: center; margin-top: 20px;">
-                        كل هذه الإجابات صحيحة لكن طريقة التفكير تختلف من طالب لآخر.
-                    </p>
-                </div>
-                
-                <div class="key-point">
-                    <div class="key-icon">🔑</div>
-                    <div>لذلك لا تحتكر لنفسك الحقيقة ولا تجعل طريقتك في الوصول إلى الله على أنها هي الطريقة الصحيحة والوحيدة، هي حقيقة بالنسبة لك، لذلك ابقَ عليها ودع غيرك يصل إلى الله بطريقته ولا تعتدي عليه، فمن صُوَر الإعتداء أن يصادر الإنسان حق غيره في التفكير.</div>
-                </div>
-                
-                <div class="examples-container">
-                    <div class="example-item">
-                        <div class="example-text">فمن الجهل والإجحاف أن يصادر الانسان أفكار غيره ويدّعي أنها باطلة لمجرد أنها لم توافق أفكاره ولم تأتِ على هواه أو تُخالف موروثه</div>
-                    </div>
-                    <div class="example-item">
-                        <div class="example-text">فلا تُصادر يا صديقي العزيز أفكار غيرك</div>
-                    </div>
-                </div>
-                
-                <div class="verse">
-                    وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ
+                    "ثم قم بتصوير تلك المقالات (التي قمت أنت بإنشائها) وأرفقها في تقريرك وأنت تحذر أتباعك ممن تسميهم بالقرآنيين أو التنويريين"
                 </div>
                 
                 <table class="comparison-table">
                     <tr>
-                        <th colspan="2">الفرق بين الحقيقة النسبية ووهم الحقيقة المطلقة</th>
+                        <th colspan="2">مقارنة بين التفكير النقدي والتشيطنة</th>
                     </tr>
                     <tr>
-                        <td class="relative-cell">الحقيقة النسبية</td>
-                        <td class="absolute-cell">وهم الحقيقة المطلقة</td>
+                        <td class="truth-cell">التفكير النقدي</td>
+                        <td class="demonize-cell">التشيطنة</td>
                     </tr>
                     <tr>
-                        <td>تعترف بوجود آراء وأفكار مختلفة</td>
-                        <td>تعتبر الرأي الواحد هو الحقيقة الوحيدة</td>
+                        <td>يبحث عن الحقيقة</td>
+                        <td>يصنع المؤامرات</td>
                     </tr>
                     <tr>
-                        <td>تتقبل النقد وتتطور مع الزمن</td>
-                        <td>تتجمد في مكانها ولا تتقبل التغيير</td>
+                        <td>يعتمد على الأدلة الموثوقة</td>
+                        <td>يستخدم أدلة مزيفة ومقالات مفبركة</td>
                     </tr>
                     <tr>
-                        <td>تحترم آراء الآخرين</td>
-                        <td>تصادر آراء الآخرين وتكفرهم</td>
+                        <td>يحترم الرأي الآخر</td>
+                        <td>يُشيطن المعارضين</td>
                     </tr>
                     <tr>
-                        <td>تسعى للفهم والتعلم المستمر</td>
-                        <td>تعتقد أنها تمتلك كل المعرفة</td>
+                        <td>يشجع على الحوار</td>
+                        <td>يغلق باب النقاش</td>
                     </tr>
                     <tr>
-                        <td>تؤمن بأن الله هو الحقيقة المطلقة الوحيدة</td>
-                        <td>تخلط بين آراء البشر والحقيقة الإلهية</td>
+                        <td>يبني على المعرفة</td>
+                        <td>يبني على الخوف والجهل</td>
                     </tr>
                 </table>
                 
                 <div class="conclusion">
                     <h3>الخلاصة</h3>
-                    <p>تذكّر قوله تعالى (وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ). الاختلاف سنة إلهية في الكون، وواجبنا احترام هذه الاختلافات وعدم احتكار الحقيقة لأنفسنا. الحقيقة المطلقة الوحيدة هي الله، وأما طرق الوصول إليه فهي متنوعة ومتعددة كما تعددت طرق الطلاب في حل المسألة الرياضية.</p>
+                    <p>التشيطنة هي أسلوب خطير لتضليل الناس وتحويل الأفكار البسيطة إلى مؤامرات خيالية. الحل هو تطوير التفكير النقدي، فحص المصادر، والتشكيك في أي ادعاءات غير مدعومة بأدلة موثوقة. كن يقظًا ولا تسمح لأحد أن يُشيطن عقلك أو يحولك إلى أداة لنشر الأكاذيب والمؤامرات الوهمية.</p>
                 </div>
             </div>
             
