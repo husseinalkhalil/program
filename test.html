@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لا عنصرية في الإسلام | العقل والنقل</title>
+    <title>نعمة العقل | العقل والنقل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <style>
         :root {
             --primary-color: #7E57C2;
@@ -24,7 +23,7 @@
             --mobile-header-height: 70px;
             --mind-color: #1565C0;
             --tradition-color: #7B1FA2;
-            --equality-color: #4CAF50;
+            --reason-color: #2196F3;
         }
         
         * {
@@ -529,18 +528,49 @@
         }
         
         /* إضافات خاصة بهذه المقالة */
-        .equality-section {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border: 3px solid var(--equality-color);
+        .mind-section {
             text-align: center;
+            margin: 40px 0;
         }
         
-        .equality-title {
-            font-size: 32px;
-            color: var(--equality-color);
+        .mind-icon {
+            font-size: 80px;
+            color: var(--reason-color);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .quran-calls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .call-box {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(21, 101, 192, 0.1) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-top: 5px solid var(--reason-color);
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .call-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+        
+        .call-title {
+            font-size: 26px;
+            color: var(--reason-color);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -548,12 +578,23 @@
             gap: 15px;
         }
         
-        .equality-icon {
-            font-size: 36px;
-            color: var(--equality-color);
+        .call-icon {
+            font-size: 30px;
+            color: var(--reason-color);
         }
         
-        .hadith-container {
+        .call-count {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--reason-color);
+            margin-top: 15px;
+            background: rgba(255,255,255,0.8);
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .warning-section {
             background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(229, 57, 53, 0.1) 100%);
             padding: 35px;
             border-radius: 20px;
@@ -561,7 +602,7 @@
             border-left: 8px solid #F44336;
         }
         
-        .hadith-title {
+        .warning-title {
             font-size: 28px;
             color: #F44336;
             margin-bottom: 20px;
@@ -570,27 +611,19 @@
             gap: 15px;
         }
         
-        .hadith-icon {
+        .warning-icon {
             font-size: 32px;
             color: #F44336;
         }
         
-        .hadith-reference {
-            font-size: 20px;
-            color: #666;
-            margin-top: 15px;
-            text-align: center;
-            font-style: italic;
-        }
-        
-        .error-section {
+        .contrast-section {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
             margin: 40px 0;
         }
         
-        .error-box {
+        .contrast-box {
             flex: 1;
             min-width: 300px;
             padding: 30px;
@@ -599,58 +632,44 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             position: relative;
             overflow: hidden;
-            border-top: 5px solid var(--primary-color);
         }
         
-        .error-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            height: 100%;
-            width: 8px;
-            background: var(--primary-color);
+        .contrast-box.reason {
+            border-top: 5px solid var(--reason-color);
         }
         
-        .error-title {
+        .contrast-box.tradition {
+            border-top: 5px solid var(--tradition-color);
+        }
+        
+        .contrast-title {
             font-size: 26px;
-            color: var(--primary-color);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
         }
         
-        .error-icon {
+        .contrast-icon {
             font-size: 30px;
-            color: var(--primary-color);
         }
         
-        .quran-proof {
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(21, 101, 192, 0.1) 100%);
+        .contrast-box.reason .contrast-title {
+            color: var(--reason-color);
+        }
+        
+        .contrast-box.tradition .contrast-title {
+            color: var(--tradition-color);
+        }
+        
+        .final-verse {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
             padding: 35px;
             border-radius: 20px;
             margin: 40px 0;
-            border-left: 8px solid var(--mind-color);
             text-align: center;
-        }
-        
-        .prophet-character {
-            background: linear-gradient(135deg, rgba(126, 87, 194, 0.1) 0%, rgba(149, 117, 205, 0.1) 100%);
-            padding: 35px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border: 2px dashed var(--primary-color);
-        }
-        
-        .call-to-action {
-            background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            text-align: center;
-            border: 3px solid var(--accent-color);
-            font-size: 24px;
+            border: 2px dashed #4CAF50;
+            font-size: 26px;
             font-weight: bold;
         }
         
@@ -681,8 +700,8 @@
                 padding: 15px;
             }
             
-            .equality-title {
-                font-size: 28px;
+            .call-title {
+                font-size: 24px;
             }
         }
         
@@ -747,8 +766,12 @@
                 height: 22px;
             }
             
-            .equality-section {
-                padding: 30px;
+            .mind-icon {
+                font-size: 60px;
+            }
+            
+            .quran-calls {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -849,11 +872,7 @@
                 border-radius: 25px;
             }
             
-            .equality-title {
-                font-size: 24px;
-            }
-            
-            .error-box {
+            .contrast-box {
                 min-width: 100%;
             }
         }
@@ -934,66 +953,83 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ لا عنصرية في الإسلام</h1>
+                <h1>❖ نعمة العقل</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
             </div>
             
             <div class="article-content">
-                <div class="equality-section">
-                    <div class="equality-title">
-                        <i class="fas fa-hands-helping equality-icon"></i>
-                        الإسلام دين المساواة
-                    </div>
-                    <p>الإسلام دين المحبة، دين التسامح والسلام، نهى عن العنصرية، وبيّن لنا أن فضيلة الإنسان تكون بالتقوى وليس باللون ولا بالمكانة الاجتماعية ولا بالمال ولا المنصب.</p>
-                    <p class="verse">ومن يقول عكس ذلك، فليأتينا بدليل قرآني، يدحض هذا الكلام.</p>
+                <div class="mind-section">
+                    <div class="mind-icon">🧠</div>
+                    <p>ميّز الله الإنسان عن غيره بالعقل والقدرة على التفكير والاختيار، فكان مع العقل الحرية، ودعا في أكثر من موضع إلى استخدام العقل.</p>
                 </div>
                 
-                <div class="hadith-container">
-                    <div class="hadith-title">
-                        <i class="fas fa-exclamation-triangle hadith-icon"></i>
-                        الافتراءات على الرسول
-                    </div>
-                    <p>رسولنا الكريم الذي قال عنه الله سبحانه وتعالى، بأنه صاحب الخلق العظيم وأنه رحمة للعالمين، لا يمكن أن يكون عنصري ويتعامل مع الناس حسب اللون والعِرق حتى لو بضرب الأمثلة والمزاح.</p>
-                    <p>ومن هذه الافتراءات على هذا الإنسان العظيم، الحديث المكذوب على لسانه:</p>
-                    <div class="verse">(عليكم بالسمع والطاعة وإن تأمّر عليكم عبد حبشي كأن رأسه زبيبة)</div>
-                    <div class="hadith-reference">أخرجه البخاري في الأحكام برقم (7142) وابن ماجه في الجهاد برقم (2860) وأحمد في مسنده برقم (3/114)</div>
-                </div>
-                
-                <div class="error-section">
-                    <div class="error-box">
-                        <div class="error-title">
-                            <i class="fas fa-times-circle error-icon"></i>
-                            الخطأ الأول: العنصرية
+                <div class="quran-calls">
+                    <div class="call-box">
+                        <div class="call-title">
+                            <i class="fas fa-lightbulb call-icon"></i>
+                            دعوة القرآن للتفكر
                         </div>
-                        <p>العنصرية في الكلام والانتقاص من أصحاب البشرة السوداء "عبد حبشي". وكأن أصحاب البشرة السوداء نَكِرة أو حرف ساقط أو أقل مكانة من غيرهم!</p>
-                        <div class="verse">مع أن الله يقول: ﴿إِنَّ أَكْرَمَكُمْ عِندَ ٱللَّهِ أَتْقَىٰكُمْ﴾</div>
+                        <div class="verse">(إِنَّ فِى ذَٰلِكَ لَأيَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ)</div>
+                        <div class="call-count">ذكرت 6 مرات في القرآن</div>
                     </div>
                     
-                    <div class="error-box">
-                        <div class="error-title">
-                            <i class="fas fa-times-circle error-icon"></i>
-                            الخطأ الثاني: الاستهزاء بخلق الله
+                    <div class="call-box">
+                        <div class="call-title">
+                            <i class="fas fa-brain call-icon"></i>
+                            دعوة القرآن للتعقل
                         </div>
-                        <p>الاستهزاء بخلق الله، عندما تستهزء بشخص بأن أنفه طويل أو فمه كبير أو رأسه كالزبيبة، فهذا استهزاء وسُخرية من خلق الله، لأن الإنسان لا يملك لنفسه شيء في هذه الأمور.</p>
+                        <div class="verse">(لَعَلَّهُمْ يَتَفَكَّرُونَ)</div>
+                        <div class="call-count">ذكرت 3 مرات في القرآن</div>
+                    </div>
+                    
+                    <div class="call-box">
+                        <div class="call-title">
+                            <i class="fas fa-cogs call-icon"></i>
+                            دعوة القرآن للعقل
+                        </div>
+                        <div class="verse">(يَعْقِلُونَ)</div>
+                        <div class="call-count">ذكرت 22 مرة في القرآن</div>
                     </div>
                 </div>
                 
-                <div class="quran-proof">
-                    <p>الله سبحانه وتعالى لا ينظر إلى ألواننا ولا أموالنا ولا عشيرتنا، بل ينظر إلى قلوبنا وأعمالنا.</p>
-                    <div class="verse">﴿وَمَآ أَمْوَٰلُكُمْ وَلَآ أَوْلَٰدُكُم بِٱلَّتِى تُقَرِّبُكُمْ عِندَنَا زُلْفَىٰٓ إِلَّا مَنْ ءَامَنَ وَعَمِلَ صَٰلِحًا فَأُو۟لَٰٓئِكَ لَهُمْ جَزَآءُ ٱلضِّعْفِ بِمَا عَمِلُوا۟ وَهُمْ فِى ٱلْغُرُفَٰتِ ءَامِنُونَ﴾</div>
+                <div class="warning-section">
+                    <div class="warning-title">
+                        <i class="fas fa-exclamation-triangle warning-icon"></i>
+                        تحذيرات القرآن
+                    </div>
+                    <p>ودعا إلى عدم تحييده: <span class="verse">(وَلَا تَقْفُ مَا لَيْسَ لَكَ بِهِۦ عِلْمٌ)</span></p>
+                    <p>وجعل العلم أساس التوحيد: <span class="verse">(فَٱعْلَمْ أَنَّهُۥ لَآ إِلَٰهَ إِلَّا ٱللَّهُ)</span></p>
+                    <p>وشنّع من لا يستخدم عقله: <span class="verse">(كَلَّا ۖ بَلْ ۜ رَانَ عَلَىٰ قُلُوبِهِم)</span></p>
+                    <p><span class="verse">(أَمْ عَلَىٰ قُلُوبٍ أَقْفَالُهَآ)</span></p>
+                    <p>وأكثر من ذلك، ذمهم ووصفهم بأنهم أضل من الأنعام: <span class="verse">(وَلَهُمْ ءَاذَانٌ لَّا يَسْمَعُونَ بِهَآ ۚ أُو۟لَٰٓئِكَ كَٱلْأَنْعَٰمِ بَلْ هُمْ أَضَلُّ)</span></p>
                 </div>
                 
-                <div class="prophet-character">
-                    <h3 class="section-title">خلق الرسول الكريم</h3>
-                    <p>قال تعالى: ﴿يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا يَسْخَرْ قَوْمٌ مِّن قَوْمٍ عَسَىٰٓ أَن يَكُونُوا۟ خَيْرًا مِّنْهُمْ وَلَا نِسَآءٌ مِّن نِّسَآءٍ عَسَىٰٓ أَن يَكُنَّ خَيْرًا مِّنْهُنَّ ۖ وَلَا تَلْمِزُوٓا۟ أَنفُسَكُمْ وَلَا تَنَابَزُوا۟ بِٱلْأَلْقَٰبِ ۖ بِئْسَ ٱلِٱسْمُ ٱلْفُسُوقُ بَعْدَ ٱلْإِيمَٰنِ ۚ وَمَن لَّمْ يَتُبْ فَأُو۟لَٰٓئِكَ هُمُ ٱلظَّٰلِمُونَ﴾</p>
-                    <p class="verse">فهل تعتقدون أن صاحب الخلق العظيم، يتكلم بهذا الكلام اللّا إنساني ويخالف ربه سبحانه وتعالى؟! تعالى الله عما تقولون.</p>
+                <div class="contrast-section">
+                    <div class="contrast-box reason">
+                        <div class="contrast-title">
+                            <i class="fas fa-book-open contrast-icon"></i>
+                            دعوة القرآن
+                        </div>
+                        <p>فالله أنزل كتابه لقوم يعقلون، وهو يخاطب أولي الألباب، فمن عمل بعقله يستطيع استنباط أحكامه وتدبر آياته، ومن عطّل عقله، فسيرى أن كتاب الله عبارة عن طلاسم وشيفرات وإعجاز يصعب فهمه، فيلجأ للشيخ كي يُفهمه إياه ويضرب بقوله تعالى <span class="verse">(وَلَقَدْ يَسَّرْنَا ٱلْقُرْءَانَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ)</span> عرض الحائط.</p>
+                    </div>
+                    
+                    <div class="contrast-box tradition">
+                        <div class="contrast-title">
+                            <i class="fas fa-ban contrast-icon"></i>
+                            موقف رجال الدين
+                        </div>
+                        <p>وبعد كل هذا يطل علينا أحد رجال الدين ليقول لنا: عقلك كالحمار، عندما تصل إلى الشيخ، اربطه وادخل لتتلقى النقل بلا عقل. والشيخ الآخر يقول لنا بكل جرأة: إن تقديم العقل على النقل هو طريقة أهل الضلال.</p>
+                    </div>
                 </div>
                 
-                <div class="call-to-action">
-                    <p>كفاكم تشويهاً لديننا الحنيف</p>
-                    <p>كفاكم إساءة لرسولنا الكريم</p>
-                    <p>أكثر من أساء لهذا الرسول هو التراث المعنعن، إساءات لم يفعلها حتى المشركين</p>
-                    <div class="verse" style="margin-top: 20px;">اللهم إنّا نبرأ إليك من كل من أساء لدينك ورسولك</div>
+                <div class="final-verse">
+                    <p>وتذكروا قوله تعالى: ﴿وَقالوا لَو كُنّا نَسمَعُ أَو نَعقِلُ ما كُنّا في أَصحابِ السَّعيرِ﴾</p>
+                    <p>صدق الله وكذب الجاهلون</p>
+                </div>
+                
+                <div class="conclusion">
+                    <h3>الخلاصة</h3>
+                    <p>نعمة العقل هي أعظم ما ميّز الله به الإنسان، وهي الوسيلة لفهم كتاب الله وتدبر آياته. من أعطّل عقله فقد تخلّى عن أعظم نعمة منّ الله بها عليه، ومن استخدم عقله في فهم القرآن فقد سلك طريق الهدى والرشاد.</p>
                 </div>
             </div>
             
