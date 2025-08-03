@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المقالات | لا توجد حقيقة مطلقة</title>
+    <title>المقالات | العقل والنقل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -22,7 +22,8 @@
             --border-color: #E0E0E0;
             --header-purple: #9575CD;
             --mobile-header-height: 70px;
-            --philosophy-color: #5D4037;
+            --mind-color: #1565C0;
+            --tradition-color: #7B1FA2;
         }
         
         * {
@@ -214,7 +215,7 @@
         }
         
         h1 {
-            color: var(--philosophy-color);
+            color: var(--mind-color);
             font-size: 38px;
             margin-bottom: 20px;
             font-weight: 700;
@@ -264,7 +265,7 @@
         }
         
         .section-title {
-            color: var(--philosophy-color);
+            color: var(--tradition-color);
             font-size: 30px;
             margin: 40px 0 20px;
             padding-right: 20px;
@@ -279,7 +280,7 @@
             bottom: -7px;
             width: 60px;
             height: 4px;
-            background: linear-gradient(to right, var(--philosophy-color), var(--accent-color));
+            background: linear-gradient(to right, var(--tradition-color), var(--accent-color));
             border-radius: 3px;
         }
         
@@ -297,7 +298,7 @@
         
         ul li::before {
             content: '•';
-            color: var(--philosophy-color);
+            color: var(--tradition-color);
             font-weight: bold;
             position: absolute;
             right: 0;
@@ -314,7 +315,7 @@
         
         ol li::before {
             content: counter(section) ".";
-            color: var(--philosophy-color);
+            color: var(--tradition-color);
             font-weight: bold;
             position: absolute;
             right: 0;
@@ -527,135 +528,96 @@
         }
         
         /* إضافات خاصة بهذه المقالة */
-        .absolute-truth {
-            text-align: center;
-            margin: 40px 0;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(94, 53, 177, 0.1) 0%, rgba(255, 235, 59, 0.1) 100%);
-            border-radius: 20px;
-            border: 2px solid var(--philosophy-color);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .absolute-truth h3 {
-            font-size: 32px;
-            color: var(--philosophy-color);
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .absolute-truth h3::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            right: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, var(--philosophy-color), var(--accent-color));
-            border-radius: 3px;
-        }
-        
-        .math-illustration {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .math-equation {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            min-width: 200px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .math-equation:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            border-color: var(--accent-color);
-        }
-        
-        .math-equation .equation {
-            font-size: 40px;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        .math-equation .description {
-            font-size: 20px;
-            color: #555;
-        }
-        
-        .key-insight {
-            background: linear-gradient(135deg, rgba(126, 87, 194, 0.1) 0%, rgba(209, 196, 233, 0.1) 100%);
-            border-left: 5px solid var(--primary-color);
-            padding: 25px;
-            margin: 30px 0;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .wisdom-block {
-            background: linear-gradient(135deg, rgba(139, 195, 74, 0.1) 0%, rgba(255, 235, 59, 0.1) 100%);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 40px 0;
-            text-align: center;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--philosophy-color);
-            border: 2px dashed var(--accent-color);
-        }
-        
-        .comparison-container {
+        .debate-container {
             display: flex;
             justify-content: space-between;
             margin: 40px 0;
             gap: 30px;
         }
         
-        .comparison-box {
+        .debate-box {
             flex: 1;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .debate-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .debate-box.mind {
+            background: linear-gradient(135deg, rgba(21, 101, 192, 0.1) 0%, rgba(33, 150, 243, 0.1) 100%);
+            border-top: 5px solid var(--mind-color);
+        }
+        
+        .debate-box.tradition {
+            background: linear-gradient(135deg, rgba(123, 31, 162, 0.1) 0%, rgba(186, 104, 200, 0.1) 100%);
+            border-top: 5px solid var(--tradition-color);
+        }
+        
+        .debate-title {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .mind-icon {
+            color: var(--mind-color);
+        }
+        
+        .tradition-icon {
+            color: var(--tradition-color);
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 235, 59, 0.1) 100%);
+            border-left: 5px solid var(--accent-color);
             padding: 25px;
+            margin: 30px 0;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        .comparison-box.positive {
+        .prophet-example {
             background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
-            border-top: 5px solid #4CAF50;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            text-align: center;
+            border: 2px dashed #4CAF50;
         }
         
-        .comparison-box.negative {
-            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(229, 57, 53, 0.1) 100%);
-            border-top: 5px solid #F44336;
+        .prophet-example h3 {
+            font-size: 28px;
+            color: #2E7D32;
+            margin-bottom: 20px;
         }
         
-        .comparison-box h4 {
+        .quran-emphasis {
+            background: rgba(126, 87, 194, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
             font-size: 24px;
             text-align: center;
-            margin-bottom: 20px;
-            color: var(--text-color);
+            font-weight: bold;
+            color: var(--primary-color);
         }
         
-        .comparison-box ul {
-            padding-right: 20px;
-        }
-        
-        .comparison-box.positive ul li::before {
-            color: #4CAF50;
-        }
-        
-        .comparison-box.negative ul li::before {
-            color: #F44336;
+        .warning-block {
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(229, 57, 53, 0.1) 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #F44336;
         }
         
         /* ==================== وسائط متجاوبة ==================== */
@@ -685,8 +647,8 @@
                 padding: 15px;
             }
             
-            .math-equation .equation {
-                font-size: 35px;
+            .debate-title {
+                font-size: 24px;
             }
         }
         
@@ -751,12 +713,7 @@
                 height: 22px;
             }
             
-            .math-illustration {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .comparison-container {
+            .debate-container {
                 flex-direction: column;
             }
         }
@@ -858,12 +815,8 @@
                 border-radius: 25px;
             }
             
-            .absolute-truth h3 {
-                font-size: 26px;
-            }
-            
-            .math-equation .equation {
-                font-size: 30px;
+            .debate-title {
+                font-size: 22px;
             }
         }
         
@@ -943,109 +896,96 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ لا توجد حقيقة مطلقة</h1>
+                <h1>❖ العقل والنقل</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 30 مايو 2025</span>
             </div>
             
             <div class="article-content">
-                <div class="absolute-truth">
-                    <h3>الحقيقة المطلقة الوحيدة</h3>
-                    <p>الحقيقة المطلقة الوحيدة التي أؤمن بها هو الله.</p>
-                </div>
-                
-                <p>جميع الأفكار والتدبرات هي حقائق نسبية، ترتفع نسبتها وتنخفض من شخص لآخر.</p>
-                
-                <div class="comparison-container">
-                    <div class="comparison-box positive">
-                        <h4>ما أراه أنا حقيقة</h4>
+                <div class="debate-container">
+                    <div class="debate-box mind">
+                        <div class="debate-title">
+                            <i class="fas fa-brain mind-icon fa-2x"></i>
+                            <h3>العقل</h3>
+                        </div>
+                        <p>استخدام العقل والتفكير النقدي في فهم الدين وتدبر آيات الله</p>
                         <ul>
-                            <li>قد يراه غيري خرافة</li>
-                            <li>نتيجة لتجربتي الشخصية</li>
-                            <li>مبنية على رؤيتي للعالم</li>
-                            <li>تتفق مع منظومتي الفكرية</li>
+                            <li>إعمال العقل في فهم النصوص الدينية</li>
+                            <li>التفكير النقدي والتدبر الشخصي</li>
+                            <li>البحث عن الحكمة والمعنى</li>
+                            <li>التحليل المنطقي للأمور الدينية</li>
                         </ul>
                     </div>
                     
-                    <div class="comparison-box negative">
-                        <h4>ما يراه غيري حقيقة</h4>
+                    <div class="debate-box tradition">
+                        <div class="debate-title">
+                            <i class="fas fa-book tradition-icon fa-2x"></i>
+                            <h3>النقل</h3>
+                        </div>
+                        <p>الاعتماد على النقل واتباع التراث الديني دون تفكير نقدي</p>
                         <ul>
-                            <li>قد أراه أنا خرافة</li>
-                            <li>نتيجة لتجربته الشخصية</li>
-                            <li>مبنية على رؤيته للعالم</li>
-                            <li>تتفق مع منظومته الفكرية</li>
+                            <li>اتباع ما نقل عن السلف دون تمحيص</li>
+                            <li>الاعتماد على تفسير رجال الدين فقط</li>
+                            <li>رفض أي تفكير مخالف للتراث</li>
+                            <li>تقديس أقوال العلماء على القرآن</li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="key-insight">
-                    <p>لا تحتكر الحقيقة لنفسك وتصادر أفكار الآخرين، فكلنا في رحلة بحث والعلم لا يزال مستمرًا.</p>
+                    <p>أنت كمسلم مطالب بتعطيل عقلك فيما يتعلق بأمور الدين، وعليك أن تأخذ دينك بالنقل وليس بالعقل. هذه هي القاعدة الرئيسية التي "أجمع" عليها رجال الدين.</p>
                 </div>
                 
-                <h3 class="section-title">طرق الوصول إلى الله</h3>
+                <h3 class="section-title">مشكلة احتكار التفسير الديني</h3>
                 
-                <p>فالحقيقة هو الله، لكن طريقة الوصول إلى هذا الإله تختلف من شخص لآخر.</p>
+                <p>من يقوم بتشغيل عقله لاستنباط أحكام الله وتدبر آياته، قد يُتهم بالكفر والزندقة. وكأن القرآن نزل على رجال الدين فقط، وهم المعنيون الوحيدون بتدبر كلام الله وتفسيره ومن ثم تقديمه لعامة المسلمين.</p>
                 
-                <div class="wisdom-block">
-                    <i class="fas fa-quote-left"></i> 
-                    كل الطرق تؤدي إلى الله، لكن المسارات تختلف باختلاف المسافرين
-                    <i class="fas fa-quote-right"></i>
+                <div class="warning-block">
+                    <p>حذروا من تدبر كتاب الله وتفسيره منفردين دون الرجوع إليهم، باعتبارهم المرجع الأساسي للدين!</p>
+                    <p>لا أعلم من الذي نصّبهم وكلاء عن الله ويتحدثون باسمه!</p>
                 </div>
                 
-                <h3 class="section-title">التشبيه الرياضي</h3>
-                
-                <p>فعندما يقول أستاذ رياضيات لطلابه:</p>
-                <p class="wisdom-block" style="font-size: 26px; padding: 20px;">أعطوني رقمين مجموعهما يساوي 10</p>
-                
-                <div class="math-illustration">
-                    <div class="math-equation">
-                        <div class="equation">5 + 5 = 10</div>
-                        <div class="description">تفكير تقليدي مباشر</div>
+                <div class="prophet-example">
+                    <h3><i class="fas fa-lightbulb"></i> قصة إبراهيم عليه السلام</h3>
+                    <p>لو كان الدين بالنقل وليس بالعقل، كان من الواجب على نبينا إبراهيم أن يعبد الأصنام الذي هو دين آبائه، لأن هذا الدين هو ما وَجَد عليه آبائه، يعني وصَلَهُ بالنقل.</p>
+                    
+                    <p>لكنه لم يقتنع بدين آبائه، لأن عقله لم يستوعب ما يقوم به قومه، فنبذ عبادة الأصنام وذَهَبَ ليجد ربَّهُ بعيداً عن عبادة الأصنام.</p>
+                    
+                    <div class="verse">
+                        ﴿وَإِذْ قَالَ إِبْرَاهِيمُ لِأَبِيهِ آزَرَ أَتَتَّخِذُ أَصْنَامًا آلِهَةً إِنِّي أَرَاكَ وَقَوْمَكَ فِي ضَلَالٍ مُبِينٍ﴾
                     </div>
                     
-                    <div class="math-equation">
-                        <div class="equation">4 + 6 = 10</div>
-                        <div class="description">رؤية غير متماثلة</div>
-                    </div>
-                    
-                    <div class="math-equation">
-                        <div class="equation">2 + 8 = 10</div>
-                        <div class="description">تفكير غير تقليدي</div>
-                    </div>
-                    
-                    <div class="math-equation">
-                        <div class="equation">7 + 3 = 10</div>
-                        <div class="description">رؤية إبداعية</div>
+                    <div class="quran-emphasis">
+                        هل كان نبينا إبراهيم مخطئ أم مصيب بتشغيل عقله ونبذ دين آبائه؟
                     </div>
                 </div>
                 
-                <p>كل هذه الإجابات صحيحة لكن طريقة التفكير تختلف من طالب لآخر.</p>
+                <h3 class="section-title">دعوة القرآن إلى إعمال العقل</h3>
+                
+                <p>في القرآن الكريم، يخاطبنا الله ويطالبنا بتشغيل عقولنا بما يقارب خمسين مرة. بل إنه أخبرنا أن عدم تشغيل العقل والعمل به، سيكون سبباً في دخول النار.</p>
+                
+                <div class="verse">
+                    ﴿وَقَالُوا۟ لَوْ كُنَّا نَسْمَعُ أَوْ نَعْقِلُ مَا كُنَّا فِىٓ أَصْحَٰبِ ٱلسَّعِيرِ﴾
+                </div>
+                
+                <div class="verse">
+                    ﴿وَيَجْعَلُ ٱلرِّجْسَ عَلَى ٱلَّذِينَ لَا يَعْقِلُونَ﴾ 
+                </div>
                 
                 <div class="key-insight">
-                    <p>لذلك لا تحتكر لنفسك الحقيقة ولا تجعل طريقتك في الوصول إلى الله على أنها هي الطريقة الصحيحة والوحيدة، هي حقيقة بالنسبة لك، لذلك ابقَ عليها ودع غيرك يصل إلى الله بطريقته ولا تعتدي عليه.</p>
-                </div>
-                
-                <h3 class="section-title">صورة الاعتداء الفكري</h3>
-                
-                <p>فمن صُوَر الاعتداء أن يصادر الإنسان حق غيره في التفكير.</p>
-                
-                <ul>
-                    <li>تصنيف أفكار الآخرين بأنها باطلة</li>
-                    <li>الادعاء بالتفرد بالحقيقة</li>
-                    <li>رفض الأفكار المخالفة لموروثه</li>
-                    <li>عدم تقبل التنوع الفكري</li>
-                </ul>
-                
-                <div class="wisdom-block" style="background: rgba(244, 67, 54, 0.1);">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    من الجهل والإجحاف أن يصادر الإنسان أفكار غيره لمجرد أنها لم توافق أفكاره
+                    <p>عندما نذكر هذا الرقم (50 مرة) فعلينا أن نستيقظ من سباتنا، ونعي ونفهم جيداً أن الله يريد منّا تشغيل عقولنا، لأنه سيحاسبنا على فهمنا نحن، وليس بما فهم رجال الدين.</p>
                 </div>
                 
                 <div class="conclusion">
-                    <p>فلا تُصادر يا صديقي العزيز أفكار غيرك.</p>
-                    <div class="verse">
-                        ﴿وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ﴾
+                    <h3>الخلاصة</h3>
+                    <p>اعمل بعقلك، واحذر من تعطيله، فالذي سينفعك هو تدبرك لكتاب الله والعمل به، ولن تستطيع تدبر كتاب الله إلّا إذا كان عقلك في وضع التشغيل.</p>
+                    
+                    <div class="verse" style="margin-top: 20px;">
+                        ﴿أَلَمْ تَكُنْ ءَايَٰتِى تُتْلَىٰ عَلَيْكُمْ فَكُنتُم بِهَا تُكَذِّبُونَ﴾
                     </div>
-                    <p style="text-align: center; margin-top: 20px; font-size: 24px;">الاختلاف سنة إلهية وحكمة كونية</p>
+                    
+                    <p style="text-align: center; margin-top: 20px; font-size: 24px;">
+                        لن ينفعك اتباعك للشيخ العلّامة ولا العالِم الفهّامة، لأنهم يوم القيامة سيتبرأون منك
+                    </p>
                 </div>
             </div>
             
