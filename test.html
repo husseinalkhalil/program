@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أصحاب القوقعة | حسين الخليل</title>
+    <title>حذارِ | حسين الخليل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #795548;
-            --secondary-color: #D7CCC8;
+            --primary-color: #C62828;
+            --secondary-color: #FFCDD2;
             --accent-color: #FF9800;
             --text-color: #333333;
             --light-bg: #F5F5F5;
             --light-beige: #F8F3E6;
             --article-beige: #F5EFE1;
-            --light-purple: #EDE7F6;
+            --light-red: #FFEBEE;
             --border-color: #E0E0E0;
-            --header-color: #5D4037;
+            --header-color: #B71C1C;
             --mobile-header-height: 70px;
             --mind-color: #1565C0;
             --tradition-color: #7B1FA2;
             --reason-color: #2196F3;
-            --misconception-color: #B71C1C;
-            --shell-color: #8D6E63;
+            --warning-color: #C62828;
         }
         
         * {
@@ -40,7 +39,7 @@
             color: var(--text-color);
             background-color: var(--light-beige);
             min-height: 100vh;
-            background: linear-gradient(135deg, #f8f3e6 0%, #efebe9 100%);
+            background: linear-gradient(135deg, #f8f3e6 0%, #ffebee 100%);
             padding-top: var(--mobile-header-height);
         }
         
@@ -110,7 +109,7 @@
             right: -100%;
             width: 100%;
             height: calc(100vh - var(--mobile-header-height));
-            background: rgba(93, 64, 55, 0.98);
+            background: rgba(183, 28, 28, 0.98);
             z-index: 999;
             transition: right 0.4s ease;
             overflow-y: auto;
@@ -150,7 +149,7 @@
         }
         
         .btn:hover {
-            background-color: #6D4C41;
+            background-color: #9C1C1C;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
@@ -191,7 +190,7 @@
             right: 0;
             width: 100%;
             height: 8px;
-            background: linear-gradient(to right, var(--shell-color), var(--accent-color));
+            background: linear-gradient(to right, var(--warning-color), var(--accent-color));
         }
         
         .article-header {
@@ -210,12 +209,12 @@
             margin: 0 auto;
             width: 120px;
             height: 5px;
-            background: linear-gradient(to right, var(--shell-color), var(--accent-color));
+            background: linear-gradient(to right, var(--warning-color), var(--accent-color));
             border-radius: 3px;
         }
         
         h1 {
-            color: var(--shell-color);
+            color: var(--warning-color);
             font-size: 38px;
             margin-bottom: 20px;
             font-weight: 700;
@@ -234,7 +233,7 @@
         }
         
         .date-icon {
-            color: var(--shell-color);
+            color: var(--warning-color);
         }
         
         .article-content {
@@ -249,8 +248,8 @@
             margin-bottom: 25px;
         }
         
-        .quote {
-            color: var(--shell-color);
+        .warning {
+            color: var(--warning-color);
             font-weight: bold;
             font-size: 26px;
             display: block;
@@ -258,9 +257,9 @@
             text-align: center;
             line-height: 1.7;
             padding: 20px;
-            background-color: var(--secondary-color);
+            background-color: var(--light-red);
             border-radius: 12px;
-            border-right: 5px solid var(--shell-color);
+            border-right: 5px solid var(--warning-color);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         
@@ -323,7 +322,7 @@
         }
         
         .conclusion {
-            background-color: var(--secondary-color);
+            background-color: var(--light-red);
             padding: 30px;
             border-radius: 15px;
             margin-top: 40px;
@@ -341,7 +340,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(to right, var(--shell-color), var(--accent-color));
+            background: linear-gradient(to right, var(--warning-color), var(--accent-color));
             border-radius: 3px;
         }
         
@@ -443,7 +442,7 @@
             justify-content: center;
             gap: 10px;
             padding: 12px 18px;
-            background-color: var(--secondary-color);
+            background-color: var(--light-red);
             color: var(--primary-color);
             border-radius: 30px;
             font-weight: 500;
@@ -456,7 +455,7 @@
         }
         
         .copy-link-btn:hover {
-            background-color: #BCAAA4;
+            background-color: #EF9A9A;
         }
         
         .share-platform img {
@@ -518,21 +517,21 @@
                 border-radius: 0;
             }
             
-            .quote {
+            .warning {
                 background: none;
                 border-right: none;
                 padding: 0;
             }
         }
         
-        .shell-section {
+        .warning-section {
             text-align: center;
             margin: 40px 0;
         }
         
-        .shell-icon {
+        .warning-icon {
             font-size: 80px;
-            color: var(--shell-color);
+            color: var(--warning-color);
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
@@ -543,35 +542,38 @@
             100% { transform: scale(1); }
         }
         
-        .examples-container {
-            background: linear-gradient(135deg, rgba(141, 110, 99, 0.1) 0%, rgba(176, 145, 134, 0.1) 100%);
+        .warnings-container {
+            background: linear-gradient(135deg, rgba(198, 40, 40, 0.1) 0%, rgba(229, 57, 53, 0.1) 100%);
             padding: 35px;
             border-radius: 20px;
             margin: 40px 0;
-            border-left: 8px solid var(--shell-color);
+            border-left: 8px solid var(--warning-color);
         }
         
-        .example-item {
+        .warning-item {
             margin-bottom: 25px;
             padding: 15px;
             background: rgba(255, 255, 255, 0.8);
             border-radius: 12px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
         }
         
-        .example-text {
+        .warning-item::before {
+            content: '⚠️';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+        }
+        
+        .warning-text {
             font-size: 24px;
             line-height: 1.7;
-            text-align: center;
             margin-bottom: 10px;
-            color: var(--shell-color);
-        }
-        
-        .example-reference {
-            text-align: left;
-            font-size: 18px;
-            color: #666;
-            font-style: italic;
+            color: var(--warning-color);
+            padding-right: 35px;
         }
         
         .contrast-section {
@@ -592,12 +594,12 @@
             overflow: hidden;
         }
         
-        .contrast-box.normal {
+        .contrast-box.truth {
             border-top: 5px solid #4CAF50;
         }
         
-        .contrast-box.shell {
-            border-top: 5px solid var(--shell-color);
+        .contrast-box.dogma {
+            border-top: 5px solid var(--warning-color);
         }
         
         .contrast-title {
@@ -612,12 +614,12 @@
             font-size: 30px;
         }
         
-        .contrast-box.normal .contrast-title {
+        .contrast-box.truth .contrast-title {
             color: #4CAF50;
         }
         
-        .contrast-box.shell .contrast-title {
-            color: var(--shell-color);
+        .contrast-box.dogma .contrast-title {
+            color: var(--warning-color);
         }
         
         .key-point {
@@ -693,7 +695,7 @@
         }
         
         .comparison-table th {
-            background-color: var(--shell-color);
+            background-color: var(--warning-color);
             color: white;
             padding: 20px;
             font-size: 22px;
@@ -710,14 +712,33 @@
             border-bottom: none;
         }
         
-        .comparison-table .normal-cell {
+        .comparison-table .truth-cell {
             background-color: rgba(76, 175, 80, 0.1);
             text-align: center;
         }
         
-        .comparison-table .shell-cell {
-            background-color: rgba(141, 110, 99, 0.1);
+        .comparison-table .dogma-cell {
+            background-color: rgba(198, 40, 40, 0.1);
             text-align: center;
+        }
+        
+        .danger-section {
+            background: linear-gradient(135deg, rgba(198, 40, 40, 0.2) 0%, rgba(229, 57, 53, 0.2) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            border: 2px dashed var(--warning-color);
+            text-align: center;
+        }
+        
+        .danger-title {
+            color: var(--warning-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
         
         @media (max-width: 992px) {
@@ -741,7 +762,7 @@
                 font-size: 21px;
             }
             
-            .quote {
+            .warning {
                 font-size: 24px;
                 padding: 15px;
             }
@@ -789,7 +810,7 @@
                 font-size: 21px;
             }
             
-            .quote {
+            .warning {
                 font-size: 22px;
             }
             
@@ -803,7 +824,7 @@
                 font-size: 20px;
             }
             
-            .shell-icon {
+            .warning-icon {
                 font-size: 60px;
             }
             
@@ -842,7 +863,7 @@
                 font-size: 20px;
             }
             
-            .quote {
+            .warning {
                 font-size: 20px;
             }
             
@@ -932,43 +953,6 @@
                 padding: 10px;
             }
         }
-        
-        .shell-animation {
-            display: flex;
-            justify-content: center;
-            margin: 40px 0;
-        }
-        
-        .shell {
-            width: 150px;
-            height: 100px;
-            background: var(--shell-color);
-            border-radius: 50% 50% 0 0;
-            position: relative;
-            animation: shell-move 5s infinite alternate;
-        }
-        
-        .shell::before {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            top: 30px;
-            left: 35px;
-            animation: shell-peek 5s infinite alternate;
-        }
-        
-        @keyframes shell-move {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(50px); }
-        }
-        
-        @keyframes shell-peek {
-            0%, 70% { transform: translateY(0); }
-            80%, 100% { transform: translateY(-50px); }
-        }
     </style>
 </head>
 <body>
@@ -1008,101 +992,117 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ أصحاب القوقعة</h1>
+                <h1>❖ حذارِ</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
             </div>
             
             <div class="article-content">
-                <div class="shell-section">
-                    <div class="shell-icon">🐚</div>
-                    <p>هناك فئة من المسلمين، (تقريبًا أغلبهم) لا يهتمون بتديُّنهم مع الله بقدر اهتمامهم بتديُّن غيرهم مع الله، فتجدهم يُنصّبون أنفسهم وكلاء عن رب العالمين ويمنحون أنفسهم الحق في التدخل بأفعال وأقوال وحياة غيرهم من البشر وينتقدونها إذا لم تعجبهم.</p>
+                <div class="warning-section">
+                    <div class="warning-icon">⚠️</div>
+                    <p>حذارِ أخي المسلم المتمسّك بكتاب الله من أن تُبرّئ الإسلام والنبي مما ورد في التراث</p>
+                </div>
+                
+                <div class="warnings-container">
+                    <div class="warning-item">
+                        <div class="warning-text">حذارِ أن تُبرّئ الإسلام وتقول أنه ليس دين عنف</div>
+                    </div>
+                    <div class="warning-item">
+                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يتزوج من طفلة لا تتجاوز التسع سنوات</div>
+                    </div>
+                    <div class="warning-item">
+                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يأمر بقتل المرتد</div>
+                    </div>
+                    <div class="warning-item">
+                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يأمر بقتل كل من لا يؤمن برسالته</div>
+                    </div>
+                    <div class="warning-item">
+                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يأمر بغزو البلدان لنشر رسالته</div>
+                    </div>
+                    <div class="warning-item">
+                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يقُل جئتكم بالذبح</div>
+                    </div>
+                    <div class="warning-item">
+                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يأمر بقطع الرؤوس</div>
+                    </div>
+                    <div class="warning-item">
+                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يرجم أحد</div>
+                    </div>
+                    <div class="warning-item">
+                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يأمر بسبي النساء</div>
+                    </div>
+                    <div class="warning-item">
+                        <div class="warning-text">حذارِ أن تُبرّئ النبي بأنه لم يتزوج من سبية بعد أن غزى بلدها وقتل زوجها وأبوها وعمها</div>
+                    </div>
+                </div>
+                
+                <div class="danger-section">
+                    <div class="danger-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        الخطر الحقيقي
+                    </div>
+                    <p>حذارِ يا أخي حذارِ، لأنه سيتم تكفيرك، والهجوم عليك، ليس من الغرب والملحدين والعلمانيين والليبراليين وغيرهم، بل من المسلمين الغيورين على دينهم والمدافعين عن النبي والمتمسكين برسالته والمحبين لرسول الله أكثر منك!!</p>
                 </div>
                 
                 <div class="key-point">
-                    <div class="key-icon">⚠️</div>
-                    <div>أصحاب القوقعة جعلوا من أفكارهم التي ورثوها، دستورًا يجب على الجميع الإمتثال له، ولكن إذا انتقد أحداً ما أفكارهم، فإنهم يتطاولون عليهم بالشتائم والتكفير.</div>
-                </div>
-                
-                <div class="quote">
-                    "هذه النوعية من الناس يعتبرون أنفسهم محور الكون، وهم الوحيدون الذين فهموا الدين. وبقية الناس عبارة عن جهلة وملحدين ومغيبين وأغبياء ومأجورين وأعداء للدين."
-                </div>
-                
-                <div class="examples-container">
-                    <div class="example-item">
-                        <div class="example-text">في أعياد رأس السنة والميلاد، تجدهم يعيدون نفس الأسطوانة "لا يجوز الاحتفال بأعياد الكفّار"</div>
-                    </div>
-                    <div class="example-item">
-                        <div class="example-text">يتسوّلون في صفحات غيرهم ويتطفّلون عليهم وينتقدونهم لأنهم يحتفلون أو يُهنّئون أصدقائهم</div>
-                    </div>
-                    <div class="example-item">
-                        <div class="example-text">ينشغلون بالناس بدلاً من أن ينشغلوا بأنفسهم، همهم الوحيد "التنغيص" عليهم</div>
-                    </div>
+                    <div class="key-icon">❗</div>
+                    <div>الغريب أنهم سيتهمونك بالعمالة للغرب وللصهيونية والماسونية وأنك مأجور وتقبض راتب منهم لضرب "ثوابت الإسلام".</div>
                 </div>
                 
                 <div class="contrast-section">
-                    <div class="contrast-box normal">
+                    <div class="contrast-box truth">
                         <div class="contrast-title">
-                            <i class="fas fa-user-friends contrast-icon"></i>
-                            الناس العاديون
+                            <i class="fas fa-book contrast-icon"></i>
+                            المسلم الحقيقي
                         </div>
-                        <p>يعيشون حياتهم بسعادة وفرح، ويستمتعون بلحظاتهم الممتعة، ولا يعيرون أي اهتمام لأصحاب القوقعة.</p>
+                        <p>يتمسك بكتاب الله ويعتمد على القرآن كمرجع أساسي، ويبحث عن الحقيقة بموضوعية دون تحيز</p>
                     </div>
                     
-                    <div class="contrast-box shell">
+                    <div class="contrast-box dogma">
                         <div class="contrast-title">
-                            <i class="fas fa-user-alt-slash contrast-icon"></i>
-                            أصحاب القوقعة
+                            <i class="fas fa-users contrast-icon"></i>
+                            المسلم التقليدي
                         </div>
-                        <p>في حرقة وغليان دائم، لم يعيشوا حياتهم كما أرادوها، ولم يستطيعوا التأثير على غيرهم بسرقة أفراحهم ومتعتهم.</p>
+                        <p>يدافع عن الموروث دون تمحيص، ويتهجم على كل من يخالف ما اعتاد عليه، ويكفر المخالفين</p>
                     </div>
                 </div>
                 
-                <div class="shell-animation">
-                    <div class="shell"></div>
-                </div>
-                
-                <div class="key-point">
-                    <div class="key-icon">🔄</div>
-                    <div>لا يطورون من أفكارهم التي ينتقدون بها كل من يعارضهم، لا يوجد لديهم حداثة، نفس الأفكار ونفس الكلام يكررونه في كل مناسبة.</div>
+                <div class="quote">
+                    "لذلك يا أخي العزيز، ولكي تكون مسلمًا حقًا ومُحبًّا للإسلام ومدافعًا عنه، عليك أن تُثبت كل هذه الجرائم للإسلام وللنبي وتؤمن بها ولا تُشكك بها أبدًا، وإلّا أصبحت كافرًا وزنديقًا."
                 </div>
                 
                 <table class="comparison-table">
                     <tr>
-                        <th colspan="2">دورة حياة أصحاب القوقعة</th>
+                        <th colspan="2">الموقف من القضايا المثيرة للجدل</th>
                     </tr>
                     <tr>
-                        <td class="normal-cell">الناس العاديون</td>
-                        <td class="shell-cell">أصحاب القوقعة</td>
+                        <td class="truth-cell">من يبحث عن الحقيقة</td>
+                        <td class="dogma-cell">من يدافع عن الموروث</td>
                     </tr>
                     <tr>
-                        <td>يعيشون حياتهم بسلام وسعادة</td>
-                        <td>ينتظرون مناسبة جديدة للخروج من قوقعتهم</td>
+                        <td>يبحث في المصادر بموضوعية</td>
+                        <td>يدافع عن كل ما ورد في التراث دون تمحيص</td>
                     </tr>
                     <tr>
-                        <td>يستمتعون بمناسباتهم الخاصة</td>
-                        <td>ينتقدون مناسبات الآخرين وأعيادهم</td>
+                        <td>يفرق بين الإسلام والتراث</td>
+                        <td>يخلط بين الإسلام والتراث</td>
                     </tr>
                     <tr>
-                        <td>لا يهتمون بآراء المتطفلين</td>
-                        <td>يتسولون في صفحات الآخرين وينتقدونهم</td>
+                        <td>يقبل النقد البناء</td>
+                        <td>يرفض أي نقد ويهاجم الناقدين</td>
                     </tr>
                     <tr>
-                        <td>يتطورون ويتغيرون مع الزمن</td>
-                        <td>يكررون نفس الأفكار والانتقادات</td>
+                        <td>يتعامل مع التاريخ بموضوعية</td>
+                        <td>يقدس التاريخ ويرفض أي مراجعة</td>
                     </tr>
                     <tr>
-                        <td>يحترمون خصوصيات الآخرين</td>
-                        <td>يتدخلون في شؤون الآخرين دون وجه حق</td>
+                        <td>يتقبل الاختلاف في الرأي</td>
+                        <td>يكفر المخالفين في الرأي</td>
                     </tr>
                 </table>
                 
-                <div class="quote">
-                    "فما لهم إلّا العودة إلى تلك القوقعة بانتظار مناسبة جديدة. وتيتي تيتي مثل ما رحتي مثل ما جبتي."
-                </div>
-                
                 <div class="conclusion">
-                    <h3>الخلاصة</h3>
-                    <p>أصحاب القوقعة يعيشون في دائرة مغلقة من الانتقاد والتدخل في شؤون الآخرين، ثم العودة إلى قوقعتهم بانتظار مناسبة جديدة. بينما الناس العاديون يستمرون في حياتهم بسلام وسعادة دون الاكتراث لهذه الانتقادات. الحل هو التركيز على تطوير الذات واحترام خصوصية الآخرين بدلاً من إضاعة الوقت في انتقادهم.</p>
+                    <h3>الخاتمة</h3>
+                    <p>هذه المقالة ليست دعوة للتشكيك في الإسلام، بل دعوة للتمييز بين الإسلام كدين سماوي وبين التراث البشري الذي قد يحوي أخطاء وتجاوزات. على المسلم العاقل أن يكون ناقدًا لما يقرأ، متبعًا لكتاب الله، متجنبًا اتهام الآخرين دون بينة.</p>
                 </div>
             </div>
             
@@ -1127,7 +1127,7 @@
                                 <img src="icons/tel-soc.png" alt="مشاركة على واتساب">
                             </a>
                             <a href="#" onclick="shareOnSocial('twitter')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
+                                <img src="icons/tel-soc.png" alt="مشاركة على تويter">
                             </a>
                         </div>
                         <button class="copy-link-btn" onclick="copyArticleLink()">
