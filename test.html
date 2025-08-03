@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قتل الوزغ | العقل والنقل</title>
+    <title>لا عنصرية في الإسلام | العقل والنقل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
             --mobile-header-height: 70px;
             --mind-color: #1565C0;
             --tradition-color: #7B1FA2;
-            --critical-color: #F44336;
+            --equality-color: #4CAF50;
         }
         
         * {
@@ -529,28 +529,18 @@
         }
         
         /* إضافات خاصة بهذه المقالة */
-        .gecko-section {
-            text-align: center;
-            margin: 40px 0;
-        }
-        
-        .gecko-icon {
-            font-size: 80px;
-            color: #4CAF50;
-            margin-bottom: 20px;
-        }
-        
-        .hadith-container {
-            background: linear-gradient(135deg, rgba(149, 117, 205, 0.1) 0%, rgba(126, 87, 194, 0.1) 100%);
-            padding: 35px;
+        .equality-section {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
+            padding: 40px;
             border-radius: 20px;
             margin: 40px 0;
-            border-right: 5px solid var(--primary-color);
+            border: 3px solid var(--equality-color);
+            text-align: center;
         }
         
-        .hadith-title {
-            font-size: 28px;
-            color: var(--primary-color);
+        .equality-title {
+            font-size: 32px;
+            color: var(--equality-color);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -558,9 +548,31 @@
             gap: 15px;
         }
         
+        .equality-icon {
+            font-size: 36px;
+            color: var(--equality-color);
+        }
+        
+        .hadith-container {
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(229, 57, 53, 0.1) 100%);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 8px solid #F44336;
+        }
+        
+        .hadith-title {
+            font-size: 28px;
+            color: #F44336;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
         .hadith-icon {
             font-size: 32px;
-            color: var(--primary-color);
+            color: #F44336;
         }
         
         .hadith-reference {
@@ -571,78 +583,75 @@
             font-style: italic;
         }
         
-        .critical-analysis {
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(21, 101, 192, 0.1) 100%);
-            padding: 35px;
-            border-radius: 20px;
+        .error-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
             margin: 40px 0;
-            border-left: 8px solid var(--mind-color);
         }
         
-        .critical-title {
-            font-size: 28px;
-            color: var(--mind-color);
+        .error-box {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid var(--primary-color);
+        }
+        
+        .error-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 8px;
+            background: var(--primary-color);
+        }
+        
+        .error-title {
+            font-size: 26px;
+            color: var(--primary-color);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
         }
         
-        .critical-icon {
-            font-size: 32px;
-            color: var(--mind-color);
+        .error-icon {
+            font-size: 30px;
+            color: var(--primary-color);
         }
         
-        .question-container {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 25px;
-            border-radius: 15px;
-            margin: 25px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-bottom: 4px solid var(--accent-color);
-        }
-        
-        .question-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--mind-color);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-        
-        .question-icon {
-            color: var(--accent-color);
-            font-size: 28px;
-            min-width: 30px;
-        }
-        
-        .justice-section {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
+        .quran-proof {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(21, 101, 192, 0.1) 100%);
             padding: 35px;
             border-radius: 20px;
             margin: 40px 0;
-            border: 2px dashed #4CAF50;
+            border-left: 8px solid var(--mind-color);
             text-align: center;
         }
         
-        .justice-title {
-            font-size: 28px;
-            color: #2E7D32;
-            margin-bottom: 20px;
-        }
-        
-        .final-question {
-            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(229, 57, 53, 0.1) 100%);
+        .prophet-character {
+            background: linear-gradient(135deg, rgba(126, 87, 194, 0.1) 0%, rgba(149, 117, 205, 0.1) 100%);
             padding: 35px;
             border-radius: 20px;
             margin: 40px 0;
-            border-left: 8px solid var(--critical-color);
+            border: 2px dashed var(--primary-color);
+        }
+        
+        .call-to-action {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            border: 3px solid var(--accent-color);
             font-size: 24px;
             font-weight: bold;
-            text-align: center;
-            color: var(--critical-color);
         }
         
         /* ==================== وسائط متجاوبة ==================== */
@@ -672,8 +681,8 @@
                 padding: 15px;
             }
             
-            .hadith-title {
-                font-size: 24px;
+            .equality-title {
+                font-size: 28px;
             }
         }
         
@@ -738,8 +747,8 @@
                 height: 22px;
             }
             
-            .gecko-icon {
-                font-size: 60px;
+            .equality-section {
+                padding: 30px;
             }
         }
         
@@ -840,12 +849,12 @@
                 border-radius: 25px;
             }
             
-            .hadith-title {
-                font-size: 22px;
+            .equality-title {
+                font-size: 24px;
             }
             
-            .gecko-icon {
-                font-size: 50px;
+            .error-box {
+                min-width: 100%;
             }
         }
         
@@ -925,64 +934,66 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ قتل الوزغ</h1>
+                <h1>❖ لا عنصرية في الإسلام</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
             </div>
             
             <div class="article-content">
-                <div class="gecko-section">
-                    <div class="gecko-icon">🦎</div>
-                    <p>تحليل نقدي للحديث الشهير حول قتل الوزغ (أبو بريص)</p>
+                <div class="equality-section">
+                    <div class="equality-title">
+                        <i class="fas fa-hands-helping equality-icon"></i>
+                        الإسلام دين المساواة
+                    </div>
+                    <p>الإسلام دين المحبة، دين التسامح والسلام، نهى عن العنصرية، وبيّن لنا أن فضيلة الإنسان تكون بالتقوى وليس باللون ولا بالمكانة الاجتماعية ولا بالمال ولا المنصب.</p>
+                    <p class="verse">ومن يقول عكس ذلك، فليأتينا بدليل قرآني، يدحض هذا الكلام.</p>
                 </div>
                 
                 <div class="hadith-container">
                     <div class="hadith-title">
-                        <i class="fas fa-book hadith-icon"></i>
-                        نص الحديث
+                        <i class="fas fa-exclamation-triangle hadith-icon"></i>
+                        الافتراءات على الرسول
                     </div>
-                    <p>في الحديث: أن رسول الله أمر بقتل الوزغ "أبو بريص" وقال: (كان ينفخ على ابراهيم عليه السلام) أخرجه البخاري برقم (3359)</p>
-                    <p>وفي رواية مسلم بحديث رقم (2238) أن رسول الله أمر بقتل الوزغ وسمّاه فويسقاً.</p>
-                    <div class="hadith-reference">[صحيح البخاري: 3359، صحيح مسلم: 2238]</div>
+                    <p>رسولنا الكريم الذي قال عنه الله سبحانه وتعالى، بأنه صاحب الخلق العظيم وأنه رحمة للعالمين، لا يمكن أن يكون عنصري ويتعامل مع الناس حسب اللون والعِرق حتى لو بضرب الأمثلة والمزاح.</p>
+                    <p>ومن هذه الافتراءات على هذا الإنسان العظيم، الحديث المكذوب على لسانه:</p>
+                    <div class="verse">(عليكم بالسمع والطاعة وإن تأمّر عليكم عبد حبشي كأن رأسه زبيبة)</div>
+                    <div class="hadith-reference">أخرجه البخاري في الأحكام برقم (7142) وابن ماجه في الجهاد برقم (2860) وأحمد في مسنده برقم (3/114)</div>
                 </div>
                 
-                <div class="critical-analysis">
-                    <div class="critical-title">
-                        <i class="fas fa-brain critical-icon"></i>
-                        تحليل نقدي للقصة
-                    </div>
-                    <p>في قصة حرق إبراهيم، أنه من شدة اشتعال النار، أنها كانت تحرق الطائر الذي يمُرّ من فوقها، وأنه من قوة اللهب، لم يستطيعوا أن يتقدموا ليُلقوا إبراهيم فيها، فقاموا برميه بالمنجنيق من بعيد (كما في القصة).</p>
-                    
-                    <div class="question-container">
-                        <div class="question-text">
-                            <i class="fas fa-question-circle question-icon"></i>
-                            السؤال الأول: كيف لمخلوق صغير أن يقترب من نار بهذه القوة؟
+                <div class="error-section">
+                    <div class="error-box">
+                        <div class="error-title">
+                            <i class="fas fa-times-circle error-icon"></i>
+                            الخطأ الأول: العنصرية
                         </div>
-                        <p>إذا كانت النار بهذا الشكل، فكيف لمخلوق صغير لا يتجاوز حجم اصبع اليد، أن يقترب من النار وينفخ فيها، مع أنه يمتلك جلد رقيق لا يستطيع حتى أن يتعرض لأشعة الشمس القوية حتى لا يموت!؟</p>
+                        <p>العنصرية في الكلام والانتقاص من أصحاب البشرة السوداء "عبد حبشي". وكأن أصحاب البشرة السوداء نَكِرة أو حرف ساقط أو أقل مكانة من غيرهم!</p>
+                        <div class="verse">مع أن الله يقول: ﴿إِنَّ أَكْرَمَكُمْ عِندَ ٱللَّهِ أَتْقَىٰكُمْ﴾</div>
                     </div>
                     
-                    <div class="question-container">
-                        <div class="question-text">
-                            <i class="fas fa-question-circle question-icon"></i>
-                            السؤال الثاني: كيف يمكن لنفخة وزنغ أن تؤثر على نار عظيمة؟
+                    <div class="error-box">
+                        <div class="error-title">
+                            <i class="fas fa-times-circle error-icon"></i>
+                            الخطأ الثاني: الاستهزاء بخلق الله
                         </div>
-                        <p>ثم كم هي كمية الهواء الخارجة من رئتيه حتى ينفخها على تلك النار العظيمة!؟ وهل يمكن لنفخة كائن صغير أن تؤثر على نار بهذا الحجم والقوة؟</p>
+                        <p>الاستهزاء بخلق الله، عندما تستهزء بشخص بأن أنفه طويل أو فمه كبير أو رأسه كالزبيبة، فهذا استهزاء وسُخرية من خلق الله، لأن الإنسان لا يملك لنفسه شيء في هذه الأمور.</p>
                     </div>
                 </div>
                 
-                <div class="justice-section">
-                    <div class="justice-title">مسألة العدالة الإلهية</div>
-                    <p>إذا كان الوزغ فعلاً فعل هذا، فما ذنب أبناءه وذريته من بعده لفعل فعله مخلوق واحد؟</p>
-                    <div class="verse">فهل من العدالة أن تُحاسب كل السلالة بسبب خطأ مخلوق واحد!؟</div>
+                <div class="quran-proof">
+                    <p>الله سبحانه وتعالى لا ينظر إلى ألواننا ولا أموالنا ولا عشيرتنا، بل ينظر إلى قلوبنا وأعمالنا.</p>
+                    <div class="verse">﴿وَمَآ أَمْوَٰلُكُمْ وَلَآ أَوْلَٰدُكُم بِٱلَّتِى تُقَرِّبُكُمْ عِندَنَا زُلْفَىٰٓ إِلَّا مَنْ ءَامَنَ وَعَمِلَ صَٰلِحًا فَأُو۟لَٰٓئِكَ لَهُمْ جَزَآءُ ٱلضِّعْفِ بِمَا عَمِلُوا۟ وَهُمْ فِى ٱلْغُرُفَٰتِ ءَامِنُونَ﴾</div>
                 </div>
                 
-                <div class="final-question">
-                    <p>يا ترى ماذا فعلت أيها الفويسق الزنديق المهرطق الكافر الفاجر العاهر لكي يؤلفوا عليك ما يؤلفوا!</p>
+                <div class="prophet-character">
+                    <h3 class="section-title">خلق الرسول الكريم</h3>
+                    <p>قال تعالى: ﴿يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا يَسْخَرْ قَوْمٌ مِّن قَوْمٍ عَسَىٰٓ أَن يَكُونُوا۟ خَيْرًا مِّنْهُمْ وَلَا نِسَآءٌ مِّن نِّسَآءٍ عَسَىٰٓ أَن يَكُنَّ خَيْرًا مِّنْهُنَّ ۖ وَلَا تَلْمِزُوٓا۟ أَنفُسَكُمْ وَلَا تَنَابَزُوا۟ بِٱلْأَلْقَٰبِ ۖ بِئْسَ ٱلِٱسْمُ ٱلْفُسُوقُ بَعْدَ ٱلْإِيمَٰنِ ۚ وَمَن لَّمْ يَتُبْ فَأُو۟لَٰٓئِكَ هُمُ ٱلظَّٰلِمُونَ﴾</p>
+                    <p class="verse">فهل تعتقدون أن صاحب الخلق العظيم، يتكلم بهذا الكلام اللّا إنساني ويخالف ربه سبحانه وتعالى؟! تعالى الله عما تقولون.</p>
                 </div>
                 
-                <div class="conclusion">
-                    <h3>الخلاصة</h3>
-                    <p>هذه الأسئلة تطرح تساؤلات حول منطقية القصة المذكورة في الحديث، وتدعونا إلى إعادة النظر في بعض الروايات التي قد تتعارض مع العقل والمنطق والعدالة الإلهية.</p>
-                    <p>الوزغ كائن ضعيف لا حول له ولا قوة، فكيف يُحمل وزر فعل لم يقم به، وكيف يُعاقب جنسه بأكمله على مدى الأجيال؟</p>
+                <div class="call-to-action">
+                    <p>كفاكم تشويهاً لديننا الحنيف</p>
+                    <p>كفاكم إساءة لرسولنا الكريم</p>
+                    <p>أكثر من أساء لهذا الرسول هو التراث المعنعن، إساءات لم يفعلها حتى المشركين</p>
+                    <div class="verse" style="margin-top: 20px;">اللهم إنّا نبرأ إليك من كل من أساء لدينك ورسولك</div>
                 </div>
             </div>
             
