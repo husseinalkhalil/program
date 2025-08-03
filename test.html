@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أنا والعندليب | العقل والنقل</title>
+    <title>مفاهيم مغلوطة | العقل والنقل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
             --mind-color: #1565C0;
             --tradition-color: #7B1FA2;
             --reason-color: #2196F3;
-            --music-color: #8E24AA;
+            --misconception-color: #D32F2F;
         }
         
         * {
@@ -192,7 +192,7 @@
             right: 0;
             width: 100%;
             height: 8px;
-            background: linear-gradient(to right, var(--music-color), var(--accent-color));
+            background: linear-gradient(to right, var(--misconception-color), var(--accent-color));
         }
         
         .article-header {
@@ -211,12 +211,12 @@
             margin: 0 auto;
             width: 120px;
             height: 5px;
-            background: linear-gradient(to right, var(--music-color), var(--accent-color));
+            background: linear-gradient(to right, var(--misconception-color), var(--accent-color));
             border-radius: 3px;
         }
         
         h1 {
-            color: var(--music-color);
+            color: var(--misconception-color);
             font-size: 38px;
             margin-bottom: 20px;
             font-weight: 700;
@@ -235,7 +235,7 @@
         }
         
         .date-icon {
-            color: var(--music-color);
+            color: var(--misconception-color);
         }
         
         .article-content {
@@ -250,8 +250,8 @@
             margin-bottom: 25px;
         }
         
-        .quote {
-            color: var(--music-color);
+        .verse {
+            color: var(--misconception-color);
             font-weight: bold;
             font-size: 26px;
             display: block;
@@ -261,7 +261,7 @@
             padding: 20px;
             background-color: var(--light-purple);
             border-radius: 12px;
-            border-right: 5px solid var(--music-color);
+            border-right: 5px solid var(--misconception-color);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         
@@ -342,7 +342,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(to right, var(--music-color), var(--accent-color));
+            background: linear-gradient(to right, var(--misconception-color), var(--accent-color));
             border-radius: 3px;
         }
         
@@ -521,7 +521,7 @@
                 border-radius: 0;
             }
             
-            .quote {
+            .verse {
                 background: none;
                 border-right: none;
                 padding: 0;
@@ -529,14 +529,14 @@
         }
         
         /* إضافات خاصة بهذه المقالة */
-        .music-section {
+        .misconception-section {
             text-align: center;
             margin: 40px 0;
         }
         
-        .music-icon {
+        .misconception-icon {
             font-size: 80px;
-            color: var(--music-color);
+            color: var(--misconception-color);
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
@@ -547,63 +547,71 @@
             100% { transform: scale(1); }
         }
         
-        .journey-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+        .examples-container {
             margin: 40px 0;
         }
         
-        .journey-card {
-            background: linear-gradient(135deg, rgba(142, 36, 170, 0.05) 0%, rgba(126, 87, 194, 0.05) 100%);
-            padding: 30px;
+        .example-item {
+            display: flex;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 15px;
-            border-top: 5px solid var(--music-color);
-            text-align: center;
-            transition: all 0.3s;
+            padding: 25px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        .journey-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
-        }
-        
-        .journey-title {
-            font-size: 26px;
-            color: var(--music-color);
-            margin-bottom: 20px;
+        .example-badge {
+            min-width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            font-size: 24px;
+            margin-left: 20px;
+            flex-shrink: 0;
         }
         
-        .journey-icon {
-            font-size: 30px;
-            color: var(--music-color);
+        .red-badge {
+            background-color: #D32F2F;
+            color: white;
         }
         
-        .warning-section {
-            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(229, 57, 53, 0.1) 100%);
+        .green-badge {
+            background-color: #388E3C;
+            color: white;
+        }
+        
+        .example-content {
+            flex: 1;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .analysis-section {
+            background: linear-gradient(135deg, rgba(211, 47, 47, 0.1) 0%, rgba(244, 67, 54, 0.1) 100%);
             padding: 35px;
             border-radius: 20px;
             margin: 40px 0;
-            border-left: 8px solid #F44336;
+            border-left: 8px solid var(--misconception-color);
         }
         
-        .warning-title {
+        .analysis-title {
             font-size: 28px;
-            color: #F44336;
+            color: var(--misconception-color);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
         }
         
-        .warning-icon {
+        .analysis-icon {
             font-size: 32px;
-            color: #F44336;
+            color: var(--misconception-color);
         }
         
         .contrast-section {
@@ -624,7 +632,7 @@
             overflow: hidden;
         }
         
-        .contrast-box.rediscovery {
+        .contrast-box.reason {
             border-top: 5px solid var(--reason-color);
         }
         
@@ -644,40 +652,12 @@
             font-size: 30px;
         }
         
-        .contrast-box.rediscovery .contrast-title {
+        .contrast-box.reason .contrast-title {
             color: var(--reason-color);
         }
         
         .contrast-box.tradition .contrast-title {
             color: var(--tradition-color);
-        }
-        
-        .artists-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-            text-align: center;
-        }
-        
-        .artist-card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-        }
-        
-        .artist-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-        
-        .artist-name {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--music-color);
-            margin-top: 15px;
         }
         
         .key-point {
@@ -699,7 +679,7 @@
             margin-top: 5px;
         }
         
-        .final-quote {
+        .final-verse {
             background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.1) 100%);
             padding: 35px;
             border-radius: 20px;
@@ -732,7 +712,7 @@
                 font-size: 21px;
             }
             
-            .quote {
+            .verse {
                 font-size: 24px;
                 padding: 15px;
             }
@@ -780,7 +760,7 @@
                 font-size: 21px;
             }
             
-            .quote {
+            .verse {
                 font-size: 22px;
             }
             
@@ -799,12 +779,18 @@
                 height: 22px;
             }
             
-            .music-icon {
+            .misconception-icon {
                 font-size: 60px;
             }
             
-            .journey-section {
-                grid-template-columns: 1fr;
+            .example-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .example-badge {
+                margin-left: 0;
+                margin-bottom: 15px;
             }
         }
         
@@ -838,7 +824,7 @@
                 font-size: 20px;
             }
             
-            .quote {
+            .verse {
                 font-size: 20px;
             }
             
@@ -986,131 +972,100 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ أنا والعندليب</h1>
+                <h1>❖ مفاهيم مغلوطة</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
             </div>
             
             <div class="article-content">
-                <div class="music-section">
-                    <div class="music-icon">🎵</div>
-                    <p>عندما دخلت العشرين من عمري، كنت مولعاً بالعندليب عبدالحليم حافظ. أعشقه عشقاً جنونياً وصل إلى حد التعصّب له، اشتريت جميع أغانيه وحفظتها عن ظهر قلب، ولا زلت أحتفظ بتلك الأشرطة حتى اليوم.</p>
+                <div class="misconception-section">
+                    <div class="misconception-icon">⚠️</div>
+                    <p>مفاهيم خاطئة تنتشر في المجتمع وتجعل الأنثى تدفع ثمن أخطاء الرجال، متناسين مبدأ المسؤولية الفردية الذي أكده القرآن الكريم.</p>
                 </div>
                 
-                <div class="journey-section">
-                    <div class="journey-card">
-                        <div class="journey-title">
-                            <i class="fas fa-book journey-icon"></i>
-                            اكتشاف جديد
+                <div class="examples-container">
+                    <div class="example-item">
+                        <div class="example-badge red-badge">🔴</div>
+                        <div class="example-content">
+                            <div class="example-title">فلان اغتصب فتاة</div>
+                            <div class="example-reaction">ردة فعل المجتمع: الله رح يبعث من يغتصب بناته</div>
                         </div>
-                        <p>اشتريت كتاباً يتحدث عن حياته الشخصية، ومن ضمن ما قرأته أنه لا يشرب الخمور ولا يُدخّن، وكان يقوم بإحضار أحد القُرّاء ليقرأ له القرآن في بيته كل يوم جمعة، أُعجبت كثيراً بهذا الكلام، (لعلّ وعسى أن يشفع له هذا العمل يوم القيامة)</p>
                     </div>
                     
-                    <div class="journey-card">
-                        <div class="journey-title">
-                            <i class="fas fa-comment-dots journey-icon"></i>
-                            النقد والرفض
+                    <div class="example-item">
+                        <div class="example-badge red-badge">🔴</div>
+                        <div class="example-content">
+                            <div class="example-title">فلان خدع فتاة وقهرها</div>
+                            <div class="example-reaction">بكرة الله يبعث من يقهر بنته/اخته</div>
                         </div>
-                        <p>فنقلت هذا الكلام إلى أحد المقربين مني والذي كان ينتقد حُبي الشديد للعندليب. فقال لي بسخرية وشماتة: لن ينفعه كل هذا العمل، هو في النار لأن الغناء حرام، وسيبقى يحمل أوزار كل من يسمع أغانية حتى تقوم الساعة.</p>
                     </div>
                     
-                    <div class="journey-card">
-                        <div class="journey-title">
-                            <i class="fas fa-heart-crack journey-icon"></i>
-                            تأثير نفسي
+                    <div class="example-item">
+                        <div class="example-badge red-badge">🔴</div>
+                        <div class="example-content">
+                            <div class="example-title">فلان ظلم زوجته</div>
+                            <div class="example-reaction">بكرة الله يبعثله من يظلم بناته</div>
                         </div>
-                        <p>قلت في نفسي: لماذا يارب! لِمَ كل هذه القسوة؟ لماذا رزقته صوتاً جميلاً طالما أنك حرّمت الغناء؟ بدأ خوفي من الله يزداد. صرت أعبده خوفاً منه وليس حباً فيه. مع أن الله يُعبد بالمحبة ولا يُعبد بالخوف والترهيب. فلا معنى للعبادة إذا كانت قائمة على الخوف.</p>
-                    </div>
-                </div>
-                
-                <div class="warning-section">
-                    <div class="warning-title">
-                        <i class="fas fa-exclamation-triangle warning-icon"></i>
-                        التشويه والتحريض
-                    </div>
-                    <p>كنت أسمع محاضرات لأحد رجال الدين وهو يستهزئ بالعندليب ويتوعده (ضمنياً) بنار جهنم لمجرد أنه غنّى. كنت أشاهد الفيديوهات والتي كان عنوانها: الأفاعي تخرج من قبر عبدالحليم حافظ. ازدادت نقمتي.</p>
-                </div>
-                
-                <div class="quote">كنت أتسائل لِمَ كل هذا؟ ما الجريمة التي ارتكبها هذا الانسان البسيط ليُعذب بكل انواع العذاب؟ ألهذه الدرجة إلهُنا قاسي؟</div>
-                
-                <div class="key-point">
-                    <div class="key-icon">🕊️</div>
-                    <div>هو لم يقتل أحدا، ولم يحقد على أحد، ولم يكره أحد، ولم يُحرّض على أحد. لم يزرع العنصرية ولا الطائفية، لم يحمل ولم يتبنى أفكاراً اجرامية. كانت رسالته هي رسالة سلام ومحبة، أوصلها لنا بصوته العذب.</div>
-                </div>
-                
-                <div class="key-point">
-                    <div class="key-icon">⚖️</div>
-                    <div>بينما من يقتل ويُفجّر ويُحرض على الطائفية والعنصرية يتنبّأون له في جنات النعيم! ما هذه المعادلة!</div>
-                </div>
-                
-                <div class="contrast-section">
-                    <div class="contrast-box rediscovery">
-                        <div class="contrast-title">
-                            <i class="fas fa-book-quran contrast-icon"></i>
-                            رحلة الاكتشاف
-                        </div>
-                        <p>مضت السنوات ونبذت كل ما تعلمته وراء ظهري، وانكببت على كتاب الله كأني اقرأه لأول مرة. تفحصت كل كلمة فيه، وبحثت في كل آية فيه، ولا زلت وسأزال أبحث. رميت بكل ما تعلمته من رجال الدين وضربت به عرض الحائط.</p>
                     </div>
                     
-                    <div class="contrast-box tradition">
-                        <div class="contrast-title">
-                            <i class="fas fa-masks-theater contrast-icon"></i>
-                            اكتشاف الحقيقة
+                    <div class="example-item">
+                        <div class="example-badge red-badge">🔴</div>
+                        <div class="example-content">
+                            <div class="example-title">فلان خدع فتاة وكسر قلبها</div>
+                            <div class="example-reaction">بكرة الله ينتقم منه ببناته، يمهل ولا يهمل</div>
                         </div>
-                        <p>وجدت أن الله بريء من كل هذا العنف. وجدت أني أعبد إلهاً جميلاً ويحب الجمال. وجدت أن الله خلق الدنيا ونعميها وملذاتها لأجلنا. أحببت ربي كثيراً وازداد حبي له. صرت أعبده حباً به وليس خوفاً منه.</p>
                     </div>
                 </div>
                 
-                <div class="key-point">
-                    <div class="key-icon">📜</div>
-                    <div>وجدت أن الله لم يُحرّم علينا ما كان يدّعيه رجال الدين. وجدت أن رجال الدين اخترعوا مصدر آخر للدين أطلقوا عليه اسم "السُنّة النبوية" وجعلوه أصل الدين والقاضي على كتاب الله! كتبوه على مقاسهم وبما يتوافق مع أفكارهم.</div>
+                <div class="analysis-section">
+                    <div class="analysis-title">
+                        <i class="fas fa-question-circle analysis-icon"></i>
+                        تحليل المشكلة
+                    </div>
+                    <p>لا أعلم هذا التفسير المغلوط إلى متى سيستمر!؟ ما علاقة الفتاة (ابنة، أخت، زوجة، أم) بفعل مُشين قام به الرجل؟ لماذا لا تدور الدنيا عليه ويتم الانتقام منه؟</p>
                 </div>
                 
                 <div class="key-point">
-                    <div class="key-icon">🚫</div>
-                    <div>ولأنهم يكرهون الحياة (ماعدا النساء فيها) فإنهم: حرّموا الغناء. حرّموا الموسيقى. حرّموا الفن. حرموا الرسم. حرّموا التصوير. حرموا النحت. حرموا الرقص. حرموا الابداع. حرموا كل ما هو جميل.</div>
+                    <div class="key-icon">❗</div>
+                    <div>إذا اغتُصبت فتاة، لماذا لا تقولون: سيأتي من يغتصبه هو؟! أليس هو من ارتكب هذه التجاوزات؟ إذاً هو من عليه أن يدفع الثمن. أخته لا علاقة لها بما يفعل. أمه لا علاقة لها بما يفعل. ابنته لا علاقة لها بما يفعل. زوجته لا علاقة لها بما يفعل.</div>
+                </div>
+                
+                <div class="key-point">
+                    <div class="key-icon">♀️</div>
+                    <div>لماذا تُصوّرون الأنثى على أنها يجب أن تكون مُكفّرة لأخطاء الرجل! هي لها كيانها الخاص بها، وتُحاسب على أخطائها هي وليس على أخطاء من تكون تحت وصايته.</div>
                 </div>
                 
                 <div class="key-point">
                     <div class="key-icon">💔</div>
-                    <div>وفي المقابل: أحلّوا قطع الرؤوس . أحلّوا قتل تارك الصلاة. أحلّوا رجم الزاني. أحلوا قطع يد السارق. أحلّوا ارضاع الكبير. أحلوا ضرب الزوجة. أحلّوا ضرب الطفل من أجل الصلاة. أحلّوا شرب بول البعير. اخترعوا عذاباً للقبر. قتلوا فينا الحياة. وحلّلوا كل ما هو عنيف وإجرامي.</div>
+                    <div>تجد أن الأنثى نفسها تستنكر ما قام به الرجل (زوجها، اخوها…) وتتبرّأ منه، بل وتتعاطف مع الأنثى الضحية، ومع ذلك المطلوب أن تدفع هي الثمن! لا، بل ويشمتون ويتشفّون بها إذا أصابها مكروه، ويرون أن هذا انتقام إلهي لما فعله (زوجها، ابنها..) مرددين مقولة: سبحان الله يمهل ولا يهمل.</div>
                 </div>
                 
-                <div class="quote">الله بريء من كل تلك المحرّمات. الله بريء من كل تلك المحلّلات. الله بريء من كل ما قالوه عنه.</div>
+                <div class="verse">(وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَىٰ)</div>
                 
-                <div class="final-quote">
-                    <p>لا زلت أعشق العندليب وازداد عشقي لصوته ولأصحاب الزمن الجميل</p>
+                <div class="contrast-section">
+                    <div class="contrast-box reason">
+                        <div class="contrast-title">
+                            <i class="fas fa-scales contrast-icon"></i>
+                            مبدأ المسؤولية الفردية
+                        </div>
+                        <p>عندما تظلم الأنثى أحدهم، لماذا لا نسمعهم يقولون: بكرة الله رح يبعث من يظلم ابنها أو زوجها أو والدها؟ لماذا الأنثى فقط هي من يجب أن يدفع الثمن؟! كل انسان يُحاسب على ما فعل هو، ولا يُحاسب عن أفعال غيره.</p>
+                    </div>
+                    
+                    <div class="contrast-box tradition">
+                        <div class="contrast-title">
+                            <i class="fas fa-exclamation-circle contrast-icon"></i>
+                            التناقض في التفكير
+                        </div>
+                        <p>ألا تقرأون القرآن!؟ ألا تقرأون قوله تعالى (وَكُلُّهُمْ ءَاتِيهِ يَوْمَ ٱلْقِيَٰمَةِ فَرْدًا)؟ هذا المفهوم الخاطئ يعكس تناقضاً في التفكير المجتمعي وتمييزاً ضد المرأة، حيث تُجعل الأنثى كبش فداء لأخطاء الرجال.</p>
+                    </div>
                 </div>
                 
-                <div class="artists-section">
-                    <div class="artist-card">
-                        <div class="artist-name">عبدالحليم حافظ</div>
-                    </div>
-                    <div class="artist-card">
-                        <div class="artist-name">أم كلثوم</div>
-                    </div>
-                    <div class="artist-card">
-                        <div class="artist-name">وردة</div>
-                    </div>
-                    <div class="artist-card">
-                        <div class="artist-name">ياس خضر</div>
-                    </div>
-                    <div class="artist-card">
-                        <div class="artist-name">ميادة الحناوي</div>
-                    </div>
-                    <div class="artist-card">
-                        <div class="artist-name">طلال مداح</div>
-                    </div>
-                    <div class="artist-card">
-                        <div class="artist-name">محمد عبدالوهاب</div>
-                    </div>
-                    <div class="artist-card">
-                        <div class="artist-name">فيروز</div>
-                    </div>
+                <div class="final-verse">
+                    <p>وتذكروا قوله تعالى: (وَكُلُّهُمْ ءَاتِيهِ يَوْمَ ٱلْقِيَٰمَةِ فَرْدًا)</p>
                 </div>
                 
                 <div class="conclusion">
                     <h3>الخلاصة</h3>
-                    <p>رحلة الإنسان مع الإيمان يجب أن تقوم على الحب والجمال، لا على الخوف والتهديد. الله خلق الحياة بمتعها وجمالها لنا، ومن واجبنا أن نعيشها بفرح وإبداع. الفنون والغناء والجمال هي هدايا من الله، وليست محرمات كما يدعي بعض رجال الدين. يجب أن نعيد اكتشاف ديننا من خلال القرآن الكريم، بعيداً عن الإضافات البشرية التي شوّهت صورة الإله الرحيم الجميل.</p>
+                    <p>المسؤولية الفردية هي أساس العدل في الإسلام. لا يجوز تحميل الأنثى وزر أفعال الرجل، سواء كانت ابنته أو أخته أو زوجته. القرآن الكريم أكد مبدأ المساءلة الفردية في أكثر من موضع، وجعل كل إنسان مسؤولاً عن أفعاله فقط. يجب علينا تصحيح هذه المفاهيم المغلوطة التي تكرس الظلم والتمييز ضد المرأة، والتمسك بمبادئ العدل والمساواة التي جاء بها الإسلام الحقيقي.</p>
                 </div>
             </div>
             
