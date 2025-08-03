@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حذارِ | حسين الخليل</title>
+    <title>وهم الحقيقة المطلقة | حسين الخليل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #C62828;
-            --secondary-color: #FFCDD2;
-            --accent-color: #FF9800;
+            --primary-color: #3F51B5;
+            --secondary-color: #C5CAE9;
+            --accent-color: #FF4081;
             --text-color: #333333;
             --light-bg: #F5F5F5;
             --light-beige: #F8F3E6;
             --article-beige: #F5EFE1;
-            --light-red: #FFEBEE;
+            --light-purple: #E8EAF6;
             --border-color: #E0E0E0;
-            --header-color: #B71C1C;
+            --header-color: #303F9F;
             --mobile-header-height: 70px;
             --mind-color: #1565C0;
             --tradition-color: #7B1FA2;
             --reason-color: #2196F3;
-            --warning-color: #C62828;
+            --truth-color: #4CAF50;
+            --illusion-color: #FF5722;
         }
         
         * {
@@ -39,7 +40,7 @@
             color: var(--text-color);
             background-color: var(--light-beige);
             min-height: 100vh;
-            background: linear-gradient(135deg, #f8f3e6 0%, #ffebee 100%);
+            background: linear-gradient(135deg, #f8f3e6 0%, #e8eaf6 100%);
             padding-top: var(--mobile-header-height);
         }
         
@@ -109,7 +110,7 @@
             right: -100%;
             width: 100%;
             height: calc(100vh - var(--mobile-header-height));
-            background: rgba(183, 28, 28, 0.98);
+            background: rgba(48, 63, 159, 0.98);
             z-index: 999;
             transition: right 0.4s ease;
             overflow-y: auto;
@@ -149,7 +150,7 @@
         }
         
         .btn:hover {
-            background-color: #9C1C1C;
+            background-color: #3949AB;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
@@ -190,7 +191,7 @@
             right: 0;
             width: 100%;
             height: 8px;
-            background: linear-gradient(to right, var(--warning-color), var(--accent-color));
+            background: linear-gradient(to right, var(--illusion-color), var(--truth-color));
         }
         
         .article-header {
@@ -209,12 +210,12 @@
             margin: 0 auto;
             width: 120px;
             height: 5px;
-            background: linear-gradient(to right, var(--warning-color), var(--accent-color));
+            background: linear-gradient(to right, var(--illusion-color), var(--truth-color));
             border-radius: 3px;
         }
         
         h1 {
-            color: var(--warning-color);
+            color: var(--illusion-color);
             font-size: 38px;
             margin-bottom: 20px;
             font-weight: 700;
@@ -233,7 +234,7 @@
         }
         
         .date-icon {
-            color: var(--warning-color);
+            color: var(--illusion-color);
         }
         
         .article-content {
@@ -248,8 +249,8 @@
             margin-bottom: 25px;
         }
         
-        .warning {
-            color: var(--warning-color);
+        .verse {
+            color: var(--truth-color);
             font-weight: bold;
             font-size: 26px;
             display: block;
@@ -257,9 +258,9 @@
             text-align: center;
             line-height: 1.7;
             padding: 20px;
-            background-color: var(--light-red);
+            background-color: var(--light-purple);
             border-radius: 12px;
-            border-right: 5px solid var(--warning-color);
+            border-right: 5px solid var(--truth-color);
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         
@@ -322,7 +323,7 @@
         }
         
         .conclusion {
-            background-color: var(--light-red);
+            background-color: var(--light-purple);
             padding: 30px;
             border-radius: 15px;
             margin-top: 40px;
@@ -340,7 +341,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(to right, var(--warning-color), var(--accent-color));
+            background: linear-gradient(to right, var(--illusion-color), var(--truth-color));
             border-radius: 3px;
         }
         
@@ -442,7 +443,7 @@
             justify-content: center;
             gap: 10px;
             padding: 12px 18px;
-            background-color: var(--light-red);
+            background-color: var(--light-purple);
             color: var(--primary-color);
             border-radius: 30px;
             font-weight: 500;
@@ -455,7 +456,7 @@
         }
         
         .copy-link-btn:hover {
-            background-color: #EF9A9A;
+            background-color: var(--secondary-color);
         }
         
         .share-platform img {
@@ -517,21 +518,21 @@
                 border-radius: 0;
             }
             
-            .warning {
+            .verse {
                 background: none;
                 border-right: none;
                 padding: 0;
             }
         }
         
-        .warning-section {
+        .truth-section {
             text-align: center;
             margin: 40px 0;
         }
         
-        .warning-icon {
+        .truth-icon {
             font-size: 80px;
-            color: var(--warning-color);
+            color: var(--illusion-color);
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
@@ -542,38 +543,35 @@
             100% { transform: scale(1); }
         }
         
-        .warnings-container {
-            background: linear-gradient(135deg, rgba(198, 40, 40, 0.1) 0%, rgba(229, 57, 53, 0.1) 100%);
+        .examples-container {
+            background: linear-gradient(135deg, rgba(255, 87, 34, 0.1) 0%, rgba(255, 138, 101, 0.1) 100%);
             padding: 35px;
             border-radius: 20px;
             margin: 40px 0;
-            border-left: 8px solid var(--warning-color);
+            border-left: 8px solid var(--illusion-color);
         }
         
-        .warning-item {
+        .example-item {
             margin-bottom: 25px;
             padding: 15px;
             background: rgba(255, 255, 255, 0.8);
             border-radius: 12px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            position: relative;
-            overflow: hidden;
         }
         
-        .warning-item::before {
-            content: '⚠️';
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-        }
-        
-        .warning-text {
+        .example-text {
             font-size: 24px;
             line-height: 1.7;
+            text-align: center;
             margin-bottom: 10px;
-            color: var(--warning-color);
-            padding-right: 35px;
+            color: var(--illusion-color);
+        }
+        
+        .example-reference {
+            text-align: left;
+            font-size: 18px;
+            color: #666;
+            font-style: italic;
         }
         
         .contrast-section {
@@ -594,12 +592,12 @@
             overflow: hidden;
         }
         
-        .contrast-box.truth {
-            border-top: 5px solid #4CAF50;
+        .contrast-box.relative {
+            border-top: 5px solid var(--truth-color);
         }
         
-        .contrast-box.dogma {
-            border-top: 5px solid var(--warning-color);
+        .contrast-box.absolute {
+            border-top: 5px solid var(--illusion-color);
         }
         
         .contrast-title {
@@ -614,16 +612,16 @@
             font-size: 30px;
         }
         
-        .contrast-box.truth .contrast-title {
-            color: #4CAF50;
+        .contrast-box.relative .contrast-title {
+            color: var(--truth-color);
         }
         
-        .contrast-box.dogma .contrast-title {
-            color: var(--warning-color);
+        .contrast-box.absolute .contrast-title {
+            color: var(--illusion-color);
         }
         
         .key-point {
-            background: rgba(255, 152, 0, 0.1);
+            background: rgba(255, 64, 129, 0.1);
             border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
@@ -695,7 +693,7 @@
         }
         
         .comparison-table th {
-            background-color: var(--warning-color);
+            background-color: var(--primary-color);
             color: white;
             padding: 20px;
             font-size: 22px;
@@ -712,33 +710,42 @@
             border-bottom: none;
         }
         
-        .comparison-table .truth-cell {
+        .comparison-table .relative-cell {
             background-color: rgba(76, 175, 80, 0.1);
             text-align: center;
         }
         
-        .comparison-table .dogma-cell {
-            background-color: rgba(198, 40, 40, 0.1);
+        .comparison-table .absolute-cell {
+            background-color: rgba(255, 87, 34, 0.1);
             text-align: center;
         }
         
-        .danger-section {
-            background: linear-gradient(135deg, rgba(198, 40, 40, 0.2) 0%, rgba(229, 57, 53, 0.2) 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 40px 0;
-            border: 2px dashed var(--warning-color);
-            text-align: center;
-        }
-        
-        .danger-title {
-            color: var(--warning-color);
-            font-size: 28px;
-            margin-bottom: 20px;
+        .math-illustration {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 15px;
+            margin: 40px 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .equation {
+            font-size: 32px;
+            margin: 15px 0;
+            padding: 10px 25px;
+            background: var(--light-purple);
+            border-radius: 10px;
+            font-family: monospace;
+        }
+        
+        .equation-label {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-top: 10px;
+            font-weight: 500;
         }
         
         @media (max-width: 992px) {
@@ -762,7 +769,7 @@
                 font-size: 21px;
             }
             
-            .warning {
+            .verse {
                 font-size: 24px;
                 padding: 15px;
             }
@@ -810,7 +817,7 @@
                 font-size: 21px;
             }
             
-            .warning {
+            .verse {
                 font-size: 22px;
             }
             
@@ -824,12 +831,21 @@
                 font-size: 20px;
             }
             
-            .warning-icon {
+            .truth-icon {
                 font-size: 60px;
             }
             
             .contrast-box {
                 min-width: 100%;
+            margin-bottom: 20px;
+            padding: 25px;
+            font-size: 20px;
+            flex: 1 0 100%;
+            max-width: 100%;
+        }
+            
+            .contrast-section {
+                flex-direction: column;
             }
         }
         
@@ -863,7 +879,7 @@
                 font-size: 20px;
             }
             
-            .warning {
+            .verse {
                 font-size: 20px;
             }
             
@@ -919,6 +935,11 @@
                 padding: 12px 10px;
                 border-radius: 25px;
             }
+            
+            .equation {
+                font-size: 26px;
+                padding: 8px 15px;
+            }
         }
         
         @media (max-width: 400px) {
@@ -951,6 +972,11 @@
             .copy-link-btn {
                 font-size: 15px;
                 padding: 10px;
+            }
+            
+            .equation {
+                font-size: 22px;
+                padding: 6px 12px;
             }
         }
     </style>
@@ -992,117 +1018,109 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ حذارِ</h1>
+                <h1>❖ وهم الحقيقة المطلقة</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
             </div>
             
             <div class="article-content">
-                <div class="warning-section">
-                    <div class="warning-icon">⚠️</div>
-                    <p>حذارِ أخي المسلم المتمسّك بكتاب الله من أن تُبرّئ الإسلام والنبي مما ورد في التراث</p>
-                </div>
-                
-                <div class="warnings-container">
-                    <div class="warning-item">
-                        <div class="warning-text">حذارِ أن تُبرّئ الإسلام وتقول أنه ليس دين عنف</div>
-                    </div>
-                    <div class="warning-item">
-                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يتزوج من طفلة لا تتجاوز التسع سنوات</div>
-                    </div>
-                    <div class="warning-item">
-                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يأمر بقتل المرتد</div>
-                    </div>
-                    <div class="warning-item">
-                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يأمر بقتل كل من لا يؤمن برسالته</div>
-                    </div>
-                    <div class="warning-item">
-                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يأمر بغزو البلدان لنشر رسالته</div>
-                    </div>
-                    <div class="warning-item">
-                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يقُل جئتكم بالذبح</div>
-                    </div>
-                    <div class="warning-item">
-                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يأمر بقطع الرؤوس</div>
-                    </div>
-                    <div class="warning-item">
-                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يرجم أحد</div>
-                    </div>
-                    <div class="warning-item">
-                        <div class="warning-text">حذارِ أن تُبرّئ النبي وتقول أنه لم يأمر بسبي النساء</div>
-                    </div>
-                    <div class="warning-item">
-                        <div class="warning-text">حذارِ أن تُبرّئ النبي بأنه لم يتزوج من سبية بعد أن غزى بلدها وقتل زوجها وأبوها وعمها</div>
-                    </div>
-                </div>
-                
-                <div class="danger-section">
-                    <div class="danger-title">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        الخطر الحقيقي
-                    </div>
-                    <p>حذارِ يا أخي حذارِ، لأنه سيتم تكفيرك، والهجوم عليك، ليس من الغرب والملحدين والعلمانيين والليبراليين وغيرهم، بل من المسلمين الغيورين على دينهم والمدافعين عن النبي والمتمسكين برسالته والمحبين لرسول الله أكثر منك!!</p>
+                <div class="truth-section">
+                    <div class="truth-icon">❓</div>
+                    <p>لا توجد حقيقة_مطلقة يا صديقي. الحقيقة المطلقة الوحيدة التي أؤمن بها هو الله. جميع الأفكار والتدبرات هي حقائق نسبية، ترتفع نسبتها وتنخفض من شخص لآخر.</p>
                 </div>
                 
                 <div class="key-point">
-                    <div class="key-icon">❗</div>
-                    <div>الغريب أنهم سيتهمونك بالعمالة للغرب وللصهيونية والماسونية وأنك مأجور وتقبض راتب منهم لضرب "ثوابت الإسلام".</div>
+                    <div class="key-icon">⚠️</div>
+                    <div>فما أراه أنا حقيقة قد يراه غيري خرافة. وما يراه غيري حقيقة قد أراه أنا خرافة. لا تحتكر الحقيقة لنفسك وتصادر أفكار الآخرين، فكلنا في رحلة بحث والعلم لا يزال مستمرًا.</div>
                 </div>
                 
                 <div class="contrast-section">
-                    <div class="contrast-box truth">
+                    <div class="contrast-box relative">
                         <div class="contrast-title">
-                            <i class="fas fa-book contrast-icon"></i>
-                            المسلم الحقيقي
+                            <i class="fas fa-exchange-alt contrast-icon"></i>
+                            الحقيقة النسبية
                         </div>
-                        <p>يتمسك بكتاب الله ويعتمد على القرآن كمرجع أساسي، ويبحث عن الحقيقة بموضوعية دون تحيز</p>
+                        <p>الحقيقة النسبية هي ما ندركه من خلال تجاربنا وثقافتنا وبيئتنا. فهي تتغير وتتطور مع مرور الوقت ومع تطور المعرفة البشرية. ما نعتبره اليوم حقيقة قد يصبح غدًا خطأ أو يحتاج إلى تعديل.</p>
                     </div>
                     
-                    <div class="contrast-box dogma">
+                    <div class="contrast-box absolute">
                         <div class="contrast-title">
-                            <i class="fas fa-users contrast-icon"></i>
-                            المسلم التقليدي
+                            <i class="fas fa-ban contrast-icon"></i>
+                            وهم الحقيقة المطلقة
                         </div>
-                        <p>يدافع عن الموروث دون تمحيص، ويتهجم على كل من يخالف ما اعتاد عليه، ويكفر المخالفين</p>
+                        <p>هو اعتقاد البعض أنهم يمتلكون الحقيقة الكاملة والنهائية، وأن آرائهم هي المقياس الوحيد للصواب والخطأ. هذا الوهم يؤدي إلى احتكار الحقيقة ومصادرة آراء الآخرين وتكفيرهم أو اتهامهم بالجهل.</p>
                     </div>
                 </div>
                 
                 <div class="quote">
-                    "لذلك يا أخي العزيز، ولكي تكون مسلمًا حقًا ومُحبًّا للإسلام ومدافعًا عنه، عليك أن تُثبت كل هذه الجرائم للإسلام وللنبي وتؤمن بها ولا تُشكك بها أبدًا، وإلّا أصبحت كافرًا وزنديقًا."
+                    "فالحقيقة هو الله، لكن طريقة الوصول إلى هذا الإله تختلف من شخص لآخر."
+                </div>
+                
+                <div class="math-illustration">
+                    <div class="equation">5 + 5 = 10</div>
+                    <div class="equation-label">إجابة الطالب الأول</div>
+                    
+                    <div class="equation">4 + 6 = 10</div>
+                    <div class="equation-label">إجابة الطالب الثاني</div>
+                    
+                    <div class="equation">2 + 8 = 10</div>
+                    <div class="equation-label">إجابة الطالب الثالث</div>
+                    
+                    <p class="equation-explanation" style="text-align: center; margin-top: 20px;">
+                        كل هذه الإجابات صحيحة لكن طريقة التفكير تختلف من طالب لآخر.
+                    </p>
+                </div>
+                
+                <div class="key-point">
+                    <div class="key-icon">🔑</div>
+                    <div>لذلك لا تحتكر لنفسك الحقيقة ولا تجعل طريقتك في الوصول إلى الله على أنها هي الطريقة الصحيحة والوحيدة، هي حقيقة بالنسبة لك، لذلك ابقَ عليها ودع غيرك يصل إلى الله بطريقته ولا تعتدي عليه، فمن صُوَر الإعتداء أن يصادر الإنسان حق غيره في التفكير.</div>
+                </div>
+                
+                <div class="examples-container">
+                    <div class="example-item">
+                        <div class="example-text">فمن الجهل والإجحاف أن يصادر الانسان أفكار غيره ويدّعي أنها باطلة لمجرد أنها لم توافق أفكاره ولم تأتِ على هواه أو تُخالف موروثه</div>
+                    </div>
+                    <div class="example-item">
+                        <div class="example-text">فلا تُصادر يا صديقي العزيز أفكار غيرك</div>
+                    </div>
+                </div>
+                
+                <div class="verse">
+                    وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ
                 </div>
                 
                 <table class="comparison-table">
                     <tr>
-                        <th colspan="2">الموقف من القضايا المثيرة للجدل</th>
+                        <th colspan="2">الفرق بين الحقيقة النسبية ووهم الحقيقة المطلقة</th>
                     </tr>
                     <tr>
-                        <td class="truth-cell">من يبحث عن الحقيقة</td>
-                        <td class="dogma-cell">من يدافع عن الموروث</td>
+                        <td class="relative-cell">الحقيقة النسبية</td>
+                        <td class="absolute-cell">وهم الحقيقة المطلقة</td>
                     </tr>
                     <tr>
-                        <td>يبحث في المصادر بموضوعية</td>
-                        <td>يدافع عن كل ما ورد في التراث دون تمحيص</td>
+                        <td>تعترف بوجود آراء وأفكار مختلفة</td>
+                        <td>تعتبر الرأي الواحد هو الحقيقة الوحيدة</td>
                     </tr>
                     <tr>
-                        <td>يفرق بين الإسلام والتراث</td>
-                        <td>يخلط بين الإسلام والتراث</td>
+                        <td>تتقبل النقد وتتطور مع الزمن</td>
+                        <td>تتجمد في مكانها ولا تتقبل التغيير</td>
                     </tr>
                     <tr>
-                        <td>يقبل النقد البناء</td>
-                        <td>يرفض أي نقد ويهاجم الناقدين</td>
+                        <td>تحترم آراء الآخرين</td>
+                        <td>تصادر آراء الآخرين وتكفرهم</td>
                     </tr>
                     <tr>
-                        <td>يتعامل مع التاريخ بموضوعية</td>
-                        <td>يقدس التاريخ ويرفض أي مراجعة</td>
+                        <td>تسعى للفهم والتعلم المستمر</td>
+                        <td>تعتقد أنها تمتلك كل المعرفة</td>
                     </tr>
                     <tr>
-                        <td>يتقبل الاختلاف في الرأي</td>
-                        <td>يكفر المخالفين في الرأي</td>
+                        <td>تؤمن بأن الله هو الحقيقة المطلقة الوحيدة</td>
+                        <td>تخلط بين آراء البشر والحقيقة الإلهية</td>
                     </tr>
                 </table>
                 
                 <div class="conclusion">
-                    <h3>الخاتمة</h3>
-                    <p>هذه المقالة ليست دعوة للتشكيك في الإسلام، بل دعوة للتمييز بين الإسلام كدين سماوي وبين التراث البشري الذي قد يحوي أخطاء وتجاوزات. على المسلم العاقل أن يكون ناقدًا لما يقرأ، متبعًا لكتاب الله، متجنبًا اتهام الآخرين دون بينة.</p>
+                    <h3>الخلاصة</h3>
+                    <p>تذكّر قوله تعالى (وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ). الاختلاف سنة إلهية في الكون، وواجبنا احترام هذه الاختلافات وعدم احتكار الحقيقة لأنفسنا. الحقيقة المطلقة الوحيدة هي الله، وأما طرق الوصول إليه فهي متنوعة ومتعددة كما تعددت طرق الطلاب في حل المسألة الرياضية.</p>
                 </div>
             </div>
             
@@ -1127,7 +1145,7 @@
                                 <img src="icons/tel-soc.png" alt="مشاركة على واتساب">
                             </a>
                             <a href="#" onclick="shareOnSocial('twitter')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على تويter">
+                                <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
                             </a>
                         </div>
                         <button class="copy-link-btn" onclick="copyArticleLink()">
