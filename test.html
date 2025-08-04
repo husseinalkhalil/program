@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حوار مع شرفنطح (8) | حسين الخليل</title>
+    <title>حوار الصعاليك | حسين الخليل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -27,6 +27,8 @@
             --sheikh-color: #5E35B1;
             --trader-color: #9C27B0;
             --package-color: #009688;
+            --scoundrel1-color: #FF5722;
+            --scoundrel2-color: #9C27B0;
         }
         
         * {
@@ -321,13 +323,13 @@
             transform: scale(1.1);
         }
         
-        .sheikh-icon {
-            background-color: var(--sheikh-color);
+        .scoundrel1-icon {
+            background-color: var(--scoundrel1-color);
             color: white;
         }
         
-        .thinker-icon {
-            background-color: var(--thinker-color);
+        .scoundrel2-icon {
+            background-color: var(--scoundrel2-color);
             color: white;
         }
         
@@ -348,7 +350,7 @@
             animation: fadeIn 0.5s ease-out;
         }
         
-        .thinker-item {
+        .scoundrel1-item {
             flex-direction: row-reverse;
         }
         
@@ -364,13 +366,13 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
         
-        .sheikh-item .speaker-icon {
-            background-color: var(--trader-color);
+        .scoundrel1-item .speaker-icon {
+            background-color: var(--scoundrel1-color);
             color: white;
         }
         
-        .thinker-item .speaker-icon {
-            background-color: var(--thinker-color);
+        .scoundrel2-item .speaker-icon {
+            background-color: var(--scoundrel2-color);
             color: white;
         }
         
@@ -389,15 +391,15 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
         
-        .sheikh-item .message {
-            background-color: #F3E5F5;
-            border-right: 5px solid var(--trader-color);
+        .scoundrel1-item .message {
+            background-color: #FFECB3;
+            border-right: 5px solid var(--scoundrel1-color);
             margin-left: 20px;
         }
         
-        .thinker-item .message {
-            background-color: #E8F5E9;
-            border-right: 5px solid var(--thinker-color);
+        .scoundrel2-item .message {
+            background-color: #E1BEE7;
+            border-right: 5px solid var(--scoundrel2-color);
             margin-right: 20px;
         }
         
@@ -410,16 +412,16 @@
             border-style: solid;
         }
         
-        .sheikh-item .message::before {
+        .scoundrel1-item .message::before {
             right: -20px;
             border-width: 10px 0 10px 20px;
-            border-color: transparent transparent transparent #F3E5F5;
+            border-color: transparent transparent transparent #FFECB3;
         }
         
-        .thinker-item .message::before {
+        .scoundrel2-item .message::before {
             left: -20px;
             border-width: 10px 20px 10px 0;
-            border-color: transparent #E8F5E9 transparent transparent;
+            border-color: transparent #E1BEE7 transparent transparent;
         }
         
         .message-text {
@@ -702,60 +704,65 @@
             border-left: 3px solid #FF5722;
         }
         
-        .map-section {
-            display: flex;
-            justify-content: center;
-            margin: 40px 0;
-        }
-        
-        .map-container {
-            width: 100%;
-            max-width: 600px;
-            background: #FFF;
+        .social-impact-section {
+            background: #E3F2FD;
+            padding: 25px;
             border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin: 30px 0;
+            border-top: 4px solid #2196F3;
         }
         
-        .map-title {
+        .social-impact-section h3 {
+            color: #2196F3;
             text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 22px;
+            margin-bottom: 20px;
+            font-size: 24px;
         }
         
-        .map-image {
-            width: 100%;
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .impact-card {
+            background: #BBDEFB;
+            padding: 20px;
             border-radius: 10px;
-            border: 2px solid var(--secondary-color);
+            border-left: 3px solid #2196F3;
+            transition: all 0.3s;
         }
         
-        .map-legend {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 15px;
-            flex-wrap: wrap;
+        .impact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
         
-        .legend-item {
+        .impact-card h4 {
+            color: #0D47A1;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin: 5px 10px;
+            gap: 10px;
         }
         
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
+        .impact-card h4 i {
+            font-size: 24px;
         }
         
-        .islamic-scholars {
-            background-color: var(--thinker-color);
+        .impact-content {
+            font-size: 18px;
+            line-height: 1.6;
         }
         
-        .rejected-region {
-            background-color: #FF5722;
+        .irony {
+            color: #9C27B0;
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(156, 39, 176, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid #9C27B0;
         }
         
         @media print {
@@ -857,11 +864,11 @@
                 max-width: 80%;
             }
             
-            .sheikh-item .message {
+            .scoundrel1-item .message {
                 margin-left: 10px;
             }
             
-            .thinker-item .message {
+            .scoundrel2-item .message {
                 margin-right: 10px;
             }
         }
@@ -1055,190 +1062,314 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ حوار مع شرفنطح (8)</h1>
+                <h1>❖ حوار الصعاليك</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 10 مايو 2025</span>
             </div>
             
             <div class="article-content">
                 <div class="intro-section">
-                    <div class="focus-icon">🌏🕌</div>
-                    <p>حوار ساخر يكشف التناقض في رفض العلماء من مناطق معينة مع قبول كتبهم التي تعتبر أساس الدين، ويسلط الضوء على ازدواجية المعايير في التعامل مع المصادر الدينية.</p>
+                    <div class="focus-icon">🎭🔥</div>
+                    <p>حوار ساخر يكشف التناقض في صناعة الشهرة من خلال الاستفزاز الديني، ويسلط الضوء على الآلية التي تحول الصعاليك إلى مشاهير بفضل ردود الفعل المبالغ فيها.</p>
                 </div>
                 
                 <div class="dialogue-container">
                     <div class="dialogue-header">
-                        <h2 class="dialogue-title">الازدواجية في تقييم المصادر الدينية</h2>
+                        <h2 class="dialogue-title">صناعة الشهرة من خلال الاستفزاز الديني</h2>
                         <div class="participants">
                             <div class="participant">
-                                <div class="participant-icon sheikh-icon">👳‍♂️</div>
-                                <div class="participant-name">الشيخ</div>
+                                <div class="participant-icon scoundrel1-icon">🧑‍🦰</div>
+                                <div class="participant-name">الصعلوك الأول</div>
                             </div>
                             <div class="participant">
-                                <div class="participant-icon thinker-icon">🙍🏻‍♂️</div>
-                                <div class="participant-name">شرفنطح</div>
+                                <div class="participant-icon scoundrel2-icon">🤵‍♂️</div>
+                                <div class="participant-name">الصعلوك الثاني</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="dialogue-content">
-                        <!-- البداية -->
-                        <div class="dialogue-item thinker-item">
-                            <div class="speaker-icon">🙍🏻‍♂️</div>
+                        <!-- الجزء الأول -->
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
                             <div class="message">
                                 <div class="message-text">
-                                    شيخي بكرة ما رح اجي واحضر الدرس.
+                                    يا أخي ملّيت من هالروتين والوضع داقر هاليومين.
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- الشيخ -->
-                        <div class="dialogue-item sheikh-item">
-                            <div class="speaker-icon">👳‍♂️</div>
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
                             <div class="message">
                                 <div class="message-text">
-                                    ليه يا ابني? 
+                                    خير ليه؟
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- شرفنطح -->
-                        <div class="dialogue-item thinker-item">
-                            <div class="speaker-icon">🙍🏻‍♂️</div>
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
                             <div class="message">
                                 <div class="message-text">
-                                    في شيخ جاي من شرق اسيا ويريد يعمل محاضرة بالمسجد بكرة وبدي احضرها.
+                                    يا أخي أنا أحب الشهرة وشايف كثير من الصعاليك يلي مثلنا انشهروا وبدي انشهر مثلهم وأكون ذو شأن والناس كلها تعرفني وتتكلم عني.
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- الشيخ -->
-                        <div class="dialogue-item sheikh-item">
-                            <div class="speaker-icon">👳‍♂️</div>
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
                             <div class="message">
                                 <div class="message-text">
-                                    اعوذ بالله، اياك يا ابني، شرق اسيا كلها صوفية وفرس وروافض.
+                                    سهلة.
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- شرفنطح -->
-                        <div class="dialogue-item thinker-item">
-                            <div class="speaker-icon">🙍🏻‍♂️</div>
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
                             <div class="message">
                                 <div class="message-text">
-                                    هااا، يعني ما يجوز نسمع منهم ولا ناخذ دين منهم؟
+                                    كيف سهلة?!
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- الشيخ -->
-                        <div class="dialogue-item sheikh-item">
-                            <div class="speaker-icon">👳‍♂️</div>
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
                             <div class="message">
                                 <div class="message-text">
-                                    لا يا ابني لا يجوز.
+                                    يووووه أنت لساتك غر وبدك فت خبز حتى تفهم.
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- شرفنطح -->
-                        <div class="dialogue-item thinker-item">
-                            <div class="speaker-icon">🙍🏻‍♂️</div>
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
                             <div class="message">
                                 <div class="message-text">
-                                    أبدًا أبدًا ولا بأي شكل من الأشكال؟
+                                    مقبولة منك بس فهمني كيف؟
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- الشيخ -->
-                        <div class="dialogue-item sheikh-item">
-                            <div class="speaker-icon">👳‍♂️</div>
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
                             <div class="message">
                                 <div class="message-text">
-                                    أبدًا أبدًا، فالحذر يا ابني ويجب ان تعرف من أين تأخذ دينك.
+                                    أنت بدك تدخل التاريخ من أوسع أبوابه ولا من أوسخ أبوابه؟
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- شرفنطح -->
-                        <div class="dialogue-item thinker-item">
-                            <div class="speaker-icon">🙍🏻‍♂️</div>
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
                             <div class="message">
                                 <div class="message-text">
-                                    شيخي واشمعنى قبلتم منهم الصحيحين والسنن الأربعة وجعلتوها ثلاث أرباع الدين مع أن جميع أصحاب هذه الكتب من شرق آسيا!!!
+                                    ما يهم، المهم أدخل التاريخ وأصير مشهور حتى لو كان من أوسخ أبوابه.
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- الشيخ -->
-                        <div class="dialogue-item sheikh-item">
-                            <div class="speaker-icon">👳‍♂️</div>
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
                             <div class="message">
                                 <div class="message-text">
-                                    أنت أكيد حدا لعب بعقلك وأدخل فيه أفكار ليبرالية وعلمانية وماسونية.
+                                    تمام، معناها إنكش المسلمين وشوف كيف رح تنشهر وتتحول من صعلوك غير مشهور إلى صعلوك مشهور.
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- خريطة شرق آسيا والعلماء -->
-                        <div class="map-section">
-                            <div class="map-container">
-                                <div class="map-title">مناطق علماء الحديث الرئيسية</div>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Map_of_West_Asia.svg/1200px-Map_of_West_Asia.svg.png" alt="خريطة شرق آسيا" class="map-image">
-                                <div class="map-legend">
-                                    <div class="legend-item">
-                                        <div class="legend-color islamic-scholars"></div>
-                                        <div>موطن علماء الحديث الكبار</div>
-                                    </div>
-                                    <div class="legend-item">
-                                        <div class="legend-color rejected-region"></div>
-                                        <div>مناطق مرفوضة بحسب الشيخ</div>
-                                    </div>
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    يا أخي الصعلوك لا تتكلم بالألغاز، فهمني كيف؟
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- ازدواجية المعايير -->
-                        <div class="double-standards-section">
-                            <h3><i class="fas fa-balance-scale-right"></i> الازدواجية في تقييم المصادر الدينية</h3>
-                            <div class="standards-grid">
-                                <div class="standard-card">
-                                    <h4><i class="fas fa-globe-asia"></i> رفض المنطقة الجغرافية</h4>
-                                    <div class="standard-content">
-                                        رفض علماء شرق آسيا بحجة أنهم صوفية وروافض
-                                        <div class="hypocrisy">
-                                            التناقض: قبول كتبهم التي تعتبر أساس الدين
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    حاول إثارة المسلمين واستفزازهم من خلال مقدساتهم.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    ما فهمت عليك.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    يعني حاول تسيء لنبيهم أو ترسم صورة كاريكاتورية عنه أو تحرق شي نسخة من كتابهم المقدس وتوثّق فعلك بالصوت والصورة.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    بس ممكن ما يهتمون لأن هذا الفعل لا يقدم ولا يؤخر ولا يؤثر على دينهم.!!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    هذا الكلام صحيح لكن هم لهم رأي آخر، هم تحركهم عواطفهم، وبمجرد أن ينتقد شخص مقدساتهم رح تثور ثائرتهم، ورح يشهروك من دون ما تدفعلهم ولا فلس ومن دون ما تعمل أي حملة اعلانية ولا تدفع شي، الله وكيلك يعملولك دعاية مجانية ما تحلم بيها، أنت جرّب وما رح تخسر شي.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    ماشي رح أجرّب…
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="quote-box">
+                            <div class="quote-icon">❝</div>
+                            <p>وبعد الانتهاء من هذا الحوار، قام الصعلوك الأول بحرق نسخة من القرآن لأنها أسهل طريقة، كونه لا يجيد القراءة ليقرأ الكتب ليستهزء بها ولا يجيد الرسم ليرسم نبي الإسلام بطريقة ساخرة، فوجد أن أسهل طريقة لاستفزاز المسلمين ودغدغة عواطفهم هي حرق نسخة من كتابهم المقدس تنفيذًا لنصيحة صديقه الصعلوك الثاني.</p>
+                        </div>
+                        
+                        <!-- الجزء الثاني -->
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    يا رجل وينك من زمان، لك أنت كنز الله وكيلك.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    ها بشّر شصار معاك؟ لأن الجوال عندي كان عطلان وما تابعت الأحداث.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    يا سيدي اسمي صار على كل مواقع التواصل الاجتماعي وكل القنوات الفضائية صارت تتحدث عني بعد ما كنت صعلوك محدا داري عني.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    ممتاااااز، ومين عمل لك شُهرة؟
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    مثل ما قلت يا أخي الصعلوك، المسلمين هم يلي شهروني، يا رجل تصور بمجرد اني حرقت القرآن وصوّرت الحادثة، لسى ما وصلت البيت إلّا وصرت ترند على كل المواقع وصارت القنوات الفضائية تتكلم عني وصرت شغلة بعد ما كنت نكرة.
+                                    تصوّر كنت ولا شي، يعني حتى جاري السبعيني كان كل ما يشوفني يتفّ بوجهي لأني عطّال بطّال لا شغلة ولا عملة.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    هي الأخبار الطيبة، والآن صار جارك يشوفك ذو شأن بعد ما صرت ترند.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    لأ، لساته يتفّ بوجهي، 😏
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    له له ليه؟
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item scoundrel1-item">
+                            <div class="speaker-icon">🧑‍🦰</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    طلع ما يتابع أخبار ولا يستخدم الانترنت، يعني لساتني بنظره صعلوك غير مشهور….
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- تأثيرات اجتماعية -->
+                        <div class="social-impact-section">
+                            <h3><i class="fas fa-chart-line"></i> تأثيرات الاستفزاز الديني على صناعة الشهرة</h3>
+                            <div class="impact-grid">
+                                <div class="impact-card">
+                                    <h4><i class="fas fa-fire"></i> آلية الاستفزاز</h4>
+                                    <div class="impact-content">
+                                        استخدام الاستفزاز الديني كأسهل طريق للشهرة
+                                        <div class="irony">
+                                            المفارقة: الاستفزاز لا يؤثر على الدين لكنه يصنع مشاهير من لا شيء
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <div class="standard-card">
-                                    <h4><i class="fas fa-book"></i> قبول المصادر المكتوبة</h4>
-                                    <div class="standard-content">
-                                        اعتبار الصحيحين والسنن الأربعة مصادر أساسية للدين
-                                        <div class="hypocrisy">
-                                            التناقض: رفض العلماء المعاصرين من نفس المناطق
+                                <div class="impact-card">
+                                    <h4><i class="fas fa-users"></i> دور الجمهور</h4>
+                                    <div class="impact-content">
+                                        تحويل الصعاليك إلى مشاهير من خلال ردود الفعل المبالغ فيها
+                                        <div class="irony">
+                                            المفارقة: الجمهور يخدم أهداف من يستهزئ به
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <div class="standard-card">
-                                    <h4><i class="fas fa-user-graduate"></i> معيار أخذ الدين</h4>
-                                    <div class="standard-content">
-                                        التأكيد على ضرورة معرفة مصدر الدين
-                                        <div class="hypocrisy">
-                                            التناقض: عدم تطبيق نفس المعيار على المؤلفين من شرق آسيا
+                                <div class="impact-card">
+                                    <h4><i class="fas fa-globe"></i> الانتشار الإعلامي</h4>
+                                    <div class="impact-content">
+                                        تحقيق انتشار واسع دون تكلفة إعلانية
+                                        <div class="irony">
+                                            المفارقة: وسائل الإعلام تقدم دعاية مجانية للمستهزئين
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <div class="standard-card">
-                                    <h4><i class="fas fa-comments"></i> التعامل مع النقد</h4>
-                                    <div class="standard-content">
-                                        اتهام شرفنطح بالليبرالية والعلمانية لمجرد طرح سؤال
-                                        <div class="hypocrisy">
-                                            التناقض: مطالبة الآخرين بقبول الآراء دون نقاش
+                                <div class="impact-card">
+                                    <h4><i class="fas fa-home"></i> الشهرة الحقيقية</h4>
+                                    <div class="impact-content">
+                                        محدودية تأثير الشهرة الإلكترونية على الواقع
+                                        <div class="irony">
+                                            المفارقة: الشهرة الإلكترونية لا تغير نظرة الجيران في الواقع
                                         </div>
                                     </div>
                                 </div>
@@ -1246,11 +1377,12 @@
                         </div>
                         
                         <!-- خاتمة الحوار -->
-                        <div class="dialogue-item thinker-item">
-                            <div class="speaker-icon">🙍🏻‍♂️</div>
+                        <div class="dialogue-item scoundrel2-item">
+                            <div class="speaker-icon">🤵‍♂️</div>
                             <div class="message">
                                 <div class="message-text">
-                                    وهكذا انتهى الحوار ليتركنا نتساءل: هل قبول المصادر الدينية يجب أن يعتمد على مضمونها أم على جغرافية أصحابها؟
+                                    وهكذا يا أصدقائي الكرام، انتهى هذا الحوار بين الصعلوكان بعد أن أصبح الصعلوك الأول من المشاهير بفضل المسلمين الذين جعلوا من الحمقى والصعاليك مشاهير، وانتظرونا بالحلقة القادمة بصعلوك جديد سينشهر على يد المسلمين.
+                                    <div style="margin-top: 15px; font-style: italic; text-align: center;">وتوتة توتة خلصت الحدوتة.</div>
                                 </div>
                             </div>
                         </div>
@@ -1259,12 +1391,12 @@
                 
                 <div class="quote-box">
                     <div class="quote-icon">❝</div>
-                    <p>ازدواجية المعايير في تقييم المصادر الدينية تكشف أن التحيز الجغرافي يتغلب أحيانًا على الموضوعية العلمية</p>
+                    <p>أكبر خدمة تقدمها للصعلوك هي أن تجعله مشهوراً، وأسوأ رد على الاستفزاز هو منحه الانتشار</p>
                 </div>
                 
                 <div class="conclusion">
                     <h3>الخلاصة</h3>
-                    <p>هذا الحوار الساخر يكشف التناقض في رفض العلماء من مناطق معينة مع قبول كتبهم التي تعتبر أساس الدين. يظهر بوضوح الازدواجية في المعايير حيث يتم رفض العلماء المعاصرين من شرق آسيا بحجة أنهم صوفية وروافض، بينما يتم قبول كتب علماء من نفس المنطقة كالبخاري ومسلم والسنن الأربعة كمراجع أساسية للدين. الحوار يوضح أيضًا آلية الدفاع التقليدية المتمثلة في اتهام السائل بالانحراف الفكري بدلاً من الإجابة على أسئلته المنطقية. كما يكشف عن تحيز جغرافي يطغى على الموضوعية العلمية في تقييم المصادر الدينية.</p>
+                    <p>هذا الحوار الساخر يكشف آلية صناعة الشهرة من خلال الاستفزاز الديني. يظهر بوضوح كيف يمكن للاستفزاز البسيط أن يحول شخصاً مغموراً إلى مشهور بين ليلة وضحاها، وذلك بفضل ردود الفعل المبالغ فيها التي تمنحه انتشاراً واسعاً دون أي تكلفة. الحوار يوضح أيضاً المفارقة في أن الجمهور المستهدف يصبح أداة في يد من يستهزئ به، حيث يقدم له دعاية مجانية لا يحلم بها. كما يكشف عن محدودية تأثير الشهرة الإلكترونية على الواقع، حيث تظل نظرة المجتمع المحلي للمستهزئ كما هي دون تغيير.</p>
                 </div>
             </div>
             
