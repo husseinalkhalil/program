@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>النقل على العقل | حسين الخليل</title>
+    <title>وهم الحواس في الإلحاد | حسين الخليل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -21,8 +21,8 @@
             --border-color: #E0E0E0;
             --header-purple: #4527A0;
             --mobile-header-height: 70px;
-            --mind-color: #1976D2;
-            --transfer-color: #D32F2F;
+            --sense-color: #7B1FA2;
+            --faith-color: #0288D1;
         }
         
         * {
@@ -188,7 +188,7 @@
             right: 0;
             width: 100%;
             height: 8px;
-            background: linear-gradient(to right, var(--mind-color), var(--accent-color));
+            background: linear-gradient(to right, var(--sense-color), var(--accent-color));
         }
         
         .article-header {
@@ -207,12 +207,12 @@
             margin: 0 auto;
             width: 120px;
             height: 5px;
-            background: linear-gradient(to right, var(--mind-color), var(--accent-color));
+            background: linear-gradient(to right, var(--sense-color), var(--accent-color));
             border-radius: 3px;
         }
         
         h1 {
-            color: var(--mind-color);
+            color: var(--sense-color);
             font-size: 38px;
             margin-bottom: 20px;
             font-weight: 700;
@@ -231,7 +231,7 @@
         }
         
         .date-icon {
-            color: var(--mind-color);
+            color: var(--sense-color);
         }
         
         .article-content {
@@ -246,14 +246,14 @@
             text-align: center;
             margin: 40px 0;
             padding: 30px;
-            background: rgba(25, 118, 210, 0.1);
+            background: rgba(123, 31, 162, 0.1);
             border-radius: 20px;
-            border-left: 8px solid var(--mind-color);
+            border-left: 8px solid var(--sense-color);
         }
         
-        .mind-icon {
+        .sense-icon {
             font-size: 80px;
-            color: var(--mind-color);
+            color: var(--sense-color);
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
@@ -264,95 +264,74 @@
             100% { transform: scale(1); opacity: 0.7; }
         }
         
-        .mind-animation {
+        .senses-container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
+            gap: 25px;
             margin: 40px 0;
-            position: relative;
+        }
+        
+        .sense-card {
+            width: 200px;
             height: 200px;
-        }
-        
-        .brain {
-            position: relative;
-            z-index: 2;
-            font-size: 80px;
-            color: var(--mind-color);
-            animation: brainFloat 4s infinite ease-in-out;
-        }
-        
-        @keyframes brainFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-        
-        .thought-bubble {
-            position: absolute;
             background: white;
-            border-radius: 50%;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            animation: floatBubble 8s infinite linear;
-            opacity: 0;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
         }
         
-        .thought-bubble:nth-child(1) {
-            width: 60px;
-            height: 60px;
-            top: -30px;
-            left: 100px;
-            animation-delay: 0s;
+        .sense-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
-        .thought-bubble:nth-child(2) {
-            width: 80px;
-            height: 80px;
-            top: 50px;
-            left: -100px;
-            animation-delay: 1s;
+        .sense-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--sense-color), var(--accent-color));
         }
         
-        .thought-bubble:nth-child(3) {
-            width: 70px;
-            height: 70px;
-            top: 120px;
-            left: 80px;
-            animation-delay: 2s;
+        .sense-icon-card {
+            font-size: 50px;
+            color: var(--sense-color);
+            margin-bottom: 15px;
         }
         
-        .thought-bubble:nth-child(4) {
-            width: 50px;
-            height: 50px;
-            top: 50px;
-            right: -100px;
-            animation-delay: 3s;
+        .sense-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--sense-color);
+            margin-bottom: 10px;
         }
         
-        @keyframes floatBubble {
-            0% { 
-                transform: scale(0.2) translate(0, 0); 
-                opacity: 0;
-            }
-            20% { 
-                transform: scale(1) translate(0, -20px); 
-                opacity: 1;
-            }
-            80% { 
-                transform: scale(1) translate(0, -40px); 
-                opacity: 1;
-            }
-            100% { 
-                transform: scale(0.2) translate(0, -60px); 
-                opacity: 0;
-            }
+        .sense-description {
+            font-size: 16px;
+            color: var(--text-color);
         }
         
-        .thought-content {
-            font-size: 24px;
-            color: var(--mind-color);
-            font-weight: bold;
+        .sense-card.faith {
+            background: linear-gradient(135deg, rgba(2, 136, 209, 0.1) 0%, rgba(123, 31, 162, 0.1) 100%);
+        }
+        
+        .sense-card.faith .sense-icon-card {
+            color: var(--faith-color);
+        }
+        
+        .sense-card.faith .sense-title {
+            color: var(--faith-color);
         }
         
         .content-paragraphs p {
@@ -367,6 +346,12 @@
         .content-paragraphs p:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, rgba(255, 213, 79, 0.4) 40%);
+            padding: 0 5px;
+            font-weight: 500;
         }
         
         .conclusion {
@@ -388,7 +373,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(to right, var(--mind-color), var(--accent-color));
+            background: linear-gradient(to right, var(--sense-color), var(--accent-color));
             border-radius: 3px;
         }
         
@@ -546,12 +531,6 @@
             animation: fadeOut 0.2s ease-out forwards;
         }
         
-        .highlight {
-            background: linear-gradient(transparent 60%, rgba(255, 213, 79, 0.4) 40%);
-            padding: 0 5px;
-            font-weight: 500;
-        }
-        
         @media print {
             .header, .article-actions, .back-btn {
                 display: none;
@@ -583,6 +562,15 @@
             
             h1 {
                 font-size: 32px;
+            }
+            
+            .senses-container {
+                gap: 20px;
+            }
+            
+            .sense-card {
+                width: 180px;
+                height: 180px;
             }
         }
         
@@ -626,16 +614,17 @@
                 font-size: 20px;
             }
             
-            .mind-icon {
+            .sense-icon {
                 font-size: 60px;
             }
             
-            .mind-animation {
-                height: 150px;
+            .senses-container {
+                gap: 15px;
             }
             
-            .brain {
-                font-size: 60px;
+            .sense-card {
+                width: 160px;
+                height: 160px;
             }
         }
         
@@ -721,6 +710,18 @@
             .intro-section {
                 padding: 25px 15px;
             }
+            
+            .senses-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .sense-card {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                min-height: 160px;
+            }
         }
         
         @media (max-width: 400px) {
@@ -794,35 +795,89 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ النقل على العقل</h1>
+                <h1>❖ وهم الحواس في الإلحاد، الحقيقة أوسع مما يُرى</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
             </div>
             
             <div class="article-content">
                 <div class="intro-section">
-                    <div class="mind-icon">🧠</div>
-                    <p>هذه المقالة تبحث في صراع النقل والعقل في المجتمعات التي ترفض التفكير النقدي، وتسلط الضوء على معاناة المفكرين الحقيقيين في مواجهة أنصار التلقين الأعمى.</p>
+                    <div class="sense-icon">👁️</div>
+                    <p>هذه المقالة تبحث في مغالطة الإلحاد القائمة على الاعتماد الحصري على الحواس، وتكشف عن محدودية الحواس البشرية في إدراك الحقيقة الكاملة للوجود.</p>
                 </div>
                 
-                <div class="mind-animation">
-                    <div class="brain">🧠</div>
-                    <div class="thought-bubble"><div class="thought-content">؟</div></div>
-                    <div class="thought-bubble"><div class="thought-content">💡</div></div>
-                    <div class="thought-bubble"><div class="thought-content">❓</div></div>
-                    <div class="thought-bubble"><div class="thought-content">✨</div></div>
+                <div class="senses-container">
+                    <div class="sense-card">
+                        <div class="sense-icon-card">👁️</div>
+                        <div class="sense-title">البصر</div>
+                        <div class="sense-description">لا ترى الأشعة فوق البنفسجية ولا تحت الحمراء</div>
+                    </div>
+                    
+                    <div class="sense-card">
+                        <div class="sense-icon-card">✋</div>
+                        <div class="sense-title">اللمس</div>
+                        <div class="sense-description">لا تلمس الجاذبية مع أننا نحيا تحت سلطانها</div>
+                    </div>
+                    
+                    <div class="sense-card">
+                        <div class="sense-icon-card">👂</div>
+                        <div class="sense-title">السمع</div>
+                        <div class="sense-description">لا تسمع الذبذبات العالية أو المنخفضة جدًا</div>
+                    </div>
+                    
+                    <div class="sense-card faith">
+                        <div class="sense-icon-card">💡</div>
+                        <div class="sense-title">الإيمان</div>
+                        <div class="sense-description">ترى الأثر فتعرف المؤثر</div>
+                    </div>
                 </div>
                 
                 <div class="content-paragraphs">
-                    <p>في المجتمعات التي تقدّس النقل على العقل، يصبح التفكير النقدي والتساؤل جريمة، ويُنظر إلى من يستخدم عقله كخارج عن المألوف أو حتى كخطر يهدد “المسلمات”. هؤلاء الذين يعتمدون على النقل وحده، دون تدبُّر أو تحليل، يشعرون بالتهديد عندما يواجهون فكرة جديدة أو قراءة مختلفة، فيكون ردّهم الافتراضي ليس بالحوار، بل <span class="highlight">بالشتم والتخوين والتكفير</span> أحيانًا.</p>
+                    <p>كثيرون ممن ينكرون وجود الله أو عوالم الغيب، يلوذون بحجة ظاهرها عقلانية: <span class="highlight">“لا أؤمن إلّا بما أراه وألمسه وأدركه بحواسي”</span>. ويزعمون أن موقفهم علمي بحت.</p>
                     
-                    <p>لكن في الحقيقة، الشتيمة من هؤلاء ليست إهانة، بل شهادة على أنك تفكر، وأنك تحررت من عقلية التلقين الأعمى. فالعقل هو أداة الإنسان الأولى للتمييز، والتشريع الإلهي نفسه في جوهره يخاطب العقول لا الحناجر المرددة. فحين تواجه مقاومة شرسة من أصحاب المنقول، اعلم أنك على طريق التفكر والتنوير، لأن الأفكار الراكدة وحدها لا تثير ردود الفعل، أما الأفكار الحية، فهي التي تُحدث الزلازل.</p>
+                    <p>ولكن لو نظرنا بعمق، لاكتشفنا أن هذا الموقف نفسه لا يقوم على منطق صلب، بل ينطوي على وهم خفي: <span class="highlight">وهم أن الحواس البشرية المحدودة قادرة على الإحاطة بكامل الوجود</span>.</p>
                     
-                    <p>ولهذا أقول: إذا أتتك الشتيمة من أصحاب النقل، فاعلم تمامًا انك من أصحاب العقل.</p>
+                    <p>إن الحواس الخمس أدوات إدراك قاصرة. لا تدرك كل ما هو موجود في الكون:
+                    <br>• لا ترى العين البشرية الأشعة فوق البنفسجية ولا تحت الحمراء، مع أنها تملأ الفضاء.
+                    <br>• لا تلمس اليد الجاذبية، ولكننا نحيا تحت سلطانها بلا انقطاع.
+                    <br>• لا تسمع الأذن الذبذبات ذات الترددات العالية جدًا أو المنخفضة جدًا، رغم أنها تحيط بنا.</p>
+                    
+                    <p>فلو كان الواقع محصورًا بما تدركه الحواس فقط، لكان أغلب الكون مجهولًا ومعدومًا بالنسبة للإنسان!
+                    وحتى العقل نفسه (الذي هو أداة التفكير والإدراك) لا تراه العين ولا تلمسه اليد، فهل يعني هذا أنه وهم؟</p>
+                    
+                    <p>الحقيقة أن الوهم الأكبر ليس في الإيمان بالغيب، بل في الظن أن ما تقع عليه الحواس هو وحده الحقيقة الكاملة.
+                    إن هذا الظن يحبس الإنسان في زنزانة الجسد، ويجعله سجين بصره ولمسه وسمعه، عاجزًا عن رؤية ما وراء ذلك.
+                    <span class="highlight">الكون أوسع، والحقيقة أعظم من أن تُختزل في إطار الحواس الخمس</span>.</p>
+                    
+                    <p>الإيمان بالله وعوالم الغيب ليس انصياعًا للجهل أو الوهم، بل هو امتداد طبيعي للمنهج العقلي السليم.
+                    <br>• نرى الأثر فندرك وجود المؤثر.
+                    <br>• نرى الحكمة والنظام فندرك أن هناك مدبرًا حكيمًا وراءها.
+                    <br>• ندرك أن حدود وعينا ليست نهاية الوجود، بل بداية البحث عنه.</p>
+                    
+                    <p>الله عز وجل، وإن غاب عن أنظارنا، فإن أثره ظاهر في كل شيء:
+                    في انتظام القوانين الكونية، في روعة النظام البيئي، في انسجام مكونات الحياة، وفي الشعور الفطري الذي يسكن القلب ويبحث عن معنى وغاية.</p>
+                    
+                    <p>أيها الإنسان، قف مع نفسك لحظةً، واسألها بصدق:
+                    هل أنت مجرد عين ترى وأذن تسمع ويد تلمس؟
+                    أم أن فيك عقلًا يدرك، وروحًا تتوق، وقلبًا يبحث عن المعنى؟</p>
+                    
+                    <p>لو كنت تحصر الحقيقة فيما تدركه حواسك، فكيف تؤمن بمشاعرك وعقلك وإرادتك؟
+                    هل رأيت يومًا فكرك؟ هل لمست حبك أو ألمك الداخلي؟ ومع ذلك تؤمن بوجودها لأنها تترك أثرًا حقيقيًا في حياتك.
+                    كذلك الإيمان بالله: ترى أثره وإن لم تره، تدركه بعقلك وقلبك، وإن لم تمسكه بيدك.</p>
+                    
+                    <p>الحقيقة أوسع من أن تحيط بها الأعين، وأعظم من أن تقيّدها الحواس.
+                    لا تجعل من قصور حواسك ميزانًا لوجود الله، ولا تجعل من عجزك عن إدراك الغيب ذريعة لإنكار الحقيقة الكبرى.</p>
+                    
+                    <p>فأعظم ما في الإنسان هو أنه قادر على الإيمان بما هو أوسع من الحواس: بعقله، بروحه، ببصيرته.
+                    إن رفض الإيمان بحجة أن الله غيبٌ لا تراه العين هو قمة السذاجة العلمية والفلسفية.
+                    الغيب لا ينفي وجوده أنه غائب عن الحواس، بل العجز عن إدراكه هو دليل على محدوديتنا نحن لا على نقص الحقيقة.</p>
+                    
+                    <p>الإيمان بالله ليس قفزًا في الظلام، بل هو استبصار بنور العقل والقلب معًا.
+                    فلا تحصر نفسك في سجن الحواس، ولا تقنع بالوهم الذي يحرمك من رؤية الوجود الكامل.</p>
                 </div>
                 
                 <div class="conclusion">
                     <h3>الخلاصة</h3>
-                    <p>الصراع بين النقل والعقل ليس جديدًا، ولكنه يتجدد في كل عصر بأشكال مختلفة. التحدي الحقيقي هو في الحفاظ على التوازن بين احترام الموروث والجرأة على التفكير النقدي. الشتائم والتخوين ليست سوى أسلحة الضعفاء الذين يخشون من قوة الفكر. فثِق بأن كل شتيمة توجه إليك بسبب تفكيرك النقدي هي في الحقيقة وسام شرف وإثبات على أنك تسير في الطريق الصحيح نحو التنوير والتحرر الفكري.</p>
+                    <p>الإلحاد الذي يعتمد على الحواس فقط هو وهم كبير ينبع من فهم قاصر لطبيعة الوجود. الكون أوسع بكثير مما تدركه حواسنا، والحقيقة لا تنحصر فيما نراه أو نلمسه. الإيمان بالله ليس إنكارًا للعقل، بل هو ذروة العقلانية، حيث يدرك الإنسان أن هناك عوالم تتجاوز حواسه المحدودة. الحواس مدخل للمعرفة، لكنها ليست نهايتها.</p>
                 </div>
             </div>
             
@@ -955,17 +1010,20 @@
             }
         });
         
-        // إنشاء تأثيرات الأفكار العقلية
-        function createThoughts() {
-            const thoughts = document.querySelectorAll('.thought-bubble');
-            thoughts.forEach((thought, index) => {
-                // التأخير في بدء الحركة لكل فقاعة
-                thought.style.animationDelay = `${index * 1.5}s`;
-            });
-        }
+        // تأثيرات الحواس
+        const senseCards = document.querySelectorAll('.sense-card');
         
-        // بدء التأثيرات عند تحميل الصفحة
-        window.addEventListener('load', createThoughts);
+        senseCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'scale(1.05)';
+                card.style.boxShadow = '0 15px 35px rgba(0,0,0,0.2)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+                card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+            });
+        });
     </script>
 </body>
 </html>
