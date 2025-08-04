@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كيف تُشيّطن أفكارك؟ | حسين الخليل</title>
+    <title>قصة قصيرة | حسين الخليل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #B71C1C;
-            --secondary-color: #FFCDD2;
-            --accent-color: #FF8A65;
+            --primary-color: #5D4037;
+            --secondary-color: #D7CCC8;
+            --accent-color: #FFAB00;
             --text-color: #333333;
             --light-bg: #F5F5F5;
             --light-beige: #F8F3E6;
             --article-beige: #F5EFE1;
-            --light-red: #FFEBEE;
+            --light-brown: #EFEBE9;
             --border-color: #E0E0E0;
-            --header-color: #C62828;
+            --header-color: #4E342E;
             --mobile-header-height: 70px;
-            --mind-color: #1565C0;
-            --tradition-color: #7B1FA2;
-            --reason-color: #2196F3;
-            --misconception-color: #B71C1C;
-            --dark-color: #7B1C1C;
+            --story-color: #795548;
+            --quote-color: #6D4C41;
         }
         
         * {
@@ -40,7 +37,7 @@
             color: var(--text-color);
             background-color: var(--light-beige);
             min-height: 100vh;
-            background: linear-gradient(135deg, #f8f3e6 0%, #ffebee 100%);
+            background: linear-gradient(135deg, #f8f3e6 0%, #efebe9 100%);
             padding-top: var(--mobile-header-height);
         }
         
@@ -110,7 +107,7 @@
             right: -100%;
             width: 100%;
             height: calc(100vh - var(--mobile-header-height));
-            background: rgba(198, 40, 40, 0.98);
+            background: rgba(78, 52, 46, 0.98);
             z-index: 999;
             transition: right 0.4s ease;
             overflow-y: auto;
@@ -150,7 +147,7 @@
         }
         
         .btn:hover {
-            background-color: #A71A1A;
+            background-color: #4E342E;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
@@ -191,7 +188,7 @@
             right: 0;
             width: 100%;
             height: 8px;
-            background: linear-gradient(to right, var(--dark-color), var(--accent-color));
+            background: linear-gradient(to right, var(--story-color), var(--accent-color));
         }
         
         .article-header {
@@ -210,12 +207,12 @@
             margin: 0 auto;
             width: 120px;
             height: 5px;
-            background: linear-gradient(to right, var(--dark-color), var(--accent-color));
+            background: linear-gradient(to right, var(--story-color), var(--accent-color));
             border-radius: 3px;
         }
         
         h1 {
-            color: var(--dark-color);
+            color: var(--story-color);
             font-size: 38px;
             margin-bottom: 20px;
             font-weight: 700;
@@ -234,7 +231,7 @@
         }
         
         .date-icon {
-            color: var(--dark-color);
+            color: var(--story-color);
         }
         
         .article-content {
@@ -249,81 +246,124 @@
             margin-bottom: 25px;
         }
         
-        .verse {
-            color: var(--dark-color);
-            font-weight: bold;
-            font-size: 26px;
-            display: block;
-            margin: 30px 0;
+        .story-section {
             text-align: center;
-            line-height: 1.7;
-            padding: 20px;
-            background-color: var(--light-red);
-            border-radius: 12px;
-            border-right: 5px solid var(--dark-color);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin: 40px 0;
         }
         
-        .section-title {
-            color: var(--primary-color);
-            font-size: 30px;
-            margin: 40px 0 20px;
-            padding-right: 20px;
+        .story-icon {
+            font-size: 80px;
+            color: var(--story-color);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .story-content {
+            background: linear-gradient(135deg, rgba(121, 85, 72, 0.1) 0%, rgba(158, 126, 115, 0.1) 100%);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border-left: 8px solid var(--story-color);
             position: relative;
-            font-weight: 600;
         }
         
-        .section-title::before {
-            content: '';
-            position: absolute;
-            right: 0;
-            bottom: -7px;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            border-radius: 3px;
-        }
-        
-        ol, ul {
-            padding-right: 30px;
-            margin: 25px 0;
-        }
-        
-        li {
-            margin-bottom: 18px;
-            position: relative;
-            padding-right: 25px;
-            font-size: 22px;
-        }
-        
-        ul li::before {
-            content: '•';
-            color: var(--primary-color);
-            font-weight: bold;
-            position: absolute;
-            right: 0;
+        .story-text {
             font-size: 24px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            text-align: justify;
+            color: var(--story-color);
         }
         
-        ol {
-            counter-reset: section;
-        }
-        
-        ol li {
-            counter-increment: section;
-        }
-        
-        ol li::before {
-            content: counter(section) ".";
-            color: var(--primary-color);
-            font-weight: bold;
-            position: absolute;
-            right: 0;
+        .quote {
+            font-style: italic;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            background: rgba(255, 255, 255, 0.7);
+            border-left: 5px solid var(--accent-color);
+            position: relative;
             font-size: 22px;
+        }
+        
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 80px;
+            color: rgba(0,0,0,0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .characters-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+            justify-content: center;
+        }
+        
+        .character-card {
+            width: 250px;
+            padding: 25px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .character-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: var(--story-color);
+        }
+        
+        .character-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--story-color);
+        }
+        
+        .character-description {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .irony-section {
+            background: linear-gradient(135deg, rgba(255, 171, 0, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 40px 0;
+            border-right: 8px solid var(--accent-color);
+        }
+        
+        .irony-title {
+            color: var(--accent-color);
+            font-size: 26px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .irony-icon {
+            font-size: 32px;
         }
         
         .conclusion {
-            background-color: var(--light-red);
+            background-color: var(--light-brown);
             padding: 30px;
             border-radius: 15px;
             margin-top: 40px;
@@ -341,7 +381,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(to right, var(--dark-color), var(--accent-color));
+            background: linear-gradient(to right, var(--story-color), var(--accent-color));
             border-radius: 3px;
         }
         
@@ -443,7 +483,7 @@
             justify-content: center;
             gap: 10px;
             padding: 12px 18px;
-            background-color: var(--light-red);
+            background-color: var(--light-brown);
             color: var(--primary-color);
             border-radius: 30px;
             font-weight: 500;
@@ -518,230 +558,12 @@
                 border-radius: 0;
             }
             
-            .verse {
+            .story-content {
                 background: none;
-                border-right: none;
+                border-left: none;
                 padding: 0;
             }
         }
-        
-        .demonize-section {
-            text-align: center;
-            margin: 40px 0;
-        }
-        
-        .demonize-icon {
-            font-size: 80px;
-            color: var(--dark-color);
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .steps-container {
-            background: linear-gradient(135deg, rgba(123, 28, 28, 0.1) 0%, rgba(183, 28, 28, 0.1) 100%);
-            padding: 35px;
-            border-radius: 20px;
-            margin: 40px 0;
-            border-left: 8px solid var(--dark-color);
-        }
-        
-        .step-item {
-            margin-bottom: 25px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-        }
-        
-        .step-text {
-            font-size: 24px;
-            line-height: 1.7;
-            text-align: center;
-            margin-bottom: 10px;
-            color: var(--dark-color);
-        }
-        
-        .step-number {
-            background-color: var(--dark-color);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-weight: bold;
-            font-size: 22px;
-        }
-        
-        .contrast-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .contrast-box {
-            flex: 1;
-            min-width: 300px;
-            padding: 30px;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .contrast-box.truth {
-            border-top: 5px solid #4CAF50;
-        }
-        
-        .contrast-box.demonize {
-            border-top: 5px solid var(--dark-color);
-        }
-        
-        .contrast-title {
-            font-size: 26px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .contrast-icon {
-            font-size: 30px;
-        }
-        
-        .contrast-box.truth .contrast-title {
-            color: #4CAF50;
-        }
-        
-        .contrast-box.demonize .contrast-title {
-            color: var(--dark-color);
-        }
-        
-        .key-point {
-            background: rgba(255, 138, 101, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 5px solid var(--accent-color);
-            font-size: 22px;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-        
-        .key-icon {
-            font-size: 28px;
-            color: var(--accent-color);
-            min-width: 40px;
-            margin-top: 5px;
-        }
-        
-        .quote {
-            font-style: italic;
-            padding: 25px;
-            border-radius: 15px;
-            margin: 30px 0;
-            background: rgba(255, 255, 255, 0.7);
-            border-left: 5px solid var(--accent-color);
-            position: relative;
-            font-size: 22px;
-        }
-        
-        .quote::before {
-            content: '"';
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 80px;
-            color: rgba(0,0,0,0.1);
-            font-family: serif;
-            line-height: 1;
-        }
-        
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .comparison-table th {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 20px;
-            font-size: 22px;
-            text-align: center;
-        }
-        
-        .comparison-table td {
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 20px;
-        }
-        
-        .comparison-table tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .comparison-table .truth-cell {
-            background-color: rgba(76, 175, 80, 0.1);
-            text-align: center;
-        }
-        
-        .comparison-table .demonize-cell {
-            background-color: rgba(123, 28, 28, 0.1);
-            text-align: center;
-        }
-        
-        .demonize-animation {
-            display: flex;
-            justify-content: center;
-            margin: 40px 0;
-            position: relative;
-            height: 200px;
-        }
-        
-        .devil {
-            position: absolute;
-            font-size: 100px;
-            color: var(--dark-color);
-            animation: devil-move 5s infinite alternate;
-        }
-        
-        .thoughts {
-            position: absolute;
-            font-size: 24px;
-            color: var(--primary-color);
-            font-weight: bold;
-            animation: thoughts-fade 5s infinite;
-        }
-        
-        @keyframes devil-move {
-            0% { transform: translateX(-100px); }
-            100% { transform: translateX(100px); }
-        }
-        
-        @keyframes thoughts-fade {
-            0%, 100% { opacity: 0; transform: translateY(20px); }
-            50% { opacity: 1; transform: translateY(0); }
-        }
-        
-        .thought-1 { top: 20px; left: 50%; animation-delay: 0s; }
-        .thought-2 { top: 60px; left: 40%; animation-delay: 1s; }
-        .thought-3 { top: 100px; left: 60%; animation-delay: 2s; }
         
         @media (max-width: 992px) {
             .header-container {
@@ -756,17 +578,8 @@
                 font-size: 32px;
             }
             
-            .section-title {
-                font-size: 26px;
-            }
-            
-            .article-content {
-                font-size: 21px;
-            }
-            
-            .verse {
-                font-size: 24px;
-                padding: 15px;
+            .story-text {
+                font-size: 22px;
             }
         }
         
@@ -804,16 +617,8 @@
                 font-size: 28px;
             }
             
-            .section-title {
-                font-size: 24px;
-            }
-            
-            .article-content {
+            .story-text {
                 font-size: 21px;
-            }
-            
-            .verse {
-                font-size: 22px;
             }
             
             .conclusion {
@@ -826,24 +631,12 @@
                 font-size: 20px;
             }
             
-            .demonize-icon {
+            .story-icon {
                 font-size: 60px;
             }
             
-            .contrast-box {
-                min-width: 100%;
-            }
-            
-            .demonize-animation {
-                height: 150px;
-            }
-            
-            .devil {
-                font-size: 70px;
-            }
-            
-            .thoughts {
-                font-size: 18px;
+            .character-card {
+                width: 100%;
             }
         }
         
@@ -869,15 +662,7 @@
                 font-size: 26px;
             }
             
-            .section-title {
-                font-size: 22px;
-            }
-            
-            .article-content {
-                font-size: 20px;
-            }
-            
-            .verse {
+            .story-text {
                 font-size: 20px;
             }
             
@@ -933,18 +718,6 @@
                 padding: 12px 10px;
                 border-radius: 25px;
             }
-            
-            .demonize-animation {
-                height: 120px;
-            }
-            
-            .devil {
-                font-size: 50px;
-            }
-            
-            .thoughts {
-                font-size: 16px;
-            }
         }
         
         @media (max-width: 400px) {
@@ -978,6 +751,40 @@
                 font-size: 15px;
                 padding: 10px;
             }
+        }
+        
+        .story-scene {
+            height: 300px;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23795548" width="100" height="100"/><circle fill="%23FFAB00" cx="80" cy="20" r="10"/><path fill="%234E342E" d="M30,70 Q50,30 70,70 L50,90 Z"/></svg>');
+            border-radius: 15px;
+            margin: 40px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            padding: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .story-scene::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(78, 52, 46, 0.6);
+            border-radius: 15px;
+        }
+        
+        .scene-text {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
         }
     </style>
 </head>
@@ -1018,110 +825,76 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ كيف تُشيّطن أفكارك؟</h1>
+                <h1>❖ قصة قصيرة</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
             </div>
             
             <div class="article-content">
-                <div class="demonize-section">
-                    <div class="demonize-icon">😈</div>
-                    <p>كيف تتحول الأفكار البسيطة إلى أدوات تشيطنة وتضليل؟ هذه المقالة تكشف الأساليب التي يستخدمها البعض لتحويل النقد البناء إلى مؤامرات خيالية، وتوضح كيفية حماية عقلك من هذه الأساليب.</p>
+                <div class="story-section">
+                    <div class="story-icon">📖</div>
+                    <p>قصة تعكس تناقضات المجتمع بين المبادئ المعلنة والسلوكيات الخفية</p>
                 </div>
                 
-                <div class="key-point">
-                    <div class="key-icon">⚠️</div>
-                    <div>دائمًا مثّل دور الضحية وأن العالم بأكمله يتآمر عليك لأنك احتكرت وصفة بول البعير التي تشفي الأمراض لنفسك ولم تعطهم اياها ولم تعطهم طريقة صناعة الأقمار الصناعية والتحكم بها من الأرض.</div>
+                <div class="story-scene">
+                    <div class="scene-text">
+                        "في قرية تدّعي تطبيق الشريعة السمحة، بينما تتناقض أفعال أهلها مع مبادئها"
+                    </div>
                 </div>
                 
-                <div class="demonize-animation">
-                    <div class="devil">😈</div>
-                    <div class="thoughts thought-1">ماسونية!</div>
-                    <div class="thoughts thought-2">عملاء!</div>
-                    <div class="thoughts thought-3">دولار!</div>
-                </div>
-                
-                <div class="steps-container">
-                    <div class="step-item">
-                        <div class="step-number">1</div>
-                        <div class="step-text">اتهم كل من يحاول توعية الناس بتشغيل العقل بأنهم عملاء للماسونية ومأجورين وموظفين من قِبَل أعداء الإسلام</div>
+                <div class="characters-section">
+                    <div class="character-card">
+                        <div class="character-icon">👩</div>
+                        <div class="character-name">المرأة</div>
+                        <div class="character-description">ضحية المجتمع وقسوته، اتهمت بالزنا وعوقبت بلا محاكمة عادلة</div>
                     </div>
                     
-                    <div class="step-item">
-                        <div class="step-number">2</div>
-                        <div class="step-text">أنشئ مدونات أو مواقع بأسماء وهمية أو لأشخاص ذوي مكانة علمية لكتابة مقالات تحذر من "المؤامرة"</div>
+                    <div class="character-card">
+                        <div class="character-icon">👨‍⚖️</div>
+                        <div class="character-name">رجال القرية</div>
+                        <div class="character-description">"ملائكة الأرض" الذين يدّعون العصمة ويطبقون "الشريعة" حسب أهوائهم</div>
                     </div>
                     
-                    <div class="step-item">
-                        <div class="step-number">3</div>
-                        <div class="step-text">اكتب مقالات عن فوائد بول البعير وذيّلها بأسماء علماء من جامعات مرموقة كجامعة اوكسفورد أو هارفرد</div>
-                    </div>
-                    
-                    <div class="step-item">
-                        <div class="step-number">4</div>
-                        <div class="step-text">قم بتصوير تلك المقالات (التي كتبتها أنت) وأرفقها في تقاريرك كـ"أدلة"</div>
-                    </div>
-                    
-                    <div class="step-item">
-                        <div class="step-number">5</div>
-                        <div class="step-text">اطلب من أتباعك التأكد من هذه المصادر بنفسهم وأرفق رابط المدونة التي أنشأتها أنت</div>
+                    <div class="character-card">
+                        <div class="character-icon">📜</div>
+                        <div class="character-name">السنة المزعومة</div>
+                        <div class="character-description">آية "أكلتها المعزة" حسب رواية الإمام البخاري</div>
                     </div>
                 </div>
                 
-                <div class="contrast-section">
-                    <div class="contrast-box truth">
-                        <div class="contrast-title">
-                            <i class="fas fa-lightbulb contrast-icon"></i>
-                            التفكير النقدي
-                        </div>
-                        <p>التفكير النقدي يعتمد على البحث والتحليل الموضوعي، والاستماع لجميع الآراء، وفحص الأدلة قبل الوصول إلى الاستنتاجات.</p>
+                <div class="story-content">
+                    <div class="story-text">
+                        تم بنجاح تطبيق الشريعة السمحة على إحدى المومسات مستندين بذلك إلى "آية" أكلتها "المعزة" لكن الإمام البخاري جزاه الله خيرًا وأطعمه طيرًا نقلها لنا في السُنّة النبوية "المُطهّرة" في كتابه "أصح" كتاب بعد كتاب الله والذي يُشكّل ثلاث أرباع الدين والذي يلغي كلام الله أيضًا، بعد أن رأى قِرَدة يقومون برجم قِرّدة زانية، فتذكر تلك الآية التي أكلتها "المعزة" أثناء انشغال الصحابة في عزاء رسول الله.
                     </div>
                     
-                    <div class="contrast-box demonize">
-                        <div class="contrast-title">
-                            <i class="fas fa-skull contrast-icon"></i>
-                            التشيطنة
-                        </div>
-                        <p>التشيطنة تعتمد على التضليل، اختراع المؤامرات، استخدام الأدلة المزيفة، وتحويل الخلاف الفكري إلى حرب وجودية.</p>
+                    <div class="story-text">
+                        فرجمها كل رجال القرية "ملائكة الأرض" والمعصومين والمنزّهين عن العيوب الأخطاء والذنوب بلا هوادة، وبعد أن تأكدوا من موتها، غطّوها بثلاثة أغطية سوداء حتى لا تنكشف عورتها، لأن هذا تكريم وتشريف لها والذي يحاول الغرب الكافر والليبراليون والعلمانيون سلبها هذا التشريف والتكريم.
+                    </div>
+                    
+                    <div class="quote">
+                        "وفي المساء يا سادة يا كرام، وبعد أن صلّوا العشاء، وابتهلوا إلى ربهم بالدعاء، متضرعين له بالبكاء، منيبين إليه بإخلاص ووفاء"
+                    </div>
+                    
+                    <div class="story-text">
+                        وفي جنح الظلام الدامس وحتى لا يراهم الأخِلّاء، طافوا على الحسناوات من النساء، ليستلذوا بهن بعد تعب اليوم والعناء، فتذكروا تلك الحسناء الفاتنة، التي رجموها قبل المساء، كم كانت لطيفةً وكريمةً معهم، فهي ليست كهؤلاء النساء اللواتي يشترطن الدفع مقدمًا، فجهش أحد هؤلاء النبلاء بالبكاء وقال في نفسه: رحمها الله كانت تصبر علينا لآخر الشهر!!
                     </div>
                 </div>
                 
-                <div class="quote">
-                    "ثم قم بتصوير تلك المقالات (التي قمت أنت بإنشائها) وأرفقها في تقريرك وأنت تحذر أتباعك ممن تسميهم بالقرآنيين أو التنويريين"
+                <div class="irony-section">
+                    <div class="irony-title">
+                        <i class="fas fa-theater-masks irony-icon"></i>
+                        مفارقة القصة
+                    </div>
+                    <div class="story-text">
+                        تبرز القصة التناقض الصارخ بين المبادئ التي يعلنها المجتمع والسلوكيات التي يمارسها في الخفاء. فبينما يدّعي الرجال تطبيق الشريعة والعصمة من الأخطاء، نراهم يمارسون نفس الأفعال التي عاقبوا عليها المرأة، بل ويشعرون بالحنين إليها بعد موتها.
+                    </div>
+                    <div class="story-text">
+                        المشهد الأخير يوضح النفاق المجتمعي والازدواجية في المعايير، حيث يظهر الرجال بمظهر المتدينين الملتزمين أمام الملأ، بينما يمارسون في الخفاء ما يدينون غيرهم به.
+                    </div>
                 </div>
-                
-                <table class="comparison-table">
-                    <tr>
-                        <th colspan="2">مقارنة بين التفكير النقدي والتشيطنة</th>
-                    </tr>
-                    <tr>
-                        <td class="truth-cell">التفكير النقدي</td>
-                        <td class="demonize-cell">التشيطنة</td>
-                    </tr>
-                    <tr>
-                        <td>يبحث عن الحقيقة</td>
-                        <td>يصنع المؤامرات</td>
-                    </tr>
-                    <tr>
-                        <td>يعتمد على الأدلة الموثوقة</td>
-                        <td>يستخدم أدلة مزيفة ومقالات مفبركة</td>
-                    </tr>
-                    <tr>
-                        <td>يحترم الرأي الآخر</td>
-                        <td>يُشيطن المعارضين</td>
-                    </tr>
-                    <tr>
-                        <td>يشجع على الحوار</td>
-                        <td>يغلق باب النقاش</td>
-                    </tr>
-                    <tr>
-                        <td>يبني على المعرفة</td>
-                        <td>يبني على الخوف والجهل</td>
-                    </tr>
-                </table>
                 
                 <div class="conclusion">
-                    <h3>الخلاصة</h3>
-                    <p>التشيطنة هي أسلوب خطير لتضليل الناس وتحويل الأفكار البسيطة إلى مؤامرات خيالية. الحل هو تطوير التفكير النقدي، فحص المصادر، والتشكيك في أي ادعاءات غير مدعومة بأدلة موثوقة. كن يقظًا ولا تسمح لأحد أن يُشيطن عقلك أو يحولك إلى أداة لنشر الأكاذيب والمؤامرات الوهمية.</p>
+                    <h3>خلاصة القصة</h3>
+                    <p>هذه القصة تطرح تساؤلات عميقة حول مفهوم العدالة والنفاق المجتمعي. فهي تعري ازدواجية المعايير والتناقض بين المبادئ المعلنة والممارسات الفعلية. القصة تذكرنا بأن تطبيق الشريعة يجب أن يكون بإنصاف وعدل، لا بأنانية ونفاق. كما تنتقد الاعتماد على روايات ضعيفة لتبرير أفعال قاسية، وتكشف عن سوء استخدام الدين لتغطية الممارسات غير الأخلاقية.</p>
                 </div>
             </div>
             
