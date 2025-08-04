@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعهم يتكلمون، وواصل طريقك بسلام | حسين الخليل</title>
+    <title>هوامش على الطريق | حسين الخليل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -21,8 +21,8 @@
             --border-color: #E0E0E0;
             --header-purple: #4527A0;
             --mobile-header-height: 70px;
-            --peace-color: #4CAF50;
-            --calm-color: #0288D1;
+            --focus-color: #FF9800;
+            --progress-color: #4CAF50;
         }
         
         * {
@@ -188,7 +188,7 @@
             right: 0;
             width: 100%;
             height: 8px;
-            background: linear-gradient(to right, var(--peace-color), var(--accent-color));
+            background: linear-gradient(to right, var(--focus-color), var(--accent-color));
         }
         
         .article-header {
@@ -207,12 +207,12 @@
             margin: 0 auto;
             width: 120px;
             height: 5px;
-            background: linear-gradient(to right, var(--peace-color), var(--accent-color));
+            background: linear-gradient(to right, var(--focus-color), var(--accent-color));
             border-radius: 3px;
         }
         
         h1 {
-            color: var(--peace-color);
+            color: var(--focus-color);
             font-size: 38px;
             margin-bottom: 20px;
             font-weight: 700;
@@ -231,7 +231,7 @@
         }
         
         .date-icon {
-            color: var(--peace-color);
+            color: var(--focus-color);
         }
         
         .article-content {
@@ -246,14 +246,14 @@
             text-align: center;
             margin: 40px 0;
             padding: 30px;
-            background: rgba(76, 175, 80, 0.1);
+            background: rgba(255, 152, 0, 0.1);
             border-radius: 20px;
-            border-left: 8px solid var(--peace-color);
+            border-left: 8px solid var(--focus-color);
         }
         
-        .peace-icon {
+        .focus-icon {
             font-size: 80px;
-            color: var(--peace-color);
+            color: var(--focus-color);
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
@@ -264,21 +264,54 @@
             100% { transform: scale(1); opacity: 0.7; }
         }
         
-        .walking-animation {
+        .road-animation {
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 40px 0;
-            height: 200px;
+            height: 300px;
             position: relative;
+            overflow: hidden;
+        }
+        
+        .road {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: #555;
+            top: 50%;
+            z-index: 1;
+        }
+        
+        .road::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to right,
+                transparent,
+                transparent 20px,
+                var(--accent-color) 20px,
+                var(--accent-color) 40px
+            );
+            animation: roadMove 3s linear infinite;
+        }
+        
+        @keyframes roadMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-40px); }
         }
         
         .walking-person {
             position: relative;
             z-index: 3;
             font-size: 60px;
-            color: var(--calm-color);
-            animation: walking 8s linear infinite;
+            color: var(--progress-color);
+            animation: walking 10s linear infinite;
+            transform: translateX(-100%);
         }
         
         @keyframes walking {
@@ -286,74 +319,63 @@
             100% { transform: translateX(100%); }
         }
         
-        .speech-bubble {
+        .marginal-people {
             position: absolute;
-            background: white;
-            border-radius: 20px;
-            padding: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeSpeech 6s infinite;
-            opacity: 0;
+            font-size: 40px;
+            animation: fadeMargins 8s infinite;
+            opacity: 0.5;
             z-index: 2;
-            font-size: 18px;
-            max-width: 150px;
-            text-align: center;
         }
         
-        .speech-bubble:nth-child(1) {
-            top: 30px;
+        .marginal-people:nth-child(1) {
+            top: 80px;
             left: 100px;
             animation-delay: 0s;
         }
         
-        .speech-bubble:nth-child(2) {
-            top: 100px;
+        .marginal-people:nth-child(2) {
+            top: 150px;
             left: 200px;
             animation-delay: 2s;
         }
         
-        .speech-bubble:nth-child(3) {
-            top: 150px;
+        .marginal-people:nth-child(3) {
+            top: 220px;
             left: 50px;
             animation-delay: 4s;
         }
         
-        .speech-bubble:nth-child(4) {
-            top: 50px;
+        .marginal-people:nth-child(4) {
+            top: 80px;
             right: 100px;
             animation-delay: 1s;
         }
         
-        .speech-bubble:nth-child(5) {
-            top: 120px;
+        .marginal-people:nth-child(5) {
+            top: 150px;
             right: 200px;
             animation-delay: 3s;
         }
         
-        .speech-bubble:nth-child(6) {
-            top: 180px;
+        .marginal-people:nth-child(6) {
+            top: 220px;
             right: 50px;
             animation-delay: 5s;
         }
         
-        @keyframes fadeSpeech {
-            0% { opacity: 0; transform: scale(0.5); }
-            20% { opacity: 1; transform: scale(1); }
-            80% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(0.5); }
+        @keyframes fadeMargins {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 0.7; transform: scale(1); }
         }
         
-        .peace-container {
+        .focus-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin: 40px 0;
         }
         
-        .peace-card {
+        .focus-card {
             background: white;
             border-radius: 15px;
             padding: 25px;
@@ -361,29 +383,29 @@
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
-            border-top: 5px solid var(--peace-color);
+            border-top: 5px solid var(--focus-color);
             text-align: center;
         }
         
-        .peace-card:hover {
+        .focus-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
-        .peace-icon-card {
+        .focus-icon-card {
             font-size: 50px;
-            color: var(--peace-color);
+            color: var(--focus-color);
             margin-bottom: 15px;
         }
         
-        .peace-title {
+        .focus-title {
             font-size: 22px;
             font-weight: 600;
-            color: var(--peace-color);
+            color: var(--focus-color);
             margin-bottom: 15px;
         }
         
-        .peace-description {
+        .focus-description {
             font-size: 18px;
             color: var(--text-color);
         }
@@ -427,7 +449,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(to right, var(--peace-color), var(--accent-color));
+            background: linear-gradient(to right, var(--focus-color), var(--accent-color));
             border-radius: 3px;
         }
         
@@ -586,11 +608,11 @@
         }
         
         .quote-box {
-            background: rgba(76, 175, 80, 0.1);
+            background: rgba(255, 152, 0, 0.1);
             padding: 30px;
             border-radius: 15px;
             margin: 40px 0;
-            border-left: 5px solid var(--peace-color);
+            border-left: 5px solid var(--focus-color);
             text-align: center;
             font-style: italic;
             font-size: 24px;
@@ -603,7 +625,7 @@
             top: 20px;
             right: 20px;
             font-size: 40px;
-            color: var(--peace-color);
+            color: var(--focus-color);
             opacity: 0.3;
         }
         
@@ -640,7 +662,7 @@
                 font-size: 32px;
             }
             
-            .peace-container {
+            .focus-container {
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 20px;
             }
@@ -686,12 +708,16 @@
                 font-size: 20px;
             }
             
-            .peace-icon {
+            .focus-icon {
                 font-size: 60px;
             }
             
             .walking-person {
                 font-size: 50px;
+            }
+            
+            .road-animation {
+                height: 250px;
             }
         }
         
@@ -778,7 +804,7 @@
                 padding: 25px 15px;
             }
             
-            .peace-container {
+            .focus-container {
                 grid-template-columns: 1fr;
             }
         }
@@ -854,62 +880,67 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ دعهم يتكلمون، وواصل طريقك بسلام</h1>
+                <h1>❖ هوامش على الطريق</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
             </div>
             
             <div class="article-content">
                 <div class="intro-section">
-                    <div class="peace-icon">🕊️</div>
-                    <p>هذه المقالة تقدم فلسفة الهدوء والتجاهل الإيجابي في مواجهة الضغوط والمستفزين، وكيف يمكن الحفاظ على السلام الداخلي وسط ضجيج الحياة.</p>
+                    <div class="focus-icon">🚶‍♂️</div>
+                    <p>هذه المقالة تقدم رؤية للتعامل مع الأشخاص الذين يهدرون وقتهم في مراقبتك ونقدك، وكيف يمكن الاستمرار في طريق النجاح رغم الضجيج المحيط.</p>
                 </div>
                 
-                <div class="walking-animation">
+                <div class="road-animation">
+                    <div class="road"></div>
                     <div class="walking-person">🚶‍♂️</div>
-                    <div class="speech-bubble">لماذا لا ترد؟</div>
-                    <div class="speech-bubble">أنت على خطأ!</div>
-                    <div class="speech-bubble">استمع إليّ!</div>
-                    <div class="speech-bubble">سأثبت أنك مخطئ</div>
-                    <div class="speech-bubble">لا تتجاهلني!</div>
-                    <div class="speech-bubble">ستندم على صمتك</div>
+                    <div class="marginal-people">👁️🗨️</div>
+                    <div class="marginal-people">🗣️</div>
+                    <div class="marginal-people">👁️</div>
+                    <div class="marginal-people">👀</div>
+                    <div class="marginal-people">👁️</div>
+                    <div class="marginal-people">👁️🗯️</div>
                 </div>
                 
-                <div class="peace-container">
-                    <div class="peace-card">
-                        <div class="peace-icon-card">🧘</div>
-                        <div class="peace-title">لا تغضب</div>
-                        <div class="peace-description">الغضب لن يغير شيئًا، بل سيستهلك طاقتك ويفقدك هدوءك. تذكّر أن ما يثير حنقك اليوم سيبدو تافهًا بعد وقت</div>
+                <div class="focus-container">
+                    <div class="focus-card">
+                        <div class="focus-icon-card">👁️</div>
+                        <div class="focus-title">مراقبون بلا هدف</div>
+                        <div class="focus-description">يجعلون من مراقبتك ونقدك مهمة يومية، ليس لأنهم يملكون رأيًا قيمًا، بل لأنهم لا يستطيعون تجاهلك</div>
                     </div>
                     
-                    <div class="peace-card">
-                        <div class="peace-icon-card">🤐</div>
-                        <div class="peace-title">لا تجادل</div>
-                        <div class="peace-description">بعض العقول مغلقة، والجاهل لن يفهم، والمتحيّز لن يسمعك. لا تضيع وقتك في محاولات إقناع من لا يريد أن يسمع</div>
+                    <div class="focus-card">
+                        <div class="focus-icon-card">💭</div>
+                        <div class="focus-title">اعتراف بتأثيرك</div>
+                        <div class="focus-description">لو لم تكن مهمًّا لما أضاعوا وقتهم في متابعتك، هم يعترفون بتأثيرك عليهم بطريقتهم الخاصة</div>
                     </div>
                     
-                    <div class="peace-card">
-                        <div class="peace-icon-card">🚶‍♂️</div>
-                        <div class="peace-title">واصل طريقك</div>
-                        <div class="peace-description">كن هادئًا، تمسك بحكمتك، واترك للزمن أن يثبت الحقائق بدلًا من أن تجهد نفسك في إثباتها لمن لا يريد أن يراها</div>
+                    <div class="focus-card">
+                        <div class="focus-icon-card">🚫</div>
+                        <div class="focus-title">لا تلتفت لهم</div>
+                        <div class="focus-description">أفضل عقوبة لهم ليست الرد، بل تجاهلهم التام. استمر في طريقك وتحقيق أهدافك دون الالتفات لهم</div>
                     </div>
                 </div>
                 
                 <div class="content-paragraphs">
-                    <p>في هذه الحياة، ستواجه الكثير من الأشخاص والمواقف التي قد تستفزك أو تحاول جرّك إلى جدال لا طائل منه. لكن <span class="highlight">لا تغضب، ولا تمنح أحدًا سلطة على مشاعرك</span>. فالغضب لن يغير شيئًا، بل سيستهلك طاقتك ويفقدك هدوءك. تذكّر دائمًا أن معظم الأمور التي تثير حنقك اليوم، ستبدو تافهة بعد وقت، فلماذا تستهلك أعصابك لأجلها؟</p>
+                    <p>هناك نوع من الأشخاص جعلوا من مراقبتك ونقدك مهمة يومية أو شبه يومية، يتابعون كل ما تنشره، يلاحقون حتى تعليقاتك، يتتبّعون أخطاءك، وينتظرون أي فرصة للهجوم عليك. ليس لأنهم يملكون رأيًا قيّمًا أو نقدًا بنّاء، بل لأنهم <span class="highlight">لا يستطيعون تجاهلك</span>، فأنت تشغل تفكيرهم أكثر مما يشغلهم تطوير أنفسهم. دون أن يدركوا، هم يعترفون بتأثيرك عليهم، فلو لم تكن مهمًّا لما أضاعوا وقتهم في متابعتك.</p>
                     
-                    <p><span class="highlight">لا تجادل أحدًا</span>، فبعض العقول مغلقة، والجاهل لن يفهم ما تقوله، ومن يراك على باطل لن يقتنع بكلامك مهما شرحت، والمتحيّز لن يسمعك أصلًا، أما الانتهازي فسيأخذ كلامك ليقلبه لصالحه. لا فائدة يا صديقي من محاولات الإقناع في عالم مليء بمن لا يريد أن يسمع. وفّر على نفسك العناء، وبدلًا من الانشغال بمن لا يستحق، ركز على ما ينفعك وما يمنحك راحة البال.</p>
+                    <p>يراقبونك وينتقدونك لأنك تمضي للأمام بينما هم عالقون في أماكنهم. الشخص الناجح والمستقل يثير فضول من لا يملك رؤية خاصة به، فيبدأ بمراقبته، ليس إعجابًا، بل بحثًا عن أي زلة يمكن أن يستخدمها للهجوم. لكن الحقيقة أنهم لا يهاجمونك لأنك مخطئ، بل لأنك مختلف، لأنك تملك الجرأة للتعبير عن نفسك بينما هم مجرد متفرجين على حياتك.</p>
                     
                     <div class="quote-box">
                         <div class="quote-icon">❝</div>
-                        <p>اعتزل كل ما يؤذيك، سواء كان أشخاصًا أو مواقف أو حتى أفكارًا سلبية. الحياة أقصر من أن تضيعها في صراعات لا جدوى منها</p>
+                        <p>هي محاولة لتعويض النقص لا أكثر، فهؤلاء لا يسعون لإثبات أنهم على حق، بل يسعون لجرِّك للرد عليهم، لأن ذلك يمنحهم إعلانًا مجانيًا</p>
                     </div>
                     
-                    <p><span class="highlight">كن هادئًا، تمسك بحكمتك، وواصل طريقك بسلام</span>. دعهم يتكلمون كما يشاؤون، فكلماتهم لن تؤثر فيك ما دمت ثابتًا على مبادئك وواثقًا من طريقك. الحياة أقصر من أن تضيعها في صراعات لا جدوى منها. ركز على نفسك، على تطورك، على أحلامك، واترك الضجيج خلفك.</p>
+                    <p>لو تجاهلتهم، سيبقون في هامش المشهد، لكن بمجرد أن ترد عليهم، ستضعهم تحت الأضواء التي لا يستطيعون الوصول إليها بأنفسهم. إنهم يدركون أن الحديث عنك يلفت الانتباه، بينما الحديث عن أنفسهم وأفكارهم لا يجذب أحدًا، وهذا اعتراف غير مباشر بأنك أكثر أهمية وتأثيرًا منهم.</p>
+                    
+                    <p>ثق بنفسك يا صديقي، فأنت في المقدمة، وهم في الخلف. أكبر عقوبة لهؤلاء ليست الرد عليهم، بل تجاهلهم التام. فأنت تمضي في طريقك، تحقق أهدافك، بينما هم يضيعون وقتهم في ملاحقتك، دون أن يدركوا أنهم يستنزفون وقتهم وجهدهم عليك، في حين أنك لا تُعيرهم أي اهتمام. فاستمر ولا تلتفت. لا شيء يزعج المراقبين الناقدين أكثر من أن تراهم ولا تراهم في الوقت ذاته، أن تدرك وجودهم ولكنك لا تمنحهم قيمة. دعهم يتحدثون، لأنهم يعلمون أن اسمك يجذب الانتباه، أما أسماؤهم وحدها فلا تهم أحدًا.</p>
+                    
+                    <p>لهذا، أفضل رد هو أن تبقى في المقدمة، وتتركهم في الخلف حيث ينتمون ولا تلتفت لهم، فأنت تكتب نجاحك، بينما هم مجرد هوامش على الطريق.</p>
                 </div>
                 
                 <div class="conclusion">
                     <h3>الخلاصة</h3>
-                    <p>قوة الشخص الحكيم تكمن في قدرته على الحفاظ على هدوئه وسط الضجيج، ومواصلة طريقه بثبات رغم كل المحاولات لإيقافه. الرد الحقيقي على المستفزين ليس بالجدال، بل بالإنجاز. عندما تركز على نموك وتطورك وتترك الضوضاء خلفك، تكون قد انتصرت على كل من حاول إعاقتك. تذكر دائمًا أن السكوت في وجه الجهلاء ليس ضعفًا، بل قوة، والمضي قدمًا رغم كل شيء ليس غرورًا، بل حكمة.</p>
+                    <p>الناجحون يبنون، بينما الفارغون يراقبون. لا تسمح لهوامش الطريق أن تعيق تقدمك أو تشتت انتباهك. قوتك الحقيقية تكمن في استمرارك رغم الضجيج، وفي إصرارك على تحقيق أهدافك دون الالتفات للخلف. تذكر أن من يراقبك بهوس هو في الحقيقة يعترف بأهميتك، فاستمر في طريقك بثقة، واتركهم في الهامش حيث ينتمون. حياتك ليست مسرحًا لمراقبتهم، بل رحلة إنجازاتك وإبداعاتك.</p>
                 </div>
             </div>
             
@@ -1043,9 +1074,9 @@
         });
         
         // تأثيرات البطاقات
-        const peaceCards = document.querySelectorAll('.peace-card');
+        const focusCards = document.querySelectorAll('.focus-card');
         
-        peaceCards.forEach(card => {
+        focusCards.forEach(card => {
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'scale(1.05)';
                 card.style.boxShadow = '0 15px 35px rgba(0,0,0,0.2)';
