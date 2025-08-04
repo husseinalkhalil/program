@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لا تسعَ لإرضاء أحد | حسين الخليل</title>
+    <title>ازدواجية الضمير | حسين الخليل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -21,8 +21,8 @@
             --border-color: #E0E0E0;
             --header-purple: #4527A0;
             --mobile-header-height: 70px;
-            --independence-color: #FF9800;
-            --freedom-color: #4CAF50;
+            --duality-color: #7B1FA2;
+            --justice-color: #0288D1;
         }
         
         * {
@@ -188,7 +188,7 @@
             right: 0;
             width: 100%;
             height: 8px;
-            background: linear-gradient(to right, var(--independence-color), var(--accent-color));
+            background: linear-gradient(to right, var(--duality-color), var(--accent-color));
         }
         
         .article-header {
@@ -207,12 +207,12 @@
             margin: 0 auto;
             width: 120px;
             height: 5px;
-            background: linear-gradient(to right, var(--independence-color), var(--accent-color));
+            background: linear-gradient(to right, var(--duality-color), var(--accent-color));
             border-radius: 3px;
         }
         
         h1 {
-            color: var(--independence-color);
+            color: var(--duality-color);
             font-size: 38px;
             margin-bottom: 20px;
             font-weight: 700;
@@ -231,7 +231,7 @@
         }
         
         .date-icon {
-            color: var(--independence-color);
+            color: var(--duality-color);
         }
         
         .article-content {
@@ -246,14 +246,14 @@
             text-align: center;
             margin: 40px 0;
             padding: 30px;
-            background: rgba(255, 152, 0, 0.1);
+            background: rgba(123, 31, 162, 0.1);
             border-radius: 20px;
-            border-left: 8px solid var(--independence-color);
+            border-left: 8px solid var(--duality-color);
         }
         
-        .independence-icon {
+        .duality-icon {
             font-size: 80px;
-            color: var(--independence-color);
+            color: var(--duality-color);
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
@@ -264,55 +264,108 @@
             100% { transform: scale(1); opacity: 0.7; }
         }
         
-        .independence-container {
+        .duality-container {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+            height: 250px;
+            position: relative;
+        }
+        
+        .scale-of-justice {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+        
+        .scale-beam {
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: var(--duality-color);
+            top: 50%;
+            transform: rotate(-20deg);
+            transform-origin: center;
+            animation: beamTilt 8s infinite alternate;
+        }
+        
+        @keyframes beamTilt {
+            0% { transform: rotate(-20deg); }
+            100% { transform: rotate(20deg); }
+        }
+        
+        .scale-pivot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--duality-color);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .scale-pan {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border: 3px solid var(--duality-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 50%;
+            font-size: 30px;
+        }
+        
+        .scale-pan.left {
+            left: -80px;
+            background: rgba(123, 31, 162, 0.1);
+        }
+        
+        .scale-pan.right {
+            right: -80px;
+            background: rgba(2, 136, 209, 0.1);
+        }
+        
+        .examples-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin: 40px 0;
         }
         
-        .independence-card {
-            width: 250px;
+        .example-card {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-radius: 15px;
             padding: 25px;
-            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
+            border-top: 5px solid var(--duality-color);
         }
         
-        .independence-card:hover {
+        .example-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
-        .independence-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 8px;
-            background: linear-gradient(to right, var(--independence-color), var(--accent-color));
-        }
-        
-        .independence-icon-card {
-            font-size: 50px;
-            color: var(--independence-color);
+        .example-icon {
+            font-size: 36px;
+            color: var(--duality-color);
             margin-bottom: 15px;
         }
         
-        .independence-title {
-            font-size: 24px;
+        .example-title {
+            font-size: 22px;
             font-weight: 600;
-            color: var(--independence-color);
+            color: var(--duality-color);
             margin-bottom: 15px;
         }
         
-        .independence-description {
+        .example-description {
             font-size: 18px;
             color: var(--text-color);
         }
@@ -356,7 +409,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(to right, var(--independence-color), var(--accent-color));
+            background: linear-gradient(to right, var(--duality-color), var(--accent-color));
             border-radius: 3px;
         }
         
@@ -514,64 +567,20 @@
             animation: fadeOut 0.2s ease-out forwards;
         }
         
-        .independence-animation {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .solution-box {
+            background: rgba(2, 136, 209, 0.1);
+            padding: 25px;
+            border-radius: 15px;
             margin: 40px 0;
-            height: 200px;
-            position: relative;
+            border-left: 5px solid var(--justice-color);
+            text-align: center;
         }
         
-        .person-standing {
-            position: relative;
-            z-index: 2;
-            font-size: 80px;
-            color: var(--independence-color);
-            animation: standingConfident 3s infinite;
-        }
-        
-        @keyframes standingConfident {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            25% { transform: translateY(-10px) rotate(-5deg); }
-            50% { transform: translateY(0) rotate(0); }
-            75% { transform: translateY(-10px) rotate(5deg); }
-        }
-        
-        .people-around {
-            position: absolute;
-            font-size: 40px;
-            animation: peopleFade 6s infinite;
-            opacity: 0.5;
-        }
-        
-        .people-around:nth-child(1) {
-            top: 20px;
-            left: 100px;
-            animation-delay: 0s;
-        }
-        
-        .people-around:nth-child(2) {
-            top: 100px;
-            left: 30px;
-            animation-delay: 1s;
-        }
-        
-        .people-around:nth-child(3) {
-            top: 20px;
-            right: 100px;
-            animation-delay: 2s;
-        }
-        
-        .people-around:nth-child(4) {
-            top: 100px;
-            right: 30px;
-            animation-delay: 3s;
-        }
-        
-        @keyframes peopleFade {
-            0%, 100% { opacity: 0.3; transform: scale(0.8); }
-            50% { opacity: 0.7; transform: scale(1); }
+        .solution-title {
+            font-size: 24px;
+            color: var(--justice-color);
+            margin-bottom: 15px;
+            font-weight: 600;
         }
         
         @media print {
@@ -607,12 +616,9 @@
                 font-size: 32px;
             }
             
-            .independence-container {
+            .examples-container {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 20px;
-            }
-            
-            .independence-card {
-                width: 220px;
             }
         }
         
@@ -656,21 +662,19 @@
                 font-size: 20px;
             }
             
-            .independence-icon {
+            .duality-icon {
                 font-size: 60px;
             }
             
-            .independence-container {
-                gap: 15px;
+            .scale-of-justice {
+                width: 250px;
+                height: 180px;
             }
             
-            .independence-card {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .person-standing {
-                font-size: 60px;
+            .scale-pan {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
             }
         }
         
@@ -756,6 +760,10 @@
             .intro-section {
                 padding: 25px 15px;
             }
+            
+            .examples-container {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 400px) {
@@ -829,61 +837,69 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ لا تسعَ لإرضاء أحد</h1>
+                <h1>❖ ازدواجية الضمير</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
             </div>
             
             <div class="article-content">
                 <div class="intro-section">
-                    <div class="independence-icon">💪</div>
-                    <p>هذه المقالة تبحث في تحرر الإنسان من سعي الدائم لإرضاء الآخرين، وتكشف عن أهمية الحفاظ على الذات والاستقلالية الفكرية في عالم مليء بالتوقعات الاجتماعية.</p>
+                    <div class="duality-icon">⚖️</div>
+                    <p>هذه المقالة تكشف عن ظاهرة خطيرة في المجتمعات الحديثة - ازدواجية الضمير أو الضمير الانتقائي، الذي يظهر فقط عندما يتوافق الحدث مع تحيزاتنا وينام عندما يتعارض مع مصالحنا.</p>
                 </div>
                 
-                <div class="independence-animation">
-                    <div class="person-standing">🚶‍♂️</div>
-                    <div class="people-around">👥</div>
-                    <div class="people-around">👥</div>
-                    <div class="people-around">👥</div>
-                    <div class="people-around">👥</div>
+                <div class="duality-container">
+                    <div class="scale-of-justice">
+                        <div class="scale-beam"></div>
+                        <div class="scale-pivot"></div>
+                        <div class="scale-pan left">👁️</div>
+                        <div class="scale-pan right">🙈</div>
+                    </div>
                 </div>
                 
-                <div class="independence-container">
-                    <div class="independence-card">
-                        <div class="independence-icon-card">🎭</div>
-                        <div class="independence-title">وهم الرضا</div>
-                        <div class="independence-description">إرضاء الناس جميعًا ضرب من الوهم، لأن تأييدهم لك مشروط بتطابق آرائك مع آرائهم</div>
+                <div class="examples-container">
+                    <div class="example-card">
+                        <div class="example-icon">👥</div>
+                        <div class="example-title">الانحياز العرقي والديني</div>
+                        <div class="example-description">عندما يُقتل إنسان من مجموعة معينة، يثور العالم غضبًا، لكن عندما يُقتل شخص من مجموعة أخرى، يُنظر إلى الحادثة ببرود أو يتم تبريرها</div>
                     </div>
                     
-                    <div class="independence-card">
-                        <div class="independence-icon-card">💡</div>
-                        <div class="independence-title">استقلال الرأي</div>
-                        <div class="independence-description">استقلال الرأي أهم من رضا الآخرين، لست مضطرًا إلى السير وفق رغبات الجميع</div>
+                    <div class="example-card">
+                        <div class="example-icon">🗳️</div>
+                        <div class="example-title">الانحياز السياسي</div>
+                        <div class="example-description">الدول تدافع عن حقوق الإنسان عندما تكون الدولة المعتدية خصمًا سياسيًا، لكنها تبرر الانتهاكات نفسها إذا كان الجاني حليفًا</div>
                     </div>
                     
-                    <div class="independence-card">
-                        <div class="independence-icon-card">🛡️</div>
-                        <div class="independence-title">لا تخشَ الغضب</div>
-                        <div class="independence-description">لا تأخذ غضبهم على محمل شخصي، بل انظر إليه كاختبار لكشف حقيقتهم</div>
+                    <div class="example-card">
+                        <div class="example-icon">🗣️</div>
+                        <div class="example-title">حرية التعبير الانتقائية</div>
+                        <div class="example-description">من يدافع عن حرية التعبير لرأيه، يسعى لقمع أي رأي مخالف تحت حجج مثل "الأمن القومي" أو "احترام المقدسات"</div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <div class="example-icon">🏛️</div>
+                        <div class="example-title">الانحياز ضد الأنظمة</div>
+                        <div class="example-description">يتم شجب الفساد والديكتاتورية في دولة معينة، لكن يتم التغاضي عنهما في دولة أخرى لأن النظام يتوافق مع مصالح المنتقدين</div>
                     </div>
                 </div>
                 
                 <div class="content-paragraphs">
-                    <p>منذ الأزل، والإنسان يسعى لنيل رضا الآخرين، ظنًا منه أن ذلك سيمنحه القبول الاجتماعي والاستقرار النفسي. غير أن هذه المحاولة، مهما بُذلت فيها الجهود، تظل غاية مستحيلة. <span class="highlight">فإرضاء الناس جميعًا ضرب من الوهم</span>، لأن تأييدهم لك غالبًا ما يكون مشروطًا بمدى تطابق آرائك مع آرائهم، لا بحقيقتك أو جوهرك.</p>
+                    <p>في عالم يزعم أنه قائم على العدالة والمساواة، نجد ظاهرة خطيرة تتسلل إلى مواقف الأفراد والمجتمعات، بل وحتى إلى الإعلام والسياسة، وهي <span class="highlight">"ازدواجية الضمير أو الضمير الانتقائي"</span> هذا الضمير ليس مطلقًا في مبادئه، بل يستيقظ عندما يتوافق الحدث مع تحيزاته، وينام حين لا يتماشى مع مصالحه أو رؤيته للعالم.</p>
                     
-                    <p>من يؤيدك اليوم، قد يفعل ذلك لأنه يرى أنك لا تزال متوافقًا معه في الأفكار والقيم، لكن ماذا لو حدث العكس؟ ماذا لو عبّرت عن رأي مختلف أو خالفت قناعاته في مسألة ما؟ عندها ستنكشف الحقيقة، وسيتحول البعض من داعمين إلى مهاجمين، وستظهر نزعاتهم الأيديولوجية وتعصبهم الذي لم يكن واضحًا من قبل.</p>
+                    <p>ازدواجية الضمير، هو ذلك الشعور الإنساني الذي يظهر فقط عندما يكون الضحية من <span class="highlight">"الفئة التي نتعاطف معها"</span>، أو عندما يكون الجاني من <span class="highlight">"الفئة التي نكرهها"</span>، لكنه يختفي إذا انعكست الأدوار. بكلمات أخرى، هو معيار مزدوج في تقييم المآسي والجرائم، حيث تُحدد المواقف بناءً على هوية الفاعل والمفعول به، وليس بناءً على المبدأ الأخلاقي ذاته.</p>
                     
-                    <p>ستدرك أن كثيرًا ممن كانوا يصفقون لك، لم يكونوا يرونك كفرد مستقل، بل كنسخة أخرى منهم، وما إن تختلف عنهم حتى تصبح في نظرهم خصمًا.</p>
+                    <p>فالبشر بطبيعتهم يميلون إلى دعم من يشبههم في الفكر أو الهوية، وغالبًا ما يؤدي ذلك إلى رؤية مشوهة للواقع. وسائل الإعلام مثلًا، تلعب دورًا كبيرًا في تشكيل الضمير الانتقائي عبر انتقاء الأخبار التي تعرضها، وكيفية تقديمها، واللغة المستخدمة في توصيف الضحايا والجناة.</p>
                     
-                    <p><span class="highlight">فاستقلال الرأي أهم من رضا الآخرين</span>، لست مضطرًا إلى السير وفق رغبات الجميع أو مراعاة مشاعرهم على حساب قناعاتك. فالناس بطبيعتهم متقلّبون، ومن الخطأ أن تجعل قبولهم لك معيارًا لتقييم ذاتك. بل يجب أن يكون معيارك الحقيقي هو اتِّساقك مع قيمك ومبادئك، حتى لو أثار ذلك استياء البعض.</p>
+                    <p>القوى الكبرى تستخدم الضمير الانتقائي كسلاح سياسي، حيث يتم توظيف حقوق الإنسان والديمقراطية كأدوات ضغط، بينما يتم غض الطرف عن الانتهاكات عندما تخدم مصالحها.</p>
                     
-                    <p>لا تخشَ الغضب، فهو لحظة كاشفة، حين تختلف مع الآخرين، قد تجدهم يهاجمونك بشدة، لا لأن رأيك خاطئ بالضرورة، بل لأنك كسرت لديهم صورة مثالية كانوا قد رسموها عنك. <span class="highlight">لا تأخذ غضبهم على محمل شخصي</span>، بل انظر إليه كاختبار لكشف حقيقتهم. فمن يحترمك حقًا، سيحترم اختلافك، أما من يجعل موافقتك له شرطًا لعلاقتكم، فهو لم يكن معك من الأساس.</p>
-                    
-                    <p>كن ذاتك ولا تخشَ العزلة، لا تجعل رضا الناس هدفك، بل اجعل الصدق مع نفسك ومبادئك هو الأساس. بعض العلاقات ستتغير، وبعض الأشخاص سيبتعدون، لكنك ستكسب أهم شيء: راحة البال والقدرة على التعبير بحرية دون الخوف من تقلبات الآخرين.</p>
+                    <div class="solution-box">
+                        <div class="solution-title">كيف نتجاوز ازدواجية الضمير؟</div>
+                        <p>لتجاوز كل هذا، يجب أن يسأل الإنسان نفسه: هل موقفي سيكون نفسه لو كان الضحية أو الجاني من فئة أخرى؟ هل أحكم بناءً على المبادئ أم على الهويات؟ بدلاً من الاعتماد على مصدر واحد قد يكون متحيزًا، يجب البحث في وجهات نظر مختلفة للوصول إلى صورة أكثر حيادية. ويجب أن يكون موقف الإنسان ثابتًا تجاه القضايا الأخلاقية، بغض النظر عن هوية الفاعل أو الضحية.</p>
+                    </div>
                 </div>
                 
                 <div class="conclusion">
                     <h3>الخلاصة</h3>
-                    <p>السعي لإرضاء الآخرين هو طريق مسدود يؤدي إلى فقدان الذات وتشتت الهوية. الاستقلالية الفكرية والتمسك بالمبادئ الشخصية هما الطريق الحقيقي إلى السلام الداخلي والتحرر النفسي. عندما تتوقف عن جعل رضا الآخرين هدفًا رئيسيًا، تكتشف قيمتك الحقيقية وتحرر طاقتك الإبداعية. تذكر دائمًا أن من يحترمك لذاتك ويقدر اختلافك هو الصديق الحقيقي، أما من يطلب منك التخلي عن مبادئك لإرضائه، فهو لا يستحق وقتك ولا اهتمامك.</p>
+                    <p>ازدواجية الضمير هو أحد أخطر أمراض المجتمعات الحديثة، لأنه يجعل من العدالة مجرد أداة يتم استخدامها حسب الهوى، وليس كمبدأ إنساني ثابت. إذا أردنا عالمًا أكثر عدلًا وإنصافًا، فعلينا أن نتخلى عن هذه الازدواجية، وأن نكون صادقين مع أنفسنا قبل أن نحاكم الآخرين. العدالة الحقيقية تتطلب منا أن نكون متسقين في مبادئنا، وأن نرفض المعايير المزدوجة التي تهدم أسس الأخلاق والإنصاف في المجتمع.</p>
                 </div>
             </div>
             
@@ -1017,15 +1033,17 @@
         });
         
         // تأثيرات البطاقات
-        const independenceCards = document.querySelectorAll('.independence-card');
+        const exampleCards = document.querySelectorAll('.example-card');
         
-        independenceCards.forEach(card => {
+        exampleCards.forEach(card => {
             card.addEventListener('mouseenter', () => {
-                card.style.transform = 'scale(1.05) rotate(2deg)';
+                card.style.transform = 'scale(1.05)';
+                card.style.boxShadow = '0 15px 35px rgba(0,0,0,0.2)';
             });
             
             card.addEventListener('mouseleave', () => {
-                card.style.transform = 'scale(1) rotate(0)';
+                card.style.transform = 'scale(1)';
+                card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
             });
         });
     </script>
