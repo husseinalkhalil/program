@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ازدواجية الضمير | حسين الخليل</title>
+    <title>دعهم يتكلمون، وواصل طريقك بسلام | حسين الخليل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -21,8 +21,8 @@
             --border-color: #E0E0E0;
             --header-purple: #4527A0;
             --mobile-header-height: 70px;
-            --duality-color: #7B1FA2;
-            --justice-color: #0288D1;
+            --peace-color: #4CAF50;
+            --calm-color: #0288D1;
         }
         
         * {
@@ -188,7 +188,7 @@
             right: 0;
             width: 100%;
             height: 8px;
-            background: linear-gradient(to right, var(--duality-color), var(--accent-color));
+            background: linear-gradient(to right, var(--peace-color), var(--accent-color));
         }
         
         .article-header {
@@ -207,12 +207,12 @@
             margin: 0 auto;
             width: 120px;
             height: 5px;
-            background: linear-gradient(to right, var(--duality-color), var(--accent-color));
+            background: linear-gradient(to right, var(--peace-color), var(--accent-color));
             border-radius: 3px;
         }
         
         h1 {
-            color: var(--duality-color);
+            color: var(--peace-color);
             font-size: 38px;
             margin-bottom: 20px;
             font-weight: 700;
@@ -231,7 +231,7 @@
         }
         
         .date-icon {
-            color: var(--duality-color);
+            color: var(--peace-color);
         }
         
         .article-content {
@@ -246,14 +246,14 @@
             text-align: center;
             margin: 40px 0;
             padding: 30px;
-            background: rgba(123, 31, 162, 0.1);
+            background: rgba(76, 175, 80, 0.1);
             border-radius: 20px;
-            border-left: 8px solid var(--duality-color);
+            border-left: 8px solid var(--peace-color);
         }
         
-        .duality-icon {
+        .peace-icon {
             font-size: 80px;
-            color: var(--duality-color);
+            color: var(--peace-color);
             margin-bottom: 20px;
             animation: pulse 2s infinite;
         }
@@ -264,79 +264,96 @@
             100% { transform: scale(1); opacity: 0.7; }
         }
         
-        .duality-container {
+        .walking-animation {
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 40px 0;
-            height: 250px;
-            position: relative;
-        }
-        
-        .scale-of-justice {
-            position: relative;
-            width: 300px;
             height: 200px;
+            position: relative;
         }
         
-        .scale-beam {
+        .walking-person {
+            position: relative;
+            z-index: 3;
+            font-size: 60px;
+            color: var(--calm-color);
+            animation: walking 8s linear infinite;
+        }
+        
+        @keyframes walking {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .speech-bubble {
             position: absolute;
-            width: 100%;
-            height: 5px;
-            background: var(--duality-color);
-            top: 50%;
-            transform: rotate(-20deg);
-            transform-origin: center;
-            animation: beamTilt 8s infinite alternate;
-        }
-        
-        @keyframes beamTilt {
-            0% { transform: rotate(-20deg); }
-            100% { transform: rotate(20deg); }
-        }
-        
-        .scale-pivot {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: var(--duality-color);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        .scale-pan {
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            border: 3px solid var(--duality-color);
-            border-radius: 50%;
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            top: 50%;
-            font-size: 30px;
+            animation: fadeSpeech 6s infinite;
+            opacity: 0;
+            z-index: 2;
+            font-size: 18px;
+            max-width: 150px;
+            text-align: center;
         }
         
-        .scale-pan.left {
-            left: -80px;
-            background: rgba(123, 31, 162, 0.1);
+        .speech-bubble:nth-child(1) {
+            top: 30px;
+            left: 100px;
+            animation-delay: 0s;
         }
         
-        .scale-pan.right {
-            right: -80px;
-            background: rgba(2, 136, 209, 0.1);
+        .speech-bubble:nth-child(2) {
+            top: 100px;
+            left: 200px;
+            animation-delay: 2s;
         }
         
-        .examples-container {
+        .speech-bubble:nth-child(3) {
+            top: 150px;
+            left: 50px;
+            animation-delay: 4s;
+        }
+        
+        .speech-bubble:nth-child(4) {
+            top: 50px;
+            right: 100px;
+            animation-delay: 1s;
+        }
+        
+        .speech-bubble:nth-child(5) {
+            top: 120px;
+            right: 200px;
+            animation-delay: 3s;
+        }
+        
+        .speech-bubble:nth-child(6) {
+            top: 180px;
+            right: 50px;
+            animation-delay: 5s;
+        }
+        
+        @keyframes fadeSpeech {
+            0% { opacity: 0; transform: scale(0.5); }
+            20% { opacity: 1; transform: scale(1); }
+            80% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+        
+        .peace-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin: 40px 0;
         }
         
-        .example-card {
+        .peace-card {
             background: white;
             border-radius: 15px;
             padding: 25px;
@@ -344,28 +361,29 @@
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
-            border-top: 5px solid var(--duality-color);
+            border-top: 5px solid var(--peace-color);
+            text-align: center;
         }
         
-        .example-card:hover {
+        .peace-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
-        .example-icon {
-            font-size: 36px;
-            color: var(--duality-color);
+        .peace-icon-card {
+            font-size: 50px;
+            color: var(--peace-color);
             margin-bottom: 15px;
         }
         
-        .example-title {
+        .peace-title {
             font-size: 22px;
             font-weight: 600;
-            color: var(--duality-color);
+            color: var(--peace-color);
             margin-bottom: 15px;
         }
         
-        .example-description {
+        .peace-description {
             font-size: 18px;
             color: var(--text-color);
         }
@@ -409,7 +427,7 @@
             right: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(to right, var(--duality-color), var(--accent-color));
+            background: linear-gradient(to right, var(--peace-color), var(--accent-color));
             border-radius: 3px;
         }
         
@@ -567,20 +585,26 @@
             animation: fadeOut 0.2s ease-out forwards;
         }
         
-        .solution-box {
-            background: rgba(2, 136, 209, 0.1);
-            padding: 25px;
+        .quote-box {
+            background: rgba(76, 175, 80, 0.1);
+            padding: 30px;
             border-radius: 15px;
             margin: 40px 0;
-            border-left: 5px solid var(--justice-color);
+            border-left: 5px solid var(--peace-color);
             text-align: center;
+            font-style: italic;
+            font-size: 24px;
+            line-height: 1.6;
+            position: relative;
         }
         
-        .solution-title {
-            font-size: 24px;
-            color: var(--justice-color);
-            margin-bottom: 15px;
-            font-weight: 600;
+        .quote-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: var(--peace-color);
+            opacity: 0.3;
         }
         
         @media print {
@@ -616,7 +640,7 @@
                 font-size: 32px;
             }
             
-            .examples-container {
+            .peace-container {
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 20px;
             }
@@ -662,19 +686,12 @@
                 font-size: 20px;
             }
             
-            .duality-icon {
+            .peace-icon {
                 font-size: 60px;
             }
             
-            .scale-of-justice {
-                width: 250px;
-                height: 180px;
-            }
-            
-            .scale-pan {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
+            .walking-person {
+                font-size: 50px;
             }
         }
         
@@ -761,7 +778,7 @@
                 padding: 25px 15px;
             }
             
-            .examples-container {
+            .peace-container {
                 grid-template-columns: 1fr;
             }
         }
@@ -837,69 +854,62 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ ازدواجية الضمير</h1>
+                <h1>❖ دعهم يتكلمون، وواصل طريقك بسلام</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
             </div>
             
             <div class="article-content">
                 <div class="intro-section">
-                    <div class="duality-icon">⚖️</div>
-                    <p>هذه المقالة تكشف عن ظاهرة خطيرة في المجتمعات الحديثة - ازدواجية الضمير أو الضمير الانتقائي، الذي يظهر فقط عندما يتوافق الحدث مع تحيزاتنا وينام عندما يتعارض مع مصالحنا.</p>
+                    <div class="peace-icon">🕊️</div>
+                    <p>هذه المقالة تقدم فلسفة الهدوء والتجاهل الإيجابي في مواجهة الضغوط والمستفزين، وكيف يمكن الحفاظ على السلام الداخلي وسط ضجيج الحياة.</p>
                 </div>
                 
-                <div class="duality-container">
-                    <div class="scale-of-justice">
-                        <div class="scale-beam"></div>
-                        <div class="scale-pivot"></div>
-                        <div class="scale-pan left">👁️</div>
-                        <div class="scale-pan right">🙈</div>
-                    </div>
+                <div class="walking-animation">
+                    <div class="walking-person">🚶‍♂️</div>
+                    <div class="speech-bubble">لماذا لا ترد؟</div>
+                    <div class="speech-bubble">أنت على خطأ!</div>
+                    <div class="speech-bubble">استمع إليّ!</div>
+                    <div class="speech-bubble">سأثبت أنك مخطئ</div>
+                    <div class="speech-bubble">لا تتجاهلني!</div>
+                    <div class="speech-bubble">ستندم على صمتك</div>
                 </div>
                 
-                <div class="examples-container">
-                    <div class="example-card">
-                        <div class="example-icon">👥</div>
-                        <div class="example-title">الانحياز العرقي والديني</div>
-                        <div class="example-description">عندما يُقتل إنسان من مجموعة معينة، يثور العالم غضبًا، لكن عندما يُقتل شخص من مجموعة أخرى، يُنظر إلى الحادثة ببرود أو يتم تبريرها</div>
+                <div class="peace-container">
+                    <div class="peace-card">
+                        <div class="peace-icon-card">🧘</div>
+                        <div class="peace-title">لا تغضب</div>
+                        <div class="peace-description">الغضب لن يغير شيئًا، بل سيستهلك طاقتك ويفقدك هدوءك. تذكّر أن ما يثير حنقك اليوم سيبدو تافهًا بعد وقت</div>
                     </div>
                     
-                    <div class="example-card">
-                        <div class="example-icon">🗳️</div>
-                        <div class="example-title">الانحياز السياسي</div>
-                        <div class="example-description">الدول تدافع عن حقوق الإنسان عندما تكون الدولة المعتدية خصمًا سياسيًا، لكنها تبرر الانتهاكات نفسها إذا كان الجاني حليفًا</div>
+                    <div class="peace-card">
+                        <div class="peace-icon-card">🤐</div>
+                        <div class="peace-title">لا تجادل</div>
+                        <div class="peace-description">بعض العقول مغلقة، والجاهل لن يفهم، والمتحيّز لن يسمعك. لا تضيع وقتك في محاولات إقناع من لا يريد أن يسمع</div>
                     </div>
                     
-                    <div class="example-card">
-                        <div class="example-icon">🗣️</div>
-                        <div class="example-title">حرية التعبير الانتقائية</div>
-                        <div class="example-description">من يدافع عن حرية التعبير لرأيه، يسعى لقمع أي رأي مخالف تحت حجج مثل "الأمن القومي" أو "احترام المقدسات"</div>
-                    </div>
-                    
-                    <div class="example-card">
-                        <div class="example-icon">🏛️</div>
-                        <div class="example-title">الانحياز ضد الأنظمة</div>
-                        <div class="example-description">يتم شجب الفساد والديكتاتورية في دولة معينة، لكن يتم التغاضي عنهما في دولة أخرى لأن النظام يتوافق مع مصالح المنتقدين</div>
+                    <div class="peace-card">
+                        <div class="peace-icon-card">🚶‍♂️</div>
+                        <div class="peace-title">واصل طريقك</div>
+                        <div class="peace-description">كن هادئًا، تمسك بحكمتك، واترك للزمن أن يثبت الحقائق بدلًا من أن تجهد نفسك في إثباتها لمن لا يريد أن يراها</div>
                     </div>
                 </div>
                 
                 <div class="content-paragraphs">
-                    <p>في عالم يزعم أنه قائم على العدالة والمساواة، نجد ظاهرة خطيرة تتسلل إلى مواقف الأفراد والمجتمعات، بل وحتى إلى الإعلام والسياسة، وهي <span class="highlight">"ازدواجية الضمير أو الضمير الانتقائي"</span> هذا الضمير ليس مطلقًا في مبادئه، بل يستيقظ عندما يتوافق الحدث مع تحيزاته، وينام حين لا يتماشى مع مصالحه أو رؤيته للعالم.</p>
+                    <p>في هذه الحياة، ستواجه الكثير من الأشخاص والمواقف التي قد تستفزك أو تحاول جرّك إلى جدال لا طائل منه. لكن <span class="highlight">لا تغضب، ولا تمنح أحدًا سلطة على مشاعرك</span>. فالغضب لن يغير شيئًا، بل سيستهلك طاقتك ويفقدك هدوءك. تذكّر دائمًا أن معظم الأمور التي تثير حنقك اليوم، ستبدو تافهة بعد وقت، فلماذا تستهلك أعصابك لأجلها؟</p>
                     
-                    <p>ازدواجية الضمير، هو ذلك الشعور الإنساني الذي يظهر فقط عندما يكون الضحية من <span class="highlight">"الفئة التي نتعاطف معها"</span>، أو عندما يكون الجاني من <span class="highlight">"الفئة التي نكرهها"</span>، لكنه يختفي إذا انعكست الأدوار. بكلمات أخرى، هو معيار مزدوج في تقييم المآسي والجرائم، حيث تُحدد المواقف بناءً على هوية الفاعل والمفعول به، وليس بناءً على المبدأ الأخلاقي ذاته.</p>
+                    <p><span class="highlight">لا تجادل أحدًا</span>، فبعض العقول مغلقة، والجاهل لن يفهم ما تقوله، ومن يراك على باطل لن يقتنع بكلامك مهما شرحت، والمتحيّز لن يسمعك أصلًا، أما الانتهازي فسيأخذ كلامك ليقلبه لصالحه. لا فائدة يا صديقي من محاولات الإقناع في عالم مليء بمن لا يريد أن يسمع. وفّر على نفسك العناء، وبدلًا من الانشغال بمن لا يستحق، ركز على ما ينفعك وما يمنحك راحة البال.</p>
                     
-                    <p>فالبشر بطبيعتهم يميلون إلى دعم من يشبههم في الفكر أو الهوية، وغالبًا ما يؤدي ذلك إلى رؤية مشوهة للواقع. وسائل الإعلام مثلًا، تلعب دورًا كبيرًا في تشكيل الضمير الانتقائي عبر انتقاء الأخبار التي تعرضها، وكيفية تقديمها، واللغة المستخدمة في توصيف الضحايا والجناة.</p>
-                    
-                    <p>القوى الكبرى تستخدم الضمير الانتقائي كسلاح سياسي، حيث يتم توظيف حقوق الإنسان والديمقراطية كأدوات ضغط، بينما يتم غض الطرف عن الانتهاكات عندما تخدم مصالحها.</p>
-                    
-                    <div class="solution-box">
-                        <div class="solution-title">كيف نتجاوز ازدواجية الضمير؟</div>
-                        <p>لتجاوز كل هذا، يجب أن يسأل الإنسان نفسه: هل موقفي سيكون نفسه لو كان الضحية أو الجاني من فئة أخرى؟ هل أحكم بناءً على المبادئ أم على الهويات؟ بدلاً من الاعتماد على مصدر واحد قد يكون متحيزًا، يجب البحث في وجهات نظر مختلفة للوصول إلى صورة أكثر حيادية. ويجب أن يكون موقف الإنسان ثابتًا تجاه القضايا الأخلاقية، بغض النظر عن هوية الفاعل أو الضحية.</p>
+                    <div class="quote-box">
+                        <div class="quote-icon">❝</div>
+                        <p>اعتزل كل ما يؤذيك، سواء كان أشخاصًا أو مواقف أو حتى أفكارًا سلبية. الحياة أقصر من أن تضيعها في صراعات لا جدوى منها</p>
                     </div>
+                    
+                    <p><span class="highlight">كن هادئًا، تمسك بحكمتك، وواصل طريقك بسلام</span>. دعهم يتكلمون كما يشاؤون، فكلماتهم لن تؤثر فيك ما دمت ثابتًا على مبادئك وواثقًا من طريقك. الحياة أقصر من أن تضيعها في صراعات لا جدوى منها. ركز على نفسك، على تطورك، على أحلامك، واترك الضجيج خلفك.</p>
                 </div>
                 
                 <div class="conclusion">
                     <h3>الخلاصة</h3>
-                    <p>ازدواجية الضمير هو أحد أخطر أمراض المجتمعات الحديثة، لأنه يجعل من العدالة مجرد أداة يتم استخدامها حسب الهوى، وليس كمبدأ إنساني ثابت. إذا أردنا عالمًا أكثر عدلًا وإنصافًا، فعلينا أن نتخلى عن هذه الازدواجية، وأن نكون صادقين مع أنفسنا قبل أن نحاكم الآخرين. العدالة الحقيقية تتطلب منا أن نكون متسقين في مبادئنا، وأن نرفض المعايير المزدوجة التي تهدم أسس الأخلاق والإنصاف في المجتمع.</p>
+                    <p>قوة الشخص الحكيم تكمن في قدرته على الحفاظ على هدوئه وسط الضجيج، ومواصلة طريقه بثبات رغم كل المحاولات لإيقافه. الرد الحقيقي على المستفزين ليس بالجدال، بل بالإنجاز. عندما تركز على نموك وتطورك وتترك الضوضاء خلفك، تكون قد انتصرت على كل من حاول إعاقتك. تذكر دائمًا أن السكوت في وجه الجهلاء ليس ضعفًا، بل قوة، والمضي قدمًا رغم كل شيء ليس غرورًا، بل حكمة.</p>
                 </div>
             </div>
             
@@ -1033,9 +1043,9 @@
         });
         
         // تأثيرات البطاقات
-        const exampleCards = document.querySelectorAll('.example-card');
+        const peaceCards = document.querySelectorAll('.peace-card');
         
-        exampleCards.forEach(card => {
+        peaceCards.forEach(card => {
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'scale(1.05)';
                 card.style.boxShadow = '0 15px 35px rgba(0,0,0,0.2)';
