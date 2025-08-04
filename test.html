@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعطيل العقول | حسين الخليل</title>
+    <title>تعطيل العقول | حوار فكري | حسين الخليل</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -23,6 +23,8 @@
             --mobile-header-height: 70px;
             --focus-color: #FF9800;
             --progress-color: #4CAF50;
+            --thinker-color: #4CAF50;
+            --sheikh-color: #5E35B1;
         }
         
         * {
@@ -264,141 +266,178 @@
             100% { transform: scale(1); opacity: 0.7; }
         }
         
-        .dialogue-animation {
+        .dialogue-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 50px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+        
+        .dialogue-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .dialogue-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .participants {
             display: flex;
             justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .participant {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            margin: 40px 0;
-            height: 300px;
-            position: relative;
-            overflow: hidden;
         }
         
-        .mind-icon {
-            position: relative;
-            z-index: 3;
-            font-size: 100px;
-            color: var(--primary-color);
-            animation: mindFloat 4s ease-in-out infinite;
+        .participant-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
         }
         
-        @keyframes mindFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(-5deg); }
-            50% { transform: translateY(0) rotate(5deg); }
-            75% { transform: translateY(-15px) rotate(-3deg); }
+        .participant-icon:hover {
+            transform: scale(1.1);
         }
         
-        .lock-icon {
-            position: absolute;
-            font-size: 60px;
-            color: #777;
-            animation: lockMove 8s infinite;
-            opacity: 0.7;
-            z-index: 2;
+        .sheikh-icon {
+            background-color: var(--sheikh-color);
+            color: white;
         }
         
-        .lock-icon:nth-child(1) {
-            top: 30px;
-            left: 100px;
-            animation-delay: 0s;
+        .thinker-icon {
+            background-color: var(--thinker-color);
+            color: white;
         }
         
-        .lock-icon:nth-child(2) {
-            top: 150px;
-            left: 200px;
-            animation-delay: 1s;
-        }
-        
-        .lock-icon:nth-child(3) {
-            top: 220px;
-            left: 50px;
-            animation-delay: 2s;
-        }
-        
-        .lock-icon:nth-child(4) {
-            top: 30px;
-            right: 100px;
-            animation-delay: 3s;
-        }
-        
-        .lock-icon:nth-child(5) {
-            top: 150px;
-            right: 200px;
-            animation-delay: 4s;
-        }
-        
-        .lock-icon:nth-child(6) {
-            top: 220px;
-            right: 50px;
-            animation-delay: 5s;
-        }
-        
-        @keyframes lockMove {
-            0%, 100% { opacity: 0.5; transform: scale(0.9); }
-            50% { opacity: 0.9; transform: scale(1.1); }
-        }
-        
-        .focus-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-        
-        .focus-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            border-top: 5px solid var(--focus-color);
-            text-align: center;
-        }
-        
-        .focus-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-        
-        .focus-icon-card {
-            font-size: 50px;
-            color: var(--focus-color);
-            margin-bottom: 15px;
-        }
-        
-        .focus-title {
-            font-size: 22px;
+        .participant-name {
             font-weight: 600;
-            color: var(--focus-color);
-            margin-bottom: 15px;
+            font-size: 20px;
         }
         
-        .focus-description {
-            font-size: 18px;
-            color: var(--text-color);
+        .dialogue-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
         
-        .content-paragraphs p {
-            margin-bottom: 30px;
+        .dialogue-item {
+            display: flex;
+            gap: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .thinker-item {
+            flex-direction: row-reverse;
+        }
+        
+        .speaker-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .sheikh-item .speaker-icon {
+            background-color: var(--sheikh-color);
+            color: white;
+        }
+        
+        .thinker-item .speaker-icon {
+            background-color: var(--thinker-color);
+            color: white;
+        }
+        
+        .message {
             padding: 20px;
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            border-radius: 15px;
+            position: relative;
+            max-width: 85%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            cursor: pointer;
         }
         
-        .content-paragraphs p:hover {
+        .message:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .sheikh-item .message {
+            background-color: #EDE7F6;
+            border-right: 5px solid var(--sheikh-color);
+            margin-left: 20px;
+        }
+        
+        .thinker-item .message {
+            background-color: #E8F5E9;
+            border-right: 5px solid var(--thinker-color);
+            margin-right: 20px;
+        }
+        
+        .message::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        
+        .sheikh-item .message::before {
+            right: -20px;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent #EDE7F6;
+        }
+        
+        .thinker-item .message::before {
+            left: -20px;
+            border-width: 10px 20px 10px 0;
+            border-color: transparent #E8F5E9 transparent transparent;
+        }
+        
+        .message-text {
+            font-size: 20px;
+            line-height: 1.7;
         }
         
         .highlight {
             background: linear-gradient(transparent 60%, rgba(255, 213, 79, 0.4) 40%);
             padding: 0 5px;
             font-weight: 500;
+        }
+        
+        .quote-in-dialogue {
+            padding: 15px;
+            margin: 15px 0;
+            background: rgba(255,255,255,0.5);
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-color);
+            font-style: italic;
         }
         
         .conclusion {
@@ -600,52 +639,6 @@
             opacity: 0.3;
         }
         
-        .dialogue-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 40px 0;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-top: 5px solid var(--focus-color);
-        }
-        
-        .dialogue-item {
-            margin: 25px 0;
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: flex-start;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        
-        .dialogue-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .sheikh {
-            background-color: #EDE7F6;
-            border-right: 5px solid var(--primary-color);
-        }
-        
-        .thinker {
-            background-color: #E8F5E9;
-            border-right: 5px solid var(--progress-color);
-        }
-        
-        .speaker-icon {
-            font-size: 40px;
-            margin-left: 15px;
-            margin-right: 10px;
-            flex-shrink: 0;
-        }
-        
-        .dialogue-text {
-            flex-grow: 1;
-        }
-        
         @media print {
             .header, .article-actions, .back-btn {
                 display: none;
@@ -677,11 +670,6 @@
             
             h1 {
                 font-size: 32px;
-            }
-            
-            .focus-container {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 20px;
             }
         }
         
@@ -729,12 +717,33 @@
                 font-size: 60px;
             }
             
-            .mind-icon {
-                font-size: 80px;
+            .dialogue-container {
+                padding: 20px;
             }
             
-            .dialogue-animation {
-                height: 250px;
+            .participant-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 35px;
+            }
+            
+            .speaker-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+            }
+            
+            .message {
+                padding: 15px;
+                max-width: 80%;
+            }
+            
+            .sheikh-item .message {
+                margin-left: 10px;
+            }
+            
+            .thinker-item .message {
+                margin-right: 10px;
             }
         }
         
@@ -821,20 +830,24 @@
                 padding: 25px 15px;
             }
             
-            .focus-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .dialogue-section {
-                padding: 20px;
-            }
-            
-            .dialogue-item {
-                padding: 15px;
+            .participant-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
             }
             
             .speaker-icon {
-                font-size: 30px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .message {
+                max-width: 75%;
+            }
+            
+            .message-text {
+                font-size: 18px;
             }
         }
         
@@ -869,6 +882,20 @@
                 font-size: 15px;
                 padding: 10px;
             }
+            
+            .participant {
+                gap: 5px;
+            }
+            
+            .participant-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+            }
+            
+            .participant-name {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -880,7 +907,7 @@
                 <a href="index.html">
                     <img src="images/logo.png" alt="شعار موقع حسين الخليل" class="logo">
                 </a>
-                <span class="site-title">حسين الخليل | المقالات</span>
+                <span class="site-title">حسين الخليل | حوار فكري</span>
             </div>
             
             <div class="nav-buttons">
@@ -909,141 +936,189 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ تعطيل العقول</h1>
+                <h1>❖ تعطيل العقول: حوار فكري حول القرآن والسنة</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 11 مايو 2025</span>
             </div>
             
             <div class="article-content">
                 <div class="intro-section">
-                    <div class="focus-icon">🧠🔓</div>
-                    <p>هذه المقالة تقدم حواراً عميقاً حول مفهوم تعطيل العقل في فهم النصوص الدينية، والصراع بين الاعتماد على المصادر الموثوقة واستخدام العقل في الفهم والتفسير.</p>
+                    <div class="focus-icon">🧠💡</div>
+                    <p>حوار عميق بين مفكر وشيخ حول دور العقل في فهم النصوص الدينية، والصراع بين الاعتماد على القرآن الكريم كمصدر أساسي والحديث النبوي كمصدر ثانوي.</p>
                 </div>
                 
-                <div class="dialogue-animation">
-                    <div class="mind-icon">🧠</div>
-                    <div class="lock-icon">🔒</div>
-                    <div class="lock-icon">🔒</div>
-                    <div class="lock-icon">🔒</div>
-                    <div class="lock-icon">🔒</div>
-                    <div class="lock-icon">🔒</div>
-                    <div class="lock-icon">🔒</div>
+                <div class="dialogue-container">
+                    <div class="dialogue-header">
+                        <h2 class="dialogue-title">حوار حول القرآن والسنة</h2>
+                        <div class="participants">
+                            <div class="participant">
+                                <div class="participant-icon sheikh-icon">👳‍♂️</div>
+                                <div class="participant-name">الشيخ</div>
+                            </div>
+                            <div class="participant">
+                                <div class="participant-icon thinker-icon">🧔🏻</div>
+                                <div class="participant-name">المفكر</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dialogue-content">
+                        <!-- الشيخ يبدأ الحوار -->
+                        <div class="dialogue-item sheikh-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    أخي الكريم، لماذا تُنكر السُنّة النبوية؟
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- رد المفكر -->
+                        <div class="dialogue-item thinker-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    وما حاجتي لنصّ ظنّي الثبوت ولديّ القرآن، قطّعي الثبوت، وهو يكفيني لعبادة الله دون الحاجة لأي مصدر آخر!!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- الشيخ -->
+                        <div class="dialogue-item sheikh-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    لكن يا أخي السُنّة مكمّلة للقرآن!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- المفكر -->
+                        <div class="dialogue-item thinker-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    مكمّلة!! وهل القرآن ناقص!!! لا يُكمّل إلّا الناقص!! 
+                                    <br><br>
+                                    أقصد أن السُنّة تشرح القرآن وتُفصّله وتُفسّره.
+                                    <br><br>
+                                    لكن الله أخبرنا أنه أنزل لنا القرآن مُفصّل، دون الحاجة لمن يُفصّله لنا، والدليل قوله تعالى:
+                                    <div class="quote-in-dialogue">
+                                        "كتاب أحكمت آياته ثم فُصّلت من لدن حكيم خبير"
+                                    </div>
+                                    ما يعني أن الحكيم الخبير الذي هو "الله"، هو من فصّله لنا وليست كُتب الحديث!!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- الشيخ -->
+                        <div class="dialogue-item sheikh-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    لكن هناك أشياء وشرائع لم يذكرها الله في كتابه.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- المفكر -->
+                        <div class="dialogue-item thinker-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    كيف تقول هذا!!! ألم تقرأ القرآن!! ألم تقرأ قوله تعالى:
+                                    <div class="quote-in-dialogue">
+                                        "ونزّلنا عليك الكتاب تبياناً لكل شيء"
+                                    </div>
+                                    مرة ثانية ركّز على كلمة "كل شيء" فما سكت عنه الله لم يطالبنا به.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- الشيخ -->
+                        <div class="dialogue-item sheikh-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    لكن الله تعالى قال:
+                                    <div class="quote-in-dialogue">
+                                        "اليوم أكملت لكم دينكم وأتممت عليكم نعمتي ورضيت لكم الإسلام ديناً"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- المفكر -->
+                        <div class="dialogue-item thinker-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    عندما نزلت هذه الآية التي يُخبرنا الله بها ويخبر رسوله أنه أكمل لنا الدين، هل كانت كُتب السُنّة التي تقول أنها مكمّلة للدين، مدوّنة؟
+                                    <br><br>
+                                    ومتى تم تدوين كتب الحديث؟ أول كتاب حديث هو موطأ الإمام مالك. تم تدوينه تقريباً سنة 160 هجرية. أي بعد 150 سنة بعد وفاة الرسول. 
+                                    <br><br>
+                                    يعني في عهد رسول الله لم يكن هناك شيء إسمه كتب الحديث!! ولا حتى في عهد الصحابة الذين هم أعلم بالدين من الجيل الذي أتى بعدهم لأنهم عاشوا في زمن نزول الوحي!! ولا حتى في عهد التابعين!!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- الشيخ -->
+                        <div class="dialogue-item sheikh-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    يعني كل المسلمين بعلمائهم وعوامهم على خطأ وأنت الذي جئت بعد 1400 سنة على حق؟
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- المفكر -->
+                        <div class="dialogue-item thinker-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    هذا ليس أسلوب في الحوار والنقاش، فالحُجّة يُردّ عليها بالحُجّة، وليس بالكلام العامي والعاطفي، جئتك بحُجج على صحة ما أنا عليه من كتاب الله، هذا كلام الله لا كلامي!! 
+                                    <br><br>
+                                    فإذا كنت تمتلك الحُجّة من نفس المصدر، أي القرآن، فقدّمها لي وحاججني بها!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- المفكر يتوسع في النقاش -->
+                        <div class="dialogue-item thinker-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    الكثير من القصص التي قصّها الله علينا عن الأمم التي سبقتنا كيف ضلّوا عن سبيل الله، أخبرنا الله عن اليهود والنصارى كيف ضلّوا بعد أن إتخذوا أحبارهم ورهبانهم أرباباً من دون الله.
+                                    <div class="quote-in-dialogue">
+                                        "إتخذوا أحبارهم ورهبانهم أرباباً من دون الله"
+                                    </div>
+                                    يحذرنا الله في هذه القصص من أن نحذوا حذوهم وأن نقع في نفس الخطأ الذي وقعوا فيه، والذي بسببه ضلّوا عن سبيل الله.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- خاتمة الحوار -->
+                        <div class="dialogue-item thinker-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    القضية الأساسية هي تعطيل العقول أمام النصوص الدينية. القرآن يدعونا للتفكر والتدبر، بينما يصر البعض على أن النقل وحده يكفي.
+                                    <br><br>
+                                    <span class="highlight">الحكمة تكمن في الموازنة بين النقل والعقل، وعدم تعطيل أي منهما.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="focus-container">
-                    <div class="focus-card">
-                        <div class="focus-icon-card">📜</div>
-                        <div class="focus-title">صراع المصادر</div>
-                        <div class="focus-description">الحوار يكشف الصراع بين القرآن كمصدر أساسي والحديث كمصدر ثانوي</div>
-                    </div>
-                    
-                    <div class="focus-card">
-                        <div class="focus-icon-card">⏳</div>
-                        <div class="focus-title">قضية التاريخ</div>
-                        <div class="focus-description">تأخر تدوين كتب الحديث بعد وفاة الرسول بقرن ونصف يطرح أسئلة جوهرية</div>
-                    </div>
-                    
-                    <div class="focus-card">
-                        <div class="focus-icon-card">💭</div>
-                        <div class="focus-title">دور العقل</div>
-                        <div class="focus-description">القرآن يدعو لاستخدام العقل بينما يرى البعض أن النقل وحده يكفي</div>
-                    </div>
-                </div>
-                
-                <div class="content-paragraphs">
-                    <p>في هذا الحوار العميق، يناقش مفكر مع شيخ حول أهمية استخدام العقل في فهم النصوص الدينية، والصراع بين الاعتماد على القرآن الكريم كمصدر أساسي والحديث النبوي كمصدر ثانوي. الحوار يكشف عن قضية جوهرية تتعلق بتعطيل العقول أمام النصوص، والاعتماد على النقل دون التفكير النقدي.</p>
-                    
-                    <div class="quote-box">
-                        <div class="quote-icon">❝</div>
-                        <p>الكثير من الآيات يخبرنا الله أنه فصّل لنا كتابه تفصيلاً، ومن ثم تقول أن السُنّة تُفصّل القرآن! أنت بهذا تفتري على الله وتطعن في كتاب الله دون أن تدري</p>
-                    </div>
-                    
-                    <p>الحوار يبدأ بسؤال الشيخ للمفكر عن سبب إنكاره للسنة النبوية، ليرد المفكر بأن القرآن يكفيه لعبادة الله دون الحاجة لأي مصدر آخر. هذا الرد يفتح الباب أمام مناقشة عميقة حول طبيعة القرآن وعلاقته بالسنة، ودور العقل في فهم النصوص الدينية.</p>
-                    
-                    <div class="dialogue-section">
-                        <div class="dialogue-item sheikh">
-                            <div class="speaker-icon">👳‍♂️</div>
-                            <div class="dialogue-text">
-                                <strong>الشيخ:</strong> أخي الكريم، لماذا تُنكر السُنّة النبوية؟
-                            </div>
-                        </div>
-                        
-                        <div class="dialogue-item thinker">
-                            <div class="speaker-icon">🧔🏻</div>
-                            <div class="dialogue-text">
-                                <strong>المفكر:</strong> وما حاجتي لنصّ ظنّي الثبوت ولديّ القرآن، قطّعي الثبوت، وهو يكفيني لعبادة الله دون الحاجة لأي مصدر آخر!!
-                            </div>
-                        </div>
-                        
-                        <div class="dialogue-item sheikh">
-                            <div class="speaker-icon">👳‍♂️</div>
-                            <div class="dialogue-text">
-                                <strong>الشيخ:</strong> لكن يا أخي السُنّة مكمّلة للقرآن!
-                            </div>
-                        </div>
-                        
-                        <div class="dialogue-item thinker">
-                            <div class="speaker-icon">🧔🏻</div>
-                            <div class="dialogue-text">
-                                <strong>المفكر:</strong> مكمّلة!! وهل القرآن ناقص!!! لا يُكمّل إلّا الناقص!! أقصد أن السُنّة تشرح القرآن وتُفصّله وتُفسّره. لكن الله أخبرنا أنه أنزل لنا القرآن مُفصّل، دون الحاجة لمن يُفصّله لنا، والدليل قوله تعالى: (كتاب أحكمت آياته ثم فُصّلت من لدن حكيم خبير). ما يعني أن الحكيم الخبير الذي هو "الله"، هو من فصّله لنا وليست كُتب الحديث!
-                            </div>
-                        </div>
-                        
-                        <div class="dialogue-item sheikh">
-                            <div class="speaker-icon">👳‍♂️</div>
-                            <div class="dialogue-text">
-                                <strong>الشيخ:</strong> لكن هناك أشياء وشرائع لم يذكرها الله في كتابه.
-                            </div>
-                        </div>
-                        
-                        <div class="dialogue-item thinker">
-                            <div class="speaker-icon">🧔🏻</div>
-                            <div class="dialogue-text">
-                                <strong>المفكر:</strong> كيف تقول هذا!!! ألم تقرأ القرآن!! ألم تقرأ قوله تعالى: (ونزّلنا عليك الكتاب تبياناً لكل شيء) مرة ثانية ركّز على كلمة "كل شيء" فما سكت عنه الله لم يطالبنا به.
-                            </div>
-                        </div>
-                        
-                        <div class="dialogue-item sheikh">
-                            <div class="speaker-icon">👳‍♂️</div>
-                            <div class="dialogue-text">
-                                <strong>الشيخ:</strong> لكن الله تعالى قال (اليوم أكملت لكم دينكم وأتممت عليكم نعمتي ورضيت لكم الإسلام ديناً)
-                            </div>
-                        </div>
-                        
-                        <div class="dialogue-item thinker">
-                            <div class="speaker-icon">🧔🏻</div>
-                            <div class="dialogue-text">
-                                <strong>المفكر:</strong> عندما نزلت هذه الآية التي يُخبرنا الله بها ويخبر رسوله أنه أكمل لنا الدين، هل كانت كُتب السُنّة التي تقول أنها مكمّلة للدين، مدوّنة؟ ومتى تم تدوين كتب الحديث؟ أول كتاب حديث هو موطأ الإمام مالك. تم تدوينه تقريباً سنة 160 هجرية. أي بعد 150 سنة بعد وفاة الرسول. يعني في عهد رسول الله لم يكن هناك شيء إسمه كتب الحديث!! ولا حتى في عهد الصحابة الذين هم أعلم بالدين من الجيل الذي أتى بعدهم لأنهم عاشوا في زمن نزول الوحي!! ولا حتى في عهد التابعين الذين عاشوا في زمن الصحابة وعاصروهم!! وأول كتاب حديث والذي من المُفترض أن يكون مكمّل للدين، تم تدوينه بعد وفاة الرسول الكريم بـ 150 سنة!!
-                            </div>
-                        </div>
-                        
-                        <div class="dialogue-item sheikh">
-                            <div class="speaker-icon">👳‍♂️</div>
-                            <div class="dialogue-text">
-                                <strong>الشيخ:</strong> 😤😤 يعني كل المسلمين بعلمائهم وعوامهم على خطأ وأنت الذي جئت بعد 1400 سنة على حق؟
-                            </div>
-                        </div>
-                        
-                        <div class="dialogue-item thinker">
-                            <div class="speaker-icon">🧔🏻</div>
-                            <div class="dialogue-text">
-                                <strong>المفكر:</strong> هذا ليس أسلوب في الحوار والنقاش، فالحُجّة يُردّ عليها بالحُجّة، وليس بالكلام العامي والعاطفي، جئتك بحُجج على صحة ما أنا عليه من كتاب الله، هذا كلام الله لا كلامي!! فإذا كنت تمتلك الحُجّة من نفس المصدر، أي القرآن، فقدّمها لي وحاججني بها!
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="quote-box">
-                        <div class="quote-icon">❝</div>
-                        <p>الكثير من القصص التي قصّها الله علينا عن الأمم التي سبقتنا كيف ضلّوا عن سبيل الله، أخبرنا الله عن اليهود والنصارى كيف ضلّوا بعد أن إتخذوا أحبارهم ورهبانهم أرباباً من دون الله</p>
-                    </div>
-                    
-                    <p>الحوار ينتهي بتأكيد المفكر على أهمية استخدام العقل وعدم تعطيله أمام النصوص، مشيراً إلى أن القرآن الكريم يدعو للتفكر والتدبر، بينما تعطيل العقول يؤدي إلى الضلال والانحراف عن الطريق المستقيم. كما يحذر من الوقوع في نفس الأخطاء التي وقعت فيها الأمم السابقة عندما اتخذت من البشر أرباباً من دون الله.</p>
-                    
-                    <p>القضية الأساسية التي يطرحها هذا الحوار هي مسألة تعطيل العقل في مقابل النقل، وإهمال دور التفكير النقدي في فهم النصوص الدينية. القرآن الكريم في مواضع كثيرة يدعو للتفكر والتدبر، بينما يرى البعض أن النقل وحده يكفي، دون الحاجة لاستخدام العقل في فهم النصوص وتفسيرها.</p>
+                <div class="quote-box">
+                    <div class="quote-icon">❝</div>
+                    <p>العقل هو هبة الله للإنسان ليفهم به النصوص، وليس ليعطله أمامها. القرآن يدعو للتفكر والتدبر، بينما تعطيل العقول يؤدي إلى الضلال والانحراف.</p>
                 </div>
                 
                 <div class="conclusion">
-                    <h3>الخلاصة</h3>
-                    <p>هذا الحوار العميق يسلط الضوء على قضية جوهرية في الفكر الديني المعاصر، وهي قضية تعطيل العقول أمام النصوص. القرآن الكريم يدعو في مواضع كثيرة للتفكر والتدبر، بينما يصر البعض على أن النقل وحده يكفي. تاريخ تدوين كتب الحديث يطرح تساؤلات مشروعة حول مصداقيتها وعلاقتها بالقرآن الكريم. الحكمة تكمن في الموازنة بين النقل والعقل، وعدم تعطيل أي منهما. فالعقل هو هبة الله للإنسان ليفهم به النصوص، وليس ليعطله أمامها.</p>
+                    <h3>خلاصة الحوار</h3>
+                    <p>هذا الحوار يسلط الضوء على قضية جوهرية في الفكر الديني المعاصر، وهي قضية تعطيل العقول أمام النصوص. القرآن الكريم يدعو في مواضع كثيرة للتفكر والتدبر، بينما يصر البعض على أن النقل وحده يكفي. تاريخ تدوين كتب الحديث يطرح تساؤلات مشروعة حول مصداقيتها وعلاقتها بالقرآن الكريم. الحكمة تكمن في الموازنة بين النقل والعقل، وعدم تعطيل أي منهما. فالعقل هو هبة الله للإنسان ليفهم به النصوص، وليس ليعطله أمامها.</p>
                 </div>
             </div>
             
@@ -1176,32 +1251,43 @@
             }
         });
         
-        // تأثيرات البطاقات
-        const focusCards = document.querySelectorAll('.focus-card');
+        // تأثيرات تفاعلية لفقاعات الحوار
+        const messages = document.querySelectorAll('.message');
         
-        focusCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'scale(1.05)';
-                card.style.boxShadow = '0 15px 35px rgba(0,0,0,0.2)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'scale(1)';
-                card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+        messages.forEach(message => {
+            message.addEventListener('click', () => {
+                message.style.transform = 'scale(1.02)';
+                message.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
+                
+                setTimeout(() => {
+                    message.style.transform = 'translateY(-5px)';
+                    message.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+                }, 200);
             });
         });
         
-        // تأثيرات عناصر الحوار
+        // تأثيرات عند التمرير لفقاعات الحوار
         const dialogueItems = document.querySelectorAll('.dialogue-item');
         
+        function animateDialogueItems() {
+            dialogueItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 200 * index);
+            });
+        }
+        
+        // تهيئة العناصر للتحريك
         dialogueItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.style.transform = 'translateX(10px)';
-            });
-            
-            item.addEventListener('mouseleave', () => {
-                item.style.transform = 'translateX(0)';
-            });
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        // بدء التحريك بعد تحميل الصفحة
+        window.addEventListener('load', () => {
+            setTimeout(animateDialogueItems, 500);
         });
     </script>
 </body>
