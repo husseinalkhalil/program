@@ -85,6 +85,8 @@
             align-items: center;
             gap: 15px;
             transition: all 0.3s ease;
+            /* تم نقل الشعار إلى اليسار */
+            margin-right: auto;
         }
         
         .header.scrolled .logo-container {
@@ -207,6 +209,8 @@
             justify-content: center;
             backdrop-filter: blur(5px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            /* تم نقل زر الهمبرغر إلى اليمين */
+            margin-left: auto;
         }
         
         .hamburger:hover {
@@ -788,6 +792,19 @@
                 width: 22px;
                 height: 22px;
             }
+            
+            /* تعديلات خاصة لترتيب العناصر في الجوال */
+            .logo-container {
+                margin-right: 0; /* إزالة الهامش الإضافي */
+                margin-left: auto; /* توسيط الشعار */
+                flex-grow: 1;
+                text-align: center;
+            }
+            
+            .hamburger {
+                margin-left: 0; /* إزالة الهامش الإضافي */
+                margin-right: auto; /* وضع زر الهمبرغر على اليمين */
+            }
         }
         
         @media (max-width: 576px) {
@@ -834,6 +851,7 @@
                 height: 20px;
             }
             
+            /* تحسين لوحة المشاركة على الجوال */
             .article-share-menu {
                 width: 92vw;
                 max-width: 300px;
@@ -993,6 +1011,12 @@
     <!-- الشريط العلوي المحسّن -->
     <header class="header" id="header">
         <div class="header-container">
+            <!-- تم نقل زر الهمبرغر إلى اليمين -->
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- تم نقل الشعار إلى اليسار -->
             <div class="logo-container">
                 <a href="index.html">
                     <img src="images/logo.png" alt="شعار موقع حسين الخليل" class="logo">
@@ -1023,10 +1047,6 @@
                 </a>
                 <div class="nav-indicator" id="navIndicator"></div>
             </div>
-            
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
         
         <!-- قائمة الجوال المحسنة -->
@@ -1135,7 +1155,7 @@
                 </ol>
                 
                 <h3 class="section-title">توثيق الديون:</h3>
-                <p>علّمنا الله في أطول آية من القرآن كيفية توثيق الحقوق <span style="color: #5e2ca5; font-weight: bold;">﴿يا أيها الذين آمنوا إذا تَداينتم بدَينٍ إلى أجلٍ mسمّى فَاكْتُبوه﴾</span></p>
+                <p>علّمنا الله في أطول آية من القرآن كيفية توثيق الحقود <span style="color: #5e2ca5; font-weight: bold;">﴿يا أيها الذين آمنوا إذا تَداينتم بدَينٍ إلى أجلٍ mسمّى فَاكْتُبوه﴾</span></p>
                 <ol>
                     <li>يُكتب الدين بواسطة كاتب عادل، ولا يحق له الامتناع</li>
                     <li>المدين يُملي الدين بنفسه دون بخس أو تحريف</li>
