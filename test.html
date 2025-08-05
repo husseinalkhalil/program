@@ -1023,7 +1023,7 @@
                 </ol>
                 
                 <h3 class="section-title">توثيق الديون:</h3>
-                <p>علّمنا الله في أطول آية من القرآن كيفية توثيق الحقوق <span style="color: #5e2ca5; font-weight: bold;">﴿يا أيها الذين آمنوا إذا تَداينتم بدَينٍ إلى أجلٍ مسمّى فَاكْتُبوه﴾</span></p>
+                <p>علّمنا الله في أطول آية من القرآن كيفية توثيق الحقوق <span style="color: #5e2ca5; font-weight: bold;">﴿يا أيها الذين آمنوا إذا تَداينتم بدَينٍ إلى أجلٍ mسمّى فَاكْتُبوه﴾</span></p>
                 <ol>
                     <li>يُكتب الدين بواسطة كاتب عادل، ولا يحق له الامتناع</li>
                     <li>المدين يُملي الدين بنفسه دون بخس أو تحريف</li>
@@ -1101,23 +1101,33 @@
         const header = document.getElementById('header');
         
         // فتح/إغلاق القائمة
-        function toggleMobileMenu() {
+        function toggleMobileMenu(event) {
+            // منع انتشار الحدث لمنع الإغلاق الفوري
+            if (event) event.stopPropagation();
+            
             mobileNav.classList.toggle('open');
             hamburger.innerHTML = mobileNav.classList.contains('open') ? 
                 '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         }
         
-        hamburger.addEventListener('click', toggleMobileMenu);
-        
         // إغلاق القائمة عند النقر في أي مكان
-        document.addEventListener('click', function(event) {
-            const isClickInsideNav = mobileNav.contains(event.target);
-            const isClickOnHamburger = hamburger.contains(event.target);
-            
-            // إذا كانت القائمة مفتوحة والنقر كان خارج القائمة وليس على زر الهامبرغر
-            if (mobileNav.classList.contains('open') && !isClickInsideNav && !isClickOnHamburger) {
+        function closeMobileMenu(event) {
+            if (mobileNav.classList.contains('open') && 
+                !mobileNav.contains(event.target) && 
+                !hamburger.contains(event.target)) {
                 toggleMobileMenu();
             }
+        }
+        
+        // تعيين المستمعين للأحداث
+        hamburger.addEventListener('click', toggleMobileMenu);
+        document.addEventListener('click', closeMobileMenu);
+        
+        // إغلاق القائمة عند النقر على أي رابط داخلي
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileMenu();
+            });
         });
         
         // تأثير التمرير على الشريط العلوي
@@ -1158,7 +1168,7 @@
             const shareMenu = document.getElementById('shareMenu');
             const shareButton = document.querySelector('.share-button-container button');
             
-            if (!shareMenu.contains(e.target) {
+            if (!shareMenu.contains(e.target) && e.target !== shareButton) {
                 toggleShareMenu();
             }
         }
