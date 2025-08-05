@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حوار ساخر | الخاتمة: عبادة الله بين القرآن والتراث | حسين الخليل</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #5E35B1;
+            --secondary-color: #D1C4E9;
+            --accent-color: #FFD54F;
+            --text-color: #333333;
+            --light-bg: #F5F5F5;
+            --light-beige: #F8F3E6;
+            --article-beige: #F5EFE1;
+            --light-purple: #EDE7F6;
+            --border-color: #E0E0E0;
+            --header-purple: #4527A0;
+            --mobile-header-height: 70px;
+            --focus-color: #FF9800;
+            --traditionalist-color: #1976D2;
+            --quranist-color: #FF9800;
+            --prayer-color: #4CAF50;
+            --wisdom-color: #9C27B0;
+            --truth-color: #4CAF50;
+            --error-color: #F44336;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-beige);
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f3e6 0%, #ede7f6 100%);
+            padding-top: var(--mobile-header-height);
+        }
+        
+        .header {
+            background-color: var(--header-purple);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: var(--mobile-header-height);
+            transition: height 0.3s ease;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            height: 45px;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .site-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            top: var(--mobile-header-height);
+            right: -100%;
+            width: 100%;
+            height: calc(100vh - var(--mobile-header-height));
+            background: rgba(69, 39, 160, 0.98);
+            z-index: 999;
+            transition: right 0.4s ease;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+        
+        .mobile-nav.open {
+            right: 0;
+        }
+        
+        .mobile-nav .btn {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #512DA8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 30px;
+        }
+        
+        .article-card {
+            background-color: var(--article-beige);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            margin-bottom: 50px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--focus-color), var(--accent-color));
+        }
+        
+        .article-header {
+            position: relative;
+            padding-bottom: 25px;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+        
+        .article-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: 0 auto;
+            width: 120px;
+            height: 5px;
+            background: linear-gradient(to right, var(--focus-color), var(--accent-color));
+            border-radius: 3px;
+        }
+        
+        h1 {
+            color: var(--focus-color);
+            font-size: 38px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.4;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .publish-date {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-size: 18px;
+            justify-content: center;
+        }
+        
+        .date-icon {
+            color: var(--focus-color);
+        }
+        
+        .article-content {
+            font-size: 22px;
+            text-align: justify;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .intro-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 152, 0, 0.1);
+            border-radius: 20px;
+            border-left: 8px solid var(--focus-color);
+        }
+        
+        .focus-icon {
+            font-size: 80px;
+            color: var(--focus-color);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .dialogue-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 50px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+        
+        .dialogue-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .dialogue-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .participants {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .participant {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .participant-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .participant-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .traditionalist-icon {
+            background-color: var(--traditionalist-color);
+            color: white;
+        }
+        
+        .quranist-icon {
+            background-color: var(--quranist-color);
+            color: white;
+        }
+        
+        .participant-name {
+            font-weight: 600;
+            font-size: 20px;
+        }
+        
+        .dialogue-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .dialogue-item {
+            display: flex;
+            gap: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .quranist-item {
+            flex-direction: row-reverse;
+        }
+        
+        .speaker-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .quranist-item .speaker-icon {
+            background-color: var(--quranist-color);
+            color: white;
+        }
+        
+        .traditionalist-item .speaker-icon {
+            background-color: var(--traditionalist-color);
+            color: white;
+        }
+        
+        .message {
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+            max-width: 85%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .message:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .quranist-item .message {
+            background-color: #FFF8E1;
+            border-right: 5px solid var(--quranist-color);
+            margin-left: 20px;
+        }
+        
+        .traditionalist-item .message {
+            background-color: #E3F2FD;
+            border-right: 5px solid var(--traditionalist-color);
+            margin-right: 20px;
+        }
+        
+        .message::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        
+        .quranist-item .message::before {
+            right: -20px;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent #FFF8E1;
+        }
+        
+        .traditionalist-item .message::before {
+            left: -20px;
+            border-width: 10px 20px 10px 0;
+            border-color: transparent #E3F2FD transparent transparent;
+        }
+        
+        .message-text {
+            font-size: 20px;
+            line-height: 1.7;
+        }
+        
+        .highlight {
+            background: linear-gradient(transparent 60%, rgba(255, 213, 79, 0.4) 40%);
+            padding: 0 5px;
+            font-weight: 500;
+        }
+        
+        .quran-verse {
+            display: inline-block;
+            padding: 5px 10px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 5px;
+            font-style: italic;
+            margin: 5px 0;
+        }
+        
+        .conclusion {
+            background-color: var(--light-purple);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            border: 1px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-size: 22px;
+        }
+        
+        .conclusion::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--focus-color), var(--accent-color));
+            border-radius: 3px;
+        }
+        
+        .article-actions {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .article-button {
+            background: white;
+            border: none;
+            cursor: pointer;
+            font-size: 22px;
+            color: var(--primary-color);
+            transition: all 0.3s;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .article-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            color: var(--accent-color);
+            background-color: var(--primary-color);
+        }
+        
+        .share-button-container {
+            position: relative;
+        }
+        
+        .article-share-menu {
+            position: absolute;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: none;
+            width: 280px;
+            z-index: 1000;
+            border: 1px solid var(--border-color);
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        
+        .share-title {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        .share-platforms {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .share-platform {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            background-color: white !important;
+            border: 1px solid #ddd;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .share-platform:hover {
+            transform: scale(1.15);
+            background-color: var(--primary-color) !important;
+        }
+        
+        .share-platform:hover i {
+            color: white;
+        }
+        
+        .copy-link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 18px;
+            background-color: var(--light-purple);
+            color: var(--primary-color);
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 17px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        .copy-link-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .article-button img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translate(-50%, 20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translate(-50%, 0); }
+            to { opacity: 0; transform: translate(-50%, 20px); }
+        }
+        
+        .article-card {
+            animation: fadeIn 0.7s ease-out forwards;
+        }
+        
+        .article-share-menu {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        
+        .share-menu-closing {
+            animation: fadeOut 0.2s ease-out forwards;
+        }
+        
+        .quote-box {
+            background: rgba(255, 152, 0, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+            border-left: 5px solid var(--focus-color);
+            text-align: center;
+            font-style: italic;
+            font-size: 24px;
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        .quote-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: var(--focus-color);
+            opacity: 0.3;
+        }
+        
+        .wisdom-section {
+            background: #F3E5F5;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-top: 4px solid var(--wisdom-color);
+        }
+        
+        .wisdom-section h3 {
+            color: var(--wisdom-color);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .wisdom-container {
+            counter-reset: wisdom-counter;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .wisdom-card {
+            background: #F3E5F5;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid var(--wisdom-color);
+            transition: all 0.3s;
+            position: relative;
+            padding-right: 50px;
+        }
+        
+        .wisdom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .wisdom-card::before {
+            counter-increment: wisdom-counter;
+            content: counter(wisdom-counter);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--wisdom-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .wisdom-description {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        .truth-section {
+            background: #E8F5E9;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-top: 4px solid var(--truth-color);
+        }
+        
+        .truth-section h3 {
+            color: var(--truth-color);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .truth-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .truth-card {
+            background: #C8E6C9;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid var(--truth-color);
+            transition: all 0.3s;
+        }
+        
+        .truth-card.error {
+            background: #FFEBEE;
+            border-left: 3px solid var(--error-color);
+        }
+        
+        .truth-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .truth-card h4 {
+            color: var(--truth-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .truth-card.error h4 {
+            color: var(--error-color);
+        }
+        
+        .truth-card h4 i {
+            font-size: 24px;
+        }
+        
+        .truth-content {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        .irony {
+            color: #9C27B0;
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(156, 39, 176, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid #9C27B0;
+        }
+        
+        @media print {
+            .header, .article-actions, .back-btn {
+                display: none;
+            }
+            
+            body {
+                background: none;
+                color: #000;
+                padding-top: 0;
+            }
+            
+            .article-card {
+                box-shadow: none;
+                padding: 0;
+                background: none;
+                border: none;
+                border-radius: 0;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .article-card {
+                padding: 40px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-buttons {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .header {
+                height: 70px;
+            }
+            
+            .site-title {
+                font-size: 18px;
+            }
+            
+            .logo {
+                height: 40px;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+            
+            .article-card {
+                padding: 35px;
+                border-radius: 18px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .article-button {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .focus-icon {
+                font-size: 60px;
+            }
+            
+            .dialogue-container {
+                padding: 20px;
+            }
+            
+            .participant-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 35px;
+            }
+            
+            .speaker-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+            }
+            
+            .message {
+                padding: 15px;
+                max-width: 80%;
+            }
+            
+            .quranist-item .message {
+                margin-left: 10px;
+            }
+            
+            .traditionalist-item .message {
+                margin-right: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header {
+                height: 65px;
+            }
+            
+            .site-title {
+                font-size: 16px;
+            }
+            
+            .logo {
+                height: 35px;
+            }
+            
+            .article-card {
+                padding: 30px;
+                border-radius: 15px;
+            }
+            
+            h1 {
+                font-size: 26px;
+            }
+            
+            .article-content {
+                font-size: 20px;
+            }
+            
+            .article-actions {
+                gap: 15px;
+            }
+            
+            .btn {
+                padding: 10px 18px;
+                font-size: 15px;
+            }
+            
+            .article-button {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .article-share-menu {
+                width: 92vw;
+                max-width: 300px;
+                padding: 18px 15px;
+                bottom: calc(100% + 12px);
+            }
+            
+            .share-title {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            
+            .share-platforms {
+                flex-wrap: nowrap;
+                justify-content: space-around;
+                gap: 12px;
+                margin-bottom: 15px;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                scrollbar-width: none;
+            }
+            
+            .share-platforms::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .share-platform {
+                width: 44px;
+                height: 44px;
+                flex-shrink: 0;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            }
+            
+            .copy-link-btn {
+                font-size: 16px;
+                padding: 12px 10px;
+                border-radius: 25px;
+            }
+            
+            .intro-section {
+                padding: 25px 15px;
+            }
+            
+            .participant-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+            }
+            
+            .speaker-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .message {
+                max-width: 75%;
+            }
+            
+            .message-text {
+                font-size: 18px;
+            }
+            
+            .wisdom-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .header {
+                height: 60px;
+            }
+            
+            .site-title {
+                font-size: 15px;
+            }
+            
+            .logo {
+                height: 32px;
+            }
+            
+            .article-share-menu {
+                width: 90vw;
+                padding: 16px 12px;
+            }
+            
+            .share-platforms {
+                gap: 8px;
+            }
+            
+            .share-platform {
+                width: 42px;
+                height: 42px;
+            }
+            
+            .copy-link-btn {
+                font-size: 15px;
+                padding: 10px;
+            }
+            
+            .participant {
+                gap: 5px;
+            }
+            
+            .participant-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+            }
+            
+            .participant-name {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="شعار موقع حسين الخليل" class="logo">
+                </a>
+                <span class="site-title">حسين الخليل | حوارات ساخرة</span>
+            </div>
+            
+            <div class="nav-buttons">
+                <a href="index.html" class="btn btn-outline">الصفحة الرئيسية</a>
+                <a href="/articles" class="btn btn-outline">جميع المقالات</a>
+            </div>
+            
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- قائمة الجوال -->
+        <div class="mobile-nav" id="mobileNav">
+            <a href="index.html" class="btn btn-outline">الصفحة الرئيسية</a>
+            <a href="articles.html" class="btn btn-outline">صفحة المقالات</a>
+            <a href="books.html" class="btn btn-outline">الكتب</a>
+            <a href="hewar.html" class="btn btn-outline">الحوارات</a>
+            <a href="khawatir.html" class="btn btn-outline">خواطر</a>
+            <a href="videos.html" class="btn btn-outline">الفيديوهات</a>
+            <a href="history.html" class="btn btn-outline">التاريخ</a>
+            <a href="podcast.html" class="btn btn-outline">البودكاست</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="article-card">
+            <div class="article-header">
+                <h1>❖ حوار ساخر | الخاتمة: عبادة الله بين القرآن والتراث</h1>
+                <span class="publish-date"><span class="date-icon">📅</span> 5 مايو 2025</span>
+            </div>
+            
+            <div class="article-content">
+                <div class="intro-section">
+                    <div class="focus-icon">📖🕊️</div>
+                    <p>حوار ختامي يلخص رحلة البحث عن الحقيقة بين القرآن والتراث، ويكشف كيف أن العودة إلى كتاب الله بعقل صافٍ هي الطريق الوحيد لعبادة الله كما يريدها سبحانه وتعالى، بعيداً عن تشويهات التراث.</p>
+                </div>
+                
+                <div class="dialogue-container">
+                    <div class="dialogue-header">
+                        <h2 class="dialogue-title">كيف نعبد الله كما يريده؟</h2>
+                        <div class="participants">
+                            <div class="participant">
+                                <div class="participant-icon traditionalist-icon">👳‍♂️</div>
+                                <div class="participant-name">التقليدي</div>
+                            </div>
+                            <div class="participant">
+                                <div class="participant-icon quranist-icon">🧔🏻</div>
+                                <div class="participant-name">القرآني</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dialogue-content">
+                        <!-- الجزء الأول -->
+                        <div class="dialogue-item traditionalist-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    لقد إقتنعت وأيقنت أن القرآن هو مصدر التشريع الوحيد في الدين، وأن الله سيُحاسبنا على ما فهمنا نحن من القرآن، ولن يُحاسبنا على فهم رجال الدين، فيوم القيامة سيُحاسب كل إنسان لوحده، وسيتبرّأ منّا الجميع، ولن ينفعنا إتباع الشيخ الفلاني ولا العلّاني.
+                                    <br><br>
+                                    لكن كيف أعبد الله، كما يريده الله ويبتغيه؟
+                                    فهناك أشياء لا أستطيع إستيعابها في كتاب الله، وهذا ليس تعجيزاً في القرآن، بل هو قصور وقلة تدبّر مني.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    كلنا نسعى لإرضاء الله وعبادته على أكمل وجه، بالطريقة التي يرتضيها ربنا سبحانه وتعالى، بعيداً عن الشركيات.
+                                    <br><br>
+                                    أقبل على كتاب الله، وكأنك تقرأه لأول مرة، وقبل أن تُقبل على كتاب الله، أخرج من رأسك كل ما تعلمته من التراث المعنعن، فإذا لم تفعل ذلك، فلن تستفيد شيئاً، لأنك ستقيس كل آية على العنعنة وفهم كهنة الدين.
+                                    <br><br>
+                                    توجه لكتاب الله بعقل صافٍ لا يوجد بداخله أي شيء.
+                                    لا تُقبل على كتاب الله، وعقلك مليء بعدد الصلوات وعدد الركعات، لأن الصلاة التي في رأسك، ليست الصلاة التي في كتاب الله، وهذا دليل على أنه تم تحريفها، كما تم تحريف الدين كله.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item traditionalist-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    هناك من يقول أنه بحث عن الصلاة في كتاب الله، لكنه لم يجد تفصيلها، وقد وجد تفصيلها في كتب الحديث!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    من يقول بهذا الكلام، فهو يقطع بأن كتاب الله ناقص غير مكتمل!! وهذا رعب بحد ذاته لو عقل ما يقوله، لأنه بكل بساطة يرد على كلام الله!
+                                    <br><br>
+                                    فالله يقول: كتابي مُفصّل، والبشر الغبي يقول: كتابك ليس مُفصّل، بل كُتب التراث هي المُفصّلِة له!
+                                    تصوّر بماذا سيجيبه الله يوم القيامة!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item traditionalist-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    لكن هناك من يقول أن القرآن فيه إعجاز.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    انسَ هذا الأمر، فلا يوجد شيء في القرآن إسمه إعجاز، فالله يوضّح ولا يُعجِّز، فمن يقول أن القرآن فيه إعجاز، فهو العاجز عن فهم كلام الله، وهذه مشكلته وحده، وليس معناه أن جميع المسلمين عجزوا كما عجز هو.
+                                    <br><br>
+                                    الله لم يُنزّل علينا كلمات مُشفّرة وتحتاج لمن يفك رموزها وشيفرتها، ولم يُنزّل علينا طلاسم لا نعرف معانيها، ولم يُنزل علينا كلمات باللغة الهيروغليفية حتى نعجز عن حلّها.
+                                    <br><br>
+                                    لماذا يُظهرون الله على أن كل كلامه إعجاز، وأن من يفهم كلامه هم فقط كهنة الدين؟!
+                                    وكما قلت لك، أقبل على كتاب الله بقلب وعقل صافٍ، لا تُقبل على كتاب الله ورأسك مليء بالتراث، انبذ كل ما تعلمته وراء ظهرك، على الأقل وأنت تدرس كتاب ربك.
+                                    كل شيء لم تجده في كتاب الله، فاعلم أنه ليس من عند الله، وبالضرورة هو من عند الشيطان.
+                                    <br><br>
+                                    اليهود أشد الناس عبادة لله، طبعاً بغض النظر عن صحة هذه العبادة، أليس كذلك؟
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item traditionalist-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    نعم صحيح.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    انظر ماذا قال الله فيهم:
+                                    <span class="quran-verse">(مَثَلُ ٱلَّذِينَ حُمِّلُوا۟ ٱلتَّوْرَىٰةَ ثُمَّ لَمْ يَحْمِلُوهَا كَمَثَلِ ٱلْحِمَارِ يَحْمِلُ أَسْفَارًۢا ۚ بِئْسَ مَثَلُ ٱلْقَوْمِ ٱلَّذِينَ كَذَّبُوا۟ بِـَٔايَٰتِ ٱللَّهِ ۚ وَٱللَّهُ لَا يَهْدِى ٱلْقَوْمَ ٱلظَّٰلِمِينَ)</span>
+                                    <br><br>
+                                    ونحن قلنا أن أمة محمد لا تجتمع على ضلالة، أليس كذلك؟
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item traditionalist-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    نعم، هذا ما قاله رجال الدين!!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    هذا قول الشياطين، حتى ترتاح نفسيّاً ولا تسأل عن هذا التحريف، لأنك بكل بساطة ستضع ثقتك برجال الدين، وأن كل ما يقولوه ويفتوا به هو الحق، وأنه لا يجوز التشكيك بكلامهم.
+                                    <br><br>
+                                    وكأنهم يرددون كلام اليهود (نحن أبناء الله وأحباءه)
+                                    الله ليس له حبيب إلّا من تبعه، ولا ينظر للجنس ولا للعرق، فالكل سواسية عند الله.
+                                    من تمسّك بكتاب الله، فلن يضل أبداً، وهذا حصراً بمن تمسّك بكتاب الله.
+                                    <br><br>
+                                    أما وأنت تكذب على الله، وتدعي بأن له وحي ثاني، وتُقسم على ذلك، فهذا حالنا مع الله، ووقعنا في نفس الخطأ الذي وقع فيه اليهود، عندما ألّفوا التلمود وقالوا هذه أقوال موسى، فنحن نسير في طريقهم بالضبط!!
+                                    ثلث القرآن يحكي عنهم كي لا نكون مثلهم.
+                                    وفي الأخير قلنا لله "ماشي" يا رب.
+                                    وبكل وقاحة كتبنا الكتب وقلنا بأنها وحي، وإتبعنا طريق الذي حذّرنا بأن نكون مثلهم.
+                                    فنحن أغبياء مرتين وليس واحدة فقط مثل اليهود،
+                                    وكأن الله كان يتكلم مع أبله أصم أخرق!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item traditionalist-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    لكن بعض كلمات القرآن لا أستطيع تدبرها وفهمها الفهم الصحيح.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    اعتمد على قواميس تشرح لك معاني الكلمات، فالقرآن كُتب بالعربية، وإذا ما استصعبت عليك كلمة، فتستطيع أن تُفسر معناها الجذري بالإستعانة بالقواميس، فهذا سيُقرّب لك المعنى، أو استعن ببعض الكتب التي تُوضّح أحكام الله، لكن من كتاب الله فقط، وليس بالعنعنة ورأي الشيخ الفلاني أو العلّاني.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item traditionalist-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    هناك خوف من هذه الخطوة أن أتدبر كلام الله بعيداً عن كتب الفقه.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    لا تخف من أحد، وخاف من الله فقط، فمن يُخوّفك من تشغيل عقلك وتدبر كتاب الله، فاعلم أنه شيطان.
+                                    <br><br>
+                                    ومن يقول لك (قال رسول الله) قل له: هل سمعته؟
+                                    وبالضرورة سيقول لك: كتاب الله وصلك كما وصلك قول رسول الله، فالذين أوصلوا لك كتاب الله، هم أنفسهم الذين أوصلوا لك قول الرسول.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item traditionalist-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    نعم سيقولون هذا.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    قل له: أنت كذاب!! كتاب الله أوصله لي الله، ولا يمُنّ عليّ أحد، وهذا تحقيقاً لوعده لعباده أنه حفظ كتابه.
+                                    <br><br>
+                                    فالله سخّرنا لبعضنا البعض كي ننقل كتابه، ولا مِنة لأحد على أي أحدٍ آخر، والكل سيُجزى من عند الله.
+                                    <br><br>
+                                    فلو كان القرآن وصلنا بالتواتر، فأين هي سلسلة التواتر كما هو الحال في الأحاديث؟ أين نجد في كتاب الله سند (حدثنا فلان عن فلان عن عن عن عن عن عن)
+                                    لا تجعله يخدعك بهذه الحجة.
+                                    <br><br>
+                                    فلا تخف قول شيء، خاف من مخالفة أمر الله فقط.
+                                    والمصدر الوحيد للدين، هو كتاب الله فقط.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item traditionalist-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    قد يقول قائل، وما يدريك أن من أوصل لنا القرآن قد حرّف بعض الكلمات دون أن ينتبه إليه أحد!؟
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    من يقول هذا، فهو يطعن بكتاب الله، يطعن بقول الله عندما قال 
+                                    <span class="quran-verse">(إِنَّا نَحْنُ نَزَّلْنَا ٱلذِّكْرَ وَإِنَّا لَهُۥ لَحَٰفِظُونَ)</span>
+                                    <br><br>
+                                    فمن يقول بهذا الكلام، ليست لديه مشكلة بأن يطعن بكتاب الله، فقط من أجل الانتصار لكتب تراثه.
+                                    لا يستطيع أي إنسان أن يُغيّر حرف من كتاب الله، لأن الله سيفضحه على الملأ كله، وسيقف ضده كل المسلمين، وستبور بضاعته.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item traditionalist-item">
+                            <div class="speaker-icon">👳‍♂️</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    وهل كل ما سكت عنه الله ولم يذكره، أنا لست مطالب به، أو أني لست مطالب بما جاء في أي كتاب آخر.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    كل ما أمرك الله به، بيّنه وفصّله لك في كتابه، وليس في أي كتابٍ آخر.
+                                    <br><br>
+                                    لا يمكن أن يفرض الله عليك شيء، ثم يحيلك إلى كُتب بشرية أخرى لتبينها لك، فهذا ليس من العدل، والله هو العدل!
+                                    <br><br>
+                                    كل ما جاء في كتاب الله من أحكام، فأنت مطالب بتدبره، وكل ما هو خارج كتاب الله فأنت لست مُطالب به، بل واضرب به عرض الحائط ولا تخف، فوحي الله، في كتاب الله فقط، لذلك شغّل عقلك.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="quote-box">
+                            <div class="quote-icon">❝</div>
+                            <p>المفارقة الساخرة: نبحث عن الحقيقة ثم نرفضها عندما تتعارض مع معتقداتنا!</p>
+                        </div>
+                        
+                        <!-- حكم وأسس -->
+                        <div class="wisdom-section">
+                            <h3><i class="fas fa-lightbulb"></i> حكم وأسس للتدبر القرآني</h3>
+                            <div class="wisdom-container">
+                                <div class="wisdom-card">
+                                    <div class="wisdom-description">
+                                        الكتاب المقدس عند الله هو القرآن وحده، قال تعالى:
+                                        <span class="quran-verse">(وَهَٰذَا كِتَٰبٌ أَنزَلْنَٰهُ مُبَارَكٌ فَٱتَّبِعُوهُ وَٱتَّقُوا۟ لَعَلَّكُمْ تُرْحَمُونَ)</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="wisdom-card">
+                                    <div class="wisdom-description">
+                                        القرآن واضح وليس معجزًا، قال تعالى:
+                                        <span class="quran-verse">(وَلَقَدْ يَسَّرْنَا ٱلْقُرْءَانَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ)</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="wisdom-card">
+                                    <div class="wisdom-description">
+                                        الله هو الحافظ لكتابه، قال تعالى:
+                                        <span class="quran-verse">(إِنَّا نَحْنُ نَزَّلْنَا ٱلذِّكْرَ وَإِنَّا لَهُۥ لَحَٰفِظُونَ)</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="wisdom-card">
+                                    <div class="wisdom-description">
+                                        المسؤولية فردية يوم القيامة، قال تعالى:
+                                        <span class="quran-verse">(كُلُّ نَفْسٍۭ بِمَا كَسَبَتْ رَهِينَةٌ)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- حقائق وأخطاء شائعة -->
+                        <div class="truth-section">
+                            <h3><i class="fas fa-book-quran"></i> حقائق وأخطاء شائعة في فهم الدين</h3>
+                            <div class="truth-container">
+                                <div class="truth-card">
+                                    <h4><i class="fas fa-check-circle"></i> الحقيقة: المسؤولية فردية</h4>
+                                    <div class="truth-content">
+                                        الله سيحاسب كل إنسان على ما فهمه من القرآن، وليس على فهم رجال الدين.
+                                        <div class="irony">
+                                            المفارقة: نؤمن بالمسؤولية الفردية ثم نتبع الآخرين بلا تفكير!
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="truth-card error">
+                                    <h4><i class="fas fa-times-circle"></i> الخطأ: القرآن غير مفصل</h4>
+                                    <div class="truth-content">
+                                        القول بأن القرآن غير مفصل يتناقض مع قول الله:
+                                        <span class="quran-verse">(وَنَزَّلْنَا عَلَيْكَ ٱلْكِتَٰبَ تِبْيَٰنًا لِّكُلِّ شَىْءٍ)</span>
+                                        <div class="irony">
+                                            المفارقة: نرفض القرآن كمصدر كامل ثم نطالب بالدليل!
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="truth-card">
+                                    <h4><i class="fas fa-check-circle"></i> الحقيقة: العقل الصافي</h4>
+                                    <div class="truth-content">
+                                        يجب أن نقرأ القرآن بعقل صافٍ من التراث، لنفهمه كما أنزله الله.
+                                        <div class="irony">
+                                            المفارقة: نؤمن بضرورة العقل الصافي ثم نرفض تطبيقه!
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="truth-card error">
+                                    <h4><i class="fas fa-times-circle"></i> الخطأ: أمّة لا تجتمع على ضلالة</h4>
+                                    <div class="truth-content">
+                                        هذه المقولة تتناقض مع القرآن الذي يخبرنا أن اليهود ضلوا رغم كثرة عددهم.
+                                        <div class="irony">
+                                            المفارقة: نؤمن بأن اليهود ضلوا ثم نعتقد أننا محصّنون من الضلال!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- خاتمة الحوار -->
+                        <div class="dialogue-item quranist-item">
+                            <div class="speaker-icon">🧔🏻</div>
+                            <div class="message">
+                                <div class="message-text">
+                                    وهكذا نرى أن الطريق الوحيد لعبادة الله كما يريدها هو الرجوع إلى كتابه الكريم بعقل صافٍ وقلب مفتوح، دون وساطة بشرية أو تشويه تراثي.
+                                    <div style="margin-top: 15px; font-style: italic; text-align: center;">وتوتة توتة خلصت الحدوتة.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-icon">❝</div>
+                    <p>القرآن نور وهدى، والتراث ظلمات بعضها فوق بعض</p>
+                </div>
+                
+                <div class="conclusion">
+                    <h3>الخلاصة</h3>
+                    <p>هذا الحوار الختامي يلخص رحلة البحث عن الحقيقة بين القرآن والتراث، ويكشف أن العودة إلى كتاب الله بعقل صافٍ وقلب مفتوح هي الطريق الوحيد لعبادة الله كما يريدها سبحانه وتعالى. يظهر بوضوح أن القرآن كافٍ وشامل، وأن ادعاء عدم تفصيله يتناقض مع نصوصه الصريحة. الحوار يسلط الضوء على مفارقة الإيمان بالمسؤولية الفردية يوم القيامة مع اتباع الآخرين بلا تفكير. كما يكشف عن خطورة مقولة "أمة لا تجتمع على ضلالة" التي تتعارض مع القرآن وتاريخ الأمم السابقة. الخلاصة أن الإسلام الحقيقي يرفض الوساطة البشرية في فهم الدين، ويؤكد على أن القرآن هو المصدر الوحيد الموثوق الذي حفظه الله، وأن كل ما عداه من كتب التراث فهي من صنع البشر وتحمل أخطاء البشر.</p>
+                </div>
+            </div>
+            
+            <div class="article-actions">
+                <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
+                    <i class="fas fa-print"></i>
+                </button>
+                <div class="share-button-container">
+                    <button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleShareMenu()">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                    <div class="article-share-menu" id="shareMenu">
+                        <div class="share-title">مشاركة المقالة</div>
+                        <div class="share-platforms">
+                            <a href="#" onclick="shareOnSocial('facebook')" class="share-platform">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" onclick="shareOnSocial('telegram')" class="share-platform">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="#" onclick="shareOnSocial('whatsapp')" class="share-platform">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="#" onclick="shareOnSocial('twitter')" class="share-platform">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                        <button class="copy-link-btn" onclick="copyArticleLink()">
+                            <i class="fas fa-link"></i>
+                            نسخ رابط المقالة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // قائمة الجوال
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        hamburger.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+            hamburger.innerHTML = mobileNav.classList.contains('open') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // إغلاق القائمة عند النقر على أي رابط
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // قائمة المشاركة
+        function toggleShareMenu() {
+            const shareMenu = document.getElementById('shareMenu');
+            const isOpen = shareMenu.style.display === 'block';
+            
+            if (isOpen) {
+                shareMenu.classList.add('share-menu-closing');
+                setTimeout(() => {
+                    shareMenu.style.display = 'none';
+                    shareMenu.classList.remove('share-menu-closing');
+                }, 200);
+            } else {
+                shareMenu.style.display = 'block';
+            }
+            
+            // إغلاق القائمة عند النقر خارجها
+            if (shareMenu.style.display === 'block') {
+                setTimeout(() => {
+                    document.addEventListener('click', closeShareMenuOutside);
+                }, 10);
+            } else {
+                document.removeEventListener('click', closeShareMenuOutside);
+            }
+        }
+        
+        function closeShareMenuOutside(e) {
+            const shareMenu = document.getElementById('shareMenu');
+            const shareButton = document.querySelector('.share-button-container button');
+            
+            if (!shareMenu.contains(e.target) && e.target !== shareButton) {
+                toggleShareMenu();
+            }
+        }
+        
+        function copyArticleLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('تم نسخ رابط المقالة بنجاح');
+                toggleShareMenu();
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+        
+        function shareOnSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            
+            let shareUrl = '';
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${title} ${url}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
+                    break;
+            }
+            
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+            toggleShareMenu();
+        }
+        
+        // إغلاق قائمة المشاركة عند التمرير
+        window.addEventListener('scroll', () => {
+            const shareMenu = document.getElementById('shareMenu');
+            if (shareMenu.style.display === 'block') {
+                toggleShareMenu();
+            }
+        });
+        
+        // تأثيرات تفاعلية لفقاعات الحوار
+        const messages = document.querySelectorAll('.message');
+        
+        messages.forEach(message => {
+            message.addEventListener('click', () => {
+                message.style.transform = 'scale(1.02)';
+                message.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
+                
+                setTimeout(() => {
+                    message.style.transform = 'translateY(-5px)';
+                    message.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+                }, 200);
+            });
+        });
+        
+        // تأثيرات عند التمرير لفقاعات الحوار
+        const dialogueItems = document.querySelectorAll('.dialogue-item');
+        
+        function animateDialogueItems() {
+            dialogueItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 200 * index);
+            });
+        }
+        
+        // تهيئة العناصر للتحريك
+        dialogueItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        // بدء التحريك بعد تحميل الصفحة
+        window.addEventListener('load', () => {
+            setTimeout(animateDialogueItems, 500);
+        });
+    </script>
+</body>
+</html>
