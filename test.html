@@ -235,6 +235,8 @@
         
         .mobile-nav.open {
             right: 0;
+            position: fixed; /* إضافة مهمة لتمكين التمرير */
+            overflow-y: scroll; /* تمكين التمرير داخل القائمة */
         }
         
         .mobile-nav .nav-btn {
@@ -983,6 +985,11 @@
             50% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.9); }
             100% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
         }
+        
+        /* منع التمرير على الصفحة عند فتح القائمة */
+        body.menu-open {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -1052,7 +1059,7 @@
                 الفيديوهات
             </a>
             <a href="history.html" class="nav-btn">
-                <i class="fas fa-hourglass"></i> <!-- تم تغيير الأيقونة هنا -->
+                <i class="fas fa-hourglass"></i>
                 التاريخ
             </a>
             <a href="podcast.html" class="nav-btn">
@@ -1220,7 +1227,10 @@
         function toggleMobileMenu(event) {
             if (event) event.stopPropagation();
             
+            const isOpen = mobileNav.classList.contains('open');
             mobileNav.classList.toggle('open');
+            document.body.classList.toggle('menu-open', !isOpen);
+            
             hamburger.innerHTML = mobileNav.classList.contains('open') ? 
                 '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         }
