@@ -1100,18 +1100,24 @@
         const mobileNav = document.getElementById('mobileNav');
         const header = document.getElementById('header');
         
-        hamburger.addEventListener('click', () => {
+        // فتح/إغلاق القائمة
+        function toggleMobileMenu() {
             mobileNav.classList.toggle('open');
             hamburger.innerHTML = mobileNav.classList.contains('open') ? 
                 '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
+        }
         
-        // إغلاق القائمة عند النقر على أي رابط
-        mobileNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('open');
-                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-            });
+        hamburger.addEventListener('click', toggleMobileMenu);
+        
+        // إغلاق القائمة عند النقر في أي مكان
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = mobileNav.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+            
+            // إذا كانت القائمة مفتوحة والنقر كان خارج القائمة وليس على زر الهامبرغر
+            if (mobileNav.classList.contains('open') && !isClickInsideNav && !isClickOnHamburger) {
+                toggleMobileMenu();
+            }
         });
         
         // تأثير التمرير على الشريط العلوي
@@ -1152,7 +1158,7 @@
             const shareMenu = document.getElementById('shareMenu');
             const shareButton = document.querySelector('.share-button-container button');
             
-            if (!shareMenu.contains(e.target) && e.target !== shareButton) {
+            if (!shareMenu.contains(e.target) {
                 toggleShareMenu();
             }
         }
