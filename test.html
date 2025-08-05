@@ -13,7 +13,7 @@
         :root {
             --primary-color: #5e2ca5;
             --secondary-color: #9575CD;
-            --accent-color: #FFC107;
+            --accent-color: #FFC107; /* اللون الأصفر */
             --text-color: #333333;
             --light-bg: #F5F5F5;
             --light-beige: #F8F3E6;
@@ -108,7 +108,7 @@
         /* ==================== أزرار التنقل المحسّنة ==================== */
         .nav-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             align-items: center;
             height: 100%;
         }
@@ -118,7 +118,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 0 20px;
+            padding: 0 18px;
             color: rgba(255,255,255,0.85);
             text-decoration: none;
             font-weight: 600;
@@ -161,7 +161,7 @@
         .nav-btn i {
             font-size: 18px;
             transition: transform 0.3s;
-            color: rgba(255,255,255,0.7);
+            color: var(--accent-color); /* اللون الأصفر */
         }
         
         .nav-btn:hover i {
@@ -245,6 +245,10 @@
             transition: all 0.3s;
             border-radius: 12px;
             height: auto;
+        }
+        
+        .mobile-nav .nav-btn i {
+            color: var(--accent-color); /* اللون الأصفر في قائمة الجوال */
         }
         
         .mobile-nav .nav-btn:hover {
@@ -991,23 +995,24 @@
             <div class="nav-buttons">
                 <a href="index.html" class="nav-btn active">
                     <i class="fas fa-home"></i>
-                    الصفحة الرئيسية
+                    الرئيسية
                 </a>
                 <a href="/articles" class="nav-btn">
                     <i class="fas fa-book-open"></i>
                     المقالات
                 </a>
+                <a href="hewar.html" class="nav-btn">
+                    <i class="fas fa-comments"></i>
+                    الحوارات
+                </a>
                 <a href="books.html" class="nav-btn">
                     <i class="fas fa-book"></i>
                     الكتب
                 </a>
-                <a href="hewar.html" class="nav-btn">
-                    <i class="fas fa-Chat"></i>
-                    الحوارات
-                </a>
                 <a href="videos.html" class="nav-btn">
                     <i class="fas fa-video"></i>
                     الفيديوهات
+                </a>
                 <div class="nav-indicator" id="navIndicator"></div>
             </div>
             
@@ -1026,13 +1031,13 @@
                 <i class="fas fa-book-open"></i>
                 المقالات
             </a>
-            <a href="books.html" class="nav-btn">
-                <i class="fas fa-book"></i>
-                الكتب
-            </a>
             <a href="hewar.html" class="nav-btn">
                 <i class="fas fa-comments"></i>
                 الحوارات
+            </a>
+            <a href="books.html" class="nav-btn">
+                <i class="fas fa-book"></i>
+                الكتب
             </a>
             <a href="khawatir.html" class="nav-btn">
                 <i class="fas fa-lightbulb"></i>
@@ -1117,7 +1122,7 @@
                 <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وإن تُبتُم فَلَكُم رُءوسُ أموالِكُم لا تَظلِمون ولا تُظلَمون﴾</span></p>
                 <ol>
                     <li>لك الحق في رأس مالك فقط دون أي زيادة</li>
-                    <li>وإن كان المدين معسرًا، يجب منحه مهلة حتى تتحسن ظروفه <span style="color: #5e2ca5; font-weight: bold;">﴿وإن كان ذو عُسرةٍ فنَظِرةٌ إلى mَيسَرة﴾</span></li>
+                    <li>وإن كان المدين معسرًا، يجب منحه مهلة حتى تتحسن ظروفه <span style="color: #5e2ca5; font-weight: bold;">﴿وإن كان ذو عُسرةٍ فنَظِرةٌ إلى مَيسَرة﴾</span></li>
                     <li>ومن تصدّق على المدين وأسقط عنه الدين، فذلك خير له <span style="color: #5e2ca5; font-weight: bold;">﴿وأن تَصَدَّقوا خيرٌ لكم إن كنتم تعلمون﴾</span></li>
                 </ol>
                 
