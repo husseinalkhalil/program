@@ -11,7 +11,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <style>
         :root {
-            --primary-color: #5e2ca5; /* تغيير اللون الأساسي */
+            --primary-color: #5e2ca5;
             --secondary-color: #9575CD;
             --accent-color: #FFC107;
             --text-color: #333333;
@@ -20,9 +20,9 @@
             --article-beige: #F5EFE1;
             --light-purple: #EDE7F6;
             --border-color: #E0E0E0;
-            --header-purple: #5e2ca5; /* لون الشريط العلوي */
+            --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
-            --glass-bg: rgba(94, 44, 165, 0.92); /* شفافية أقل للون الجديد */
+            --glass-bg: rgba(94, 44, 165, 0.92);
         }
         
         * {
@@ -141,6 +141,7 @@
             background: var(--accent-color);
             border-radius: 3px 3px 0 0;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
         }
         
         .nav-btn:hover {
@@ -149,6 +150,7 @@
         
         .nav-btn:hover::after {
             width: 100%;
+            opacity: 1;
         }
         
         .nav-btn.active {
@@ -156,15 +158,10 @@
             font-weight: 700;
         }
         
-        .nav-btn.active::after {
-            width: 100%;
-            background: white;
-        }
-        
         .nav-btn i {
             font-size: 18px;
             transition: transform 0.3s;
-            color: var(--accent-color);
+            color: rgba(255,255,255,0.7);
         }
         
         .nav-btn:hover i {
@@ -181,6 +178,7 @@
             border-radius: 3px 3px 0 0;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 1;
+            opacity: 0;
         }
         
         .hamburger {
@@ -1116,7 +1114,7 @@
                 <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وإن تُبتُم فَلَكُم رُءوسُ أموالِكُم لا تَظلِمون ولا تُظلَمون﴾</span></p>
                 <ol>
                     <li>لك الحق في رأس مالك فقط دون أي زيادة</li>
-                    <li>وإن كان المدين معسرًا، يجب منحه مهلة حتى تتحسن ظروفه <span style="color: #5e2ca5; font-weight: bold;">﴿وإن كان ذو عُسرةٍ فنَظِرةٌ إلى مَيسَرة﴾</span></li>
+                    <li>وإن كان المدين معسرًا، يجب منحه مهلة حتى تتحسن ظروفه <span style="color: #5e2ca5; font-weight: bold;">﴿وإن كان ذو عُسرةٍ فنَظِرةٌ إلى mَيسَرة﴾</span></li>
                     <li>ومن تصدّق على المدين وأسقط عنه الدين، فذلك خير له <span style="color: #5e2ca5; font-weight: bold;">﴿وأن تَصَدَّقوا خيرٌ لكم إن كنتم تعلمون﴾</span></li>
                 </ol>
                 
@@ -1245,47 +1243,36 @@
         });
         
         // تحديث مؤشر التنقل
-        function updateNavIndicator(activeButton) {
-            if (!activeButton) return;
+        function updateNavIndicator(button) {
+            if (!button) return;
             
-            const buttonRect = activeButton.getBoundingClientRect();
+            const buttonRect = button.getBoundingClientRect();
             const headerRect = header.getBoundingClientRect();
             
             navIndicator.style.width = `${buttonRect.width}px`;
             navIndicator.style.left = `${buttonRect.left - headerRect.left}px`;
+            navIndicator.style.opacity = '1';
         }
         
-        // تعيين الزر النشط عند التحميل
-        document.addEventListener('DOMContentLoaded', () => {
-            const activeButton = document.querySelector('.nav-btn.active');
-            if (activeButton) {
-                updateNavIndicator(activeButton);
-            }
-        });
+        // إخفاء مؤشر التنقل
+        function hideNavIndicator() {
+            navIndicator.style.opacity = '0';
+        }
         
-        // تحديث المؤشر عند تغيير حجم النافذة
-        window.addEventListener('resize', () => {
-            const activeButton = document.querySelector('.nav-btn.active');
-            if (activeButton) {
-                updateNavIndicator(activeButton);
-            }
-        });
-        
-        // تحديث المؤشر عند التمرير على الأزرار
+        // تعيين الأحداث لأزرار التنقل
         navButtons.forEach(button => {
             button.addEventListener('mouseenter', () => {
-                if (!button.classList.contains('active')) {
-                    updateNavIndicator(button);
-                }
+                updateNavIndicator(button);
             });
             
             button.addEventListener('mouseleave', () => {
-                const activeButton = document.querySelector('.nav-btn.active');
-                if (activeButton) {
-                    updateNavIndicator(activeButton);
-                }
+                hideNavIndicator();
             });
         });
+        
+        // إخفاء المؤشر عند تحريك الماوس خارج منطقة الأزرار
+        const navButtonsContainer = document.querySelector('.nav-buttons');
+        navButtonsContainer.addEventListener('mouseleave', hideNavIndicator);
         
         // قائمة المشاركة
         function toggleShareMenu() {
