@@ -11,8 +11,8 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <style>
         :root {
-            --primary-color: #7E57C2;
-            --secondary-color: #D1C4E9;
+            --primary-color: #5e2ca5; /* تغيير اللون الأساسي */
+            --secondary-color: #9575CD;
             --accent-color: #FFC107;
             --text-color: #333333;
             --light-bg: #F5F5F5;
@@ -20,9 +20,9 @@
             --article-beige: #F5EFE1;
             --light-purple: #EDE7F6;
             --border-color: #E0E0E0;
-            --header-purple: #9575CD;
+            --header-purple: #5e2ca5; /* لون الشريط العلوي */
             --mobile-header-height: 70px;
-            --glass-bg: rgba(149, 117, 205, 0.85);
+            --glass-bg: rgba(94, 44, 165, 0.92); /* شفافية أقل للون الجديد */
         }
         
         * {
@@ -76,6 +76,11 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .header.scrolled .logo-container {
+            gap: 10px;
         }
         
         .logo {
@@ -93,64 +98,89 @@
             font-size: 20px;
             font-weight: 700;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-            transition: font-size 0.3s;
+            transition: all 0.3s ease;
         }
         
         .scrolled .site-title {
             font-size: 18px;
         }
         
+        /* ==================== أزرار التنقل المحسّنة ==================== */
         .nav-buttons {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
+            height: 100%;
         }
         
         .nav-btn {
             position: relative;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 25px;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
+            gap: 10px;
+            padding: 0 20px;
+            color: rgba(255,255,255,0.85);
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            font-weight: 600;
+            transition: all 0.3s ease;
             font-family: 'Tajawal', sans-serif;
             font-size: 17px;
-            backdrop-filter: blur(5px);
-            overflow: hidden;
+            height: 100%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
         }
         
-        .nav-btn::before {
+        .nav-btn::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
-            z-index: -1;
-            border-radius: 50px;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 3px 3px 0 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            color: white;
+        }
+        
+        .nav-btn:hover::after {
+            width: 100%;
+        }
+        
+        .nav-btn.active {
+            color: white;
+            font-weight: 700;
+        }
+        
+        .nav-btn.active::after {
+            width: 100%;
+            background: white;
         }
         
         .nav-btn i {
             font-size: 18px;
             transition: transform 0.3s;
+            color: var(--accent-color);
         }
         
         .nav-btn:hover i {
             transform: translateX(5px);
+            color: white;
+        }
+        
+        /* تأثيرات خاصة بالشريط العلوي */
+        .nav-indicator {
+            position: absolute;
+            bottom: 0;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 3px 3px 0 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
         }
         
         .hamburger {
@@ -178,6 +208,8 @@
             transform: scale(1.05);
         }
         
+        /* ==================== بقية التصميم ==================== */
+        
         /* ==================== قائمة الجوال المحسّنة ==================== */
         .mobile-nav {
             position: fixed;
@@ -186,7 +218,7 @@
             width: 85%;
             max-width: 320px;
             height: calc(100vh - var(--mobile-header-height));
-            background: linear-gradient(135deg, #8a6bc9 0%, #6e4fb1 100%);
+            background: linear-gradient(135deg, #6e4fb1 0%, #5e2ca5 100%);
             z-index: 999;
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             overflow-y: auto;
@@ -213,6 +245,8 @@
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
             transition: all 0.3s;
+            border-radius: 12px;
+            height: auto;
         }
         
         .mobile-nav .nav-btn:hover {
@@ -679,8 +713,8 @@
             }
             
             .nav-btn {
-                padding: 10px 20px;
                 font-size: 16px;
+                padding: 0 15px;
             }
         }
         
@@ -774,11 +808,6 @@
             
             .article-actions {
                 gap: 15px;
-            }
-            
-            .btn {
-                padding: 10px 18px;
-                font-size: 15px;
             }
             
             .article-button {
@@ -962,7 +991,7 @@
             </div>
             
             <div class="nav-buttons">
-                <a href="index.html" class="nav-btn">
+                <a href="index.html" class="nav-btn active">
                     <i class="fas fa-home"></i>
                     الصفحة الرئيسية
                 </a>
@@ -970,6 +999,15 @@
                     <i class="fas fa-book-open"></i>
                     صفحة المقالات
                 </a>
+                <a href="books.html" class="nav-btn">
+                    <i class="fas fa-book"></i>
+                    الكتب
+                </a>
+                <a href="videos.html" class="nav-btn">
+                    <i class="fas fa-video"></i>
+                    الفيديوهات
+                </a>
+                <div class="nav-indicator" id="navIndicator"></div>
             </div>
             
             <button class="hamburger" id="hamburger">
@@ -1165,10 +1203,11 @@
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
         const header = document.getElementById('header');
+        const navIndicator = document.getElementById('navIndicator');
+        const navButtons = document.querySelectorAll('.nav-btn');
         
         // فتح/إغلاق القائمة
         function toggleMobileMenu(event) {
-            // منع انتشار الحدث لمنع الإغلاق الفوري
             if (event) event.stopPropagation();
             
             mobileNav.classList.toggle('open');
@@ -1203,6 +1242,49 @@
             } else {
                 header.classList.remove('scrolled');
             }
+        });
+        
+        // تحديث مؤشر التنقل
+        function updateNavIndicator(activeButton) {
+            if (!activeButton) return;
+            
+            const buttonRect = activeButton.getBoundingClientRect();
+            const headerRect = header.getBoundingClientRect();
+            
+            navIndicator.style.width = `${buttonRect.width}px`;
+            navIndicator.style.left = `${buttonRect.left - headerRect.left}px`;
+        }
+        
+        // تعيين الزر النشط عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            const activeButton = document.querySelector('.nav-btn.active');
+            if (activeButton) {
+                updateNavIndicator(activeButton);
+            }
+        });
+        
+        // تحديث المؤشر عند تغيير حجم النافذة
+        window.addEventListener('resize', () => {
+            const activeButton = document.querySelector('.nav-btn.active');
+            if (activeButton) {
+                updateNavIndicator(activeButton);
+            }
+        });
+        
+        // تحديث المؤشر عند التمرير على الأزرار
+        navButtons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                if (!button.classList.contains('active')) {
+                    updateNavIndicator(button);
+                }
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                const activeButton = document.querySelector('.nav-btn.active');
+                if (activeButton) {
+                    updateNavIndicator(activeButton);
+                }
+            });
         });
         
         // قائمة المشاركة
