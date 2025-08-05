@@ -793,17 +793,32 @@
                 height: 22px;
             }
             
-            /* تعديلات خاصة لترتيب العناصر في الجوال */
+            /* تحريك الشعار في الجوال */
             .logo-container {
-                margin-right: 0; /* إزالة الهامش الإضافي */
-                margin-left: auto; /* توسيط الشعار */
+                margin-right: 0;
+                margin-left: auto;
                 flex-grow: 1;
                 text-align: center;
+                /* التحكم في موقع الشعار (يمكن تعديل القيم حسب الرغبة) */
+                transform: translateX(var(--logo-position, 0px)); 
             }
             
+            /* زر الهامبرغر - تم تعديله للتوافق مع تحريك الشعار */
             .hamburger {
-                margin-left: 0; /* إزالة الهامش الإضافي */
-                margin-right: auto; /* وضع زر الهمبرغر على اليمين */
+                margin-left: 0;
+                margin-right: auto;
+                transform: translateX(var(--hamburger-position, 0px)); 
+            }
+            
+            /* فئة جديدة للتحكم في موقع الشعار */
+            .logo-left {
+                --logo-position: -15px; /* تحريك الشعار لليسار */
+                --hamburger-position: 15px; /* تعويض لزر الهامبرغر */
+            }
+            
+            .logo-right {
+                --logo-position: 15px; /* تحريك الشعار لليمين */
+                --hamburger-position: -15px; /* تعويض لزر الهامبرغر */
             }
         }
         
@@ -1016,8 +1031,8 @@
                 <i class="fas fa-bars"></i>
             </button>
             
-            <!-- تم نقل الشعار إلى اليسار -->
-            <div class="logo-container">
+            <!-- تم نقل الشعار إلى اليسار مع إمكانية التحكم -->
+            <div class="logo-container logo-left"> <!-- أو logo-right -->
                 <a href="index.html">
                     <img src="images/logo.png" alt="شعار موقع حسين الخليل" class="logo">
                 </a>
