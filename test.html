@@ -13,7 +13,7 @@
         :root {
             --primary-color: #5e2ca5;
             --secondary-color: #9575CD;
-            --accent-color: #FFC107; /* اللون الأصفر */
+            --accent-color: #FFC107;
             --text-color: #333333;
             --light-bg: #F5F5F5;
             --light-beige: #F8F3E6;
@@ -39,6 +39,14 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #f8f3e6 0%, #ede7f6 100%);
             padding-top: var(--mobile-header-height);
+            transition: transform 0.3s ease;
+        }
+        
+        /* منع التمرير على الصفحة عند فتح القائمة */
+        body.menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
         
         /* ==================== الشريط العلوي المحسّن ==================== */
@@ -161,7 +169,7 @@
         .nav-btn i {
             font-size: 18px;
             transition: transform 0.3s;
-            color: var(--accent-color); /* اللون الأصفر */
+            color: var(--accent-color);
         }
         
         .nav-btn:hover i {
@@ -206,8 +214,6 @@
             transform: scale(1.05);
         }
         
-        /* ==================== بقية التصميم ==================== */
-        
         /* ==================== قائمة الجوال المحسّنة ==================== */
         .mobile-nav {
             position: fixed;
@@ -235,8 +241,8 @@
         
         .mobile-nav.open {
             right: 0;
-            position: fixed; /* إضافة مهمة لتمكين التمرير */
-            overflow-y: scroll; /* تمكين التمرير داخل القائمة */
+            position: fixed;
+            overflow-y: auto;
         }
         
         .mobile-nav .nav-btn {
@@ -254,7 +260,7 @@
         }
         
         .mobile-nav .nav-btn i {
-            color: var(--accent-color); /* اللون الأصفر في قائمة الجوال */
+            color: var(--accent-color);
         }
         
         .mobile-nav .nav-btn:hover {
@@ -828,7 +834,6 @@
                 height: 20px;
             }
             
-            /* تحسين لوحة المشاركة على الجوال */
             .article-share-menu {
                 width: 92vw;
                 max-width: 300px;
@@ -926,7 +931,6 @@
             }
         }
         
-        /* التأثير الجديد على العنوان */
         .video-link {
             display: inline-block;
             padding: 12px 25px;
@@ -972,23 +976,16 @@
             transform: rotate(10deg);
         }
         
-        /* تأثير النبض */
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
         
-        /* تأثير الإضاءة */
         @keyframes glow {
             0% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
             50% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.9); }
             100% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
-        }
-        
-        /* منع التمرير على الصفحة عند فتح القائمة */
-        body.menu-open {
-            overflow: hidden;
         }
     </style>
 </head>
@@ -1231,8 +1228,9 @@
             mobileNav.classList.toggle('open');
             document.body.classList.toggle('menu-open', !isOpen);
             
-            hamburger.innerHTML = mobileNav.classList.contains('open') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            // تحديث أيقونة القائمة
+            hamburger.innerHTML = isOpen ? 
+                '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
         }
         
         // إغلاق القائمة عند النقر في أي مكان
