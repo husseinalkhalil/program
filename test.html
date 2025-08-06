@@ -218,7 +218,7 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            padding: 25px 15px;
+            padding: 20px 15px 120px; /* زيادة المساحة السفلية */
             box-shadow: -5px 0 30px rgba(0,0,0,0.25);
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
@@ -238,9 +238,9 @@
         .mobile-nav .nav-btn {
             width: 100%;
             max-width: 300px;
-            margin-bottom: 15px;
+            margin-bottom: 8px; /* تقليل المسافة بين العناصر */
             font-size: 18px;
-            padding: 15px 20px;
+            padding: 12px 16px; /* تعديل الحشوة */
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
@@ -275,6 +275,40 @@
         
         .mobile-nav::-webkit-scrollbar-thumb:hover {
             background: rgba(255,255,255,0.5);
+        }
+        
+        /* مؤشر التمرير في الأسفل */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 50%;
+            transform: translateX(50%);
+            background: rgba(255, 255, 255, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s infinite;
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .mobile-nav.open .scroll-indicator {
+            opacity: 1;
+        }
+        
+        .scroll-indicator i {
+            color: white;
+            font-size: 20px;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(50%) translateY(0);}
+            40% {transform: translateX(50%) translateY(-15px);}
+            60% {transform: translateX(50%) translateY(-7px);}
         }
         
         .btn {
@@ -853,6 +887,17 @@
             .header-container {
                 justify-content: flex-start;
             }
+            
+            /* تعديلات القائمة المنسدلة على الجوال */
+            .mobile-nav {
+                padding: 15px 12px 100px; /* زيادة المساحة السفلية */
+            }
+            
+            .mobile-nav .nav-btn {
+                margin-bottom: 8px; /* تقليل المسافة بين العناصر */
+                padding: 12px 15px; /* تعديل الحشوة */
+                font-size: 16px;
+            }
         }
         
         @media (min-width: 769px) {
@@ -960,12 +1005,12 @@
             
             .mobile-nav {
                 width: 80%;
-                padding: 20px 12px;
+                padding: 12px 10px 90px; /* زيادة المساحة السفلية */
             }
             
             .mobile-nav .nav-btn {
                 font-size: 16px;
-                padding: 13px 18px;
+                padding: 10px 12px; /* تعديل الحشوة */
             }
         }
         
@@ -1004,6 +1049,12 @@
             
             .mobile-nav {
                 width: 85%;
+                padding: 10px 8px 80px; /* زيادة المساحة السفلية */
+            }
+            
+            .mobile-nav .nav-btn {
+                font-size: 15px;
+                padding: 8px 10px; /* تعديل الحشوة */
             }
         }
         
@@ -1062,6 +1113,49 @@
             0% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
             50% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.9); }
             100% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
+        }
+        
+        /* مؤشر التمرير في الأسفل */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 50%;
+            transform: translateX(50%);
+            background: rgba(255, 255, 255, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s infinite;
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .mobile-nav.open .scroll-indicator {
+            opacity: 1;
+        }
+        
+        .scroll-indicator i {
+            color: white;
+            font-size: 20px;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(50%) translateY(0);}
+            40% {transform: translateX(50%) translateY(-15px);}
+            60% {transform: translateX(50%) translateY(-7px);}
+        }
+        
+        /* زر اليوتيوب في القائمة */
+        .youtube-btn {
+            background: rgba(255, 0, 0, 0.15) !important;
+        }
+        
+        .youtube-btn:hover {
+            background: rgba(255, 0, 0, 0.3) !important;
         }
     </style>
 </head>
@@ -1167,13 +1261,22 @@
                 <i class="fas fa-hand-holding-heart"></i>
                 دعم المحتوى
             </a>
-            <!-- إضافة عناوين جديدة للقائمة المنسدلة في الجوال -->
+            <!-- تغيير أيقونة اتصل بنا إلى أيقونة الرسالة -->
             <a href="contact.html" class="nav-btn">
-                <i class="fas fa-phone-alt"></i>
+                <i class="fas fa-envelope"></i>
                 اتصل بنا
             </a>
             
+            <!-- إضافة زر اليوتيوب الجديد -->
+            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="nav-btn youtube-btn">
+                <i class="fab fa-youtube"></i>
+                قناة اليوتيوب
+            </a>
             
+            <!-- مؤشر التمرير للأسفل -->
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
         </div>
     </header>
     
@@ -1500,6 +1603,20 @@
                 top: 0,
                 behavior: 'smooth'
             });
+        });
+        
+        // إخفاء مؤشر التمرير عند الوصول للأسفل في القائمة المنسدلة
+        mobileNav.addEventListener('scroll', () => {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            const scrollPosition = mobileNav.scrollTop + mobileNav.clientHeight;
+            const scrollHeight = mobileNav.scrollHeight;
+            
+            // إخفاء المؤشر عند الوصول إلى أسفل القائمة
+            if (scrollPosition >= scrollHeight - 20) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
         });
     </script>
 </body>
