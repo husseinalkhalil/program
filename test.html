@@ -597,6 +597,57 @@
         font-size: 0.8em;
       }
     }
+    
+    /* قسم التبويبات الجديد */
+    .book-tabs-section {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 0 15px;
+    }
+
+    .book-tabs-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .book-tab {
+      background: #fff5f8;
+      border: 2px solid #d9c7ff;
+      border-radius: 14px;
+      padding: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(94, 44, 165, 0.15);
+    }
+
+    .book-tab:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 18px rgba(94, 44, 165, 0.25);
+    }
+
+    .book-tab img {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border: 1px solid #e0d0f0;
+    }
+
+    .book-tab h4 {
+      margin: 0;
+      font-size: 0.85em;
+      color: #5e2ca5;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+      .book-tabs-container {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
 
     /* أنماط الشريط المتحرك من الكود الثاني */
     .slider-section {
@@ -1579,6 +1630,31 @@
 <!-- سيتم ملؤه بواسطة JavaScript -->
 </div>
 </div>
+
+<!-- التبويبات الثلاثة الجديدة -->
+<div class="book-tabs-section">
+  <div class="book-tabs-container">
+    <div class="book-tab">
+      <a href="https://husseinalkhalil.com/books?book=book-5" style="text-decoration: none; color: inherit;">
+        <img src="images/quran-cover.jpg" alt="كتاب فكري يتناول أهم المسائل الجدلية">
+        <h4>كتاب فكري يتناول أهم المسائل الجدلية بمفهوم القرآن وأبرزها الصلاة</h4>
+      </a>
+    </div>
+    <div class="book-tab">
+      <a href="https://husseinalkhalil.com/books?book=book-2" style="text-decoration: none; color: inherit;">
+        <img src="images/haton-cover.jpg" alt="هتون الحب، رواية">
+        <h4>هتون الحب، رواية تتناول الحب، الخرافة، وتضليل البسطاء باسم الدين</h4>
+      </a>
+    </div>
+    <div class="book-tab">
+      <a href="#" style="text-decoration: none; color: inherit;">
+        <img src="images/placeholder.jpg" alt="كتاب جديد قريباً">
+        <h4>كتاب جديد قريباً</h4>
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- الشريط المتحرك من الكود الثاني -->
 <div class="slider-section">
 <div class="slider-container">
