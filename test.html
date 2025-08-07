@@ -603,6 +603,27 @@
       max-width: 800px;
       margin: 2em auto;
       padding: 0 15px;
+      text-align: center;
+    }
+
+    .book-tabs-title {
+      color: #5e2ca5;
+      font-size: 1.8em;
+      margin-bottom: 1em;
+      position: relative;
+      display: inline-block;
+    }
+
+    .book-tabs-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #5e2ca5, #8a4fff);
+      border-radius: 3px;
     }
 
     .book-tabs-container {
@@ -1283,49 +1304,6 @@
   font-size: 1.1em;
 }
 
-.small-book-promo {
-  position: absolute;
-  top: 20px;
-  left: 30px; /* إزاحة أكبر لليسار */
-  background: #fff5f8;
-  border: 2px solid #d9c7ff;
-  border-radius: 14px;
-  padding: 14px;
-  width: 190px; /* زيادة العرض */
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(94, 44, 165, 0.18);
-  transition: transform 0.3s ease;
-}
-
-.small-book-promo img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.small-book-promo h4 {
-  font-size: 1em;
-  color: #5e2ca5;
-  margin: 0;
-}
-
-.small-book-promo:hover {
-  transform: scale(1.03);
-}
-
-.small-book-promo img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
-
-.small-book-promo h4 {
-  font-size: 0.9em;
-  color: #5e2ca5;
-  margin: 0;
-}
-
 /* أنماط أزرار اليوتيوب الجديدة */
 .youtube-buttons {
   display: flex;
@@ -1400,71 +1378,6 @@
     flex-direction: row;
     align-items: center;
     text-align: center;
-  }
-}
-
-/* إعلانات الكتب العائمة - التعديلات الجديدة */
-.floating-books-container {
-  position: fixed;
-  top: 100px; /* رفعها للأعلى */
-  left: 40px;
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  z-index: 9999;
-}
-
-.floating-book-promo {
-  width: 150px;
-  background: #fff5f8;
-  border: 2px solid #d9c7ff;
-  border-radius: 14px;
-  padding: 12px;
-  text-align: center;
-  cursor: grab;
-  box-shadow: 0 6px 14px rgba(94, 44, 165, 0.15);
-  transition: transform 0.3s ease;
-  position: relative;
-}
-
-.floating-book-promo:active {
-  cursor: grabbing;
-}
-
-.floating-book-promo img {
-  width: 100%;
-  height: 140px; /* تقليل ارتفاع الصورة */
-  border-radius: 10px;
-  margin-bottom: 8px;
-  object-fit: cover; /* للحفاظ على نسب الصورة */
-}
-
-.floating-book-promo:hover {
-  transform: scale(1.05);
-}
-
-.close-promo-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: #ff4d4f;
-  color: white;
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 10;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-@media (max-width: 768px) {
-  .floating-books-container {
-    display: none !important;
   }
 }
 
@@ -1606,23 +1519,6 @@
   </a>
 </div>
 
-<!-- إعلانات الكتب العائمة -->
-<div class="floating-books-container">
-<div class="floating-book-promo">
-<button class="close-promo-btn">✕</button>
-<a href="https://husseinalkhalil.com/books?book=book-5" style="text-decoration: none; color: inherit; display: block;">
-<img alt="غلاف كتاب القران" src="images/quran-cover.jpg"/>
-<h4 style="font-size: 0.70em; color: #5e2ca5; margin: 0;">كتاب فكري يتناول أهم المسائل الجدلية بمفهوم القرآن وأبرزها الصلاة</h4>
-</a>
-</div>
-<div class="floating-book-promo">
-<button class="close-promo-btn">✕</button>
-<a href="https://husseinalkhalil.com/books?book=book-2" style="text-decoration: none; color: inherit; display: block;">
-<img alt="غلاف كتاب الإسلام بين القرآن والتراث" src="images/haton-cover.jpg"/>
-<h4 style="font-size: 0.70em; color: #5e2ca5; margin: 0;">هتون الحب، رواية تتناول الحب، الخرافة، وتضليل البسطاء باسم الدين</h4>
-</a>
-</div>
-</div>
 <!-- قسم آخر التحديثات -->
 <div class="updates-section">
 <h2>آخر التحديثات</h2>
@@ -1633,6 +1529,7 @@
 
 <!-- التبويبات الثلاثة الجديدة -->
 <div class="book-tabs-section">
+  <h2 class="book-tabs-title">كتب ينصح بقرائتها</h2>
   <div class="book-tabs-container">
     <div class="book-tab">
       <a href="https://husseinalkhalil.com/books?book=book-5" style="text-decoration: none; color: inherit;">
@@ -2233,83 +2130,6 @@
       
       sliderContainer.addEventListener('touchstart', handleTouchStart, false);
       sliderContainer.addEventListener('touchend', handleTouchEnd, false);
-    });
-    
-    // سكريبت سحب وإغلاق لإعلانات الكتب - النسخة المعدلة
-    document.addEventListener('DOMContentLoaded', function() {
-      const promoBoxes = document.querySelectorAll('.floating-book-promo');
-      
-      promoBoxes.forEach(promoBox => {
-        const closeBtn = promoBox.querySelector('.close-promo-btn');
-        const link = promoBox.querySelector('a');
-        let isDragging = false;
-        let offsetX = 0, offsetY = 0;
-        let clickStartTime = 0;
-        let startX = 0, startY = 0;
-
-        promoBox.addEventListener('mousedown', function(e) {
-          // تجاهل النقر على زر الإغلاق أو الرابط
-          if (e.target === closeBtn || e.target === link || link.contains(e.target)) {
-            return;
-          }
-          
-          clickStartTime = Date.now();
-          startX = e.clientX;
-          startY = e.clientY;
-          
-          isDragging = true;
-          offsetX = e.clientX - promoBox.getBoundingClientRect().left;
-          offsetY = e.clientY - promoBox.getBoundingClientRect().top;
-          
-          promoBox.style.position = 'absolute';
-          promoBox.style.zIndex = '10000';
-          promoBox.style.cursor = 'grabbing';
-
-          function moveAt(e) {
-            if (!isDragging) return;
-            promoBox.style.left = (e.clientX - offsetX) + 'px';
-            promoBox.style.top = (e.clientY - offsetY) + 'px';
-          }
-
-          function stopDrag() {
-            isDragging = false;
-            promoBox.style.cursor = 'grab';
-            document.removeEventListener('mousemove', moveAt);
-            document.removeEventListener('mouseup', stopDrag);
-            promoBox.style.zIndex = '';
-          }
-
-          document.addEventListener('mousemove', moveAt);
-          document.addEventListener('mouseup', stopDrag);
-        });
-
-        // حل مشكلة النقر على الرابط
-        link.addEventListener('click', function(e) {
-          // إذا كان هناك سحب، نمنع فتح الرابط
-          if (isDragging) {
-            e.preventDefault();
-          }
-        });
-
-        promoBox.addEventListener('click', function(e) {
-          // إذا كان النقر بعد سحب قصير، نفتح الرابط
-          if (isDragging && Date.now() - clickStartTime < 200) {
-            const rect = promoBox.getBoundingClientRect();
-            const distX = Math.abs(e.clientX - startX);
-            const distY = Math.abs(e.clientY - startY);
-            
-            // إذا كانت المسافة أقل من 5 بكسل، اعتبرها نقراً وليس سحباً
-            if (distX < 5 && distY < 5) {
-              window.location.href = link.href;
-            }
-          }
-        });
-
-        closeBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          promoBox.style.display = 'none';
-        });
-      });
     });
   </script>
 </body>
