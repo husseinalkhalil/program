@@ -15,18 +15,8 @@
             --article-font-size: 1; /* القيمة الأساسية (1 = 100%) */
         }
         
-        /* تطبيق حجم الخط على عناصر المقالة */
-        .article-card h1,
-        .article-card .publish-date,
-        .article-card .article-content,
-        .article-card .article-content p,
-        .article-card .verse,
-        .article-card .section-title,
-        .article-card ol,
-        .article-card ul,
-        .article-card li,
-        .article-card .conclusion,
-        .article-card .article-actions .article-button {
+        /* تطبيق حجم الخط على كامل المقالة */
+        .article-card {
             font-size: calc(var(--article-font-size) * 1em);
         }
         
@@ -78,6 +68,28 @@
             .font-controls {
                 display: flex;
             }
+        }
+        
+        /* رسالة التأكيد عند التكبير/التصغير */
+        .font-size-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            z-index: 2000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .font-size-notification.show {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* بقية الأنماط الموجودة مسبقًا... */
@@ -803,7 +815,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -1296,6 +1308,9 @@
         <button id="fontDecrease" title="تصغير الخط"><i class="fas fa-minus"></i></button>
     </div>
 
+    <!-- رسالة التأكيد -->
+    <div class="font-size-notification" id="fontNotification"></div>
+
     <!-- الشريط العلوي المحسّن -->
     <header class="header" id="header">
         <div class="header-container">
@@ -1423,6 +1438,7 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 9 يوليو 2025</span>
             </div>
             
+            <div class="article-content">
                 <p>في هذا الزمن المليء بالصخب والتفسيرات الجاهزة والآراء المتزاحمة، يظن البعض أنك مجبر أن تشرح وتفسر وتدافع عن كل فكرة تكتبها، وكأنك محامٍ تقف في قفص الاتهام وتنتظر براءة من جمهور لا يعرف عنك شيئًا سوى كلمات عابرة. لكن الحقيقة مختلفة تمامًا: أنت لست مضطرًا لتبرير شيء.</p>
                 <p>حين تكتب فكرة، أو تنشر رأيًا، أو تشارك موقفًا، فأنت لا تطلب الإذن من أحد، هذه مساحتك، هذا صوتك، وهذا المنبر الصغير الذي اخترت أن تعبّر منه عمّا تعتقده، لا عمّا يريده الآخرون أن يسمعوه.</p>
                 <p>لا تهدر طاقتك في محاولة إقناع كل من يمر بك، لن يقتنعوا جميعًا، حتى لو جلبت الشمس من جهة الغرب.</p>
@@ -1436,6 +1452,7 @@
                 <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
                 </div>
+            </div>
             
             <div class="article-actions">
                 <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
@@ -1498,6 +1515,7 @@
         const fontDecrease = document.getElementById('fontDecrease');
         const fontIncrease = document.getElementById('fontIncrease');
         const fontReset = document.getElementById('fontReset');
+        const fontNotification = document.getElementById('fontNotification');
         
         // حجم الخط الأساسي
         const defaultFontSize = 1;
@@ -1513,6 +1531,16 @@
             }
         });
         
+        // إظهار رسالة التأكيد
+        function showNotification(message) {
+            fontNotification.textContent = message;
+            fontNotification.classList.add('show');
+            
+            setTimeout(() => {
+                fontNotification.classList.remove('show');
+            }, 2000);
+        }
+        
         // تصغير الخط
         fontDecrease.addEventListener('click', () => {
             let currentSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--article-font-size') || defaultFontSize);
@@ -1520,6 +1548,9 @@
                 currentSize -= step;
                 document.documentElement.style.setProperty('--article-font-size', currentSize);
                 localStorage.setItem('articleFontSize', currentSize);
+                showNotification(`تم تصغير الخط: ${Math.round(currentSize * 100)}%`);
+            } else {
+                showNotification('الحجم الأدنى للخط');
             }
         });
         
@@ -1530,6 +1561,9 @@
                 currentSize += step;
                 document.documentElement.style.setProperty('--article-font-size', currentSize);
                 localStorage.setItem('articleFontSize', currentSize);
+                showNotification(`تم تكبير الخط: ${Math.round(currentSize * 100)}%`);
+            } else {
+                showNotification('الحجم الأقصى للخط');
             }
         });
         
@@ -1537,6 +1571,7 @@
         fontReset.addEventListener('click', () => {
             document.documentElement.style.setProperty('--article-font-size', defaultFontSize);
             localStorage.removeItem('articleFontSize');
+            showNotification('تم إعادة الخط إلى الحجم الأصلي');
         });
         
         // تحديث وضع أزرار التحكم عند التمرير
