@@ -40,6 +40,8 @@
             background: linear-gradient(135deg, #f8f3e6 0%, #ede7f6 100%);
             padding-top: var(--mobile-header-height);
             transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
         
         /* منع التمرير على الصفحة عند فتح القائمة */
@@ -350,6 +352,7 @@
             max-width: 1000px;
             margin: 40px auto;
             padding: 0 20px;
+            flex: 1;
         }
         
         .article-card {
@@ -729,7 +732,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, footer {
                 display: none;
             }
             
@@ -1168,6 +1171,7 @@
             z-index: 10;
             box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15);
             border-top: 1px solid rgba(255, 255, 255, 0.15);
+            width: 100%;
         }
         
         .social-links {
@@ -1437,7 +1441,7 @@
         <i class="fas fa-arrow-up"></i>
     </div>
     
-    <!-- قسم الفوتر المضاف -->
+    <!-- قسم الفوتر على كامل العرض -->
     <footer>
         <div class="social-links">
             <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
