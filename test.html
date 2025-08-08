@@ -23,6 +23,7 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         * {
@@ -40,8 +41,6 @@
             background: linear-gradient(135deg, #f8f3e6 0%, #ede7f6 100%);
             padding-top: var(--mobile-header-height);
             transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
         }
         
         /* منع التمرير على الصفحة عند فتح القائمة */
@@ -104,7 +103,7 @@
             transform: scale(1.05);
         }
         
-        /* ==================== أزرار التنقل المحسنة ==================== */
+        /* ==================== أزرار التنقل المحسّنة ==================== */
         .nav-buttons {
             display: flex;
             gap: 12px;
@@ -352,7 +351,6 @@
             max-width: 1000px;
             margin: 40px auto;
             padding: 0 20px;
-            flex: 1;
         }
         
         .article-card {
@@ -1160,16 +1158,15 @@
         .youtube-btn:hover {
             background: rgba(255, 0, 0, 0.3) !important;
         }
-        
-        /* أنماط الشريط السفلي المضافة من الكود الأول */
+
+        /* أنماط الفوتر من الكود الأول */
         footer {
             text-align: center;
             padding: 18px;
-            background: #5e2ca5;
+            background: var(--primary-color);
             color: white;
             font-size: 0.85em;
-            margin-top: auto; /* هذا مهم لدفع الفوتر للأسفل */
-            width: 100%;
+            margin-top: 40px;
         }
 
         .social-links {
@@ -1183,7 +1180,7 @@
         .social-links a {
             color: white;
             font-size: 0.9em;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1212,7 +1209,7 @@
             padding-top: 10px;
             font-size: 0.95em;
             font-weight: 600;
-            color: #FFD166;
+            color: var(--accent-color);
         }
     </style>
 </head>
@@ -1337,7 +1334,6 @@
         </div>
     </header>
     
-    <!-- المحتوى الرئيسي -->
     <div class="container">
         <div class="article-card">
             <div class="article-header">
@@ -1452,20 +1448,20 @@
             </div>
         </div>
     </div>
-    
-    <!-- الشريط السفلي المضاف من الكود الأول -->
+
+    <!-- الفوتر المضافة من الكود الأول -->
     <footer>
         <div class="social-links">
-            <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
-            <a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
-            <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+          <a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
+          <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
         </div>
         
         <div class="copyright">
-            حسين الخليل - جميع الحقوق محفوظة © 2025
+          حسين الخليل - جميع الحقوق محفوظة © 2025
         </div>
     </footer>
 
