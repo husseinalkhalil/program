@@ -40,6 +40,8 @@
             background: linear-gradient(135deg, #f8f3e6 0%, #ede7f6 100%);
             padding-top: var(--mobile-header-height);
             transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
         
         /* منع التمرير على الصفحة عند فتح القائمة */
@@ -350,6 +352,7 @@
             max-width: 1000px;
             margin: 40px auto;
             padding: 0 20px;
+            flex: 1;
         }
         
         .article-card {
@@ -1165,7 +1168,9 @@
           background: #5e2ca5;
           color: white;
           font-size: 0.85em;
-          margin-top: 40px;
+          margin-top: auto; /* تم تعديل هذه الخاصية */
+          width: 100%; /* عرض كامل */
+          box-sizing: border-box;
         }
 
         .social-links {
@@ -1359,11 +1364,12 @@
                 <p>فمن الجهل والاجحاف أن يصادر الإنسان أفكار غيره ويدّعي أنها باطلة لمجرد أنها لم توافق أفكاره ولم تأتِ على هواه أو تُخالف موروثه.<strong> </strong></p>
                 <p>فلا تُصادر يا صديقي العزيز أفكار غيرك.<strong></strong></p>
                 <p>وتذكّر قوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ﴾</span> [هود 111] </p>
-                
+            </div>
            
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-                </div>
+            </div>
+            
             <div class="article-actions">
                 <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
                     <i class="fas fa-print"></i>
