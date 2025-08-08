@@ -8,7 +8,79 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <style>
+        /* أضفت هذه الأنماط للتحكم في حجم الخط */
+        :root {
+            --article-font-size: 1; /* القيمة الأساسية (1 = 100%) */
+        }
+        
+        /* تطبيق حجم الخط على عناصر المقالة */
+        .article-card h1,
+        .article-card .publish-date,
+        .article-card .article-content,
+        .article-card .article-content p,
+        .article-card .verse,
+        .article-card .section-title,
+        .article-card ol,
+        .article-card ul,
+        .article-card li,
+        .article-card .conclusion,
+        .article-card .article-actions .article-button {
+            font-size: calc(var(--article-font-size) * 1em);
+        }
+        
+        /* أزرار التحكم في حجم الخط */
+        .font-controls {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .font-controls.scrolled {
+            top: 80px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .font-controls button {
+            background: none;
+            border: none;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+            color: var(--primary-color);
+        }
+        
+        .font-controls button:hover {
+            background-color: var(--light-purple);
+            color: var(--primary-color);
+        }
+        
+        .font-controls button:first-child {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        @media (min-width: 769px) {
+            .font-controls {
+                display: flex;
+            }
+        }
+        
+        /* بقية الأنماط الموجودة مسبقًا... */
         :root {
             --primary-color: #5e2ca5;
             --secondary-color: #9575CD;
@@ -22,7 +94,6 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
-            --article-font-size: 1; /* القيمة الأساسية (1 = 100%) */
         }
         
         * {
@@ -412,7 +483,7 @@
             align-items: center;
             gap: 10px;
             color: #666;
-            font-size: calc(18px * var(--article-font-size));
+            font-size: 18px;
             justify-content: center;
         }
         
@@ -421,7 +492,7 @@
         }
         
         .article-content {
-            font-size: calc(18px * var(--article-font-size));
+            font-size: 18px;
             text-align: justify;
             line-height: 1.8;
             max-width: 1200px;
@@ -435,7 +506,7 @@
         .verse {
             color: var(--primary-color);
             font-weight: bold;
-            font-size: calc(22px * var(--article-font-size));
+            font-size: 22px;
             display: block;
             margin: 30px 0;
             text-align: center;
@@ -449,7 +520,7 @@
         
         .section-title {
             color: var(--primary-color);
-            font-size: calc(26px * var(--article-font-size));
+            font-size: 26px;
             margin: 40px 0 20px;
             padding-right: 20px;
             position: relative;
@@ -484,7 +555,7 @@
             font-weight: bold;
             position: absolute;
             right: 0;
-            font-size: calc(22px * var(--article-font-size));
+            font-size: 22px;
         }
         
         ol {
@@ -501,7 +572,7 @@
             font-weight: bold;
             position: absolute;
             right: 0;
-            font-size: calc(20px * var(--article-font-size));
+            font-size: 20px;
         }
         
         .conclusion {
@@ -702,78 +773,6 @@
             transform: translateY(-3px);
         }
         
-        /* ==================== أزرار التحكم في حجم الخط ==================== */
-        .font-controls {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 1000;
-            background: white;
-            border-radius: 50px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        
-        .font-controls.scrolled {
-            top: 80px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-        }
-        
-        .font-controls button {
-            background: none;
-            border: none;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 18px;
-            color: var(--primary-color);
-        }
-        
-        .font-controls button:hover {
-            background-color: var(--light-purple);
-            color: var(--primary-color);
-        }
-        
-        .font-controls button:first-child {
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        @media (min-width: 769px) {
-            .font-controls {
-                display: flex;
-            }
-        }
-        
-        /* رسالة التأكيد عند التكبير/التصغير */
-        .font-size-notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 16px;
-            z-index: 2000;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        
-        .font-size-notification.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
         /* ==================== تأثيرات حركية ==================== */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
@@ -804,7 +803,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
+            .header, .article-actions, .back-btn, .back-to-top {
                 display: none;
             }
             
@@ -1297,9 +1296,6 @@
         <button id="fontDecrease" title="تصغير الخط"><i class="fas fa-minus"></i></button>
     </div>
 
-    <!-- رسالة التأكيد -->
-    <div class="font-size-notification" id="fontNotification"></div>
-
     <!-- الشريط العلوي المحسّن -->
     <header class="header" id="header">
         <div class="header-container">
@@ -1427,7 +1423,6 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 9 يوليو 2025</span>
             </div>
             
-            <div class="article-content">
                 <p>في هذا الزمن المليء بالصخب والتفسيرات الجاهزة والآراء المتزاحمة، يظن البعض أنك مجبر أن تشرح وتفسر وتدافع عن كل فكرة تكتبها، وكأنك محامٍ تقف في قفص الاتهام وتنتظر براءة من جمهور لا يعرف عنك شيئًا سوى كلمات عابرة. لكن الحقيقة مختلفة تمامًا: أنت لست مضطرًا لتبرير شيء.</p>
                 <p>حين تكتب فكرة، أو تنشر رأيًا، أو تشارك موقفًا، فأنت لا تطلب الإذن من أحد، هذه مساحتك، هذا صوتك، وهذا المنبر الصغير الذي اخترت أن تعبّر منه عمّا تعتقده، لا عمّا يريده الآخرون أن يسمعوه.</p>
                 <p>لا تهدر طاقتك في محاولة إقناع كل من يمر بك، لن يقتنعوا جميعًا، حتى لو جلبت الشمس من جهة الغرب.</p>
@@ -1441,7 +1436,6 @@
                 <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
                 </div>
-            </div>
             
             <div class="article-actions">
                 <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
@@ -1504,7 +1498,6 @@
         const fontDecrease = document.getElementById('fontDecrease');
         const fontIncrease = document.getElementById('fontIncrease');
         const fontReset = document.getElementById('fontReset');
-        const fontNotification = document.getElementById('fontNotification');
         
         // حجم الخط الأساسي
         const defaultFontSize = 1;
@@ -1520,41 +1513,23 @@
             }
         });
         
-        // إظهار رسالة التأكيد
-        function showNotification(message) {
-            fontNotification.textContent = message;
-            fontNotification.classList.add('show');
-            
-            setTimeout(() => {
-                fontNotification.classList.remove('show');
-            }, 2000);
-        }
-        
         // تصغير الخط
         fontDecrease.addEventListener('click', () => {
-            let currentSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--article-font-size') || defaultFontSize;
+            let currentSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--article-font-size') || defaultFontSize);
             if (currentSize > minFontSize) {
                 currentSize -= step;
-                currentSize = Math.round(currentSize * 10) / 10; // تقريب إلى منزلة عشرية واحدة
                 document.documentElement.style.setProperty('--article-font-size', currentSize);
                 localStorage.setItem('articleFontSize', currentSize);
-                showNotification(`تم تصغير الخط: ${Math.round(currentSize * 100)}%`);
-            } else {
-                showNotification('الحجم الأدنى للخط');
             }
         });
         
         // تكبير الخط
         fontIncrease.addEventListener('click', () => {
-            let currentSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--article-font-size') || defaultFontSize;
+            let currentSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--article-font-size') || defaultFontSize);
             if (currentSize < maxFontSize) {
                 currentSize += step;
-                currentSize = Math.round(currentSize * 10) / 10; // تقريب إلى منزلة عشرية واحدة
                 document.documentElement.style.setProperty('--article-font-size', currentSize);
                 localStorage.setItem('articleFontSize', currentSize);
-                showNotification(`تم تكبير الخط: ${Math.round(currentSize * 100)}%`);
-            } else {
-                showNotification('الحجم الأقصى للخط');
             }
         });
         
@@ -1562,7 +1537,6 @@
         fontReset.addEventListener('click', () => {
             document.documentElement.style.setProperty('--article-font-size', defaultFontSize);
             localStorage.removeItem('articleFontSize');
-            showNotification('تم إعادة الخط إلى الحجم الأصلي');
         });
         
         // تحديث وضع أزرار التحكم عند التمرير
