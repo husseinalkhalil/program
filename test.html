@@ -40,8 +40,6 @@
             background: linear-gradient(135deg, #f8f3e6 0%, #ede7f6 100%);
             padding-top: var(--mobile-header-height);
             transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
         }
         
         /* منع التمرير على الصفحة عند فتح القائمة */
@@ -352,7 +350,6 @@
             max-width: 1000px;
             margin: 40px auto;
             padding: 0 20px;
-            flex: 1;
         }
         
         .article-card {
@@ -732,7 +729,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top, footer {
+            .header, .article-actions, .back-btn, .back-to-top {
                 display: none;
             }
             
@@ -1160,94 +1157,6 @@
         .youtube-btn:hover {
             background: rgba(255, 0, 0, 0.3) !important;
         }
-        
-        /* =========== أنماط الفوتر الجديدة =========== */
-        footer {
-            background-color: var(--header-purple); /* نفس لون الشريط العلوي */
-            padding: 40px 20px 30px;
-            text-align: center;
-            color: white;
-            position: relative;
-            z-index: 10;
-            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.15);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            width: 100%;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            font-size: 22px;
-            color: white;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-        }
-        
-        .social-links a:hover {
-            transform: translateY(-5px) scale(1.15);
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .social-links .facebook:hover { background-color: #3b5998; }
-        .social-links .instagram:hover { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); }
-        .social-links .youtube:hover { background-color: #ff0000; }
-        .social-links .tiktok:hover { background-color: #000000; }
-        .social-links .snapchat:hover { background-color: #fffc00; color: #000; }
-        .social-links .telegram:hover { background-color: #0088cc; }
-        
-        .copyright {
-            font-size: 18px;
-            font-weight: 500;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            max-width: 800px;
-            margin: 0 auto;
-            letter-spacing: 0.5px;
-        }
-        
-        @media (max-width: 768px) {
-            .social-links a {
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }
-            
-            .copyright {
-                font-size: 16px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .social-links {
-                gap: 12px;
-            }
-            
-            .social-links a {
-                width: 42px;
-                height: 42px;
-                font-size: 18px;
-            }
-            
-            .copyright {
-                font-size: 15px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1440,21 +1349,6 @@
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </div>
-    
-    <!-- قسم الفوتر على كامل العرض -->
-    <footer>
-        <div class="social-links">
-            <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&amp;utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
-            <a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
-            <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
-        </div>
-        <div class="copyright">
-            حسين الخليل - جميع الحقوق محفوظة © 2025
-        </div>
-    </footer>
 
     <script>
         // قائمة الجوال
