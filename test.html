@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <style>
         :root {
             --primary-color: #5e2ca5;
@@ -366,7 +365,6 @@
             width: 100%;
             position: relative;
             overflow: hidden;
-            font-size: calc(var(--article-font-size) * 1em); /* تطبيق حجم الخط */
         }
         
         .article-card::before {
@@ -414,7 +412,7 @@
             align-items: center;
             gap: 10px;
             color: #666;
-            font-size: 18px;
+            font-size: calc(18px * var(--article-font-size));
             justify-content: center;
         }
         
@@ -423,7 +421,7 @@
         }
         
         .article-content {
-            font-size: 18px;
+            font-size: calc(18px * var(--article-font-size));
             text-align: justify;
             line-height: 1.8;
             max-width: 1200px;
@@ -437,7 +435,7 @@
         .verse {
             color: var(--primary-color);
             font-weight: bold;
-            font-size: 22px;
+            font-size: calc(22px * var(--article-font-size));
             display: block;
             margin: 30px 0;
             text-align: center;
@@ -451,7 +449,7 @@
         
         .section-title {
             color: var(--primary-color);
-            font-size: 26px;
+            font-size: calc(26px * var(--article-font-size));
             margin: 40px 0 20px;
             padding-right: 20px;
             position: relative;
@@ -486,7 +484,7 @@
             font-weight: bold;
             position: absolute;
             right: 0;
-            font-size: 22px;
+            font-size: calc(22px * var(--article-font-size));
         }
         
         ol {
@@ -503,7 +501,7 @@
             font-weight: bold;
             position: absolute;
             right: 0;
-            font-size: 20px;
+            font-size: calc(20px * var(--article-font-size));
         }
         
         .conclusion {
@@ -1537,6 +1535,7 @@
             let currentSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--article-font-size') || defaultFontSize;
             if (currentSize > minFontSize) {
                 currentSize -= step;
+                currentSize = Math.round(currentSize * 10) / 10; // تقريب إلى منزلة عشرية واحدة
                 document.documentElement.style.setProperty('--article-font-size', currentSize);
                 localStorage.setItem('articleFontSize', currentSize);
                 showNotification(`تم تصغير الخط: ${Math.round(currentSize * 100)}%`);
@@ -1550,6 +1549,7 @@
             let currentSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--article-font-size') || defaultFontSize;
             if (currentSize < maxFontSize) {
                 currentSize += step;
+                currentSize = Math.round(currentSize * 10) / 10; // تقريب إلى منزلة عشرية واحدة
                 document.documentElement.style.setProperty('--article-font-size', currentSize);
                 localStorage.setItem('articleFontSize', currentSize);
                 showNotification(`تم تكبير الخط: ${Math.round(currentSize * 100)}%`);
