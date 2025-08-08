@@ -10,6 +10,77 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <style>
+        /* أضفت هذه الأنماط للتحكم في حجم الخط */
+        :root {
+            --article-font-size: 1; /* القيمة الأساسية (1 = 100%) */
+        }
+        
+        /* تطبيق حجم الخط على عناصر المقالة */
+        .article-card h1,
+        .article-card .publish-date,
+        .article-card .article-content,
+        .article-card .article-content p,
+        .article-card .verse,
+        .article-card .section-title,
+        .article-card ol,
+        .article-card ul,
+        .article-card li,
+        .article-card .conclusion,
+        .article-card .article-actions .article-button {
+            font-size: calc(var(--article-font-size) * 1em);
+        }
+        
+        /* أزرار التحكم في حجم الخط */
+        .font-controls {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .font-controls.scrolled {
+            top: 80px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        
+        .font-controls button {
+            background: none;
+            border: none;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+            color: var(--primary-color);
+        }
+        
+        .font-controls button:hover {
+            background-color: var(--light-purple);
+            color: var(--primary-color);
+        }
+        
+        .font-controls button:first-child {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        @media (min-width: 769px) {
+            .font-controls {
+                display: flex;
+            }
+        }
+        
+        /* بقية الأنماط الموجودة مسبقًا... */
         :root {
             --primary-color: #5e2ca5;
             --secondary-color: #9575CD;
@@ -1218,6 +1289,13 @@
     </style>
 </head>
 <body>
+    <!-- أزرار التحكم في حجم الخط -->
+    <div class="font-controls" id="fontControls">
+        <button id="fontIncrease" title="تكبير الخط"><i class="fas fa-plus"></i></button>
+        <button id="fontReset" title="الحجم الأصلي"><i class="fas fa-font"></i></button>
+        <button id="fontDecrease" title="تصغير الخط"><i class="fas fa-minus"></i></button>
+    </div>
+
     <!-- الشريط العلوي المحسّن -->
     <header class="header" id="header">
         <div class="header-container">
@@ -1415,6 +1493,61 @@
     </div>
 
     <script>
+        // التحكم في حجم الخط
+        const fontControls = document.getElementById('fontControls');
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontIncrease = document.getElementById('fontIncrease');
+        const fontReset = document.getElementById('fontReset');
+        
+        // حجم الخط الأساسي
+        const defaultFontSize = 1;
+        const minFontSize = 0.8;
+        const maxFontSize = 1.4;
+        const step = 0.1;
+        
+        // استعادة حجم الخط من localStorage عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedFontSize = localStorage.getItem('articleFontSize');
+            if (savedFontSize) {
+                document.documentElement.style.setProperty('--article-font-size', savedFontSize);
+            }
+        });
+        
+        // تصغير الخط
+        fontDecrease.addEventListener('click', () => {
+            let currentSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--article-font-size') || defaultFontSize);
+            if (currentSize > minFontSize) {
+                currentSize -= step;
+                document.documentElement.style.setProperty('--article-font-size', currentSize);
+                localStorage.setItem('articleFontSize', currentSize);
+            }
+        });
+        
+        // تكبير الخط
+        fontIncrease.addEventListener('click', () => {
+            let currentSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--article-font-size') || defaultFontSize);
+            if (currentSize < maxFontSize) {
+                currentSize += step;
+                document.documentElement.style.setProperty('--article-font-size', currentSize);
+                localStorage.setItem('articleFontSize', currentSize);
+            }
+        });
+        
+        // إعادة تعيين حجم الخط
+        fontReset.addEventListener('click', () => {
+            document.documentElement.style.setProperty('--article-font-size', defaultFontSize);
+            localStorage.removeItem('articleFontSize');
+        });
+        
+        // تحديث وضع أزرار التحكم عند التمرير
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                fontControls.classList.add('scrolled');
+            } else {
+                fontControls.classList.remove('scrolled');
+            }
+        });
+        
         // قائمة الجوال
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
