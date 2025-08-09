@@ -1217,7 +1217,7 @@
           color: #ffd166;
         }
         
-        /* أزرار التحكم في حجم الخط - تم تصغير الحجم أكثر وتمييز علامة X */
+        /* أزرار التحكم في حجم الخط - تم إزالة المؤشر النصي */
         .font-controls {
             position: fixed;
             top: 100px;
@@ -1228,7 +1228,7 @@
             gap: 8px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 25px;
-            padding: 12px 12px 10px;
+            padding: 12px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
@@ -1266,14 +1266,6 @@
         
         .font-btn.reset:hover {
             background: #ffb300;
-        }
-        
-        .font-size-indicator {
-            font-size: 13px;
-            font-weight: bold;
-            text-align: center;
-            color: #5e2ca5;
-            margin-top: 5px;
         }
         
         /* استثناء العنوان الرئيسي من تغيير الخط */
@@ -1335,10 +1327,6 @@
                 font-size: 14px;
             }
             
-            .font-size-indicator {
-                font-size: 12px;
-            }
-            
             .close-font-controls {
                 width: 20px;
                 height: 20px;
@@ -1351,7 +1339,7 @@
                 top: 80px;
                 right: 10px;
                 gap: 6px;
-                padding: 10px 8px 8px;
+                padding: 10px;
             }
             
             .font-btn {
@@ -1489,7 +1477,7 @@
         </div>
     </header>
     
-    <!-- أزرار التحكم في حجم الخط - تم تصغير حجمها أكثر وتمييز علامة X -->
+    <!-- أزرار التحكم في حجم الخط - بدون المؤشر النصي -->
     <div class="font-controls" id="fontControls">
         <span class="close-font-controls" id="closeFontControls" title="إخفاء التحكم في الخط">
             <i class="fas fa-times"></i>
@@ -1503,7 +1491,6 @@
         <button class="font-btn" id="decreaseFont" title="تصغير الخط">
             <i class="fas fa-minus"></i>
         </button>
-        <div class="font-size-indicator" id="fontSizeIndicator">متوسط</div>
     </div>
 
     <div class="container">
@@ -1596,14 +1583,7 @@
     <script>
         // وظائف التحكم في حجم الخط
         const fontSizeClasses = ['font-small', 'font-medium', 'font-large', 'font-xlarge'];
-        const sizeNames = ['صغير', 'متوسط', 'كبير', 'كبير جداً'];
         let currentFontSize = 1; // متوسط (القيمة الافتراضية)
-        
-        // العناصر التي سيتم تغيير حجم الخط لها
-        const articleContent = document.querySelector('.article-content');
-        const fontSizeIndicator = document.getElementById('fontSizeIndicator');
-        const fontControls = document.getElementById('fontControls');
-        const closeFontControls = document.getElementById('closeFontControls');
         
         // إعداد حجم الخط عند تحميل الصفحة
         function setupFontSize() {
@@ -1624,9 +1604,6 @@
             
             // إضافة الصنف الحالي
             document.body.classList.add(fontSizeClasses[currentFontSize]);
-            
-            // تحديث المؤشر
-            fontSizeIndicator.textContent = sizeNames[currentFontSize];
             
             // حفظ الإعدادات
             localStorage.setItem('fontSize', currentFontSize);
@@ -1655,8 +1632,8 @@
         });
         
         // إخفاء أزرار التحكم في الخط
-        closeFontControls.addEventListener('click', () => {
-            fontControls.style.display = 'none';
+        document.getElementById('closeFontControls').addEventListener('click', () => {
+            document.getElementById('fontControls').style.display = 'none';
         });
         
         // قائمة الجوال
