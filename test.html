@@ -1471,13 +1471,14 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 30 يوليو 2025</span>
             </div>
             
-            
-                <p> الحقيقة المطلقة الوحيدة التي أؤمن بها هو <span style="color: green; font-weight: bold;"> الله </span>.</p>
+            <!-- محتوى المقالة داخل div مع class="article-content" -->
+            <div class="article-content">
+                <p>الحقيقة المطلقة الوحيدة التي أؤمن بها هو <span style="color: green; font-weight: bold;"> الله </span>.</p>
                 <p>جميع الأفكار والتدبرات هي حقائق نسبية، ترتفع نسبتها وتنخفض من شخص لآخر.</p>
                 <p>فما أراه أنا حقيقة قد يراه غيري خرافة.</p>
                 <p>وما يراه غيري حقيقة قد أراه أنا خرافة.</p>
                 <p>لا تحتكر الحقيقة لنفسك وتصادر أفكار الآخرين، فكلنا في رحلة بحث والعلم لا يزال مستمرًا.</p>
-                <p> فالحقيقة هو <span style="color: green; font-weight: bold;"> الله </span>، لكن طريقة الوصول إلى هذا الإله تختلف من شخص لآخر.</p>
+                <p>فالحقيقة هو <span style="color: green; font-weight: bold;"> الله </span>، لكن طريقة الوصول إلى هذا الإله تختلف من شخص لآخر.</p>
                 <p>فعندما يقول معلم رياضيات لطلابه:</p>
                 <p> أعطوني رقمين مجموعهما يساوي <strong> 10 </strong></p>
                 <p>فتختلف الإجابات بين الطلاب.</p>
@@ -1745,13 +1746,13 @@
         const increaseFontBtn = document.getElementById('increaseFont');
         const articleContent = document.querySelector('.article-content');
         
-        // الحجم الأصلي للخط
-        const originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+        // الحجم الأصلي للخط (18px حسب CSS)
+        const originalFontSize = 18; 
         let currentFontSize = originalFontSize;
         
         // الحد الأدنى والأقصى لحجم الخط
-        const minFontSize = originalFontSize * 0.6; // 60% من الحجم الأصلي
-        const maxFontSize = originalFontSize * 1.6; // 160% من الحجم الأصلي
+        const minFontSize = 12; // 12px
+        const maxFontSize = 28; // 28px
         
         // تخزين حجم الخط في localStorage
         function saveFontSize(size) {
@@ -1762,16 +1763,17 @@
         function loadFontSize() {
             const savedSize = localStorage.getItem('articleFontSize');
             if (savedSize) {
-                currentFontSize = parseFloat(savedSize);
+                currentFontSize = parseInt(savedSize);
                 articleContent.style.fontSize = `${currentFontSize}px`;
+            } else {
+                articleContent.style.fontSize = `${originalFontSize}px`;
             }
         }
         
         // تصغير حجم الخط
         decreaseFontBtn.addEventListener('click', () => {
-            const newSize = currentFontSize - (originalFontSize * 0.2);
-            if (newSize >= minFontSize) {
-                currentFontSize = newSize;
+            if (currentFontSize > minFontSize) {
+                currentFontSize--;
                 articleContent.style.fontSize = `${currentFontSize}px`;
                 saveFontSize(currentFontSize);
             }
@@ -1786,9 +1788,8 @@
         
         // تكبير حجم الخط
         increaseFontBtn.addEventListener('click', () => {
-            const newSize = currentFontSize + (originalFontSize * 0.2);
-            if (newSize <= maxFontSize) {
-                currentFontSize = newSize;
+            if (currentFontSize < maxFontSize) {
+                currentFontSize++;
                 articleContent.style.fontSize = `${currentFontSize}px`;
                 saveFontSize(currentFontSize);
             }
