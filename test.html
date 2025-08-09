@@ -131,26 +131,8 @@
             cursor: pointer;
         }
         
-        .nav-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 0;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 3px 3px 0 0;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0;
-        }
-        
         .nav-btn:hover {
             color: white;
-        }
-        
-        .nav-btn:hover::after {
-            width: 100%;
-            opacity: 1;
         }
         
         .nav-btn.active {
@@ -167,18 +149,6 @@
         .nav-btn:hover i {
             transform: translateX(5px);
             color: white;
-        }
-        
-        /* تأثيرات خاصة بالشريط العلوي */
-        .nav-indicator {
-            position: absolute;
-            bottom: 0;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 3px 3px 0 0;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1;
-            opacity: 0;
         }
         
         .hamburger {
@@ -1461,7 +1431,6 @@
                     <i class="fas fa-lightbulb"></i>
                     الخواطر
                 </a>
-                <div class="nav-indicator" id="navIndicator"></div>
             </div>
         </div>
         
@@ -1712,8 +1681,6 @@
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
         const header = document.getElementById('header');
-        const navIndicator = document.getElementById('navIndicator');
-        const navButtons = document.querySelectorAll('.nav-btn');
         const backToTop = document.getElementById('backToTop');
         
         // فتح/إغلاق القائمة
@@ -1764,38 +1731,6 @@
                 backToTop.classList.remove('show');
             }
         });
-        
-        // تحديث مؤشر التنقل
-        function updateNavIndicator(button) {
-            if (!button) return;
-            
-            const buttonRect = button.getBoundingClientRect();
-            const headerRect = header.getBoundingClientRect();
-            
-            navIndicator.style.width = `${buttonRect.width}px`;
-            navIndicator.style.left = `${buttonRect.left - headerRect.left}px`;
-            navIndicator.style.opacity = '1';
-        }
-        
-        // إخفاء مؤشر التنقل
-        function hideNavIndicator() {
-            navIndicator.style.opacity = '0';
-        }
-        
-        // تعيين الأحداث لأزرار التنقل
-        navButtons.forEach(button => {
-            button.addEventListener('mouseenter', () => {
-                updateNavIndicator(button);
-            });
-            
-            button.addEventListener('mouseleave', () => {
-                hideNavIndicator();
-            });
-        });
-        
-        // إخفاء المؤشر عند تحريك الماوس خارج منطقة الأزرار
-        const navButtonsContainer = document.querySelector('.nav-buttons');
-        navButtonsContainer.addEventListener('mouseleave', hideNavIndicator);
         
         // قائمة المشاركة
         function toggleShareMenu() {
