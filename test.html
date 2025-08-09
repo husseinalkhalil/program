@@ -22,6 +22,13 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
+            
+            /* إعدادات موضع أزرار التحكم - يمكنك تعديلها */
+            --desktop-top: 80px;
+            --desktop-right: 20px;
+            --mobile-top: 80px;
+            --mobile-right: 15px;
+            --button-size: 40px;
         }
         
         * {
@@ -45,6 +52,7 @@
             -webkit-tap-highlight-color: transparent;
         }
         
+        /* منع التمرير على الصفحة عند فتح القائمة */
         body.menu-open {
             overflow: hidden;
             position: fixed;
@@ -181,7 +189,7 @@
         }
         
         .hamburger {
-            display: none;
+            display: none; /* مخفي افتراضيًا */
             background: none;
             border: none;
             color: white;
@@ -220,11 +228,13 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            padding: 20px 15px 120px;
+            padding: 20px 15px 120px; /* زيادة المساحة السفلية */
             box-shadow: -5px 0 30px rgba(0,0,0,0.25);
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
             border-left: 1px solid rgba(255,255,255,0.15);
+            
+            /* تمكين التمرير السلس على الجوال */
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
         }
@@ -238,9 +248,9 @@
         .mobile-nav .nav-btn {
             width: 100%;
             max-width: 300px;
-            margin-bottom: 8px;
+            margin-bottom: 8px; /* تقليل المسافة بين العناصر */
             font-size: 18px;
-            padding: 12px 16px;
+            padding: 12px 16px; /* تعديل الحشوة */
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
@@ -258,6 +268,7 @@
             background: rgba(255,255,255,0.25);
         }
         
+        /* شريط التمرير للقائمة المنسدلة */
         .mobile-nav::-webkit-scrollbar {
             width: 8px;
         }
@@ -276,6 +287,7 @@
             background: rgba(255,255,255,0.5);
         }
         
+        /* مؤشر التمرير في الأسفل */
         .scroll-indicator {
             position: fixed;
             bottom: 20px;
@@ -378,7 +390,7 @@
             padding-bottom: 25px;
             margin-bottom: 35px;
             text-align: center;
-            padding-top: 60px;
+            padding-top: 60px; /* مساحة إضافية لمنع التداخل مع الأزرار */
         }
         
         .article-header::after {
@@ -657,6 +669,7 @@
             font-size: 20px;
         }
         
+        /* زر العودة للأعلى */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -698,6 +711,7 @@
             transform: translateY(-3px);
         }
         
+        /* ==================== تأثيرات حركية ==================== */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -725,6 +739,7 @@
             animation: fadeOut 0.2s ease-out forwards;
         }
         
+        /* ==================== طباعة ==================== */
         @media print {
             .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
@@ -801,7 +816,7 @@
             }
             
             .hamburger {
-                display: flex;
+                display: flex; /* يظهر فقط في الجوال */
             }
             
             .header {
@@ -809,7 +824,7 @@
             }
             
             .logo {
-                height: 50px;
+                height: 50px; /* تكبير الشعار في الجوال */
             }
             
             .scrolled .logo {
@@ -852,6 +867,7 @@
                 height: 22px;
             }
             
+            /* زر العودة للأعلى في الجوال */
             .back-to-top {
                 width: 50px;
                 height: 50px;
@@ -863,6 +879,7 @@
                 font-size: 20px;
             }
             
+            /* وضع الشعار في وسط الشريط العلوي في الجوال */
             .logo-container {
                 position: absolute;
                 left: 50%;
@@ -878,24 +895,26 @@
                 z-index: 1001;
             }
             
+            /* تحريك زر الهامبرغر إلى اليسار */
             .header-container {
                 justify-content: flex-start;
             }
             
+            /* تعديلات القائمة المنسدلة على الجوال */
             .mobile-nav {
-                padding: 15px 12px 100px;
+                padding: 15px 12px 100px; /* زيادة المساحة السفلية */
             }
             
             .mobile-nav .nav-btn {
-                margin-bottom: 8px;
-                padding: 12px 15px;
+                margin-bottom: 8px; /* تقليل المسافة بين العناصر */
+                padding: 12px 15px; /* تعديل الحشوة */
                 font-size: 16px;
             }
         }
         
         @media (min-width: 769px) {
             .hamburger {
-                display: none !important;
+                display: none !important; /* إخفاء زر الهمبرغر في الكمبيوتر */
             }
         }
         
@@ -939,6 +958,7 @@
                 height: 20px;
             }
             
+            /* زر العودة للأعلى في الجوال الصغير */
             .back-to-top {
                 width: 45px;
                 height: 45px;
@@ -950,6 +970,7 @@
                 font-size: 18px;
             }
             
+            /* تحسين لوحة المشاركة على الجوال */
             .article-share-menu {
                 width: 92vw;
                 max-width: 300px;
@@ -996,12 +1017,12 @@
             
             .mobile-nav {
                 width: 80%;
-                padding: 12px 10px 90px;
+                padding: 12px 10px 90px; /* زيادة المساحة السفلية */
             }
             
             .mobile-nav .nav-btn {
                 font-size: 16px;
-                padding: 10px 12px;
+                padding: 10px 12px; /* تعديل الحشوة */
             }
         }
         
@@ -1040,12 +1061,12 @@
             
             .mobile-nav {
                 width: 85%;
-                padding: 10px 8px 80px;
+                padding: 10px 8px 80px; /* زيادة المساحة السفلية */
             }
             
             .mobile-nav .nav-btn {
                 font-size: 15px;
-                padding: 8px 10px;
+                padding: 8px 10px; /* تعديل الحشوة */
             }
         }
         
@@ -1106,6 +1127,7 @@
             100% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
         }
         
+        /* زر اليوتيوب في القائمة */
         .youtube-btn {
             background: rgba(255, 0, 0, 0.15) !important;
         }
@@ -1114,15 +1136,15 @@
             background: rgba(255, 0, 0, 0.3) !important;
         }
         
-        /* ================ أنماط الفوتر ================ */
+        /* ================ أنماط الفوتر من الكود الأول ================ */
         footer {
           text-align: center;
           padding: 18px;
           background: #5e2ca5;
           color: white;
           font-size: 0.85em;
-          margin-top: auto;
-          width: 100%;
+          margin-top: auto; /* تم تعديل هذه الخاصية */
+          width: 100%; /* عرض كامل */
           box-sizing: border-box;
         }
 
@@ -1172,8 +1194,8 @@
         /* ==================== أزرار التحكم بحجم الخط ==================== */
         .font-controls {
             position: fixed;
-            top: 80px;
-            right: 20px;
+            top: var(--desktop-top);
+            right: var(--desktop-right);
             display: flex;
             gap: 8px;
             z-index: 1000;
@@ -1191,8 +1213,8 @@
         }
         
         .font-btn {
-            width: 40px;
-            height: 40px;
+            width: var(--button-size);
+            height: var(--button-size);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1246,39 +1268,103 @@
             opacity: 1;
         }
         
-        /* تحكمات الجوال */
-        .mobile-font-controls {
+        /* التعديلات الجديدة لموضع الأزرار في الجوال */
+        @media (max-width: 768px) {
+            .font-controls {
+                top: var(--mobile-top);
+                right: var(--mobile-right);
+                padding: 8px;
+                gap: 6px;
+                z-index: 1001;
+            }
+            
+            .font-btn {
+                width: calc(var(--button-size) - 4px);
+                height: calc(var(--button-size) - 4px);
+                font-size: 16px;
+            }
+            
+            .article-header {
+                padding-top: 50px; /* مساحة إضافية لمنع التداخل */
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .font-controls {
+                top: calc(var(--mobile-top) - 5px);
+                right: calc(var(--mobile-right) - 5px);
+                padding: 6px;
+                gap: 5px;
+            }
+            
+            .font-btn {
+                width: calc(var(--button-size) - 8px);
+                height: calc(var(--button-size) - 8px);
+                font-size: 14px;
+            }
+            
+            .font-btn::after {
+                font-size: 10px;
+                bottom: -35px;
+                padding: 4px 8px;
+            }
+            
+            .article-header {
+                padding-top: 45px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .font-controls {
+                top: calc(var(--mobile-top) - 10px);
+            }
+        }
+        
+        /* لوحة التحكم للمطور */
+        .developer-control-panel {
             position: fixed;
             bottom: 20px;
-            right: 20px;
-            display: none;
-            flex-wrap: wrap;
-            gap: 8px;
-            z-index: 1001;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 2000;
+            width: 300px;
             border: 1px solid var(--border-color);
+            font-family: 'Tajawal', sans-serif;
         }
         
-        .mobile-font-controls .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        .developer-control-panel h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
         }
         
-        .mobile-font-controls .position-controls {
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .position-controls {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(3, 1fr);
-            gap: 6px;
-            width: 120px;
+            gap: 8px;
+            margin-bottom: 15px;
         }
         
         .position-btn {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1288,6 +1374,12 @@
             border: none;
             cursor: pointer;
             font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .position-btn:hover {
+            background: var(--primary-color);
+            color: white;
         }
         
         .position-btn.up {
@@ -1319,13 +1411,13 @@
         
         .zoom-controls {
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            justify-content: space-between;
+            margin-bottom: 15px;
         }
         
         .zoom-btn {
-            width: 36px;
-            height: 36px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1335,6 +1427,12 @@
             border: none;
             cursor: pointer;
             font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .zoom-btn:hover {
+            background: var(--primary-color);
+            color: white;
         }
         
         .zoom-btn.zoom-in {
@@ -1342,146 +1440,26 @@
             color: white;
         }
         
-        /* التعديلات الجديدة لموضع الأزرار في الجوال */
-        @media (max-width: 768px) {
-            .font-controls {
-                top: 80px;
-                right: 15px;
-                padding: 8px;
-                gap: 6px;
-                z-index: 1001;
-            }
-            
-            .font-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
-            }
-            
-            .article-header {
-                padding-top: 50px;
-            }
-            
-            /* إظهار تحكمات الجوال وإخفاء تحكمات الكمبيوتر */
-            .font-controls {
-                display: none;
-            }
-            
-            .mobile-font-controls {
-                display: flex;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .font-controls {
-                top: 75px;
-                right: 10px;
-                padding: 6px;
-                gap: 5px;
-            }
-            
-            .font-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
-            }
-            
-            .font-btn::after {
-                font-size: 10px;
-                bottom: -35px;
-                padding: 4px 8px;
-            }
-            
-            .article-header {
-                padding-top: 45px;
-            }
-            
-            .mobile-font-controls {
-                bottom: 15px;
-                right: 15px;
-                padding: 8px;
-            }
-            
-            .position-btn, .zoom-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
-            }
-        }
-        
-        @media (max-width: 400px) {
-            .font-controls {
-                top: 70px;
-            }
-            
-            .mobile-font-controls {
-                bottom: 10px;
-                right: 10px;
-            }
-        }
-        
-        /* لوحة تحكم الكمبيوتر */
-        .desktop-control-panel {
-            position: fixed;
-            top: 140px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            z-index: 999;
-            display: none;
-            flex-direction: column;
+        .preset-buttons {
+            display: flex;
             gap: 10px;
-            border: 1px solid var(--border-color);
-            width: 200px;
-        }
-        
-        .desktop-control-panel h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            text-align: center;
-            font-size: 18px;
-        }
-        
-        .control-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .control-label {
-            font-size: 14px;
-            color: var(--text-color);
-        }
-        
-        .control-btn {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            background: var(--light-purple);
-            color: var(--primary-color);
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
         }
         
-        .control-btn:hover {
+        .preset-btn {
+            padding: 8px 15px;
             background: var(--primary-color);
             color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s;
         }
         
-        @media (min-width: 769px) {
-            .desktop-control-panel {
-                display: flex;
-            }
-            
-            .mobile-font-controls {
-                display: none;
-            }
+        .preset-btn:hover {
+            background: var(--accent-color);
         }
     </style>
 </head>
@@ -1489,16 +1467,19 @@
     <!-- الشريط العلوي المحسّن -->
     <header class="header" id="header">
         <div class="header-container">
+            <!-- زر الهمبرغر (يظهر فقط في الجوال) -->
             <button class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
             </button>
             
+            <!-- الشعار -->
             <div class="logo-container"> 
                 <a href="index.html">
                     <img src="images/logo.png" alt="شعار موقع حسين الخليل" class="logo">
                 </a>
             </div>
             
+            <!-- أزرار التنقل (للشاشات الكبيرة) -->
             <div class="nav-buttons">
                 <a href="index.html" class="nav-btn active">
                     <i class="fas fa-home"></i>
@@ -1520,6 +1501,7 @@
                     <i class="fas fa-video"></i>
                     الفيديوهات
                 </a>
+                <!-- العناوين الجديدة -->
                 <a href="history.html" class="nav-btn">
                     <i class="fas fa-hourglass"></i>
                     التاريخ
@@ -1540,6 +1522,7 @@
             </div>
         </div>
         
+        <!-- قائمة الجوال المحسنة -->
         <div class="mobile-nav" id="mobileNav">
             <a href="index.html" class="nav-btn">
                 <i class="fas fa-home"></i>
@@ -1561,6 +1544,7 @@
                 <i class="fas fa-video"></i>
                 الفيديوهات
             </a>
+            <!-- العناوين الجديدة في القائمة المنسدلة -->
             <a href="history.html" class="nav-btn">
                 <i class="fas fa-hourglass"></i>
                 التاريخ
@@ -1581,64 +1565,51 @@
                 <i class="fas fa-hand-holding-heart"></i>
                 دعم المحتوى
             </a>
+            <!-- تغيير أيقونة اتصل بنا إلى أيقونة الرسالة -->
             <a href="contact.html" class="nav-btn">
                 <i class="fas fa-envelope"></i>
                 اتصل بنا
             </a>
+            
+            <!-- إضافة زر اليوتيوب الجديد -->
             <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="nav-btn youtube-btn">
                 <i class="fab fa-youtube"></i>
                 قناة اليوتيوب
             </a>
+            
+            <!-- مؤشر التمرير للأسفل -->
             <div class="scroll-indicator">
                 <i class="fas fa-chevron-down"></i>
             </div>
         </div>
     </header>
     
-    <!-- لوحة تحكم الكمبيوتر -->
-    <div class="desktop-control-panel">
-        <h3>تحكم في موضع الأزرار</h3>
-        <div class="control-row">
-            <span class="control-label">الموضع الرأسي:</span>
-            <div>
-                <button class="control-btn up-btn">↑</button>
-                <button class="control-btn down-btn">↓</button>
-            </div>
-        </div>
-        <div class="control-row">
-            <span class="control-label">الموضع الأفقي:</span>
-            <div>
-                <button class="control-btn left-btn">←</button>
-                <button class="control-btn right-btn">→</button>
-            </div>
-        </div>
-        <div class="control-row">
-            <span class="control-label">حجم الأزرار:</span>
-            <div>
-                <button class="control-btn zoom-in-btn">+</button>
-                <button class="control-btn zoom-out-btn">-</button>
-            </div>
-        </div>
-        <div class="control-row">
-            <span class="control-label">إعادة الضبط:</span>
-            <button class="control-btn reset-btn">↺</button>
-        </div>
-    </div>
-    
-    <!-- تحكمات الجوال -->
-    <div class="mobile-font-controls">
+    <!-- لوحة تحكم المطور -->
+    <div class="developer-control-panel">
+        <h3>لوحة تحكم موضع أزرار الخط (للمطور)</h3>
+        
         <div class="control-group">
+            <label>موضع أزرار التحكم:</label>
             <div class="position-controls">
-                <button class="position-btn up">↑</button>
-                <button class="position-btn down">↓</button>
-                <button class="position-btn left">←</button>
-                <button class="position-btn right">→</button>
-                <button class="position-btn center">•</button>
+                <button class="position-btn up" data-direction="up">↑</button>
+                <button class="position-btn down" data-direction="down">↓</button>
+                <button class="position-btn left" data-direction="left">←</button>
+                <button class="position-btn right" data-direction="right">→</button>
+                <button class="position-btn center" data-direction="center">•</button>
             </div>
         </div>
-        <div class="zoom-controls">
-            <button class="zoom-btn zoom-in">+</button>
-            <button class="zoom-btn zoom-out">-</button>
+        
+        <div class="control-group">
+            <label>حجم الأزرار:</label>
+            <div class="zoom-controls">
+                <button class="zoom-btn zoom-in" data-action="zoom-in">+</button>
+                <button class="zoom-btn zoom-out" data-action="zoom-out">-</button>
+            </div>
+        </div>
+        
+        <div class="preset-buttons">
+            <button class="preset-btn" data-preset="desktop-default">إعدادات كمبيوتر افتراضية</button>
+            <button class="preset-btn" data-preset="mobile-default">إعدادات جوال افتراضية</button>
         </div>
     </div>
     
@@ -1662,6 +1633,7 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 30 يوليو 2025</span>
             </div>
             
+            <!-- محتوى المقالة داخل div مع class="article-content" -->
             <div class="article-content">
                 <p>الحقيقة المطلقة الوحيدة التي أؤمن بها هو <span style="color: green; font-weight: bold;"> الله </span>.</p>
                 <p>جميع الأفكار والتدبرات هي حقائق نسبية، ترتفع نسبتها وتنخفض من شخص لآخر.</p>
@@ -1721,6 +1693,7 @@
         </div>
     </div>
 
+    <!-- الفوتر من الكود الأول -->
     <footer>
         <div class="social-links">
             <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -1736,6 +1709,7 @@
         </div>
     </footer>
 
+    <!-- زر العودة إلى الأعلى -->
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </div>
@@ -1748,7 +1722,6 @@
         const navIndicator = document.getElementById('navIndicator');
         const navButtons = document.querySelectorAll('.nav-btn');
         const backToTop = document.getElementById('backToTop');
-        const fontControls = document.querySelector('.font-controls');
         
         // فتح/إغلاق القائمة
         function toggleMobileMenu(event) {
@@ -1758,10 +1731,12 @@
             mobileNav.classList.toggle('open');
             document.body.classList.toggle('menu-open', !isOpen);
             
+            // تحديث أيقونة القائمة
             hamburger.innerHTML = isOpen ? 
                 '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
         }
         
+        // إغلاق القائمة عند النقر في أي مكان
         function closeMobileMenu(event) {
             if (mobileNav.classList.contains('open') && 
                 !mobileNav.contains(event.target) && 
@@ -1770,15 +1745,18 @@
             }
         }
         
+        // تعيين المستمعين للأحداث
         hamburger.addEventListener('click', toggleMobileMenu);
         document.addEventListener('click', closeMobileMenu);
         
+        // إغلاق القائمة عند النقر على أي رابط داخلي
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 toggleMobileMenu();
             });
         });
         
+        // تأثير التمرير على الشريط العلوي
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {
                 header.classList.add('scrolled');
@@ -1786,6 +1764,7 @@
                 header.classList.remove('scrolled');
             }
             
+            // التحكم في ظهور زر العودة للأعلى
             if (window.scrollY > 500) {
                 backToTop.classList.add('show');
             } else {
@@ -1793,6 +1772,7 @@
             }
         });
         
+        // تحديث مؤشر التنقل
         function updateNavIndicator(button) {
             if (!button) return;
             
@@ -1804,10 +1784,12 @@
             navIndicator.style.opacity = '1';
         }
         
+        // إخفاء مؤشر التنقل
         function hideNavIndicator() {
             navIndicator.style.opacity = '0';
         }
         
+        // تعيين الأحداث لأزرار التنقل
         navButtons.forEach(button => {
             button.addEventListener('mouseenter', () => {
                 updateNavIndicator(button);
@@ -1818,9 +1800,11 @@
             });
         });
         
+        // إخفاء المؤشر عند تحريك الماوس خارج منطقة الأزرار
         const navButtonsContainer = document.querySelector('.nav-buttons');
         navButtonsContainer.addEventListener('mouseleave', hideNavIndicator);
         
+        // قائمة المشاركة
         function toggleShareMenu() {
             const shareMenu = document.getElementById('shareMenu');
             const isOpen = shareMenu.style.display === 'block';
@@ -1835,6 +1819,7 @@
                 shareMenu.style.display = 'block';
             }
             
+            // إغلاق القائمة عند النقر خارجها
             if (shareMenu.style.display === 'block') {
                 setTimeout(() => {
                     document.addEventListener('click', closeShareMenuOutside);
@@ -1887,6 +1872,7 @@
             toggleShareMenu();
         }
         
+        // إغلاق قائمة المشاركة عند التمرير
         window.addEventListener('scroll', () => {
             const shareMenu = document.getElementById('shareMenu');
             if (shareMenu.style.display === 'block') {
@@ -1894,6 +1880,7 @@
             }
         });
         
+        // وظيفة زر العودة للأعلى
         backToTop.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -1901,11 +1888,13 @@
             });
         });
         
+        // إخفاء مؤشر التمرير عند الوصول للأسفل في القائمة المنسدلة
         mobileNav.addEventListener('scroll', () => {
             const scrollIndicator = document.querySelector('.scroll-indicator');
             const scrollPosition = mobileNav.scrollTop + mobileNav.clientHeight;
             const scrollHeight = mobileNav.scrollHeight;
             
+            // إخفاء المؤشر عند الوصول إلى أسفل القائمة
             if (scrollPosition >= scrollHeight - 20) {
                 scrollIndicator.style.opacity = '0';
             } else {
@@ -1919,16 +1908,20 @@
         const increaseFontBtn = document.getElementById('increaseFont');
         const articleContent = document.querySelector('.article-content');
         
+        // الحجم الأصلي للخط (18px حسب CSS)
         const originalFontSize = 18; 
         let currentFontSize = originalFontSize;
         
-        const minFontSize = 12;
-        const maxFontSize = 28;
+        // الحد الأدنى والأقصى لحجم الخط
+        const minFontSize = 12; // 12px
+        const maxFontSize = 28; // 28px
         
+        // تخزين حجم الخط في localStorage
         function saveFontSize(size) {
             localStorage.setItem('articleFontSize', size);
         }
         
+        // استرجاع حجم الخط من localStorage
         function loadFontSize() {
             const savedSize = localStorage.getItem('articleFontSize');
             if (savedSize) {
@@ -1939,6 +1932,7 @@
             }
         }
         
+        // تصغير حجم الخط
         decreaseFontBtn.addEventListener('click', () => {
             if (currentFontSize > minFontSize) {
                 currentFontSize--;
@@ -1947,12 +1941,14 @@
             }
         });
         
+        // إعادة حجم الخط إلى الحجم الأصلي
         resetFontBtn.addEventListener('click', () => {
             currentFontSize = originalFontSize;
             articleContent.style.fontSize = `${currentFontSize}px`;
             saveFontSize(currentFontSize);
         });
         
+        // تكبير حجم الخط
         increaseFontBtn.addEventListener('click', () => {
             if (currentFontSize < maxFontSize) {
                 currentFontSize++;
@@ -1961,151 +1957,112 @@
             }
         });
         
-        // ==================== التحكم في موضع الأزرار ====================
-        // إعدادات افتراضية
-        let positionTop = 80;
-        let positionRight = 20;
-        let buttonSize = 40;
+        // ==================== لوحة تحكم المطور ====================
+        // إعدادات موضع الأزرار
+        let desktopTop = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--desktop-top'));
+        let desktopRight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--desktop-right'));
+        let mobileTop = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-top'));
+        let mobileRight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--mobile-right'));
+        let buttonSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--button-size'));
+        
+        // تطبيق الإعدادات على متغيرات CSS
+        function applySettings() {
+            document.documentElement.style.setProperty('--desktop-top', `${desktopTop}px`);
+            document.documentElement.style.setProperty('--desktop-right', `${desktopRight}px`);
+            document.documentElement.style.setProperty('--mobile-top', `${mobileTop}px`);
+            document.documentElement.style.setProperty('--mobile-right', `${mobileRight}px`);
+            document.documentElement.style.setProperty('--button-size', `${buttonSize}px`);
+            
+            // حفظ الإعدادات في localStorage
+            localStorage.setItem('fontControlsSettings', JSON.stringify({
+                desktopTop,
+                desktopRight,
+                mobileTop,
+                mobileRight,
+                buttonSize
+            }));
+        }
         
         // تحميل الإعدادات المحفوظة
-        function loadPositionSettings() {
-            const savedSettings = localStorage.getItem('fontPositionSettings');
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('fontControlsSettings');
             if (savedSettings) {
                 const settings = JSON.parse(savedSettings);
-                positionTop = settings.top;
-                positionRight = settings.right;
-                buttonSize = settings.size;
+                desktopTop = settings.desktopTop;
+                desktopRight = settings.desktopRight;
+                mobileTop = settings.mobileTop;
+                mobileRight = settings.mobileRight;
+                buttonSize = settings.buttonSize;
                 
-                applyPositionSettings();
+                applySettings();
             }
         }
         
-        // تطبيق الإعدادات
-        function applyPositionSettings() {
-            fontControls.style.top = `${positionTop}px`;
-            fontControls.style.right = `${positionRight}px`;
-            
-            document.querySelectorAll('.font-btn').forEach(btn => {
-                btn.style.width = `${buttonSize}px`;
-                btn.style.height = `${buttonSize}px`;
+        // التحكم في موضع الأزرار
+        document.querySelectorAll('.position-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const direction = this.getAttribute('data-direction');
+                
+                switch(direction) {
+                    case 'up':
+                        desktopTop -= 10;
+                        mobileTop -= 10;
+                        break;
+                    case 'down':
+                        desktopTop += 10;
+                        mobileTop += 10;
+                        break;
+                    case 'left':
+                        desktopRight += 10;
+                        mobileRight += 10;
+                        break;
+                    case 'right':
+                        desktopRight -= 10;
+                        mobileRight -= 10;
+                        break;
+                    case 'center':
+                        // الإعدادات الافتراضية
+                        desktopTop = 80;
+                        desktopRight = 20;
+                        mobileTop = 80;
+                        mobileRight = 15;
+                        break;
+                }
+                
+                applySettings();
             });
-        }
-        
-        // حفظ الإعدادات
-        function savePositionSettings() {
-            const settings = {
-                top: positionTop,
-                right: positionRight,
-                size: buttonSize
-            };
-            localStorage.setItem('fontPositionSettings', JSON.stringify(settings));
-        }
-        
-        // التحكم في الموضع للكمبيوتر
-        document.querySelector('.up-btn').addEventListener('click', () => {
-            positionTop -= 10;
-            if (positionTop < 60) positionTop = 60;
-            applyPositionSettings();
-            savePositionSettings();
         });
         
-        document.querySelector('.down-btn').addEventListener('click', () => {
-            positionTop += 10;
-            if (positionTop > 300) positionTop = 300;
-            applyPositionSettings();
-            savePositionSettings();
-        });
-        
-        document.querySelector('.left-btn').addEventListener('click', () => {
-            positionRight += 10;
-            if (positionRight > 100) positionRight = 100;
-            applyPositionSettings();
-            savePositionSettings();
-        });
-        
-        document.querySelector('.right-btn').addEventListener('click', () => {
-            positionRight -= 10;
-            if (positionRight < 10) positionRight = 10;
-            applyPositionSettings();
-            savePositionSettings();
-        });
-        
-        document.querySelector('.zoom-in-btn').addEventListener('click', () => {
+        // التحكم في حجم الأزرار
+        document.querySelector('.zoom-btn.zoom-in').addEventListener('click', function() {
             buttonSize += 5;
             if (buttonSize > 60) buttonSize = 60;
-            applyPositionSettings();
-            savePositionSettings();
+            applySettings();
         });
         
-        document.querySelector('.zoom-out-btn').addEventListener('click', () => {
+        document.querySelector('.zoom-btn.zoom-out').addEventListener('click', function() {
             buttonSize -= 5;
             if (buttonSize < 30) buttonSize = 30;
-            applyPositionSettings();
-            savePositionSettings();
+            applySettings();
         });
         
-        document.querySelector('.reset-btn').addEventListener('click', () => {
-            positionTop = 80;
-            positionRight = 20;
-            buttonSize = 40;
-            applyPositionSettings();
-            savePositionSettings();
+        // الإعدادات المسبقة
+        document.querySelector('[data-preset="desktop-default"]').addEventListener('click', function() {
+            desktopTop = 80;
+            desktopRight = 20;
+            applySettings();
         });
         
-        // التحكم في الموضع للجوال
-        document.querySelector('.position-btn.up').addEventListener('click', () => {
-            positionTop -= 10;
-            if (positionTop < 60) positionTop = 60;
-            applyPositionSettings();
-            savePositionSettings();
-        });
-        
-        document.querySelector('.position-btn.down').addEventListener('click', () => {
-            positionTop += 10;
-            if (positionTop > 300) positionTop = 300;
-            applyPositionSettings();
-            savePositionSettings();
-        });
-        
-        document.querySelector('.position-btn.left').addEventListener('click', () => {
-            positionRight += 10;
-            if (positionRight > 100) positionRight = 100;
-            applyPositionSettings();
-            savePositionSettings();
-        });
-        
-        document.querySelector('.position-btn.right').addEventListener('click', () => {
-            positionRight -= 10;
-            if (positionRight < 10) positionRight = 10;
-            applyPositionSettings();
-            savePositionSettings();
-        });
-        
-        document.querySelector('.position-btn.center').addEventListener('click', () => {
-            positionTop = 80;
-            positionRight = 20;
-            applyPositionSettings();
-            savePositionSettings();
-        });
-        
-        document.querySelector('.zoom-btn.zoom-in').addEventListener('click', () => {
-            buttonSize += 5;
-            if (buttonSize > 60) buttonSize = 60;
-            applyPositionSettings();
-            savePositionSettings();
-        });
-        
-        document.querySelector('.zoom-btn.zoom-out').addEventListener('click', () => {
-            buttonSize -= 5;
-            if (buttonSize < 30) buttonSize = 30;
-            applyPositionSettings();
-            savePositionSettings();
+        document.querySelector('[data-preset="mobile-default"]').addEventListener('click', function() {
+            mobileTop = 80;
+            mobileRight = 15;
+            applySettings();
         });
         
         // تحميل الإعدادات عند بدء التحميل
         window.addEventListener('DOMContentLoaded', () => {
             loadFontSize();
-            loadPositionSettings();
+            loadSettings();
         });
     </script>
 </body>
