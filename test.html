@@ -1217,7 +1217,7 @@
           color: #ffd166;
         }
         
-        /* أزرار التحكم في حجم الخط */
+        /* أزرار التحكم في حجم الخط - تم تصغير الحجم */
         .font-controls {
             position: fixed;
             top: 100px;
@@ -1225,33 +1225,33 @@
             z-index: 999;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 30px;
-            padding: 15px;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 12px 12px 10px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
         
         .font-controls:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
         
         .font-btn {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: #5e2ca5;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 18px;
             cursor: pointer;
             border: none;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
         
         .font-btn:hover {
@@ -1269,7 +1269,7 @@
         }
         
         .font-size-indicator {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             text-align: center;
             color: #5e2ca5;
@@ -1295,7 +1295,31 @@
         }
         
         .font-xlarge .article-content {
-            font-size: 24px;
+            font-size: 22px;
+        }
+        
+        /* زر إغلاق التحكم في الخط */
+        .close-font-controls {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-font-controls:hover {
+            background: rgba(0, 0, 0, 0.2);
+            color: #ff0000;
+            transform: rotate(90deg);
         }
         
         @media (max-width: 768px) {
@@ -1306,13 +1330,13 @@
             }
             
             .font-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
             }
             
             .font-size-indicator {
-                font-size: 14px;
+                font-size: 12px;
             }
         }
         
@@ -1320,13 +1344,14 @@
             .font-controls {
                 top: 80px;
                 right: 10px;
-                gap: 8px;
+                gap: 6px;
+                padding: 10px 8px 8px;
             }
             
             .font-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
             }
         }
     </style>
@@ -1452,8 +1477,11 @@
         </div>
     </header>
     
-    <!-- أزرار التحكم في حجم الخط -->
-    <div class="font-controls">
+    <!-- أزرار التحكم في حجم الخط - تم تصغير حجمها -->
+    <div class="font-controls" id="fontControls">
+        <span class="close-font-controls" id="closeFontControls" title="إخفاء التحكم في الخط">
+            <i class="fas fa-times"></i>
+        </span>
         <button class="font-btn" id="increaseFont" title="تكبير الخط">
             <i class="fas fa-plus"></i>
         </button>
@@ -1562,6 +1590,8 @@
         // العناصر التي سيتم تغيير حجم الخط لها
         const articleContent = document.querySelector('.article-content');
         const fontSizeIndicator = document.getElementById('fontSizeIndicator');
+        const fontControls = document.getElementById('fontControls');
+        const closeFontControls = document.getElementById('closeFontControls');
         
         // إعداد حجم الخط عند تحميل الصفحة
         function setupFontSize() {
@@ -1610,6 +1640,11 @@
         document.getElementById('resetFont').addEventListener('click', () => {
             currentFontSize = 1;
             applyFontSize();
+        });
+        
+        // إخفاء أزرار التحكم في الخط
+        closeFontControls.addEventListener('click', () => {
+            fontControls.style.display = 'none';
         });
         
         // قائمة الجوال
