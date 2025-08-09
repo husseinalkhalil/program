@@ -381,6 +381,7 @@
             padding-bottom: 25px;
             margin-bottom: 35px;
             text-align: center;
+            padding-top: 60px; /* مساحة إضافية لمنع التداخل مع الأزرار */
         }
         
         .article-header::after {
@@ -1217,23 +1218,23 @@
         
         /* ==================== أزرار التحكم بحجم الخط ==================== */
         .font-controls {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+            position: fixed;
+            top: 80px;
+            right: 20px;
             display: flex;
             gap: 8px;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
             padding: 10px;
             border-radius: 50px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             border: 1px solid var(--border-color);
             transition: all 0.3s;
         }
         
         .font-controls:hover {
             background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
         
         .font-btn {
@@ -1295,39 +1296,45 @@
         /* التعديلات الجديدة لموضع الأزرار في الجوال */
         @media (max-width: 768px) {
             .font-controls {
-                top: 0 /* أسفل الشريط العلوي مباشرة */
-                left: auto;
-                right: 15px; /* الزاوية اليمنى */
-                z-index: 100;
-            }
-            
-            .article-header {
-                padding-top: 40px; /* مساحة إضافية لمنع التغطية */
-            }
-            
-            .font-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 16px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .font-controls {
                 top: 70px;
-                right: 10px;
+                right: 15px;
                 padding: 8px;
                 gap: 6px;
             }
             
             .font-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 15px;
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
             }
             
             .article-header {
-                padding-top: 35px;
+                padding-top: 50px; /* مساحة إضافية لمنع التداخل */
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .font-controls {
+                top: 65px;
+                right: 10px;
+                padding: 6px;
+                gap: 5px;
+            }
+            
+            .font-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+            
+            .font-btn::after {
+                font-size: 10px;
+                bottom: -35px;
+                padding: 4px 8px;
+            }
+            
+            .article-header {
+                padding-top: 45px;
             }
         }
     </style>
@@ -1468,6 +1475,7 @@
                 </button>
             </div>
             
+            <div class="article-header">
                 <h1>❖ لا توجد حقيقة مطلقة.</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 30 يوليو 2025</span>
             </div>
