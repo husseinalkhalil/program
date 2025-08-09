@@ -10,6 +10,121 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <style>
+        /* أضف هذا النمط الجديد */
+        .font-controls {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: rgba(94, 44, 165, 0.9);
+            padding: 15px 10px;
+            border-radius: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .font-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid #ddd;
+        }
+        
+        .font-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent-color);
+            color: white;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .font-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        .font-btn.small {
+            font-size: 18px;
+        }
+        
+        .font-btn.large {
+            font-size: 26px;
+        }
+        
+        /* مؤشر حجم الخط */
+        .font-size-indicator {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .font-controls:hover .font-size-indicator {
+            opacity: 1;
+        }
+        
+        /* حجم الخط للمقالة */
+        .article-content.small-font {
+            font-size: 16px;
+        }
+        
+        .article-content.medium-font {
+            font-size: 18px;
+        }
+        
+        .article-content.large-font {
+            font-size: 20px;
+        }
+        
+        .article-content.xlarge-font {
+            font-size: 22px;
+        }
+        
+        /* تعديلات للأجهزة المحمولة */
+        @media (max-width: 992px) {
+            .font-controls {
+                top: auto;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
+                width: auto;
+                padding: 10px 15px;
+            }
+            
+            .font-size-indicator {
+                top: auto;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* بقية الأنماط من الكود الأصلي تبقى كما هي */
         :root {
             --primary-color: #5e2ca5;
             --secondary-color: #9575CD;
@@ -426,6 +541,7 @@
             line-height: 1.8;
             max-width: 1200px;
             margin: 0 auto;
+            transition: font-size 0.3s ease;
         }
         
         .article-content p {
@@ -1338,6 +1454,24 @@
         </div>
     </header>
     
+    <!-- عناصر التحكم في حجم الخط -->
+    <div class="font-controls">
+        <span class="font-size-indicator" id="fontSizeIndicator">حجم الخط: متوسط</span>
+        <button class="font-btn small" title="تصغير الخط" onclick="changeFontSize('small')">
+            <i class="fas fa-font small"></i>
+        </button>
+        <button class="font-btn medium active" title="الحجم الافتراضي" onclick="changeFontSize('medium')">
+            <i class="fas fa-font"></i>
+        </button>
+        <button class="font-btn large" title="تكبير الخط" onclick="changeFontSize('large')">
+            <i class="fas fa-font large"></i>
+        </button>
+        <button class="font-btn xlarge" title="تكبير الخط جداً" onclick="changeFontSize('xlarge')">
+            <i class="fas fa-font large"></i>
+            <i class="fas fa-plus" style="font-size: 14px; position: absolute; top: 6px; right: 6px;"></i>
+        </button>
+    </div>
+    
     <div class="container">
         <div class="article-card">
             <div class="article-header">
@@ -1345,7 +1479,7 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 30 يوليو 2025</span>
             </div>
             
-            
+            <div class="article-content medium-font">
                 <p> الحقيقة المطلقة الوحيدة التي أؤمن بها هو <span style="color: green; font-weight: bold;"> الله </span>.</p>
                 <p>جميع الأفكار والتدبرات هي حقائق نسبية، ترتفع نسبتها وتنخفض من شخص لآخر.</p>
                 <p>فما أراه أنا حقيقة قد يراه غيري خرافة.</p>
@@ -1426,6 +1560,55 @@
     </div>
 
     <script>
+        // وظيفة التحكم في حجم الخط
+        function changeFontSize(size) {
+            const articleContent = document.querySelector('.article-content');
+            const buttons = document.querySelectorAll('.font-btn');
+            const indicator = document.getElementById('fontSizeIndicator');
+            
+            // إزالة جميع الفئات المتعلقة بحجم الخط
+            articleContent.classList.remove('small-font', 'medium-font', 'large-font', 'xlarge-font');
+            
+            // إزالة النشاط من جميع الأزرار
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // تطبيق الحجم الجديد
+            switch(size) {
+                case 'small':
+                    articleContent.classList.add('small-font');
+                    document.querySelector('.font-btn.small').classList.add('active');
+                    indicator.textContent = 'حجم الخط: صغير';
+                    break;
+                case 'medium':
+                    articleContent.classList.add('medium-font');
+                    document.querySelector('.font-btn.medium').classList.add('active');
+                    indicator.textContent = 'حجم الخط: متوسط';
+                    break;
+                case 'large':
+                    articleContent.classList.add('large-font');
+                    document.querySelector('.font-btn.large').classList.add('active');
+                    indicator.textContent = 'حجم الخط: كبير';
+                    break;
+                case 'xlarge':
+                    articleContent.classList.add('xlarge-font');
+                    document.querySelector('.font-btn.xlarge').classList.add('active');
+                    indicator.textContent = 'حجم الخط: كبير جداً';
+                    break;
+            }
+            
+            // تخزين التفضيل في localStorage
+            localStorage.setItem('fontSizePreference', size);
+        }
+        
+        // استعادة تفضيل حجم الخط عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedFontSize = localStorage.getItem('fontSizePreference');
+            if (savedFontSize) {
+                changeFontSize(savedFontSize);
+            }
+        });
+        
+        // بقية كود الجافاسكريبت من الكود الأصلي
         // قائمة الجوال
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
