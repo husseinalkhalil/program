@@ -426,6 +426,7 @@
             line-height: 1.8;
             max-width: 1200px;
             margin: 0 auto;
+            transition: font-size 0.3s ease;
         }
         
         .article-content p {
@@ -732,7 +733,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -1215,6 +1216,119 @@
           font-weight: 600;
           color: #ffd166;
         }
+        
+        /* أزرار التحكم في حجم الخط */
+        .font-controls {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            padding: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .font-controls:hover {
+            transform: translateY(-5px);
+        }
+        
+        .font-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #5e2ca5;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .font-btn:hover {
+            background: #6A45B0;
+            transform: scale(1.1);
+        }
+        
+        .font-btn.reset {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .font-btn.reset:hover {
+            background: #ffb300;
+        }
+        
+        .font-size-indicator {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: #5e2ca5;
+            margin-top: 5px;
+        }
+        
+        /* استثناء العنوان الرئيسي من تغيير الخط */
+        .article-header h1 {
+            font-size: 32px !important;
+        }
+        
+        /* أنماط حجم الخط المختلفة */
+        .font-small .article-content {
+            font-size: 16px;
+        }
+        
+        .font-medium .article-content {
+            font-size: 18px;
+        }
+        
+        .font-large .article-content {
+            font-size: 20px;
+        }
+        
+        .font-xlarge .article-content {
+            font-size: 22px;
+        }
+        
+        @media (max-width: 768px) {
+            .font-controls {
+                top: 85px;
+                right: 15px;
+                padding: 10px;
+            }
+            
+            .font-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .font-size-indicator {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .font-controls {
+                top: 80px;
+                right: 10px;
+                gap: 8px;
+            }
+            
+            .font-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1337,6 +1451,7 @@
             </div>
         </div>
     </header>
+    
     <!-- أزرار التحكم في حجم الخط -->
     <div class="font-controls">
         <button class="font-btn" id="increaseFont" title="تكبير الخط">
@@ -1350,7 +1465,7 @@
         </button>
         <div class="font-size-indicator" id="fontSizeIndicator">متوسط</div>
     </div>
-    
+
     <div class="container">
         <div class="article-card">
             <div class="article-header">
@@ -1439,6 +1554,64 @@
     </div>
 
     <script>
+        // وظائف التحكم في حجم الخط
+        const fontSizeClasses = ['font-small', 'font-medium', 'font-large', 'font-xlarge'];
+        const sizeNames = ['صغير', 'متوسط', 'كبير', 'كبير جداً'];
+        let currentFontSize = 1; // متوسط (القيمة الافتراضية)
+        
+        // العناصر التي سيتم تغيير حجم الخط لها
+        const articleContent = document.querySelector('.article-content');
+        const fontSizeIndicator = document.getElementById('fontSizeIndicator');
+        
+        // إعداد حجم الخط عند تحميل الصفحة
+        function setupFontSize() {
+            // جلب الإعدادات المحفوظة
+            const savedSize = localStorage.getItem('fontSize');
+            if (savedSize !== null) {
+                currentFontSize = parseInt(savedSize);
+            }
+            
+            // تطبيق حجم الخط
+            applyFontSize();
+        }
+        
+        // تطبيق حجم الخط المحدد
+        function applyFontSize() {
+            // إزالة جميع أصناف الخط
+            document.body.classList.remove(...fontSizeClasses);
+            
+            // إضافة الصنف الحالي
+            document.body.classList.add(fontSizeClasses[currentFontSize]);
+            
+            // تحديث المؤشر
+            fontSizeIndicator.textContent = sizeNames[currentFontSize];
+            
+            // حفظ الإعدادات
+            localStorage.setItem('fontSize', currentFontSize);
+        }
+        
+        // تكبير الخط
+        document.getElementById('increaseFont').addEventListener('click', () => {
+            if (currentFontSize < fontSizeClasses.length - 1) {
+                currentFontSize++;
+                applyFontSize();
+            }
+        });
+        
+        // تصغير الخط
+        document.getElementById('decreaseFont').addEventListener('click', () => {
+            if (currentFontSize > 0) {
+                currentFontSize--;
+                applyFontSize();
+            }
+        });
+        
+        // إعادة الخط للحجم الافتراضي
+        document.getElementById('resetFont').addEventListener('click', () => {
+            currentFontSize = 1;
+            applyFontSize();
+        });
+        
         // قائمة الجوال
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
@@ -1625,6 +1798,9 @@
                 scrollIndicator.style.opacity = '1';
             }
         });
+        
+        // تهيئة حجم الخط عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', setupFontSize);
     </script>
 </body>
 </html>
