@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المقالات | وطني أولاً، هل أصبحت الوطنية تهمة؟</title>
+    <title>المقالات | لا توجد حقيقة مطلقة.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -80,7 +80,6 @@
             justify-content: space-between;
             align-items: center;
             height: 100%;
-            position: relative;
         }
         
         .logo-container {
@@ -131,8 +130,26 @@
             cursor: pointer;
         }
         
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 3px 3px 0 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+        }
+        
         .nav-btn:hover {
             color: white;
+        }
+        
+        .nav-btn:hover::after {
+            width: 100%;
+            opacity: 1;
         }
         
         .nav-btn.active {
@@ -149,6 +166,18 @@
         .nav-btn:hover i {
             transform: translateX(5px);
             color: white;
+        }
+        
+        /* تأثيرات خاصة بالشريط العلوي */
+        .nav-indicator {
+            position: absolute;
+            bottom: 0;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 3px 3px 0 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
+            opacity: 0;
         }
         
         .hamburger {
@@ -397,7 +426,6 @@
             line-height: 1.8;
             max-width: 1200px;
             margin: 0 auto;
-            transition: font-size 0.3s ease;
         }
         
         .article-content p {
@@ -704,7 +732,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
+            .header, .article-actions, .back-btn, .back-to-top {
                 display: none;
             }
             
@@ -1187,199 +1215,12 @@
           font-weight: 600;
           color: #ffd166;
         }
-        
-        /* أزرار التحكم في حجم الخط - تم نقلها إلى الشريط العلوي */
-        .font-controls {
-            position: static;
-            display: flex;
-            flex-direction: row;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 5px 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            margin-left: 15px;
-        }
-        
-        .font-controls:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .font-btn {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
-            /* تأثير ثلاثي الأبعاد */
-            background: linear-gradient(135deg, #6A45B0, #5e2ca5);
-            color: white;
-            box-shadow: 
-                0 2px 5px rgba(0, 0, 0, 0.3),
-                0 3px 6px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
-        }
-        
-        .font-btn:hover {
-            background: linear-gradient(135deg, #7E57C2, #6A45B0);
-            transform: scale(1.1);
-            box-shadow: 
-                0 3px 8px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-        
-        .font-btn:active {
-            transform: scale(0.95);
-            box-shadow: 
-                0 1px 3px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-        
-        .font-btn.reset {
-            background: linear-gradient(135deg, #FFC107, #FFA000);
-        }
-        
-        .font-btn.reset:hover {
-            background: linear-gradient(135deg, #FFCA28, #FFB300);
-        }
-        
-        /* استثناء العنوان الرئيسي من تغيير الخط */
-        .article-header h1 {
-            font-size: 32px !important;
-        }
-        
-        /* أنماط حجم الخط المختلفة */
-        .font-small .article-content {
-            font-size: 16px;
-        }
-        
-        .font-medium .article-content {
-            font-size: 18px;
-        }
-        
-        .font-large .article-content {
-            font-size: 20px;
-        }
-        
-        .font-xlarge .article-content {
-            font-size: 24px;
-        }
-        
-        /* زر إغلاق التحكم في الخط - تمييزه باللون الأحمر */
-        .close-font-controls {
-            display: none; /* مخفي في الشريط العلوي */
-        }
-        
-        /* إخفاء أزرار التحكم في الجوال */
-        @media (max-width: 768px) {
-            .font-controls {
-                display: none; /* إخفاء من الشريط العلوي في الجوال */
-            }
-            
-            /* أزرار التحكم في الخط في الجوال (في نفس مكانها الأصلي) */
-            .mobile-font-controls {
-                position: fixed;
-                top: 90px;
-                right: 15px;
-                z-index: 999;
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-                background: rgba(94, 44, 165, 0.85);
-                backdrop-filter: blur(10px);
-                border-radius: 25px;
-                padding: 15px;
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                transition: all 0.3s ease;
-            }
-            
-            .mobile-font-controls .font-btn {
-                width: 35px; /* زيادة الحجم في الجوال */
-                height: 35px;
-                font-size: 16px;
-            }
-            
-            .mobile-font-controls .close-font-controls {
-                position: absolute;
-                top: 8px;
-                left: 8px;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.2);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-                color: white;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            }
-            
-            .mobile-font-controls .close-font-controls:hover {
-                background: rgba(255, 255, 255, 0.3);
-                transform: rotate(90deg);
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .mobile-font-controls {
-                top: 85px;
-                right: 10px;
-                gap: 10px;
-                padding: 12px;
-            }
-            
-            .mobile-font-controls .font-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
-            }
-            
-            .mobile-font-controls .close-font-controls {
-                width: 18px;
-                height: 18px;
-                font-size: 10px;
-            }
-        }
-
-        /* إخفاء أزرار التحكم في الخط للكمبيوتر */
-        @media (min-width: 769px) {
-            .font-controls {
-                display: none !important;
-            }
-        }
     </style>
 </head>
 <body>
     <!-- الشريط العلوي المحسّن -->
     <header class="header" id="header">
         <div class="header-container">
-            <!-- أزرار التحكم في الخط - تم نقلها إلى الشريط العلوي -->
-            <div class="font-controls" id="fontControls">
-                <button class="font-btn" id="increaseFont" title="تكبير الخط">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <button class="font-btn reset" id="resetFont" title="إعادة الخط للافتراضي">
-                    <i class="fas fa-text-height"></i>
-                </button>
-                <button class="font-btn" id="decreaseFont" title="تصغير الخط">
-                    <i class="fas fa-minus"></i>
-                </button>
-            </div>
-            
             <!-- زر الهمبرغر (يظهر فقط في الجوال) -->
             <button class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
@@ -1431,6 +1272,7 @@
                     <i class="fas fa-lightbulb"></i>
                     الخواطر
                 </a>
+                <div class="nav-indicator" id="navIndicator"></div>
             </div>
         </div>
         
@@ -1496,76 +1338,33 @@
         </div>
     </header>
     
-    <!-- أزرار التحكم في الخط للجوال -->
-    <div class="mobile-font-controls" id="mobileFontControls">
-        <span class="close-font-controls" id="closeMobileFontControls" title="إخفاء التحكم في الخط">
-            <i class="fas fa-times"></i>
-        </span>
-        <button class="font-btn" id="mobileIncreaseFont" title="تكبير الخط">
-            <i class="fas fa-plus"></i>
-        </button>
-        <button class="font-btn reset" id="mobileResetFont" title="إعادة الخط للافتراضي">
-            <i class="fas fa-text-height"></i>
-        </button>
-        <button class="font-btn" id="mobileDecreaseFont" title="تصغير الخط">
-            <i class="fas fa-minus"></i>
-        </button>
-    </div>
-
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ وطني أولاً، هل أصبحت الوطنية تهمة؟</h1>
-                <span class="publish-date"><span class="date-icon">📅</span> 10 يوليو 2025</span>
+                <h1>❖ لا توجد حقيقة مطلقة.</h1>
+                <span class="publish-date"><span class="date-icon">📅</span> 30 يوليو 2025</span>
             </div>
             
-                <p>في كل مرة يُعلن فيها أحدهم أن قضيته الأولى هي وطنه، تنهال عليه الاتهامات: “مُطبّع”، “خائن”، “أناني”، وكأن حب الوطن والسعي لبنائه أصبح جريمة لا تُغتفر في زمن الشعارات الرنانة.</p>
-                <p>أكثر من يزايدون على غيرهم في هذا السياق، يعيشون في بلدان مستقرة، بعيدة عن أجواء الحروب والانهيارات، ينعمون بالأمان، وبخدمات التعليم والصحة والرواتب، ثم يطالبون شعوبًا أنهكتها الصراعات أن تُنكر أوطانها وتُضحي بها لأجل “قضايا الأمة”، وعلى رأسها قضية فلسطين.</p>
-                <p>بل ويعتبرون أن من لا يضع فلسطين على رأس أولوياته، حتى على حساب بلده المدمَّر، فهو خائن أو متخاذل. لكن هل حقًا نصروا فلسطين؟</p>
-                <p>كل ما فعلوه (شعوبًا وساسة) لم يتجاوز حدود الشعارات، وجهادهم لنصرة فلسطين، لم يتخطى لوحة المفاتيح.</p>
-                <p>عبارات مثل: “نريد تحرير فلسطين”، “افتحوا لنا الحدود”، “القدس لنا”، لم تتجاوز حناجرهم.</p>
-                <p>هي شعارات تُطلق لتخدير الشعوب لا أكثر، والشعوب المخدّرة تصفق دائمًا طالما أن اسم فلسطين موجود.</p>
-                <p>والأغرب، أن نفس من يصرخون: “افتحوا لنا الحدود”، يعلمون جيدًا أنهم قادرون على الوصول لأي دولة في العالم، سواء بالطرق النظامية أو عبر التهريب.</p>
-                <p>هم أنفسهم يسافرون لحضور مؤتمرات ومناسبات وفعاليات، ويجولون العواصم بحرية، فلماذا يصبح دخول فلسطين بالذات متوقفًا على<strong>“فتح الحدود”؟ </strong></p>
-                <p><strong>الجواب واضح: </strong>لأن فتح الحدود ليس سوى “مسرحية خطابية”، تُقال لكسب الشعبية والتأييد، لا أكثر.</p>
-                <p>وإذا أردنا أن نتحدث بوضوح، فخذ مثالًا صارخًا:</p>
-                <p>إيران، التي بقيت<strong>14  </strong> سنة على حدود إسرائيل من جهة سورية، لم تُطلق رصاصة واحدة باتجاهها، بل وجهت كل نيرانها وآلة قتلها إلى صدور السوريين، دفاعًا عن مشروعها وعن الساقط الفار.</p>
-                <p>لم يكن العدو بالنسبة لها هو<strong>“الاحتلال” </strong>بل الشعب السوري الثائر.</p>
-                <p>وعندما انهزمت من سورية، فجأة تحوّلت بوصلة شعاراتها من جديد نحو فلسطين و<strong>”تحرير القدس” </strong>.</p>
-                <p>وها قد مرت ما يقارب سنتين وأهل غزة يُبادون بكل أنواع الأسلحة، دون أن نرى منها أو من أتباعها ومن يزايدون علينا من أبناء جلدتنا شيئًا حقيقيًا، سوى الشعارات الفارغة والبيانات الإنشائية التي أكل عليها الزمان وشرب.</p>
-                <p>والأدهى من ذلك، أن نفس هؤلاء الذين ينعمون بالأمن والاستقرار في بلدانهم، لو قلت لأحدهم: اطلب من جيشك أن يدخل حربًا مع إسرائيل نصرة لفلسطين، سيرفض فورًا، ويقول لك: الله يحمي بلدنا من الفتن، أو لا نريد توريط جيشنا في معارك خاسرة.</p>
-                <p>طيب أين شعاراتك التي صدّعت رؤوسنا بها؟</p>
-                <p> أين صيحات: <span style="color: red; font-weight: bold;"> الموت لإسرائيل، </span>مهلًا مهلًا يا يهود جيش محمد سوف يعود؟ أين ادّعاءات استعادة الأقصى؟ </p>
-                <p>تُطالب الدول المنهكة التي خرجت من حروب دامية ضد أقذر مجرم عرفته البشر ويفوق باجرامه الصهاينة وغيرهم، أن تواجه كيانًا يمتلك أحدث الأسلحة، بينما أنت ترفض حتى التفكير بدخول معركة معه، <strong>"حتى لو قصفك أو هددك" </strong>خوفًا على استقرارك!</p>
-                <p>أي نفاق هذا؟ أن تطلب من غيرك أن يُحارب وأنت تنعم في الظل وتُنظّر عليهم بالمثاليات الزائفة؟</p>
-                <p>الأغرب من كل ذلك، أنهم إذا أطلقت جهة ما، صواريخ أو مسيّرات باتجاه إسرائيل، وقررت "دولة حدودية" أن تُسقِط بعضها دفاعًا عن أجوائها وشعبها "لأن تلك المسيّرات ليست دقيقة وقد تسقط داخل أراضيها وتتسبب بكارثة"يبدأ هؤلاء بشنّ حملات التخوين ضد تلك الدولة!</p>
-                <p>يتجاهلون حقها المشروع في حماية أمنها الداخلي، ويتعاملون وكأن شعوب الدول الأخرى مجرد وقود أو دروع بشرية في معارك لا يملكون قرارها.</p>
-                <p>ينادون بنصرة فلسطين، ثم يهاجمون كل من لا يسمح بتحويل بلده إلى ساحة فوضى.</p>
-                <p>حتى الدفاع عن النفس أصبح بنظرهم خيانة، إن لم يكن على طريقتهم وبشروطهم.</p>
-                <p><span style="color: #5e2ca5; font-weight: bold;">أما الأنظمة:</span> فقصتها أعمق، لم نرَ من أنظمتهم لا جيوشًا تحركت، ولا دعمًا حقيقيًا، فقط خطابات حماسية تُستخدم كورقة ضغط سياسية وقت الحاجة، وربما ورقة “تمديد فترة رئاسية” حين يَخفت البريق، فيعيدون إشعال الحماسة بكلمة “فلسطين” وكأنها تعويذة انتخابية لا أكثر.</p>
-                <p>وفي المقابل، الشعوب التي يُزايدون عليها، هي ذاتها التي تسعى لإعادة إعمار بلدانها الخارجة من جحيم الحروب، شعوب تحاول ترميم مدارسها ومشافيها واقتصادها، وتسير وسط الركام نحو الحياة، فهل يُعقل أن نطلب منها أن تترك ذلك كلّه، لتتفرغ فقط للقضايا الكبرى؟</p>
-                <p> قولك <strong>“بلدي أولاً” </strong>لا يعني أنك ضد فلسطين أو غيرها من القضايا العادلة، بل يعني ببساطة: أنك لن تنقذ غيرك وبيتك يحترق.</p>
-                <p>بلدي أولًا، ليست خيانة.</p>
-                <p>الخيانة الحقيقية هي أن تترك وطنك يغرق، بينما تحاضر في الفضيلة، وتُزايد بشعارات لا تطلق رصاصة ولا تُنقذ إنسانًا.</p>
-                <p>إن كنتم صادقين في نصرة فلسطين، ففلسطين الآن بأمسّ الحاجة إليكم من أي وقت آخر.</p>
-                <p>كفّوا عن الخطابات والتغريدات، وكونوا قولًا وفعلًا ولو لمرة واحدة، لا كما عودتمونا أنتم وساستكم، على الكلام فقط.</p>
-                <p>جيشكم الذي تتفاخرون به يمتلك من الطائرات والقطع البحرية ما يكفي ليصل فلسطين دون أن ينتظر “فتح الحدود” من أحد، ويمتلك أيضًا صواريخ قادرة على الوصول إلى أي نقطة في فلسطين دون الحاجة لتحريك جيوش أو فتح حدود.</p>
-                <p>الميدان يا حميدان، والله يوفقكم وينصركم، ونحن سندعو لكم قيامًا وقعودًا.</p>
-                <p>وإذا ما عندكم الموقع أو ما تعرفون الطريق لا أنتم ولا جيشكم، بلغوني، أرسل لكم العنوان من 
-  <span style="font-weight: bold;">
-    <span style="color: #4285F4;">G</span>
-    <span style="color: #EA4335;">o</span>
-    <span style="color: #FBBC05;">o</span>
-    <span style="color: #4285F4;">g</span>
-    <span style="color: #34A853;">l</span>
-    <span style="color: #EA4335;">e</span>
-    <span style="color: black;"> </span>
-    <span style="color: #4285F4;">M</span>
-    <span style="color: #34A853;">a</span>
-    <span style="color: #FBBC05;">p</span>
-    <span style="color: #EA4335;">s</span>
-  </span>.
-</p>
+            <div class="article-content">
+                <p> الحقيقة المطلقة الوحيدة التي أؤمن بها هو <span style="color: green; font-weight: bold;"> الله </span>.</p>
+                <p>جميع الأفكار والتدبرات هي حقائق نسبية، ترتفع نسبتها وتنخفض من شخص لآخر.</p>
+                <p>فما أراه أنا حقيقة قد يراه غيري خرافة.</p>
+                <p>وما يراه غيري حقيقة قد أراه أنا خرافة.</p>
+                <p>لا تحتكر الحقيقة لنفسك وتصادر أفكار الآخرين، فكلنا في رحلة بحث والعلم لا يزال مستمرًا.</p>
+                <p> فالحقيقة هو <span style="color: green; font-weight: bold;"> الله </span>، لكن طريقة الوصول إلى هذا الإله تختلف من شخص لآخر.</p>
+                <p>فعندما يقول معلم رياضيات لطلابه:</p>
+                <p> أعطوني رقمين مجموعهما يساوي <strong> 10 </strong></p>
+                <p>فتختلف الإجابات بين الطلاب.</p>
+                <p> الأول أجاب: <strong> 5+5=10 </strong></p>
+                <p> والثاني أجاب: <strong> 4+6=10 </strong></p>
+                <p> والثالث أجاب: <strong> 2+8=10 </strong></p>
+                <p> كل هذه الإجابات صحيحة لكن <strong> "طريقة التفكير" </strong>تختلف من طالب لآخر.</p>
+                <p>لذلك لا تحتكر لنفسك الحقيقة ولا تجعل طريقتك في الوصول إلى الله على أنها هي الطريقة الصحيحة والوحيدة، هي حقيقة بالنسبة لك، لذلك ابقَ عليها ودع غيرك يصل إلى الله بطريقته ولا تعتدي عليه.</p>
+                <p>فمن صُوَر الاعتداء أن يصادر الإنسان حق غيره في التفكير.</p>
+                <p>فمن الجهل والاجحاف أن يصادر الإنسان أفكار غيره ويدّعي أنها باطلة لمجرد أنها لم توافق أفكاره ولم تأتِ على هواه أو تُخالف موروثه.<strong> </strong></p>
+                <p>فلا تُصادر يا صديقي العزيز أفكار غيرك.<strong></strong></p>
+                <p>وتذكّر قوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ﴾</span> [هود 111] </p>
+            </div>
            
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
@@ -1627,87 +1426,12 @@
     </div>
 
     <script>
-        // وظائف التحكم في حجم الخط
-        const fontSizeClasses = ['font-small', 'font-medium', 'font-large', 'font-xlarge'];
-        let currentFontSize = 1; // متوسط (القيمة الافتراضية)
-        
-        // إعداد حجم الخط عند تحميل الصفحة
-        function setupFontSize() {
-            // جلب الإعدادات المحفوظة
-            const savedSize = localStorage.getItem('fontSize');
-            if (savedSize !== null) {
-                currentFontSize = parseInt(savedSize);
-            }
-            
-            // تطبيق حجم الخط
-            applyFontSize();
-        }
-        
-        // تطبيق حجم الخط المحدد
-        function applyFontSize() {
-            // إزالة جميع أصناف الخط
-            document.body.classList.remove(...fontSizeClasses);
-            
-            // إضافة الصنف الحالي
-            document.body.classList.add(fontSizeClasses[currentFontSize]);
-            
-            // حفظ الإعدادات
-            localStorage.setItem('fontSize', currentFontSize);
-        }
-        
-        // تكبير الخط
-        document.getElementById('increaseFont').addEventListener('click', () => {
-            if (currentFontSize < fontSizeClasses.length - 1) {
-                currentFontSize++;
-                applyFontSize();
-            }
-        });
-        
-        // تصغير الخط
-        document.getElementById('decreaseFont').addEventListener('click', () => {
-            if (currentFontSize > 0) {
-                currentFontSize--;
-                applyFontSize();
-            }
-        });
-        
-        // إعادة الخط للحجم الافتراضي
-        document.getElementById('resetFont').addEventListener('click', () => {
-            currentFontSize = 1;
-            applyFontSize();
-        });
-        
-        // تكبير الخط للجوال
-        document.getElementById('mobileIncreaseFont').addEventListener('click', () => {
-            if (currentFontSize < fontSizeClasses.length - 1) {
-                currentFontSize++;
-                applyFontSize();
-            }
-        });
-        
-        // تصغير الخط للجوال
-        document.getElementById('mobileDecreaseFont').addEventListener('click', () => {
-            if (currentFontSize > 0) {
-                currentFontSize--;
-                applyFontSize();
-            }
-        });
-        
-        // إعادة الخط للحجم الافتراضي للجوال
-        document.getElementById('mobileResetFont').addEventListener('click', () => {
-            currentFontSize = 1;
-            applyFontSize();
-        });
-        
-        // إخفاء أزرار التحكم في الخط للجوال
-        document.getElementById('closeMobileFontControls').addEventListener('click', () => {
-            document.getElementById('mobileFontControls').style.display = 'none';
-        });
-        
         // قائمة الجوال
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
         const header = document.getElementById('header');
+        const navIndicator = document.getElementById('navIndicator');
+        const navButtons = document.querySelectorAll('.nav-btn');
         const backToTop = document.getElementById('backToTop');
         
         // فتح/إغلاق القائمة
@@ -1758,6 +1482,38 @@
                 backToTop.classList.remove('show');
             }
         });
+        
+        // تحديث مؤشر التنقل
+        function updateNavIndicator(button) {
+            if (!button) return;
+            
+            const buttonRect = button.getBoundingClientRect();
+            const headerRect = header.getBoundingClientRect();
+            
+            navIndicator.style.width = `${buttonRect.width}px`;
+            navIndicator.style.left = `${buttonRect.left - headerRect.left}px`;
+            navIndicator.style.opacity = '1';
+        }
+        
+        // إخفاء مؤشر التنقل
+        function hideNavIndicator() {
+            navIndicator.style.opacity = '0';
+        }
+        
+        // تعيين الأحداث لأزرار التنقل
+        navButtons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                updateNavIndicator(button);
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                hideNavIndicator();
+            });
+        });
+        
+        // إخفاء المؤشر عند تحريك الماوس خارج منطقة الأزرار
+        const navButtonsContainer = document.querySelector('.nav-buttons');
+        navButtonsContainer.addEventListener('mouseleave', hideNavIndicator);
         
         // قائمة المشاركة
         function toggleShareMenu() {
@@ -1856,9 +1612,6 @@
                 scrollIndicator.style.opacity = '1';
             }
         });
-        
-        // تهيئة حجم الخط عند تحميل الصفحة
-        window.addEventListener('DOMContentLoaded', setupFontSize);
     </script>
 </body>
 </html>
