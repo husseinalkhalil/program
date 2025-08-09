@@ -1217,7 +1217,7 @@
           color: #ffd166;
         }
         
-        /* أزرار التحكم في حجم الخط - تم تصغير الحجم */
+        /* أزرار التحكم في حجم الخط - تم تصغير الحجم أكثر وتمييز علامة X */
         .font-controls {
             position: fixed;
             top: 100px;
@@ -1239,19 +1239,19 @@
         }
         
         .font-btn {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             background: #5e2ca5;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             border: none;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
         
         .font-btn:hover {
@@ -1269,7 +1269,7 @@
         }
         
         .font-size-indicator {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             text-align: center;
             color: #5e2ca5;
@@ -1295,29 +1295,29 @@
         }
         
         .font-xlarge .article-content {
-            font-size: 24px;
+            font-size: 22px;
         }
         
-        /* زر إغلاق التحكم في الخط */
+        /* زر إغلاق التحكم في الخط - تمييزه باللون الأحمر */
         .close-font-controls {
             position: absolute;
             top: 5px;
             left: 5px;
-            width: 25px;
-            height: 25px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(255, 0, 0, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            color: #666;
+            font-size: 12px;
+            color: #ff0000;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         
         .close-font-controls:hover {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 0, 0, 0.3);
             color: #ff0000;
             transform: rotate(90deg);
         }
@@ -1330,13 +1330,19 @@
             }
             
             .font-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 16px;
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
             }
             
             .font-size-indicator {
                 font-size: 12px;
+            }
+            
+            .close-font-controls {
+                width: 20px;
+                height: 20px;
+                font-size: 11px;
             }
         }
         
@@ -1349,9 +1355,15 @@
             }
             
             .font-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 14px;
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+            
+            .close-font-controls {
+                width: 18px;
+                height: 18px;
+                font-size: 10px;
             }
         }
     </style>
@@ -1477,7 +1489,7 @@
         </div>
     </header>
     
-    <!-- أزرار التحكم في حجم الخط - تم تصغير حجمها -->
+    <!-- أزرار التحكم في حجم الخط - تم تصغير حجمها أكثر وتمييز علامة X -->
     <div class="font-controls" id="fontControls">
         <span class="close-font-controls" id="closeFontControls" title="إخفاء التحكم في الخط">
             <i class="fas fa-times"></i>
