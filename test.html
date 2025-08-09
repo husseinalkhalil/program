@@ -1215,6 +1215,119 @@
           font-weight: 600;
           color: #ffd166;
         }
+        
+        /* ==================== أزرار التحكم بحجم الخط ==================== */
+        .font-controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        
+        .font-controls:hover {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        .font-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-purple);
+            color: var(--primary-color);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .font-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .font-btn:active {
+            transform: translateY(0);
+        }
+        
+        .font-btn.reset {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        .font-btn.reset:hover {
+            background: #e6ac00;
+        }
+        
+        .font-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -40px;
+            right: 50%;
+            transform: translateX(50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .font-btn:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .font-controls {
+                top: 15px;
+                left: 15px;
+                padding: 8px;
+                gap: 6px;
+            }
+            
+            .font-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .font-controls {
+                top: 10px;
+                left: 10px;
+                padding: 6px;
+                gap: 5px;
+            }
+            
+            .font-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+            
+            .font-btn::after {
+                font-size: 10px;
+                bottom: -35px;
+                padding: 4px 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1340,11 +1453,25 @@
     
     <div class="container">
         <div class="article-card">
+            <!-- أزرار التحكم بحجم الخط -->
+            <div class="font-controls">
+                <button class="font-btn" id="decreaseFont" data-tooltip="تصغير الخط">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button class="font-btn reset" id="resetFont" data-tooltip="إعادة الخط إلى الحجم الأصلي">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <button class="font-btn" id="increaseFont" data-tooltip="تكبير الخط">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            
             <div class="article-header">
                 <h1>❖ لا توجد حقيقة مطلقة.</h1>
                 <span class="publish-date"><span class="date-icon">📅</span> 30 يوليو 2025</span>
             </div>
             
+            <div class="article-content">
                 <p> الحقيقة المطلقة الوحيدة التي أؤمن بها هو <span style="color: green; font-weight: bold;"> الله </span>.</p>
                 <p>جميع الأفكار والتدبرات هي حقائق نسبية، ترتفع نسبتها وتنخفض من شخص لآخر.</p>
                 <p>فما أراه أنا حقيقة قد يراه غيري خرافة.</p>
@@ -1362,7 +1489,7 @@
                 <p>فمن صُوَر الاعتداء أن يصادر الإنسان حق غيره في التفكير.</p>
                 <p>فمن الجهل والاجحاف أن يصادر الإنسان أفكار غيره ويدّعي أنها باطلة لمجرد أنها لم توافق أفكاره ولم تأتِ على هواه أو تُخالف موروثه.<strong> </strong></p>
                 <p>فلا تُصادر يا صديقي العزيز أفكار غيرك.<strong></strong></p>
-                <p>وتذكّر قوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ﴾</span> [هود 111] </p>
+                <p>وتذكّر قوله تعالى <span class="verse">﴿وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ﴾ [هود 111]</span></p>
             </div>
            
             <div style="text-align: center; margin-top: 40px;">
@@ -1610,6 +1737,66 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
+        });
+        
+        // ==================== أزرار التحكم بحجم الخط ====================
+        const decreaseFontBtn = document.getElementById('decreaseFont');
+        const resetFontBtn = document.getElementById('resetFont');
+        const increaseFontBtn = document.getElementById('increaseFont');
+        const articleContent = document.querySelector('.article-content');
+        
+        // الحجم الأصلي للخط
+        const originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+        let currentFontSize = originalFontSize;
+        
+        // الحد الأدنى والأقصى لحجم الخط
+        const minFontSize = originalFontSize * 0.6; // 60% من الحجم الأصلي
+        const maxFontSize = originalFontSize * 1.6; // 160% من الحجم الأصلي
+        
+        // تخزين حجم الخط في localStorage
+        function saveFontSize(size) {
+            localStorage.setItem('articleFontSize', size);
+        }
+        
+        // استرجاع حجم الخط من localStorage
+        function loadFontSize() {
+            const savedSize = localStorage.getItem('articleFontSize');
+            if (savedSize) {
+                currentFontSize = parseFloat(savedSize);
+                articleContent.style.fontSize = `${currentFontSize}px`;
+            }
+        }
+        
+        // تصغير حجم الخط
+        decreaseFontBtn.addEventListener('click', () => {
+            const newSize = currentFontSize - (originalFontSize * 0.2);
+            if (newSize >= minFontSize) {
+                currentFontSize = newSize;
+                articleContent.style.fontSize = `${currentFontSize}px`;
+                saveFontSize(currentFontSize);
+            }
+        });
+        
+        // إعادة حجم الخط إلى الحجم الأصلي
+        resetFontBtn.addEventListener('click', () => {
+            currentFontSize = originalFontSize;
+            articleContent.style.fontSize = `${currentFontSize}px`;
+            saveFontSize(currentFontSize);
+        });
+        
+        // تكبير حجم الخط
+        increaseFontBtn.addEventListener('click', () => {
+            const newSize = currentFontSize + (originalFontSize * 0.2);
+            if (newSize <= maxFontSize) {
+                currentFontSize = newSize;
+                articleContent.style.fontSize = `${currentFontSize}px`;
+                saveFontSize(currentFontSize);
+            }
+        });
+        
+        // تحميل حجم الخط المحفوظ عند بدء التحميل
+        window.addEventListener('DOMContentLoaded', () => {
+            loadFontSize();
         });
     </script>
 </body>
