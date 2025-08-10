@@ -10,6 +10,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <style>
+        /* أنماط العلامة المائية الجديدة */
+        .watermark {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('11.svg');
+            background-repeat: repeat;
+            background-size: 300px;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: -1;
+            animation: watermark-animation 60s linear infinite;
+        }
+        
+        @keyframes watermark-animation {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* بقية الأنماط الحالية */
         :root {
             --primary-color: #5e2ca5;
             --secondary-color: #9575CD;
@@ -42,6 +64,7 @@
             transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
         
         /* منع التمرير على الصفحة عند فتح القائمة */
@@ -755,6 +778,11 @@
                 border-right: none;
                 padding: 0;
             }
+            
+            /* إخفاء العلامة المائية عند الطباعة */
+            .watermark {
+                display: none;
+            }
         }
         
         .highlight {
@@ -798,6 +826,12 @@
             .nav-btn {
                 font-size: 16px;
                 padding: 0 15px;
+            }
+            
+            /* حجم العلامة المائية للشاشات المتوسطة */
+            .watermark {
+                background-size: 200px;
+                opacity: 0.07;
             }
         }
         
@@ -900,6 +934,12 @@
                 margin-bottom: 8px; /* تقليل المسافة بين العناصر */
                 padding: 12px 15px; /* تعديل الحشوة */
                 font-size: 16px;
+            }
+            
+            /* حجم العلامة المائية للشاشات الصغيرة */
+            .watermark {
+                background-size: 150px;
+                opacity: 0.06;
             }
         }
         
@@ -1014,6 +1054,12 @@
             .mobile-nav .nav-btn {
                 font-size: 16px;
                 padding: 10px 12px; /* تعديل الحشوة */
+            }
+            
+            /* حجم العلامة المائية للشاشات الصغيرة جدًا */
+            .watermark {
+                background-size: 120px;
+                opacity: 0.05;
             }
         }
         
@@ -1171,6 +1217,8 @@
           margin-top: auto; /* تم تعديل هذه الخاصية */
           width: 100%; /* عرض كامل */
           box-sizing: border-box;
+          position: relative;
+          z-index: 1;
         }
 
         .social-links {
@@ -1218,6 +1266,9 @@
     </style>
 </head>
 <body>
+    <!-- العلامة المائية الجديدة -->
+    <div class="watermark"></div>
+
     <!-- الشريط العلوي المحسّن -->
     <header class="header" id="header">
         <div class="header-container">
