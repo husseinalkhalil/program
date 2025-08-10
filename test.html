@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المقالات | وطني أولاً، هل أصبحت الوطنية تهمة؟</title>
+    <title>المقالات | لا توجد حقيقة مطلقة.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -23,17 +23,6 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
-            
-            /* متغيرات لموضع أزرار التحكم بالخط */
-            --font-control-position: top right; /* يمكن تغييرها إلى: top left, bottom right, bottom left */
-            --font-control-top: 120px; /* المسافة من الأعلى */
-            --font-control-bottom: auto; /* المسافة من الأسفل */
-            --font-control-right: 250px; /* المسافة من اليمين */
-            --font-control-left: auto; /* المسافة من اليسار */
-            
-            /* حجم أزرار التحكم بالخط */
-            --font-control-button-size: 30px;
-            --font-control-button-font-size: 18px;
         }
         
         * {
@@ -189,8 +178,6 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 1;
             opacity: 0;
-            /* إخفاء المؤشر الأصفر */
-            display: none !important;
         }
         
         .hamburger {
@@ -745,7 +732,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
+            .header, .article-actions, .back-btn, .back-to-top {
                 display: none;
             }
             
@@ -1228,89 +1215,6 @@
           font-weight: 600;
           color: #ffd166;
         }
-        
-        /* ================ أنماط أزرار التحكم بالخط ================ */
-        .font-controls {
-            position: fixed;
-            z-index: 1000;
-            display: flex;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.5s ease-out;
-            
-            /* تحديد الموضع باستخدام المتغيرات */
-            top: var(--font-control-top);
-            bottom: var(--font-control-bottom);
-            right: var(--font-control-right);
-            left: var(--font-control-left);
-        }
-        
-        .font-controls button {
-            width: var(--font-control-button-size);
-            height: var(--font-control-button-size);
-            border-radius: 50%;
-            border: none;
-            background: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: var(--font-control-button-font-size);
-            transition: all 0.3s;
-        }
-        
-        .font-controls button:hover {
-            background: var(--accent-color);
-            transform: scale(1.1);
-        }
-        
-        .font-controls button i {
-            transition: transform 0.2s;
-        }
-        
-        .font-controls button:active i {
-            transform: scale(0.9);
-        }
-        
-        /* أنماط للجوال */
-        @media (max-width: 768px) {
-            .font-controls {
-                --font-control-top: 100px;
-                --font-control-right: 10px;
-                --font-control-button-size: 36px;
-                --font-control-button-font-size: 15px;
-                gap: 6px;
-                padding: 8px;
-            }
-        }
-        
-        /* تلميحات */
-        .font-controls button::after {
-            content: attr(title);
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
-        .font-controls button:hover::after {
-            opacity: 1;
-        }
     </style>
 </head>
 <body>
@@ -1368,7 +1272,6 @@
                     <i class="fas fa-lightbulb"></i>
                     الخواطر
                 </a>
-                <!-- تم إخفاء المؤشر الأصفر هنا -->
                 <div class="nav-indicator" id="navIndicator"></div>
             </div>
         </div>
@@ -1435,64 +1338,34 @@
         </div>
     </header>
     
-    <!-- أزرار التحكم بحجم الخط -->
-    <div class="font-controls">
-        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
-            <i class="fas fa-search-minus"></i>
-        </button>
-        <button id="fontReset" title="الحجم الطبيعي (Reset)">
-            <i class="fas fa-font"></i>
-        </button>
-        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
-            <i class="fas fa-search-plus"></i>
-        </button>
-    </div>
-    
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ وطني أولاً، هل أصبحت الوطنية تهمة؟</h1>
-                <span class="publish-date"><span class="date-icon">📅</span> 10 يوليو 2025</span>
+                <h1>❖ لا توجد حقيقة مطلقة.</h1>
+                <span class="publish-date"><span class="date-icon">📅</span> 30 يوليو 2025</span>
             </div>
             
-            <div class="article-card">
-                <p>نكاد لا نسمع بهذه الكلمة، إلّا ويذهب تفكيرنا إلى الشهداء والمتعة الجنسية.</p>
-                <p>لأن هذه الكلمة ارتبطت، أو بالأحرى تم ربطها من قبل البعض بالجهاد في سبيل الله والعمليات الانتحارية، وقتل الآمنين، حتى يفوز بالحور العين، مع أن الله عندما ذكر الحور العين، لم يحدد أنهم لفئة معينة من الناس (كالشهداء مثلاً﴾.</p>
-                <p>كلمة <span style="color: #000; font-weight: bold;"> "الحور" </span> تعني شديد سواد العينين، والأنثى "حوراء" وكلمة <span style="color: #000; font-weight: bold;"> "عين" </span>تعني صفاء العين، والحور العين تشمل الذكور والإناث على حد سواء، حيث الذكور (الحور العين) لهم في الجنة جمال نادر.</p>
-                <p><span style="color: #5e2ca5; font-weight: bold;">﴿وَيَطُوفُ عَلَيْهِمْ وِلْدَانٌ مُخَلَّدُونَ إِذَا رَأَيْتَهُمْ حَسِبْتَهُمْ لُؤْلُؤًا مَنْثُورًا﴾</span> الإنسان [19] </p>
-                <p>وفي الآية <strong> “مخلدون” </strong>أي المزينين بالجواهر.</p>
-                <p>إن الحور العين لسن للزواج الجنسي المعروف، بل إنهن للخدمات فقط، والدليل قوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿لَمْ يَطْمِثْهُنَّ إِنْسٌ قَبْلَهُمْ وَلَا جَانٌّ﴾</span> الرحمن [74] </p>
-                <p>أي أنهن عذراوات بشكل دائم، وكلمة <span style="color: #5e2ca5; font-weight: bold;">﴿لَمْ يَطْمِثْهُنَّ﴾</span> أي لم ولن يطمثهن (قبلهم وبعدهم) إنس ولا جان كقوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿الْحَمْدُ لِلَّهِ الَّذِي لَمْ يَتَّخِذْ وَلَدًا﴾</span> الإسراء [111] </p>
-                <p>أي سبحانه لم ولن يتخذ ولدًا أبداً.</p>
-                <p> وهذا يؤكد على أن الزواج من الحور العين هو زواج نفسي وتآلف ومحبة، لقوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿وَزَوَّجْنَاهُمْ بِحُورٍ عِينٍ﴾</span> وقوله تعالى عن الزواج في الآخرة <span style="color: #5e2ca5; font-weight: bold;">﴿وَإِذَا النُّفُوسُ زُوِّجَتْ﴾</span>التكوير [7]</p>
-                <p> إذاً، الحور العين هن موجودات لخدمة أهل الجنة لا أكثر، والدليل القرآني الآخر، قال تعالى في سورة الواقعة<span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّا أَنْشَأْنَاهُنَّ إِنْشَاءً ۝ فَجَعَلْنَاهُنَّ أَبْكَارًا﴾</span> الواقعة [35-36] </p>
-                <p>وهذه يمكن تدبرها على عدة نقاط:</p>
-                <p><strong>1- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿(إِنَّا أَنْشَأْنَاهُنَّ إِنْشَاءً﴾</span></p>
-                <p>‏أي نحن من خلقناهن، وجعلناهن كما نشاء أن نجعلهن، إنشاءًا خاضعًا بمشيئة الله وكيفما أراد.</p>
-                <p><strong>2- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿(فَجَعَلْنَاهُنَّ أَبْكَارًا﴾</span></p>
-                <p> ‏أي جعلناها بكر، والبكر كلمة نوصف بها الذكر والأنثى، وهو الذي لم يسبق له في حياته أن يمارس الجنس، وبمعنى هنا جعلناهن بكر بشكل دائم ومستمر، أي لن يمارس معهن أي شخص في الجنة، كقوله تعالى في خلق الانسان<span style="color: #5e2ca5; font-weight: bold;">﴿فَجَعَلْنَاهُ سَمِيعًا بَصِيرًا﴾</span> أي سميع بصير بشكل دائم.</p>
-                <p><strong>3- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿(عُرُبًا أَترابًا﴾</span></p>
-                <p><strong>عُربًا </strong>الفتاة العريب، أي صغيرة السن قبل ظهور الثدي، وهن للخدمات ولسن للجنس كما قلنا.</p>
-                <p><strong>أترابا </strong> أي صديقات ومماثلات في العمر، كما نقول (يلعب الولد مع أترابه) أي مع أصدقاءه بنفس عمره.</p>
-                <p>وأيضًا قوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿(وَكَوَاعِبَ أَتْرَابًا﴾</span></p>
-                <p><strong>‏الكاعب: </strong> هي الأنثى التي لم يظهر لها نهدين.</p>
-                <p><strong>أترابا: </strong> أي صديقات، مماثلات في العمر.</p>
-                <p>إنَّ سُنّة الحياة تقتضي بأن كل شخص يتزوج من صنفه، فالحور العين هن من صنف الملائكة فكيف تتزوج الملائكة البشر والجن، ومعنى<span style="color: #5e2ca5; font-weight: bold;"> ﴿فَجَعَلْنَاهُنَّ أَبْكَارًا﴾ </span> أي جعلناهن بشكل مستمر ودائم بكر لم يلمسهن أحد.</p>
-                <p>لذلك كُفّو عن تشويه هذا الدين الحنيف، وتصوير الجنة على أنها أشبه ببيت الدعارة.</p>
-                <p>تعالى الله عمّا يصفون.</p>
-                
-                <div style="text-align: center; margin-top: 40px;">
-                <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-                </div>
-            
-                
-                <!-- الرابط مع التأثير الجديد -->
-                <div style="text-align: center; margin: 30px 0;">
-                    <a href="https://youtu.be/wEVNsdUnjMU?si=3BcvtbehUx6bW2bw" target="_blank" class="video-link">
-                        <i class="fas fa-video"></i> حلقة مرئية عن الموضوع
-                     </a>
+            <div class="article-content">
+                <p> الحقيقة المطلقة الوحيدة التي أؤمن بها هو <span style="color: green; font-weight: bold;"> الله </span>.</p>
+                <p>جميع الأفكار والتدبرات هي حقائق نسبية، ترتفع نسبتها وتنخفض من شخص لآخر.</p>
+                <p>فما أراه أنا حقيقة قد يراه غيري خرافة.</p>
+                <p>وما يراه غيري حقيقة قد أراه أنا خرافة.</p>
+                <p>لا تحتكر الحقيقة لنفسك وتصادر أفكار الآخرين، فكلنا في رحلة بحث والعلم لا يزال مستمرًا.</p>
+                <p> فالحقيقة هو <span style="color: green; font-weight: bold;"> الله </span>، لكن طريقة الوصول إلى هذا الإله تختلف من شخص لآخر.</p>
+                <p>فعندما يقول معلم رياضيات لطلابه:</p>
+                <p> أعطوني رقمين مجموعهما يساوي <strong> 10 </strong></p>
+                <p>فتختلف الإجابات بين الطلاب.</p>
+                <p> الأول أجاب: <strong> 5+5=10 </strong></p>
+                <p> والثاني أجاب: <strong> 4+6=10 </strong></p>
+                <p> والثالث أجاب: <strong> 2+8=10 </strong></p>
+                <p> كل هذه الإجابات صحيحة لكن <strong> "طريقة التفكير" </strong>تختلف من طالب لآخر.</p>
+                <p>لذلك لا تحتكر لنفسك الحقيقة ولا تجعل طريقتك في الوصول إلى الله على أنها هي الطريقة الصحيحة والوحيدة، هي حقيقة بالنسبة لك، لذلك ابقَ عليها ودع غيرك يصل إلى الله بطريقته ولا تعتدي عليه.</p>
+                <p>فمن صُوَر الاعتداء أن يصادر الإنسان حق غيره في التفكير.</p>
+                <p>فمن الجهل والاجحاف أن يصادر الإنسان أفكار غيره ويدّعي أنها باطلة لمجرد أنها لم توافق أفكاره ولم تأتِ على هواه أو تُخالف موروثه.<strong> </strong></p>
+                <p>فلا تُصادر يا صديقي العزيز أفكار غيرك.<strong></strong></p>
+                <p>وتذكّر قوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ﴾</span> [هود 111] </p>
             </div>
-            
+           
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
             </div>
@@ -1739,75 +1612,6 @@
                 scrollIndicator.style.opacity = '1';
             }
         });
-        
-        // ==================== أزرار التحكم بحجم الخط ====================
-        const fontDecrease = document.getElementById('fontDecrease');
-        const fontReset = document.getElementById('fontReset');
-        const fontIncrease = document.getElementById('fontIncrease');
-        const articleContent = document.querySelector('.article-content');
-        const publishDate = document.querySelector('.publish-date');
-        
-        // تخزين الحجم الأصلي
-        const originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-        const originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
-        
-        // عوامل التحكم في الحجم
-        let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
-        
-        // تطبيق تغيير حجم الخط
-        function applyFontScale() {
-            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
-        }
-        
-        // تصغير الخط
-        fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 2);
-            applyFontScale();
-        });
-        
-        // تكبير الخط
-        fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 2);
-            applyFontScale();
-        });
-        
-        // إعادة الخط إلى الحجم الطبيعي
-        fontReset.addEventListener('click', () => {
-            currentScale = 1;
-            applyFontScale();
-        });
-        
-        // تغيير موضع أزرار التحكم بالخط حسب المتغيرات
-        function updateFontControlPosition() {
-            const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
-        }
-        
-        // الحصول على قيم المتغيرات من CSS
-        const rootStyles = getComputedStyle(document.documentElement);
-        const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-        const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-        const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-        const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-        
-        // تطبيق الموضع عند التحميل
-        document.addEventListener('DOMContentLoaded', updateFontControlPosition);
-        
-        // إمكانية تغيير الموضع بسهولة (يمكن استخدام هذا في وحدة التحكم)
-        window.changeFontControlPosition = function(position, top, right, bottom, left) {
-            document.documentElement.style.setProperty('--font-control-position', position);
-            document.documentElement.style.setProperty('--font-control-top', top);
-            document.documentElement.style.setProperty('--font-control-right', right);
-            document.documentElement.style.setProperty('--font-control-bottom', bottom);
-            document.documentElement.style.setProperty('--font-control-left', left);
-            updateFontControlPosition();
-        };
     </script>
 </body>
 </html>
