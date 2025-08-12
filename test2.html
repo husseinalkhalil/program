@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>التاريخ</title>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+  <title>التاريخ - بطاقات مصغرة</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    /* أنماط عامة */
     * {
       margin: 0;
       padding: 0;
@@ -21,8 +21,13 @@
       --light: #f9f5ff;
       --dark: #2f003f;
       --text: #333;
+      --gray: #e0d6c2;
+      --gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
       --box-shadow: 0 10px 30px rgba(94, 44, 165, 0.15);
       --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --light-purple: #f0e6ff;
+      --medium-purple: #d9c6ff;
+      --dark-purple: #5e2ca5;
     }
 
     body {
@@ -31,9 +36,10 @@
       color: var(--text);
       margin: 0;
       padding: 0;
-      line-height: 1.6;
+      line-height: 1.8;
       min-height: 100vh;
       background-attachment: fixed;
+      background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
     }
 
@@ -43,7 +49,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* الشريط العلوي */
+    /* أنماط الشريط العلوي - تم تصغيره */
     .nav-overlay {
       position: fixed;
       top: 0;
@@ -57,7 +63,7 @@
     }
 
     nav {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      background: var(--gradient);
       padding: 0.6em 5%;
       position: fixed;
       width: 100%;
@@ -66,7 +72,9 @@
       display: flex;
       align-items: center;
       gap: 25px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       box-shadow: 0 4px 15px rgba(94, 44, 165, 0.2);
+      transition: var(--transition);
     }
 
     .nav-links {
@@ -101,6 +109,11 @@
       transform: translateY(-2px);
     }
 
+    .logo-container {
+      margin-right: auto;
+      margin-left: 0;
+    }
+
     .logo-container img {
       height: 40px;
       transition: var(--transition);
@@ -111,6 +124,7 @@
 
     .logo-container img:hover {
       transform: scale(1.1) rotate(5deg);
+      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
     }
 
     .hamburger {
@@ -127,19 +141,19 @@
       background: rgba(255, 255, 255, 0.15);
     }
 
-    /* مربع البحث */
+    /* مربع البحث الجديد - من الكود الأول */
     .search-container {
-      max-width: 700px;
+      max-width: 600px;
       margin: 30px auto;
       position: relative;
     }
 
     .search-box {
       width: 100%;
-      padding: 12px 45px 12px 20px;
+      padding: 15px 50px 15px 20px;
       border: 2px solid var(--primary);
       border-radius: 50px;
-      font-size: 1em;
+      font-size: 1.1em;
       box-shadow: 0 5px 15px rgba(94, 44, 165, 0.1);
       transition: all 0.3s ease;
     }
@@ -153,21 +167,25 @@
     .search-icon {
       position: absolute;
       top: 50%;
-      right: 20px;
+      right: 20px; /* تعديل لاتجاه RTL */
       transform: translateY(-50%);
       color: var(--primary);
-      font-size: 1.1em;
+      font-size: 1.2em;
     }
 
     .search-results-info {
       text-align: center;
       margin-top: 10px;
-      font-size: 1em;
+      font-size: 1.1em;
       color: var(--primary-dark);
       display: none;
     }
 
     @media (min-width: 768px) {
+      .nav-links a {
+        position: relative;
+      }
+
       .nav-links a::after {
         content: '';
         position: absolute;
@@ -181,6 +199,11 @@
 
       .nav-links a:hover::after {
         width: 100%;
+      }
+
+      .logo-container {
+        order: -1;
+        margin-right: 30px;
       }
     }
 
@@ -226,6 +249,13 @@
         margin: 4px 0;
         font-size: 0.9em;
       }
+
+      .logo-container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+      }
     }
 
     @keyframes slideIn {
@@ -233,36 +263,37 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
-    /* التذييل */
+    /* التذييل - تم تصغيره بنسبة 25% إضافية */
     footer {
       text-align: center;
-      padding: 15px;
+      padding: 18px; /* تم تصغير الحشو */
       background: #5e2ca5;
       color: white;
-      font-size: 0.85em;
+      font-size: 0.85em; /* تم تصغير الخط */
       margin-top: 40px;
     }
 
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin: 15px 0;
+      gap: 10px; /* تم تقليل المسافة */
+      margin: 15px 0; /* تم تصغير المسافة */
       flex-wrap: wrap;
     }
 
     .social-links a {
       color: white;
-      font-size: 0.9em;
+      font-size: 0.9em; /* تم تصغير الأيقونات بشكل كبير */
       transition: var(--transition);
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
+      width: 30px; /* تم تصغير الحاويات بشكل كبير */
       height: 30px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.1);
       text-decoration: none !important;
+      border: none !important;
     }
 
     .social-links a:hover {
@@ -274,12 +305,13 @@
     .social-links a.instagram:hover { background: #E4405F; }
     .social-links a.youtube:hover { background: #FF0000; }
     .social-links a.tiktok:hover { background: #000000; }
+    .social-links a.snapchat:hover { background: #FFFC00; color: #000; }
     .social-links a.telegram:hover { background: #2AABEE; }
 
     .copyright {
-      margin-top: 10px;
-      padding-top: 10px;
-      font-size: 0.95em;
+      margin-top: 10px; /* تم تصغير المسافة */
+      padding-top: 10px; /* تم تصغير المسافة */
+      font-size: 0.95em; /* تم تصغير الخط */
       font-weight: 600;
       color: var(--accent);
     }
@@ -297,6 +329,7 @@
       user-select: none;
     }
 
+    /* تأثيرات خاصة بالصفحة */
     .inspiration {
       position: absolute;
       top: 18px;
@@ -315,10 +348,10 @@
       100% { box-shadow: 0 0 0 0 rgba(106, 76, 147, 0); }
     }
 
-    /* محتوى الصفحة الرئيسي */
+    /* محتوى الفيديوهات مع تأثيرات جديدة */
     .container {
-      padding: 1em 2em; /* زيادة المساحة الجانبية */
-      max-width: 1400px;
+      padding: 1em;
+      max-width: 1200px; /* تقليل العرض لإنشاء مساحة على الجانبين */
       margin: 90px auto 40px;
       text-align: center;
     }
@@ -330,20 +363,18 @@
       margin-top: 2em;
     }
 
-    /* بطاقات الفيديو المصغرة */
     .video-card {
       background-color: #f0e4ff;
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 15px;
+      padding: 12px; /* تصغير الحشو الداخلي */
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
-      transform: scale(0.95); /* تصغير البطاقة */
     }
 
     .video-card:hover {
-      transform: translateY(-5px) scale(0.95);
+      transform: translateY(-5px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
 
@@ -353,22 +384,22 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 4px;
+      height: 5px;
       background: linear-gradient(90deg, var(--primary), var(--accent));
       transition: all 0.3s ease;
     }
 
     .video-card:hover::before {
-      height: 5px;
+      height: 8px;
     }
 
     .video-thumbnail {
       position: relative;
       width: 100%;
-      height: 140px; /* ارتفاع أقل للصورة */
-      border-radius: 8px;
+      height: 150px; /* تقليل ارتفاع الصورة المصغرة */
+      border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 10px;
+      margin-bottom: 12px; /* تقليل المسافة السفلية */
       cursor: pointer;
     }
 
@@ -389,7 +420,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       color: white;
-      font-size: 36px; /* حجم أيقونة تشغيل أصغر */
+      font-size: 40px; /* تصغير حجم أيقونة التشغيل */
       opacity: 0.8;
       transition: all 0.3s ease;
     }
@@ -400,16 +431,15 @@
     }
 
     .video-title {
-      margin: 8px 0;
+      margin: 12px 0; /* تقليل المسافات */
       font-weight: bold;
-      font-size: 0.9em; /* حجم خط أصغر */
+      font-size: 0.95em; /* تصغير حجم الخط */
       color: var(--primary-dark);
       transition: all 0.3s ease;
-      min-height: 38px; /* ارتفاع أقل للعنوان */
+      min-height: 40px; /* تقليل الارتفاع الأدنى */
       display: flex;
       align-items: center;
       justify-content: center;
-      line-height: 1.4;
     }
 
     .video-card:hover .video-title {
@@ -419,28 +449,52 @@
     .favorite-button {
       background-color: var(--primary);
       color: white;
-      padding: 6px 12px; /* حجم أصغر للزر */
+      padding: 6px 16px; /* تصغير الحشو الداخلي */
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 12px; /* حجم خط أصغر */
-      margin-top: 6px;
+      font-size: 12px; /* تصغير حجم الخط */
+      margin-top: 8px; /* تقليل المسافة العلوية */
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
       font-weight: bold;
     }
 
+    .favorite-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .favorite-button:hover::before {
+      left: 100%;
+    }
+
     .favorite-button.added {
       background-color: var(--primary-dark);
-      box-shadow: 0 0 8px rgba(94, 44, 165, 0.5);
+      box-shadow: 0 0 10px rgba(94, 44, 165, 0.5);
+    }
+
+    /* تمييز النتائج */
+    .highlight {
+      background-color: #d9c4ff;
+      padding: 2px 4px;
+      border-radius: 3px;
+      color: var(--primary-dark);
+      font-weight: bold;
     }
 
     /* رسالة عدم وجود نتائج بحث */
     .no-results {
       text-align: center;
-      padding: 25px;
-      font-size: 1.1em;
+      padding: 30px;
+      font-size: 1.2em;
       color: var(--primary);
       display: none;
       width: 100%;
@@ -457,7 +511,7 @@
       transform: translate(-50%, -50%);
       background-color: var(--accent);
       color: var(--dark);
-      padding: 12px 20px;
+      padding: 15px 25px;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       z-index: 10000;
@@ -465,11 +519,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       font-family: Tahoma, sans-serif;
       max-width: 80%;
       text-align: center;
-      font-size: 0.95em;
+    }
+
+    .custom-alert::before {
+      content: '✓';
+      font-size: 18px;
     }
 
     @keyframes fadeIn {
@@ -482,36 +540,36 @@
       to { opacity: 0; transform: translate(-50%, -40%); }
     }
 
-    /* التعديلات للشاشات المتوسطة والصغيرة */
+    /* التعديلات الأساسية لتحقيق 4 بطاقات في الصف */
     @media (max-width: 1200px) {
       .videos-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* 3 بطاقات في الصف للشاشات المتوسطة */
       }
     }
     
     @media (max-width: 900px) {
       .videos-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* 2 بطاقات في الصف للأجهزة اللوحية */
       }
     }
     
     @media (max-width: 600px) {
       .videos-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* بطاقة واحدة في الصف للجوال */
       }
       
       .custom-alert {
         width: 90%;
-        padding: 10px 15px;
+        padding: 12px 20px;
       }
     }
 
     .page-title {
       color: var(--primary-dark);
-      margin-bottom: 15px;
-      font-size: 1.6em;
+      margin-bottom: 20px;
+      font-size: 1.8em;
       position: relative;
-      padding-bottom: 8px;
+      padding-bottom: 10px;
     }
     
     .page-title::after {
@@ -520,7 +578,7 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 80px;
+      width: 100px;
       height: 3px;
       background: linear-gradient(90deg, var(--accent), var(--secondary));
       border-radius: 2px;
@@ -528,8 +586,8 @@
     
     .page-description {
       color: var(--primary);
-      font-size: 1em;
-      margin-bottom: 25px;
+      font-size: 1.1em;
+      margin-bottom: 30px;
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
@@ -538,23 +596,23 @@
     /* زر العودة للأعلى */
     .back-to-top {
       position: fixed;
-      bottom: 25px;
-      left: 25px;
-      width: 45px;
-      height: 45px;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
       background-color: var(--primary-dark);
       color: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 24px;
       cursor: pointer;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
       z-index: 999;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     .back-to-top.visible {
@@ -565,14 +623,15 @@
     .back-to-top:hover {
       background-color: var(--primary);
       transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
+    /* للجوال */
     @media (max-width: 767px) {
       .back-to-top {
-        width: 38px;
-        height: 38px;
-        font-size: 18px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
         bottom: 20px;
         left: 20px;
       }
@@ -583,7 +642,7 @@
 
   <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
 
-  <!-- الشريط العلوي -->
+  <!-- الشريط العلوي الجديد -->
   <nav>
     <div class="hamburger" onclick="toggleMobileMenu()">☰ القائمة</div>
     
@@ -603,15 +662,15 @@
 
     <div class="logo-container">
       <a href="index.html">
-        <img src="images/logo.png" alt="شعار الموقع" />
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48Y2lyY2xlIGN4PSIxMjgiIGN5PSIxMjgiIHI9IjEyMCIgZmlsbD0iIzVlMmNhNSIvPjx0ZXh0IHg9IjEyOCIgeT0iMTI4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmYiPuiNiTwvdGV4dD48L3N2Zz4=" alt="شعار الموقع" />
       </a>
     </div>
   </nav>
 
-  <!-- وسم مائي -->
-  <div class="watermark"></div>
+  <!-- وسم مائي مصغر -->
+  <div class="watermark">الخليل</div>
 
-  <!-- ملاحظة إلهامية -->
+  <!-- ملاحظة إلهامية مصغرة -->
   <div class="inspiration">
     <i class="fas fa-quote-left"></i> الإنسانية فوق كل انتماء <i class="fas fa-quote-right"></i>
   </div>
@@ -621,7 +680,7 @@
     <h2 class="page-title">التاريخ</h2>
     <p class="page-description">هنا تجد مقاطع مختارة عن الخرافات والتاريخ والأديان والملل الأخرى</p>
     
-    <!-- مربع البحث -->
+    <!-- مربع البحث الجديد - من الكود الأول -->
     <div class="search-container">
       <div class="search-icon">
         <i class="fas fa-search"></i>
@@ -638,7 +697,7 @@
     </div>
     
     <div class="videos-grid" id="videosGrid">
-      <!-- الفيديوهات المصغرة -->
+      <!-- الفيديوهات المعدلة -->
       <div class="video-card">
         <div class="video-thumbnail" onclick="openYoutubeVideo('cMUtBHMdgfk')">
           <img src="https://img.youtube.com/vi/cMUtBHMdgfk/maxresdefault.jpg" alt="العلويون">
@@ -773,109 +832,20 @@
         <div class="video-title">خرافة الاصابة بالعين </div>
         <button class="favorite-button" onclick="toggleFavorite('W6DAvH4-kqo', 'خرافة الاصابة بالعين ', this)">⭐ حفظ في المفضلة</button>
       </div>
-      
-      <div class="video-card">
-        <div class="video-thumbnail" onclick="openYoutubeVideo('tVTLhi_MAkM')">
-          <img src="https://img.youtube.com/vi/tVTLhi_MAkM/maxresdefault.jpg" alt="خرافة سكب الماء الساخن">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="video-title">خرافة سكب الماء الساخن</div>
-        <button class="favorite-button" onclick="toggleFavorite('tVTLhi_MAkM', 'خرافة سكب الماء الساخن', this)">⭐ حفظ في المفضلة</button>
-      </div>
-      
-      <div class="video-card">
-        <div class="video-thumbnail" onclick="openYoutubeVideo('9KOvdr5pjyQ')">
-          <img src="https://img.youtube.com/vi/9KOvdr5pjyQ/maxresdefault.jpg" alt="خرافة طي سجادة الصلاة">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="video-title">خرافة طي سجادة الصلاة</div>
-        <button class="favorite-button" onclick="toggleFavorite('9KOvdr5pjyQ', 'خرافة طي سجادة الصلاة', this)">⭐ حفظ في المفضلة</button>
-      </div>
-      
-      <div class="video-card">
-        <div class="video-thumbnail" onclick="openYoutubeVideo('U7fMWUd54N0')">
-          <img src="https://img.youtube.com/vi/U7fMWUd54N0/maxresdefault.jpg" alt="خرافات صدقها المسلمون">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="video-title">خرافات صدقها المسلمون</div>
-        <button class="favorite-button" onclick="toggleFavorite('U7fMWUd54N0', 'خرافات صدقها المسلمون', this)">⭐ حفظ في المفضلة</button>
-      </div>
-      
-      <div class="video-card">
-        <div class="video-thumbnail" onclick="openYoutubeVideo('sYEPdEZQB50')">
-          <img src="https://img.youtube.com/vi/sYEPdEZQB50/maxresdefault.jpg" alt="الترويج للدين بالخرافة">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="video-title">الترويج للدين بالخرافة</div>
-        <button class="favorite-button" onclick="toggleFavorite('sYEPdEZQB50', 'الترويج للدين بالخرافة', this)">⭐ حفظ في المفضلة</button>
-      </div>
-      
-      <div class="video-card">
-        <div class="video-thumbnail" onclick="openYoutubeVideo('wOsoyyneqmA')">
-          <img src="https://img.youtube.com/vi/wOsoyyneqmA/maxresdefault.jpg" alt="عندما تبيع الوهم">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="video-title">عندما تبيع الوهم</div>
-        <button class="favorite-button" onclick="toggleFavorite('wOsoyyneqmA', 'عندما تبيع الوهم', this)">⭐ حفظ في المفضلة</button>
-      </div>
-      
-      <div class="video-card">
-        <div class="video-thumbnail" onclick="openYoutubeVideo('shXjuuUBOlA')">
-          <img src="https://img.youtube.com/vi/shXjuuUBOlA/maxresdefault.jpg" alt="الصابئة المندائيون">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="video-title">الصابئة المندائيون</div>
-        <button class="favorite-button" onclick="toggleFavorite('shXjuuUBOlA', 'الصابئة المندائيون', this)">⭐ حفظ في المفضلة</button>
-      </div>
-      
-      <div class="video-card">
-        <div class="video-thumbnail" onclick="openYoutubeVideo('0DpidAR1MPU')">
-          <img src="https://img.youtube.com/vi/0DpidAR1MPU/maxresdefault.jpg" alt="السريان">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="video-title">السريان</div>
-        <button class="favorite-button" onclick="toggleFavorite('0DpidAR1MPU', 'السريان', this)">⭐ حفظ في المفضلة</button>
-      </div>
-      
-      <div class="video-card">
-        <div class="video-thumbnail" onclick="openYoutubeVideo('dQRovOQVoB4')">
-          <img src="https://img.youtube.com/vi/dQRovOQVoB4/maxresdefault.jpg" alt="الديانة المانوية">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="video-title">الديانة المانوية</div>
-        <button class="favorite-button" onclick="toggleFavorite('dQRovOQVoB4', 'الديانة المانوية', this)">⭐ حفظ في المفضلة</button>
-      </div>
-      
-      <div class="video-card">
-        <div class="video-thumbnail" onclick="openYoutubeVideo('yfMETxdXqbs')">
-          <img src="https://img.youtube.com/vi/yfMETxdXqbs/maxresdefault.jpg" alt="الديانة الزرادشتية">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="video-title">الديانة الزرادشتية</div>
-        <button class="favorite-button" onclick="toggleFavorite('yfMETxdXqbs', 'الديانة الزرادشتية', this)">⭐ حفظ في المفضلة</button>
-      </div>
-      
-      <div class="video-card">
-        <div class="video-thumbnail" onclick="openYoutubeVideo('EfCEfaLgbYU')">
-          <img src="https://img.youtube.com/vi/EfCEfaLgbYU/maxresdefault.jpg" alt="القدس ليست اورشليم">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="video-title">القدس ليست اورشليم</div>
-        <button class="favorite-button" onclick="toggleFavorite('EfCEfaLgbYU', 'القدس ليست اورشليم', this)">⭐ حفظ في المفضلة</button>
-      </div>
     </div>
   </div>
 
   <!-- زر العودة للأعلى -->
   <button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
 
-  <!-- التذييل -->
+  <!-- التذييل الجديد -->
   <footer>
     <div class="social-links">
       <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
       <a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
       <a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
       <a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
       <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
     </div>
     
@@ -924,6 +894,7 @@
       const index = favorites.findIndex(v => v.id === videoId && v.type === 'video');
       
       if (index === -1) {
+        // إضافة إلى المفضلة
         favorites.push({
           id: videoId,
           title: videoTitle,
@@ -935,6 +906,7 @@
         button.textContent = '✓ في المفضلة';
         showCustomAlert(`تمت إضافة "${videoTitle}" إلى المفضلة`);
       } else {
+        // إزالة من المفضلة
         favorites.splice(index, 1);
         button.classList.remove("added");
         button.textContent = '⭐ حفظ في المفضلة';
@@ -944,10 +916,12 @@
       localStorage.setItem("favorites", JSON.stringify(favorites));
     }
 
+    // دالة لفتح الفيديو في اليوتيوب
     function openYoutubeVideo(videoId) {
       window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
     }
 
+    // نظام البحث الجديد - من الكود الأول مع تعديلات للفيديوهات
     function initSearchSystem() {
       const searchInput = document.getElementById('searchInput');
       const videosGrid = document.getElementById('videosGrid');
@@ -955,16 +929,22 @@
       const resultsCount = document.getElementById('resultsCount');
       const noResultsMessage = document.getElementById('noResultsMessage');
       
+      // حفظ الفيديوهات الأصلية للاسترجاع لاحقاً
       const originalVideos = Array.from(videosGrid.children);
       
+      // حدث البحث عند الكتابة
       searchInput.addEventListener('input', function() {
         const searchTerm = this.value.trim().toLowerCase();
+        
+        // إخفاء رسالة عدم وجود نتائج مؤقتاً
         noResultsMessage.style.display = 'none';
         
         if (searchTerm === '') {
+          // إعادة عرض جميع الفيديوهات عند إفراغ البحث
           videosGrid.innerHTML = '';
           originalVideos.forEach(video => {
             videosGrid.appendChild(video);
+            // إزالة التمييز
             const titleElement = video.querySelector('.video-title');
             titleElement.innerHTML = titleElement.textContent;
           });
@@ -972,6 +952,7 @@
           return;
         }
         
+        // فلترة الفيديوهات حسب البحث
         let count = 0;
         videosGrid.innerHTML = '';
         
@@ -982,6 +963,7 @@
           if (title.includes(searchTerm)) {
             count++;
             
+            // تمييز النص المطابق
             const regex = new RegExp(searchTerm, 'gi');
             const highlightedTitle = titleElement.textContent.replace(
               regex, 
@@ -989,20 +971,25 @@
             );
             
             titleElement.innerHTML = highlightedTitle;
+            
+            // إضافة الفيديو إلى الشبكة
             videosGrid.appendChild(video);
           }
         });
         
+        // عرض معلومات النتائج
         if (count > 0) {
           resultsCount.textContent = count;
           resultsInfo.style.display = 'block';
           noResultsMessage.style.display = 'none';
         } else {
+          // عرض رسالة عدم وجود نتائج
           resultsInfo.style.display = 'none';
           noResultsMessage.style.display = 'block';
         }
       });
       
+      // إمكانية البحث بالضغط على Enter
       searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
           this.dispatchEvent(new Event('input'));
@@ -1010,6 +997,7 @@
       });
     }
 
+    // وظيفة العودة للأعلى
     function scrollToTop() {
       window.scrollTo({
         top: 0,
@@ -1017,6 +1005,7 @@
       });
     }
 
+    // إظهار/إخفاء زر العودة للأعلى عند التمرير
     window.addEventListener('scroll', function() {
       const backToTopButton = document.querySelector('.back-to-top');
       if (window.pageYOffset > 300) {
@@ -1026,6 +1015,7 @@
       }
     });
 
+    // عند تحميل الصفحة، تحقق من العناصر المفضلة وعرض حالة الأزرار
     document.addEventListener('DOMContentLoaded', function() {
       const buttons = document.querySelectorAll('.favorite-button');
       const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -1038,6 +1028,7 @@
         }
       });
 
+      // تهيئة نظام البحث الجديد
       initSearchSystem();
     });
   </script>
