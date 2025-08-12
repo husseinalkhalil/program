@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>الكتب</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<!-- إضافة كود AdSense هنا -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
-<style>
+  <meta charset="UTF-8" />
+  <!-- إضافة user-scalable=no لمنع التكبير/التصغير -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>التاريخ</title>
+  <!-- إضافة كود AdSense هنا -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
     /* أنماط عامة */
     * {
       margin: 0;
@@ -141,6 +142,46 @@
 
     .hamburger:hover {
       background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* مربع البحث الجديد - من الكود الأول */
+    .search-container {
+      max-width: 600px;
+      margin: 30px auto;
+      position: relative;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 15px 50px 15px 20px;
+      border: 2px solid var(--primary);
+      border-radius: 50px;
+      font-size: 1.1em;
+      box-shadow: 0 5px 15px rgba(94, 44, 165, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 5px 20px rgba(94, 44, 165, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      right: 20px; /* تعديل لاتجاه RTL */
+      transform: translateY(-50%);
+      color: var(--primary);
+      font-size: 1.2em;
+    }
+
+    .search-results-info {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: var(--primary-dark);
+      display: none;
     }
 
     @media (min-width: 768px) {
@@ -310,202 +351,187 @@
       100% { box-shadow: 0 0 0 0 rgba(106, 76, 147, 0); }
     }
 
-    /* محتوى الكتب مع التحسينات الجمالية */
-    .books-section {
-      background: linear-gradient(135deg, #faf4ff 0%, #f0e5ff 100%);
-      padding: 40px;
-      border-radius: 20px;
-      width: 1000px; /* تغيير العرض إلى 1200 بكسل */
-      margin: 100px auto 40px; /* تم تعديل الهامش العلوي ليتناسب مع الشريط الجديد */
-      box-shadow: 0 10px 30px rgba(94, 44, 165, 0.1);
-    }
-
-    .section-header {
+    /* محتوى الفيديوهات مع تأثيرات جديدة */
+    .container {
+      padding: 1em;
+      max-width: 1400px; /* زيادة العرض لاستيعاب 4 بطاقات */
+      margin: 90px auto 40px;
       text-align: center;
-      margin-bottom: 40px;
     }
 
-    .section-header h1 {
-      color: #5e2ca5;
-      font-size: 2.2em;
-      margin-bottom: 15px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .section-header p {
-      color: #4a208f;
-      font-size: 1.1em;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .books-grid {
+    .videos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(4, 1fr); /* 4 بطاقات في الصف */
+      gap: 15px; /* تم تقليل الفجوة بين البطاقات */
+      margin-top: 2em;
     }
 
-    .book-card {
-      text-align: center;
-      background-color: #F0E6FF;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(94, 44, 165, 0.15);
-      transition: all 0.3s ease;
+    .video-card {
+      background-color: #f0e4ff;
+      border-radius: 12px; /* تصغير نصف القطر */
+      padding: 12px; /* تصغير الحشو */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
-      cursor: pointer;
+      transform: scale(0.95); /* تصغير البطاقة بشكل عام */
     }
 
-    .book-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(94, 44, 165, 0.2);
+    .video-card:hover {
+      transform: translateY(-5px) scale(0.95); /* الحفاظ على الحجم المصغر عند التحويم */
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
 
-    .book-card::before {
+    .video-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
+      height: 4px; /* تصغير الشريط العلوي */
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: all 0.3s ease;
+    }
+
+    .video-card:hover::before {
       height: 5px;
-      background: linear-gradient(90deg, #5e2ca5, #b388ff);
-      transition: all 0.3s ease;
     }
 
-    .book-card:hover::before {
-      height: 8px;
-    }
-
-    .book-cover-container {
+    .video-thumbnail {
       position: relative;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .book-card:hover .book-cover-container {
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-
-    .book-card img {
       width: 100%;
-      height: 360px;
+      height: 140px; /* تصغير ارتفاع الصورة المصغرة */
+      border-radius: 8px; /* تصغير نصف القطر */
+      overflow: hidden;
+      margin-bottom: 12px; /* تصغير المسافة السفلية */
+      cursor: pointer;
+    }
+
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      transition: all 0.5s ease;
+      transition: transform 0.3s ease;
     }
 
-    .book-card:hover img {
-      transform: scale(1.03);
+    .video-card:hover .video-thumbnail img {
+      transform: scale(1.05);
     }
 
-    .book-card h2 {
-      color: #3b0a63;
-      margin: 15px 0 10px;
-      font-size: 1.4em;
-      transition: all 0.3s ease;
-    }
-
-    .book-card:hover h2 {
-      color: #5e2ca5;
-    }
-
-    .book-card p {
-      font-size: 15px;
-      margin: 10px 0 20px;
-      color: #555;
-      line-height: 1.6;
-      min-height: 60px;
-    }
-
-    .download-link {
-      display: inline-block;
-      background: linear-gradient(90deg, #5e2ca5, #7b3fcf);
+    .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       color: white;
-      font-weight: bold;
-      text-decoration: none;
-      padding: 8px 15px;
-      border-radius: 30px;
-      margin: 10px 0;
+      font-size: 40px; /* تصغير حجم أيقونة التشغيل */
+      opacity: 0.8;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(94, 44, 165, 0.3);
-      font-size: 14px;
     }
 
-    .download-link:hover {
-      background: linear-gradient(90deg, #4a208f, #6a0dad);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(94, 44, 165, 0.4);
+    .video-card:hover .play-icon {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.1);
     }
 
-    .book-actions {
+    .video-title {
+      margin: 10px 0; /* تصغير المسافة العلوية والسفلية */
+      font-weight: bold;
+      font-size: 0.95em; /* تصغير حجم الخط */
+      color: var(--primary-dark);
+      transition: all 0.3s ease;
+      min-height: 40px; /* تصغير الارتفاع الأدنى */
       display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-      position: relative;
+    }
+
+    .video-card:hover .video-title {
+      color: var(--primary);
     }
 
     .favorite-button {
-      background: linear-gradient(90deg, #ffcc00, #ffd700);
-      color: #333;
-      border: none;
-      border-radius: 30px;
-      padding: 10px 25px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .favorite-button:hover {
-      background: linear-gradient(90deg, #ffd700, #ffdf40);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(255, 204, 0, 0.4);
-    }
-
-    .favorite-button.active {
-      background: linear-gradient(90deg, #5e2ca5, #7b3fcf);
+      background-color: var(--primary);
       color: white;
+      padding: 6px 15px; /* تصغير الحشو */
+      border: none;
+      border-radius: 6px; /* تصغير نصف القطر */
+      cursor: pointer;
+      font-size: 12px; /* تصغير حجم الخط */
+      margin-top: 8px; /* تصغير المسافة العلوية */
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      font-weight: bold;
     }
 
-    .favorite-button.active:hover {
-      background: linear-gradient(90deg, #4a208f, #6a0dad);
+    .favorite-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.5s ease;
     }
 
-    /* أنماط رسائل التنبيه المخصصة في الوسط */
+    .favorite-button:hover::before {
+      left: 100%;
+    }
+
+    .favorite-button.added {
+      background-color: var(--primary-dark);
+      box-shadow: 0 0 10px rgba(94, 44, 165, 0.5);
+    }
+
+    /* تمييز النتائج */
+    .highlight {
+      background-color: #d9c4ff;
+      padding: 2px 4px;
+      border-radius: 3px;
+      color: var(--primary-dark);
+      font-weight: bold;
+    }
+
+    /* رسالة عدم وجود نتائج بحث */
+    .no-results {
+      text-align: center;
+      padding: 30px;
+      font-size: 1.2em;
+      color: var(--primary);
+      display: none;
+      width: 100%;
+      background-color: #f0e6ff;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    /* رسائل التنبيه */
     .custom-alert {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: linear-gradient(135deg, #5e2ca5 0%, #7b3fcf 100%);
-      color: white;
+      background-color: var(--accent);
+      color: var(--dark);
       padding: 15px 25px;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(94, 44, 165, 0.3);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       z-index: 10000;
       animation: fadeIn 0.3s ease-out;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      font-family: Tahoma, sans-serif;
       max-width: 80%;
       text-align: center;
-      font-size: 1.1em;
     }
 
     .custom-alert::before {
       content: '✓';
-      font-size: 20px;
-      color: #ffcc00;
+      font-size: 18px;
     }
 
     @keyframes fadeIn {
@@ -518,487 +544,416 @@
       to { opacity: 0; transform: translate(-50%, -40%); }
     }
 
-    /* تأثيرات إضافية */
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .floating {
-      animation: float 3s ease-in-out infinite;
-    }
-
-    /* التنسيق للجوال */
+    /* التعديلات الأساسية لتحقيق 4 بطاقات في الصف */
     @media (max-width: 1200px) {
-      .books-section {
-        width: 95%;
-        max-width: 1200px;
+      .videos-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 بطاقات في الصف للشاشات المتوسطة */
       }
     }
-
-    @media (max-width: 768px) {
-      .books-section {
-        padding: 25px;
-        width: 95%;
-        margin-top: 85px; /* تعديل الهامش العلوي للجوال */
+    
+    @media (max-width: 900px) {
+      .videos-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 بطاقات في الصف للأجهزة اللوحية */
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .videos-grid {
+        grid-template-columns: 1fr; /* بطاقة واحدة في الصف للجوال */
       }
       
-      .books-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .book-card {
-        width: 100%;
-        max-width: 350px;
-        margin: 0 auto;
-      }
-
-      .section-header h1 {
-        font-size: 1.8em;
-      }
-
       .custom-alert {
         width: 90%;
         padding: 12px 20px;
-        font-size: 1em;
       }
     }
-    
-    /* أنماط جديدة لقائمة المشاركة - بنفسجي فاتح */
-    .book-share-menu {
-      position: absolute;
-      bottom: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--light-purple); /* بنفسجي فاتح */
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(94, 44, 165, 0.2); /* ظل بنفسجي */
-      z-index: 10;
-      width: max-content;
-      display: none;
-      margin-bottom: 10px;
-      animation: fadeInScale 0.3s ease;
-      border: 1px solid var(--medium-purple); /* حدود بنفسجي فاتح */
-    }
 
-    @keyframes fadeInScale {
-      from { opacity: 0; transform: translateX(-50%) scale(0.95); }
-      to { opacity: 1; transform: translateX(-50%) scale(1); }
-    }
-
-    .book-share-menu::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 10px solid transparent;
-      border-top-color: var(--light-purple); /* بنفسجي فاتح */
-    }
-
-    .book-share-menu > div:first-child {
-      font-size: 14px;
-      margin-bottom: 12px;
-      color: var(--primary); /* لون النص بنفسجي داكن */
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      cursor: pointer;
-      padding: 5px 10px;
-      border-radius: 6px;
-      transition: background 0.3s;
-      background: var(--medium-purple); /* خلفية بنفسجي فاتح */
-    }
-
-    .book-share-menu > div:first-child:hover {
-      background: #d0b8ff; /* لون تحويم أغمق قليلاً */
-    }
-
-    .book-share-menu > div:first-child::before {
-      content: "🔗";
-    }
-
-    .book-share-menu .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .book-share-menu .social-icons a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--medium-purple); /* خلفية أيقونات بنفسجي فاتح */
-      transition: all 0.3s ease;
-    }
-
-    .book-share-menu .social-icons a:hover {
-      background: var(--dark-purple); /* لون تحويم بنفسجي داكن */
-      transform: scale(1.1);
-    }
-
-    .book-share-menu .social-icons a:hover img {
-      filter: brightness(0) invert(1); /* أيقونات بيضاء عند التحويم */
-    }
-
-    .book-share-menu .social-icons a img {
-      width: 16px;
-      height: 16px;
-      transition: filter 0.3s;
+    .page-title {
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      position: relative;
+      padding-bottom: 10px;
     }
     
-    /* تحسينات عامة للتصميم */
-    .section-header h1::after {
+    .page-title::after {
       content: '';
-      display: block;
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(to right, var(--accent), var(--secondary));
-      margin: 10px auto;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
       border-radius: 2px;
     }
     
-    .book-card .download-link {
+    .page-description {
+      color: var(--primary);
+      font-size: 1.1em;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* زر العودة للأعلى */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary-dark);
+      color: white;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
-    
-    .floating:nth-child(2n) {
-      animation-delay: 0.5s;
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
     }
-    
-    .floating:nth-child(3n) {
-      animation-delay: 1s;
+
+    .back-to-top:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
-    
-    /* أيقونات افتراضية */
-    .social-icon {
-      width: 16px;
-      height: 16px;
-      display: inline-block;
-      background-size: contain;
-      background-repeat: no-repeat;
+
+    /* للجوال */
+    @media (max-width: 767px) {
+      .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        bottom: 20px;
+        left: 20px;
+      }
     }
-    
-    .icon-facebook { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%235e2ca5"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>'); }
-
-    .icon-whatsapp { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%235e2ca5"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'); }
-
-    .icon-telegram { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%235e2ca5"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.14.141-.259.259-.374.261l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.12l-6.87 4.326-2.96-.924c-.64-.203-.658-.64.136-.954l11.57-4.458c.538-.196 1.006.128.832.941z"/></svg>'); }
-
-    .icon-twitter { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%235e2ca5"><path d="M23.954 4.569a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.004 10.004 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.691 8.094 4.066 6.13 1.64 3.161a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.061a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.937 4.937 0 004.604 3.417 9.868 9.868 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63a9.935 9.935 0 002.46-2.548l-.047-.02z"/></svg>'); }
-
-}
-.support-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 15px 0;
-  justify-content: center;
-}
-
-.support-links .download-link {
-  padding: 6px;
-  border-radius: 12px;
-  background: linear-gradient(90deg, #5e2ca5, #7b3fcf);
-  box-shadow: 0 4px 10px rgba(94, 44, 165, 0.3);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-}
-
-.support-links .download-link img {
-  max-height: 24px;
-  max-width: 24px;
-}
-
-.support-links .download-link:hover {
-  background: linear-gradient(90deg, #4a208f, #6a0dad);
-}
-
-.support-links .download-link {
-  margin: 5px; /* إضافة هامش بين الأيقونات */
-}
-
-/* إضافة أنماط لإعلان AdSense */
-.ad-container {
-  text-align: center;
-  margin: 30px auto;
-  padding: 15px;
-  background: #f8f3ff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(94, 44, 165, 0.1);
-  max-width: 800px;
-}
-</style>
+  </style>
 </head>
 <body>
-<div class="nav-overlay" onclick="toggleMobileMenu()"></div>
-<!-- الشريط العلوي الجديد -->
-<nav>
-<div class="hamburger" onclick="toggleMobileMenu()">☰ القائمة</div>
-<div class="nav-links">
-<a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-<a class="active" href="books.html"><i class="fas fa-book"></i> الكتب</a>
-<a href="articles.html"><i class="fas fa-newspaper"></i> المقالات</a>
-<a href="khawatir.html"><i class="fas fa-lightbulb"></i> خواطر</a>
-<a href="videos.html"><i class="fas fa-video"></i> الفيديوهات</a>
-<a href="history.html"><i class="fas fa-hourglass-half"></i> التاريخ</a>
-<a class="active" href="podcast.html"><i class="fas fa-podcast"></i> البودكاست</a>
-<a href="ask.html"><i class="fas fa-question-circle"></i> الأسئلة</a>
-<a href="hewar.html"><i class="fas fa-comments"></i> حوارات</a>
-<a href="favorites.html"><i class="fas fa-star"></i> المفضلة</a>
-<a href="support.html"><i class="fas fa-hand-holding-heart"></i> دعم المحتوى</a>
-<a href="#" onclick="window.print()"><i class="fas fa-print"></i> طباعة</a>
-</div>
-<div class="logo-container">
-<a href="index.html">
-<img alt="شعار الموقع" src="images/logo.png" style="border-radius: 5px;"/>
-</a>
-</div>
-</nav>
-<!-- وسم مائي مصغر -->
-<div class="watermark"></div>
-<!-- ملاحظة إلهامية مصغرة -->
-<div class="inspiration">
-<i class="fas fa-quote-left"></i> الإنسانية فوق كل انتماء <i class="fas fa-quote-right"></i>
-</div>
-<!-- محتوى الكتب مع التحسينات -->
-<div class="books-section">
-<div class="section-header">
-<h1 style="text-align: center;">مكتبتي الرقمية</h1>
-<p>استكشف مجموعة كتبي التي تتناول مواضيع فكرية ودينية معاصرة بأسلوب تحليلي نقدي</p>
-</div>
 
-<!-- إضافة إعلان AdSense هنا -->
-<div class="ad-container">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-4459876088599546"
-       data-ad-slot="1234567890"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-  </script>
-</div>
+  <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
 
-<div class="books-grid">
-<!-- الدعم -->
-<div class="book-card floating" id="book-1">
-<div class="book-cover-container">
-<img alt="غلاف الدعم" src="images/daam-cover.jpg"/>
-</div>
-<h2>ادعم المحتوى</h2>
-<p>إذا وجدت في هذا المحتوى قيمة، يمكنك المساهمة بما تستطيع لدعم المحتوى، فمساهمتك، مهما كانت، تصنع فرقًا.</p>
-<div class="support-links"><a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book3" target="_blank">
-<img alt="Gumroad" src="images/gumroad.png" style="height: 24px; width: auto;"/>
-</a><a class="download-link" href="https://www.paypal.com/paypalme/HusseinAlkhalil" target="_blank">
-<img alt="paypal" src="images/paypal.png" style="height: 24px; width: auto;"/>
-</a><a class="download-link" href="https://ko-fi.com/s/763cb54e0a" target="_blank">
-<img alt="ko-fi" src="images/ko-fi.png" style="height: 24px; width: auto;"/>
-</a><a class="download-link" href="https://payhip.com/b/qvP0F" target="_blank">
-<img alt="payhip" src="images/payhip.png" style="height: 24px; width: auto;"/>
-</a><a class="download-link" href="https://buymeacoffee.com/husseinalkhalil/e/411365" target="_blank">
-<img alt="buyme" src="images/buyme.png" style="height: 24px; width: auto;"/>
-</a></div><div class="book-actions">
-<div class="share-button-container">
-<button class="favorite-button" onclick="toggleShareMenu(this)">
-<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/> مشاركة
-  </button>
-<div class="book-share-menu">
-<div class="copy-link" onclick="copyBookLink(this.closest('.book-card'))">نسخ الرابط</div>
-<div class="social-icons">
-<a href="#" onclick="shareBookOn('facebook', this.closest('.book-card'))"><span class="social-icon icon-facebook"></span></a>
-<a href="#" onclick="shareBookOn('whatsapp', this.closest('.book-card'))"><span class="social-icon icon-whatsapp"></span></a>
-<a href="#" onclick="shareBookOn('telegram', this.closest('.book-card'))"><span class="social-icon icon-telegram"></span></a>
-<a href="#" onclick="shareBookOn('twitter', this.closest('.book-card'))"><span class="social-icon icon-twitter"></span></a>
-</div>
-</div>
-</div>
-<button class="favorite-button" onclick="toggleFavorite('ادعم المحتوى', this, event)">
-<span>⭐</span> <span class="fav-text">المفضلة</span>
-</button>
-</div>
-</div>
-<!-- رواية هتون الحب -->
-<div class="book-card floating" id="book-2">
-<div class="book-cover-container">
-<img alt="غلاف رواية هتون الحب" src="images/haton-cover.jpg"/>
-</div>
-<h2>هتون الحب (رواية)</h2>
-<p>رواية تتناول الحب، الزواج، الخرافة، والخروج عن المألوف والتمرد وتضليل البسطاء باسم الدين والكرامات ومحاولة محاربة هذا الجهل بأسلوب روائي شيق.</p>
-<a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book2" target="_blank">الشراء من gumroad</a>
-<a class="download-link" href="https://payhip.com/b/dFNls" target="_blank">الشراء من payhip</a>
-<a class="download-link" href="https://ko-fi.com/s/7f16d1ddac" target="_blank">الشراء من ko-fi</a>
-<div class="book-actions">
-<div class="share-button-container">
-<button class="favorite-button" onclick="toggleShareMenu(this)">
-<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/> مشاركة
-  </button>
-<div class="book-share-menu">
-<div class="copy-link" onclick="copyBookLink(this.closest('.book-card'))">نسخ الرابط</div>
-<div class="social-icons">
-<a href="#" onclick="shareBookOn('facebook', this.closest('.book-card'))"><span class="social-icon icon-facebook"></span></a>
-<a href="#" onclick="shareBookOn('whatsapp', this.closest('.book-card'))"><span class="social-icon icon-whatsapp"></span></a>
-<a href="#" onclick="shareBookOn('telegram', this.closest('.book-card'))"><span class="social-icon icon-telegram"></span></a>
-<a href="#" onclick="shareBookOn('twitter', this.closest('.book-card'))"><span class="social-icon icon-twitter"></span></a>
-</div>
-</div>
-</div>
-<button class="favorite-button" onclick="toggleFavorite('رواية هتون الحب', this, event)">
-<span>⭐</span> <span class="fav-text">المفضلة</span>
-</button>
-</div>
-</div>
-<!-- كتاب جريمة في القلب   -->
-<div class="book-card floating" id="book-3">
-<div class="book-cover-container">
-<img alt="غلاف كتاب جريمة في القلب" src="images/jarima-cover.jpg"/>
-</div>
-<h2>جريمة في القلب (رواية)</h2>
-<p>تتصارع الأخلاق مع الفساد، رواية تجمع الفساد والتفكك الاسري والجريمة، تنسج الرواية خيوط دراما اجتماعية مليئة بالتشويق.</p>
-<a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book4" target="_blank">الشراء من gumroad</a>
-<a class="download-link" href="https://payhip.com/b/LG3ZA" target="_blank">الشراء من payhip</a>
-<a class="download-link" href="https://ko-fi.com/s/f86f2b3c19" target="_blank">الشراء من ko-fi</a>
-<div class="book-actions">
-<div class="share-button-container">
-<button class="favorite-button" onclick="toggleShareMenu(this)">
-<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/> مشاركة
-  </button>
-<div class="book-share-menu">
-<div class="copy-link" onclick="copyBookLink(this.closest('.book-card'))">نسخ الرابط</div>
-<div class="social-icons">
-<a href="#" onclick="shareBookOn('facebook', this.closest('.book-card'))"><span class="social-icon icon-facebook"></span></a>
-<a href="#" onclick="shareBookOn('whatsapp', this.closest('.book-card'))"><span class="social-icon icon-whatsapp"></span></a>
-<a href="#" onclick="shareBookOn('telegram', this.closest('.book-card'))"><span class="social-icon icon-telegram"></span></a>
-<a href="#" onclick="shareBookOn('twitter', this.closest('.book-card'))"><span class="social-icon icon-twitter"></span></a>
-</div>
-</div>
-</div>
-<button class="favorite-button" onclick="toggleFavorite('جريمة في القلب', this, event)">
-<span>⭐</span> <span class="fav-text">المفضلة</span>
-</button>
-</div>
-</div>
-<!-- كتاب الإسلام بين القرآن والتراث     -->
-<div class="book-card floating" id="book-4">
-<div class="book-cover-container">
-<img alt="غلاف كتاب الإسلام بين القرآن والتراث " src="images/islam-cover.jpg"/>
-</div>
-<h2>الإسلام بين القرآن والتراث</h2>
-<p>حوار بين عقلين يمثلان رؤيتين مختلفتين للدين، أحدهما يرى أن القرآن هو مصدر الدين، بينما الآخر يخلط بين القرآن وكتب التراث.</p>
-<a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book5" target="_blank">التحميل من gumroad</a>
-<a class="download-link" href="https://payhip.com/b/jnVxT" target="_blank">التحميل من payhip</a>
-<a class="download-link" href="https://ko-fi.com/s/6f34541ce4" target="_blank">التحميل من ko-fi</a>
-<div class="book-actions">
-<div class="share-button-container">
-<button class="favorite-button" onclick="toggleShareMenu(this)">
-<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/> مشاركة
-  </button>
-<div class="book-share-menu">
-<div class="copy-link" onclick="copyBookLink(this.closest('.book-card'))">نسخ الرابط</div>
-<div class="social-icons">
-<a href="#" onclick="shareBookOn('facebook', this.closest('.book-card'))"><span class="social-icon icon-facebook"></span></a>
-<a href="#" onclick="shareBookOn('whatsapp', this.closest('.book-card'))"><span class="social-icon icon-whatsapp"></span></a>
-<a href="#" onclick="shareBookOn('telegram', this.closest('.book-card'))"><span class="social-icon icon-telegram"></span></a>
-<a href="#" onclick="shareBookOn('twitter', this.closest('.book-card'))"><span class="social-icon icon-twitter"></span></a>
-</div>
-</div>
-</div>
-<button class="favorite-button" onclick="toggleFavorite('الإسلام بين القرآن والتراث', this, event)">
-<span>⭐</span> <span class="fav-text">المفضلة</span>
-</button>
-</div>
-</div>
-<!-- كتاب القرآن وكفى        -->
-<div class="book-card floating" id="book-5">
-<div class="book-cover-container">
-<img alt="غلاف كتاب القرآن وكفى    " src="images/quran-cover.jpg"/>
-</div>
-<h2>القرآن وكفى</h2>
-<p>يتناول الكتاب المواضيع المهمة والمثيرة للجدل حول الإسلام، وإعادة قراءتها من جديد بطريقة معاصرة وبحسب الأدوات المعرفية.</p>
-<a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book6" target="_blank">الشراء من gumroad</a>
-<a class="download-link" href="https://payhip.com/b/QMfTl" target="_blank">الشراء من payhip</a>
-<a class="download-link" href="https://ko-fi.com/s/f5468a41b1" target="_blank">الشراء من ko-fi</a>
-<div class="book-actions">
-<div class="share-button-container">
-<button class="favorite-button" onclick="toggleShareMenu(this)">
-<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/> مشاركة
-  </button>
-<div class="book-share-menu">
-<div class="copy-link" onclick="copyBookLink(this.closest('.book-card'))">نسخ الرابط</div>
-<div class="social-icons">
-<a href="#" onclick="shareBookOn('facebook', this.closest('.book-card'))"><span class="social-icon icon-facebook"></span></a>
-<a href="#" onclick="shareBookOn('whatsapp', this.closest('.book-card'))"><span class="social-icon icon-whatsapp"></span></a>
-<a href="#" onclick="shareBookOn('telegram', this.closest('.book-card'))"><span class="social-icon icon-telegram"></span></a>
-<a href="#" onclick="shareBookOn('twitter', this.closest('.book-card'))"><span class="social-icon icon-twitter"></span></a>
-</div>
-</div>
-</div>
-<button class="favorite-button" onclick="toggleFavorite('القرآن وكفى', this, event)">
-<span>⭐</span> <span class="fav-text">المفضلة</span>
-</button>
-</div>
-</div>
-<!-- كتاب فكر من جديد -->
-<div class="book-card floating" id="book-6">
-<div class="book-cover-container">
-<img alt="غلاف كتاب فكر من جديد" src="images/faker-cover.jpg"/>
-</div>
-<h2>فكر من جديد</h2>
-<p>افتح نوافذ العقل، ودع النور يتسلل إلى زوايا الوعي، فإن أول ما نزل من الوحي كان دعوة صريحة: "اقرأ".</p>
-<a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book1" target="_blank">الشراء من gumroad</a>
-<a class="download-link" href="https://payhip.com/b/3g9xp" target="_blank">الشراء من payhip</a>
-<a class="download-link" href="https://ko-fi.com/s/d16f951c95" target="_blank">الشراء من ko-fi</a>
-<div class="book-actions">
-<div class="share-button-container">
-<button class="favorite-button" onclick="toggleShareMenu(this)">
-<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/> مشاركة
-  </button>
-<div class="book-share-menu">
-<div class="copy-link" onclick="copyBookLink(this.closest('.book-card'))">نسخ الرابط</div>
-<div class="social-icons">
-<a href="#" onclick="shareBookOn('facebook', this.closest('.book-card'))"><span class="social-icon icon-facebook"></span></a>
-<a href="#" onclick="shareBookOn('whatsapp', this.closest('.book-card'))"><span class="social-icon icon-whatsapp"></span></a>
-<a href="#" onclick="shareBookOn('telegram', this.closest('.book-card'))"><span class="social-icon icon-telegram"></span></a>
-<a href="#" onclick="shareBookOn('twitter', this.closest('.book-card'))"><span class="social-icon icon-twitter"></span></a>
-</div>
-</div>
-</div>
-<button class="favorite-button" onclick="toggleFavorite('كتاب فكر من جديد', this, event)">
-<span>⭐</span> <span class="fav-text">المفضلة</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- التذييل الجديد -->
-<footer>
-<div class="social-links">
-<a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-<a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&amp;utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
-<a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
-<a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
-<a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
-<a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
-</div>
-<div class="copyright">
+  <!-- الشريط العلوي الجديد -->
+  <nav>
+    <div class="hamburger" onclick="toggleMobileMenu()">☰ القائمة</div>
+    
+    <div class="nav-links">
+      <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+      <a href="books.html"><i class="fas fa-book"></i> الكتب</a>
+      <a href="articles.html"><i class="fas fa-newspaper"></i> المقالات</a>
+      <a href="khawatir.html"><i class="fas fa-lightbulb"></i> خواطر</a>
+      <a href="videos.html" class="active"><i class="fas fa-video"></i> الفيديوهات</a>
+      <a class="active" href="podcast.html"><i class="fas fa-podcast"></i> البودكاست</a>
+      <a href="ask.html"><i class="fas fa-question-circle"></i> الأسئلة</a>
+      <a href="hewar.html"><i class="fas fa-comments"></i> حوارات</a>
+      <a href="favorites.html"><i class="fas fa-star"></i> المفضلة</a>
+      <a href="support.html"><i class="fas fa-hand-holding-heart"></i> دعم المحتوى</a>
+      <a href="#" onclick="window.print()"><i class="fas fa-print"></i> طباعة</a>
+    </div>
+
+    <div class="logo-container">
+      <a href="index.html">
+        <img src="images/logo.png" alt="شعار الموقع" />
+      </a>
+    </div>
+  </nav>
+
+  <!-- وسم مائي مصغر -->
+  <div class="watermark"></div>
+
+  <!-- ملاحظة إلهامية مصغرة -->
+  <div class="inspiration">
+    <i class="fas fa-quote-left"></i> الإنسانية فوق كل انتماء <i class="fas fa-quote-right"></i>
+  </div>
+
+  <!-- محتوى الصفحة -->
+  <div class="container">
+    <h2 class="page-title">التاريخ</h2>
+    <p class="page-description">هنا تجد مقاطع مختارة عن الخرافات والتاريخ والأديان والملل الأخرى</p>
+    
+    <!-- مربع البحث الجديد - من الكود الأول -->
+    <div class="search-container">
+      <div class="search-icon">
+        <i class="fas fa-search"></i>
+      </div>
+      <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن فيديو...">
+      <div id="searchResultsInfo" class="search-results-info">
+        <span id="resultsCount">0</span> نتيجة
+      </div>
+    </div>
+    
+    <!-- رسالة عدم وجود نتائج بحث -->
+    <div class="no-results" id="noResultsMessage">
+      لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
+    </div>
+    
+    <div class="videos-grid" id="videosGrid">
+      <!-- الفيديوهات المعدلة -->
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('cMUtBHMdgfk')">
+          <img src="https://img.youtube.com/vi/cMUtBHMdgfk/maxresdefault.jpg" alt="العلويون">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">العلويون</div>
+        <button class="favorite-button" onclick="toggleFavorite('cMUtBHMdgfk', 'العلويون', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('RV06KmxvzPA')">
+          <img src="https://img.youtube.com/vi/RV06KmxvzPA/maxresdefault.jpg" alt="الدروز">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">الدروز</div>
+        <button class="favorite-button" onclick="toggleFavorite('RV06KmxvzPA', 'الدروز', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('eUtTHdTrRTk')">
+          <img src="https://img.youtube.com/vi/eUtTHdTrRTk/maxresdefault.jpg" alt="الديانة البهائية">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">الديانة البهائية</div>
+        <button class="favorite-button" onclick="toggleFavorite('eUtTHdTrRTk', 'الديانة البهائية', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('aba3m8xGGDo')">
+          <img src="https://img.youtube.com/vi/aba3m8xGGDo/maxresdefault.jpg" alt="الديانة الكونفوشيوسية">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">الديانة الكونفوشيوسية</div>
+        <button class="favorite-button" onclick="toggleFavorite('aba3m8xGGDo', 'الديانة الكونفوشيوسية', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('t1J3M8D4Xec')">
+          <img src="https://img.youtube.com/vi/t1J3M8D4Xec/maxresdefault.jpg" alt="الديانة السيخية">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">الديانة السيخية</div>
+        <button class="favorite-button" onclick="toggleFavorite('t1J3M8D4Xec', 'الديانة السيخية', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('jlnefbaCzUo')">
+          <img src="https://img.youtube.com/vi/jlnefbaCzUo/maxresdefault.jpg" alt="قصة أصحاب الفيل">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">قصة أصحاب الفيل</div>
+        <button class="favorite-button" onclick="toggleFavorite('jlnefbaCzUo', 'قصة أصحاب الفيل', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('svP8omiK_OA')">
+          <img src="https://img.youtube.com/vi/svP8omiK_OA/maxresdefault.jpg" alt="الديانة البوذية">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">الديانة البوذية</div>
+        <button class="favorite-button" onclick="toggleFavorite('svP8omiK_OA', 'الديانة البوذية', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('lZoTROZUoW0')">
+          <img src="https://img.youtube.com/vi/lZoTROZUoW0/maxresdefault.jpg" alt="الديانة الهندوسية">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">الديانة الهندوسية</div>
+        <button class="favorite-button" onclick="toggleFavorite('lZoTROZUoW0', 'الديانة الهندوسية', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('uOlb4xYpAms')">
+          <img src="https://img.youtube.com/vi/uOlb4xYpAms/maxresdefault.jpg" alt="تدمير التماثيل تدميرًا للتاريخ">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">تدمير التماثيل تدميرًا للتاريخ</div>
+        <button class="favorite-button" onclick="toggleFavorite('uOlb4xYpAms', 'تدمير التماثيل تدميرًا للتاريخ', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('-8HV__MVLNc')">
+          <img src="https://img.youtube.com/vi/-8HV__MVLNc/maxresdefault.jpg" alt="خرافات في كتب الروايات">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">خرافات في كتب الروايات</div>
+        <button class="favorite-button" onclick="toggleFavorite('-8HV__MVLNc', 'خرافات في كتب الروايات', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('Cplld9BB7i8')">
+          <img src="https://img.youtube.com/vi/Cplld9BB7i8/maxresdefault.jpg" alt="خرافة تلبس الجن بالانسان">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">خرافة تلبس الجن بالانسان</div>
+        <button class="favorite-button" onclick="toggleFavorite('Cplld9BB7i8', 'خرافة تلبس الجن بالانسان', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('BDFnqLoPrTA')">
+          <img src="https://img.youtube.com/vi/BDFnqLoPrTA/maxresdefault.jpg" alt="هاروت وماروت">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">هاروت وماروت</div>
+        <button class="favorite-button" onclick="toggleFavorite('BDFnqLoPrTA', 'هاروت وماروت', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('xR9mxBhRw00')">
+          <img src="https://img.youtube.com/vi/xR9mxBhRw00/maxresdefault.jpg" alt="السحر">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">السحر</div>
+        <button class="favorite-button" onclick="toggleFavorite('xR9mxBhRw00', 'السحر', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('aKZnOZjXsw8')">
+          <img src="https://img.youtube.com/vi/aKZnOZjXsw8/maxresdefault.jpg" alt="خرافة الحسد ">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">خرافة الحسد </div>
+        <button class="favorite-button" onclick="toggleFavorite('aKZnOZjXsw8', 'خرافة الحسد ', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('W6DAvH4-kqo')">
+          <img src="https://img.youtube.com/vi/W6DAvH4-kqo/maxresdefault.jpg" alt="خرافة الاصابة بالعين ">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">خرافة الاصابة بالعين </div>
+        <button class="favorite-button" onclick="toggleFavorite('W6DAvH4-kqo', 'خرافة الاصابة بالعين ', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('tVTLhi_MAkM')">
+          <img src="https://img.youtube.com/vi/tVTLhi_MAkM/maxresdefault.jpg" alt="خرافة سكب الماء الساخن">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">خرافة سكب الماء الساخن</div>
+        <button class="favorite-button" onclick="toggleFavorite('tVTLhi_MAkM', 'خرافة سكب الماء الساخن', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('9KOvdr5pjyQ')">
+          <img src="https://img.youtube.com/vi/9KOvdr5pjyQ/maxresdefault.jpg" alt="خرافة طي سجادة الصلاة">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">خرافة طي سجادة الصلاة</div>
+        <button class="favorite-button" onclick="toggleFavorite('9KOvdr5pjyQ', 'خرافة طي سجادة الصلاة', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('U7fMWUd54N0')">
+          <img src="https://img.youtube.com/vi/U7fMWUd54N0/maxresdefault.jpg" alt="خرافات صدقها المسلمون">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">خرافات صدقها المسلمون</div>
+        <button class="favorite-button" onclick="toggleFavorite('U7fMWUd54N0', 'خرافات صدقها المسلمون', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('sYEPdEZQB50')">
+          <img src="https://img.youtube.com/vi/sYEPdEZQB50/maxresdefault.jpg" alt="الترويج للدين بالخرافة">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">الترويج للدين بالخرافة</div>
+        <button class="favorite-button" onclick="toggleFavorite('sYEPdEZQB50', 'الترويج للدين بالخرافة', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('wOsoyyneqmA')">
+          <img src="https://img.youtube.com/vi/wOsoyyneqmA/maxresdefault.jpg" alt="عندما تبيع الوهم">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">عندما تبيع الوهم</div>
+        <button class="favorite-button" onclick="toggleFavorite('wOsoyyneqmA', 'عندما تبيع الوهم', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('shXjuuUBOlA')">
+          <img src="https://img.youtube.com/vi/shXjuuUBOlA/maxresdefault.jpg" alt="الصابئة المندائيون">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">الصابئة المندائيون</div>
+        <button class="favorite-button" onclick="toggleFavorite('shXjuuUBOlA', 'الصابئة المندائيون', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('0DpidAR1MPU')">
+          <img src="https://img.youtube.com/vi/0DpidAR1MPU/maxresdefault.jpg" alt="السريان">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">السريان</div>
+        <button class="favorite-button" onclick="toggleFavorite('0DpidAR1MPU', 'السريان', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('dQRovOQVoB4')">
+          <img src="https://img.youtube.com/vi/dQRovOQVoB4/maxresdefault.jpg" alt="الديانة المانوية">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">الديانة المانوية</div>
+        <button class="favorite-button" onclick="toggleFavorite('dQRovOQVoB4', 'الديانة المانوية', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('yfMETxdXqbs')">
+          <img src="https://img.youtube.com/vi/yfMETxdXqbs/maxresdefault.jpg" alt="الديانة الزرادشتية">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">الديانة الزرادشتية</div>
+        <button class="favorite-button" onclick="toggleFavorite('yfMETxdXqbs', 'الديانة الزرادشتية', this)">⭐ حفظ في المفضلة</button>
+      </div>
+      
+      <div class="video-card">
+        <div class="video-thumbnail" onclick="openYoutubeVideo('EfCEfaLgbYU')">
+          <img src="https://img.youtube.com/vi/EfCEfaLgbYU/maxresdefault.jpg" alt="القدس ليست اورشليم">
+          <div class="play-icon">▶</div>
+        </div>
+        <div class="video-title">القدس ليست اورشليم</div>
+        <button class="favorite-button" onclick="toggleFavorite('EfCEfaLgbYU', 'القدس ليست اورشليم', this)">⭐ حفظ في المفضلة</button>
+      </div>
+    </div>
+  </div>
+      
+      <!-- بقية الفيديوهات بنفس الهيكل -->
+      <!-- ... -->
+    </div>
+  </div>
+
+  <!-- زر العودة للأعلى -->
+  <button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
+
+  <!-- التذييل الجديد -->
+  <footer>
+    <div class="social-links">
+      <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
+      <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
+    </div>
+    
+    <div class="copyright">
       حسين الخليل - جميع الحقوق محفوظة © 2025
     </div>
-</footer>
-<script>
-    // وظائف الشريط العلوي
+  </footer>
+
+  <script>
     function toggleMobileMenu() {
       const menu = document.querySelector(".nav-links");
       const overlay = document.querySelector(".nav-overlay");
@@ -1019,11 +974,10 @@
       }
     });
 
-    // نظام المفضلة المعدل مع رسائل تنبيه مخصصة في الوسط
     function showCustomAlert(message) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'custom-alert';
-      alertDiv.innerHTML = `<span>${message}</span>`;
+      alertDiv.textContent = message;
       document.body.appendChild(alertDiv);
       
       setTimeout(() => {
@@ -1034,68 +988,131 @@
       }, 3000);
     }
 
-    function toggleFavorite(item, button, event) {
-      event.stopPropagation();
+    function toggleFavorite(videoId, videoTitle, button) {
       let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-      const favText = button.querySelector('.fav-text');
-      const index = favorites.indexOf(item);
+      const index = favorites.findIndex(v => v.id === videoId && v.type === 'video');
       
       if (index === -1) {
         // إضافة إلى المفضلة
-        favorites.push(item);
-        button.classList.add("active");
-        favText.textContent = 'في المفضلة';
-        showCustomAlert(`تمت إضافة "${item}" إلى المفضلة`);
+        favorites.push({
+          id: videoId,
+          title: videoTitle,
+          type: 'video',
+          url: `https://www.youtube.com/embed/${videoId}`,
+          date: new Date().toLocaleDateString('ar-EG')
+        });
+        button.classList.add("added");
+        button.textContent = '✓ في المفضلة';
+        showCustomAlert(`تمت إضافة "${videoTitle}" إلى المفضلة`);
       } else {
         // إزالة من المفضلة
         favorites.splice(index, 1);
-        button.classList.remove("active");
-        favText.textContent = 'المفضلة';
-        showCustomAlert(`تم إزالة "${item}" من المفضلة`);
+        button.classList.remove("added");
+        button.textContent = '⭐ حفظ في المفضلة';
+        showCustomAlert(`تم إزالة "${videoTitle}" من المفضلة`);
       }
       
       localStorage.setItem("favorites", JSON.stringify(favorites));
     }
 
-    // وظيفة البحث في الكتب
-    function setupSearch() {
+    // دالة لفتح الفيديو في اليوتيوب
+    function openYoutubeVideo(videoId) {
+      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+    }
+
+    // نظام البحث الجديد - من الكود الأول مع تعديلات للفيديوهات
+    function initSearchSystem() {
       const searchInput = document.getElementById('searchInput');
-      const bookCards = document.querySelectorAll('.book-card');
+      const videosGrid = document.getElementById('videosGrid');
+      const resultsInfo = document.getElementById('searchResultsInfo');
+      const resultsCount = document.getElementById('resultsCount');
+      const noResultsMessage = document.getElementById('noResultsMessage');
       
+      // حفظ الفيديوهات الأصلية للاسترجاع لاحقاً
+      const originalVideos = Array.from(videosGrid.children);
+      
+      // حدث البحث عند الكتابة
       searchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
+        const searchTerm = this.value.trim().toLowerCase();
         
-        bookCards.forEach(card => {
-          const title = card.querySelector('h2').textContent.toLowerCase();
-          const description = card.querySelector('p').textContent.toLowerCase();
+        // إخفاء رسالة عدم وجود نتائج مؤقتاً
+        noResultsMessage.style.display = 'none';
+        
+        if (searchTerm === '') {
+          // إعادة عرض جميع الفيديوهات عند إفراغ البحث
+          videosGrid.innerHTML = '';
+          originalVideos.forEach(video => {
+            videosGrid.appendChild(video);
+            // إزالة التمييز
+            const titleElement = video.querySelector('.video-title');
+            titleElement.innerHTML = titleElement.textContent;
+          });
+          resultsInfo.style.display = 'none';
+          return;
+        }
+        
+        // فلترة الفيديوهات حسب البحث
+        let count = 0;
+        videosGrid.innerHTML = '';
+        
+        originalVideos.forEach(video => {
+          const titleElement = video.querySelector('.video-title');
+          const title = titleElement.textContent.toLowerCase();
           
-          if (title.includes(searchTerm) || description.includes(searchTerm)) {
-            card.style.display = 'flex';
-            card.style.flexDirection = 'column';
-          } else {
-            card.style.display = 'none';
+          if (title.includes(searchTerm)) {
+            count++;
+            
+            // تمييز النص المطابق
+            const regex = new RegExp(searchTerm, 'gi');
+            const highlightedTitle = titleElement.textContent.replace(
+              regex, 
+              match => `<span class="highlight">${match}</span>`
+            );
+            
+            titleElement.innerHTML = highlightedTitle;
+            
+            // إضافة الفيديو إلى الشبكة
+            videosGrid.appendChild(video);
           }
         });
+        
+        // عرض معلومات النتائج
+        if (count > 0) {
+          resultsCount.textContent = count;
+          resultsInfo.style.display = 'block';
+          noResultsMessage.style.display = 'none';
+        } else {
+          // عرض رسالة عدم وجود نتائج
+          resultsInfo.style.display = 'none';
+          noResultsMessage.style.display = 'block';
+        }
+      });
+      
+      // إمكانية البحث بالضغط على Enter
+      searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          this.dispatchEvent(new Event('input'));
+        }
       });
     }
 
-    // جعل كل بطاقة كتاب قابلة للنقر
-    function setupBookCardsClick() {
-      document.querySelectorAll('.book-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-          // إذا كان النقر على زر المفضلة أو زر الشراء، لا نفتح الرابط
-          if (e.target.closest('.favorite-button') || e.target.closest('.download-link')) {
-            return;
-          }
-          
-          // البحث عن الرابط داخل البطاقة وفتحه
-          const link = this.querySelector('.download-link');
-          if (link) {
-            window.open(link.href, '_blank');
-          }
-        });
+    // وظيفة العودة للأعلى
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       });
     }
+
+    // إظهار/إخفاء زر العودة للأعلى عند التمرير
+    window.addEventListener('scroll', function() {
+      const backToTopButton = document.querySelector('.back-to-top');
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('visible');
+      } else {
+        backToTopButton.classList.remove('visible');
+      }
+    });
 
     // عند تحميل الصفحة، تحقق من العناصر المفضلة وعرض حالة الأزرار
     document.addEventListener('DOMContentLoaded', function() {
@@ -1103,99 +1120,15 @@
       const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
       
       buttons.forEach(button => {
-        const item = button.getAttribute('onclick').match(/'([^']+)'/)[1];
-        const favText = button.querySelector('.fav-text');
-        if (favorites.includes(item)) {
-          button.classList.add("active");
-          favText.textContent = 'في المفضلة';
+        const videoId = button.getAttribute('onclick').split("'")[1];
+        if (favorites.some(v => v.id === videoId && v.type === 'video')) {
+          button.classList.add("added");
+          button.textContent = '✓ في المفضلة';
         }
       });
 
-      // تهيئة وظيفة البحث
-      setupSearch();
-      
-      // تهيئة النقر على بطاقات الكتب
-      setupBookCardsClick();
-    });
-    
-    // وظيفة إظهار/إخفاء قائمة المشاركة
-    function toggleShareMenu(button) {
-      const menu = button.closest('.share-button-container').querySelector('.book-share-menu');
-      
-      // إخفاء جميع القوائم الأخرى
-      document.querySelectorAll('.book-share-menu').forEach(m => {
-        if (m !== menu) m.style.display = 'none';
-      });
-      
-      // تبديل القائمة الحالية
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    }
-
-    // إغلاق القوائم عند النقر في أي مكان آخر
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.book-share-menu') && !e.target.closest('.share-button-container')) {
-        document.querySelectorAll('.book-share-menu').forEach(menu => {
-          menu.style.display = 'none';
-        });
-      }
-    });
-
-    // وظيفة نسخ رابط الكتاب
-    function copyBookLink(card) {
-      const id = card.id;
-      const link = window.location.origin + window.location.pathname + "?book=" + id;
-      
-      navigator.clipboard.writeText(link).then(() => {
-        showCustomAlert("تم نسخ رابط الكتاب 📋");
-      });
-    }
-
-    // وظيفة المشاركة على منصات التواصل
-    function shareBookOn(platform, card) {
-      const id = card.id;
-      const url = encodeURIComponent(window.location.origin + window.location.pathname + "?book=" + id);
-      const text = encodeURIComponent("أنصحك بقراءة هذا الكتاب:");
-
-      let shareUrl = "#";
-      switch(platform) {
-        case "facebook":
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-          break;
-        case "whatsapp":
-          shareUrl = `https://wa.me/?text=${text}%20${url}`;
-          break;
-        case "telegram":
-          shareUrl = `https://t.me/share/url?url=${url}&text=${text}`;
-          break;
-        case "twitter":
-          shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
-          break;
-      }
-      
-      window.open(shareUrl, '_blank');
-    }
-    
-    // عند تحميل الصفحة، عرض كتاب واحد فقط عند وجود ?book=
-    document.addEventListener("DOMContentLoaded", function() {
-      const params = new URLSearchParams(window.location.search);
-      const bookId = params.get("book");
-      if (bookId) {
-        const allBooks = document.querySelectorAll('.book-card');
-        allBooks.forEach(book => {
-          if (book.id !== bookId) {
-            book.style.display = 'none';
-          }
-        });
-
-        // زر عرض جميع الكتب
-        const backBtn = document.createElement('button');
-        backBtn.innerText = 'عرض جميع الكتب';
-        backBtn.className = 'favorite-button';
-        backBtn.style.margin = '30px auto 0';
-        backBtn.style.display = 'block';
-        backBtn.onclick = () => window.location.href = window.location.pathname;
-        document.querySelector('.books-section').appendChild(backBtn);
-      }
+      // تهيئة نظام البحث الجديد
+      initSearchSystem();
     });
   </script>
 </body>
