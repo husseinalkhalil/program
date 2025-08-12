@@ -351,7 +351,7 @@
     /* محتوى الفيديوهات مع تأثيرات جديدة */
     .container {
       padding: 1em;
-      max-width: 1000px; /* تقليل العرض لإنشاء مساحة على الجانبين */
+      max-width: 1000px; /* تقليل العرض إلى 1000px لإنشاء مساحة أكبر على الجانبين */
       margin: 90px auto 40px;
       text-align: center;
     }
@@ -359,14 +359,14 @@
     .videos-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr); /* 4 بطاقات في الصف */
-      gap: 10px; /* تقليل المسافة بين البطاقات */
+      gap: 12px; /* تقليل المسافة بين البطاقات أكثر */
       margin-top: 2em;
     }
 
     .video-card {
       background-color: #f0e4ff;
       border-radius: 15px;
-      padding: 10px; /* تصغير الحشو الداخلي */
+      padding: 10px; /* تصغير الحشو الداخلي أكثر */
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       transition: all 0.4s ease;
       position: relative;
@@ -396,10 +396,10 @@
     .video-thumbnail {
       position: relative;
       width: 100%;
-      height: 150px; /* تقليل ارتفاع الصورة المصغرة */
+      height: 140px; /* تقليل ارتفاع الصورة المصغرة أكثر */
       border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 12px; /* تقليل المسافة السفلية */
+      margin-bottom: 10px; /* تقليل المسافة السفلية أكثر */
       cursor: pointer;
     }
 
@@ -420,7 +420,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       color: white;
-      font-size: 40px; /* تصغير حجم أيقونة التشغيل */
+      font-size: 36px; /* تصغير حجم أيقونة التشغيل أكثر */
       opacity: 0.8;
       transition: all 0.3s ease;
     }
@@ -431,15 +431,16 @@
     }
 
     .video-title {
-      margin: 12px 0; /* تقليل المسافات */
+      margin: 10px 0; /* تقليل المسافات أكثر */
       font-weight: bold;
-      font-size: 0.95em; /* تصغير حجم الخط */
+      font-size: 0.88em; /* تصغير حجم الخط أكثر */
       color: var(--primary-dark);
       transition: all 0.3s ease;
-      min-height: 40px; /* تقليل الارتفاع الأدنى */
+      min-height: 36px; /* تقليل الارتفاع الأدنى أكثر */
       display: flex;
       align-items: center;
       justify-content: center;
+      line-height: 1.4;
     }
 
     .video-card:hover .video-title {
@@ -449,12 +450,12 @@
     .favorite-button {
       background-color: var(--primary);
       color: white;
-      padding: 6px 16px; /* تصغير الحشو الداخلي */
+      padding: 5px 14px; /* تصغير الحشو الداخلي أكثر */
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 12px; /* تصغير حجم الخط */
-      margin-top: 8px; /* تقليل المسافة العلوية */
+      font-size: 11px; /* تصغير حجم الخط أكثر */
+      margin-top: 6px; /* تقليل المسافة العلوية أكثر */
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -636,11 +637,34 @@
         left: 20px;
       }
     }
+    
+    /* شريط التقدم */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      z-index: 1001;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
   </style>
 </head>
 <body>
 
   <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
+  
+  <!-- شريط تقدم التمرير -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
 
   <!-- الشريط العلوي الجديد -->
   <nav>
@@ -668,7 +692,7 @@
   </nav>
 
   <!-- وسم مائي مصغر -->
-  <div class="watermark"></div>
+  <div class="watermark">الخليل</div>
 
   <!-- ملاحظة إلهامية مصغرة -->
   <div class="inspiration">
@@ -1013,6 +1037,12 @@
       } else {
         backToTopButton.classList.remove('visible');
       }
+      
+      // تحديث شريط التقدم
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
     });
 
     // عند تحميل الصفحة، تحقق من العناصر المفضلة وعرض حالة الأزرار
