@@ -1828,8 +1828,7 @@
         const publishDate = document.querySelector('.publish-date');
         
         // تخزين الحجم الأصلي
-        const originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-        const originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+        let originalFontSize, originalDateSize;
         
         // عوامل التحكم في الحجم
         let currentScale = 1;
@@ -1860,24 +1859,25 @@
             applyFontScale();
         });
         
-        // تغيير موضع أزرار التحكم بالخط حسب المتغيرات
-        function updateFontControlPosition() {
+        // تهيئة المتغيرات بعد تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            // الحصول على القيم الأصلية بعد تحميل الصفحة
+            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            
+            // تطبيق الموضع
+            const rootStyles = getComputedStyle(document.documentElement);
+            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
+            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
+            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
+            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+            
             const controls = document.querySelector('.font-controls');
             controls.style.top = varFontControlTop;
             controls.style.bottom = varFontControlBottom;
             controls.style.right = varFontControlRight;
             controls.style.left = varFontControlLeft;
-        }
-        
-        // الحصول على قيم المتغيرات من CSS
-        const rootStyles = getComputedStyle(document.documentElement);
-        const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-        const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-        const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-        const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-        
-        // تطبيق الموضع عند التحميل
-        document.addEventListener('DOMContentLoaded', updateFontControlPosition);
+        });
         
         // إمكانية تغيير الموضع بسهولة (يمكن استخدام هذا في وحدة التحكم)
         window.changeFontControlPosition = function(position, top, right, bottom, left) {
@@ -1886,7 +1886,12 @@
             document.documentElement.style.setProperty('--font-control-right', right);
             document.documentElement.style.setProperty('--font-control-bottom', bottom);
             document.documentElement.style.setProperty('--font-control-left', left);
-            updateFontControlPosition();
+            
+            const controls = document.querySelector('.font-controls');
+            controls.style.top = top;
+            controls.style.bottom = bottom;
+            controls.style.right = right;
+            controls.style.left = left;
         };
     </script>
 </body>
