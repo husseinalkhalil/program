@@ -2,15 +2,15 @@
 <html lang="ar" dir="rtl">
 <head>
     <!-- تعريف ترميز الصفحة ومعلوماتها الأساسية -->
-    <meta charset="UTF-8"> <!-- تحديد ترميز الحروف للغة العربية -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- جعل الصفحة متجاوبة مع الأجهزة المختلفة -->
-    <title>المقالات | الجدال مع المؤدلجين، معركة خاسرة. </title> <!-- عنوان الصفحة الذي يظهر في المتصفح -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المقالات | الجدال مع المؤدلجين، معركة خاسرة. </title>
     
     <!-- روابط لخطوط جوجل وأيقونات فونت أويسوم -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet"> <!-- تحميل خط عربي -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- مكتبة أيقونات -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- إعلانات جوجل أدسنس -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
@@ -30,6 +30,15 @@
             --header-purple: #5e2ca5; /* لون الهيدر */
             --mobile-header-height: 70px; /* ارتفاع الهيدر في الجوال */
             --glass-bg: rgba(94, 44, 165, 0.92); /* خلفية زجاجية شفافة */
+            
+            /* متغيرات لموضع أزرار التحكم بالخط (مضافة من الكود الأول) */
+            --font-control-position: top right;
+            --font-control-top: 120px;
+            --font-control-bottom: auto;
+            --font-control-right: 250px;
+            --font-control-left: auto;
+            --font-control-button-size: 30px;
+            --font-control-button-font-size: 18px;
         }
         
         /* إعادة تعيين الهوامش والحشوات لجميع العناصر */
@@ -815,7 +824,7 @@
         /* ==================== طباعة ==================== */
         @media print {
             /* إخفاء العناصر غير المرغوب فيها عند الطباعة */
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -854,6 +863,89 @@
         .note-highlight {
             color: red; /* لون أحمر */
             font-weight: bold; /* عريض */
+        }
+        
+        /* ==================== أنماط أزرار التحكم بالخط (مضافة من الكود الأول) ==================== */
+        .font-controls {
+            position: fixed;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+            
+            /* تحديد الموضع باستخدام المتغيرات */
+            top: var(--font-control-top);
+            bottom: var(--font-control-bottom);
+            right: var(--font-control-right);
+            left: var(--font-control-left);
+        }
+        
+        .font-controls button {
+            width: var(--font-control-button-size);
+            height: var(--font-control-button-size);
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-control-button-font-size);
+            transition: all 0.3s;
+        }
+        
+        .font-controls button:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .font-controls button i {
+            transition: transform 0.2s;
+        }
+        
+        .font-controls button:active i {
+            transform: scale(0.9);
+        }
+        
+        /* تلميحات */
+        .font-controls button::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .font-controls button:hover::after {
+            opacity: 1;
+        }
+        
+        /* أنماط للجوال */
+        @media (max-width: 768px) {
+            .font-controls {
+                --font-control-top: 100px;
+                --font-control-right: 10px;
+                --font-control-button-size: 36px;
+                --font-control-button-font-size: 15px;
+                gap: 6px;
+                padding: 8px;
+            }
         }
         
         /* ==================== وسائط متجاوبة ==================== */
@@ -1412,7 +1504,19 @@
         </div>
     </header>
     
-    <!-- المحتوى الرئيسي -->
+    <!-- أزرار التحكم بحجم الخط (مضافة من الكود الأول) -->
+    <div class="font-controls">
+        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+            <i class="fas fa-search-minus"></i>
+        </button>
+        <button id="fontReset" title="الحجم الطبيعي (Reset)">
+            <i class="fas fa-font"></i>
+        </button>
+        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+            <i class="fas fa-search-plus"></i>
+        </button>
+    </div>
+    
     <div class="container">
         <div class="article-card">
             <div class="article-header">
@@ -1421,6 +1525,7 @@
             </div>
             
             <!-- محتوى المقالة -->
+            <div class="article-content">
                 <p>كم مرة وجدت نفسك في جدال محتدم مع شخص عنيد لا يقبل المنطق، مهما كانت الحجج واضحة وضوح الشمس؟</p>
                 <p>المجادلة مع المؤدلجين تشبه تمامًا محاولة قتل بعوضة وقفت على خدك؛ قد تنجح في التخلص منها، وقد لا تفعل، لكن في النهاية، ستصفع نفسك بلا فائدة.</p>
                 <p> الأحمق لا يناقش ليصل إلى الحقيقة، بل يجادل ليُثبت نفسه، حتى لو كان في قمة الجهل. لا يهتم بالأدلة، ولا يتراجع أمام المنطق، بل يرى الجدال ساحة معركة <strong> "يجب أن ينتصر فيها"، </strong> حتى لو كان سلاحه الوحيد هو الصراخ أو تكرار كلام بلا معنى. </p>    
@@ -1438,13 +1543,12 @@
                 <p>الحكمة تكمن في اختيار المعارك التي تستحق خوضها، والانسحاب بذكاء من تلك التي لا طائل منها.</p>
                 <p>تذكر دائمًا أن السكوت في وجه الجدال العقيم ليس ضعفًا، بل قوة وحكمة.</p>
                 <p>استثمر وقتك وطاقتك في ما ينفعك، واترك المؤدلجين في دوائرهم المغلقة.</p>
-               
+            </div>
+            
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-
-                </div>
-                </div>
+            </div>
             
             <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
@@ -1700,6 +1804,75 @@
                 scrollIndicator.style.opacity = '1';
             }
         });
+        
+        // ==================== أزرار التحكم بحجم الخط (مضافة من الكود الأول) ====================
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontReset = document.getElementById('fontReset');
+        const fontIncrease = document.getElementById('fontIncrease');
+        const articleContent = document.querySelector('.article-content');
+        const publishDate = document.querySelector('.publish-date');
+        
+        // تخزين الحجم الأصلي
+        const originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+        const originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+        
+        // عوامل التحكم في الحجم
+        let currentScale = 1;
+        const minScale = 0.5;
+        const maxScale = 4;
+        
+        // تطبيق تغيير حجم الخط
+        function applyFontScale() {
+            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+        }
+        
+        // تصغير الخط
+        fontDecrease.addEventListener('click', () => {
+            currentScale = Math.max(minScale, currentScale / 1.2);
+            applyFontScale();
+        });
+        
+        // تكبير الخط
+        fontIncrease.addEventListener('click', () => {
+            currentScale = Math.min(maxScale, currentScale * 1.2);
+            applyFontScale();
+        });
+        
+        // إعادة الخط إلى الحجم الطبيعي
+        fontReset.addEventListener('click', () => {
+            currentScale = 1;
+            applyFontScale();
+        });
+        
+        // تغيير موضع أزرار التحكم بالخط حسب المتغيرات
+        function updateFontControlPosition() {
+            const controls = document.querySelector('.font-controls');
+            controls.style.top = varFontControlTop;
+            controls.style.bottom = varFontControlBottom;
+            controls.style.right = varFontControlRight;
+            controls.style.left = varFontControlLeft;
+        }
+        
+        // الحصول على قيم المتغيرات من CSS
+        const rootStyles = getComputedStyle(document.documentElement);
+        const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
+        const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
+        const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
+        const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+        
+        // تطبيق الموضع عند التحميل
+        document.addEventListener('DOMContentLoaded', updateFontControlPosition);
+        
+        // إمكانية تغيير الموضع بسهولة (يمكن استخدام هذا في وحدة التحكم)
+        window.changeFontControlPosition = function(position, top, right, bottom, left) {
+            document.documentElement.style.setProperty('--font-control-position', position);
+            document.documentElement.style.setProperty('--font-control-top', top);
+            document.documentElement.style.setProperty('--font-control-right', right);
+            document.documentElement.style.setProperty('--font-control-bottom', bottom);
+            document.documentElement.style.setProperty('--font-control-left', left);
+            updateFontControlPosition();
+        };
     </script>
 </body>
 </html>
