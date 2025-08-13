@@ -31,7 +31,18 @@
             --mobile-header-height: 70px; /* ارتفاع الهيدر في الجوال */
             --glass-bg: rgba(94, 44, 165, 0.92); /* خلفية زجاجية شفافة */
         }
-        
+        :root {
+    /* ... المتغيرات الأخرى ... */
+    
+    /* متغيرات لموضع أزرار التحكم بالخط */
+    --font-control-position: top right;
+    --font-control-top: 120px;
+    --font-control-bottom: auto;
+    --font-control-right: 250px;
+    --font-control-left: auto;
+    --font-control-button-size: 30px;
+    --font-control-button-font-size: 18px;
+}
         /* إعادة تعيين الهوامش والحشوات لجميع العناصر */
         * {
             box-sizing: border-box; /* تضمين الحشوة والحدود في حساب العرض */
@@ -811,7 +822,88 @@
         .share-menu-closing {
             animation: fadeOut 0.2s ease-out forwards;
         }
-        
+        /* ==================== أنماط أزرار التحكم بالخط ==================== */
+.font-controls {
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.5s ease-out;
+    
+    /* تحديد الموضع باستخدام المتغيرات */
+    top: var(--font-control-top);
+    bottom: var(--font-control-bottom);
+    right: var(--font-control-right);
+    left: var(--font-control-left);
+}
+
+.font-controls button {
+    width: var(--font-control-button-size);
+    height: var(--font-control-button-size);
+    border-radius: 50%;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-control-button-font-size);
+    transition: all 0.3s;
+}
+
+.font-controls button:hover {
+    background: var(--accent-color);
+    transform: scale(1.1);
+}
+
+.font-controls button i {
+    transition: transform 0.2s;
+}
+
+.font-controls button:active i {
+    transform: scale(0.9);
+}
+
+/* تلميحات */
+.font-controls button::after {
+    content: attr(title);
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.font-controls button:hover::after {
+    opacity: 1;
+}
+
+/* أنماط للجوال */
+@media (max-width: 768px) {
+    .font-controls {
+        --font-control-top: 100px;
+        --font-control-right: 10px;
+        --font-control-button-size: 36px;
+        --font-control-button-font-size: 15px;
+        gap: 6px;
+        padding: 8px;
+    }
+}
         /* ==================== طباعة ==================== */
         @media print {
             /* إخفاء العناصر غير المرغوب فيها عند الطباعة */
@@ -1411,7 +1503,18 @@
             </div>
         </div>
     </header>
-    
+    <!-- أزرار التحكم بحجم الخط -->
+<div class="font-controls">
+    <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+        <i class="fas fa-search-minus"></i>
+    </button>
+    <button id="fontReset" title="الحجم الطبيعي (Reset)">
+        <i class="fas fa-font"></i>
+    </button>
+    <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+        <i class="fas fa-search-plus"></i>
+    </button>
+</div>
     <!-- المحتوى الرئيسي -->
     <div class="container">
         <div class="article-card">
@@ -1701,7 +1804,45 @@
                 behavior: 'smooth'
             });
         });
-        
+        // ==================== أزرار التحكم بحجم الخط ====================
+const fontDecrease = document.getElementById('fontDecrease');
+const fontReset = document.getElementById('fontReset');
+const fontIncrease = document.getElementById('fontIncrease');
+const articleContent = document.querySelector('.article-content');
+const publishDate = document.querySelector('.publish-date');
+
+// تخزين الحجم الأصلي
+const originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+const originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+
+// عوامل التحكم في الحجم
+let currentScale = 1;
+const minScale = 0.5;
+const maxScale = 4;
+
+// تطبيق تغيير حجم الخط
+function applyFontScale() {
+    articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+    publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+}
+
+// تصغير الخط
+fontDecrease.addEventListener('click', () => {
+    currentScale = Math.max(minScale, currentScale / 1.2);
+    applyFontScale();
+});
+
+// تكبير الخط
+fontIncrease.addEventListener('click', () => {
+    currentScale = Math.min(maxScale, currentScale * 1.2);
+    applyFontScale();
+});
+
+// إعادة الخط إلى الحجم الطبيعي
+fontReset.addEventListener('click', () => {
+    currentScale = 1;
+    applyFontScale();
+});
         // إخفاء مؤشر التمرير عند الوصول للأسفل في القائمة المنسدلة
         mobileNav.addEventListener('scroll', () => {
             const scrollIndicator = document.querySelector('.scroll-indicator');
