@@ -31,6 +31,13 @@
             --mobile-header-height: 70px; /* ارتفاع الهيدر في الجوال */
             --glass-bg: rgba(94, 44, 165, 0.92); /* خلفية زجاجية شفافة */
         }
+        --font-control-position: top right;
+--font-control-top: 120px;
+--font-control-bottom: auto;
+--font-control-right: 250px;
+--font-control-left: auto;
+--font-control-button-size: 30px;
+--font-control-button-font-size: 18px;
         
         /* إعادة تعيين الهوامش والحشوات لجميع العناصر */
         * {
@@ -59,6 +66,17 @@
             position: fixed;
             width: 100%;
         }
+        <div class="font-controls">
+    <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+        <i class="fas fa-search-minus"></i>
+    </button>
+    <button id="fontReset" title="الحجم الطبيعي (Reset)">
+        <i class="fas fa-font"></i>
+    </button>
+    <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+        <i class="fas fa-search-plus"></i>
+    </button>
+</div>
         
         /* ==================== الشريط العلوي المحسّن ==================== */
         .header {
@@ -1509,7 +1527,14 @@
         const navIndicator = document.getElementById('navIndicator');
         const navButtons = document.querySelectorAll('.nav-btn');
         const backToTop = document.getElementById('backToTop');
-        
+        // أزرار التحكم بحجم الخط
+const fontDecrease = document.getElementById('fontDecrease');
+const fontReset = document.getElementById('fontReset');
+const fontIncrease = document.getElementById('fontIncrease');
+const articleContent = document.querySelector('.article-content');
+const publishDate = document.querySelector('.publish-date');
+
+// ... بقية الكود ...
         // فتح/إغلاق القائمة
         function toggleMobileMenu(event) {
             if (event) event.stopPropagation();
