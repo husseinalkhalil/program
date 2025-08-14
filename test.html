@@ -1826,53 +1826,52 @@
         });
         
         // أزرار التحكم بالخط
-        const fontDecrease = document.getElementById('fontDecrease');
-        const fontReset = document.getElementById('fontReset');
-        const fontIncrease = document.getElementById('fontIncrease');
-        const articleContent = document.querySelector('.article-content');
-        const publishDate = document.querySelector('.publish-date');
-        
         let originalFontSize, originalDateSize;
-        
         let currentScale = 1;
         const minScale = 0.5;
         const maxScale = 4;
-        
-        function applyFontScale() {
-            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+
+        function initFontControls() {
+            const articleContent = document.querySelector('.article-content');
+            const publishDate = document.querySelector('.publish-date');
+            
+            if (articleContent && publishDate) {
+                originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+                originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+                
+                const fontDecrease = document.getElementById('fontDecrease');
+                const fontReset = document.getElementById('fontReset');
+                const fontIncrease = document.getElementById('fontIncrease');
+                
+                function applyFontScale() {
+                    articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+                    publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+                }
+                
+                fontDecrease.addEventListener('click', () => {
+                    currentScale = Math.max(minScale, currentScale / 1.2);
+                    applyFontScale();
+                });
+                
+                fontIncrease.addEventListener('click', () => {
+                    currentScale = Math.min(maxScale, currentScale * 1.2);
+                    applyFontScale();
+                });
+                
+                fontReset.addEventListener('click', () => {
+                    currentScale = 1;
+                    applyFontScale();
+                });
+            }
         }
-        
-        fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
-            applyFontScale();
-        });
-        
-        fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
-            applyFontScale();
-        });
-        
-        fontReset.addEventListener('click', () => {
-            currentScale = 1;
-            applyFontScale();
-        });
-        
+
         document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            // ... بقية الكود ...
             
-            const rootStyles = getComputedStyle(document.documentElement);
-            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+            // تهيئة التحكم بالخط بعد تحميل الصفحة
+            initFontControls();
             
-            const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
+            // ... بقية الكود ...
         });
     </script>
 </body>
