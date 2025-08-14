@@ -902,6 +902,24 @@
           font-weight: 600; /* سمك متوسط */
           color: #ffd166; /* لون أصفر */
         }
+        
+        /* الحل: إخفاء زر الهمبرغر في الشاشات الكبيرة فقط */
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none !important;
+            }
+        }
+        
+        /* إظهار زر الهمبرغر في الشاشات الصغيرة فقط */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-buttons {
+                display: none;
+            }
+        }
     
 </style>
 </head>
