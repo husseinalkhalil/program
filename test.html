@@ -1522,6 +1522,7 @@
             </div>
             
             <!-- محتوى المقالة -->
+            <div class="article-content">
                 <p>هل الخمر <strong><span style="color: red;">محرم؟</span></strong></p>
                 <p>هل الاجتناب يعني التحريم؟</p>
                 <p>هل يصل إلى درجة التحريم بما أنه إثم؟</p>
@@ -1564,6 +1565,7 @@
                 <p>قد يكون ذلك في حالة الإدمان وإهلاك النفس.</p>
                 <p>فالخمر هو كل ما يخامر عقل الإنسان أو يغلق منافذ الإدراك عنه.</p>
                 <p>الله يشفي كل مُبتلى بإدمان هذا المنكر ويعوضه فيما يغنيه عن إضرار هذا الابتلاء.</p>
+            </div>
             
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
@@ -1828,14 +1830,15 @@
         // أزرار التحكم بالخط
         let originalFontSize, originalDateSize;
         let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
+        const minScale = 0.8;
+        const maxScale = 2.0;
 
         function initFontControls() {
             const articleContent = document.querySelector('.article-content');
             const publishDate = document.querySelector('.publish-date');
             
             if (articleContent && publishDate) {
+                // حفظ الحجم الأصلي للخط
                 originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
                 originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
                 
@@ -1843,36 +1846,39 @@
                 const fontReset = document.getElementById('fontReset');
                 const fontIncrease = document.getElementById('fontIncrease');
                 
+                // تطبيق التكبير/التصغير
                 function applyFontScale() {
                     articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-                    publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+                    if (publishDate) {
+                        publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+                    }
                 }
                 
-                fontDecrease.addEventListener('click', () => {
-                    currentScale = Math.max(minScale, currentScale / 1.2);
-                    applyFontScale();
-                });
-                
+                // تكبير الخط
                 fontIncrease.addEventListener('click', () => {
-                    currentScale = Math.min(maxScale, currentScale * 1.2);
+                    currentScale = Math.min(maxScale, currentScale * 1.1);
                     applyFontScale();
                 });
                 
+                // تصغير الخط
+                fontDecrease.addEventListener('click', () => {
+                    currentScale = Math.max(minScale, currentScale / 1.1);
+                    applyFontScale();
+                });
+                
+                // إعادة الخط للحجم الأصلي
                 fontReset.addEventListener('click', () => {
                     currentScale = 1;
                     applyFontScale();
                 });
+                
+                // تطبيق الحجم الافتراضي عند التحميل
+                applyFontScale();
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // ... بقية الكود ...
-            
-            // تهيئة التحكم بالخط بعد تحميل الصفحة
-            initFontControls();
-            
-            // ... بقية الكود ...
-        });
+        // استدعاء الدالة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', initFontControls);
     </script>
 </body>
 </html>
