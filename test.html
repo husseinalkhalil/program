@@ -1523,6 +1523,7 @@
             </div>
             
             <!-- محتوى المقالة -->
+            <div class="article-content">
                 <p>في ساحة الفكر والتدبر، يظهر أحيانًا شخص يتقمّص دور الناقد الحريص، متتبعًا أخطاء الآخرين، مدّعيًا امتلاك الفهم الصحيح والتدبر السليم. لكنه، في الحقيقة، لا يقدّم أي طرح مستقل، بل يقتات على الردود والمجادلات، وكأن رسالته الوحيدة هي محاولة إثبات خطأ الآخرين، لا البحث عن الحقيقة.</p>
                 <p>المفارقة أن هذا الشخص، الذي يُنصِّب نفسه حكمًا على عقول غيره، لا يخلو من الأخطاء، بل قد تكون أخطاؤه أشدّ وأوضح. ومع ذلك، نادرًا ما يجد من يردّ عليه أو يناقشه بجدية، لا لأن حججه قوية أو لأنه على صواب، بل ببساطة لأنه لا يستحق هذا الاهتمام. فالذين يردّ عليهم منشغلون بطرح أفكارهم وتقديم رؤى مستقلة، ولا يضيّعون وقتهم في مناكفات لا تضيف جديدًا إلى الحوار الفكري.</p>
                 <p>إن ما يسعى إليه هذا النموذج من الأشخاص ليس التدبر ولا البحث عن الحق، بل لفت الأنظار إليه. فبدلًا من أن يقدّم فكرًا حقيقيًا، يعتمد على إثارة الجدل واستفزاز الآخرين ليحصل على ردود تروّج له أكثر. لكنه لا يدرك أن تجاهله هو أكبر ردّ عليه، وأن القيمة الحقيقية لا تُبنى على الهدم والتتبع، بل على الطرح والإبداع والتجديد.</p>
@@ -1530,13 +1531,12 @@
                 <p>الباحث عن الأضواء ليس سوى ظاهرة تطفلية في الساحة الفكرية، تسعى للظهور على حساب الآخرين دون تقديم أي قيمة حقيقية.</p>
                 <p>الإبداع الحقيقي يكمن في بناء الأفكار وتطويرها، لا في هدم أفكار الآخرين.</p>
                 <p>التجاهل هو الرد الأمثل على هذه الظاهرة، حيث أن الاهتمام بها يزيد من انتشارها، بينما التركيز على البناء الفكري والإنتاج المعرفي هو الطريق لتقدم الفكر والإنسان.</p>
+            </div>
             
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-
-                </div>
-                </div>
+            </div>
             
             <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
@@ -1827,10 +1827,17 @@
             applyFontScale();
         });
 
+        // الحصول على أحجام الخطوط الأصلية بعد تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            // الحصول على حجم الخط الأصلي لمحتوى المقالة
+            const computedStyle = window.getComputedStyle(articleContent);
+            originalFontSize = parseFloat(computedStyle.fontSize);
             
+            // الحصول على حجم الخط الأصلي لتاريخ النشر
+            const dateComputedStyle = window.getComputedStyle(publishDate);
+            originalDateSize = parseFloat(dateComputedStyle.fontSize);
+            
+            // تطبيق مواضع عناصر التحكم بالخط
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
