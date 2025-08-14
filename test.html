@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المقالات | الباحث عن الأضواء. </title>
+    <title>المقالات | الباحث عن الأضواء</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     
     <style>
         :root {
@@ -737,6 +735,13 @@
             animation: fadeIn 0.5s ease-out;
             top: 120px;
             right: 20px;
+            cursor: move;
+            user-select: none;
+        }
+        
+        .font-controls.dragging {
+            box-shadow: 0 6px 20px rgba(94, 44, 165, 0.3);
+            opacity: 0.9;
         }
         
         .font-controls button {
@@ -1062,7 +1067,7 @@
         </div>
     </header>
     
-    <div class="font-controls">
+    <div class="font-controls" id="fontControls">
         <button id="fontDecrease" title="تصغير الخط">
             <i class="fas fa-search-minus"></i>
         </button>
@@ -1325,9 +1330,9 @@
         const fontIncrease = document.getElementById('fontIncrease');
         const articleContent = document.querySelector('.article-content');
         const publishDate = document.querySelector('.publish-date');
+        const fontControls = document.getElementById('fontControls');
         
         let originalFontSize, originalDateSize;
-        
         let currentScale = 1;
         const minScale = 0.8;
         const maxScale = 1.5;
@@ -1358,6 +1363,96 @@
             originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
             if (publishDate) {
                 originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            }
+            
+            // استعادة موضع الأزرار من التخزين المحلي إن وجد
+            const savedPosition = localStorage.getItem('fontControlsPosition');
+            if (savedPosition) {
+                const { top, left } = JSON.parse(savedPosition);
+                fontControls.style.top = top;
+                fontControls.style.left = left;
+                fontControls.style.right = 'auto';
+            }
+        });
+        
+        // إضافة وظيفة السحب للأزرار
+        let isDragging = false;
+        let offsetX, offsetY;
+        
+        fontControls.addEventListener('mousedown', (e) => {
+            if (e.target === fontControls) {
+                isDragging = true;
+                fontControls.classList.add('dragging');
+                
+                const rect = fontControls.getBoundingClientRect();
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
+                
+                e.preventDefault();
+            }
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const x = e.clientX - offsetX;
+                const y = e.clientY - offsetY;
+                
+                fontControls.style.left = `${x}px`;
+                fontControls.style.top = `${y}px`;
+                fontControls.style.right = 'auto';
+            }
+        });
+        
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                fontControls.classList.remove('dragging');
+                
+                // حفظ الموضع في التخزين المحلي
+                localStorage.setItem('fontControlsPosition', JSON.stringify({
+                    top: fontControls.style.top,
+                    left: fontControls.style.left
+                }));
+            }
+        });
+        
+        // دعم السحب باللمس للأجهزة المحمولة
+        fontControls.addEventListener('touchstart', (e) => {
+            if (e.target === fontControls) {
+                isDragging = true;
+                fontControls.classList.add('dragging');
+                
+                const touch = e.touches[0];
+                const rect = fontControls.getBoundingClientRect();
+                offsetX = touch.clientX - rect.left;
+                offsetY = touch.clientY - rect.top;
+                
+                e.preventDefault();
+            }
+        });
+        
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                const touch = e.touches[0];
+                const x = touch.clientX - offsetX;
+                const y = touch.clientY - offsetY;
+                
+                fontControls.style.left = `${x}px`;
+                fontControls.style.top = `${y}px`;
+                fontControls.style.right = 'auto';
+            }
+        });
+        
+        document.addEventListener('touchend', () => {
+            if (isDragging) {
+                isDragging = false;
+                fontControls.classList.remove('dragging');
+                
+                // حفظ الموضع في التخزين المحلي
+                localStorage.setItem('fontControlsPosition', JSON.stringify({
+                    top: fontControls.style.top,
+                    left: fontControls.style.left
+                }));
             }
         });
     </script>
