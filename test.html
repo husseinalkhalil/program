@@ -1742,36 +1742,54 @@
         const articleContent = document.querySelector('.article-content');
         const publishDate = document.querySelector('.publish-date');
         
-        let originalFontSize, originalDateSize;
+        // متغيرات لتخزين الحجم الأصلي
+        let originalFontSize;
+        let originalDateSize;
         
+        // متغير للتحكم في مقياس التكبير/التصغير
         let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
+        const minScale = 0.5; // الحد الأدنى للتكبير
+        const maxScale = 4;   // الحد الأقصى للتكبير
         
+        // تطبيق تغيير حجم الخط
         function applyFontScale() {
             articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            if (publishDate) {
+                publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            }
         }
         
+        // تصغير الخط
         fontDecrease.addEventListener('click', () => {
             currentScale = Math.max(minScale, currentScale / 1.2);
             applyFontScale();
         });
         
+        // تكبير الخط
         fontIncrease.addEventListener('click', () => {
             currentScale = Math.min(maxScale, currentScale * 1.2);
             applyFontScale();
         });
         
+        // إعادة تعيين حجم الخط إلى الحجم الأصلي
         fontReset.addEventListener('click', () => {
             currentScale = 1;
             applyFontScale();
         });
         
+        // تهيئة الأحجام الأصلية عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            // الحصول على الحجم الأصلي لمحتوى المقالة
+            const computedStyle = getComputedStyle(articleContent);
+            originalFontSize = parseFloat(computedStyle.fontSize);
             
+            // الحصول على الحجم الأصلي لتاريخ النشر
+            if (publishDate) {
+                const dateComputedStyle = getComputedStyle(publishDate);
+                originalDateSize = parseFloat(dateComputedStyle.fontSize);
+            }
+            
+            // تطبيق الموضع المحدد في متغيرات CSS
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
@@ -1779,10 +1797,12 @@
             const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
             
             const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
+            if (controls) {
+                controls.style.top = varFontControlTop;
+                controls.style.bottom = varFontControlBottom;
+                controls.style.right = varFontControlRight;
+                controls.style.left = varFontControlLeft;
+            }
         });
     </script>
 </body>
