@@ -87,15 +87,13 @@
             height: 100%;
         }
         
-        logo-container {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%); /* توسيط */
-                z-index: 1000; /* فوق العناصر */
-                margin: 0;
-                text-align: center; /* توسيط النص */
-            }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            margin-right: auto;
+        }
         
         .header.scrolled .logo-container {
             gap: 10px;
@@ -920,6 +918,19 @@
             
             .nav-buttons {
                 display: none;
+            }
+            
+            /* توسيط الشعار في نسخة الجوال */
+            .logo-container {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1;
+                margin-right: 0 !important;
+            }
+            
+            .header-container {
+                justify-content: flex-start;
             }
         }
     
