@@ -435,6 +435,7 @@
             line-height: 1.8;
             max-width: 1200px;
             margin: 0 auto;
+            transition: font-size 0.3s ease;
         }
         
         .article-content p {
@@ -1226,7 +1227,6 @@
         }
 
         /* ==================== أزرار التحكم بالخط ==================== */
-        /* تم إضافة هذه القاعدة من الكود الأول */
         .font-controls {
             position: fixed;
             z-index: 1000;
@@ -1447,6 +1447,8 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 20 يونيو 2025</span>
             </div>
             
+            <!-- تم إضافة class="article-content" هنا -->
+            <div class="article-content">
                 <p>نكاد لا نسمع بهذه الكلمة، إلّا ويذهب تفكيرنا إلى الشهداء والمتعة الجنسية.</p>
                 <p>لأن هذه الكلمة ارتبطت، أو بالأحرى تم ربطها من قبل البعض بالجهاد في سبيل الله والعمليات الانتحارية، وقتل الآمنين، حتى يفوز بالحور العين، مع أن الله عندما ذكر الحور العين، لم يحدد أنهم لفئة معينة من الناس (كالشهداء مثلاً﴾.</p>
                 <p>كلمة <span style="color: #000; font-weight: bold;"> "الحور" </span> تعني شديد سواد العينين، والأنثى "حوراء" وكلمة <span style="color: #000; font-weight: bold;"> "عين" </span>تعني صفاء العين، والحور العين تشمل الذكور والإناث على حد سواء، حيث الذكور (الحور العين) لهم في الجنة جمال نادر.</p>
@@ -1484,7 +1486,7 @@
                      </a>
                     
                 </div>
-                </div> 
+            </div> 
             
             <div class="article-actions">
                 <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
@@ -1730,54 +1732,58 @@
         });
         
         // ==================== أزرار التحكم بحجم الخط ====================
-        // تم إضافة هذا الجزء من الكود الأول
         const fontDecrease = document.getElementById('fontDecrease');
         const fontReset = document.getElementById('fontReset');
         const fontIncrease = document.getElementById('fontIncrease');
         const articleContent = document.querySelector('.article-content');
         const publishDate = document.querySelector('.publish-date');
         
-        let originalFontSize, originalDateSize;
-        
         let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
+        const minScale = 0.8;
+        const maxScale = 1.5;
+        const scaleStep = 0.1;
         
+        // دالة لتطبيق تغيير حجم الخط
         function applyFontScale() {
-            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            const newSize = 18 * currentScale; // الحجم الأساسي 18px
+            articleContent.style.fontSize = `${newSize}px`;
+            publishDate.style.fontSize = `${newSize * 0.9}px`;
+            
+            // تغيير حجم العناوين بشكل متناسب
+            const headings = articleContent.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            headings.forEach(heading => {
+                const originalSize = parseFloat(getComputedStyle(heading).fontSize);
+                heading.style.fontSize = `${originalSize * currentScale}px`;
+            });
         }
         
+        // تصغير الخط
         fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
-            applyFontScale();
+            if (currentScale > minScale) {
+                currentScale -= scaleStep;
+                applyFontScale();
+            }
         });
         
+        // تكبير الخط
         fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
-            applyFontScale();
+            if (currentScale < maxScale) {
+                currentScale += scaleStep;
+                applyFontScale();
+            }
         });
         
+        // إعادة الخط للحجم الطبيعي
         fontReset.addEventListener('click', () => {
             currentScale = 1;
-            applyFontScale();
-        });
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            articleContent.style.fontSize = '';
+            publishDate.style.fontSize = '';
             
-            const rootStyles = getComputedStyle(document.documentElement);
-            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-            
-            const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
+            // إعادة العناوين لحجمها الأصلي
+            const headings = articleContent.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            headings.forEach(heading => {
+                heading.style.fontSize = '';
+            });
         });
     </script>
 </body>
