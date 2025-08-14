@@ -2,11 +2,14 @@
 <html dir="rtl" lang="ar">
 <head>
 <meta charset="utf-8"/>
+<!-- إصلاح إعدادات viewport لمنع الميل والزوم غير المرغوب فيه -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>المقالات</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- إضافة كود AdSense هنا -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
 <style>
+    /* إصلاح عام لمنع التجاوز الأفقي */
     * {
       box-sizing: border-box;
       max-width: 100%;
@@ -16,25 +19,9 @@
       width: 100%;
       overflow-x: hidden;
       position: relative;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5efff;
-      margin: 0;
-      padding: 0;
-      color: #2f003f;
-      min-height: 100vh;
-      background-attachment: fixed;
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      -webkit-overflow-scrolling: touch;
     }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* أنماط الشريط العلوي */
+    
+    /* أنماط الشريط العلوي من الكود الأول */
     .nav-overlay {
       position: fixed;
       top: 0;
@@ -126,7 +113,89 @@
       background: rgba(255, 255, 255, 0.15);
     }
 
-    /* أنماط أزرار المقالات - تم إزالة أزرار المشاركة والطباعة */
+    @media (min-width: 1400px) {
+      .nav-links a {
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 2px;
+        background: #ffd166;
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .logo-container {
+        order: -1;
+        margin-right: 30px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      nav {
+        padding: 0.6em 3%;
+        justify-content: space-between;
+      }
+
+      .hamburger {
+        display: block;
+        order: -1;
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 60px;
+        right: 15px;
+        background: #5e2ca5;
+        width: 230px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(94, 44, 165, 0.15);
+        flex-direction: column;
+        padding: 1.2em;
+        z-index: 999;
+        left: auto;
+        transform: none;
+        animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        max-height: 80vh;
+        overflow-y: auto;
+        padding-bottom: 10px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        margin: 4px 0;
+        font-size: 0.9em;
+      }
+
+      .logo-container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+      }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* أنماط أزرار المقالات */
     .article-actions {
       display: flex;
       gap: 10px;
@@ -176,6 +245,39 @@
       z-index: 10;
       min-width: 120px;
       text-align: center;
+    }
+
+    /* أنماط قائمة المشاركة للمقالات */
+    .article-share-menu {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f8f3ff;
+      border: 1px solid #e6daff;
+      border-radius: 12px;
+      padding: 15px;
+      width: 180px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 10;
+    }
+
+    .article-share-menu a img {
+      transition: transform 0.2s ease;
+    }
+
+    .article-share-menu a:hover img {
+      transform: scale(1.15);
+    }
+
+    .share-button-container {
+      position: relative;
+    }
+
+    /* تغيير لون أيقونة المشاركة فقط إلى اللون الوردي */
+    .share-button-container .article-button img {
+      filter: hue-rotate(300deg) saturate(2) brightness(0.9);
     }
 
     /* رسائل التنبيه */
@@ -328,7 +430,7 @@
       display: none;
     }
 
-    /* أنماط مربع البحث الجديد */
+    /* أنماط مربع البحث الجديد - من الكود الأول */
     .section-header {
       text-align: center;
       margin-bottom: 40px;
@@ -485,8 +587,8 @@
       }
       
       #prevPage, #nextPage, #firstPage {
-        padding: 8px 16px;
-        font-size: 0.95em;
+        padding: 6px 12px;
+        font-size: 0.9em;
       }
       
       /* إصلاحات لمنع التجاوز الأفقي */
@@ -564,30 +666,17 @@
         top: 60px;
         right: 15px;
         background: #5e2ca5;
-        width: 230px;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(94, 44, 165, 0.15);
+        width: 200px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         flex-direction: column;
-        padding: 1.2em;
+        padding: 1em;
         z-index: 999;
-        left: auto;
-        transform: none;
-        animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        max-height: 80vh;
-        overflow-y: auto;
-        padding-bottom: 10px;
       }
 
       .nav-links.show {
         display: flex;
-      }
-
-      .nav-links a {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        margin: 4px 0;
-        font-size: 0.9em;
+        animation: slideIn 0.3s ease;
       }
 
       .logo-container {
@@ -596,6 +685,20 @@
         transform: translateX(-50%);
         margin: 0;
       }
+
+      .logo-container img:hover {
+        transform: none;
+        filter: none;
+      }
+
+      .article-button {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .back-to-all {
+        width: 90%;
+      }
     }
 
     @keyframes slideIn {
@@ -603,7 +706,7 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
-    /* أنماط التذييل */
+    /* أنماط التذييل من الكود الأول */
     footer {
       text-align: center;
       padding: 18px;
@@ -658,6 +761,25 @@
     }
 
     /* باقي أنماط الصفحة الأصلية */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5efff;
+      margin: 0;
+      padding: 0;
+      color: #2f003f;
+      min-height: 100vh;
+      background-attachment: fixed;
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      -webkit-overflow-scrolling: touch; /* تمكين التمرير السلس على iOS */
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .container {
       padding: 2em;
       max-width: 900px;
@@ -745,145 +867,34 @@
       color: #5e2ca5;
     }
   
-    .creative-text {
-      position: relative;
-      display: inline-block;
-      color: #5e2ca5;
-      margin-bottom: 1.3em;
-      font-size: 2.3em;
-      padding-bottom: 12px;
-      font-weight: 700;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      text-align: center;
-      width: 100%;
-    }
-    .creative-text::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 50%;
-      transform: translateX(50%);
-      width: 90px;
-      height: 3px;
-      background: linear-gradient(90deg, #ffd166, #ff6b6b);
-      border-radius: 10px;
-    }
-    
-    /* تحسينات أزرار التنقل بين الصفحات */
-    #pagination-wrapper {
-      text-align: center;
-      margin: 40px 0;
-      padding: 15px;
-      background: #f5f0ff;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    }
-    
-    #pageInfo {
-      font-weight: bold;
-      color: #5e2ca5;
-      margin-bottom: 15px;
-      font-size: 1.1em;
-    }
-    
-    .pagination-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    
-    #prevPage, #nextPage, #firstPage {
-      background-color: #a88ee6;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1em;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      min-width: 120px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-      position: relative;
-    }
-    
-    #prevPage:hover, #nextPage:hover, #firstPage:hover {
-      background-color: #8a6ad6;
-      transform: translateY(-3px);
-      box-shadow: 0 5px 12px rgba(0,0,0,0.15);
-    }
-    
-    #firstPage {
-      background-color: #f3eaff;
-      color: #5e2ca5;
-    }
-    
-    #firstPage:hover {
-      background-color: #e6d6ff;
-    }
-    
-    #prevPage::after {
-      content: 'عرض المقالات السابقة';
-      position: absolute;
-      top: -35px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #7b3fcf;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 0.8em;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-    
-    #nextPage::after {
-      content: 'عرض المقالات التالية';
-      position: absolute;
-      top: -35px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #7b3fcf;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 0.8em;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-    
-    #firstPage::after {
-      content: 'العودة للصفحة الأولى';
-      position: absolute;
-      top: -35px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #7b3fcf;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 0.8em;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-    
-    #prevPage:hover::after, 
-    #nextPage:hover::after, 
-    #firstPage:hover::after {
-      opacity: 1;
-    }
+.creative-text {
+  position: relative;
+  display: inline-block;
+  color: #5e2ca5;
+  margin-bottom: 1.3em;
+  font-size: 2.3em;
+  padding-bottom: 12px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+}
+.creative-text::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translateX(50%);
+  width: 90px;
+  height: 3px;
+  background: linear-gradient(90deg, #ffd166, #ff6b6b);
+  border-radius: 10px;
+}
 </style>
 </head>
 <body>
 <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
-<!-- الشريط العلوي -->
+<!-- الشريط العلوي من الكود الأول مع إزالة مربع البحث -->
 <nav>
 <div class="hamburger" onclick="toggleMobileMenu()">☰ القائمة</div>
 <div class="nav-links">
@@ -898,6 +909,8 @@
 <a href="hewar.html"><i class="fas fa-comments"></i> حوارات</a>
 <a href="favorites.html"><i class="fas fa-star"></i> المفضلة</a>
 <a href="support.html"><i class="fas fa-hand-holding-heart"></i> دعم المحتوى</a>
+<a href="#" onclick="window.print()"><i class="fas fa-print"></i> طباعة</a>
+<!-- تمت إزالة مربع البحث من هنا -->
 </div>
 <div class="logo-container">
 <a href="index.html">
@@ -908,12 +921,12 @@
 
 <!-- المحتوى الأصلي -->
 <div class="container">
-<!-- قسم العنوان ومربع البحث -->
+<!-- إضافة قسم العنوان ومربع البحث الجديد -->
 <div class="section-header">
   <h1 class="creative-text" style="text-align: center;">المقالات</h1>
   <p class="intro">في هذه الصفحة أشارك مقالات من خارج الصندوق، ونقد الموروث بوعي واحترام للعقل.</p>
   
-  <!-- مربع البحث -->
+  <!-- مربع البحث الجديد بنفس شكل الكود الأول -->
   <div class="search-container">
     <div class="search-icon">
       <i class="fas fa-search"></i>
@@ -929,125 +942,1187 @@
 <div class="no-results" id="noResultsMessage">
       لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
 </div>
-
-<!-- قائمة المقالات -->
 <div class="article" id="article-44">
 <h2><a href="https://husseinalkhalil.com/books">❖ مفهوم الربا في كتاب الله.</a></h2>
 <span class="publish-date"><span class="date-icon">📅</span> 24 يوليو 2025</span>
-<p>في هذه المقالة نستعرض مفهوم الربا كما ورد في الكتاب المقدس، مع تحليل لآراء الفقهاء والمفكرين المعاصرين حول تطبيقاته في العصر الحديث. الربا من المفاهيم التي تثير جدلاً واسعاً في الأوساط الدينية والاقتصادية على حد سواء.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ مفهوم الربا في كتاب الله.')">
-          ⭐ المفضلة
+          ⭐
         </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
 </div>
 </div>
-
+</div>
+</div>
+</div>
 <div class="article" id="article-43">
 <h2>❖ للذكر مثل حظ الانثيين</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 13 يوليو 2025</span>
-<p>تتناول هذه المقالة مفهوم الميراث في الإسلام وتفسير الآية "للذكر مثل حظ الأنثيين". نناقش التفسيرات المختلفة لهذه الآية والقراءات المعاصرة التي تحاول فهمها في سياق العدالة الاجتماعية والمساواة بين الجنسين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ للذكر مثل حظ الانثيين')">
-          ⭐ المفضلة
+          ⭐
         </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
 </div>
 </div>
-
+</div>
+</div>
+</div>
 <div class="article" id="article-42">
 <h2>❖ وطني أولاً، هل أصبحت الوطنية تهمة؟</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 10 يوليو 2025</span>
-<p>في زمن العولمة والانفتاح الثقافي، أصبح مفهوم الوطنية موضع تساؤل. هذه المقالة تناقش تحول مفهوم الوطنية من فضيلة إلى تهمة في بعض الأوساط، وتستكشف التوازن بين الانتماء الوطني والانفتاح على العالم.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ وطني أولاً، هل أصبحت الوطنية تهمة؟')">
-          ⭐ المفضلة
+          ⭐
         </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
 </div>
 </div>
-
+</div>
+</div>
+</div>
 <div class="article" id="article-41">
-<h2>❖ لا تبرر، أنت لست موظفًا في خدمة أفكار الآخرين</h2>
+<h2>❖ لا تبرر، أنت لست موظفًا في خدمة أفكار الآخرين.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 9 يوليو 2025</span>
-<p>كثير منا يقع في فخ الدفاع المستمر عن أفكار الآخرين وتبريرها. هذه المقالة تحث على التحرر الفكري وعدم تحمل عبء الدفاع عن أفكار لا نؤمن بها حقاً، مع التركيز على أهمية تكوين الرأي المستقل.</p>
 <div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا تبرر، أنت لست موظفًا في خدمة أفكار الآخرين')">
-          ⭐ المفضلة
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا تبرر، أنت لست موظفًا في خدمة أفكار الآخرين.')">
+          ⭐
         </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
 </div>
 </div>
-
+</div>
+</div>
+</div>
 <div class="article" id="article-40">
-<h2>❖ فلسطين وحصان طروادة</h2>
+<h2>❖ فلسطين وحصان طروادة.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 5 يوليو 2025</span>
-<p>تحليل للصراع الفلسطيني الإسرائيلي من منظور استراتيجي، مع استعارة مفهوم "حصان طروادة" لفهم بعض التكتيكات السياسية والدبلوماسية المستخدمة في هذا الصراع الطويل.</p>
 <div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ فلسطين وحصان طروادة')">
-          ⭐ المفضلة
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ فلسطين وحصان طروادة.')">
+          ⭐
         </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
 </div>
 </div>
-
+</div>
+</div>
+</div>
 <div class="article" id="article-39">
-<h2>❖ الحور العين: قراءة معاصرة</h2>
+<h2>❖ الحور العين.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 20 يونيو 2025</span>
-<p>تتناول هذه المقالة مفهوم الحور العين في الجنة كما ورد في النصوص الدينية، مع محاولة لفهمه في سياق عصري يتناسب مع مفاهيم الجمال والروحانية في عصرنا الحالي.</p>
 <div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الحور العين: قراءة معاصرة')">
-          ⭐ المفضلة
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الحور العين.')">
+          ⭐
         </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
 </div>
 </div>
-
+</div>
+</div>
+</div>
 <div class="article" id="article-38">
 <h2>❖ الإيمان الصادق لا يحتاج إلى ترويج</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 9 يونيو 2025</span>
-<p>في عصر الإعلام والتسويق الديني، تطرح هذه المقالة تساؤلاً جوهرياً: هل الإيمان الحقيقي يحتاج إلى حملات ترويجية؟ نناقش الفرق بين نشر المعرفة وتسويق الدين، وكيف يؤثر ذلك على مصداقية الخطاب الديني.</p>
 <div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الإيمان الصادق لا يحتاج إلى ترويج')">
-          ⭐ المفضلة
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الإيمان الصادق لا يحتاج إلى ترويج.')">
+          ⭐
         </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
 </div>
 </div>
-
+</div>
+</div>
+</div>
 <div class="article" id="article-37">
-<h2>❖ بني إسرائيل: التاريخ والرمزية</h2>
+<h2>❖ بني إسرائيل.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 30 مايو 2025</span>
-<p>دراسة تاريخية وتحليلية لقصة بني إسرائيل كما وردت في الكتب المقدسة، مع التركيز على الدروس المستفادة والأبعاد الرمزية التي تتجاوز الحدث التاريخي إلى الدلالات الأخلاقية والروحية.</p>
 <div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ بني إسرائيل: التاريخ والرمزية')">
-          ⭐ المفضلة
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ بني إسرائيل.')">
+          ⭐
         </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
 </div>
 </div>
-
-<!-- ترقيم الصفحات - تم تحسين التنسيق -->
-<div id="pagination-wrapper">
-  <div id="pageInfo">
-    الصفحة 1 من 5 - إجمالي المقالات: 40
-  </div>
-  <div class="pagination-buttons">
-    <button id="prevPage" onclick="prevPage()">« السابق</button>
-    <button id="firstPage" onclick="goToFirstPage()">الصفحة الأولى</button>
-    <button id="nextPage" onclick="nextPage()">التالي »</button>
-  </div>
 </div>
 </div>
-<div id="message"></div>
-<!-- زر العودة للأعلى -->
-<button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
-<!-- التذييل -->
-<footer>
-<div class="social-links">
-<a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-<a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&amp;utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
-<a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
-<a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
-<a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
-<a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
 </div>
-<div class="copyright">
-      حسين الخليل - جميع الحقوق محفوظة © 2025
+<div class="article" id="article-36">
+<h2>❖ لا توجد حقيقة مطلقة.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 30 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا توجد حقيقة مطلقة.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-35">
+<h2>❖ العقل والنقل.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 30 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ العقل والنقل.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-34">
+<h2>❖ رسالة إلى صديقي المتمسك بالتراث الديني.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي المتمسك بالتراث الديني.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-33">
+<h2>❖ رسالة إلى صديقي الملحد.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي الملحد.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-32">
+<h2>❖ رسالة إلى صديقي السُنّي وصديقي الشيعي.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي السُنّي وصديقي الشيعي.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-31">
+<h2>❖ رسالة إلى صديقي المثقف.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي المثقف.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-30">
+<h2>❖ قتل الوزغ.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ قتل الوزغ.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-29">
+<h2>❖ لا عنصرية في الإسلام.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا عنصرية في الإسلام.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-28">
+<h2>❖ نعمة العقل.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ نعمة العقل.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-27">
+<h2>❖ الخمر وحكمه.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الخمر وحكمه.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-26">
+<h2>❖ حياة النبي.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ حياة النبي.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-25">
+<h2>❖ الجرح والتعديل.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الجرح والتعديل.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-24">
+<h2>❖ معالجة الخطأ بالخطأ.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ معالجة الخطأ بالخطأ.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-24">
+<h2>❖ أنا والعندليب.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ أنا والعندليب.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-23">
+<h2>❖ مفاهيم مغلوطة.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ مفاهيم مغلوطة.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-22">
+<h2>❖ حُسن الخاتمة وسوء الخاتمة.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ حُسن الخاتمة وسوء الخاتمة.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-21">
+<h2>❖ الأعراب أشد كفراً ونفاقا.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الأعراب أشد كفراً ونفاقا.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-20">
+<h2>❖ الملحد وأنواعه</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الملحد وأنواعه')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-19">
+<h2>❖ تغسيل الميت وتكفينه</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ تغسيل الميت وتكفينه')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-18">
+<h2>❖ الناسخ والمنسوخ.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الناسخ والمنسوخ.
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-17">
+<h2>❖  أكذوبة أسباب النزول</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ أسباب النزول')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-16">
+<h2>❖  القرآن أم التراث؟</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ القرآن أم التراث؟')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-15">
+<h2>❖  أصحاب القوقعة.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ أصحاب القوقعة.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-14">
+<h2>❖  حذارِ.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ حذارِ.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-13">
+<h2>❖  وهم الحقيقة المطلقة.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ وهم الحقيقة المطلقة.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-12">
+<h2>❖  كيف تُشيّطن أفكارك؟</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ كيف تُشيّطن أفكارك؟')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-11">
+<h2>❖  قصة قصيرة.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ قصة قصيرة.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-10">
+<h2>❖  أعراض فهم الدين بالمقلوب.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖  أعراض فهم الدين بالمقلوب.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-9">
+<h2>❖  الباحث عن الأضواء.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖  الباحث عن الأضواء.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-8">
+<h2>❖  النقل على العقل.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖  النقل على العقل.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-7">
+<h2>❖ وهم الحواس في الإلحاد، الحقيقة أوسع مما يُرى.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ وهم الحواس في الإلحاد، الحقيقة أوسع مما يُرى.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-6">
+<h2>❖ لا تسعَ لإرضاء أحد.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا تسعَ لإرضاء أحد.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-5">
+<h2>❖ ازدواجية الضمير</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ ازدواجية الضمير')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-4">
+<h2>❖ دعهم يتكلمون، وواصل طريقك بسلام</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ دعهم يتكلمون، وواصل طريقك بسلام')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-3">
+<h2>❖ هوامش على الطريق.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ هوامش على الطريق.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-2">
+<h2>❖ نظرية الحصان الميت.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 10 مايو 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ نظرية الحصان الميت.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="article" id="article-1">
+<h2>❖ الجدال مع المؤدلجين، معركة خاسرة.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 28 فبراير 2025</span>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الجدال مع المؤدلجين، معركة خاسرة.')">
+          ⭐
+        </button>
+<button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="printArticle(this)">
+          🖨️
+        </button>
+<div class="share-button-container">
+<button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleArticleShareMenu(this)">
+<img alt="مشاركة" src="images/share.png" style="width:20px; height:20px;"/>
+</button>
+<div class="article-share-menu">
+<div onclick="copyArticleLink(this.closest('.article'))" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5; text-align:center;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="#" onclick="shareArticleOn('facebook', this.closest('.article'))"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="#" onclick="shareArticleOn('whatsapp', this.closest('.article'))"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="#" onclick="shareArticleOn('telegram', this.closest('.article'))"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="#" onclick="shareArticleOn('twitter', this.closest('.article'))"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="pagination-wrapper" style="text-align:center; margin: 40px 0;">
+<div id="pageInfo" style="font-weight:bold; color:#5e2ca5; margin-bottom:10px;">
+        الصفحة 1 من ? - إجمالي المقالات: ?
     </div>
-</footer>
+<div style="display:inline-flex; gap: 8px; flex-wrap: wrap; justify-content:center;">
+<button id="prevPage" onclick="prevPage()" style="background-color:#a88ee6; border:none; color:white; padding:8px 14px; border-radius:8px; cursor:pointer;">« السابق</button>
+<button id="firstPage" onclick="goToFirstPage()" style="background-color:#f3eaff; border:none; color:#5e2ca5; padding:8px 14px; border-radius:8px; cursor:pointer;">الصفحة الأولى</button>
+<button id="nextPage" onclick="nextPage()" style="background-color:#a88ee6; border:none; color:white; padding:8px 14px; border-radius:8px; cursor:pointer;">التالي »</button>
+</div>
+</div>
 <script>
     const articlesPerPage = 8;
     let currentPage = 1;
@@ -1064,7 +2139,6 @@
         article.style.display = (index >= start && index < end) ? 'block' : 'none';
       });
 
-      // التحكم في ظهور أزرار السابق والتالي
       document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline-block' : 'none';
       document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline-block' : 'none';
     }
@@ -1095,6 +2169,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       paginateArticles();
 
+      // إضافة ربط مباشر عند الضغط على زر الصفحة الأولى (تأكيد)
       const firstBtn = document.getElementById('firstPage');
       if (firstBtn) {
         firstBtn.addEventListener('click', () => {
@@ -1104,8 +2179,60 @@
         });
       }
     });
+    </script>
+<script>
+  const articlesPerPage = 8;
+  let currentPage = 1;
 
-    // وظائف الشريط العلوي
+  function paginateArticles() {
+    const articles = document.querySelectorAll('.article');
+    const totalPages = Math.ceil(articles.length / articlesPerPage);
+
+    articles.forEach((article, index) => {
+      const start = (currentPage - 1) * articlesPerPage;
+      const end = currentPage * articlesPerPage;
+      article.style.display = (index >= start && index < end) ? 'block' : 'none';
+    });
+
+    document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline-block' : 'none';
+    document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline-block' : 'none';
+  }
+
+  function nextPage() {
+    currentPage++;
+    paginateArticles();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function prevPage() {
+    currentPage--;
+    paginateArticles();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    paginateArticles();
+  });
+</script>
+<div id="message"></div>
+<!-- زر العودة للأعلى -->
+<button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
+<!-- التذييل من الكود الأول -->
+<footer>
+<div class="social-links">
+<a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+<a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&amp;utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+<a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
+<a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+<a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
+<a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
+</div>
+<div class="copyright">
+      حسين الخليل - جميع الحقوق محفوظة © 2025
+    </div>
+</footer>
+<script>
+    // وظائف الشريط العلوي من الكود الأول
     function toggleMobileMenu() {
       const menu = document.querySelector(".nav-links");
       const overlay = document.querySelector(".nav-overlay");
@@ -1206,6 +2333,49 @@
         }
     }
 
+    function printArticle(button) {
+        const article = button.closest(".article").cloneNode(true);
+        const printWindow = window.open('', '_blank');
+        
+        article.querySelectorAll('.read-more, .article-actions').forEach(el => el.remove());
+        
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>طباعة المقالة</title>
+                    <style>
+                        body { 
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            padding: 20px; 
+                            direction: rtl;
+                            line-height: 1.7;
+                        }
+                        h2 {
+                            color: #4a208f;
+                        }
+                        .publish-date {
+                            color: #666;
+                            font-size: 0.9em;
+                            margin-bottom: 15px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${article.innerHTML}
+                    <script>
+                        window.onload = function() {
+                            window.print();
+                            window.onafterprint = function() {
+                                window.close();
+                            };
+                        };
+                    <\/script>
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
+    }
+
     function showMessage(text) {
         const message = document.getElementById("message");
         message.textContent = text;
@@ -1297,7 +2467,7 @@
       });
     }
 
-    // وظيفة البحث في المقالات مع تمييز النتائج
+    // وظيفة البحث في المقالات مع تمييز النتائج (معدلة من الكود الأول)
     function setupSearch() {
       const searchInput = document.getElementById('searchInput');
       const resultsInfo = document.getElementById('searchResultsInfo');
@@ -1362,6 +2532,73 @@
           performSearch();
         }
       });
+    }
+
+    // وظائف مشاركة المقالات
+    function toggleArticleShareMenu(button) {
+      const menu = button.nextElementSibling;
+      const allMenus = document.querySelectorAll('.article-share-menu');
+      
+      // إغلاق جميع قوائم المشاركة الأخرى
+      allMenus.forEach(m => {
+        if (m !== menu) m.style.display = 'none';
+      });
+      
+      // تبديل القائمة الحالية
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function copyArticleLink(article) {
+      const articleId = article.id;
+      const articleUrl = window.location.href.split('#')[0] + '#' + articleId;
+      
+      navigator.clipboard.writeText(articleUrl).then(() => {
+        showCopyAlert("تم نسخ رابط المقالة بنجاح ✅");
+      });
+      
+      // إغلاق القائمة بعد النسخ
+      article.querySelector('.article-share-menu').style.display = 'none';
+    }
+
+    function shareArticleOn(platform, article) {
+      const articleTitle = article.querySelector('h2').textContent;
+      const articleId = article.id;
+      const articleUrl = window.location.href.split('#')[0] + '#' + articleId;
+      
+      let shareUrl = '';
+      
+      switch(platform) {
+        case 'facebook':
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}&quote=${encodeURIComponent(articleTitle)}`;
+          break;
+        case 'twitter':
+          shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(articleTitle)}&url=${encodeURIComponent(articleUrl)}`;
+          break;
+        case 'whatsapp':
+          shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(articleTitle + ' - ' + articleUrl)}`;
+          break;
+        case 'telegram':
+          shareUrl = `https://t.me/share/url?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent(articleTitle)}`;
+          break;
+      }
+      
+      window.open(shareUrl, '_blank');
+      
+      // إغلاق القائمة بعد المشاركة
+      article.querySelector('.article-share-menu').style.display = 'none';
+    }
+
+    function showCopyAlert(message) {
+      let alertBox = document.createElement("div");
+      alertBox.className = "copy-alert";
+      alertBox.innerText = message;
+      document.body.appendChild(alertBox);
+
+      setTimeout(() => alertBox.classList.add("show"), 10);
+      setTimeout(() => {
+        alertBox.classList.remove("show");
+        setTimeout(() => document.body.removeChild(alertBox), 500);
+      }, 2500);
     }
 
     // عرض مقالة واحدة عند فتح رابط معين
@@ -1430,6 +2667,15 @@
         backToTopButton.classList.add('visible');
       } else {
         backToTopButton.classList.remove('visible');
+      }
+    });
+
+    // إغلاق قوائم المشاركة عند النقر خارجها
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.share-button-container')) {
+        document.querySelectorAll('.article-share-menu').forEach(menu => {
+          menu.style.display = 'none';
+        });
       }
     });
 
