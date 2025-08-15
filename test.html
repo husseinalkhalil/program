@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المقالات |رسالة إلى صديقي الملحد.</title>
+    <title>المقالات | فلسطين وحصان طروادة.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -23,14 +23,6 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
-            /* إضافة متغيرات التحكم بالخط */
-            --font-control-position: top right;
-            --font-control-top: 120px;
-            --font-control-bottom: auto;
-            --font-control-right: 250px;
-            --font-control-left: auto;
-            --font-control-button-size: 30px;
-            --font-control-button-font-size: 18px;
         }
         
         * {
@@ -740,7 +732,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
+            .header, .article-actions, .back-btn, .back-to-top {
                 display: none;
             }
             
@@ -1223,86 +1215,6 @@
           font-weight: 600;
           color: #ffd166;
         }
-        
-        /* ==================== أزرار التحكم بالخط ==================== */
-        /* من الكود الأول */
-        .font-controls {
-            position: fixed;
-            z-index: 1000;
-            display: flex;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.5s ease-out;
-            top: var(--font-control-top);
-            bottom: var(--font-control-bottom);
-            right: var(--font-control-right);
-            left: var(--font-control-left);
-        }
-        
-        .font-controls button {
-            width: var(--font-control-button-size);
-            height: var(--font-control-button-size);
-            border-radius: 50%;
-            border: none;
-            background: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: var(--font-control-button-font-size);
-            transition: all 0.3s;
-        }
-        
-        .font-controls button:hover {
-            background: var(--accent-color);
-            transform: scale(1.1);
-        }
-        
-        .font-controls button i {
-            transition: transform 0.2s;
-        }
-        
-        .font-controls button:active i {
-            transform: scale(0.9);
-        }
-        
-        .font-controls button::after {
-            content: attr(title);
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
-        .font-controls button:hover::after {
-            opacity: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .font-controls {
-                --font-control-top: 100px;
-                --font-control-right: 10px;
-                --font-control-button-size: 36px;
-                --font-control-button-font-size: 15px;
-                gap: 6px;
-                padding: 8px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -1426,39 +1338,38 @@
         </div>
     </header>
     
-    <!-- إضافة أزرار التحكم بالخط -->
-    <div class="font-controls">
-        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
-            <i class="fas fa-search-minus"></i>
-        </button>
-        <button id="fontReset" title="الحجم الطبيعي (Reset)">
-            <i class="fas fa-font"></i>
-        </button>
-        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
-            <i class="fas fa-search-plus"></i>
-        </button>
-    </div>
-    
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ رسالة إلى صديقي الملحد.</h1>
-                <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+                <h1>❖ فلسطين وحصان طروادة.</h1>
+                <span class="publish-date"><span class="date-icon">📅</span> 5 يوليو 2025</span>
             </div>
             
-            <div class="article-content">
-                <p>سبب إلحادك هو أنك غير مقتنع بالأديان وتعتبرها مجرد أكاذيب من صنع البشرية، وهذا حقك بالفكر ولا أحد له الحق بالإنكار عليك، لأن البشر ليس لهم الحق في محاسبة بعضهم على معتقداتهم.</p>
-                <p>نبقى جميعًا، مجتمعين تحت مظلة الإنسانية.</p>
-                <p>فالإنسانية تتسع للجميع.</p>
-                <p>لكن أرجوك يا صديقي، أرجوك، جاهد نفسك بما ينفعك، وأطوي صفحة الأديان من حياتك، بما أنك لا تقتنع بها، واجعلها من الماضي، وامضِ حياتك بما يفيدك بدلاً من الاستهزاء بالأديان والملل.</p>
-                <p>لأن هذه الإساءات والاستهزاءات، لا تسمن ولا تغني من جوع بالنسبة لك ولغيرك.</p>
-                <p>ولا تُضيّع جُل وقتك بسب وشتم ولعن الأديان والاستهزاء بها والتي في غالبها موجهة للإسلام دون سواه. خلاص إنساها وإبدأ حياتك من جديد بصفحة جديدة.</p>
-                <p>ابحث عن مسيرة علمية جديدة في حياتك، وحاول تقديم شيء يفيد البشرية، واعتبر حياتك الماضية جزء من ذاكرة قد انتهت.</p>
-                <p>هذه الأشياء تنفعك أكثر من تضييع وقتك في ذِكر آية والاستهزاء بها، على مبدأ شوفوني كيف أستهزء بدينكم.</p>
-                <p>فكما لك حرية المعتقد وتريد من غيرك احترامه، غيرك أيضاً له حرية معتقده.</p>
-                <p>فمن حقك أن تمارس حريتك، لكن حريتك تنتهي عند حرية الآخرين.</p>
-                <p><strong> دمت بود </strong> 🌹 </p>
-            </div>
+                <p>فلسطين ليست قضية شعب محتل، ولا كرامة أمة مسلوبة عند الأنظمة المستبدة.</p>
+                <p>هي ببساطة <span style="color: #000; font-weight: bold;">"حصان طروادة"</span> وبرواية ثانية <span style="color: #000; font-weight: bold;">"مسمار جحا"</span>.</p>
+                <p>الأنظمة المستبدة عرفت نقطة ضعف شعوبها، عرفت إن الشعب العربي عنده جرح حقيقي، وتعاطف إنساني صادق مع فلسطين.</p>
+                <p>فعرفت من وين تدخل وكيف تخدر شعوبها:</p>
+                <p><strong>بدنا نحرر فلسطين.</strong></p>
+                <p><strong>العدو على الأبواب.</strong></p>
+                <p><strong>لازم ندعم فلسطين.</strong></p>
+                <p><strong>لازم نرجع الأقصى.</strong></p>
+                <p>وكل ما الشعب اشتكى من الجوع، من القمع، من الفساد.</p>
+                <p>يُخرَج <strong> “حصان طروادة” </strong>المغبّر من المخزن، ويُقال لهم: اصبروا، نحن دولة مواجهة، العالم يتآمر علينا، فلسطين تناديكم، انظروا إلى الدول الثانية كيف منهارة.</p>
+                <p>وكلما قلّت شعبية الحاكم واهتزت الثقة به، وبدأت الناس تسأل: إلى أين نحن ذاهبون؟!</p>
+                <p>غلاء، ضرائب، فساد، رشاوي، عُزلة دولة….</p>
+                <p>يُستدعى حصان طروادة من جديد لأداء مهمته العاجلة: شدّ الناس عاطفيًا، خلط الأوراق، وتوجيه البوصلة نحو “العدو الخارجي” بدلًا من مواجهة الطغيان الداخلي.</p>
+                <p>ومع الوقت، انحرفت البوصلة فعلاً.</p>
+                <p>حتى صار بعض الناس ما يشوف الظلم ظلمًا، إلّا إذا وقع على الفلسطيني.</p>
+                <p>صار قتل الشعوب الأخرى وتهجيرهم وسحقهم وسجنهم، أمرًا ثانويًا أو مبررًا.</p>
+                <p>بل في أحيان كثيرة، يصفّقون للجلاد، ما دام <strong> “يدعم القضية” </strong>!</p>
+                <p>وغابت عنهم القاعدة البديهية: العدل لا يتجزأ، والمظلومية لا تحتكرها جنسية واحدة.</p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">بس الحقيقة:</span></p>
+                <p>ما في معركة، في نظام خايف ينهار، في سلطة بدها تمدد لنفسها، في مشروع قمعي يستخدم فلسطين كذريعة مقدسة.</p>
+                <p>فصارت القضية مجرد شعار أجوف، يُعلّق عند الحاجة، لتمديد حكم، لتبرير الاعتقالات، لرفع الأسعار، لفرض الضرائب، لتخدير الغضب الشعبي، وتحويل كل نداء للعدالة إلى<strong> “خيانة وطنية” </strong>.</p>
+                <p>وفلسطين ما استفادت شي، لكن الطغاة فازوا بالمناصب، وأحكموا قبضتهم، وسرقوا باسم فلسطين، وزجّوا الأحرار في السجون باسم الخيانة والعمالة.</p>
+                <p>القضية الفلسطينية تحوّلت في يد الطغاة من قضية كرامة، إلى أداة استغلال نفسي وسياسي، تُستخدم فقط حين يحتاجها النظام.</p>
+                <p>مثل مفتاح قديم، يفتح كل الأبواب إلا باب القدس.</p>
+                <p>وحصان طروادة عرف كل الطرق، إلّا <strong> طريق القدس </strong>.</p>
            
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
@@ -1705,57 +1616,6 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
-        });
-        
-        // ==================== أزرار التحكم بحجم الخط ====================
-        // من الكود الأول
-        const fontDecrease = document.getElementById('fontDecrease');
-        const fontReset = document.getElementById('fontReset');
-        const fontIncrease = document.getElementById('fontIncrease');
-        const articleContent = document.querySelector('.article-content');
-        const publishDate = document.querySelector('.publish-date');
-        
-        let originalFontSize, originalDateSize;
-        
-        let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
-        
-        function applyFontScale() {
-            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
-        }
-        
-        fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
-            applyFontScale();
-        });
-        
-        fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
-            applyFontScale();
-        });
-        
-        fontReset.addEventListener('click', () => {
-            currentScale = 1;
-            applyFontScale();
-        });
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
-            
-            const rootStyles = getComputedStyle(document.documentElement);
-            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-            
-            const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
         });
     </script>
 </body>
