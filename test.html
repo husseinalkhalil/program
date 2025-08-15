@@ -24,6 +24,13 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
+            --font-control-position: top right;
+            --font-control-top: 120px;
+            --font-control-bottom: auto;
+            --font-control-right: 250px;
+            --font-control-left: auto;
+            --font-control-button-size: 30px;
+            --font-control-button-font-size: 18px;
         }
         
         * {
@@ -759,8 +766,87 @@
             width: 100%;
         }
         
+        /* أزرار التحكم بالخط */
+        .font-controls {
+            position: fixed;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+            top: var(--font-control-top);
+            bottom: var(--font-control-bottom);
+            right: var(--font-control-right);
+            left: var(--font-control-left);
+        }
+        
+        .font-controls button {
+            width: var(--font-control-button-size);
+            height: var(--font-control-button-size);
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-control-button-font-size);
+            transition: all 0.3s;
+        }
+        
+        .font-controls button:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .font-controls button i {
+            transition: transform 0.2s;
+        }
+        
+        .font-controls button:active i {
+            transform: scale(0.9);
+        }
+        
+        .font-controls button::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .font-controls button:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .font-controls {
+                --font-control-top: 100px;
+                --font-control-right: 10px;
+                --font-control-button-size: 36px;
+                --font-control-button-font-size: 15px;
+                gap: 6px;
+                padding: 8px;
+            }
+        }
+        
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -1333,6 +1419,19 @@
         </div>
     </header>
     
+    <!-- أزرار التحكم بحجم الخط -->
+    <div class="font-controls">
+        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+            <i class="fas fa-search-minus"></i>
+        </button>
+        <button id="fontReset" title="الحجم الطبيعي (Reset)">
+            <i class="fas fa-font"></i>
+        </button>
+        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+            <i class="fas fa-search-plus"></i>
+        </button>
+    </div>
+    
     <div class="container">
         <div class="article-card">
             <div class="article-header">
@@ -1347,7 +1446,7 @@
                     <img src="haleem.jpg" alt="صورة حليم" class="article-image">
                 </div>
                 
-                <p>عندما دخلت العشرين من عمري، كنت مولعلاً بالعندليب عبدالحليم حافظ.</p>
+                <p>عندما دخلت العشرين من عمري، كنت مولعاً بالعندليب عبدالحليم حافظ.</p>
                 
                 <p>أعشقه عشقاً جنونياً وصل إلى حد التعصّب له، اشتريت جميع أغانيه وحفظتها عن ظهر قلب، ولا زلت أحتفظ بتلك الأشرطة حتى اليوم.</p>
                 
@@ -1369,7 +1468,7 @@
                 
                 <p>فلا معنى للعبادة إذا كانت قائمة على الخوف.</p>
                 
-                <p>كنت أسمع محاضرات لأحد رجال الدين وهو يستهزئ بالعندليب ويتوعده <strong> (ضمنيًّا) </strong> بنار جهنم لمجرد أنه غنّى. </p>
+                <p>كنت أسمع محاضرات لأحد رجال الدين وهو يستهزئ بالعندليب ويتوعده <strong> (ضمنيًّا) </strong> بنار جهنم لمجرد أنه غنّى. </p>
                 
                 <p>كنت أشاهد الفيديوهات والتي كان عنوانها: الأفاعي تخرج من قبر عبدالحليم حافظ.</p>
                 
@@ -1547,6 +1646,16 @@
         const navIndicator = document.getElementById('navIndicator');
         const navButtons = document.querySelectorAll('.nav-btn');
         const backToTop = document.getElementById('backToTop');
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontReset = document.getElementById('fontReset');
+        const fontIncrease = document.getElementById('fontIncrease');
+        const articleContent = document.querySelector('.article-content');
+        const publishDate = document.querySelector('.publish-date');
+        
+        let originalFontSize, originalDateSize;
+        let currentScale = 1;
+        const minScale = 0.5;
+        const maxScale = 4;
         
         function toggleMobileMenu(event) {
             if (event) event.stopPropagation();
@@ -1708,6 +1817,44 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
+        });
+        
+        // وظائف التحكم بحجم الخط
+        function applyFontScale() {
+            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+        }
+        
+        fontDecrease.addEventListener('click', () => {
+            currentScale = Math.max(minScale, currentScale / 1.2);
+            applyFontScale();
+        });
+        
+        fontIncrease.addEventListener('click', () => {
+            currentScale = Math.min(maxScale, currentScale * 1.2);
+            applyFontScale();
+        });
+        
+        fontReset.addEventListener('click', () => {
+            currentScale = 1;
+            applyFontScale();
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            
+            const rootStyles = getComputedStyle(document.documentElement);
+            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
+            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
+            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
+            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+            
+            const controls = document.querySelector('.font-controls');
+            controls.style.top = varFontControlTop;
+            controls.style.bottom = varFontControlBottom;
+            controls.style.right = varFontControlRight;
+            controls.style.left = varFontControlLeft;
         });
     </script>
 </body>
