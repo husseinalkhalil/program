@@ -30,6 +30,14 @@
             --header-purple: #5e2ca5; /* لون الهيدر */
             --mobile-header-height: 70px; /* ارتفاع الهيدر في الجوال */
             --glass-bg: rgba(94, 44, 165, 0.92); /* خلفية زجاجية شفافة */
+            
+            /* متغيرات التحكم بالخط المضافة */
+            --font-control-top: 120px;
+            --font-control-bottom: auto;
+            --font-control-right: 250px;
+            --font-control-left: auto;
+            --font-control-button-size: 30px;
+            --font-control-button-font-size: 18px;
         }
         
         /* إعادة تعيين الهوامش والحشوات لجميع العناصر */
@@ -815,7 +823,7 @@
         /* ==================== طباعة ==================== */
         @media print {
             /* إخفاء العناصر غير المرغوب فيها عند الطباعة */
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -854,6 +862,85 @@
         .note-highlight {
             color: red; /* لون أحمر */
             font-weight: bold; /* عريض */
+        }
+        
+        /* أزرار التحكم بالخط المضافة */
+        .font-controls {
+            position: fixed;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+            top: var(--font-control-top);
+            bottom: var(--font-control-bottom);
+            right: var(--font-control-right);
+            left: var(--font-control-left);
+        }
+        
+        .font-controls button {
+            width: var(--font-control-button-size);
+            height: var(--font-control-button-size);
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-control-button-font-size);
+            transition: all 0.3s;
+        }
+        
+        .font-controls button:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .font-controls button i {
+            transition: transform 0.2s;
+        }
+        
+        .font-controls button:active i {
+            transform: scale(0.9);
+        }
+        
+        .font-controls button::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .font-controls button:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .font-controls {
+                --font-control-top: 100px;
+                --font-control-right: 10px;
+                --font-control-button-size: 36px;
+                --font-control-button-font-size: 15px;
+                gap: 6px;
+                padding: 8px;
+            }
         }
         
         /* ==================== وسائط متجاوبة ==================== */
@@ -1412,6 +1499,19 @@
         </div>
     </header>
     
+    <!-- أزرار التحكم بالخط المضافة -->
+    <div class="font-controls">
+        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+            <i class="fas fa-search-minus"></i>
+        </button>
+        <button id="fontReset" title="الحجم الطبيعي (Reset)">
+            <i class="fas fa-font"></i>
+        </button>
+        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+            <i class="fas fa-search-plus"></i>
+        </button>
+    </div>
+    
     <!-- المحتوى الرئيسي -->
     <div class="container">
         <div class="article-card">
@@ -1474,7 +1574,7 @@
                 <p>لكن لم ينتهِ الأمر عند هذا الحد، فلسان حال حُراس المعبد الكهنوتي يقول: لا تزال هناك مشكلة يجب حلها.</p>
                 <p><strong><span style="color: blue;">ما هي هذه المشكلة يا ترى؟ </span></strong></p>
                 <p><strong><span style="color: green;">الجواب: </span></strong> هناك آيات (آنفة الذكر) لا تتوافق مع ما كتبناه في الأحاديث التي نسبناها لرسول الله ويجب التخلّص منها. </p>
-                <p><strong><span style="color: blue;">ما العمل إذاً؟ </span></strong></p>
+                <p><strong><span style="color: blue;">ما العمل إذاً? </span></strong></p>
                 <p>نخترع لهم مصطلح الناسخ والمنسوخ وأي آية لا تعجبنا وتدعو إلى التسامح والحرية ولا تتوافق مع أفكارنا، نقول عنها منسوخة، وبذلك تبقى الآيات كما هي في القرآن للقراءة فقط، ولكن حكمها ملغي بالنصوص التي كتبناها نحن.</p>
                 <p>حتى ابليس لا يخطر على باله هذه الأفكار لأنهم هم الأبالسة الحقيقيين.</p>
                 <p>وإذا ما انتقد أحد ما "غير مسلم" دين الإسلام وانتقد رسول الله بأنه بيدوفيلي ويدعو إلى غزو البلدان وقتل كل من لا يؤمن برسالته، مستندين بذلك إلى النصوص البخارية والكُليّنية وغيرها، تثور ثائرة المسلمين كالعادة والتي تحركهم العواطف لا العقول، ويطلقون شعارات "إلّا رسول الله" ويطالبون بقتل من يسيء للرسول وللإسلام لإثبات أن الإسلام هو دين السلام وليس دين القتل والهمجية كما يدّعي المسيء!</p>
@@ -1762,6 +1862,56 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
+        });
+        
+        // أزرار التحكم بحجم الخط المضافة
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontReset = document.getElementById('fontReset');
+        const fontIncrease = document.getElementById('fontIncrease');
+        const articleContent = document.querySelector('.article-content');
+        const publishDate = document.querySelector('.publish-date');
+        
+        let originalFontSize, originalDateSize;
+        
+        let currentScale = 1;
+        const minScale = 0.5;
+        const maxScale = 4;
+        
+        function applyFontScale() {
+            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+        }
+        
+        fontDecrease.addEventListener('click', () => {
+            currentScale = Math.max(minScale, currentScale / 1.2);
+            applyFontScale();
+        });
+        
+        fontIncrease.addEventListener('click', () => {
+            currentScale = Math.min(maxScale, currentScale * 1.2);
+            applyFontScale();
+        });
+        
+        fontReset.addEventListener('click', () => {
+            currentScale = 1;
+            applyFontScale();
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            
+            const rootStyles = getComputedStyle(document.documentElement);
+            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
+            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
+            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
+            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+            
+            const controls = document.querySelector('.font-controls');
+            controls.style.top = varFontControlTop;
+            controls.style.bottom = varFontControlBottom;
+            controls.style.right = varFontControlRight;
+            controls.style.left = varFontControlLeft;
         });
     </script>
 </body>
