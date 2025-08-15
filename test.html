@@ -23,6 +23,14 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
+            /* متغيرات التحكم بالخط */
+            --font-control-position: top right;
+            --font-control-top: 120px;
+            --font-control-bottom: auto;
+            --font-control-right: 250px;
+            --font-control-left: auto;
+            --font-control-button-size: 30px;
+            --font-control-button-font-size: 18px;
         }
         
         * {
@@ -730,9 +738,88 @@
             animation: fadeOut 0.2s ease-out forwards;
         }
         
+        /* ==================== أزرار التحكم بحجم الخط ==================== */
+        .font-controls {
+            position: fixed;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+            top: var(--font-control-top);
+            bottom: var(--font-control-bottom);
+            right: var(--font-control-right);
+            left: var(--font-control-left);
+        }
+        
+        .font-controls button {
+            width: var(--font-control-button-size);
+            height: var(--font-control-button-size);
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-control-button-font-size);
+            transition: all 0.3s;
+        }
+        
+        .font-controls button:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .font-controls button i {
+            transition: transform 0.2s;
+        }
+        
+        .font-controls button:active i {
+            transform: scale(0.9);
+        }
+        
+        .font-controls button::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .font-controls button:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .font-controls {
+                --font-control-top: 100px;
+                --font-control-right: 10px;
+                --font-control-button-size: 36px;
+                --font-control-button-font-size: 15px;
+                gap: 6px;
+                padding: 8px;
+            }
+        }
+        
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -1338,6 +1425,19 @@
         </div>
     </header>
     
+    <!-- أزرار التحكم بحجم الخط -->
+    <div class="font-controls">
+        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+            <i class="fas fa-search-minus"></i>
+        </button>
+        <button id="fontReset" title="الحجم الطبيعي (Reset)">
+            <i class="fas fa-font"></i>
+        </button>
+        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+            <i class="fas fa-search-plus"></i>
+        </button>
+    </div>
+    
     <div class="container">
         <div class="article-card">
             <div class="article-header">
@@ -1345,6 +1445,7 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
             </div>
             
+            <div class="article-content">
                 <p>يعتقد من يتمسّك بالتراث الديني بجميع طوائفهم المتناحرة، بأن القرآن عبارة عن طلاسم غير مفصّل وغير محكم وأحوج للروايات!</p>
                 <p>بل إن بعضهم ذهب لأبعد من ذلك، حيث أنهم جعلوا الروايات التي يعترفون بأنها "ظنّية" هي وحي من الله يجب اتباعها وبأنها تنسخ (تلغي) آيات من القرآن جملةً وتفصيلاً!</p>
                 <p>يقول تعالى:</p>
@@ -1371,13 +1472,13 @@
                 <p>الذي يُحبّ رسول الله لا يتقوّل عليه بالبذاءة، ولا بالدمويّة ولا على أهل بيته بالفاحشة (حاشاهم).</p>
                 <p>الذي يُحبّ الرسول لا يؤذيه بروايات شوّهت أخلاقه وصورته بأسوء صورة، وهو أسوتنا الحسنة.</p>
                 <p>هناك روايات لا تقبلونها على أنفسكم ولا على أهل بيتكم، فكيف تقبلونها على رسول الله!</p>
-                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;"> ﴿إِنَّ ٱلَّذِينَ يُؤْذُونَ ٱللَّهَ وَرَسُولَهُۥ لَعَنَهُمُ ٱللَّهُ فِى ٱلدُّنْيَا وَٱلْءَاخِرَةِ وَأَعَدَّ لَهُمْ عَذَابًا مُّهِينًا﴾ </span>الأحزاب [57]</p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;"> ﴿إِنَّ ٱلَّذِينَ يُؤْذُونَ ٱللَّهَ وَرَسُولَهُۥ لَعَنَهُمُ ٱللَّهُ فِى ٱلدُّنْيَا وَٱلْءَاخِرَةِ وَأَعَدَّ لَهُمْ عَذَابًا مُّهِينًا﴾</span>الأحزاب [57]</p>
                 <p>يكذبون على لسان رسول الله بأنه منع كتابة الحديث حتى لا يختلط مع القرآن.</p>
                 <p>وأجمل ما في القرآن أنه يفضح الكذابين.</p>
                 <p>ها أنتم تناقضون أنفسكم.</p>
                 <p>لماذا تخشون على الأحاديث بأن تختلط مع القرآن إن كانت وحي ثاني من عند الله؟</p>
                 <p>بل إن الله فضح الذين كانوا يدّعون بأنهم يطيعون الرسول، ويقومون بكتابة ما يقول، فقد كانوا يبدلون قوله فور الخروج من عنده.</p>
-                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;"> ﴿وَيَقُولُونَ طَاعَةٌ فَإِذَا بَرَزُوا۟ مِنْ عِندِكَ بَيَّتَ طَآئِفَةٌ مِّنْهُمْ غَيْرَ ٱلَّذِى تَقُولُ ۖ وَٱللَّهُ يَكْتُبُ مَا يُبَيِّتُونَ ۖ فَأَعْرِضْ عَنْهُمْ وَتَوَكَّلْ عَلَى ٱللَّهِ ۚ وَكَفَىٰ بِٱللَّهِ وَكِيلًا﴾ </span> النساء [81] </p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;"> ﴿وَيَقُولُونَ طَاعَةٌ فَإِذَا بَرَزُوا۟ مِنْ عِندِكَ بَيَّتَ طَآئِفَةٌ مِّنْهُمْ غَيْرَ ٱلَّذِى تَقُولُ ۖ وَٱللَّهُ يَكْتُبُ مَا يُبَيِّتُونَ ۖ فَأَعْرِضْ عَنْهُمْ وَتَوَكَّلْ عَلَى ٱللَّهِ ۚ وَكَفَىٰ بِٱللَّهِ وَكِيلًا﴾</span> النساء [81] </p>
                 <p>كلما حاول أتباع الظنّ بالتضليل والكذب، فإن القرآن يفضحهم.</p>
                 <p>فدائماً ما يتحججون بقوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿وَمَآ ءَاتَىٰكُمُ ٱلرَّسُولُ فَخُذُوهُ وَمَا نَهَىٰكُمْ عَنْهُ فَٱنتَهُوا۟﴾</span> الحشر [7] </p>
                 <p>عندكم استعداد بأن تنشروا بالمنشار الآيات، وتقتصّونها عن سياقها وتلغوا فيها لكي تنتصروا لكهنوتكم، فعندما انتقدت أحاديث في البخاري بأنها تُناقض آيات الله، جاء أحدهم وقال لي: القرآن أيضاً يوجد فيه آيات تناقض بعضها البعض!</p>
@@ -1413,11 +1514,13 @@
                 <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وَٱلَّذِينَ يُمَسِّكُونَ بِٱلْكِتَٰبِ وَأَقَامُوا۟ ٱلصَّلَوٰةَ إِنَّا لَا نُضِيعُ أَجْرَ ٱلْمُصْلِحِينَ﴾</span> الأعراف [170] </p>
                 <p><strong> وأخيرًا: </strong>الله وحده يعلم بما تتقولون عليه وعلى رسوله، وليس عليّ إلّا أن أذكركم بالقرآن فقط، وليس بأي كتاب بشري آخر من الكتب التي تشركونها مع كتاب الله.</p>
                 <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿نَّحْنُ أَعْلَمُ بِمَا يَقُولُونَ ۖ وَمَآ أَنتَ عَلَيْهِم بِجَبَّارٍ ۖ فَذَكِّرْ <span style="color: #006400;"> بِالْقُرْآنِ </span><span style="color: #5e2ca5; font-weight: bold;">مَن يَخَافُ وَعِيدِ﴾</span> ق [45]</p>
+            </div>
                 
-                <div style="text-align: center; margin-top: 40px;">
+            <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-                </div>
+            </div>
             
+            <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
                 <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
                     <i class="fas fa-print"></i>
@@ -1659,6 +1762,56 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
+        });
+        
+        // أزرار التحكم بحجم الخط
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontReset = document.getElementById('fontReset');
+        const fontIncrease = document.getElementById('fontIncrease');
+        const articleContent = document.querySelector('.article-content');
+        const publishDate = document.querySelector('.publish-date');
+        
+        let originalFontSize, originalDateSize;
+        
+        let currentScale = 1;
+        const minScale = 0.5;
+        const maxScale = 4;
+        
+        function applyFontScale() {
+            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+        }
+        
+        fontDecrease.addEventListener('click', () => {
+            currentScale = Math.max(minScale, currentScale / 1.2);
+            applyFontScale();
+        });
+        
+        fontIncrease.addEventListener('click', () => {
+            currentScale = Math.min(maxScale, currentScale * 1.2);
+            applyFontScale();
+        });
+        
+        fontReset.addEventListener('click', () => {
+            currentScale = 1;
+            applyFontScale();
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            
+            const rootStyles = getComputedStyle(document.documentElement);
+            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
+            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
+            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
+            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+            
+            const controls = document.querySelector('.font-controls');
+            controls.style.top = varFontControlTop;
+            controls.style.bottom = varFontControlBottom;
+            controls.style.right = varFontControlRight;
+            controls.style.left = varFontControlLeft;
         });
     </script>
 </body>
