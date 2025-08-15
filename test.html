@@ -1444,9 +1444,10 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
             </div>
             
+            <div class="article-content">
                 <p>بعض المفاهيم المغلوطة لدى البعض من أصحاب الفكر العقلاني أو المفكرين كما يحبون أن يُطلق عليهم.</p>
                 <p>البعض لديهم خلط ولغط بمفهوم اليهود، ونسب هذه الكلمة وحصرها باسرائيل.</p>
-                <p>حن لا مشكلة لدينا مع اليهود، فهم ملّة مثلهم مثل باقي الملل كالمؤمنين والنصارى.</p>
+                <p>حن لا مشكلة لدينا مع اليهود، فهُم ملّة مثلهم مثل باقي الملل كالمؤمنين والنصارى.</p>
                 <p>لهم ما لهم وعليهم ما عليهم.</p>
                 <p>منهم المحترمين ومنهم السيئين كغيرهم.</p>
                 <p>أنا عن نفسي ليست لدي مشكلة مع اليهودي في اوروبا أو امريكا أو في أي مكان آخر <strong><span style="color: red;">"بإستثناء اسرائيل"</span></strong> هناك يهود في الدول العربية حالهم كحال باقي المواطنين. </p>
@@ -1457,7 +1458,7 @@
                 <p>يعني الصهاينة أنفسهم يعترفون بجرائمهم واحتلالهم للبلدان وارتكابهم للمجازر ويتفاخرون بها، بينما صاحبنا "المثقف" يحاول تلميع صورتهم بكل ما يستطيع.</p>
                 <p>بل وصل به الحد إلى لوم من يدافع عن أرضه وإظهاره بمظهر المجرم المعتدي لانه يقاتل الصهيوني الذي اغتصب ارضه!</p>
                 <p>سيأتي أمثال هؤلاء ويقول: أن الشعب الصهيوني الآن من الأطفال وغيرهم، لا ذنب لهم بما فعله آبائهم وأجدادهم، وعلينا أن نتسامح ونتعايش معهم.</p>
-                <p><strong><span style="color: blue;"> أقول لهم: </strong>يا ترى لو سألت أياً من هؤلاء وبيّنت له أنه يعيش في أرض ليست أرضه، بل أرض اغتصبها آبائه وأجداده من سكانها الأصليين بعد أن قتلوهم وهجّروهم. </p>    
+                <p><strong><span style="color: blue;"> أقول لهم: </span></strong>يا ترى لو سألت أياً من هؤلاء وبيّنت له أنه يعيش في أرض ليست أرضه، بل أرض اغتصبها آبائه وأجداده من سكانها الأصليين بعد أن قتلوهم وهجّروهم. </p>    
                 <p>بماذا سيجيبك؟</p>
                 <p>بالتأكيد سينكر ذلك وسيُعلن ولائه المطلق لدولته المزعومة، وسيتهم أهل الأرض الأصليين بالإرهاب، ولديه القناعة الكاملة بأن هذه الأرض هي أرضه وأرض آباءه وأجداده.</p>
                 <p>يربط هؤلاء "المثقفون" جميع يهود العالم بإسرائيل، وهذا خلط ولغط، فاليهود شيء واسرائيل شيء آخر، فاليهود منتشرون تقريبًا في كل بقاع الأرض، ونتعامل معهم كما نتعامل مع غيرهم.</p>
@@ -1471,8 +1472,8 @@
                 <p>عندما يأتي مجرم ويحتل أرضك ويُهجّرك من بيتك بالقوة، عندها حدثني عن التسامح والعيش المشترك.</p>
                 <p>ما أسهل الكلام عندما تكون المشاكل بعيدة عنّا.</p>
                 <p>دمت بود يا صديقي المثقف الذي ترتشف القهوة🌹</p>
-                
-           
+            </div>
+            
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
             </div>
@@ -1533,6 +1534,61 @@
     </div>
 
     <script>
+        // ==================== كود التحكم بالخط (مُعدّل) ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعريف متغيرات التحكم بالخط
+            const fontDecrease = document.getElementById('fontDecrease');
+            const fontReset = document.getElementById('fontReset');
+            const fontIncrease = document.getElementById('fontIncrease');
+            const articleContent = document.querySelector('.article-content');
+            const publishDate = document.querySelector('.publish-date');
+            
+            // تخزين الحجم الأصلي للخط
+            let originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            let originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            
+            // إعداد التحكم بالحجم
+            let currentScale = 1;
+            const minScale = 0.5;
+            const maxScale = 4;
+            
+            // تطبيق حجم الخط الحالي
+            function applyFontScale() {
+                articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+                publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            }
+            
+            // أحداث النقر على الأزرار
+            fontDecrease.addEventListener('click', () => {
+                currentScale = Math.max(minScale, currentScale / 1.2);
+                applyFontScale();
+            });
+            
+            fontIncrease.addEventListener('click', () => {
+                currentScale = Math.min(maxScale, currentScale * 1.2);
+                applyFontScale();
+            });
+            
+            fontReset.addEventListener('click', () => {
+                currentScale = 1;
+                applyFontScale();
+            });
+            
+            // تعيين موقع عناصر التحكم بالخط
+            const rootStyles = getComputedStyle(document.documentElement);
+            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
+            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
+            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
+            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+            
+            const controls = document.querySelector('.font-controls');
+            controls.style.top = varFontControlTop;
+            controls.style.bottom = varFontControlBottom;
+            controls.style.right = varFontControlRight;
+            controls.style.left = varFontControlLeft;
+        });
+
+        // ==================== بقية الكود ====================
         // قائمة الجوال
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
@@ -1718,56 +1774,6 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
-        });
-        
-        // ============= أزرار التحكم بحجم الخط =============
-        const fontDecrease = document.getElementById('fontDecrease');
-        const fontReset = document.getElementById('fontReset');
-        const fontIncrease = document.getElementById('fontIncrease');
-        const articleContent = document.querySelector('.article-content');
-        const publishDate = document.querySelector('.publish-date');
-        
-        let originalFontSize, originalDateSize;
-        
-        let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
-        
-        function applyFontScale() {
-            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
-        }
-        
-        fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
-            applyFontScale();
-        });
-        
-        fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
-            applyFontScale();
-        });
-        
-        fontReset.addEventListener('click', () => {
-            currentScale = 1;
-            applyFontScale();
-        });
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
-            
-            const rootStyles = getComputedStyle(document.documentElement);
-            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-            
-            const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
         });
     </script>
 </body>
