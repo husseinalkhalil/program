@@ -4,7 +4,7 @@
     <!-- تعريف ترميز الصفحة ومعلوماتها الأساسية -->
     <meta charset="UTF-8"> <!-- تحديد ترميز الحروف للغة العربية -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- جعل الصفحة متجاوبة مع الأجهزة المختلفة -->
-    <title>المقالات |حياة النبي.</title> <!-- عنوان الصفحة الذي يظهر في المتصفح -->
+    <title>المقالات | دعهم يتكلمون، وواصل طريقك بسلام. </title> <!-- عنوان الصفحة الذي يظهر في المتصفح -->
     
     <!-- روابط لخطوط جوجل وأيقونات فونت أويسوم -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,13 +30,6 @@
             --header-purple: #5e2ca5; /* لون الهيدر */
             --mobile-header-height: 70px; /* ارتفاع الهيدر في الجوال */
             --glass-bg: rgba(94, 44, 165, 0.92); /* خلفية زجاجية شفافة */
-            --font-control-position: top right;
-            --font-control-top: 120px;
-            --font-control-bottom: auto;
-            --font-control-right: 250px;
-            --font-control-left: auto;
-            --font-control-button-size: 30px;
-            --font-control-button-font-size: 18px;
         }
         
         /* إعادة تعيين الهوامش والحشوات لجميع العناصر */
@@ -822,7 +815,7 @@
         /* ==================== طباعة ==================== */
         @media print {
             /* إخفاء العناصر غير المرغوب فيها عند الطباعة */
-            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
+            .header, .article-actions, .back-btn, .back-to-top {
                 display: none;
             }
             
@@ -1236,85 +1229,6 @@
             background: rgba(255, 0, 0, 0.3) !important; /* خلفية حمراء أفتح */
         }
         
-        /* أزرار التحكم بالخط */
-        .font-controls {
-            position: fixed;
-            z-index: 1000;
-            display: flex;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.5s ease-out;
-            top: var(--font-control-top);
-            bottom: var(--font-control-bottom);
-            right: var(--font-control-right);
-            left: var(--font-control-left);
-        }
-        
-        .font-controls button {
-            width: var(--font-control-button-size);
-            height: var(--font-control-button-size);
-            border-radius: 50%;
-            border: none;
-            background: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: var(--font-control-button-font-size);
-            transition: all 0.3s;
-        }
-        
-        .font-controls button:hover {
-            background: var(--accent-color);
-            transform: scale(1.1);
-        }
-        
-        .font-controls button i {
-            transition: transform 0.2s;
-        }
-        
-        .font-controls button:active i {
-            transform: scale(0.9);
-        }
-        
-        .font-controls button::after {
-            content: attr(title);
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
-        .font-controls button:hover::after {
-            opacity: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .font-controls {
-                --font-control-top: 100px;
-                --font-control-right: 10px;
-                --font-control-button-size: 36px;
-                --font-control-button-font-size: 15px;
-                gap: 6px;
-                padding: 8px;
-            }
-        }
-        
         /* ================ أنماط الفوتر ================ */
         footer {
           text-align: center; /* توسيط النص */
@@ -1498,55 +1412,28 @@
         </div>
     </header>
     
-    <!-- أزرار التحكم بحجم الخط -->
-    <div class="font-controls">
-        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
-            <i class="fas fa-search-minus"></i>
-        </button>
-        <button id="fontReset" title="الحجم الطبيعي (Reset)">
-            <i class="fas fa-font"></i>
-        </button>
-        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
-            <i class="fas fa-search-plus"></i>
-        </button>
-    </div>
-    
     <!-- المحتوى الرئيسي -->
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ حياة النبي.</h1>
-                <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+                <h1>❖ دعهم يتكلمون، وواصل طريقك بسلام. </h1>
+                <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
             </div>
             
             <!-- محتوى المقالة -->
-            <div class="article-content">
-                <p>رسول الله في حياته وفي زمانه، كان يعيش حياته الطبيعية مثله مثل أي انسان في ذلك الزمان، كان ينظف أسنانه بالسواك بحسب الأدوات المتاحة في ذلك الزمان، فالسواك ما هو إلّا الوسيلة المتاحة لتنظيف الأسنان في ذلك الزمان، فلم يكن للفرشاة والمعجون أي وجود، فاستخدم رسولنا الكريم الأدوات المتاحة في زمانه، فلو عاش في زماننا هذا، لاستخدم الفرشاة والمعجون بدلاً من السواك، لأنها الأدوات المتاحة في زماننا هذا، ولربما لبس البنطال والقميص، واستخدم الحمّام الافرنجي بدلاً من الاستنجاء بثلاث حجرات (كما تقول الرواية)، وركب الطائرة والسيارة واستخدم الهاتف النقّال.</p>
-                <p>رسول الله لم يخالف قومه في ملبسهم ومأكلهم.</p>
-                <p>لبس كما يلبس ابو بكر و أبو لهب و أبو طالب وغيرهم.</p>
-                <p>ينام كما ينامون.</p>
-                <p>يلبس كما يلبسون.</p>
-                <p>يأكل كما يأكلون.</p>
-                <p>مارس حياته الطبيعية كإنسان مثله مثل باقي البشر.</p>
-                <p>فكفاكم تقزيماً لهذا الدين وجعل كل أفعال الرسول ديناً وأن كل أفعاله توقيفية لا تقبل الحداثة حتى في زماننا هذا.</p>
-                <p>الكثير لم يفهم معنى كلمة "الرسول" لو فهمنا قوله تعالى:</p>
-                <p><span style="color: #5e2ca5; font-weight: bold;">﴿يَٰٓأَيُّهَا ٱلرَّسُولُ بَلِّغْ مَآ أُنزِلَ إِلَيْكَ مِن رَّبِّكَ ۖ وَإِن لَّمْ تَفْعَلْ فَمَا بَلَّغْتَ رِسَالَتَهُ﴾</span> المائدة [67] </p>
-                <p><span style="color: #5e2ca5; font-weight: bold;">﴿مَّا عَلَى ٱلرَّسُولِ إِلَّا ٱلْبَلَٰغُ﴾</span> المائدة [99] </p>
-                <p>لتغيرت الكثير من المفاهيم.</p>
-                <p>رسول الله صاحب رسالة إلهية ومطالب بتبليغنا ما أمره الله به، أما أعماله وأفعاله وأقواله، فهي ليست ديناً من عند الله، ولسنا مطالبين بها، فمن شاء فليفعل كما كان يفعله النبي لكن عليه أن يعلم أن دين الله يتمثل في كتابه وليس في حياة انسان.</p>
-                <p>حياة النبي كانت حياة بشرية طبيعية تعكس ظروف عصره وأدوات زمانه.</p>
-                <p>الرسالة التي جاء بها هي الدين الذي يجب أن نتمسك به، وليست التفاصيل الحياتية التي كانت مناسبة لزمانه.</p>
-                <p>فهمنا لدور الرسول يجب أن يرتكز على مهمته الأساسية وهي تبليغ الرسالة الإلهية، وليس جعل كل تفاصيل حياته ديناً يتبع حرفياً في كل العصور.</p>
-            </div>
-            
+                <p>في هذه الحياة، ستواجه الكثير من الأشخاص والمواقف التي قد تستفزك أو تحاول جرّك إلى جدال لا طائل منه. لكن لا تغضب، ولا تمنح أحدًا سلطة على مشاعرك. فالغضب لن يغير شيئًا، بل سيستهلك طاقتك ويفقدك هدوءك. تذكّر دائمًا أن معظم الأمور التي تثير حنقك اليوم، ستبدو تافهة بعد وقت، فلماذا تستهلك أعصابك لأجلها؟</p>
+                <p>لا تجادل أحدًا، فبعض العقول مغلقة، والجاهل لن يفهم ما تقوله، ومن يراك على باطل لن يقتنع بكلامك مهما شرحت، والمتحيّز لن يسمعك أصلًا، أما الانتهازي فسيأخذ كلامك ليقلبه لصالحه. لا فائدة يا صديقي من محاولات الإقناع في عالم مليء بمن لا يريد أن يسمع. وفّر على نفسك العناء، وبدلًا من الانشغال بمن لا يستحق، ركز على ما ينفعك وما يمنحك راحة البال.</p>
+                <p>اعتزل كل ما يؤذيك، سواء كان أشخاصًا أو مواقف أو حتى أفكارًا سلبية. الحياة أقصر من أن تضيعها في صراعات لا جدوى منها.</p>
+                <p>كن هادئًا، تمسك بحكمتك، واترك للزمن أن يثبت الحقائق بدلًا من أن تجهد نفسك في إثباتها لمن لا يريد أن يراها.</p>
+                <p>قوة الشخص الحكيم تكمن في قدرته على الحفاظ على هدوئه وسط الضجيج، ومواصلة طريقه بثبات رغم كل المحاولات لإيقافه. الرد الحقيقي على المستفزين ليس بالجدال، بل بالإنجاز.</p>
+                <p>عندما تركز على نموك وتطورك وتترك الضوضاء خلفك، تكون قد انتصرت على كل من حاول إعاقتك.</p>
+                <p>تذكر دائمًا أن السكوت في وجه الجهلاء ليس ضعفًا، بل قوة، والمضي قدمًا رغم كل شيء ليس غرورًا، بل حكمة.</p>
+                
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-            </div>
-            <div style="text-align: center; margin: 30px 0;">
-                    <a href="https://www.youtube.com/watch?v=Uu4o7OCz4j4" target="_blank" class="video-link">
-                        <i class="fas fa-video"></i> حلقة مرئية عن الموضوع
-                    </a>
+
+                </div>
                 </div>
             
             <!-- أزرار المقالة (طباعة، مشاركة) -->
@@ -1622,8 +1509,6 @@
         const navIndicator = document.getElementById('navIndicator');
         const navButtons = document.querySelectorAll('.nav-btn');
         const backToTop = document.getElementById('backToTop');
-        const articleContent = document.querySelector('.article-content');
-        const publishDate = document.querySelector('.publish-date');
         
         // فتح/إغلاق القائمة
         function toggleMobileMenu(event) {
@@ -1804,62 +1689,6 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
-        });
-        
-        // أزرار التحكم بحجم الخط
-        const fontDecrease = document.getElementById('fontDecrease');
-        const fontReset = document.getElementById('fontReset');
-        const fontIncrease = document.getElementById('fontIncrease');
-        
-        // تعريف المتغيرات لحجم الخط
-        let currentFontSize = 18; // الحجم الابتدائي للخط
-        const minFontSize = 12;   // الحد الأدنى لحجم الخط
-        const maxFontSize = 36;   // الحد الأقصى لحجم الخط
-        
-        // دالة لتطبيق حجم الخط
-        function applyFontSize() {
-            articleContent.style.fontSize = currentFontSize + 'px';
-            publishDate.style.fontSize = (currentFontSize - 2) + 'px'; // حجم أصغر قليلاً لتاريخ النشر
-        }
-        
-        // تصغير الخط
-        fontDecrease.addEventListener('click', () => {
-            if (currentFontSize > minFontSize) {
-                currentFontSize -= 2;
-                applyFontSize();
-            }
-        });
-        
-        // تكبير الخط
-        fontIncrease.addEventListener('click', () => {
-            if (currentFontSize < maxFontSize) {
-                currentFontSize += 2;
-                applyFontSize();
-            }
-        });
-        
-        // إعادة تعيين حجم الخط
-        fontReset.addEventListener('click', () => {
-            currentFontSize = 18; // الحجم الافتراضي
-            applyFontSize();
-        });
-        
-        // تطبيق حجم الخط الابتدائي عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', () => {
-            applyFontSize();
-            
-            // وضع أزرار التحكم بالخط في مكانها الصحيح
-            const rootStyles = getComputedStyle(document.documentElement);
-            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-            
-            const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
         });
     </script>
 </body>
