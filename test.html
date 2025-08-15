@@ -30,6 +30,13 @@
             --header-purple: #5e2ca5; /* لون الهيدر */
             --mobile-header-height: 70px; /* ارتفاع الهيدر في الجوال */
             --glass-bg: rgba(94, 44, 165, 0.92); /* خلفية زجاجية شفافة */
+            --font-control-position: top right; /* موقع أزرار التحكم بالخط */
+            --font-control-top: 120px; /* المسافة من الأعلى */
+            --font-control-bottom: auto; /* المسافة من الأسفل */
+            --font-control-right: 250px; /* المسافة من اليمين */
+            --font-control-left: auto; /* المسافة من اليسار */
+            --font-control-button-size: 30px; /* حجم أزرار التحكم */
+            --font-control-button-font-size: 18px; /* حجم أيقونات الأزرار */
         }
         
         /* إعادة تعيين الهوامش والحشوات لجميع العناصر */
@@ -812,10 +819,89 @@
             animation: fadeOut 0.2s ease-out forwards;
         }
         
+        /* ==================== أزرار التحكم بالخط ==================== */
+        .font-controls {
+            position: fixed;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+            top: var(--font-control-top);
+            bottom: var(--font-control-bottom);
+            right: var(--font-control-right);
+            left: var(--font-control-left);
+        }
+        
+        .font-controls button {
+            width: var(--font-control-button-size);
+            height: var(--font-control-button-size);
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-control-button-font-size);
+            transition: all 0.3s;
+        }
+        
+        .font-controls button:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .font-controls button i {
+            transition: transform 0.2s;
+        }
+        
+        .font-controls button:active i {
+            transform: scale(0.9);
+        }
+        
+        .font-controls button::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .font-controls button:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .font-controls {
+                --font-control-top: 100px;
+                --font-control-right: 10px;
+                --font-control-button-size: 36px;
+                --font-control-button-font-size: 15px;
+                gap: 6px;
+                padding: 8px;
+            }
+        }
+        
         /* ==================== طباعة ==================== */
         @media print {
             /* إخفاء العناصر غير المرغوب فيها عند الطباعة */
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -1412,6 +1498,19 @@
         </div>
     </header>
     
+    <!-- أزرار التحكم بحجم الخط -->
+    <div class="font-controls">
+        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+            <i class="fas fa-search-minus"></i>
+        </button>
+        <button id="fontReset" title="الحجم الطبيعي (Reset)">
+            <i class="fas fa-font"></i>
+        </button>
+        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+            <i class="fas fa-search-plus"></i>
+        </button>
+    </div>
+    
     <!-- المحتوى الرئيسي -->
     <div class="container">
         <div class="article-card">
@@ -1540,6 +1639,23 @@
         const navIndicator = document.getElementById('navIndicator');
         const navButtons = document.querySelectorAll('.nav-btn');
         const backToTop = document.getElementById('backToTop');
+        
+        // أزرار التحكم بحجم الخط
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontReset = document.getElementById('fontReset');
+        const fontIncrease = document.getElementById('fontIncrease');
+        const articleContent = document.querySelector('.article-content');
+        const publishDate = document.querySelector('.publish-date');
+        
+        let originalFontSize, originalDateSize;
+        let currentScale = 1;
+        const minScale = 0.5;
+        const maxScale = 4;
+        
+        function applyFontScale() {
+            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+        }
         
         // فتح/إغلاق القائمة
         function toggleMobileMenu(event) {
@@ -1720,6 +1836,43 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
+        });
+        
+        // التحكم بحجم الخط
+        fontDecrease.addEventListener('click', () => {
+            currentScale = Math.max(minScale, currentScale / 1.2);
+            applyFontScale();
+        });
+        
+        fontIncrease.addEventListener('click', () => {
+            currentScale = Math.min(maxScale, currentScale * 1.2);
+            applyFontScale();
+        });
+        
+        fontReset.addEventListener('click', () => {
+            currentScale = 1;
+            applyFontScale();
+        });
+        
+        // تهيئة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            // الكود الموجود أصلاً في الكود الثاني
+            
+            // تهيئة أزرار التحكم بالخط
+            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            
+            const rootStyles = getComputedStyle(document.documentElement);
+            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
+            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
+            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
+            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+            
+            const controls = document.querySelector('.font-controls');
+            controls.style.top = varFontControlTop;
+            controls.style.bottom = varFontControlBottom;
+            controls.style.right = varFontControlRight;
+            controls.style.left = varFontControlLeft;
         });
     </script>
 </body>
