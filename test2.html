@@ -820,6 +820,20 @@
       color: #4a208f;
       margin-top: 0;
       overflow-wrap: break-word;
+      /* إزالة السطر السفلي من العناوين */
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .article h2 a {
+      /* إزالة السطر السفلي من روابط العناوين */
+      text-decoration: none;
+      /* تأثير تغيير اللون عند التمرير */
+      transition: color 0.3s ease;
+    }
+
+    .article h2 a:hover {
+      color: #ff6b6b; /* اللون الجديد عند التمرير */
     }
 
     .article p {
@@ -829,6 +843,9 @@
       max-height: 4.5em;
       transition: max-height 0.4s ease;
       overflow-wrap: break-word;
+      /* إزالة السطر السفلي من الوصف */
+      text-decoration: none;
+      border-bottom: none;
     }
 
     .article.expanded p {
@@ -1394,7 +1411,8 @@
 </div>
 </div>
 <script>
-    const articlesPerPage = 8;
+    // تغيير عدد المقالات في الصفحة من 8 إلى 10
+    const articlesPerPage = 10;
     let currentPage = 1;
 
     function paginateArticles() {
@@ -1450,40 +1468,6 @@
       }
     });
     </script>
-<script>
-  const articlesPerPage = 8;
-  let currentPage = 1;
-
-  function paginateArticles() {
-    const articles = document.querySelectorAll('.article');
-    const totalPages = Math.ceil(articles.length / articlesPerPage);
-
-    articles.forEach((article, index) => {
-      const start = (currentPage - 1) * articlesPerPage;
-      const end = currentPage * articlesPerPage;
-      article.style.display = (index >= start && index < end) ? 'block' : 'none';
-    });
-
-    document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline-block' : 'none';
-    document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline-block' : 'none';
-  }
-
-  function nextPage() {
-    currentPage++;
-    paginateArticles();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function prevPage() {
-    currentPage--;
-    paginateArticles();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    paginateArticles();
-  });
-</script>
 <div id="message"></div>
 <!-- زر العودة للأعلى -->
 <button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
