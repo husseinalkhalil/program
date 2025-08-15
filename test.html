@@ -1520,6 +1520,7 @@
             </div>
             
             <!-- محتوى المقالة -->
+            <div class="article-content">
                 <p>تشريعات كثيرة في ديننا الإسلامي والتي ما أنزل الله بها من سلطان ونعتبرها من أساسيات الدين والتي لا يجوز المساس بها.</p>
                 <p>من تلك التشريعات هي مسألة تغسيل الميت وتكفينه!</p>
                 <p>سأُركّز في هذه المقالة على عملية التغسيل أكثر من الصلاة.</p>
@@ -1552,7 +1553,8 @@
                 <p>لكن صلاة الجنازة بوضعها الحالي، تعطي طمأنينة لأهل الميت وتبعث لهم السكينة بعد فقدانهم انسان عزيز عليهم، فلا يوجد بها أي انتهاك لخصوصية الميت على عكس التغسيل والتكفين.</p>
                 <p>القرآن الكريم لم يذكر شيئاً عن تغسيل الميت، بل ركز على أهمية الدعاء للميت. صلاة الجنازة بوضعها الحالي، تعطي طمأنينة لأهل الميت وتبعث لهم السكينة بعد فقدانهم إنسان عزيز عليهم، ولا يوجد بها أي انتهاك لخصوصية الميت على عكس التغسيل والتكفين.</p>
                 <p>الأفضل دفن الميت بملابسه مع إزالة الأشياء القيّمة للاستفادة منها، وهذا أكثر احتراماً للميت وأكثر توافقاً مع روح الإسلام الحنيف.</p>
-                
+            </div>
+            
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
@@ -1856,8 +1858,6 @@
         
         // تهيئة عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
-            // الكود الموجود أصلاً في الكود الثاني
-            
             // تهيئة أزرار التحكم بالخط
             originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
             originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
@@ -1873,6 +1873,12 @@
             controls.style.bottom = varFontControlBottom;
             controls.style.right = varFontControlRight;
             controls.style.left = varFontControlLeft;
+            
+            // تهيئة متغيرات الخط بعد تحميل الصفحة
+            setTimeout(() => {
+                originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+                originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            }, 100);
         });
     </script>
 </body>
