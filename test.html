@@ -23,6 +23,15 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
+            
+            /* متغيرات التحكم بالخط المضافة */
+            --font-control-position: top right;
+            --font-control-top: 120px;
+            --font-control-bottom: auto;
+            --font-control-right: 250px;
+            --font-control-left: auto;
+            --font-control-button-size: 30px;
+            --font-control-button-font-size: 18px;
         }
         
         * {
@@ -732,7 +741,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -766,6 +775,85 @@
         .note-highlight {
             color: red;
             font-weight: bold;
+        }
+        
+        /* ==================== أزرار التحكم بالخط (مضافة) ==================== */
+        .font-controls {
+            position: fixed;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+            top: var(--font-control-top);
+            bottom: var(--font-control-bottom);
+            right: var(--font-control-right);
+            left: var(--font-control-left);
+        }
+        
+        .font-controls button {
+            width: var(--font-control-button-size);
+            height: var(--font-control-button-size);
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-control-button-font-size);
+            transition: all 0.3s;
+        }
+        
+        .font-controls button:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .font-controls button i {
+            transition: transform 0.2s;
+        }
+        
+        .font-controls button:active i {
+            transform: scale(0.9);
+        }
+        
+        .font-controls button::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .font-controls button:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .font-controls {
+                --font-control-top: 100px;
+                --font-control-right: 10px;
+                --font-control-button-size: 36px;
+                --font-control-button-font-size: 15px;
+                gap: 6px;
+                padding: 8px;
+            }
         }
         
         /* ==================== وسائط متجاوبة ==================== */
@@ -1338,6 +1426,19 @@
         </div>
     </header>
     
+    <!-- أزرار التحكم بحجم الخط (مضافة) -->
+    <div class="font-controls">
+        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+            <i class="fas fa-search-minus"></i>
+        </button>
+        <button id="fontReset" title="الحجم الطبيعي (Reset)">
+            <i class="fas fa-font"></i>
+        </button>
+        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+            <i class="fas fa-search-plus"></i>
+        </button>
+    </div>
+    
     <div class="container">
         <div class="article-card">
             <div class="article-header">
@@ -1345,6 +1446,7 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
             </div>
             
+            <div class="article-content">
                 <p>يُحكى أنه في إحدى البلدان الاوروبية، تشاجر رجلان عربيان يقيمان في تلك الدولة، أحدهما سُني والآخر شيعي.</p>
                 <p>وبعد أن ألقت الشرطة القبض عليهما وتقديمهما للمحكمة، سأل القاضي عن سبب الخلاف بينهما الذي أدى إلى الشجار؟</p>
                 <p> فقيل له: يا سيدي القاضي، لقد تشاجرا بسبب <strong> الحسين بن علي ويزيد بن معاوية </strong>. </p>
@@ -1386,8 +1488,8 @@
                 <p>عند تشغيل العقل سيسقط كهنة الدين ولن يبقَ هناك طائفية ولا عنصرية بينكم.</p>
                 <p>الأولين عاشوا وانتهت حياتهم، فتلك أمة قد خلت، لها ما كسبت وعليها ما اكتسبت، فكّروا في حاضرتكم ومستقبلكم.</p>
                 <p>التاريخ عبارة عن مجموعة من الأكاذيب متفق عليها.</p>
-                
-           
+            </div>
+            
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
             </div>
@@ -1633,6 +1735,56 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
+        });
+        
+        // ========== أزرار التحكم بحجم الخط (مضافة) ==========
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontReset = document.getElementById('fontReset');
+        const fontIncrease = document.getElementById('fontIncrease');
+        const articleContent = document.querySelector('.article-content');
+        const publishDate = document.querySelector('.publish-date');
+        
+        let originalFontSize, originalDateSize;
+        
+        let currentScale = 1;
+        const minScale = 0.5;
+        const maxScale = 4;
+        
+        function applyFontScale() {
+            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+        }
+        
+        fontDecrease.addEventListener('click', () => {
+            currentScale = Math.max(minScale, currentScale / 1.2);
+            applyFontScale();
+        });
+        
+        fontIncrease.addEventListener('click', () => {
+            currentScale = Math.min(maxScale, currentScale * 1.2);
+            applyFontScale();
+        });
+        
+        fontReset.addEventListener('click', () => {
+            currentScale = 1;
+            applyFontScale();
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            
+            const rootStyles = getComputedStyle(document.documentElement);
+            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
+            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
+            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
+            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+            
+            const controls = document.querySelector('.font-controls');
+            controls.style.top = varFontControlTop;
+            controls.style.bottom = varFontControlBottom;
+            controls.style.right = varFontControlRight;
+            controls.style.left = varFontControlLeft;
         });
     </script>
 </body>
