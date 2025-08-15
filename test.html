@@ -1520,6 +1520,7 @@
             </div>
             
             <!-- محتوى المقالة -->
+            <div class="article-content">
                 <p>أنت كمسلم مطالب بتعطيل عقلك فيما يتعلق بأمور الدين، وعليك أن تأخذ دينك بالنقل وليس بالعقل.</p>
                 <p>هذه هي القاعدة الرئيسية التي "أجمع" عليها رجال الدين.</p>
                 <p>من يقوم بتشغيل عقله لاستنباط أحكام الله وتدبر آياته، قد يُتهم بالكفر والزندقة.</p>
@@ -1545,13 +1546,12 @@
                 <p>فلن ينفعنا سادتنا ولا كبرائنا، فالكل سيتبرّئ منّا.</p>
                 <h3 class="section-title">الخلاصة:</h3>
                 <p>اعمل بعقلك، واحذر من تعطيله، فالذي سينفعك هو تدبرك لكتاب الله والعمل به، ولن تستطيع تدبر كتاب الله إلّا إذا كان عقلك في وضع التشغيل، ولن ينفعك اتباعك للشيخ العلّامة ولا العالِم الفهّامة، لأنهم يوم القيامة سيتبرأون منك، كما أخبرك الله بذلك.</p>
-                
+            </div>
+            
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-
-
-                </div>
+            </div>
             
             <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
@@ -1571,16 +1571,16 @@
                         <!-- منصات المشاركة -->
                         <div class="share-platforms">
                             <a href="#" onclick="shareOnSocial('facebook')" class="share-platform">
-                                <img src="icons/fac-soc.png" alt="مشاركة على فيسبوك">
+                                <i class="fab fa-facebook-f"></i>
                             </a>
                             <a href="#" onclick="shareOnSocial('telegram')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على تلغرام">
+                                <i class="fab fa-telegram"></i>
                             </a>
                             <a href="#" onclick="shareOnSocial('whatsapp')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على واتساب">
+                                <i class="fab fa-whatsapp"></i>
                             </a>
                             <a href="#" onclick="shareOnSocial('twitter')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
+                                <i class="fab fa-twitter"></i>
                             </a>
                         </div>
                         <!-- زر نسخ الرابط -->
@@ -1823,7 +1823,9 @@
         
         function applyFontScale() {
             articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            if (publishDate) {
+                publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            }
         }
         
         fontDecrease.addEventListener('click', () => {
@@ -1842,9 +1844,13 @@
         });
         
         document.addEventListener('DOMContentLoaded', () => {
+            // التحكم بالخط
             originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            if (publishDate) {
+                originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            }
             
+            // تعيين موضع أزرار التحكم بالخط
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
@@ -1852,10 +1858,27 @@
             const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
             
             const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
+            if (controls) {
+                controls.style.top = varFontControlTop;
+                controls.style.bottom = varFontControlBottom;
+                controls.style.right = varFontControlRight;
+                controls.style.left = varFontControlLeft;
+            }
+            
+            // إعادة تعيين الحدث عند التمرير للشريط العلوي
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
         });
     </script>
 </body>
