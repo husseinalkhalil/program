@@ -1521,6 +1521,7 @@
             </div>
             
             <!-- محتوى المقالة -->
+            <div class="article-content">
                 <p>اقرأوا معي هذه الآيات:</p>
                 <p><strong>1- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿ٱتَّبِعْ مَآ أُوحِىَ إِلَيْكَ مِن رَّبِّكَ ۖ لَآ إِلَٰهَ إِلَّا هُوَ ۖ وَأَعْرِضْ عَنِ ٱلْمُشْرِكِينَ ۞ وَلَوْ شَآءَ ٱللَّهُ مَآ أَشْرَكُوا۟ ۗ وَمَا جَعَلْنَٰكَ عَلَيْهِمْ حَفِيظًا ۖ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ﴾</span> الأنعام [ 106-107]. </p>
                 <p><strong>2- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّكَ لَا تَهْدِى مَنْ أَحْبَبْتَ وَلَٰكِنَّ ٱللَّهَ يَهْدِى مَن يَشَآءُ ۚ وَهُوَ أَعْلَمُ بِٱلْمُهْتَدِينَ﴾</span> القصص [56]. </p>
@@ -1595,7 +1596,8 @@
                 <p>الناسخ والمنسوخ هي من أخبث الأفكار ومن أقذر الجرائم التي ارتُكِبت بحق الإسلام.</p>
                 <p>لقد تجرأ رجال الدين على تحريف الدين وتشويه صورة الإسلام الحقيقي الذي يدعو إلى التسامح والحرية والسلام.</p>
                 <p>اخترعوا مصادر للدين ونسبوا إليها ما يخدم أغراضهم السياسية والاجتماعية، مستغلين غياب الوعي النقدي لدى عامة المسلمين. يجب علينا العودة إلى القرآن الكريم كمصدر وحيد للدين، ورفض كل ما يتعارض مع روحه ومبادئه السامية التي تحترم الإنسان وتكفل حريته وتدعو إلى التعايش السلمي بين جميع البشر.</p>
-                
+            </div>
+            
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
@@ -1605,9 +1607,7 @@
                         <i class="fas fa-video"></i> حلقة مرئية عن الموضوع
                     </a>
                 </div>
-            
-
-                </div>
+            </div>
             
             <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
@@ -1871,47 +1871,49 @@
         const articleContent = document.querySelector('.article-content');
         const publishDate = document.querySelector('.publish-date');
         
+        // تعريف المتغيرات لحجم الخط الأصلي
         let originalFontSize, originalDateSize;
-        
         let currentScale = 1;
         const minScale = 0.5;
         const maxScale = 4;
         
+        // دالة لتطبيق حجم الخط
         function applyFontScale() {
             articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
             publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
         }
         
+        // تصغير حجم الخط
         fontDecrease.addEventListener('click', () => {
             currentScale = Math.max(minScale, currentScale / 1.2);
             applyFontScale();
         });
         
+        // تكبير حجم الخط
         fontIncrease.addEventListener('click', () => {
             currentScale = Math.min(maxScale, currentScale * 1.2);
             applyFontScale();
         });
         
+        // إعادة تعيين حجم الخط إلى الحجم الأصلي
         fontReset.addEventListener('click', () => {
             currentScale = 1;
             applyFontScale();
         });
         
+        // تهيئة المتغيرات عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
+            // الحصول على حجم الخط الأصلي من الـ CSS
             originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
             originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
             
+            // تحديد موقع أزرار التحكم بالخط من المتغيرات
             const rootStyles = getComputedStyle(document.documentElement);
-            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-            
             const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
+            controls.style.top = rootStyles.getPropertyValue('--font-control-top');
+            controls.style.bottom = rootStyles.getPropertyValue('--font-control-bottom');
+            controls.style.right = rootStyles.getPropertyValue('--font-control-right');
+            controls.style.left = rootStyles.getPropertyValue('--font-control-left');
         });
     </script>
 </body>
