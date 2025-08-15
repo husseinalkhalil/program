@@ -58,6 +58,7 @@
             transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
+            padding-bottom: 0; /* إزالة الحشوة السفلية */
         }
         
         /* منع التمرير عند فتح القائمة */
@@ -817,50 +818,6 @@
             animation: fadeOut 0.2s ease-out forwards;
         }
         
-        /* ==================== طباعة ==================== */
-        @media print {
-            /* إخفاء العناصر غير المرغوب فيها عند الطباعة */
-            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
-                display: none;
-            }
-            
-            /* تنسيقات الطباعة */
-            body {
-                background: none;
-                color: #000;
-                padding-top: 0;
-            }
-            
-            /* تنسيقات بطاقة المقالة للطباعة */
-            .article-card {
-                box-shadow: none;
-                padding: 0;
-                background: none;
-                border: none;
-                border-radius: 0;
-            }
-            
-            /* تنسيقات الآيات للطباعة */
-            .verse {
-                background: none;
-                border-right: none;
-                padding: 0;
-            }
-        }
-        
-        /* تنسيقات النص المميز */
-        .highlight {
-            background-color: rgba(255, 193, 7, 0.2);
-            padding: 2px 5px;
-            border-radius: 4px;
-        }
-        
-        /* تنسيقات الملاحظات المميزة */
-        .note-highlight {
-            color: red;
-            font-weight: bold;
-        }
-        
         /* ==================== أزرار التحكم بالخط ==================== */
         .font-controls {
             position: fixed;
@@ -938,6 +895,50 @@
                 gap: 6px;
                 padding: 8px;
             }
+        }
+        
+        /* ==================== طباعة ==================== */
+        @media print {
+            /* إخفاء العناصر غير المرغوب فيها عند الطباعة */
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
+                display: none;
+            }
+            
+            /* تنسيقات الطباعة */
+            body {
+                background: none;
+                color: #000;
+                padding-top: 0;
+            }
+            
+            /* تنسيقات بطاقة المقالة للطباعة */
+            .article-card {
+                box-shadow: none;
+                padding: 0;
+                background: none;
+                border: none;
+                border-radius: 0;
+            }
+            
+            /* تنسيقات الآيات للطباعة */
+            .verse {
+                background: none;
+                border-right: none;
+                padding: 0;
+            }
+        }
+        
+        /* تنسيقات النص المميز */
+        .highlight {
+            background-color: rgba(255, 193, 7, 0.2);
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+        
+        /* تنسيقات الملاحظات المميزة */
+        .note-highlight {
+            color: red;
+            font-weight: bold;
         }
         
         /* ==================== وسائط متجاوبة ==================== */
@@ -1313,52 +1314,57 @@
             background: rgba(255, 0, 0, 0.3) !important;
         }
         
-        /* ================ أنماط الفوتر ================ */
+        /* ================ أنماط الفوتر المعدلة ================ */
         footer {
-          text-align: center;
-          padding: 18px;
-          background: #5e2ca5;
-          color: white;
-          font-size: 0.85em;
-          margin-top: auto;
-          width: 100%;
-          box-sizing: border-box;
+            text-align: center;
+            padding: 25px 0; /* زيادة الحشوة العلوية والسفلية */
+            background: #5e2ca5;
+            color: white;
+            font-size: 0.9em;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 10;
+            border-top: 3px solid var(--accent-color);
         }
 
         /* روابط التواصل الاجتماعي */
         .social-links {
-          display: flex;
-          justify-content: center;
-          gap: 10px;
-          margin: 15px 0;
-          flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            gap: 18px; /* زيادة المسافة بين الأيقونات */
+            margin: 20px 0; /* زيادة الهوامش */
+            flex-wrap: wrap;
         }
 
         /* تنسيقات روابط التواصل */
         .social-links a {
-          color: white;
-          font-size: 0.9em;
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.1);
-          text-decoration: none !important;
-          border: none !important;
+            color: white;
+            font-size: 1.1em; /* حجم أكبر للأيقونات */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px; /* حجم أكبر */
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            text-decoration: none !important;
+            border: none !important;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
         }
 
         /* تأثير عند المرور على روابط التواصل */
         .social-links a:hover {
-          color: white;
-          transform: scale(1.1);
+            color: white;
+            transform: scale(1.15) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         
         /* ألوان خاصة بكل منصة */
         .social-links a.facebook:hover { background: #1877F2; }
-        .social-links a.instagram:hover { background: #E4405F; }
+        .social-links a.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
         .social-links a.youtube:hover { background: #FF0000; }
         .social-links a.tiktok:hover { background: #000000; }
         .social-links a.snapchat:hover { background: #FFFC00; color: #000; }
@@ -1366,11 +1372,25 @@
 
         /* حقوق النشر */
         .copyright {
-          margin-top: 10px;
-          padding-top: 10px;
-          font-size: 0.95em;
-          font-weight: 600;
-          color: #ffd166;
+            margin-top: 20px; /* زيادة الهامش العلوي */
+            padding-top: 20px; /* زيادة الحشوة العلوية */
+            border-top: 1px solid rgba(255,255,255,0.2); /* خط فاصل */
+            font-size: 1em; /* حجم أكبر قليلاً */
+            font-weight: 600;
+            color: #ffd166;
+            letter-spacing: 0.5px;
+        }
+        
+        /* تأثير توهج خفيف للفوتر */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #5e2ca5, var(--accent-color), #5e2ca5);
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -1526,7 +1546,7 @@
                 <p>هو الملحد <strong> "الوسطي" </strong> وهو يشبه نوعاً ما، الأول، يتميّز الثاني بأنه محاور ويحترم الرأي الآخر والاختلاف، ويحترم أصدقائه من جميع التوجهات، وبالنسبة لمقالاته فهي متنوعة، وفي بعض الأحيان ينتقد الأديان في بعض المقالات.</p>
                 <h3 class="section-title">الثالث:</h3>
                 <p>هو ملحد من  <strong> "سوق الجمعة" </strong> وله أسماء أخرى مثل <strong> "ملحد صف أول" </strong><strong> "ملحد أبو ريالين" </strong> وغيره. </p>
-                <p>هذا النوع (أبو ريالين) يختلف جذرياً عن الأنواع السابقة، لا يمتلك لا فكر ولا هم يحزنون، سمع أن الأديان صناعة بشرية، فقال أي "والله" صحيح، الأديان صناعة بشرية، كيف لم أفكر بهذا من قبل! ليس لديه أي فِكر، يُركّز كل اهتماماماته ومقالاته على السخرية والاستهزاء من الأديان  <strong> "الإسلام حصراً" </strong></p> وكأن من أركان الإلحاد هو السخرية والاستهزاء من الأديان، <strong> (لم أقل انتقاد لأنه أصغر من أن ينتقد) </strong></p> فالنقد يحتاج لإنسان لديه فِكر وعقل وهو الشيء الذي يفتقده صاحبنا ابو ريالين. <strong></strong></p>
+                <p>هذا النوع (أبو ريالين) يختلف جذرياً عن الأنواع السابقة، لا يمتلك لا فكر ولا هم يحزنون، سمع أن الأديان صناعة بشرية، فقال أي "والله" صحيح، الأديان صناعة بشرية، كيف لم أفكر بهذا من قبل! ليس لديه أي فِكر، يُركّز كل اهتماماماته ومقالاته على السخرية والاستهزاء من الأديان  <strong> "الإسلام حصراً" </strong></p> وكأن من أركان الإلحاد هو السخرية والاستهزاء من الأديان، <strong> (لم قل انتقاد لأنه أصغر من أن ينتقد) </strong></p> فالنقد يحتاج لإنسان لديه فِكر وعقل وهو الشيء الذي يفتقده صاحبنا ابو ريالين. <strong></strong></p>
                 <p> هو يريد أن يعيش حياته دون أي ضوابط وأي ممنوعات، على قولة أخوتنا المصريين <strong> "مش عايز حد يقله تلت التلاتة كام" </strong>.</p>
                 <p>فوجد أن الإلحاد يحقق له ذلك، مع أن هناك من يؤمن بالأديان ويفعل كل الموبقات وأكثر!</p>
                 <p>لذلك يعتبر السخرية هي انتقاد!</p>
@@ -1591,7 +1611,7 @@
         </div>
     </div>
 
-    <!-- تذييل الصفحة -->
+    <!-- تذييل الصفحة المعدل -->
     <footer>
         <!-- روابط التواصل الاجتماعي -->
         <div class="social-links">
