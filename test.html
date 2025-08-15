@@ -1520,6 +1520,7 @@
             </div>
             
             <!-- محتوى المقالة -->
+            <div class="article-content">
                 <p>رسول الله في حياته وفي زمانه، كان يعيش حياته الطبيعية مثله مثل أي انسان في ذلك الزمان، كان ينظف أسنانه بالسواك بحسب الأدوات المتاحة في ذلك الزمان، فالسواك ما هو إلّا الوسيلة المتاحة لتنظيف الأسنان في ذلك الزمان، فلم يكن للفرشاة والمعجون أي وجود، فاستخدم رسولنا الكريم الأدوات المتاحة في زمانه، فلو عاش في زماننا هذا، لاستخدم الفرشاة والمعجون بدلاً من السواك، لأنها الأدوات المتاحة في زماننا هذا، ولربما لبس البنطال والقميص، واستخدم الحمّام الافرنجي بدلاً من الاستنجاء بثلاث حجرات (كما تقول الرواية)، وركب الطائرة والسيارة واستخدم الهاتف النقّال.</p>
                 <p>رسول الله لم يخالف قومه في ملبسهم ومأكلهم.</p>
                 <p>لبس كما يلبس ابو بكر و أبو لهب و أبو طالب وغيرهم.</p>
@@ -1536,6 +1537,7 @@
                 <p>حياة النبي كانت حياة بشرية طبيعية تعكس ظروف عصره وأدوات زمانه.</p>
                 <p>الرسالة التي جاء بها هي الدين الذي يجب أن نتمسك به، وليست التفاصيل الحياتية التي كانت مناسبة لزمانه.</p>
                 <p>فهمنا لدور الرسول يجب أن يرتكز على مهمته الأساسية وهي تبليغ الرسالة الإلهية، وليس جعل كل تفاصيل حياته ديناً يتبع حرفياً في كل العصور.</p>
+            </div>
             
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
@@ -1809,35 +1811,44 @@
         const fontReset = document.getElementById('fontReset');
         const fontIncrease = document.getElementById('fontIncrease');
         
-        let originalFontSize, originalDateSize;
-        let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
+        // تعريف المتغيرات لحجم الخط
+        let currentFontSize = 18; // الحجم الابتدائي للخط
+        const minFontSize = 12;   // الحد الأدنى لحجم الخط
+        const maxFontSize = 36;   // الحد الأقصى لحجم الخط
         
-        function applyFontScale() {
-            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+        // دالة لتطبيق حجم الخط
+        function applyFontSize() {
+            articleContent.style.fontSize = currentFontSize + 'px';
+            publishDate.style.fontSize = (currentFontSize - 2) + 'px'; // حجم أصغر قليلاً لتاريخ النشر
         }
         
+        // تصغير الخط
         fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
-            applyFontScale();
+            if (currentFontSize > minFontSize) {
+                currentFontSize -= 2;
+                applyFontSize();
+            }
         });
         
+        // تكبير الخط
         fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
-            applyFontScale();
+            if (currentFontSize < maxFontSize) {
+                currentFontSize += 2;
+                applyFontSize();
+            }
         });
         
+        // إعادة تعيين حجم الخط
         fontReset.addEventListener('click', () => {
-            currentScale = 1;
-            applyFontScale();
+            currentFontSize = 18; // الحجم الافتراضي
+            applyFontSize();
         });
         
+        // تطبيق حجم الخط الابتدائي عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            applyFontSize();
             
+            // وضع أزرار التحكم بالخط في مكانها الصحيح
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
