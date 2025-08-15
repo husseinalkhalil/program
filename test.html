@@ -1519,12 +1519,12 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
             </div>
             
-            <!-- محتوى المقالة -->
+            <!-- محتوى المقالة داخل عنصر article-content -->
+            <div class="article-content">
                 <p>دائمًا مثّل دور الضحية وأن العالم بأكمله يتآمر عليك لأنك احتكرت وصفة بول البعير التي تشفي الأمراض لنفسك ولم تعطهم اياها ولم تعطهم طريقة صناعة الأقمار الصناعية والتحكم بها من الأرض، وكلما سمعت عن أشخاص يحاولون توعية الناس من خلال مطالبتهم بتشغيل العقل، افتري عليهم بأنهم عملاء للماسونية ومأجورين وموظفين من قِبَل أعداء الإسلام ويقبضون الرواتب "بالدولار" لنشر الأفكار الماسونية وتدمير الدين والثوابت الإسلامية، وأنهم من أبناء جلدتنا ويتكلمون بلساننا ويعيشون بين أظهرنا.</p>
                 <p>ثم قم بإنشاء مدوّنة أو اثنتين أو موقعًا أو أكثر على الشبكة العنكبوتية واكتب مقالات بأسماء وهمية أو لأشخاص ذوي مكانة علمية (لأنه لن يقرأها أحد إلّا أتباعك) يحذرون من أن الماسونية سوف ينشرون أشخاصًا ويندسون بيننا لتدمير الإسلام ولكنهم سيظهرون باسم التنوير والتفكير، ثم اكتب مقالة عن فوائد بول البعير وعدد الأمراض التي يشفيها وذيّلها بأسماء علماء من جامعات مرموقة كجامعة اوكسفورد أو هارفرد، وأن علماء الغرب أنفسهم يؤمنون بهذه الأشياء في الوقت الذي ينكره ويستهزء به أبناء جلدتنا، ثم قم بتصوير تلك المقالات (يلي أنت كتبتها ونسبتها لأشخاص آخرين) وأرفقها في تقريرك وأنت تحذر أتباعك ممن تسميهم بالقرآنيين أو التنويريين واطلب منهم أن يتأكدوا بأنفسهم من هذه المصادر ثم أرفق رابط المدونة (التي قمت أنت بإنشائها) ليقرءوا بأنفسهم تلك المقالات التي تحذر منهم وأنك لم تأتِ بشيء من عندك وأن كل كلامك بالأدلة.</p>
                 <p><strong><span style="color: blue;">التفكير النقدي: </span></strong></p>    
                 <p>يبحث عن الحقيقة.</p>
-                <p>يعتمد على الأدلة الموثوقة.</p>
                 <p>يعتمد على الأدلة الموثوقة.</p>
                 <p>يشجع على الحوار.</p>
                 <p>يبني على المعرفة</p>
@@ -1538,12 +1538,12 @@
                 <p>الشيطنة هي أسلوب خطير لتضليل الناس وتحويل الأفكار البسيطة إلى مؤامرات خيالية.</p>
                 <p>الحل هو تطوير التفكير النقدي، فحص المصادر، والتشكيك في أي ادعاءات غير مدعومة بأدلة موثوقة.</p>
                 <p>كن يقظًا ولا تسمح لأحد أن يُشيطن عقلك أو يحولك إلى أداة لنشر الأكاذيب والمؤامرات الوهمية.</p>
+            </div>
+            
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-
-                </div>
-                </div>
+            </div>
             
             <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
@@ -1800,49 +1800,64 @@
             }
         });
         
-        // أزرار التحكم بحجم الخط
+        // ==================== أزرار التحكم بحجم الخط ====================
         const fontDecrease = document.getElementById('fontDecrease');
         const fontReset = document.getElementById('fontReset');
         const fontIncrease = document.getElementById('fontIncrease');
         const articleContent = document.querySelector('.article-content');
         const publishDate = document.querySelector('.publish-date');
         
-        let originalFontSize, originalDateSize;
+        // متغيرات لتخزين الحجم الأصلي
+        let originalFontSize;
+        let originalDateSize;
         
+        // معامل التكبير/التصغير الحالي
         let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
+        const minScale = 0.5; // الحد الأدنى للتصغير
+        const maxScale = 4;   // الحد الأقصى للتكبير
         
+        // تطبيق تغيير حجم الخط
         function applyFontScale() {
             articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            if (publishDate) {
+                publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            }
         }
         
+        // حدث تصغير الخط
         fontDecrease.addEventListener('click', () => {
             currentScale = Math.max(minScale, currentScale / 1.2);
             applyFontScale();
         });
         
+        // حدث تكبير الخط
         fontIncrease.addEventListener('click', () => {
             currentScale = Math.min(maxScale, currentScale * 1.2);
             applyFontScale();
         });
         
+        // حدث إعادة الخط للحجم الأصلي
         fontReset.addEventListener('click', () => {
             currentScale = 1;
             applyFontScale();
         });
         
+        // تهيئة عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
+            // الحصول على الحجم الأصلي من CSS
             originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            if (publishDate) {
+                originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            }
             
+            // تهيئة متغيرات التحكم بالخط
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
             const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
             const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
             
+            // تطبيق المواقع من المتغيرات
             const controls = document.querySelector('.font-controls');
             controls.style.top = varFontControlTop;
             controls.style.bottom = varFontControlBottom;
