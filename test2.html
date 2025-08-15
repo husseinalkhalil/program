@@ -2,11 +2,14 @@
 <html dir="rtl" lang="ar">
 <head>
 <meta charset="utf-8"/>
+<!-- إصلاح إعدادات viewport لمنع الميل والزوم غير المرغوب فيه -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>المقالات</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- إضافة كود AdSense هنا -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
 <style>
+    /* إصلاح عام لمنع التجاوز الأفقي */
     * {
       box-sizing: border-box;
       max-width: 100%;
@@ -16,24 +19,9 @@
       width: 100%;
       overflow-x: hidden;
       position: relative;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5efff;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background-attachment: fixed;
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      -webkit-overflow-scrolling: touch;
     }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* أنماط الشريط العلوي */
+    
+    /* أنماط الشريط العلوي من الكود الأول */
     .nav-overlay {
       position: fixed;
       top: 0;
@@ -125,15 +113,324 @@
       background: rgba(255, 255, 255, 0.15);
     }
 
-    .container {
-      padding: 2em;
-      max-width: 900px;
-      margin: auto;
-      text-align: center;
-      padding-top: 100px;
-      overflow: hidden;
+    @media (min-width: 1400px) {
+      .nav-links a {
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 2px;
+        background: #ffd166;
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .logo-container {
+        order: -1;
+        margin-right: 30px;
+      }
     }
 
+    @media (max-width: 767px) {
+      nav {
+        padding: 0.6em 3%;
+        justify-content: space-between;
+      }
+
+      .hamburger {
+        display: block;
+        order: -1;
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 60px;
+        right: 15px;
+        background: #5e2ca5;
+        width: 230px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(94, 44, 165, 0.15);
+        flex-direction: column;
+        padding: 1.2em;
+        z-index: 999;
+        left: auto;
+        transform: none;
+        animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        max-height: 80vh;
+        overflow-y: auto;
+        padding-bottom: 10px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        margin: 4px 0;
+        font-size: 0.9em;
+      }
+
+      .logo-container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+      }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* أنماط أزرار المقالات */
+    .article-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .article-button {
+      background-color: #b08cf2;
+      color: white;
+      padding: 8px 15px;
+      border: 2px solid #dcc7fc;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      position: relative;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .article-button:hover {
+      transform: scale(1.07);
+      background-color: #9d7ae8;
+    }
+
+    .article-button.active {
+      background-color: #4b0082;
+      border-color: #4b0082;
+    }
+
+    .article-button:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 125%;
+      right: 50%;
+      transform: translateX(50%);
+      background-color: #7b3fcf;
+      color: #e8d7ff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 10;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    /* أنماط قائمة المشاركة للمقالات */
+    .article-share-menu {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f8f3ff;
+      border: 1px solid #e6daff;
+      border-radius: 12px;
+      padding: 15px;
+      width: 180px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 10;
+    }
+
+    .article-share-menu a img {
+      transition: transform 0.2s ease;
+    }
+
+    .article-share-menu a:hover img {
+      transform: scale(1.15);
+    }
+
+    .share-button-container {
+      position: relative;
+    }
+
+    /* تغيير لون أيقونة المشاركة فقط إلى اللون الوردي */
+    .share-button-container .article-button img {
+      filter: hue-rotate(300deg) saturate(2) brightness(0.9);
+    }
+
+    /* رسائل التنبيه */
+    #message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #7b3fcf;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 15px;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 90%;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .copy-alert {
+      position: fixed;
+      top: 100px;
+      left: 30%;
+      transform: translateX(-50%);
+      background-color: #c29eea;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+      font-size: 1em;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .copy-alert.show {
+      opacity: 1;
+    }
+
+    /* زر العودة لجميع المقالات */
+    .back-to-all {
+      margin: 20px auto;
+      display: block;
+      padding: 10px 20px;
+      background-color: #5e2ca5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-all:hover {
+      background-color: #4a208f;
+      transform: translateY(-2px);
+    }
+
+    /* تمييز الكلمات التي تم البحث عنها - لون أغمق */
+    .highlight {
+      background-color: #d9c4ff;
+      padding: 2px 4px;
+      border-radius: 3px;
+      color: #4a208f;
+      font-weight: bold;
+    }
+
+    /* زر العودة للأعلى */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: #5e2ca5;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background-color: #4a208f;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* تحسينات لعرض المقالات في الجوال */
+    @media (max-width: 767px) {
+      .highlight {
+        background-color: #d9c4ff;
+        padding: 2px 3px;
+        border-radius: 2px;
+      }
+      
+      /* تحسينات لعرض المقالات في الجوال */
+      .article p {
+        max-height: 6em;
+        -webkit-line-clamp: 4;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: max-height 0.5s ease, -webkit-line-clamp 0.5s ease;
+      }
+      
+      .article.expanded p {
+        max-height: none;
+        -webkit-line-clamp: unset;
+        display: block;
+      }
+      
+      .article.expanded img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* تعديلات زر العودة للأعلى للجوال */
+      .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        bottom: 20px;
+        left: 20px;
+      }
+    }
+
+    /* رسالة عدم وجود نتائج بحث */
+    .no-results {
+      text-align: center;
+      padding: 30px;
+      font-size: 1.2em;
+      color: #5e2ca5;
+      display: none;
+    }
+
+    /* أنماط مربع البحث الجديد - من الكود الأول */
     .section-header {
       text-align: center;
       margin-bottom: 40px;
@@ -193,222 +490,165 @@
       color: #5e2ca5;
       display: none;
     }
-
-    .no-results {
-      text-align: center;
-      padding: 30px;
-      font-size: 1.2em;
-      color: #5e2ca5;
-      display: none;
+    
+    /* تحسينات خاصة بالجوال لمنع الميلان */
+    @media (max-width: 767px) {
+      .section-header {
+        margin-bottom: 25px;
+        padding: 0 15px;
+      }
+      
+      .section-header h1 {
+        font-size: 1.6em;
+        padding-bottom: 8px;
+      }
+      
+      .section-header h1::after {
+        height: 3px;
+        width: 60px;
+      }
+      
+      .section-header p {
+        font-size: 0.95em;
+      }
+      
+      .search-container {
+        width: 95%;
+        margin: 0 auto 20px;
+      }
+      
+      .search-box {
+        padding: 10px 40px 10px 15px;
+        font-size: 0.95em;
+      }
+      
+      .search-icon {
+        left: 15px;
+        font-size: 1em;
+      }
+      
+      .search-results-info {
+        font-size: 0.95em;
+      }
+      
+      .container {
+        padding: 1em;
+        padding-top: 85px;
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .article {
+        padding: 1.2em;
+        margin-bottom: 1.2em;
+        width: 100%;
+        overflow: hidden;
+      }
+      
+      .article h2 {
+        font-size: 1.1em;
+      }
+      
+      .article p {
+        font-size: 0.95em;
+        line-height: 1.7;
+        word-wrap: break-word;
+      }
+      
+      .article-button {
+        padding: 7px 12px;
+        font-size: 13px;
+      }
+      
+      .publish-date {
+        font-size: 0.85em;
+        padding: 4px 8px;
+      }
+      
+      .creative-text {
+        font-size: 1.8em;
+        margin-bottom: 0.8em;
+        white-space: normal;
+      }
+      
+      .intro {
+        font-size: 1em;
+        margin-bottom: 1.5em;
+        padding: 0 10px;
+      }
+      
+      #pagination-wrapper {
+        margin: 25px 0;
+      }
+      
+      #pageInfo {
+        font-size: 0.9em;
+        margin-bottom: 8px;
+      }
+      
+      #prevPage, #nextPage, #firstPage {
+        padding: 6px 12px;
+        font-size: 0.9em;
+      }
+      
+      /* إصلاحات لمنع التجاوز الأفقي */
+      .article-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .podcasts-grid, .podcasts-section {
+        width: 100%;
+        max-width: 100%;
+      }
+      
+      .nav-links {
+        width: 95%;
+      }
+      
+      /* إصلاحات لمنع التكبير التلقائي */
+      input, textarea, select {
+        font-size: 16px !important;
+      }
     }
 
-    /* بطاقات المقالات المحسنة */
-    .article {
-      background: linear-gradient(135deg, #ffffff 0%, #f9f5ff 100%);
-      padding: 1.8em;
-      border-radius: 16px;
-      margin-bottom: 1.8em;
-      box-shadow: 0 8px 20px rgba(94, 44, 165, 0.08);
-      text-align: right;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      overflow: hidden;
-      position: relative;
-      border: 1px solid rgba(106, 76, 147, 0.12);
-    }
+    @media (min-width: 768px) {
+      .nav-links a {
+        position: relative;
+        transition: all 0.3s ease;
+        padding: 5px 0;
+      }
 
-    .article:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 12px 30px rgba(94, 44, 165, 0.15);
-      border-color: rgba(106, 76, 147, 0.2);
-    }
+      .nav-links a:hover {
+        color: #d0bfff !important;
+        transform: translateY(-2px);
+      }
 
-    .article h2 {
-      color: #4a208f;
-      margin-top: 0;
-      margin-bottom: 12px;
-      font-size: 1.4em;
-      font-weight: 700;
-      position: relative;
-      padding-bottom: 12px;
-      transition: color 0.3s ease;
-    }
-
-    .article:hover h2 {
-      color: #6a4c93;
-    }
-
-    .article h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(to right, #a88ee6, #6a4c93);
-      border-radius: 3px;
-      transition: width 0.4s ease;
-    }
-
-    .article:hover h2::after {
-      width: 100px;
-    }
-
-    .article p {
-      line-height: 1.85;
-      color: #3a0066;
-      font-size: 1.05em;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .publish-date {
-      background: linear-gradient(135deg, #7b3fcf, #5e2ca5);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 0 0 12px 12px;
-      display: inline-block;
-      font-size: 0.9em;
-      font-weight: 500;
-      position: absolute;
-      top: 0;
-      right: 20px;
-      box-shadow: 0 3px 10px rgba(94, 44, 165, 0.2);
-      transition: all 0.3s ease;
-      z-index: 2;
-    }
-
-    .article:hover .publish-date {
-      transform: translateY(5px);
-      box-shadow: 0 5px 15px rgba(94, 44, 165, 0.3);
-    }
-
-    .date-icon {
-      margin-left: 8px;
-      color: #e8d7ff;
-    }
-
-    .article-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-start;
-      margin-top: 15px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
-
-    .article-button {
-      background: linear-gradient(135deg, #a88ee6, #7b3fcf);
-      color: white;
-      padding: 10px 18px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 0.95em;
-      position: relative;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      box-shadow: 0 4px 10px rgba(106, 76, 147, 0.25);
-    }
-
-    .article-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(106, 76, 147, 0.35);
-      background: linear-gradient(135deg, #9678e0, #6a30c0);
-    }
-
-    .article-button.active {
-      background: linear-gradient(135deg, #4b0082, #3a0066);
-    }
-
-    .article-button:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 125%;
-      right: 50%;
-      transform: translateX(50%);
-      background-color: #5e2ca5;
-      color: #e8d7ff;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 0.85em;
-      white-space: nowrap;
-      pointer-events: none;
-      z-index: 10;
-      min-width: 120px;
-      text-align: center;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    }
-
-    /* تأثيرات الخلفية للبطاقات */
-    .article::before {
+      .nav-links a::after {
         content: '';
         position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(168, 142, 230, 0.05) 0%, transparent 70%);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        z-index: 0;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #d0bfff;
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .logo-container {
+        order: -1;
+        margin-right: 40px;
+      }
+
+      .hamburger {
+        display: none !important;
+      }
     }
 
-    .article:hover::before {
-        opacity: 1;
-    }
-
-    /* التذييل - النسخة الأصلية */
-    footer {
-      text-align: center;
-      padding: 18px;
-      background: #5e2ca5;
-      color: white;
-      font-size: 0.85em;
-      margin-top: 40px;
-      width: 100%;
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 15px 0;
-      flex-wrap: wrap;
-    }
-
-    .social-links a {
-      color: white;
-      font-size: 0.9em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      text-decoration: none !important;
-      border: none !important;
-      transition: all 0.3s ease;
-    }
-
-    .social-links a:hover {
-      color: white;
-      transform: scale(1.1);
-    }
-    
-    .copyright {
-      margin-top: 10px;
-      padding-top: 10px;
-      font-size: 0.95em;
-      font-weight: 600;
-      color: #ffd166;
-    }
-
-    /* التكيف مع الجوال */
     @media (max-width: 767px) {
       nav {
         padding: 0.6em 3%;
@@ -451,65 +691,13 @@
         filter: none;
       }
 
-      .article {
-          padding: 1.5em;
-          padding-top: 45px;
-      }
-      
-      .article h2 {
-          font-size: 1.25em;
-          padding-bottom: 10px;
-      }
-      
-      .publish-date {
-          padding: 6px 14px;
-          font-size: 0.85em;
-          right: 15px;
-      }
-      
       .article-button {
-          padding: 9px 15px;
-          font-size: 0.9em;
+        padding: 8px 12px;
+        font-size: 13px;
       }
 
-      .container {
-        padding: 1em;
-        padding-top: 85px;
-        width: 100%;
-        max-width: 100%;
-      }
-
-      .section-header {
-        margin-bottom: 25px;
-        padding: 0 15px;
-      }
-      
-      .section-header h1 {
-        font-size: 1.6em;
-        padding-bottom: 8px;
-      }
-      
-      .section-header p {
-        font-size: 0.95em;
-      }
-      
-      .search-container {
-        width: 95%;
-        margin: 0 auto 20px;
-      }
-      
-      .search-box {
-        padding: 10px 40px 10px 15px;
-        font-size: 0.95em;
-      }
-      
-      .search-icon {
-        left: 15px;
-        font-size: 1em;
-      }
-      
-      .search-results-info {
-        font-size: 0.95em;
+      .back-to-all {
+        width: 90%;
       }
     }
 
@@ -517,108 +705,196 @@
       from { transform: translateY(-20px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-    
-    /* رسالة التنبيه */
-    #message {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #7b3fcf;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 15px;
-      display: none;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      max-width: 90%;
+
+    /* أنماط التذييل من الكود الأول */
+    footer {
       text-align: center;
-      white-space: nowrap;
-    }
-
-    .copy-alert {
-      position: fixed;
-      top: 100px;
-      left: 30%;
-      transform: translateX(-50%);
-      background-color: #c29eea;
+      padding: 18px;
+      background: #5e2ca5;
       color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      font-weight: bold;
-      font-size: 1em;
-      z-index: 9999;
-      opacity: 0;
-      transition: opacity 0.5s ease;
+      font-size: 0.85em;
+      margin-top: 40px;
+      width: 100%;
     }
 
-    .copy-alert.show {
-      opacity: 1;
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+      flex-wrap: wrap;
     }
 
-    /* زر العودة للأعلى */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 50px;
-      height: 50px;
-      background-color: #5e2ca5;
+    .social-links a {
       color: white;
-      border-radius: 50%;
+      font-size: 0.9em;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 999;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      text-decoration: none !important;
+      border: none !important;
     }
 
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
+    .social-links a:hover {
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .social-links a.facebook:hover { background: #1877F2; }
+    .social-links a.instagram:hover { background: #E4405F; }
+    .social-links a.youtube:hover { background: #FF0000; }
+    .social-links a.tiktok:hover { background: #000000; }
+    .social-links a.snapchat:hover { background: #FFFC00; color: #000; }
+    .social-links a.telegram:hover { background: #2AABEE; }
+
+    .copyright {
+      margin-top: 10px;
+      padding-top: 10px;
+      font-size: 0.95em;
+      font-weight: 600;
+      color: #ffd166;
     }
 
-    .back-to-top:hover {
-      background-color: #4a208f;
-      transform: translateY(-3px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* باقي أنماط الصفحة الأصلية */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5efff;
+      margin: 0;
+      padding: 0;
+      color: #2f003f;
+      min-height: 100vh;
+      background-attachment: fixed;
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      -webkit-overflow-scrolling: touch; /* تمكين التمرير السلس على iOS */
     }
 
-    .creative-text {
-      position: relative;
-      display: inline-block;
-      color: #5e2ca5;
-      margin-bottom: 1.3em;
-      font-size: 2.3em;
-      padding-bottom: 12px;
-      font-weight: 700;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      padding: 2em;
+      max-width: 900px;
+      margin: auto;
       text-align: center;
-      width: 100%;
+      padding-top: 100px;
+      overflow: hidden;
     }
-    .creative-text::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 50%;
-      transform: translateX(50%);
-      width: 90px;
-      height: 3px;
-      background: linear-gradient(90deg, #ffd166, #ff6b6b);
+
+    h1 {
+      color: #5e2ca5;
+      margin-bottom: 0.5em;
+    }
+
+    p.intro {
+      font-size: 1.1em;
+      margin-bottom: 2em;
+      color: #4a208f;
+    }
+
+    .article {
+      background-color: #ebddff;
+      padding: 1.5em;
       border-radius: 10px;
+      margin-bottom: 1.5em;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      text-align: right;
+      transition: all 0.3s ease;
+      overflow: hidden;
     }
+
+    .article:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    .article h2 {
+      color: #4a208f;
+      margin-top: 0;
+      overflow-wrap: break-word;
+    }
+
+    .article p {
+      line-height: 1.8;
+      white-space: pre-line;
+      overflow: hidden;
+      max-height: 4.5em;
+      transition: max-height 0.4s ease;
+      overflow-wrap: break-word;
+    }
+
+    .article.expanded p {
+      max-height: 1200px;
+    }
+
+    .article a.read-more {
+      display: inline-block;
+      margin-top: 10px;
+      color: #6a0dad;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .article a.read-more:hover {
+      color: #4b0082;
+      transform: scale(1.05);
+    }
+
+    /* تحسينات لتاريخ النشر */
+    .publish-date {
+      font-size: 0.9em;
+      color: #666;
+      margin: 5px 0 15px;
+      display: block;
+      background-color: #e0d0ff;
+      padding: 5px 10px;
+      border-radius: 15px;
+      display: inline-block;
+    }
+    
+    .date-icon {
+      margin-left: 5px;
+      color: #5e2ca5;
+    }
+  
+.creative-text {
+  position: relative;
+  display: inline-block;
+  color: #5e2ca5;
+  margin-bottom: 1.3em;
+  font-size: 2.3em;
+  padding-bottom: 12px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+}
+.creative-text::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translateX(50%);
+  width: 90px;
+  height: 3px;
+  background: linear-gradient(90deg, #ffd166, #ff6b6b);
+  border-radius: 10px;
+}
 </style>
 </head>
 <body>
 <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
-<!-- الشريط العلوي -->
+<!-- الشريط العلوي من الكود الأول مع إزالة مربع البحث -->
 <nav>
 <div class="hamburger" onclick="toggleMobileMenu()">☰ القائمة</div>
 <div class="nav-links">
@@ -634,6 +910,7 @@
 <a href="favorites.html"><i class="fas fa-star"></i> المفضلة</a>
 <a href="support.html"><i class="fas fa-hand-holding-heart"></i> دعم المحتوى</a>
 <a href="#" onclick="window.print()"><i class="fas fa-print"></i> طباعة</a>
+<!-- تمت إزالة مربع البحث من هنا -->
 </div>
 <div class="logo-container">
 <a href="index.html">
@@ -642,13 +919,14 @@
 </div>
 </nav>
 
-<!-- المحتوى الرئيسي -->
+<!-- المحتوى الأصلي -->
 <div class="container">
-<!-- العنوان ومربع البحث -->
+<!-- إضافة قسم العنوان ومربع البحث الجديد -->
 <div class="section-header">
-  <h1 class="creative-text">المقالات</h1>
+  <h1 class="creative-text" style="text-align: center;">المقالات</h1>
   <p class="intro">في هذه الصفحة أشارك مقالات من خارج الصندوق، ونقد الموروث بوعي واحترام للعقل.</p>
   
+  <!-- مربع البحث الجديد بنفس شكل الكود الأول -->
   <div class="search-container">
     <div class="search-icon">
       <i class="fas fa-search"></i>
@@ -664,15 +942,13 @@
 <div class="no-results" id="noResultsMessage">
       لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
 </div>
-
-<!-- بطاقات المقالات المحسنة -->
 <div class="article" id="article-44">
 <h2><a href="https://husseinalkhalil.com/books">❖ مفهوم الربا من كتاب الله</a></h2>
 <span class="publish-date"><span class="date-icon">📅</span> 13 يوليو 2025</span>
 <p>تتين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ مفهوم الربا من كتاب الله')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐ المفضلة
         </button>
 </div>
 </div>
@@ -682,7 +958,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ للذكر مثل حظ الانثيين')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐ المفضلة
         </button>
 </div>
 </div>
@@ -692,7 +968,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ وطني أولاً، هل أصبحت الوطنية تهمة؟')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -702,7 +978,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا تبرر، أنت لست موظفًا في خدمة أفكار الآخرين.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -712,7 +988,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ فلسطين وحصان طروادة.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -722,7 +998,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الحور العين.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -732,7 +1008,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الإيمان الصادق لا يحتاج إلى ترويج.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -742,127 +1018,137 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ بني إسرائيل.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
 <div class="article" id="article-36">
+<h2>❖ لا توجد حقيقة مطلقة.</h2>
+<span class="publish-date"><span class="date-icon">📅</span> 30 مايو 2025</span>
+<p>تتناين.</p>
+<div class="article-actions">
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا توجد حقيقة مطلقة.')">
+          ⭐
+        </button>
+</div>
+</div>
+<div class="article" id="article-35">
 <h2>❖ العقل والنقل.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 30 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ العقل والنقل.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-35">
+<div class="article" id="article-34">
 <h2>❖ رسالة إلى صديقي المتمسك بالتراث الديني.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي المتمسك بالتراث الديني.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-34">
+<div class="article" id="article-33">
 <h2>❖ رسالة إلى صديقي الملحد.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي الملحد.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-33">
+<div class="article" id="article-32">
 <h2>❖ رسالة إلى صديقي السُنّي وصديقي الشيعي.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي السُنّي وصديقي الشيعي.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-32">
+<div class="article" id="article-31">
 <h2>❖ رسالة إلى صديقي المثقف.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي المثقف.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-31">
+<div class="article" id="article-30">
 <h2>❖ قتل الوزغ.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ قتل الوزغ.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-30">
+<div class="article" id="article-29">
 <h2>❖ لا عنصرية في الإسلام.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا عنصرية في الإسلام.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-29">
+<div class="article" id="article-28">
 <h2>❖ نعمة العقل.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ نعمة العقل.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-28">
+<div class="article" id="article-27">
 <h2>❖ الخمر وحكمه.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الخمر وحكمه.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-27">
+<div class="article" id="article-26">
 <h2>❖ حياة النبي.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ حياة النبي.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-26">
+<div class="article" id="article-25">
 <h2>❖ الجرح والتعديل.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الجرح والتعديل.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
-<div class="article" id="article-25">
+<div class="article" id="article-24">
 <h2>❖ معالجة الخطأ بالخطأ.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ معالجة الخطأ بالخطأ.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -872,7 +1158,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ أنا والعندليب.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -882,7 +1168,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ مفاهيم مغلوطة.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -892,7 +1178,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ حُسن الخاتمة وسوء الخاتمة.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -902,7 +1188,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الأعراب أشد كفراً ونفاقا.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -912,7 +1198,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الملحد وأنواعه')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -922,17 +1208,17 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ تغسيل الميت وتكفينه')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
     </div>
 </div>
 <div class="article" id="article-18">
-<h2>❖ الناسخ والمنسوخ</h2>
+<h2>❖ أكذوبة أسباب النزول.</h2>
 <span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
 <p>تتناين.</p>
 <div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الناسخ والمنسوخ.')">
-          <i class="far fa-heart"></i> المفضلة
+<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ أكذوبة أسباب النزول.')">
+          ⭐
         </button>
 </div>
 </div>
@@ -942,7 +1228,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ أسباب النزول')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -952,7 +1238,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ القرآن أم التراث؟')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -962,7 +1248,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ أصحاب القوقعة.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -972,7 +1258,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ حذارِ.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -982,8 +1268,8 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ وهم الحقيقة المطلقة.')">
-          <i class="far fa-heart"></i> المفضلة
-        </button>
+          ⭐
+        </button>>
 </div>
 </div>
 <div class="article" id="article-12">
@@ -992,7 +1278,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ كيف تُشيّطن أفكارك؟')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1002,7 +1288,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ قصة قصيرة.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1012,8 +1298,9 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖  أعراض فهم الدين بالمقلوب.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
+</div>
 </div>
 </div>
 <div class="article" id="article-9">
@@ -1022,7 +1309,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖  الباحث عن الأضواء.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1032,7 +1319,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖  النقل على العقل.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1042,7 +1329,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ وهم الحواس في الإلحاد، الحقيقة أوسع مما يُرى.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1052,7 +1339,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا تسعَ لإرضاء أحد.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1062,7 +1349,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ ازدواجية الضمير')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1072,7 +1359,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ دعهم يتكلمون، وواصل طريقك بسلام')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1082,7 +1369,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ هوامش على الطريق.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1092,7 +1379,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ نظرية الحصان الميت.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1102,7 +1389,7 @@
 <p>تتناين.</p>
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الجدال مع المؤدلجين، معركة خاسرة.')">
-          <i class="far fa-heart"></i> المفضلة
+          ⭐
         </button>
 </div>
 </div>
@@ -1162,6 +1449,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       paginateArticles();
 
+      // إضافة ربط مباشر عند الضغط على زر الصفحة الأولى (تأكيد)
       const firstBtn = document.getElementById('firstPage');
       if (firstBtn) {
         firstBtn.addEventListener('click', () => {
@@ -1171,10 +1459,45 @@
         });
       }
     });
+    </script>
+<script>
+  const articlesPerPage = 8;
+  let currentPage = 1;
+
+  function paginateArticles() {
+    const articles = document.querySelectorAll('.article');
+    const totalPages = Math.ceil(articles.length / articlesPerPage);
+
+    articles.forEach((article, index) => {
+      const start = (currentPage - 1) * articlesPerPage;
+      const end = currentPage * articlesPerPage;
+      article.style.display = (index >= start && index < end) ? 'block' : 'none';
+    });
+
+    document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline-block' : 'none';
+    document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline-block' : 'none';
+  }
+
+  function nextPage() {
+    currentPage++;
+    paginateArticles();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function prevPage() {
+    currentPage--;
+    paginateArticles();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    paginateArticles();
+  });
 </script>
 <div id="message"></div>
+<!-- زر العودة للأعلى -->
 <button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
-<!-- الفوتر كما في النسخة الأصلية -->
+<!-- التذييل من الكود الأول -->
 <footer>
 <div class="social-links">
 <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -1189,7 +1512,7 @@
     </div>
 </footer>
 <script>
-    // وظائف الشريط العلوي
+    // وظائف الشريط العلوي من الكود الأول
     function toggleMobileMenu() {
       const menu = document.querySelector(".nav-links");
       const overlay = document.querySelector(".nav-overlay");
@@ -1258,19 +1581,16 @@
     function toggleFavorite(button, item) {
         let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
         const isFavorite = favorites.includes(item);
-        const heartIcon = button.querySelector('i');
         
         if (isFavorite) {
             favorites = favorites.filter(i => i !== item);
             button.classList.remove("active");
             button.setAttribute('data-tooltip', 'أضف للمفضلة');
-            heartIcon.className = 'far fa-heart';
             showMessage("تمت إزالة العنصر من المفضلة");
         } else {
             favorites.push(item);
             button.classList.add("active");
             button.setAttribute('data-tooltip', 'إزالة من المفضلة');
-            heartIcon.className = 'fas fa-heart';
             showMessage("تمت إضافة العنصر إلى المفضلة");
         }
 
@@ -1427,7 +1747,7 @@
       });
     }
 
-    // وظيفة البحث في المقالات مع تمييز النتائج
+    // وظيفة البحث في المقالات مع تمييز النتائج (معدلة من الكود الأول)
     function setupSearch() {
       const searchInput = document.getElementById('searchInput');
       const resultsInfo = document.getElementById('searchResultsInfo');
@@ -1648,18 +1968,14 @@
         const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
         document.querySelectorAll(".article-button").forEach(button => {
             const match = button.getAttribute("onclick")?.match(/'([^']+)'/);
-            if (match && button.textContent.includes('المفضلة')) {
+            if (match && button.textContent.includes('⭐')) {
                 const articleTitle = match[1];
                 const isFavorite = favorites.includes(articleTitle);
-                const heartIcon = button.querySelector('i');
-                
                 button.setAttribute('data-tooltip', isFavorite ? 'إزالة من المفضلة' : 'أضف للمفضلة');
                 if (isFavorite) {
                     button.classList.add("active");
-                    if (heartIcon) heartIcon.className = 'fas fa-heart';
                 } else {
                     button.classList.remove("active");
-                    if (heartIcon) heartIcon.className = 'far fa-heart';
                 }
             }
         });
