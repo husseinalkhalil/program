@@ -13,6 +13,7 @@
     * {
       box-sizing: border-box;
       max-width: 100%;
+      text-decoration: none !important; /* إزالة الخطوط تحت جميع العناصر */
     }
     
     html, body {
@@ -217,6 +218,7 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      text-decoration: none !important; /* إزالة الخط تحت الأيقونة */
     }
 
     .article-button:hover {
@@ -817,23 +819,22 @@
     }
 
     .article h2 {
-      color: #4a208f;
+      color: #2563eb; /* تغيير لون العناوين إلى الأزرق */
       margin-top: 0;
       overflow-wrap: break-word;
-      /* إزالة السطر السفلي من العناوين */
       text-decoration: none;
       border-bottom: none;
+      transition: color 0.3s ease;
     }
 
     .article h2 a {
-      /* إزالة السطر السفلي من روابط العناوين */
+      color: #2563eb; /* لون روابط العناوين بالأزرق */
       text-decoration: none;
-      /* تأثير تغيير اللون عند التمرير */
       transition: color 0.3s ease;
     }
 
     .article h2 a:hover {
-      color: #ff6b6b; /* اللون الجديد عند التمرير */
+      color: #1d4ed8; /* لون أزرق داكن عند التمرير */
     }
 
     .article p {
@@ -843,7 +844,6 @@
       max-height: 4.5em;
       transition: max-height 0.4s ease;
       overflow-wrap: break-word;
-      /* إزالة السطر السفلي من الوصف */
       text-decoration: none;
       border-bottom: none;
     }
@@ -1299,16 +1299,6 @@
         </button>
 </div>
 </div>
-<div class="article" id="article-10">
-<h2><a href="article/10.html">❖ أعراض فهم الدين بالمقلوب.</h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖  أعراض فهم الدين بالمقلوب.')">
-          ⭐
-        </button>
-</div>
-</div>
 </div>
 <div class="article" id="article-9">
 <h2><a href="article/9.html">❖ الباحث عن الأضواء.</h2>
@@ -1411,7 +1401,7 @@
 </div>
 </div>
 <script>
-    // تغيير عدد المقالات في الصفحة من 8 إلى 10
+    // تغيير عدد المقالات في الصفحة إلى 10
     const articlesPerPage = 10;
     let currentPage = 1;
 
@@ -1436,7 +1426,7 @@
       if (currentPage < totalPages) {
         currentPage++;
         paginateArticles();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // إزالة التمرير للأعلى لمنع فتح المقالة الأولى
       }
     }
 
@@ -1444,26 +1434,25 @@
       if (currentPage > 1) {
         currentPage--;
         paginateArticles();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // إزالة التمرير للأعلى لمنع فتح المقالة الأولى
       }
     }
 
     function goToFirstPage() {
       currentPage = 1;
       paginateArticles();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // إزالة التمرير للأعلى لمنع فتح المقالة الأولى
     }
 
     document.addEventListener('DOMContentLoaded', function() {
       paginateArticles();
 
-      // إضافة ربط مباشر عند الضغط على زر الصفحة الأولى (تأكيد)
+      // إضافة ربط مباشر عند الضغط على زر الصفحة الأولى
       const firstBtn = document.getElementById('firstPage');
       if (firstBtn) {
         firstBtn.addEventListener('click', () => {
           currentPage = 1;
           paginateArticles();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       }
     });
