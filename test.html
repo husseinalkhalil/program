@@ -51,6 +51,7 @@
             transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden; /* لمنع التمرير الأفقي عند التكبير */
         }
         
         /* منع التمرير على الصفحة عند فتح القائمة */
@@ -365,6 +366,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: transform 0.3s ease;
+            transform-origin: top center;
         }
         
         .article-card {
@@ -1445,7 +1448,7 @@
         </button>
     </div>
     
-    <div class="container">
+    <div class="container" id="container">
         <div class="article-card" id="articleCard">
             <div class="article-header">
                 <h1>❖ مفهوم الربا في كتاب الله.</h1>
@@ -1613,6 +1616,7 @@
         const navButtons = document.querySelectorAll('.nav-btn');
         const backToTop = document.getElementById('backToTop');
         const articleCard = document.getElementById('articleCard');
+        const container = document.getElementById('container');
         
         // فتح/إغلاق القائمة
         function toggleMobileMenu(event) {
@@ -1793,7 +1797,7 @@
             }
         });
         
-        // أزرار التحكم بحجم الخط
+        // أزرار التحكم بحجم الخط - الحل النهائي
         const fontDecrease = document.getElementById('fontDecrease');
         const fontReset = document.getElementById('fontReset');
         const fontIncrease = document.getElementById('fontIncrease');
@@ -1801,19 +1805,25 @@
         let currentScale = 1;
         const minScale = 0.8;
         const maxScale = 1.5;
+        const scaleStep = 0.1;
         
         function applyFontScale() {
             // تطبيق التكبير/التصغير على المقالة كاملة
             articleCard.style.transform = `scale(${currentScale})`;
+            container.style.transform = `scale(${currentScale})`;
+            
+            // تحديث حجم الحاوية لمنع التداخل
+            container.style.width = `${100 / currentScale}%`;
+            container.style.height = 'auto';
         }
         
         fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale - 0.1);
+            currentScale = Math.max(minScale, currentScale - scaleStep);
             applyFontScale();
         });
         
         fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale + 0.1);
+            currentScale = Math.min(maxScale, currentScale + scaleStep);
             applyFontScale();
         });
         
