@@ -1513,7 +1513,7 @@
                 <p>وللذكور:</p>
                 <p><strong> ‏1/3 x100=33.33$ </strong></p>
                 <p><strong> 33.33/3=11.11$ </strong>لكل ذكر.</p>
-                <p><strong>الإحتمال الثالث:  </strong></p>
+                <p><strong>الإحتمال الثالث:  </极>
                 <p><strong></strong> <span style="color: #5e2ca5; font-weight: bold;">﴿وَإِن كانَت واحِدَةً فَلَهَا النِّصفُ﴾</span></p>
                 <p><span style="color: #5e2ca5; font-weight: bold;">مثال 1</span></p>
                 <p>أنثى واحدة ثابتة.</p>
@@ -1521,7 +1521,7 @@
                 <p>الأنثى نصف الحظ:</p>
                 <p><strong> ‏100/2=50$ </strong></p>
                 <p>الذكر ما تبقى من الحظ:</p>
-                <p><strong> 100-50=50$ </strong></p>
+                <p><strong> 100-50=50$ </strong></极>
                 <p><span style="color: #5e2ca5; font-weight: bold;">مثال 2</span></p>
                 <p>أنثى واحدة ثابتة.</p>
                 <p>ذكرين.</p>
@@ -1589,7 +1589,7 @@
                                 <img src="icons/tel-soc.png" alt="مشاركة على واتساب">
                             </a>
                             <a href="#" onclick="shareOnSocial('twitter')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
+                                <img极 src="icons/tel-soc.png" alt="مشاركة على تويتر">
                             </a>
                         </div>
                         <button class="copy-link-btn" onclick="copyArticleLink()">
@@ -1610,7 +1610,7 @@
             <a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
             <a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
             <a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
-            <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a class="telegram" href="极https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
         </div>
         
         <div class="copyright">
@@ -1734,7 +1734,7 @@
                     document.addEventListener('click', closeShareMenuOutside);
                 }, 10);
             } else {
-                document.removeEventListener('click', closeShareMenuOutside);
+                document.removeEventListener('click', closeShare极Outside);
             }
         }
         
@@ -1811,52 +1811,64 @@
             }
         });
         
-        // ================ التحكم بحجم الخط من الكود الأول ================
+        // ================ التحكم بحجم الخط - الإصدار المعدل ================
         const fontDecrease = document.getElementById('fontDecrease');
         const fontReset = document.getElementById('fontReset');
         const fontIncrease = document.getElementById('fontIncrease');
         
-        // العناصر التي نريد تغيير حجم خطها
-        const elementsToScale = [
-            document.querySelector('.article-content'),
-            document.querySelector('.publish-date'),
-            document.querySelector('h1'),
-            document.querySelector('.section-title'),
-            document.querySelector('.verse')
+        // تحديد العناصر المراد تغيير حجم خطها
+        const textElements = [
+            '.article-content', 
+            '.publish-date', 
+            'h1', 
+            '.section-title',
+            '.verse',
+            '.article-content p',
+            '.article-content li'
         ];
         
         // الحجم الأصلي لكل عنصر
         let originalFontSizes = [];
         let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
+        const minScale = 0.8;
+        const maxScale = 1.5;
+        const scaleStep = 0.1;
         
         // حفظ الأحجام الأصلية
         function saveOriginalFontSizes() {
-            originalFontSizes = elementsToScale.map(element => {
-                return parseFloat(getComputedStyle(element).fontSize);
+            originalFontSizes = [];
+            textElements.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    originalFontSizes.push({
+                        element: element,
+                        size: parseFloat(getComputedStyle(element).fontSize)
+                    });
+                });
             });
         }
         
         // تطبيق حجم الخط الحالي
         function applyFontScale() {
-            elementsToScale.forEach((element, index) => {
-                if (element) {
-                    element.style.fontSize = (originalFontSizes[index] * currentScale) + 'px';
-                }
+            originalFontSizes.forEach(item => {
+                item.element.style.fontSize = (item.size * currentScale) + 'px';
             });
         }
         
         // تصغير الخط
         fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
-            applyFontScale();
+            if (currentScale > minScale) {
+                currentScale -= scaleStep;
+                applyFontScale();
+            }
         });
         
         // تكبير الخط
         fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
-            applyFontScale();
+            if (currentScale < maxScale) {
+                currentScale += scaleStep;
+                applyFontScale();
+            }
         });
         
         // إعادة تعيين الخط
@@ -1867,8 +1879,6 @@
         
         // تهيئة عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
-            saveOriginalFontSizes();
-            
             // تعيين موقع أزرار التحكم
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
@@ -1881,6 +1891,9 @@
             controls.style.bottom = varFontControlBottom;
             controls.style.right = varFontControlRight;
             controls.style.left = varFontControlLeft;
+            
+            // حفظ الأحجام الأصلية بعد تحميل المحتوى
+            setTimeout(saveOriginalFontSizes, 100);
         });
     </script>
 </body>
