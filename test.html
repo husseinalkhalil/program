@@ -23,6 +23,14 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
+            /* إضافة متغيرات التحكم بالخط */
+            --font-control-position: top right;
+            --font-control-top: 120px;
+            --font-control-bottom: auto;
+            --font-control-right: 250px;
+            --font-control-left: auto;
+            --font-control-button-size: 30px;
+            --font-control-button-font-size: 18px;
         }
         
         * {
@@ -732,7 +740,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -1215,6 +1223,85 @@
           font-weight: 600;
           color: #ffd166;
         }
+        
+        /* ==================== أزرار التحكم بحجم الخط ==================== */
+        .font-controls {
+            position: fixed;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+            top: var(--font-control-top);
+            bottom: var(--font-control-bottom);
+            right: var(--font-control-right);
+            left: var(--font-control-left);
+        }
+        
+        .font-controls button {
+            width: var(--font-control-button-size);
+            height: var(--font-control-button-size);
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-control-button-font-size);
+            transition: all 0.3s;
+        }
+        
+        .font-controls button:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .font-controls button i {
+            transition: transform 0.2s;
+        }
+        
+        .font-controls button:active i {
+            transform: scale(0.9);
+        }
+        
+        .font-controls button::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .font-controls button:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .font-controls {
+                --font-control-top: 100px;
+                --font-control-right: 10px;
+                --font-control-button-size: 36px;
+                --font-control-button-font-size: 15px;
+                gap: 6px;
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1338,6 +1425,19 @@
         </div>
     </header>
     
+    <!-- أزرار التحكم بحجم الخط -->
+    <div class="font-controls">
+        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+            <i class="fas fa-search-minus"></i>
+        </button>
+        <button id="fontReset" title="الحجم الطبيعي (Reset)">
+            <i class="fas fa-font"></i>
+        </button>
+        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+            <i class="fas fa-search-plus"></i>
+        </button>
+    </div>
+    
     <div class="container">
         <div class="article-card">
             <div class="article-header">
@@ -1345,6 +1445,7 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
             </div>
             
+            <div class="article-content">
                 <p>ميّز الله الإنسان عن غيره بالعقل والقدرة على التفكير والاختيار، فكان مع العقل الحرية، ودعا في أكثر من موضع إلى استخدام العقل.</p>
                 <p>ذكر الله قوله:</p>
                 <p>وعندما نللإسلام.</p>
@@ -1382,16 +1483,16 @@
                         <div class="share-title">مشاركة المقالة</div>
                         <div class="share-platforms">
                             <a href="#" onclick="shareOnSocial('facebook')" class="share-platform">
-                                <img src="icons/fac-soc.png" alt="مشاركة على فيسبوك">
+                                <i class="fab fa-facebook-f"></i>
                             </a>
                             <a href="#" onclick="shareOnSocial('telegram')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على تلغرام">
+                                <i class="fab fa-telegram"></i>
                             </a>
                             <a href="#" onclick="shareOnSocial('whatsapp')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على واتساب">
+                                <i class="fab fa-whatsapp"></i>
                             </a>
                             <a href="#" onclick="shareOnSocial('twitter')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
+                                <i class="fab fa-twitter"></i>
                             </a>
                         </div>
                         <button class="copy-link-btn" onclick="copyArticleLink()">
@@ -1611,6 +1712,56 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
+        });
+        
+        // ==================== أزرار التحكم بحجم الخط ====================
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontReset = document.getElementById('fontReset');
+        const fontIncrease = document.getElementById('fontIncrease');
+        const articleContent = document.querySelector('.article-content');
+        const publishDate = document.querySelector('.publish-date');
+        
+        let originalFontSize, originalDateSize;
+        
+        let currentScale = 1;
+        const minScale = 0.5;
+        const maxScale = 4;
+        
+        function applyFontScale() {
+            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+        }
+        
+        fontDecrease.addEventListener('click', () => {
+            currentScale = Math.max(minScale, currentScale / 1.2);
+            applyFontScale();
+        });
+        
+        fontIncrease.addEventListener('click', () => {
+            currentScale = Math.min(maxScale, currentScale * 1.2);
+            applyFontScale();
+        });
+        
+        fontReset.addEventListener('click', () => {
+            currentScale = 1;
+            applyFontScale();
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            
+            const rootStyles = getComputedStyle(document.documentElement);
+            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
+            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
+            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
+            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+            
+            const controls = document.querySelector('.font-controls');
+            controls.style.top = varFontControlTop;
+            controls.style.bottom = varFontControlBottom;
+            controls.style.right = varFontControlRight;
+            controls.style.left = varFontControlLeft;
         });
     </script>
 </body>
