@@ -1445,6 +1445,7 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 24 يوليو 2025</span>
             </div>
             
+            <div class="article-content">
                 <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿قالوا إِنَّما البَيعُ مِثلُ الرِّبا وأحلَّ اللهُ البَيعَ وحرَّمَ الرِّبا﴾</span></p>
                 <p>ما هو الربا؟ وهل التعامل مع البنوك <span style="color: red;">محرّم</span>؟</p>
                 <h2 class="section-title">تعريف الربا في القرآن:</h2>
@@ -1803,10 +1804,13 @@
             applyFontScale();
         });
         
+        // تهيئة أحجام الخطوط بعد تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
+            // تخزين الحجم الأصلي
             originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
             originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
             
+            // تطبيق موضع أزرار التحكم
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
