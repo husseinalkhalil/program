@@ -1624,13 +1624,17 @@
     </div>
 
     <script>
-        // المتغيرات العامة
+        // المتغيرات العامة للتحكم بالخط
         let originalFontSize, originalDateSize;
         let currentScale = 1;
         const minScale = 0.5;
         const maxScale = 4;
 
+        // وظيفة تطبيق تغيير حجم الخط
         function applyFontScale() {
+            const articleContent = document.querySelector('.article-content');
+            const publishDate = document.querySelector('.publish-date');
+            
             if (articleContent) {
                 articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
             }
@@ -1639,30 +1643,18 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // تعريف العناصر
-            const hamburger = document.getElementById('hamburger');
-            const mobileNav = document.getElementById('mobileNav');
-            const header = document.getElementById('header');
-            const navIndicator = document.getElementById('navIndicator');
-            const navButtons = document.querySelectorAll('.nav-btn');
-            const backToTop = document.getElementById('backToTop');
+        // تهيئة الأحجام الأصلية عند تحميل الصفحة
+        function initFontControls() {
             const articleContent = document.querySelector('.article-content');
             const publishDate = document.querySelector('.publish-date');
             
-            // أزرار التحكم بالخط
-            const fontDecrease = document.getElementById('fontDecrease');
-            const fontReset = document.getElementById('fontReset');
-            const fontIncrease = document.getElementById('fontIncrease');
-
-            // الحصول على الأحجام الأصلية
             if (articleContent) {
                 originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
             }
             if (publishDate) {
                 originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
             }
-
+            
             // تعيين موضع أزرار التحكم بالخط
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
@@ -1677,29 +1669,47 @@
                 controls.style.right = varFontControlRight;
                 controls.style.left = varFontControlLeft;
             }
-
-            // إضافة المستمعين لأزرار التحكم بالخط
+            
+            // إضافة المستمعين للأحداث
+            const fontDecrease = document.getElementById('fontDecrease');
+            const fontReset = document.getElementById('fontReset');
+            const fontIncrease = document.getElementById('fontIncrease');
+            
             if (fontDecrease) {
                 fontDecrease.addEventListener('click', () => {
                     currentScale = Math.max(minScale, currentScale / 1.2);
                     applyFontScale();
                 });
             }
-
+            
             if (fontIncrease) {
                 fontIncrease.addEventListener('click', () => {
                     currentScale = Math.min(maxScale, currentScale * 1.2);
                     applyFontScale();
                 });
             }
-
+            
             if (fontReset) {
                 fontReset.addEventListener('click', () => {
                     currentScale = 1;
                     applyFontScale();
                 });
             }
+        }
 
+        // تهيئة الصفحة عند تحميل DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            // تهيئة التحكم بالخط
+            initFontControls();
+            
+            // تعريف العناصر الأخرى
+            const hamburger = document.getElementById('hamburger');
+            const mobileNav = document.getElementById('mobileNav');
+            const header = document.getElementById('header');
+            const navIndicator = document.getElementById('navIndicator');
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const backToTop = document.getElementById('backToTop');
+            
             // فتح/إغلاق القائمة
             function toggleMobileMenu(event) {
                 if (event) event.stopPropagation();
