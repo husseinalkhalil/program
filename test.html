@@ -23,7 +23,6 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
-            /* تم إضافة متغيرات التحكم بالخط من الكود الأول */
             --font-control-position: top right;
             --font-control-top: 120px;
             --font-control-bottom: auto;
@@ -1442,10 +1441,11 @@
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ للذكر مثل حظ الأنثيين.</h1>
-                <span class="publish-date"><span class="date-icon">📅</span> 13 يوليو 2025</span>
+                <h1 id="articleTitle">❖ للذكر مثل حظ الأنثيين.</h1>
+                <span class="publish-date" id="publishDate"><span class="date-icon">📅</span> 13 يوليو 2025</span>
             </div>
             
+            <div class="article-content" id="articleContent">
                 <p>هل معنى الآية أن الذكر يأخذ ضعف حصة الأنثى؟</p>
                 <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿لِلذَّكَرِ مِثْلُ حَظِّ ٱلْأُنثَيَيْنِ﴾</span> أي له مثل حظ أختيّه، فلهن الثلثان وهو الثلث، وهذا لأن الله قال حظ وليس نصيب.</p>
                 <p>وردت آية <span style="color: #5e2ca5; font-weight: bold;">﴿لِلذَّكَرِ مِثْلُ حَظِّ ٱلْأُنثَيَيْنِ﴾</span> في كتاب الله في موقعين.</p>
@@ -1563,6 +1563,7 @@
                 <h3 class="section-title">الخلاصة:</h3>
                 <p>إذا كان ولد وأربعة إناث، فالذكر يأخذ حصة انثيين، فالذكر يأخذ الثلث وأربعة إناث تأخذ الثلثين.</p>
                 <p>أما بقية الحالات فالذكر مثل حصة الأنثى.</p>
+            </div>
             
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
@@ -1625,34 +1626,59 @@
 
     <script>
         // المتغيرات العامة للتحكم بالخط
-        let originalFontSize, originalDateSize;
+        let originalFontSize = {
+            title: 32,    // حجم العنوان الأصلي
+            date: 18,     // حجم التاريخ الأصلي
+            content: 18   // حجم المحتوى الأصلي
+        };
+        
         let currentScale = 1;
         const minScale = 0.5;
         const maxScale = 4;
 
         // وظيفة تطبيق تغيير حجم الخط
         function applyFontScale() {
-            const articleContent = document.querySelector('.article-content');
-            const publishDate = document.querySelector('.publish-date');
+            const articleTitle = document.getElementById('articleTitle');
+            const publishDate = document.getElementById('publishDate');
+            const articleContent = document.getElementById('articleContent');
             
-            if (articleContent) {
-                articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            if (articleTitle) {
+                articleTitle.style.fontSize = (originalFontSize.title * currentScale) + 'px';
             }
             if (publishDate) {
-                publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+                publishDate.style.fontSize = (originalFontSize.date * currentScale) + 'px';
+            }
+            if (articleContent) {
+                articleContent.style.fontSize = (originalFontSize.content * currentScale) + 'px';
             }
         }
 
-        // تهيئة الأحجام الأصلية عند تحميل الصفحة
-        function initFontControls() {
-            const articleContent = document.querySelector('.article-content');
-            const publishDate = document.querySelector('.publish-date');
+        // تهيئة الصفحة عند تحميل DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            // تعريف العناصر
+            const hamburger = document.getElementById('hamburger');
+            const mobileNav = document.getElementById('mobileNav');
+            const header = document.getElementById('header');
+            const navIndicator = document.getElementById('navIndicator');
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const backToTop = document.getElementById('backToTop');
             
-            if (articleContent) {
-                originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            // الحصول على الأحجام الأصلية إذا كانت متوفرة
+            const articleTitle = document.getElementById('articleTitle');
+            const publishDate = document.getElementById('publishDate');
+            const articleContent = document.getElementById('articleContent');
+            
+            if (articleTitle) {
+                const computedStyle = getComputedStyle(articleTitle);
+                originalFontSize.title = parseFloat(computedStyle.fontSize);
             }
             if (publishDate) {
-                originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+                const computedStyle = getComputedStyle(publishDate);
+                originalFontSize.date = parseFloat(computedStyle.fontSize);
+            }
+            if (articleContent) {
+                const computedStyle = getComputedStyle(articleContent);
+                originalFontSize.content = parseFloat(computedStyle.fontSize);
             }
             
             // تعيين موضع أزرار التحكم بالخط
@@ -1670,7 +1696,7 @@
                 controls.style.left = varFontControlLeft;
             }
             
-            // إضافة المستمعين للأحداث
+            // إضافة المستمعين للأحداث لأزرار التحكم بالخط
             const fontDecrease = document.getElementById('fontDecrease');
             const fontReset = document.getElementById('fontReset');
             const fontIncrease = document.getElementById('fontIncrease');
@@ -1695,21 +1721,7 @@
                     applyFontScale();
                 });
             }
-        }
 
-        // تهيئة الصفحة عند تحميل DOM
-        document.addEventListener('DOMContentLoaded', () => {
-            // تهيئة التحكم بالخط
-            initFontControls();
-            
-            // تعريف العناصر الأخرى
-            const hamburger = document.getElementById('hamburger');
-            const mobileNav = document.getElementById('mobileNav');
-            const header = document.getElementById('header');
-            const navIndicator = document.getElementById('navIndicator');
-            const navButtons = document.querySelectorAll('.nav-btn');
-            const backToTop = document.getElementById('backToTop');
-            
             // فتح/إغلاق القائمة
             function toggleMobileMenu(event) {
                 if (event) event.stopPropagation();
