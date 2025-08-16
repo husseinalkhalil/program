@@ -1815,39 +1815,61 @@
         const fontDecrease = document.getElementById('fontDecrease');
         const fontReset = document.getElementById('fontReset');
         const fontIncrease = document.getElementById('fontIncrease');
-        const articleContent = document.querySelector('.article-content');
-        const publishDate = document.querySelector('.publish-date');
         
-        let originalFontSize, originalDateSize;
+        // العناصر التي نريد تغيير حجم خطها
+        const elementsToScale = [
+            document.querySelector('.article-content'),
+            document.querySelector('.publish-date'),
+            document.querySelector('h1'),
+            document.querySelector('.section-title'),
+            document.querySelector('.verse')
+        ];
         
+        // الحجم الأصلي لكل عنصر
+        let originalFontSizes = [];
         let currentScale = 1;
         const minScale = 0.5;
         const maxScale = 4;
         
-        function applyFontScale() {
-            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+        // حفظ الأحجام الأصلية
+        function saveOriginalFontSizes() {
+            originalFontSizes = elementsToScale.map(element => {
+                return parseFloat(getComputedStyle(element).fontSize);
+            });
         }
         
+        // تطبيق حجم الخط الحالي
+        function applyFontScale() {
+            elementsToScale.forEach((element, index) => {
+                if (element) {
+                    element.style.fontSize = (originalFontSizes[index] * currentScale) + 'px';
+                }
+            });
+        }
+        
+        // تصغير الخط
         fontDecrease.addEventListener('click', () => {
             currentScale = Math.max(minScale, currentScale / 1.2);
             applyFontScale();
         });
         
+        // تكبير الخط
         fontIncrease.addEventListener('click', () => {
             currentScale = Math.min(maxScale, currentScale * 1.2);
             applyFontScale();
         });
         
+        // إعادة تعيين الخط
         fontReset.addEventListener('click', () => {
             currentScale = 1;
             applyFontScale();
         });
         
+        // تهيئة عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            saveOriginalFontSizes();
             
+            // تعيين موقع أزرار التحكم
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
