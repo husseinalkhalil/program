@@ -1520,6 +1520,7 @@
             </div>
             
             <!-- محتوى المقالة -->
+            <div class="article-content">
                 <p><strong> 1- </strong>تؤمن بأن الكلب نجس وبنفس الوقت تأكل من صيده، لكن في المقابل تغمس الذبابة إذا سقطت في طعامك وتكمل الأكل بشكل طبيعي مع أنها تعيش في بيئة قذرة.</p>
                 <p><strong> 2- </strong>تؤمن أن ابن تيمية وأمثاله في الجنة على الرغم أن لديه عشرات الفتاوى بالقتل وجميعها من خارج كتاب الله وفتاوى رجال الدين بالتحريض على القتل وسفك الدماء لا تُعد ولا تُحصى، لكن في المقابل عبدالحليم حافظ في النار مع أنه لم يؤذِ أحد ولم يُحرّض على قتل أحد وذنبه أنه يغني.</p>
                 <p><strong> 3- </strong>تؤمن أن أكثر أهل النار هن النساء، لكن في المقابل الجنة تحت أقدام الأمهات.</p>
@@ -1530,12 +1531,12 @@
                 <p><strong> 8- </strong>تؤمن بتحريم العيش في بلاد (الكفار) وعدم التعامل معهم، لكن في المقابل تنعم باختراعاتهم وتتعالج بأدويتهم.</p>
                 <p><strong> 9- </strong>تدعوا ليل نهار على الكفار بالهلاك وتنشر التحريض والكره ضدهم، لكن في المقابل تستخدم أجهزتهم في سبّهم وشتمهم والتحريض عليهم.</p>
                 <p><strong> 10- </strong>تؤمن بتكريم المرأة واحترامها، لكن في المقابل إذا رأيت امرأة غير محجبة، تدخل بنواياها وتصفها بالفاسقة.</p>
+            </div>
+            
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-
-                </div>
-                </div>
+            </div>
             
             <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
@@ -1555,16 +1556,16 @@
                         <!-- منصات المشاركة -->
                         <div class="share-platforms">
                             <a href="#" onclick="shareOnSocial('facebook')" class="share-platform">
-                                <img src="icons/fac-soc.png" alt="مشاركة على فيسبوك">
+                                <i class="fab fa-facebook-f"></i>
                             </a>
                             <a href="#" onclick="shareOnSocial('telegram')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على تلغرام">
+                                <i class="fab fa-telegram"></i>
                             </a>
                             <a href="#" onclick="shareOnSocial('whatsapp')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على واتساب">
+                                <i class="fab fa-whatsapp"></i>
                             </a>
                             <a href="#" onclick="shareOnSocial('twitter')" class="share-platform">
-                                <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
+                                <i class="fab fa-twitter"></i>
                             </a>
                         </div>
                         <!-- زر نسخ الرابط -->
@@ -1805,30 +1806,42 @@
         const minScale = 0.5;
         const maxScale = 4;
         
+        // دالة لتطبيق تغيير حجم الخط
         function applyFontScale() {
             articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
             publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
         }
         
+        // تصغير الخط
         fontDecrease.addEventListener('click', () => {
             currentScale = Math.max(minScale, currentScale / 1.2);
             applyFontScale();
         });
         
+        // تكبير الخط
         fontIncrease.addEventListener('click', () => {
             currentScale = Math.min(maxScale, currentScale * 1.2);
             applyFontScale();
         });
         
+        // إعادة الخط للحجم الأصلي
         fontReset.addEventListener('click', () => {
             currentScale = 1;
             applyFontScale();
         });
         
+        // تهيئة الأحجام الأصلية عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
+            // الحصول على حجم الخط الأصلي للمحتوى
             originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            
+            // الحصول على حجم الخط الأصلي لتاريخ النشر
             originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
             
+            // تطبيق الأحجام الأصلية
+            applyFontScale();
+            
+            // تهيئة موضع عناصر التحكم في الخط
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
