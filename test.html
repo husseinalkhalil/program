@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <!-- تعريف ترميز الصفحة ومعلوماتها الأساسية -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المقالات | هوامش على الطريق. </title>
-    
-    <!-- روابط لخطوط جوجل وأيقونات فونت أويسوم -->
+    <title>المقالات | للذكر مثل حظ الأنثيين.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- إعلانات جوجل أدسنس -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
-    
     <style>
-        /* تعريف المتغيرات اللونية للاستخدام في التصميم */
         :root {
             --primary-color: #5e2ca5;
             --secondary-color: #9575CD;
@@ -30,24 +23,14 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
-            /* متغيرات التحكم بالخط المضافة */
-            --font-control-position: top right;
-            --font-control-top: 120px;
-            --font-control-bottom: auto;
-            --font-control-right: 250px;
-            --font-control-left: auto;
-            --font-control-button-size: 30px;
-            --font-control-button-font-size: 18px;
         }
         
-        /* إعادة تعيين الهوامش والحشوات لجميع العناصر */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
         
-        /* تنسيقات عامة للجسم */
         body {
             font-family: 'Tajawal', sans-serif;
             line-height: 1.8;
@@ -61,7 +44,7 @@
             flex-direction: column;
         }
         
-        /* منع التمرير عند فتح القائمة */
+        /* منع التمرير على الصفحة عند فتح القائمة */
         body.menu-open {
             overflow: hidden;
             position: fixed;
@@ -83,14 +66,12 @@
             border-bottom: 1px solid rgba(255,255,255,0.15);
         }
         
-        /* تنسيقات الهيدر عند التمرير */
         .header.scrolled {
             height: 60px;
             box-shadow: 0 4px 25px rgba(0,0,0,0.2);
             background: var(--header-purple);
         }
         
-        /* حاوية محتوى الهيدر */
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -101,7 +82,6 @@
             height: 100%;
         }
         
-        /* حاوية الشعار */
         .logo-container {
             display: flex;
             align-items: center;
@@ -110,19 +90,16 @@
             margin-right: auto;
         }
         
-        /* تعديلات الشعار عند التمرير */
         .header.scrolled .logo-container {
             gap: 10px;
         }
         
-        /* تنسيقات الشعار */
         .logo {
             height: 45px;
             transition: transform 0.3s;
             filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
         }
         
-        /* تأثير عند المرور على الشعار */
         .logo:hover {
             transform: scale(1.05);
         }
@@ -130,12 +107,11 @@
         /* ==================== أزرار التنقل المحسّنة ==================== */
         .nav-buttons {
             display: flex;
-            gap: 8px;
+            gap: 12px;
             align-items: center;
             height: 100%;
         }
         
-        /* تنسيقات زر التنقل */
         .nav-btn {
             position: relative;
             display: inline-flex;
@@ -154,7 +130,6 @@
             cursor: pointer;
         }
         
-        /* خط تحت الزر عند المرور */
         .nav-btn::after {
             content: '';
             position: absolute;
@@ -168,37 +143,32 @@
             opacity: 0;
         }
         
-        /* تأثير عند المرور على الزر */
         .nav-btn:hover {
             color: white;
         }
         
-        /* ظهور الخط عند المرور */
         .nav-btn:hover::after {
             width: 100%;
             opacity: 1;
         }
         
-        /* تنسيقات الزر النشط */
         .nav-btn.active {
             color: white;
             font-weight: 700;
         }
         
-        /* تنسيقات أيقونات الأزرار */
         .nav-btn i {
             font-size: 18px;
             transition: transform 0.3s;
             color: var(--accent-color);
         }
         
-        /* تأثير على الأيقونة عند المرور */
         .nav-btn:hover i {
             transform: translateX(5px);
             color: white;
         }
         
-        /* مؤشر التنقل */
+        /* تأثيرات خاصة بالشريط العلوي */
         .nav-indicator {
             position: absolute;
             bottom: 0;
@@ -210,9 +180,8 @@
             opacity: 0;
         }
         
-        /* زر القائمة في الجوال */
         .hamburger {
-            display: none;
+            display: none; /* مخفي افتراضيًا */
             background: none;
             border: none;
             color: white;
@@ -232,7 +201,6 @@
             margin-left: auto;
         }
         
-        /* تأثير عند المرور على زر القائمة */
         .hamburger:hover {
             background: rgba(255,255,255,0.25);
             transform: scale(1.05);
@@ -252,29 +220,29 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            padding: 20px 15px 120px;
+            padding: 20px 15px 120px; /* زيادة المساحة السفلية */
             box-shadow: -5px 0 30px rgba(0,0,0,0.25);
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
             border-left: 1px solid rgba(255,255,255,0.15);
+            
+            /* تمكين التمرير السلس على الجوال */
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
         }
         
-        /* فتح القائمة */
         .mobile-nav.open {
             right: 0;
             position: fixed;
             overflow-y: auto;
         }
         
-        /* تنسيقات أزرار القائمة في الجوال */
         .mobile-nav .nav-btn {
             width: 100%;
             max-width: 300px;
-            margin-bottom: 8px;
+            margin-bottom: 8px; /* تقليل المسافة بين العناصر */
             font-size: 18px;
-            padding: 12px 16px;
+            padding: 12px 16px; /* تعديل الحشوة */
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
@@ -283,12 +251,10 @@
             height: auto;
         }
         
-        /* تنسيقات أيقونات القائمة في الجوال */
         .mobile-nav .nav-btn i {
             color: var(--accent-color);
         }
         
-        /* تأثير عند المرور على أزرار القائمة في الجوال */
         .mobile-nav .nav-btn:hover {
             transform: translateX(-8px);
             background: rgba(255,255,255,0.25);
@@ -299,19 +265,16 @@
             width: 8px;
         }
         
-        /* مسار شريط التمرير */
         .mobile-nav::-webkit-scrollbar-track {
             background: rgba(0,0,0,0.1);
             border-radius: 4px;
         }
         
-        /* مقبض شريط التمرير */
         .mobile-nav::-webkit-scrollbar-thumb {
             background: rgba(255,255,255,0.3);
             border-radius: 4px;
         }
         
-        /* تأثير عند المرور على مقبض التمرير */
         .mobile-nav::-webkit-scrollbar-thumb:hover {
             background: rgba(255,255,255,0.5);
         }
@@ -335,25 +298,21 @@
             transition: opacity 0.3s;
         }
         
-        /* إظهار المؤشر عند فتح القائمة */
         .mobile-nav.open .scroll-indicator {
             opacity: 1;
         }
         
-        /* تنسيقات أيقونة المؤشر */
         .scroll-indicator i {
             color: white;
             font-size: 20px;
         }
         
-        /* حركة ارتداد للمؤشر */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateX(50%) translateY(0);}
             40% {transform: translateX(50%) translateY(-15px);}
             60% {transform: translateX(50%) translateY(-7px);}
         }
         
-        /* تنسيقات الأزرار العامة */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -372,27 +331,23 @@
             font-size: 17px;
         }
         
-        /* تأثير عند المرور على الزر */
         .btn:hover {
             background-color: #6A45B0;
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
         
-        /* تنسيقات الزر ذو الإطار */
         .btn-outline {
             background-color: transparent;
             color: white;
             border: 2px solid white;
         }
         
-        /* تأثير عند المرور على الزر ذو الإطار */
         .btn-outline:hover {
             background-color: white;
             color: var(--primary-color);
         }
         
-        /* حاوية المحتوى الرئيسي */
         .container {
             max-width: 1000px;
             margin: 40px auto;
@@ -400,7 +355,6 @@
             flex: 1;
         }
         
-        /* تنسيقات بطاقة المقالة */
         .article-card {
             background-color: var(--article-beige);
             border-radius: 20px;
@@ -413,7 +367,6 @@
             overflow: hidden;
         }
         
-        /* خط ملون أعلى بطاقة المقالة */
         .article-card::before {
             content: '';
             position: absolute;
@@ -424,7 +377,6 @@
             background: linear-gradient(to right, var(--primary-color), var(--accent-color));
         }
         
-        /* تنسيقات رأس المقالة */
         .article-header {
             position: relative;
             padding-bottom: 25px;
@@ -432,7 +384,6 @@
             text-align: center;
         }
         
-        /* خط تحت رأس المقالة */
         .article-header::after {
             content: '';
             position: absolute;
@@ -446,7 +397,6 @@
             border-radius: 3px;
         }
         
-        /* تنسيقات العنوان الرئيسي */
         h1 {
             color: var(--primary-color);
             font-size: 32px;
@@ -457,7 +407,6 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         
-        /* تنسيقات تاريخ النشر */
         .publish-date {
             display: flex;
             align-items: center;
@@ -467,12 +416,10 @@
             justify-content: center;
         }
         
-        /* تنسيقات أيقونة التاريخ */
         .date-icon {
             color: var(--primary-color);
         }
         
-        /* تنسيقات محتوى المقالة */
         .article-content {
             font-size: 18px;
             text-align: justify;
@@ -481,12 +428,10 @@
             margin: 0 auto;
         }
         
-        /* تنسيقات الفقرات */
         .article-content p {
             margin-bottom: 25px;
         }
         
-        /* تنسيقات الآيات والاقتباسات */
         .verse {
             color: var(--primary-color);
             font-weight: bold;
@@ -502,7 +447,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         
-        /* تنسيقات عناوين الأقسام */
         .section-title {
             color: var(--primary-color);
             font-size: 26px;
@@ -512,7 +456,6 @@
             font-weight: 600;
         }
         
-        /* خط تحت عنوان القسم */
         .section-title::before {
             content: '';
             position: absolute;
@@ -524,20 +467,17 @@
             border-radius: 3px;
         }
         
-        /* تنسيقات القوائم المرتبة وغير المرتبة */
         ol, ul {
             padding-right: 30px;
             margin: 25px 0;
         }
         
-        /* تنسيقات عناصر القائمة */
         li {
             margin-bottom: 18px;
             position: relative;
             padding-right: 25px;
         }
         
-        /* تنسيقات القوائم غير المرتبة */
         ul li::before {
             content: '•';
             color: var(--primary-color);
@@ -547,7 +487,6 @@
             font-size: 22px;
         }
         
-        /* تنسيقات القوائم المرتبة */
         ol {
             counter-reset: section;
         }
@@ -565,7 +504,6 @@
             font-size: 20px;
         }
         
-        /* تنسيقات قسم الخاتمة */
         .conclusion {
             background-color: var(--light-purple);
             padding: 30px;
@@ -577,7 +515,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        /* خط أعلى الخاتمة */
         .conclusion::before {
             content: '';
             position: absolute;
@@ -589,7 +526,6 @@
             border-radius: 3px;
         }
         
-        /* تنسيقات أزرار المقالة (مشاركة، طباعة) */
         .article-actions {
             display: flex;
             gap: 20px;
@@ -600,7 +536,6 @@
             justify-content: center;
         }
         
-        /* تنسيقات زر المقالة */
         .article-button {
             background: white;
             border: none;
@@ -618,7 +553,6 @@
             border: 1px solid var(--border-color);
         }
         
-        /* تأثير عند المرور على زر المقالة */
         .article-button:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -626,12 +560,10 @@
             background-color: var(--primary-color);
         }
         
-        /* حاوية زر المشاركة */
         .share-button-container {
             position: relative;
         }
         
-        /* قائمة مشاركة المقالة */
         .article-share-menu {
             position: absolute;
             bottom: calc(100% + 15px);
@@ -648,7 +580,6 @@
             animation: slideIn 0.3s ease-out forwards;
         }
         
-        /* عنوان قائمة المشاركة */
         .share-title {
             margin-bottom: 20px;
             color: var(--primary-color);
@@ -657,7 +588,6 @@
             font-size: 20px;
         }
         
-        /* منصة مشاركة الوسائط */
         .share-platforms {
             display: flex;
             justify-content: center;
@@ -666,7 +596,6 @@
             margin-bottom: 20px;
         }
         
-        /* زر منصة المشاركة */
         .share-platform {
             width: 50px;
             height: 50px;
@@ -680,18 +609,15 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
         
-        /* تأثير عند المرور على زر المشاركة */
         .share-platform:hover {
             transform: scale(1.15);
             background-color: var(--primary-color) !important;
         }
         
-        /* تغيير لون الأيقونة عند المرور */
         .share-platform:hover img {
             filter: brightness(0) invert(1);
         }
         
-        /* زر نسخ الرابط */
         .copy-link-btn {
             display: flex;
             align-items: center;
@@ -710,12 +636,10 @@
             cursor: pointer;
         }
         
-        /* تأثير عند المرور على زر نسخ الرابط */
         .copy-link-btn:hover {
             background-color: var(--secondary-color);
         }
         
-        /* تنسيقات صور منصات المشاركة */
         .share-platform img {
             width: 26px;
             height: 26px;
@@ -723,14 +647,12 @@
             transition: filter 0.3s;
         }
         
-        /* تنسيقات صور أزرار المقالة */
         .article-button img {
             width: 24px;
             height: 24px;
             object-fit: contain;
         }
         
-        /* تنسيقات أمثلة الكود */
         .example-block h4 {
             color: var(--primary-color);
             font-weight: 600;
@@ -760,158 +682,66 @@
             transform: translateY(20px);
         }
         
-        /* إظهار زر العودة للأعلى */
         .back-to-top.show {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
         
-        /* تأثير عند المرور على الزر */
         .back-to-top:hover {
             background: var(--accent-color);
             transform: translateY(-5px);
         }
         
-        /* تنسيقات أيقونة الزر */
         .back-to-top i {
             font-size: 24px;
             transition: transform 0.3s;
         }
         
-        /* تأثير على الأيقونة عند المرور */
         .back-to-top:hover i {
             transform: translateY(-3px);
         }
         
         /* ==================== تأثيرات حركية ==================== */
-        /* تأثير ظهور تدريجي */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* تأثير انزلاق من الأسفل */
         @keyframes slideIn {
             from { opacity: 0; transform: translate(-50%, 20px); }
             to { opacity: 1; transform: translate(-50%, 0); }
         }
         
-        /* تأثير اختفاء تدريجي */
         @keyframes fadeOut {
             from { opacity: 1; transform: translate(-50%, 0); }
             to { opacity: 0; transform: translate(-50%, 20px); }
         }
         
-        /* تطبيق تأثير الظهور على بطاقة المقالة */
         .article-card {
             animation: fadeIn 0.7s ease-out forwards;
         }
         
-        /* تطبيق تأثير الانزلاق على قائمة المشاركة */
         .article-share-menu {
             animation: slideIn 0.3s ease-out forwards;
         }
         
-        /* تأثير الاختفاء عند إغلاق قائمة المشاركة */
         .share-menu-closing {
             animation: fadeOut 0.2s ease-out forwards;
         }
         
-        /* ============= أزرار التحكم بحجم الخط المضافة ============= */
-        .font-controls {
-            position: fixed;
-            z-index: 1000;
-            display: flex;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.5s ease-out;
-            top: var(--font-control-top);
-            bottom: var(--font-control-bottom);
-            right: var(--font-control-right);
-            left: var(--font-control-left);
-        }
-        
-        .font-controls button {
-            width: var(--font-control-button-size);
-            height: var(--font-control-button-size);
-            border-radius: 50%;
-            border: none;
-            background: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: var(--font-control-button-font-size);
-            transition: all 0.3s;
-        }
-        
-        .font-controls button:hover {
-            background: var(--accent-color);
-            transform: scale(1.1);
-        }
-        
-        .font-controls button i {
-            transition: transform 0.2s;
-        }
-        
-        .font-controls button:active i {
-            transform: scale(0.9);
-        }
-        
-        .font-controls button::after {
-            content: attr(title);
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
-        .font-controls button:hover::after {
-            opacity: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .font-controls {
-                --font-control-top: 100px;
-                --font-control-right: 10px;
-                --font-control-button-size: 36px;
-                --font-control-button-font-size: 15px;
-                gap: 6px;
-                padding: 8px;
-            }
-        }
-        
         /* ==================== طباعة ==================== */
         @media print {
-            /* إخفاء العناصر غير المرغوب فيها عند الطباعة */
-            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
+            .header, .article-actions, .back-btn, .back-to-top {
                 display: none;
             }
             
-            /* تنسيقات الطباعة */
             body {
                 background: none;
                 color: #000;
                 padding-top: 0;
             }
             
-            /* تنسيقات بطاقة المقالة للطباعة */
             .article-card {
                 box-shadow: none;
                 padding: 0;
@@ -920,7 +750,6 @@
                 border-radius: 0;
             }
             
-            /* تنسيقات الآيات للطباعة */
             .verse {
                 background: none;
                 border-right: none;
@@ -928,21 +757,18 @@
             }
         }
         
-        /* تنسيقات النص المميز */
         .highlight {
             background-color: rgba(255, 193, 7, 0.2);
             padding: 2px 5px;
             border-radius: 4px;
         }
         
-        /* تنسيقات الملاحظات المميزة */
         .note-highlight {
             color: red;
             font-weight: bold;
         }
         
         /* ==================== وسائط متجاوبة ==================== */
-        /* شاشات متوسطة الحجم (992px) */
         @media (max-width: 992px) {
             .header-container {
                 padding: 0 15px;
@@ -975,14 +801,13 @@
             }
         }
         
-        /* شاشات صغيرة (768px) */
         @media (max-width: 768px) {
             .nav-buttons {
                 display: none;
             }
             
             .hamburger {
-                display: flex;
+                display: flex; /* يظهر فقط في الجوال */
             }
             
             .header {
@@ -990,7 +815,7 @@
             }
             
             .logo {
-                height: 50px;
+                height: 50px; /* تكبير الشعار في الجوال */
             }
             
             .scrolled .logo {
@@ -1045,7 +870,7 @@
                 font-size: 20px;
             }
             
-            /* توسيط الشعار في الهيدر */
+            /* وضع الشعار في وسط الشريط العلوي في الجوال */
             .logo-container {
                 position: absolute;
                 left: 50%;
@@ -1061,31 +886,29 @@
                 z-index: 1001;
             }
             
-            /* تحريك زر القائمة لليسار */
+            /* تحريك زر الهامبرغر إلى اليسار */
             .header-container {
                 justify-content: flex-start;
             }
             
-            /* تعديلات القائمة المنسدلة */
+            /* تعديلات القائمة المنسدلة على الجوال */
             .mobile-nav {
-                padding: 15px 12px 100px;
+                padding: 15px 12px 100px; /* زيادة المساحة السفلية */
             }
             
             .mobile-nav .nav-btn {
-                margin-bottom: 8px;
-                padding: 12px 15px;
+                margin-bottom: 8px; /* تقليل المسافة بين العناصر */
+                padding: 12px 15px; /* تعديل الحشوة */
                 font-size: 16px;
             }
         }
         
-        /* إخفاء زر القائمة في الشاشات الكبيرة */
         @media (min-width: 769px) {
             .hamburger {
-                display: none !important;
+                display: none !important; /* إخفاء زر الهمبرغر في الكمبيوتر */
             }
         }
         
-        /* شاشات صغيرة جدًا (576px) */
         @media (max-width: 576px) {
             .header {
                 height: 65px;
@@ -1138,7 +961,7 @@
                 font-size: 18px;
             }
             
-            /* تحسين لوحة المشاركة */
+            /* تحسين لوحة المشاركة على الجوال */
             .article-share-menu {
                 width: 92vw;
                 max-width: 300px;
@@ -1161,7 +984,6 @@
                 scrollbar-width: none;
             }
             
-            /* إخفاء شريط التمرير في متصفحات الويب كيت */
             .share-platforms::-webkit-scrollbar {
                 display: none;
             }
@@ -1186,16 +1008,15 @@
             
             .mobile-nav {
                 width: 80%;
-                padding: 12px 10px 90px;
+                padding: 12px 10px 90px; /* زيادة المساحة السفلية */
             }
             
             .mobile-nav .nav-btn {
                 font-size: 16px;
-                padding: 10px 12px;
+                padding: 10px 12px; /* تعديل الحشوة */
             }
         }
         
-        /* شاشات صغيرة جدًا (400px) */
         @media (max-width: 400px) {
             .header {
                 height: 60px;
@@ -1231,16 +1052,15 @@
             
             .mobile-nav {
                 width: 85%;
-                padding: 10px 8px 80px;
+                padding: 10px 8px 80px; /* زيادة المساحة السفلية */
             }
             
             .mobile-nav .nav-btn {
                 font-size: 15px;
-                padding: 8px 10px;
+                padding: 8px 10px; /* تعديل الحشوة */
             }
         }
         
-        /* تنسيقات رابط الفيديو */
         .video-link {
             display: inline-block;
             padding: 12px 25px;
@@ -1258,7 +1078,6 @@
             animation: glow 3s infinite;
         }
         
-        /* طبقة شفافة فوق الزر */
         .video-link::before {
             content: '';
             position: absolute;
@@ -1271,7 +1090,6 @@
             border-radius: 50px;
         }
         
-        /* تأثير عند المرور على الزر */
         .video-link:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
@@ -1279,29 +1097,59 @@
             animation: pulse 1.5s infinite;
         }
         
-        /* تنسيقات أيقونة الزر */
         .video-link i {
             margin-left: 10px;
             transition: transform 0.5s ease;
         }
         
-        /* تأثير على الأيقونة عند المرور */
         .video-link:hover i {
             transform: rotate(10deg);
         }
         
-        /* تأثير النبض */
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
         
-        /* تأثير التوهج */
         @keyframes glow {
             0% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
             50% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.9); }
             100% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
+        }
+        
+        /* مؤشر التمرير في الأسفل */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 50%;
+            transform: translateX(50%);
+            background: rgba(255, 255, 255, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s infinite;
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .mobile-nav.open .scroll-indicator {
+            opacity: 1;
+        }
+        
+        .scroll-indicator i {
+            color: white;
+            font-size: 20px;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(50%) translateY(0);}
+            40% {transform: translateX(50%) translateY(-15px);}
+            60% {transform: translateX(50%) translateY(-7px);}
         }
         
         /* زر اليوتيوب في القائمة */
@@ -1309,24 +1157,22 @@
             background: rgba(255, 0, 0, 0.15) !important;
         }
         
-        /* تأثير عند المرور على زر اليوتيوب */
         .youtube-btn:hover {
             background: rgba(255, 0, 0, 0.3) !important;
         }
         
-        /* ================ أنماط الفوتر ================ */
+        /* ================ أنماط الفوتر من الكود الأول ================ */
         footer {
           text-align: center;
           padding: 18px;
           background: #5e2ca5;
           color: white;
           font-size: 0.85em;
-          margin-top: auto;
-          width: 100%;
+          margin-top: auto; /* تم تعديل هذه الخاصية */
+          width: 100%; /* عرض كامل */
           box-sizing: border-box;
         }
 
-        /* روابط التواصل الاجتماعي */
         .social-links {
           display: flex;
           justify-content: center;
@@ -1335,7 +1181,6 @@
           flex-wrap: wrap;
         }
 
-        /* تنسيقات روابط التواصل */
         .social-links a {
           color: white;
           font-size: 0.9em;
@@ -1351,13 +1196,11 @@
           border: none !important;
         }
 
-        /* تأثير عند المرور على روابط التواصل */
         .social-links a:hover {
           color: white;
           transform: scale(1.1);
         }
         
-        /* ألوان خاصة بكل منصة */
         .social-links a.facebook:hover { background: #1877F2; }
         .social-links a.instagram:hover { background: #E4405F; }
         .social-links a.youtube:hover { background: #FF0000; }
@@ -1365,7 +1208,6 @@
         .social-links a.snapchat:hover { background: #FFFC00; color: #000; }
         .social-links a.telegram:hover { background: #2AABEE; }
 
-        /* حقوق النشر */
         .copyright {
           margin-top: 10px;
           padding-top: 10px;
@@ -1379,19 +1221,19 @@
     <!-- الشريط العلوي المحسّن -->
     <header class="header" id="header">
         <div class="header-container">
-            <!-- زر القائمة في الجوال -->
+            <!-- زر الهمبرغر (يظهر فقط في الجوال) -->
             <button class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
             </button>
             
-            <!-- حاوية الشعار -->
+            <!-- الشعار -->
             <div class="logo-container"> 
                 <a href="index.html">
                     <img src="images/logo.png" alt="شعار موقع حسين الخليل" class="logo">
                 </a>
             </div>
             
-            <!-- أزرار التنقل للشاشات الكبيرة -->
+            <!-- أزرار التنقل (للشاشات الكبيرة) -->
             <div class="nav-buttons">
                 <a href="index.html" class="nav-btn active">
                     <i class="fas fa-home"></i>
@@ -1413,7 +1255,7 @@
                     <i class="fas fa-video"></i>
                     الفيديوهات
                 </a>
-                <!-- عناوين إضافية -->
+                <!-- العناوين الجديدة -->
                 <a href="history.html" class="nav-btn">
                     <i class="fas fa-hourglass"></i>
                     التاريخ
@@ -1430,13 +1272,12 @@
                     <i class="fas fa-lightbulb"></i>
                     الخواطر
                 </a>
-                <div class="nav-indicator" id="navIndicator"></div> <!-- مؤشر التنقل -->
+                <div class="nav-indicator" id="navIndicator"></div>
             </div>
         </div>
         
         <!-- قائمة الجوال المحسنة -->
         <div class="mobile-nav" id="mobileNav">
-            <!-- روابط القائمة المتنقلة -->
             <a href="index.html" class="nav-btn">
                 <i class="fas fa-home"></i>
                 الرئيسية
@@ -1457,7 +1298,7 @@
                 <i class="fas fa-video"></i>
                 الفيديوهات
             </a>
-            <!-- عناوين إضافية في القائمة -->
+            <!-- العناوين الجديدة في القائمة المنسدلة -->
             <a href="history.html" class="nav-btn">
                 <i class="fas fa-hourglass"></i>
                 التاريخ
@@ -1478,13 +1319,13 @@
                 <i class="fas fa-hand-holding-heart"></i>
                 دعم المحتوى
             </a>
-            <!-- رابط اتصل بنا -->
+            <!-- تغيير أيقونة اتصل بنا إلى أيقونة الرسالة -->
             <a href="contact.html" class="nav-btn">
                 <i class="fas fa-envelope"></i>
                 اتصل بنا
             </a>
             
-            <!-- رابط قناة اليوتيوب -->
+            <!-- إضافة زر اليوتيوب الجديد -->
             <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="nav-btn youtube-btn">
                 <i class="fab fa-youtube"></i>
                 قناة اليوتيوب
@@ -1497,60 +1338,145 @@
         </div>
     </header>
     
-    <!-- أزرار التحكم بحجم الخط المضافة -->
-    <div class="font-controls">
-        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
-            <i class="fas fa-search-minus"></i>
-        </button>
-        <button id="fontReset" title="الحجم الطبيعي (Reset)">
-            <i class="fas fa-font"></i>
-        </button>
-        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
-            <i class="fas fa-search-plus"></i>
-        </button>
-    </div>
-    
-    <!-- المحتوى الرئيسي -->
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ هوامش على الطريق. </h1>
-                <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+                <h1>❖ للذكر مثل حظ الأنثيين.</h1>
+                <span class="publish-date"><span class="date-icon">📅</span> 13 يوليو 2025</span>
             </div>
             
-            <!-- محتوى المقالة -->
-                <p>هناك نوع من الأشخاص جعلوا من مراقبتك ونقدك مهمة يومية أو شبه يومية، يتابعون كل ما تنشره، يلاحقون حتى تعليقاتك، يتتبّعون أخطاءك، وينتظرون أي فرصة للهجوم عليك. ليس لأنهم يملكون رأيًا قيّمًا أو نقدًا بنّاء، بل لأنهم لا يستطيعون تجاهلك، فأنت تشغل تفكيرهم أكثر مما يشغلهم تطوير أنفسهم. دون أن يدركوا، هم يعترفون بتأثيرك عليهم، فلو لم تكن مهمًّا لما أضاعوا وقتهم في متابعتك.</p>
-                <p>يراقبونك وينتقدونك لأنك تمضي للأمام بينما هم عالقون في أماكنهم. الشخص الناجح والمستقل يثير فضول من لا يملك رؤية خاصة به، فيبدأ بمراقبته، ليس إعجابًا، بل بحثًا عن أي زلة يمكن أن يستخدمها للهجوم.</p>
-                <p>لكن الحقيقة أنهم لا يهاجمونك لأنك مخطئ، بل لأنك مختلف، لأنك تملك الجرأة للتعبير عن نفسك بينما هم مجرد متفرجين على حياتك.</p>
-                <p>هي محاولة لتعويض النقص لا أكثر، فهؤلاء لا يسعون لإثبات أنهم على حق، بل يسعون لجرِّك للرد عليهم، لأن ذلك يمنحهم إعلانًا مجانيًا وشهرة لم يكونوا ليحصلوا عليها وحدهم.</p>
-                <p>لو تجاهلتهم، سيبقون في هامش المشهد، لكن بمجرد أن ترد عليهم، ستضعهم تحت الأضواء التي لا يستطيعون الوصول إليها بأنفسهم. إنهم يدركون أن الحديث عنك يلفت الانتباه، بينما الحديث عن أنفسهم وأفكارهم لا يجذب أحدًا، وهذا اعتراف غير مباشر بأنك أكثر أهمية وتأثيرًا منهم.</p>
-                <p>ثق بنفسك يا صديقي، فأنت في المقدمة، وهم في الخلف. أكبر عقوبة لهؤلاء ليست الرد عليهم، بل تجاهلهم التام.</p>
-                <p>فأنت تمضي في طريقك، تحقق أهدافك، بينما هم يضيعون وقتهم في ملاحقتك، دون أن يدركوا أنهم يستنزفون وقتهم وجهدهم عليك، في حين أنك لا تُعيرهم أي اهتمام. فاستمر ولا تلتفت. لا شيء يزعج المراقبين الناقدين أكثر من أن تراهم ولا تراهم في الوقت ذاته، أن تدرك وجودهم ولكنك لا تمنحهم قيمة. دعهم يتحدثون، لأنهم يعلمون أن اسمك يجذب الانتباه، أما أسماؤهم وحدها فلا تهم أحدًا.</p>
-                <p>لهذا، أفضل رد هو أن تبقى في المقدمة، وتتركهم في الخلف حيث ينتمون ولا تلتفت لهم، فأنت تكتب نجاحك، بينما هم مجرد هوامش على الطريق.</p>
-                
-            <!-- فاصل زخرفي -->
+                <p>هل معنى الآية أن الذكر يأخذ ضعف حصة الأنثى؟</p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿لِلذَّكَرِ مِثْلُ حَظِّ ٱلْأُنثَيَيْنِ﴾</span> أي له مثل حظ أختيّه، فلهن الثلثان وهو الثلث، وهذا لأن الله قال حظ وليس نصيب.</p>
+                <p>وردت آية <span style="color: #5e2ca5; font-weight: bold;">﴿لِلذَّكَرِ مِثْلُ حَظِّ ٱلْأُنثَيَيْنِ﴾</span> في كتاب الله في موقعين.</p>
+                <p><strong>الأول: </strong>في آية حظ الأولاد.</p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿يوصيكُمُ الله في أولادكُم لِلذّكَرِ مثلُ حَظّ الأنثَيَين ﴾</span> [النساء 11]</p>
+                <p><strong>الثاني: </strong>في آية حظ الإخوة.</p> 
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وإِن كانوا إِخوَةً رجالًا ونساءً فَلِلذَّكَرِ مِثلُ حظِّ الأُنثَيَين ﴾</span> [النساء 176]</p>
+                <p><strong>1- </strong> <span style="color: #5e2ca5; font-weight: bold;">﴿يوصيكُمُ الله في أولادكُم لِلذّكرِ مِثلُ حَظِ الأنثَيَين ﴾</span></p>
+                <p><strong>الإحتمال الأول:  </strong></p>
+                <p>وهو تساوي حظّ الجميع في حال ثبات عدد الإناث بإنثتين فقط.</p>
+                <p>مثال على ذلك:</p>
+                <p>إذا كان لدينا <strong>100 $</strong> من الإرث.</p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال 1</span></p>
+                <p>عدد الإناث ثابت بأنثتين.</p>
+                <p>عدد الذكور واحد.</p>
+                <p>يصبح الحظ <strong>100 / 3 = 33.33 $</strong></p>
+                <p>بالتالي الذكر أخذ مثل حظ كل أنثى من الانثتين بالتساوي.</p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال 2</span></p>
+                <p>عدد الإناث ثابت بأنثتين.</p>
+                <p>عدد الذكور إثنان.</p>
+                <p>يصبح الحظ <strong>100 / 4 = 25 $</strong></p>
+                <p>كل ذكر أخذ مثل حظ كل أنثى من الأنثتين.</p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال 3</span></p>
+                <p>عدد الإناث ثابت بأنثتين.</p>
+                <p>عدد الذكور ثلاثة.</p>
+                <p>يصبح الحظ <strong>100 / 5 = 20 $</strong></p>
+                <p>كل ذكر أخذ مثل حظ كل أنثى من الأنثتين.</p>
+                <p>وتستمر هذه القسمة طالما عدد الإناث ثابت بأنثتين.</p>
+                <p><strong>الإحتمال الثاني:  </strong></p>
+                <p><strong></strong> <span style="color: #5e2ca5; font-weight: bold;">﴿فإن كُنّ نِساءً فَوقَ اثنَتَينِ فَلَهُنَ ثُلُثا ما تَرَكَ﴾</span></p>
+                <p>بمعنى أن عدد الإناث أكثر من أنثتين، ثلاثة فما فوق بغض النظر عن عدد الذكور.</p>
+                <p>فلهنّ ثلثا الميراث.</p>
+                <p><strong> 2/ 3 </strong>توزع بالتساوي بينهن.</p>
+                <p>وللذكور:</p>
+                <p><strong> 1/ 3 </strong>يوزع بالتساوي بينهم.</p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال 1</span></p>
+                <p>عدد الإناث <strong> "3" </strong>فوق انثتين</p>
+                <p>عدد الذكور واحد.</p>
+                <p>حظ الإناث <strong> 2/3 </strong></p>
+                <p>حظ الذكر <strong> 1/3 </strong></p>
+                <p>فيصبح الحظ للإناث:</p>
+                <p><strong> ‏2/3 x100=66.66$ </strong></p>
+                <p><strong> 66.66/3=22.22$ </strong>لكل أنثى.</p>
+                <p>وللذكر:</p>
+                <p><strong> ‏‏1/3 x100=33.33$ </strong></p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال 2</span></p>
+                <p>عدد الإناث <strong> "3" </strong>فوق انثتين</p>
+                <p>عدد الذكور إثنان.</p>
+                <p>حظ الإناث <strong> 2/3 </strong></p>
+                <p>حظ الذكر <strong> 1/3 </strong></p>
+                <p>للإناث:</p>
+                <p><strong> ‏‏2/3 x100=66.66$ </strong></p>
+                <p><strong> 66.66/3=22.22$ </strong>لكل أنثى.</p>
+                <p>وللذكور:</p>
+                <p><strong> ‏1/3 x100=33.33$ </strong></p>
+                <p><strong> ‏33.33/2=16.66$ </strong></p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال 3</span></p>
+                <p>عدد الإناث <strong> "3" </strong>فوق انثتين</p>
+                <p>عدد الذكور ثلاثة.</p>
+                <p>حظ الإناث <strong> 2/3 </strong></p>
+                <p>حظ الذكر <strong> 1/3 </strong></p>
+                <p>للإناث:</p>
+                <p><strong> ‏‏2/3 x100=66.66$ </strong></p>
+                <p><strong> 66.66/3=22.22$ </strong>لكل أنثى.</p>
+                <p>وللذكور:</p>
+                <p><strong> ‏1/3 x100=33.33$ </strong></p>
+                <p><strong> 33.33/3=11.11$ </strong>لكل ذكر.</p>
+                <p><strong>الإحتمال الثالث:  </strong></p>
+                <p><strong></strong> <span style="color: #5e2ca5; font-weight: bold;">﴿وَإِن كانَت واحِدَةً فَلَهَا النِّصفُ﴾</span></p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال 1</span></p>
+                <p>أنثى واحدة ثابتة.</p>
+                <p>ذكر واحد.</p>
+                <p>الأنثى نصف الحظ:</p>
+                <p><strong> ‏100/2=50$ </strong></p>
+                <p>الذكر ما تبقى من الحظ:</p>
+                <p><strong> 100-50=50$ </strong></p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال 2</span></p>
+                <p>أنثى واحدة ثابتة.</p>
+                <p>ذكرين.</p>
+                <p>الأنثى نصف الحظ:</p>
+                <p><strong> ‏100/2=50$ </strong></p>
+                <p>الذكران ما تبقى من الحظ:</p>
+                <p><strong> 100-50=50$ </strong></p>
+                <p><strong> 50/2=25$ </strong>لكل ذكر.</p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال 3</span></p>
+                <p>أنثى واحدة فقط.</p>
+                <p>من دون ذكور.</p>
+                <p>تأخذ حظها وحظ الأولاد<strong> 100$ </strong></p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال 4</span></p>
+                <p>ذكر واحد فقط من دون إناث.</p>
+                <p>يأخذ كل حظ الأولاد<strong> 100$ </strong></p>
+                <p><span style="color: red; font-weight: bold;">ملاحظة:</span></p>
+                <p>سمّى الله إرث الأولاد بالحظ لأنه قد يتغير ويزداد من الحد الأدنى الذي بيّنه الله في حال وجود الطرف الآخر، وقد يصل إلى الحد الأعلى في حال التفرّد.</p>
+                <p>الوريث الذي يرث هو الذي يذكره الله في الآيات (فقط) بينما الذي ليس لديه ذكر في كتاب الله فلا يرث<strong> (مثل ابن العم). </strong></p>
+                <h3 class="section-title">نأتي لآية الكلالة (الإخوة)</h3>
+                <p><strong></strong> <span style="color: #5e2ca5; font-weight: bold;">﴿يَستَفتونَكَ قُلِ الله يُفتيكُم فِي الكَلالَة إن امرُؤ هَلَكَ ليسَ لَهُ وَلَدٌ وَلَهُ أختٌ فَلَها نصفُ ما تَرَك﴾</span></p>
+                <p>سنلاحظ هنا أن الله قال<strong> هلك </strong>ولم يقل مات.</p>
+                <p>وربط الهلاك بموت الإنسان الذي لم يترك له ذرية وليس له أب أو أم أو زوجة أو أولاد، لكن له إخوة، وبدأ بالأخت الواحدة</p>
+                <p>بالتالي ستأخذ هذه الأخت (الأنثى الواحدة) نصف ما ترك<strong> 50$ </strong>والنصف الآخر موزع بالتساوي بين الأخوة الذكور بغض النظر عن عددهم.</p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وَهُوَ يَرِثُهَآ إِن لَّمْ يَكُن لَّهَا وَلَدٌ ﴾</span> [النساء 176]</p>
+                <p>وينطبق نفس الشيء في الحالة المعاكسة.</p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿فَإِن كانَتَا اثنَتَينِ فَلَهُمَا الثُّلُثانِ مِمّا تَرَك ﴾</span> [النساء 11]</p>
+                <p>فإن كان له أختين، فللأختين الثلثين<strong> 2/3 </strong></p>
+                <p>بغض النظر عن عدد الأخوة الذكور والذين يصبح حظهم الثلث<strong> 1/3 </strong>المتبقي.</p>
+                <p><strong> 66.66$ </strong></p>
+                <p><strong> 33.33$ </strong></p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وإن كانوا إخوَةً رجالًا ونساءً فَلِلذّكرِ مِثلُ حَظّ الأُنثَيَين ﴾</span> [النساء 176]</p>
+                <p><strong> الحالة الثالثة: </strong>هي نساء بمعنى جمع (أكثر من اثنتين) فسنستخدم نفس القسمة الخاصة بـ (للذكر مثل حظ الانثيين)</p>
+                <p>في هذه الحالة التي يكون فيها الورثة<strong> 3 </strong> أخوات إناث فما فوق بغض النظر عن عدد الأخوة الذكور.</p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">مثال:</span></p>
+                <p>لدينا<strong> 3 </strong> أخوات إناث وأربعة إخوة ذكور.</p>
+                <p>فسنستخدم المعادلة في قسمة (للذّكر مثل حظ الانثيين) والتي هي التقسيم بالتساوي.</p>
+                <p>فيصبح الحظ:</p>
+                <p><strong> 100/7=14.28$ </strong> لكل وريث منهم.</p>
+                <h3 class="section-title">الخلاصة:</h3>
+                <p>إذا كان ولد وأربعة إناث، فالذكر يأخذ حصة انثيين، فالذكر يأخذ الثلث وأربعة إناث تأخذ الثلثين.</p>
+                <p>أما بقية الحالات فالذكر مثل حصة الأنثى.</p>
+            
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-
-                </div>
-                </div>
+            </div>
             
-            <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
-                <!-- زر الطباعة -->
                 <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
                     <i class="fas fa-print"></i>
                 </button>
-                
-                <!-- زر المشاركة -->
                 <div class="share-button-container">
                     <button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleShareMenu()">
                         <i class="fas fa-share-alt"></i>
                     </button>
-                    <!-- قائمة مشاركة المقالة -->
                     <div class="article-share-menu" id="shareMenu">
                         <div class="share-title">مشاركة المقالة</div>
-                        <!-- منصات المشاركة -->
                         <div class="share-platforms">
                             <a href="#" onclick="shareOnSocial('facebook')" class="share-platform">
                                 <img src="icons/fac-soc.png" alt="مشاركة على فيسبوك">
@@ -1565,7 +1491,6 @@
                                 <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
                             </a>
                         </div>
-                        <!-- زر نسخ الرابط -->
                         <button class="copy-link-btn" onclick="copyArticleLink()">
                             <i class="fas fa-link"></i>
                             نسخ رابط المقالة
@@ -1576,9 +1501,8 @@
         </div>
     </div>
 
-    <!-- تذييل الصفحة -->
+    <!-- الفوتر من الكود الأول -->
     <footer>
-        <!-- روابط التواصل الاجتماعي -->
         <div class="social-links">
             <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -1588,7 +1512,6 @@
             <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
         </div>
         
-        <!-- حقوق النشر -->
         <div class="copyright">
             حسين الخليل - جميع الحقوق محفوظة © 2025
         </div>
@@ -1600,7 +1523,6 @@
     </div>
 
     <script>
-        // كود الجافاسكريبت للموقع
         // قائمة الجوال
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
@@ -1635,6 +1557,7 @@
         hamburger.addEventListener('click', toggleMobileMenu);
         document.addEventListener('click', closeMobileMenu);
         
+        // إغلاق القائمة عند النقر على أي رابط داخلي
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 toggleMobileMenu();
@@ -1723,7 +1646,6 @@
             }
         }
         
-        // نسخ رابط المقالة
         function copyArticleLink() {
             const url = window.location.href;
             navigator.clipboard.writeText(url).then(() => {
@@ -1734,7 +1656,6 @@
             });
         }
         
-        // مشاركة على وسائل التواصل
         function shareOnSocial(platform) {
             const url = encodeURIComponent(window.location.href);
             const title = encodeURIComponent(document.title);
@@ -1781,72 +1702,11 @@
             const scrollPosition = mobileNav.scrollTop + mobileNav.clientHeight;
             const scrollHeight = mobileNav.scrollHeight;
             
+            // إخفاء المؤشر عند الوصول إلى أسفل القائمة
             if (scrollPosition >= scrollHeight - 20) {
                 scrollIndicator.style.opacity = '0';
             } else {
                 scrollIndicator.style.opacity = '1';
-            }
-        });
-        
-        // ============= كود التحكم بحجم الخط المضافة =============
-        const fontDecrease = document.getElementById('fontDecrease');
-        const fontReset = document.getElementById('fontReset');
-        const fontIncrease = document.getElementById('fontIncrease');
-        const articleContent = document.querySelector('.article-content');
-        
-        // تخزين الحجم الأصلي للخط
-        let originalFontSize = 18; // الحجم الافتراضي
-        
-        // معامل التحكم في حجم الخط
-        let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
-        
-        // تطبيق تغيير حجم الخط
-        function applyFontScale() {
-            if (articleContent) {
-                articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            }
-        }
-        
-        // تصغير الخط
-        fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
-            applyFontScale();
-        });
-        
-        // تكبير الخط
-        fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
-            applyFontScale();
-        });
-        
-        // إعادة الخط للحجم الطبيعي
-        fontReset.addEventListener('click', () => {
-            currentScale = 1;
-            applyFontScale();
-        });
-        
-        // تهيئة الخط عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', () => {
-            // الحصول على حجم الخط الأصلي
-            if (articleContent) {
-                const computedStyle = window.getComputedStyle(articleContent);
-                originalFontSize = parseFloat(computedStyle.fontSize);
-            }
-            
-            // تطبيق حجم الخط الحالي
-            applyFontScale();
-            
-            // تحديث موقع عناصر التحكم بالخط
-            const rootStyles = getComputedStyle(document.documentElement);
-            const controls = document.querySelector('.font-controls');
-            
-            if (controls) {
-                controls.style.top = rootStyles.getPropertyValue('--font-control-top');
-                controls.style.bottom = rootStyles.getPropertyValue('--font-control-bottom');
-                controls.style.right = rootStyles.getPropertyValue('--font-control-right');
-                controls.style.left = rootStyles.getPropertyValue('--font-control-left');
             }
         });
     </script>
