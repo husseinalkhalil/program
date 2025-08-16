@@ -374,6 +374,7 @@
             width: 100%;
             position: relative;
             overflow: hidden;
+            transition: transform 0.3s ease; /* إضافة انتقال سلس للتحجيم */
         }
         
         .article-card::before {
@@ -1446,6 +1447,7 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 24 يوليو 2025</span>
             </div>
             
+            <div class="article-content">
                 <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿قالوا إِنَّما البَيعُ مِثلُ الرِّبا وأحلَّ اللهُ البَيعَ وحرَّمَ الرِّبا﴾</span></p>
                 <p>ما هو الربا؟ وهل التعامل مع البنوك <span style="color: red;">محرّم</span>؟</p>
                 <h2 class="section-title">تعريف الربا في القرآن:</h2>
@@ -1526,7 +1528,7 @@
                         <i class="fas fa-video"></i> حلقة مرئية عن الموضوع
                     </a>
                 </div>
-                </div> 
+            </div>
             
             <div class="article-actions">
                 <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
@@ -1771,30 +1773,29 @@
             }
         });
         
-        // أزرار التحكم بحجم الخط
+        // أزرار التحكم بحجم الخط - التعديل الجديد
         const fontDecrease = document.getElementById('fontDecrease');
         const fontReset = document.getElementById('fontReset');
         const fontIncrease = document.getElementById('fontIncrease');
-        const articleContent = document.querySelector('.article-content');
-        const publishDate = document.querySelector('.publish-date');
+        const articleCard = document.querySelector('.article-card');
         
-        let originalFontSize, originalDateSize;
         let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
+        const minScale = 0.8;
+        const maxScale = 1.5;
         
         function applyFontScale() {
-            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            // تطبيق التكبير/التصغير على المقالة كاملة
+            articleCard.style.transform = `scale(${currentScale})`;
+            articleCard.style.transformOrigin = 'top center';
         }
         
         fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
+            currentScale = Math.max(minScale, currentScale - 0.1);
             applyFontScale();
         });
         
         fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
+            currentScale = Math.min(maxScale, currentScale + 0.1);
             applyFontScale();
         });
         
@@ -1804,9 +1805,6 @@
         });
         
         document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
-            
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
