@@ -740,7 +740,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -1445,6 +1445,8 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 9 يونيو 2025</span>
             </div>
             
+            <!-- إضافة div.article-content حول محتوى المقالة -->
+            <div class="article-content">
                 <p>في عالم يعج بالشعارات الدينية، والدعوات المتكررة إلى اعتناق هذا المعتقد أو ذاك، يتبادر إلى الذهن سؤال بسيط لكنه عميق:</p>
                 <p>لماذا يحتاج من يؤمن بدينٍ ما إلى الترويج له؟ ولماذا نجد هذا السلوك أكثر وضوحًا في ديانات ومجتمعات معينة دون غيرها؟</p>
                 <p>هل المسألة تتعلق بحب الخير للناس؟ أم أن خلف هذا الترويج قلقًا داخليًا، يحتاج إلى تطمين خارجي؟ وهل الإيمان القوي يحتاج إلى لافتة؟ أم أن الإيمان حين يكون صادقًا، يكون كالماء العذب: لا يحتاج إلى دعاية كي يُروى؟</p>
@@ -1471,6 +1473,7 @@
                 <p><strong>الثاني: </strong> صاخب، مهووس بالإقناع، لا يرتاح حتى يُقنع الجميع، وغالبًا لا ينجح.</p>
                 <p>ليس المطلوب أن نخجل مما نؤمن به، لكن علينا أن نميز بين: مشاركة المعتقد عن طمأنينة، وبين نشره عن قلق فكلما زاد صراخ الإيمان، قلّ صدقه.</p>
                 <p> كلما احتاج أحدهم إلى <strong> “جيش من المتشابهين” </strong> كي يطمئن إلى دينه، فليعلم أن إيمانه هشّ، مهما كان مظهره قويًا.</p>
+            </div>
                
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
@@ -1725,25 +1728,26 @@
         const fontIncrease = document.getElementById('fontIncrease');
         const articleContent = document.querySelector('.article-content');
         const publishDate = document.querySelector('.publish-date');
+        const articleTitle = document.querySelector('.article-header h1');
         
-        let originalFontSize, originalDateSize;
-        
+        let originalFontSize, originalDateSize, originalTitleSize;
         let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
+        const minScale = 0.8;
+        const maxScale = 1.5;
         
         function applyFontScale() {
             articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
             publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            articleTitle.style.fontSize = (originalTitleSize * currentScale) + 'px';
         }
         
         fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
+            currentScale = Math.max(minScale, currentScale - 0.1);
             applyFontScale();
         });
         
         fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
+            currentScale = Math.min(maxScale, currentScale + 0.1);
             applyFontScale();
         });
         
@@ -1753,9 +1757,12 @@
         });
         
         document.addEventListener('DOMContentLoaded', () => {
+            // الحصول على الأحجام الأصلية عند تحميل الصفحة
             originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
             originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            originalTitleSize = parseFloat(getComputedStyle(articleTitle).fontSize);
             
+            // تطبيق المواقع من متغيرات CSS
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
