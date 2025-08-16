@@ -1795,49 +1795,61 @@
         const fontReset = document.getElementById('fontReset');
         const fontIncrease = document.getElementById('fontIncrease');
         const articleContent = document.querySelector('.article-content');
-        const publishDate = document.querySelector('.publish-date');
         
-        let originalFontSize, originalDateSize;
+        // تخزين الحجم الأصلي للخط
+        let originalFontSize;
         
+        // معامل التحكم في حجم الخط
         let currentScale = 1;
         const minScale = 0.5;
         const maxScale = 4;
         
+        // تطبيق تغيير حجم الخط
         function applyFontScale() {
-            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            if (articleContent) {
+                articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            }
         }
         
+        // تصغير الخط
         fontDecrease.addEventListener('click', () => {
             currentScale = Math.max(minScale, currentScale / 1.2);
             applyFontScale();
         });
         
+        // تكبير الخط
         fontIncrease.addEventListener('click', () => {
             currentScale = Math.min(maxScale, currentScale * 1.2);
             applyFontScale();
         });
         
+        // إعادة الخط للحجم الطبيعي
         fontReset.addEventListener('click', () => {
             currentScale = 1;
             applyFontScale();
         });
         
+        // تهيئة الخط عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            if (articleContent) {
+                // الحصول على حجم الخط الأصلي
+                const computedStyle = window.getComputedStyle(articleContent);
+                originalFontSize = parseFloat(computedStyle.fontSize);
+                
+                // تطبيق حجم الخط الحالي
+                applyFontScale();
+            }
             
+            // تحديث موقع عناصر التحكم بالخط
             const rootStyles = getComputedStyle(document.documentElement);
-            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-            
             const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
+            
+            if (controls) {
+                controls.style.top = rootStyles.getPropertyValue('--font-control-top');
+                controls.style.bottom = rootStyles.getPropertyValue('--font-control-bottom');
+                controls.style.right = rootStyles.getPropertyValue('--font-control-right');
+                controls.style.left = rootStyles.getPropertyValue('--font-control-left');
+            }
         });
     </script>
 </body>
