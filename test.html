@@ -23,13 +23,6 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
-            --font-control-position: top right;
-            --font-control-top: 120px;
-            --font-control-bottom: auto;
-            --font-control-right: 250px;
-            --font-control-left: auto;
-            --font-control-button-size: 30px;
-            --font-control-button-font-size: 18px;
         }
         
         * {
@@ -737,89 +730,9 @@
             animation: fadeOut 0.2s ease-out forwards;
         }
         
-        /* ==================== أزرار التحكم بالخط ==================== */
-        /* تم إضافة من الكود الأول */
-        .font-controls {
-            position: fixed;
-            z-index: 1000;
-            display: flex;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.5s ease-out;
-            top: var(--font-control-top);
-            bottom: var(--font-control-bottom);
-            right: var(--font-control-right);
-            left: var(--font-control-left);
-        }
-        
-        .font-controls button {
-            width: var(--font-control-button-size);
-            height: var(--font-control-button-size);
-            border-radius: 50%;
-            border: none;
-            background: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: var(--font-control-button-font-size);
-            transition: all 0.3s;
-        }
-        
-        .font-controls button:hover {
-            background: var(--accent-color);
-            transform: scale(1.1);
-        }
-        
-        .font-controls button i {
-            transition: transform 0.2s;
-        }
-        
-        .font-controls button:active i {
-            transform: scale(0.9);
-        }
-        
-        .font-controls button::after {
-            content: attr(title);
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
-        .font-controls button:hover::after {
-            opacity: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .font-controls {
-                --font-control-top: 100px;
-                --font-control-right: 10px;
-                --font-control-button-size: 36px;
-                --font-control-button-font-size: 15px;
-                gap: 6px;
-                padding: 8px;
-            }
-        }
-        
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
+            .header, .article-actions, .back-btn, .back-to-top {
                 display: none;
             }
             
@@ -1425,27 +1338,13 @@
         </div>
     </header>
     
-    <!-- أزرار التحكم بحجم الخط من الكود الأول -->
-    <div class="font-controls">
-        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
-            <i class="fas fa-search-minus"></i>
-        </button>
-        <button id="fontReset" title="الحجم الطبيعي (Reset)">
-            <i class="fas fa-font"></i>
-        </button>
-        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
-            <i class="fas fa-search-plus"></i>
-        </button>
-    </div>
-    
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1 id="articleTitle">❖ للذكر مثل حظ الأنثيين.</h1>
-                <span class="publish-date" id="publishDate"><span class="date-icon">📅</span> 13 يوليو 2025</span>
+                <h1>❖ للذكر مثل حظ الأنثيين.</h1>
+                <span class="publish-date"><span class="date-icon">📅</span> 13 يوليو 2025</span>
             </div>
             
-            <div class="article-content" id="articleContent">
                 <p>هل معنى الآية أن الذكر يأخذ ضعف حصة الأنثى؟</p>
                 <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿لِلذَّكَرِ مِثْلُ حَظِّ ٱلْأُنثَيَيْنِ﴾</span> أي له مثل حظ أختيّه، فلهن الثلثان وهو الثلث، وهذا لأن الله قال حظ وليس نصيب.</p>
                 <p>وردت آية <span style="color: #5e2ca5; font-weight: bold;">﴿لِلذَّكَرِ مِثْلُ حَظِّ ٱلْأُنثَيَيْنِ﴾</span> في كتاب الله في موقعين.</p>
@@ -1563,7 +1462,6 @@
                 <h3 class="section-title">الخلاصة:</h3>
                 <p>إذا كان ولد وأربعة إناث، فالذكر يأخذ حصة انثيين، فالذكر يأخذ الثلث وأربعة إناث تأخذ الثلثين.</p>
                 <p>أما بقية الحالات فالذكر مثل حصة الأنثى.</p>
-            </div>
             
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
@@ -1625,283 +1523,191 @@
     </div>
 
     <script>
-        // المتغيرات العامة للتحكم بالخط
-        let originalFontSize = {
-            title: 32,    // حجم العنوان الأصلي
-            date: 18,     // حجم التاريخ الأصلي
-            content: 18   // حجم المحتوى الأصلي
-        };
+        // قائمة الجوال
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const header = document.getElementById('header');
+        const navIndicator = document.getElementById('navIndicator');
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const backToTop = document.getElementById('backToTop');
         
-        let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
-
-        // وظيفة تطبيق تغيير حجم الخط
-        function applyFontScale() {
-            const articleTitle = document.getElementById('articleTitle');
-            const publishDate = document.getElementById('publishDate');
-            const articleContent = document.getElementById('articleContent');
+        // فتح/إغلاق القائمة
+        function toggleMobileMenu(event) {
+            if (event) event.stopPropagation();
             
-            if (articleTitle) {
-                articleTitle.style.fontSize = (originalFontSize.title * currentScale) + 'px';
-            }
-            if (publishDate) {
-                publishDate.style.fontSize = (originalFontSize.date * currentScale) + 'px';
-            }
-            if (articleContent) {
-                articleContent.style.fontSize = (originalFontSize.content * currentScale) + 'px';
+            const isOpen = mobileNav.classList.contains('open');
+            mobileNav.classList.toggle('open');
+            document.body.classList.toggle('menu-open', !isOpen);
+            
+            // تحديث أيقونة القائمة
+            hamburger.innerHTML = isOpen ? 
+                '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
+        }
+        
+        // إغلاق القائمة عند النقر في أي مكان
+        function closeMobileMenu(event) {
+            if (mobileNav.classList.contains('open') && 
+                !mobileNav.contains(event.target) && 
+                !hamburger.contains(event.target)) {
+                toggleMobileMenu();
             }
         }
-
-        // تهيئة الصفحة عند تحميل DOM
-        document.addEventListener('DOMContentLoaded', () => {
-            // تعريف العناصر
-            const hamburger = document.getElementById('hamburger');
-            const mobileNav = document.getElementById('mobileNav');
-            const header = document.getElementById('header');
-            const navIndicator = document.getElementById('navIndicator');
-            const navButtons = document.querySelectorAll('.nav-btn');
-            const backToTop = document.getElementById('backToTop');
-            
-            // الحصول على الأحجام الأصلية إذا كانت متوفرة
-            const articleTitle = document.getElementById('articleTitle');
-            const publishDate = document.getElementById('publishDate');
-            const articleContent = document.getElementById('articleContent');
-            
-            if (articleTitle) {
-                const computedStyle = getComputedStyle(articleTitle);
-                originalFontSize.title = parseFloat(computedStyle.fontSize);
-            }
-            if (publishDate) {
-                const computedStyle = getComputedStyle(publishDate);
-                originalFontSize.date = parseFloat(computedStyle.fontSize);
-            }
-            if (articleContent) {
-                const computedStyle = getComputedStyle(articleContent);
-                originalFontSize.content = parseFloat(computedStyle.fontSize);
+        
+        // تعيين المستمعين للأحداث
+        hamburger.addEventListener('click', toggleMobileMenu);
+        document.addEventListener('click', closeMobileMenu);
+        
+        // إغلاق القائمة عند النقر على أي رابط داخلي
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileMenu();
+            });
+        });
+        
+        // تأثير التمرير على الشريط العلوي
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
             
-            // تعيين موضع أزرار التحكم بالخط
-            const rootStyles = getComputedStyle(document.documentElement);
-            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-            
-            const controls = document.querySelector('.font-controls');
-            if (controls) {
-                controls.style.top = varFontControlTop;
-                controls.style.bottom = varFontControlBottom;
-                controls.style.right = varFontControlRight;
-                controls.style.left = varFontControlLeft;
+            // التحكم في ظهور زر العودة للأعلى
+            if (window.scrollY > 500) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
             }
+        });
+        
+        // تحديث مؤشر التنقل
+        function updateNavIndicator(button) {
+            if (!button) return;
             
-            // إضافة المستمعين للأحداث لأزرار التحكم بالخط
-            const fontDecrease = document.getElementById('fontDecrease');
-            const fontReset = document.getElementById('fontReset');
-            const fontIncrease = document.getElementById('fontIncrease');
+            const buttonRect = button.getBoundingClientRect();
+            const headerRect = header.getBoundingClientRect();
             
-            if (fontDecrease) {
-                fontDecrease.addEventListener('click', () => {
-                    currentScale = Math.max(minScale, currentScale / 1.2);
-                    applyFontScale();
-                });
-            }
-            
-            if (fontIncrease) {
-                fontIncrease.addEventListener('click', () => {
-                    currentScale = Math.min(maxScale, currentScale * 1.2);
-                    applyFontScale();
-                });
-            }
-            
-            if (fontReset) {
-                fontReset.addEventListener('click', () => {
-                    currentScale = 1;
-                    applyFontScale();
-                });
-            }
-
-            // فتح/إغلاق القائمة
-            function toggleMobileMenu(event) {
-                if (event) event.stopPropagation();
-                
-                const isOpen = mobileNav.classList.contains('open');
-                mobileNav.classList.toggle('open');
-                document.body.classList.toggle('menu-open', !isOpen);
-                
-                // تحديث أيقونة القائمة
-                hamburger.innerHTML = isOpen ? 
-                    '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
-            }
-            
-            // إغلاق القائمة عند النقر في أي مكان
-            function closeMobileMenu(event) {
-                if (mobileNav.classList.contains('open') && 
-                    !mobileNav.contains(event.target) && 
-                    !hamburger.contains(event.target)) {
-                    toggleMobileMenu();
-                }
-            }
-            
-            // تعيين المستمعين للأحداث
-            hamburger.addEventListener('click', toggleMobileMenu);
-            document.addEventListener('click', closeMobileMenu);
-            
-            // إغلاق القائمة عند النقر على أي رابط داخلي
-            mobileNav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    toggleMobileMenu();
-                });
+            navIndicator.style.width = `${buttonRect.width}px`;
+            navIndicator.style.left = `${buttonRect.left - headerRect.left}px`;
+            navIndicator.style.opacity = '1';
+        }
+        
+        // إخفاء مؤشر التنقل
+        function hideNavIndicator() {
+            navIndicator.style.opacity = '0';
+        }
+        
+        // تعيين الأحداث لأزرار التنقل
+        navButtons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                updateNavIndicator(button);
             });
             
-            // تأثير التمرير على الشريط العلوي
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 20) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-                
-                // التحكم في ظهور زر العودة للأعلى
-                if (window.scrollY > 500) {
-                    backToTop.classList.add('show');
-                } else {
-                    backToTop.classList.remove('show');
-                }
+            button.addEventListener('mouseleave', () => {
+                hideNavIndicator();
             });
+        });
+        
+        // إخفاء المؤشر عند تحريك الماوس خارج منطقة الأزرار
+        const navButtonsContainer = document.querySelector('.nav-buttons');
+        navButtonsContainer.addEventListener('mouseleave', hideNavIndicator);
+        
+        // قائمة المشاركة
+        function toggleShareMenu() {
+            const shareMenu = document.getElementById('shareMenu');
+            const isOpen = shareMenu.style.display === 'block';
             
-            // تحديث مؤشر التنقل
-            function updateNavIndicator(button) {
-                if (!button) return;
-                
-                const buttonRect = button.getBoundingClientRect();
-                const headerRect = header.getBoundingClientRect();
-                
-                navIndicator.style.width = `${buttonRect.width}px`;
-                navIndicator.style.left = `${buttonRect.left - headerRect.left}px`;
-                navIndicator.style.opacity = '1';
+            if (isOpen) {
+                shareMenu.classList.add('share-menu-closing');
+                setTimeout(() => {
+                    shareMenu.style.display = 'none';
+                    shareMenu.classList.remove('share-menu-closing');
+                }, 200);
+            } else {
+                shareMenu.style.display = 'block';
             }
             
-            // إخفاء مؤشر التنقل
-            function hideNavIndicator() {
-                navIndicator.style.opacity = '0';
+            // إغلاق القائمة عند النقر خارجها
+            if (shareMenu.style.display === 'block') {
+                setTimeout(() => {
+                    document.addEventListener('click', closeShareMenuOutside);
+                }, 10);
+            } else {
+                document.removeEventListener('click', closeShareMenuOutside);
             }
+        }
+        
+        function closeShareMenuOutside(e) {
+            const shareMenu = document.getElementById('shareMenu');
+            const shareButton = document.querySelector('.share-button-container button');
             
-            // تعيين الأحداث لأزرار التنقل
-            navButtons.forEach(button => {
-                button.addEventListener('mouseenter', () => {
-                    updateNavIndicator(button);
-                });
-                
-                button.addEventListener('mouseleave', () => {
-                    hideNavIndicator();
-                });
-            });
-            
-            // إخفاء المؤشر عند تحريك الماوس خارج منطقة الأزرار
-            const navButtonsContainer = document.querySelector('.nav-buttons');
-            if (navButtonsContainer) {
-                navButtonsContainer.addEventListener('mouseleave', hideNavIndicator);
-            }
-            
-            // قائمة المشاركة
-            function toggleShareMenu() {
-                const shareMenu = document.getElementById('shareMenu');
-                const isOpen = shareMenu.style.display === 'block';
-                
-                if (isOpen) {
-                    shareMenu.classList.add('share-menu-closing');
-                    setTimeout(() => {
-                        shareMenu.style.display = 'none';
-                        shareMenu.classList.remove('share-menu-closing');
-                    }, 200);
-                } else {
-                    shareMenu.style.display = 'block';
-                }
-                
-                // إغلاق القائمة عند النقر خارجها
-                if (shareMenu.style.display === 'block') {
-                    setTimeout(() => {
-                        document.addEventListener('click', closeShareMenuOutside);
-                    }, 10);
-                } else {
-                    document.removeEventListener('click', closeShareMenuOutside);
-                }
-            }
-            
-            function closeShareMenuOutside(e) {
-                const shareMenu = document.getElementById('shareMenu');
-                const shareButton = document.querySelector('.share-button-container button');
-                
-                if (!shareMenu.contains(e.target) && e.target !== shareButton) {
-                    toggleShareMenu();
-                }
-            }
-            
-            function copyArticleLink() {
-                const url = window.location.href;
-                navigator.clipboard.writeText(url).then(() => {
-                    alert('تم نسخ رابط المقالة بنجاح');
-                    toggleShareMenu();
-                }).catch(err => {
-                    console.error('Failed to copy: ', err);
-                });
-            }
-            
-            function shareOnSocial(platform) {
-                const url = encodeURIComponent(window.location.href);
-                const title = encodeURIComponent(document.title);
-                
-                let shareUrl = '';
-                switch(platform) {
-                    case 'facebook':
-                        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-                        break;
-                    case 'twitter':
-                        shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
-                        break;
-                    case 'whatsapp':
-                        shareUrl = `https://wa.me/?text=${title} ${url}`;
-                        break;
-                    case 'telegram':
-                        shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
-                        break;
-                }
-                
-                window.open(shareUrl, '_blank', 'width=600,height=400');
+            if (!shareMenu.contains(e.target) && e.target !== shareButton) {
                 toggleShareMenu();
             }
-            
-            // إغلاق قائمة المشاركة عند التمرير
-            window.addEventListener('scroll', () => {
-                const shareMenu = document.getElementById('shareMenu');
-                if (shareMenu && shareMenu.style.display === 'block') {
-                    toggleShareMenu();
-                }
+        }
+        
+        function copyArticleLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('تم نسخ رابط المقالة بنجاح');
+                toggleShareMenu();
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
             });
+        }
+        
+        function shareOnSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
             
-            // وظيفة زر العودة للأعلى
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
+            let shareUrl = '';
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${title} ${url}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
+                    break;
+            }
             
-            // إخفاء مؤشر التمرير عند الوصول للأسفل في القائمة المنسدلة
-            mobileNav.addEventListener('scroll', () => {
-                const scrollIndicator = document.querySelector('.scroll-indicator');
-                const scrollPosition = mobileNav.scrollTop + mobileNav.clientHeight;
-                const scrollHeight = mobileNav.scrollHeight;
-                
-                // إخفاء المؤشر عند الوصول إلى أسفل القائمة
-                if (scrollPosition >= scrollHeight - 20) {
-                    scrollIndicator.style.opacity = '0';
-                } else {
-                    scrollIndicator.style.opacity = '1';
-                }
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+            toggleShareMenu();
+        }
+        
+        // إغلاق قائمة المشاركة عند التمرير
+        window.addEventListener('scroll', () => {
+            const shareMenu = document.getElementById('shareMenu');
+            if (shareMenu.style.display === 'block') {
+                toggleShareMenu();
+            }
+        });
+        
+        // وظيفة زر العودة للأعلى
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
+        });
+        
+        // إخفاء مؤشر التمرير عند الوصول للأسفل في القائمة المنسدلة
+        mobileNav.addEventListener('scroll', () => {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            const scrollPosition = mobileNav.scrollTop + mobileNav.clientHeight;
+            const scrollHeight = mobileNav.scrollHeight;
+            
+            // إخفاء المؤشر عند الوصول إلى أسفل القائمة
+            if (scrollPosition >= scrollHeight - 20) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
         });
     </script>
 </body>
