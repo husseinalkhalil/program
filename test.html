@@ -1635,7 +1635,6 @@
         hamburger.addEventListener('click', toggleMobileMenu);
         document.addEventListener('click', closeMobileMenu);
         
-        // إغلاق القائمة عند النقر على أي رابط داخلي
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 toggleMobileMenu();
@@ -1782,7 +1781,6 @@
             const scrollPosition = mobileNav.scrollTop + mobileNav.clientHeight;
             const scrollHeight = mobileNav.scrollHeight;
             
-            // إخفاء المؤشر عند الوصول إلى أسفل القائمة
             if (scrollPosition >= scrollHeight - 20) {
                 scrollIndicator.style.opacity = '0';
             } else {
@@ -1797,7 +1795,7 @@
         const articleContent = document.querySelector('.article-content');
         
         // تخزين الحجم الأصلي للخط
-        let originalFontSize;
+        let originalFontSize = 18; // الحجم الافتراضي
         
         // معامل التحكم في حجم الخط
         let currentScale = 1;
@@ -1831,14 +1829,14 @@
         
         // تهيئة الخط عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
+            // الحصول على حجم الخط الأصلي
             if (articleContent) {
-                // الحصول على حجم الخط الأصلي
                 const computedStyle = window.getComputedStyle(articleContent);
                 originalFontSize = parseFloat(computedStyle.fontSize);
-                
-                // تطبيق حجم الخط الحالي
-                applyFontScale();
             }
+            
+            // تطبيق حجم الخط الحالي
+            applyFontScale();
             
             // تحديث موقع عناصر التحكم بالخط
             const rootStyles = getComputedStyle(document.documentElement);
