@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <!-- تعريف ترميز الصفحة ومعلوماتها الأساسية -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المقالات | هوامش على الطريق. </title>
-    
-    <!-- روابط لخطوط جوجل وأيقونات فونت أويسوم -->
+    <title>المقالات | مفهوم الربا في كتاب الله.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- إعلانات جوجل أدسنس -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
-    
     <style>
-        /* تعريف المتغيرات اللونية للاستخدام في التصميم */
         :root {
             --primary-color: #5e2ca5;
             --secondary-color: #9575CD;
@@ -30,14 +23,6 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
-            /* إضافة متغيرات التحكم بالخط */
-            --font-control-position: top right;
-            --font-control-top: 120px;
-            --font-control-bottom: auto;
-            --font-control-right: 250px;
-            --font-control-left: auto;
-            --font-control-button-size: 30px;
-            --font-control-button-font-size: 18px;
         }
         
         * {
@@ -59,7 +44,7 @@
             flex-direction: column;
         }
         
-        /* منع التمرير عند فتح القائمة */
+        /* منع التمرير على الصفحة عند فتح القائمة */
         body.menu-open {
             overflow: hidden;
             position: fixed;
@@ -196,7 +181,7 @@
         }
         
         .hamburger {
-            display: none;
+            display: none; /* مخفي افتراضيًا */
             background: none;
             border: none;
             color: white;
@@ -235,12 +220,13 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            padding: 20px 15px 120px;
+            padding: 20px 15px 120px; /* زيادة المساحة السفلية */
             box-shadow: -5px 0 30px rgba(0,0,0,0.25);
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
             border-left: 1px solid rgba(255,255,255,0.15);
             
+            /* تمكين التمرير السلس على الجوال */
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
         }
@@ -254,9 +240,9 @@
         .mobile-nav .nav-btn {
             width: 100%;
             max-width: 300px;
-            margin-bottom: 8px;
+            margin-bottom: 8px; /* تقليل المسافة بين العناصر */
             font-size: 18px;
-            padding: 12px 16px;
+            padding: 12px 16px; /* تعديل الحشوة */
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
@@ -274,6 +260,7 @@
             background: rgba(255,255,255,0.25);
         }
         
+        /* شريط التمرير للقائمة المنسدلة */
         .mobile-nav::-webkit-scrollbar {
             width: 8px;
         }
@@ -292,6 +279,7 @@
             background: rgba(255,255,255,0.5);
         }
         
+        /* مؤشر التمرير في الأسفل */
         .scroll-indicator {
             position: fixed;
             bottom: 20px;
@@ -744,7 +732,7 @@
         
         /* ==================== طباعة ==================== */
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
+            .header, .article-actions, .back-btn, .back-to-top {
                 display: none;
             }
             
@@ -819,7 +807,7 @@
             }
             
             .hamburger {
-                display: flex;
+                display: flex; /* يظهر فقط في الجوال */
             }
             
             .header {
@@ -827,7 +815,7 @@
             }
             
             .logo {
-                height: 50px;
+                height: 50px; /* تكبير الشعار في الجوال */
             }
             
             .scrolled .logo {
@@ -870,6 +858,7 @@
                 height: 22px;
             }
             
+            /* زر العودة للأعلى في الجوال */
             .back-to-top {
                 width: 50px;
                 height: 50px;
@@ -881,6 +870,7 @@
                 font-size: 20px;
             }
             
+            /* وضع الشعار في وسط الشريط العلوي في الجوال */
             .logo-container {
                 position: absolute;
                 left: 50%;
@@ -896,24 +886,26 @@
                 z-index: 1001;
             }
             
+            /* تحريك زر الهامبرغر إلى اليسار */
             .header-container {
                 justify-content: flex-start;
             }
             
+            /* تعديلات القائمة المنسدلة على الجوال */
             .mobile-nav {
-                padding: 15px 12px 100px;
+                padding: 15px 12px 100px; /* زيادة المساحة السفلية */
             }
             
             .mobile-nav .nav-btn {
-                margin-bottom: 8px;
-                padding: 12px 15px;
+                margin-bottom: 8px; /* تقليل المسافة بين العناصر */
+                padding: 12px 15px; /* تعديل الحشوة */
                 font-size: 16px;
             }
         }
         
         @media (min-width: 769px) {
             .hamburger {
-                display: none !important;
+                display: none !important; /* إخفاء زر الهمبرغر في الكمبيوتر */
             }
         }
         
@@ -957,6 +949,7 @@
                 height: 20px;
             }
             
+            /* زر العودة للأعلى في الجوال الصغير */
             .back-to-top {
                 width: 45px;
                 height: 45px;
@@ -968,6 +961,7 @@
                 font-size: 18px;
             }
             
+            /* تحسين لوحة المشاركة على الجوال */
             .article-share-menu {
                 width: 92vw;
                 max-width: 300px;
@@ -1014,12 +1008,12 @@
             
             .mobile-nav {
                 width: 80%;
-                padding: 12px 10px 90px;
+                padding: 12px 10px 90px; /* زيادة المساحة السفلية */
             }
             
             .mobile-nav .nav-btn {
                 font-size: 16px;
-                padding: 10px 12px;
+                padding: 10px 12px; /* تعديل الحشوة */
             }
         }
         
@@ -1058,12 +1052,12 @@
             
             .mobile-nav {
                 width: 85%;
-                padding: 10px 8px 80px;
+                padding: 10px 8px 80px; /* زيادة المساحة السفلية */
             }
             
             .mobile-nav .nav-btn {
                 font-size: 15px;
-                padding: 8px 10px;
+                padding: 8px 10px; /* تعديل الحشوة */
             }
         }
         
@@ -1124,6 +1118,7 @@
             100% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
         }
         
+        /* مؤشر التمرير في الأسفل */
         .scroll-indicator {
             position: fixed;
             bottom: 20px;
@@ -1157,6 +1152,7 @@
             60% {transform: translateX(50%) translateY(-7px);}
         }
         
+        /* زر اليوتيوب في القائمة */
         .youtube-btn {
             background: rgba(255, 0, 0, 0.15) !important;
         }
@@ -1165,15 +1161,15 @@
             background: rgba(255, 0, 0, 0.3) !important;
         }
         
-        /* ================ أنماط الفوتر ================ */
+        /* ================ أنماط الفوتر من الكود الأول ================ */
         footer {
           text-align: center;
           padding: 18px;
           background: #5e2ca5;
           color: white;
           font-size: 0.85em;
-          margin-top: auto;
-          width: 100%;
+          margin-top: auto; /* تم تعديل هذه الخاصية */
+          width: 100%; /* عرض كامل */
           box-sizing: border-box;
         }
 
@@ -1219,104 +1215,25 @@
           font-weight: 600;
           color: #ffd166;
         }
-        
-        /* ==================== أزرار التحكم بحجم الخط ==================== */
-        .font-controls {
-            position: fixed;
-            z-index: 1000;
-            display: flex;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.5s ease-out;
-            top: var(--font-control-top);
-            bottom: var(--font-control-bottom);
-            right: var(--font-control-right);
-            left: var(--font-control-left);
-        }
-        
-        .font-controls button {
-            width: var(--font-control-button-size);
-            height: var(--font-control-button-size);
-            border-radius: 50%;
-            border: none;
-            background: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: var(--font-control-button-font-size);
-            transition: all 0.3s;
-        }
-        
-        .font-controls button:hover {
-            background: var(--accent-color);
-            transform: scale(1.1);
-        }
-        
-        .font-controls button i {
-            transition: transform 0.2s;
-        }
-        
-        .font-controls button:active i {
-            transform: scale(0.9);
-        }
-        
-        .font-controls button::after {
-            content: attr(title);
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
-        .font-controls button:hover::after {
-            opacity: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .font-controls {
-                --font-control-top: 100px;
-                --font-control-right: 10px;
-                --font-control-button-size: 36px;
-                --font-control-button-font-size: 15px;
-                gap: 6px;
-                padding: 8px;
-            }
-        }
     </style>
 </head>
 <body>
     <!-- الشريط العلوي المحسّن -->
     <header class="header" id="header">
         <div class="header-container">
-            <!-- زر القائمة في الجوال -->
+            <!-- زر الهمبرغر (يظهر فقط في الجوال) -->
             <button class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
             </button>
             
-            <!-- حاوية الشعار -->
+            <!-- الشعار -->
             <div class="logo-container"> 
                 <a href="index.html">
                     <img src="images/logo.png" alt="شعار موقع حسين الخليل" class="logo">
                 </a>
             </div>
             
-            <!-- أزرار التنقل للشاشات الكبيرة -->
+            <!-- أزرار التنقل (للشاشات الكبيرة) -->
             <div class="nav-buttons">
                 <a href="index.html" class="nav-btn active">
                     <i class="fas fa-home"></i>
@@ -1338,7 +1255,7 @@
                     <i class="fas fa-video"></i>
                     الفيديوهات
                 </a>
-                <!-- عناوين إضافية -->
+                <!-- العناوين الجديدة -->
                 <a href="history.html" class="nav-btn">
                     <i class="fas fa-hourglass"></i>
                     التاريخ
@@ -1361,7 +1278,6 @@
         
         <!-- قائمة الجوال المحسنة -->
         <div class="mobile-nav" id="mobileNav">
-            <!-- روابط القائمة المتنقلة -->
             <a href="index.html" class="nav-btn">
                 <i class="fas fa-home"></i>
                 الرئيسية
@@ -1382,7 +1298,7 @@
                 <i class="fas fa-video"></i>
                 الفيديوهات
             </a>
-            <!-- عناوين إضافية في القائمة -->
+            <!-- العناوين الجديدة في القائمة المنسدلة -->
             <a href="history.html" class="nav-btn">
                 <i class="fas fa-hourglass"></i>
                 التاريخ
@@ -1403,13 +1319,13 @@
                 <i class="fas fa-hand-holding-heart"></i>
                 دعم المحتوى
             </a>
-            <!-- رابط اتصل بنا -->
+            <!-- تغيير أيقونة اتصل بنا إلى أيقونة الرسالة -->
             <a href="contact.html" class="nav-btn">
                 <i class="fas fa-envelope"></i>
                 اتصل بنا
             </a>
             
-            <!-- رابط قناة اليوتيوب -->
+            <!-- إضافة زر اليوتيوب الجديد -->
             <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="nav-btn youtube-btn">
                 <i class="fab fa-youtube"></i>
                 قناة اليوتيوب
@@ -1422,75 +1338,119 @@
         </div>
     </header>
     
-    <!-- أزرار التحكم بحجم الخط -->
-    <div class="font-controls">
-        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
-            <i class="fas fa-search-minus"></i>
-        </button>
-        <button id="fontReset" title="الحجم الطبيعي (Reset)">
-            <i class="fas fa-font"></i>
-        </button>
-        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
-            <i class="fas fa-search-plus"></i>
-        </button>
-    </div>
-    
-    <!-- المحتوى الرئيسي -->
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ هوامش على الطريق. </h1>
-                <span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
+                <h1>❖ مفهوم الربا في كتاب الله.</h1>
+                <span class="publish-date"><span class="date-icon">📅</span> 24 يوليو 2025</span>
             </div>
             
-            <!-- محتوى المقالة -->
-            <div class="article-content">
-                <p>هناك نوع من الأشخاص جعلوا من مراقبتك ونقدك مهمة يومية أو شبه يومية، يتابعون كل ما تنشره، يلاحقون حتى تعليقاتك، يتتبّعون أخطاءك، وينتظرون أي فرصة للهجوم عليك. ليس لأنهم يملكون رأيًا قيّمًا أو نقدًا بنّاء، بل لأنهم لا يستطيعون تجاهلك، فأنت تشغل تفكيرهم أكثر مما يشغلهم تطوير أنفسهم. دون أن يدركوا، هم يعترفون بتأثيرك عليهم، فلو لم تكن مهمًّا لما أضاعوا وقتهم في متابعتك.</p>
-                <p>يراقبونك وينتقدونك لأنك تمضي للأمام بينما هم عالقون في أماكنهم. الشخص الناجح والمستقل يثير فضول من لا يملك رؤية خاصة به، فيبدأ بمراقبته، ليس إعجابًا، بل بحثًا عن أي زلة يمكن أن يستخدمها للهجوم.</p>
-                <p>لكن الحقيقة أنهم لا يهاجمونك لأنك مخطئ، بل لأنك مختلف، لأنك تملك الجرأة للتعبير عن نفسك بينما هم مجرد متفرجين على حياتك.</p>
-                <p>هي محاولة لتعويض النقص لا أكثر، فهؤلاء لا يسعون لإثبات أنهم على حق، بل يسعون لجرِّك للرد عليهم، لأن ذلك يمنحهم إعلانًا مجانيًا وشهرة لم يكونوا ليحصلوا عليها وحدهم.</p>
-                <p>لو تجاهلتهم، سيبقون في هامش المشهد، لكن بمجرد أن ترد عليهم، ستضعهم تحت الأضواء التي لا يستطيعون الوصول إليها بأنفسهم. إنهم يدركون أن الحديث عنك يلفت الانتباه، بينما الحديث عن أنفسهم وأفكارهم لا يجذب أحدًا، وهذا اعتراف غير مباشر بأنك أكثر أهمية وتأثيرًا منهم.</p>
-                <p>ثق بنفسك يا صديقي، فأنت في المقدمة، وهم في الخلف. أكبر عقوبة لهؤلاء ليست الرد عليهم، بل تجاهلهم التام.</p>
-                <p>فأنت تمضي في طريقك، تحقق أهدافك، بينما هم يضيعون وقتهم في ملاحقتك، دون أن يدركوا أنهم يستنزفون وقتهم وجهدهم عليك، في حين أنك لا تُعيرهم أي اهتمام. فاستمر ولا تلتفت. لا شيء يزعج المراقبين الناقدين أكثر من أن تراهم ولا تراهم في الوقت ذاته، أن تدرك وجودهم ولكنك لا تمنحهم قيمة. دعهم يتحدثون، لأنهم يعلمون أن اسمك يجذب الانتباه، أما أسماؤهم وحدها فلا تهم أحدًا.</p>
-                <p>لهذا، أفضل رد هو أن تبقى في المقدمة، وتتركهم في الخلف حيث ينتمون ولا تلتفت لهم، فأنت تكتب نجاحك، بينما هم مجرد هوامش على الطريق.</p>
-            </div>
-            
-            <!-- فاصل زخرفي -->
-            <div style="text-align: center; margin-top: 40px;">
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿قالوا إِنَّما البَيعُ مِثلُ الرِّبا وأحلَّ اللهُ البَيعَ وحرَّمَ الرِّبا﴾</span></p>
+                <p>ما هو الربا؟ وهل التعامل مع البنوك <span style="color: red;">محرّم</span>؟</p>
+                <h2 class="section-title">تعريف الربا في القرآن:</h2>
+                <p>الربا (كما جاء في كتاب الله) هو الزيادة المالية الربحية على رأس المال</p>
+                <p>وقد أحلّ الله هذه الزيادة في حالة واحدة فقط: عندما تكون ناتجة عن عملية بيع (تجارة)، وبشرط ألّا تتحول إلى أرباح متضاعفة أضعافًا مضاعفة</p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَأْكُلُوا الرِّبَا أَضْعَافًا مُّضَاعَفَةً﴾</span></p>
+                <p>أي لا تجعلوا أرباحكم متزايدة بنسب متضاعفة بشكل مستمر، فإن حدث ذلك صار الربح ربًا محرّمًا.</p>
+                <h2 class="section-title">مواضع ذكر الربا في القرآن:</h2>
+                <p>يظهر مفهوم الربا في ثلاثة سياقات أساسية:</p>
+                    <li>في التعاملات التجارية (البيع)</li>
+                    <li>في التعامل مع مستحقي الصدقات</li>
+                    <li>في القروض (أموال الناس)</li>
+                <h3 class="section-title">أولًا: الربا في التعاملات التجارية (البيع):</h3>
+                <p>في التجارة، يتم الاتفاق بين جميع الأطراف بالتراضي، وقد يحقق رأس المال ربحًا أو قد يتعرض لخسارة</p>
+                <p>الربح الناتج عن بيع سلعة محددة هو ربح طبيعي، لأنه ليس متزايدًا بشكل متضاعف. لذلك جاء رد الله على الذين شبّهوا البيع بالربا:</p>
+                    <li>الزيادة الناتجة عن البيع حلال</li>
+                    <li>أما المضاعفة المستمرة للأرباح فهي ربا محرّم، لأنها ليست بيعًا بل استغلالًا ماليًا</li>
+                <h3 class="section-title">ثانيًا: الربا مع مستحقي الصدقات:</h3>
+                <p>الله حذّر هنا بصرامة وقال:</p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">﴿يَمحَقُ اللهُ الرّبا ويُربِي الصّدَقات﴾</span></p>
+                <p>أي أن كل ربا يُؤخذ من شخص مستحق للصدقة سيمحقه الله</p>
+                    <li>مستحق الصدقة شخص فقير، لا مصدر دخل له</li>
+                    <li>فرض الله له حقًّا في أموالنا من خلال الصدقات الفردية أو من خلال الزكاة التي تجمعها الدولة</li>
+                <p>كيف نُقرض إنسانًا له حق في أموالنا أصلاً ولم ننفق عليه صدقته الواجبة؟</p>
+                <p>الله يذكّرنا أن الرزق الذي نملكه هو وديعة عندنا:</p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿فآتِ ذا القُربى حقَّهُ والمسكينَ وابنَ السّبيل ذلكَ خيرٌ للّذين يُريدونَ وجهَ الله وأولئك هُمُ المُفلحون﴾</span></p>
+                <p>من يبخل أو يفرض ربا على هؤلاء المستحقين، فلن يبارك الله له، بينما يُربي أموال المنفقين على الصدقات ويضاعفها أجرًا في الدنيا والآخرة</p>
+                <h3 class="section-title">ثالثًا: الربا في القروض (أموال الناس):</h3>
+                <p>يقول تعالى:</p>
+                <p><span style="color: #5e2ca5; font-weight: bold;">﴿وما آتيتُم من ربًا لِيَربُوَ في أموالِ النّاس فلا يَربو عندَ الله وما آتَيتُم من زكاةٍ تُريدونَ وجهَ الله فأُولئكَ هُمُ المُضعفون﴾</span></p>
+                    <li>أي قرض يُعطى لشخص (حتى لو كان قادرًا على السداد) ويُشترط عليه زيادة مالية، فهو ربا محرّم</li>
+                    <li>الله لن يبارك هذه الزيادة، بل ستمحق كما في الآية السابقة</li>
+                <p><strong>أما الصدقات والزكاة</strong>: فهي القرض الحسن الذي وعدنا الله أن يضاعفه لنا:</p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿مَن ذَا الَّذي يُقرِضُ الله قَرضًا حَسنًا فيُضاعِفَهُ لَهُ أضعافًا كثيرةً والله يَقبِضُ ويَبسُطُ وإليهِ تُرجَعون﴾</span></p>
+                <p>من كان قد دخل في تعامل ربوي سابق، فقد أمره الله بترك ما تبقى من الربا فورًا</p>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿يَا أَيُّهَا الَّذينَ آمَنوا اتَّقوا الله وذَروا ما بَقِيَ مِنَ الرِّبا إن كُنتُم مُؤمنين فإن لم تَفعَلوا فأذَنوا بِحَربٍ مِنَ الله ورسولِهِ﴾</span></p>
+                <p>ومن لم يترك الربا فسيحاربه الله ويزيل بركته في المال والصحة والرزق</p>
+                <h3 class="section-title">كيفية ترك الربا:</h3>
+                <p>يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وإن تُبتُم فَلَكُم رُءوسُ أموالِكُم لا تَظلِمون ولا تُظلَمون﴾</span></p>
+                    <li>لك الحق في رأس مالك فقط دون أي زيادة</li>
+                    <li>وإن كان المدين معسرًا، يجب منحه مهلة حتى تتحسن ظروفه <span style="color: #5e2ca5; font-weight: bold;">﴿وإن كان ذو عُسرةٍ فنَظِرةٌ إلى مَيسَرة﴾</span></li>
+                    <li>ومن تصدّق على المدين وأسقط عنه الدين، فذلك خير له <span style="color: #5e2ca5; font-weight: bold;">﴿وأن تَصَدَّقوا خيرٌ لكم إن كنتم تعلمون﴾</span></li>
+                <h3 class="section-title">توثيق الديون:</h3>
+                <p>علّمنا الله في أطول آية من القرآن كيفية توثيق الحقود <span style="color: #5e2ca5; font-weight: bold;">﴿يا أيها الذين آمنوا إذا تَداينتم بدَينٍ إلى أجلٍ mسمّى فَاكْتُبوه﴾</span></p>
+                    <li>يُكتب الدين بواسطة كاتب عادل، ولا يحق له الامتناع</li>
+                    <li>المدين يُملي الدين بنفسه دون بخس أو تحريف</li>
+                    <li>إن كان عاجزًا، يتكفل وليّه بالإملاء</li>
+                    <li>تُستشهد شهادتان من الرجال، أو رجل وامرأتان <strong>(تفصيل شهادة المرأة موضوع آخر)</strong></li>
+                    <li>لا يجوز الامتناع عن الشهادة</li>
+                    <li>يجب كتابة الدين مهما كان صغيرًا أو كبيرًا، لتجنب الشك</li>
+                    <li>أما التجارة الحاضرة (البيع الفوري)، فلا يشترط كتابتها، لكن يُستحب الإشهاد عليها</li>
+                <h3 class="section-title">هل التعامل مع البنوك محرّم؟</h3>
+                <p>البنوك هي مؤسسات مالية تدير الأموال عبر الإقراض والاستثمار لصالح المجتمع</p>
+                <p>هناك حالتان للتعامل معها:</p>
+                <div class="example-block">
+                    <h4>1- إيداع الأموال مع فائدة ثابتة</h4>
+                    <p>• عند إيداع المال في البنك، فإنك توكله لاستثمار أموالك بشكل آمن</p>
+                    <p>• الفائدة الثابتة على رأس المال ليست ربا، طالما لم تتحول إلى أضعاف مضاعفة</p>
+                    <p>• الفوائد البنكية عادةً ليست متضاعفة، لذا فهي حلال وفق تحليل الآيات</p>
+                </div>
+                <div class="example-block">
+                    <h4>2- الاقتراض من البنك</h4>
+                    <p>• إذا اقترضت لتمويل مشروع مدروس، فالأمر يعد اتفاقًا تجاريًا، وليس ربًا، طالما أن البنك لا يفرض نسبًا متضاعفة</p>
+                    <p>• إن فشل المشروع وأعسر المقترض، فعلى البنك أن يتوقف عن احتساب الفوائد، وينتظر حتى تتحسن ظروف المقترض، أو يتفق معه على تسوية عادلة</p>
+                </div>
+                <h3 class="section-title">الخلاصة:</h3>
+                        <li>أي زيادة على القروض (أموال الناس) هي ربا محرّم</li>
+                        <li>أي إقراض لشخص مستحق للصدقات مع زيادة فهو ربا محرّم</li>
+                        <li>أي زيادة على رأس المال من بيع (تجارة) هي حلال، طالما لا تتحول إلى أرباح متضاعفة مستمرة</li>
+                    
+                        <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-            </div>
+                </div>
+                
+                <!-- الرابط مع التأثير الجديد -->
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="https://youtu.be/hTPaTdk4_8E?si=dFT5JD1uc28Ds1-G" target="_blank" class="video-link">
+                        <i class="fas fa-video"></i> حلقة مرئية عن الموضوع
+                    </a>
+                </div>
+                </div> 
             
-            <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
-                <!-- زر الطباعة -->
                 <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
                     <i class="fas fa-print"></i>
                 </button>
-                
-                <!-- زر المشاركة -->
                 <div class="share-button-container">
                     <button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleShareMenu()">
                         <i class="fas fa-share-alt"></i>
                     </button>
-                    <!-- قائمة مشاركة المقالة -->
                     <div class="article-share-menu" id="shareMenu">
                         <div class="share-title">مشاركة المقالة</div>
-                        <!-- منصات المشاركة -->
                         <div class="share-platforms">
                             <a href="#" onclick="shareOnSocial('facebook')" class="share-platform">
-                                <i class="fab fa-facebook-f"></i>
+                                <img src="icons/fac-soc.png" alt="مشاركة على فيسبوك">
                             </a>
                             <a href="#" onclick="shareOnSocial('telegram')" class="share-platform">
-                                <i class="fab fa-telegram"></i>
+                                <img src="icons/tel-soc.png" alt="مشاركة على تلغرام">
                             </a>
                             <a href="#" onclick="shareOnSocial('whatsapp')" class="share-platform">
-                                <i class="fab fa-whatsapp"></i>
+                                <img src="icons/tel-soc.png" alt="مشاركة على واتساب">
                             </a>
                             <a href="#" onclick="shareOnSocial('twitter')" class="share-platform">
-                                <i class="fab fa-twitter"></i>
+                                <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
                             </a>
                         </div>
-                        <!-- زر نسخ الرابط -->
                         <button class="copy-link-btn" onclick="copyArticleLink()">
                             <i class="fas fa-link"></i>
                             نسخ رابط المقالة
@@ -1501,9 +1461,8 @@
         </div>
     </div>
 
-    <!-- تذييل الصفحة -->
+    <!-- الفوتر من الكود الأول -->
     <footer>
-        <!-- روابط التواصل الاجتماعي -->
         <div class="social-links">
             <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -1513,7 +1472,6 @@
             <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
         </div>
         
-        <!-- حقوق النشر -->
         <div class="copyright">
             حسين الخليل - جميع الحقوق محفوظة © 2025
         </div>
@@ -1525,7 +1483,6 @@
     </div>
 
     <script>
-        // كود الجافاسكريبت للموقع
         // قائمة الجوال
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
@@ -1649,7 +1606,6 @@
             }
         }
         
-        // نسخ رابط المقالة
         function copyArticleLink() {
             const url = window.location.href;
             navigator.clipboard.writeText(url).then(() => {
@@ -1660,7 +1616,6 @@
             });
         }
         
-        // مشاركة على وسائل التواصل
         function shareOnSocial(platform) {
             const url = encodeURIComponent(window.location.href);
             const title = encodeURIComponent(document.title);
@@ -1713,56 +1668,6 @@
             } else {
                 scrollIndicator.style.opacity = '1';
             }
-        });
-        
-        // ==================== أزرار التحكم بحجم الخط ====================
-        const fontDecrease = document.getElementById('fontDecrease');
-        const fontReset = document.getElementById('fontReset');
-        const fontIncrease = document.getElementById('fontIncrease');
-        const articleContent = document.querySelector('.article-content');
-        const publishDate = document.querySelector('.publish-date');
-        
-        let originalFontSize, originalDateSize;
-        
-        let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
-        
-        function applyFontScale() {
-            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
-        }
-        
-        fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
-            applyFontScale();
-        });
-        
-        fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
-            applyFontScale();
-        });
-        
-        fontReset.addEventListener('click', () => {
-            currentScale = 1;
-            applyFontScale();
-        });
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
-            
-            const rootStyles = getComputedStyle(document.documentElement);
-            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-            
-            const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
         });
     </script>
 </body>
