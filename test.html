@@ -23,7 +23,6 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
-            /* إضافة متغيرات التحكم بالخط */
             --font-control-position: top right;
             --font-control-top: 120px;
             --font-control-bottom: auto;
@@ -1445,6 +1444,7 @@
                 <span class="publish-date"><span class="date-icon">📅</span> 10 يوليو 2025</span>
             </div>
             
+            <div class="article-content">
                 <p>في كل مرة يُعلن فيها أحدهم أن قضيته الأولى هي وطنه، تنهال عليه الاتهامات: “مُطبّع”، “خائن”، “أناني”، وكأن حب الوطن والسعي لبنائه أصبح جريمة لا تُغتفر في زمن الشعارات الرنانة.</p>
                 <p>أكثر من يزايدون على غيرهم في هذا السياق، يعيشون في بلدان مستقرة، بعيدة عن أجواء الحروب والانهيارات، ينعمون بالأمان، وبخدمات التعليم والصحة والرواتب، ثم يطالبون شعوبًا أنهكتها الصراعات أن تُنكر أوطانها وتُضحي بها لأجل “قضايا الأمة”، وعلى رأسها قضية فلسطين.</p>
                 <p>بل ويعتبرون أن من لا يضع فلسطين على رأس أولوياته، حتى على حساب بلده المدمَّر، فهو خائن أو متخاذل. لكن هل حقًا نصروا فلسطين؟</p>
@@ -1492,6 +1492,8 @@
     <span style="color: #EA4335;">s</span>
   </span>.
 </p>
+            </div>
+            
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
             </div>
@@ -1739,54 +1741,57 @@
             }
         });
         
-        // ==================== كود التحكم بحجم الخط من الكود الأول ====================
+        // ==================== كود التحكم بحجم الخط المعدل ====================
         const fontDecrease = document.getElementById('fontDecrease');
         const fontReset = document.getElementById('fontReset');
         const fontIncrease = document.getElementById('fontIncrease');
         const articleContent = document.querySelector('.article-content');
         const publishDate = document.querySelector('.publish-date');
         
-        let originalFontSize, originalDateSize;
+        let originalFontSize = 18; // الحجم الأصلي للخط في البكسلات
+        let originalDateSize = 18; // الحجم الأصلي لتاريخ النشر
         
         let currentScale = 1;
         const minScale = 0.5;
         const maxScale = 4;
         
+        // تطبيق تغيير حجم الخط
         function applyFontScale() {
             articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            if(publishDate) {
+                publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            }
         }
         
+        // تصغير الخط
         fontDecrease.addEventListener('click', () => {
             currentScale = Math.max(minScale, currentScale / 1.2);
             applyFontScale();
         });
         
+        // تكبير الخط
         fontIncrease.addEventListener('click', () => {
             currentScale = Math.min(maxScale, currentScale * 1.2);
             applyFontScale();
         });
         
+        // إعادة تعيين الخط إلى الحجم الأصلي
         fontReset.addEventListener('click', () => {
             currentScale = 1;
             applyFontScale();
         });
         
+        // الحصول على الأحجام الأصلية عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            if(articleContent) {
+                const computedStyle = getComputedStyle(articleContent);
+                originalFontSize = parseFloat(computedStyle.fontSize);
+            }
             
-            const rootStyles = getComputedStyle(document.documentElement);
-            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
-            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
-            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
-            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
-            
-            const controls = document.querySelector('.font-controls');
-            controls.style.top = varFontControlTop;
-            controls.style.bottom = varFontControlBottom;
-            controls.style.right = varFontControlRight;
-            controls.style.left = varFontControlLeft;
+            if(publishDate) {
+                const computedDateStyle = getComputedStyle(publishDate);
+                originalDateSize = parseFloat(computedDateStyle.fontSize);
+            }
         });
     </script>
 </body>
