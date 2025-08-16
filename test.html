@@ -1519,6 +1519,7 @@
             </div>
             
             <!-- محتوى المقالة -->
+            <div class="article-content">
                 <p>منذ الأزل، والإنسان يسعى لنيل رضا الآخرين، ظنًا منه أن ذلك سيمنحه القبول الاجتماعي والاستقرار النفسي.</p>
                 <p>غير أن هذه المحاولة، مهما بُذلت فيها الجهود، تظل غاية مستحيلة.</p>
                 <p>فإرضاء الناس جميعًا ضرب من الوهم، لأن تأييدهم لك غالبًا ما يكون مشروطًا بمدى تطابق آرائك مع آرائهم، لا بحقيقتك أو جوهرك.</p>
@@ -1537,13 +1538,12 @@
                 <p>الاستقلالية الفكرية والتمسك بالمبادئ الشخصية هما الطريق الحقيقي إلى السلام الداخلي والتحرر النفسي.</p>
                 <p>عندما تتوقف عن جعل رضا الآخرين هدفًا رئيسيًا، تكتشف قيمتك الحقيقية وتحرر طاقتك الإبداعية.</p>
                 <p>تذكر دائمًا أن من يحترمك لذاتك ويقدر اختلافك هو الصديق الحقيقي، أما من يطلب منك التخلي عن مبادئك لإرضائه، فهو لا يستحق وقتك ولا اهتمامك.</p>
-                
+            </div>
+            
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-
-                </div>
-                </div>
+            </div>
             
             <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
@@ -1809,33 +1809,51 @@
         
         let originalFontSize, originalDateSize;
         let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
+        const minScale = 0.8;
+        const maxScale = 1.8;
+        const scaleStep = 0.1;
         
+        // تخزين الحجم الأصلي عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            // الحصول على حجم الخط الأصلي من CSS
+            const style = getComputedStyle(articleContent);
+            originalFontSize = parseFloat(style.fontSize);
+            
+            // تخزين حجم الخط للتاريخ
+            const dateStyle = getComputedStyle(publishDate);
+            originalDateSize = parseFloat(dateStyle.fontSize);
+        });
+        
+        // تطبيق تغيير حجم الخط
         function applyFontScale() {
             articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
             publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
         }
         
+        // تصغير الخط
         fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
-            applyFontScale();
+            if (currentScale > minScale) {
+                currentScale -= scaleStep;
+                applyFontScale();
+            }
         });
         
+        // تكبير الخط
         fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
-            applyFontScale();
+            if (currentScale < maxScale) {
+                currentScale += scaleStep;
+                applyFontScale();
+            }
         });
         
+        // إعادة تعيين الخط
         fontReset.addEventListener('click', () => {
             currentScale = 1;
             applyFontScale();
         });
         
+        // وضع أزرار التحكم في مكانها الصحيح
         document.addEventListener('DOMContentLoaded', () => {
-            originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
-            originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
-            
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
