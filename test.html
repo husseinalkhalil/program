@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- تعريف ترميز الصفحة ومعلوماتها الأساسية -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المقالات |نعمة العقل.</title>
+    <title>المقالات | نظرية الحصان الميت. </title>
+    
+    <!-- روابط لخطوط جوجل وأيقونات فونت أويسوم -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- إعلانات جوجل أدسنس -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+    
     <style>
+        /* تعريف المتغيرات اللونية للاستخدام في التصميم */
         :root {
             --primary-color: #5e2ca5;
             --secondary-color: #9575CD;
@@ -23,6 +30,14 @@
             --header-purple: #5e2ca5;
             --mobile-header-height: 70px;
             --glass-bg: rgba(94, 44, 165, 0.92);
+            /* متغيرات التحكم بالخط */
+            --font-control-position: top right;
+            --font-control-top: 120px;
+            --font-control-bottom: auto;
+            --font-control-right: 250px;
+            --font-control-left: auto;
+            --font-control-button-size: 30px;
+            --font-control-button-font-size: 18px;
         }
         
         * {
@@ -44,14 +59,12 @@
             flex-direction: column;
         }
         
-        /* منع التمرير على الصفحة عند فتح القائمة */
         body.menu-open {
             overflow: hidden;
             position: fixed;
             width: 100%;
         }
         
-        /* ==================== الشريط العلوي المحسّن ==================== */
         .header {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
@@ -104,10 +117,9 @@
             transform: scale(1.05);
         }
         
-        /* ==================== أزرار التنقل المحسّنة ==================== */
         .nav-buttons {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             align-items: center;
             height: 100%;
         }
@@ -168,7 +180,6 @@
             color: white;
         }
         
-        /* تأثيرات خاصة بالشريط العلوي */
         .nav-indicator {
             position: absolute;
             bottom: 0;
@@ -181,7 +192,7 @@
         }
         
         .hamburger {
-            display: none; /* مخفي افتراضيًا */
+            display: none;
             background: none;
             border: none;
             color: white;
@@ -206,7 +217,6 @@
             transform: scale(1.05);
         }
         
-        /* ==================== قائمة الجوال المحسّنة ==================== */
         .mobile-nav {
             position: fixed;
             top: var(--mobile-header-height);
@@ -220,13 +230,11 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            padding: 20px 15px 120px; /* زيادة المساحة السفلية */
+            padding: 20px 15px 120px;
             box-shadow: -5px 0 30px rgba(0,0,0,0.25);
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
             border-left: 1px solid rgba(255,255,255,0.15);
-            
-            /* تمكين التمرير السلس على الجوال */
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
         }
@@ -240,9 +248,9 @@
         .mobile-nav .nav-btn {
             width: 100%;
             max-width: 300px;
-            margin-bottom: 8px; /* تقليل المسافة بين العناصر */
+            margin-bottom: 8px;
             font-size: 18px;
-            padding: 12px 16px; /* تعديل الحشوة */
+            padding: 12px 16px;
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
@@ -260,7 +268,6 @@
             background: rgba(255,255,255,0.25);
         }
         
-        /* شريط التمرير للقائمة المنسدلة */
         .mobile-nav::-webkit-scrollbar {
             width: 8px;
         }
@@ -279,7 +286,6 @@
             background: rgba(255,255,255,0.5);
         }
         
-        /* مؤشر التمرير في الأسفل */
         .scroll-indicator {
             position: fixed;
             bottom: 20px;
@@ -660,7 +666,6 @@
             font-size: 20px;
         }
         
-        /* زر العودة للأعلى */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -702,7 +707,6 @@
             transform: translateY(-3px);
         }
         
-        /* ==================== تأثيرات حركية ==================== */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -730,9 +734,87 @@
             animation: fadeOut 0.2s ease-out forwards;
         }
         
-        /* ==================== طباعة ==================== */
+        /* أزرار التحكم بالخط */
+        .font-controls {
+            position: fixed;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+            top: var(--font-control-top);
+            bottom: var(--font-control-bottom);
+            right: var(--font-control-right);
+            left: var(--font-control-left);
+        }
+        
+        .font-controls button {
+            width: var(--font-control-button-size);
+            height: var(--font-control-button-size);
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-control-button-font-size);
+            transition: all 0.3s;
+        }
+        
+        .font-controls button:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .font-controls button i {
+            transition: transform 0.2s;
+        }
+        
+        .font-controls button:active i {
+            transform: scale(0.9);
+        }
+        
+        .font-controls button::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .font-controls button:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .font-controls {
+                --font-control-top: 100px;
+                --font-control-right: 10px;
+                --font-control-button-size: 36px;
+                --font-control-button-font-size: 15px;
+                gap: 6px;
+                padding: 8px;
+            }
+        }
+        
         @media print {
-            .header, .article-actions, .back-btn, .back-to-top {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
@@ -768,7 +850,6 @@
             font-weight: bold;
         }
         
-        /* ==================== وسائط متجاوبة ==================== */
         @media (max-width: 992px) {
             .header-container {
                 padding: 0 15px;
@@ -807,7 +888,7 @@
             }
             
             .hamburger {
-                display: flex; /* يظهر فقط في الجوال */
+                display: flex;
             }
             
             .header {
@@ -815,7 +896,7 @@
             }
             
             .logo {
-                height: 50px; /* تكبير الشعار في الجوال */
+                height: 50px;
             }
             
             .scrolled .logo {
@@ -858,7 +939,6 @@
                 height: 22px;
             }
             
-            /* زر العودة للأعلى في الجوال */
             .back-to-top {
                 width: 50px;
                 height: 50px;
@@ -870,7 +950,6 @@
                 font-size: 20px;
             }
             
-            /* وضع الشعار في وسط الشريط العلوي في الجوال */
             .logo-container {
                 position: absolute;
                 left: 50%;
@@ -886,26 +965,24 @@
                 z-index: 1001;
             }
             
-            /* تحريك زر الهامبرغر إلى اليسار */
             .header-container {
                 justify-content: flex-start;
             }
             
-            /* تعديلات القائمة المنسدلة على الجوال */
             .mobile-nav {
-                padding: 15px 12px 100px; /* زيادة المساحة السفلية */
+                padding: 15px 12px 100px;
             }
             
             .mobile-nav .nav-btn {
-                margin-bottom: 8px; /* تقليل المسافة بين العناصر */
-                padding: 12px 15px; /* تعديل الحشوة */
+                margin-bottom: 8px;
+                padding: 12px 15px;
                 font-size: 16px;
             }
         }
         
         @media (min-width: 769px) {
             .hamburger {
-                display: none !important; /* إخفاء زر الهمبرغر في الكمبيوتر */
+                display: none !important;
             }
         }
         
@@ -949,7 +1026,6 @@
                 height: 20px;
             }
             
-            /* زر العودة للأعلى في الجوال الصغير */
             .back-to-top {
                 width: 45px;
                 height: 45px;
@@ -961,7 +1037,6 @@
                 font-size: 18px;
             }
             
-            /* تحسين لوحة المشاركة على الجوال */
             .article-share-menu {
                 width: 92vw;
                 max-width: 300px;
@@ -1008,12 +1083,12 @@
             
             .mobile-nav {
                 width: 80%;
-                padding: 12px 10px 90px; /* زيادة المساحة السفلية */
+                padding: 12px 10px 90px;
             }
             
             .mobile-nav .nav-btn {
                 font-size: 16px;
-                padding: 10px 12px; /* تعديل الحشوة */
+                padding: 10px 12px;
             }
         }
         
@@ -1052,12 +1127,12 @@
             
             .mobile-nav {
                 width: 85%;
-                padding: 10px 8px 80px; /* زيادة المساحة السفلية */
+                padding: 10px 8px 80px;
             }
             
             .mobile-nav .nav-btn {
                 font-size: 15px;
-                padding: 8px 10px; /* تعديل الحشوة */
+                padding: 8px 10px;
             }
         }
         
@@ -1118,41 +1193,6 @@
             100% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
         }
         
-        /* مؤشر التمرير في الأسفل */
-        .scroll-indicator {
-            position: fixed;
-            bottom: 20px;
-            right: 50%;
-            transform: translateX(50%);
-            background: rgba(255, 255, 255, 0.3);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: bounce 2s infinite;
-            z-index: 1001;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .mobile-nav.open .scroll-indicator {
-            opacity: 1;
-        }
-        
-        .scroll-indicator i {
-            color: white;
-            font-size: 20px;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateX(50%) translateY(0);}
-            40% {transform: translateX(50%) translateY(-15px);}
-            60% {transform: translateX(50%) translateY(-7px);}
-        }
-        
-        /* زر اليوتيوب في القائمة */
         .youtube-btn {
             background: rgba(255, 0, 0, 0.15) !important;
         }
@@ -1161,15 +1201,14 @@
             background: rgba(255, 0, 0, 0.3) !important;
         }
         
-        /* ================ أنماط الفوتر من الكود الأول ================ */
         footer {
           text-align: center;
           padding: 18px;
           background: #5e2ca5;
           color: white;
           font-size: 0.85em;
-          margin-top: auto; /* تم تعديل هذه الخاصية */
-          width: 100%; /* عرض كامل */
+          margin-top: auto;
+          width: 100%;
           box-sizing: border-box;
         }
 
@@ -1221,19 +1260,19 @@
     <!-- الشريط العلوي المحسّن -->
     <header class="header" id="header">
         <div class="header-container">
-            <!-- زر الهمبرغر (يظهر فقط في الجوال) -->
+            <!-- زر القائمة في الجوال -->
             <button class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
             </button>
             
-            <!-- الشعار -->
+            <!-- حاوية الشعار -->
             <div class="logo-container"> 
                 <a href="index.html">
                     <img src="images/logo.png" alt="شعار موقع حسين الخليل" class="logo">
                 </a>
             </div>
             
-            <!-- أزرار التنقل (للشاشات الكبيرة) -->
+            <!-- أزرار التنقل للشاشات الكبيرة -->
             <div class="nav-buttons">
                 <a href="index.html" class="nav-btn active">
                     <i class="fas fa-home"></i>
@@ -1255,7 +1294,7 @@
                     <i class="fas fa-video"></i>
                     الفيديوهات
                 </a>
-                <!-- العناوين الجديدة -->
+                <!-- عناوين إضافية -->
                 <a href="history.html" class="nav-btn">
                     <i class="fas fa-hourglass"></i>
                     التاريخ
@@ -1272,12 +1311,13 @@
                     <i class="fas fa-lightbulb"></i>
                     الخواطر
                 </a>
-                <div class="nav-indicator" id="navIndicator"></div>
+                <div class="nav-indicator" id="navIndicator"></div> <!-- مؤشر التنقل -->
             </div>
         </div>
         
         <!-- قائمة الجوال المحسنة -->
         <div class="mobile-nav" id="mobileNav">
+            <!-- روابط القائمة المتنقلة -->
             <a href="index.html" class="nav-btn">
                 <i class="fas fa-home"></i>
                 الرئيسية
@@ -1298,7 +1338,7 @@
                 <i class="fas fa-video"></i>
                 الفيديوهات
             </a>
-            <!-- العناوين الجديدة في القائمة المنسدلة -->
+            <!-- عناوين إضافية في القائمة -->
             <a href="history.html" class="nav-btn">
                 <i class="fas fa-hourglass"></i>
                 التاريخ
@@ -1319,13 +1359,13 @@
                 <i class="fas fa-hand-holding-heart"></i>
                 دعم المحتوى
             </a>
-            <!-- تغيير أيقونة اتصل بنا إلى أيقونة الرسالة -->
+            <!-- رابط اتصل بنا -->
             <a href="contact.html" class="nav-btn">
                 <i class="fas fa-envelope"></i>
                 اتصل بنا
             </a>
             
-            <!-- إضافة زر اليوتيوب الجديد -->
+            <!-- رابط قناة اليوتيوب -->
             <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="nav-btn youtube-btn">
                 <i class="fab fa-youtube"></i>
                 قناة اليوتيوب
@@ -1338,48 +1378,72 @@
         </div>
     </header>
     
+    <!-- أزرار التحكم بحجم الخط -->
+    <div class="font-controls">
+        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+            <i class="fas fa-search-minus"></i>
+        </button>
+        <button id="fontReset" title="الحجم الطبيعي (Reset)">
+            <i class="fas fa-font"></i>
+        </button>
+        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+            <i class="fas fa-search-plus"></i>
+        </button>
+    </div>
+    
+    <!-- المحتوى الرئيسي -->
     <div class="container">
         <div class="article-card">
             <div class="article-header">
-                <h1>❖ نعمة العقل.</h1>
-                <span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
+                <h1>❖ نظرية الحصان الميت. </h1>
+                <span class="publish-date"><span class="date-icon">📅</span> 10 مايو 2025</span>
             </div>
             
-                <p>ميّز الله الإنسان عن غيره بالعقل والقدرة على التفكير والاختيار، فكان مع العقل الحرية، ودعا في أكثر من موضع إلى استخدام العقل.</p>
-                <p>ذكر الله قوله:</p>
-                <p>وعندما نللإسلام.</p>
-                <p><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّ فِى ذَٰلِكَ لَأيَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ﴾</span><strong> 6 </strong> مرات. </p>
-                <p> وقوله: <span style="color: #5e2ca5; font-weight: bold;">﴿لَعَلَّهُمْ يَتَفَكَّرُونَ﴾</span><strong> 3 </strong> مرات. </p>
-                <p> وذكر كلمة <span style="color: #5e2ca5; font-weight: bold;">﴿يَعْقِلُونَ﴾</span><strong> 22 </strong> مرة. </p>
-                <p>ودعا إلى عدم تحييده.</p>
-                <p><span style="color: #5e2ca5; font-weight: bold;">﴿وَلَا تَقْفُ مَا لَيْسَ لَكَ بِهِۦ عِلْمٌ﴾</span><strong></strong> الإسراء [36] </p>
-                <p>وجعل العلم أساس التوحيد.</p>
-                <p><span style="color: #5e2ca5; font-weight: bold;">﴿فَٱعْلَمْ أَنَّهُۥ لَآ إِلَٰهَ إِلَّا ٱللَّهُ﴾</span><strong></strong> محمد [19] </p>
-                <p>وشنّع من لا يستخدم عقله.</p>
-                <p><span style="color: #5e2ca5; font-weight: bold;">﴿كَلَّا ۖ بَلْ ۜ رَانَ عَلَىٰ قُلُوبِهِم﴾</span><strong></strong> المطففين [14] </p>
-                <p><span style="color: #5e2ca5; font-weight: bold;">﴿أَمْ عَلَىٰ قُلُوبٍ أَقْفَالُهَآ﴾</span><strong></strong> محمد [24] </p>
-                <p>وأكثر من ذلك، ذمهم ووصفهم بأنهم أضل من الأنعام.</p>
-                <p><span style="color: #5e2ca5; font-weight: bold;">﴿وَلَهُمْ ءَاذَانٌ لَّا يَسْمَعُونَ بِهَآ ۚ أُو۟لَٰٓئِكَ كَٱلْأَنْعَٰمِ بَلْ هُمْ أَضَلُّ﴾</span><strong></strong> الأعراف [179] </p>
-                <p> وبعد كل هذا يطل علينا أحد رجال الدين ليقول لنا: <strong> عقلك كالحمار، </strong>عندما تصل إلى الشيخ، اربطه وادخل لتتلقى النقل بلا عقل.</p>
-                <p> والشيخ الآخر يقول لنا بكل جرأة: <strong> إن تقديم العقل على النقل هو طريقة أهل الضلال. </strong></p> 
-                <p>فيلجأ للشيخ كي يُفهمه إياه ويضرب بقوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَقَدْ يَسَّرْنَا ٱلْقُرْءَانَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ﴾</span> القمر [17]، عرض الحائط.</p>
-                <p>وتذكروا قوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿وَقالوا لَو كُنّا نَسمَعُ أَو نَعقِلُ ما كُنّا في أَصحابِ السَّعيرِ﴾</span> الملك [10].</p>
-                <p> صدق الله وكذب الجاهلون. </p>
-                
+            <!-- محتوى المقالة -->
+            <div class="article-content">
+                <p>هناك حكمة لإحدى قبائل الهنود الحمر في ولاية داكوتا الأمريكية تنتقل من جيل إلى جيل:</p>
+                <p><strong> "أنه عندما تكتشف أنك تركب حصانًا ميتًا، فإن أفضل استراتيجية للتعامل معه هو النزول منه". </strong></p>
+                <p>إلا أن بعض المنظمات والمؤسسات غالبًا ما تقوم باستخدام مجموعة وتكنيكات مختلفة واستراتيجيات من وجهة نظرهم أنها الأفضل في التعامل مع الحصان الميت لديهم، مثل:</p>
+                <p><strong><span style="color: blue;">• </span></strong> شراء سوط أقوى للقائد. </p>  
+                <p><strong><span style="color: blue;">• </span></strong> تغيير الفارس الذي يركب الحصان الميت. </p>
+                <p><strong><span style="color: blue;">• </span></strong> تهديد الحصان الميت بإنهاء خدمته. </p>
+                <p><strong><span style="color: blue;">• </span></strong> تعيين لجنة لدراسة حالة الحصان الميت. </p>
+                <p><strong><span style="color: blue;">• </span></strong> القيام بزيارة مؤسسات ومنظمات أخرى لمعرفة كيف يركبوا الحصان الميت. </p>
+                <p><strong><span style="color: blue;">• </span></strong> خفض معايير التقييم للخيول الميتة. </p>
+                <p><strong><span style="color: blue;">• </span></strong> إعادة تصنيف الحصان الميت بأنه حي ولكنه لديه تحديات حركية. </p>
+                <p><strong><span style="color: blue;">• </span></strong> التعاقد مع فرسان أجانب لركوب الحصان الميت. </p>
+                <p><strong><span style="color: blue;">• </span></strong> خلق جو من التنافس بين الحصان الميت ومجموعة من الخيول الميتة لتطوير أدائه. </p>
+                <p><strong><span style="color: blue;">• </span></strong> عمل خطة تطوير وتدريب للحصان الميت. </p>
+                <p><strong><span style="color: blue;">• </span></strong> إعادة هيكلة معايير الإنتاجية لتحسين ورفع كفاءة الحصان الميت. </p>
+                <p><strong><span style="color: blue;">• </span></strong> التباهي بأن الحصان الميت يوفر في التكاليف لأنه لا يجب إطعامه عكس باقي الخيول التي تحتاج إلى مصاريف عليه للإطعام. </p>
+                <p><strong><span style="color: blue;">• </span></strong> إعادة صياغة متطلبات الأداء المتوقعة للخيول الأخرى لتتناسب مع الحصان الميت. </p>
+                <p>الحكمة تكمن في معرفة متى نتمسك ومتى نترك. ركوب الحصان الميت لا يجعله حياً، بل يهدر طاقتك ووقتك.</p>
+                <p>الشجاعة في التخلي عن ما لم يعد مجدياً تفتح الأبواب لفرص جديدة وإبداعات أفضل.</p>
+                <p>تذكر دائمًا أن الاعتراف بالفشل ليس نهاية الطريق، بل بداية طريق جديد نحو النجاح.</p>
+                <p> عندما تواجه الحصان الميت في حياتك، تذكر الحكمة القديمة: <strong> النزول عنه هو أفضل استراتيجية. </strong></p>
+            </div>
+            
+            <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
             </div>
             
+            <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
+                <!-- زر الطباعة -->
                 <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
                     <i class="fas fa-print"></i>
                 </button>
+                
+                <!-- زر المشاركة -->
                 <div class="share-button-container">
                     <button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleShareMenu()">
                         <i class="fas fa-share-alt"></i>
                     </button>
+                    <!-- قائمة مشاركة المقالة -->
                     <div class="article-share-menu" id="shareMenu">
                         <div class="share-title">مشاركة المقالة</div>
+                        <!-- منصات المشاركة -->
                         <div class="share-platforms">
                             <a href="#" onclick="shareOnSocial('facebook')" class="share-platform">
                                 <img src="icons/fac-soc.png" alt="مشاركة على فيسبوك">
@@ -1394,6 +1458,7 @@
                                 <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
                             </a>
                         </div>
+                        <!-- زر نسخ الرابط -->
                         <button class="copy-link-btn" onclick="copyArticleLink()">
                             <i class="fas fa-link"></i>
                             نسخ رابط المقالة
@@ -1404,8 +1469,9 @@
         </div>
     </div>
 
-    <!-- الفوتر من الكود الأول -->
+    <!-- تذييل الصفحة -->
     <footer>
+        <!-- روابط التواصل الاجتماعي -->
         <div class="social-links">
             <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -1415,6 +1481,7 @@
             <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
         </div>
         
+        <!-- حقوق النشر -->
         <div class="copyright">
             حسين الخليل - جميع الحقوق محفوظة © 2025
         </div>
@@ -1426,6 +1493,7 @@
     </div>
 
     <script>
+        // كود الجافاسكريبت للموقع
         // قائمة الجوال
         const hamburger = document.getElementById('hamburger');
         const mobileNav = document.getElementById('mobileNav');
@@ -1549,6 +1617,7 @@
             }
         }
         
+        // نسخ رابط المقالة
         function copyArticleLink() {
             const url = window.location.href;
             navigator.clipboard.writeText(url).then(() => {
@@ -1559,6 +1628,7 @@
             });
         }
         
+        // مشاركة على وسائل التواصل
         function shareOnSocial(platform) {
             const url = encodeURIComponent(window.location.href);
             const title = encodeURIComponent(document.title);
@@ -1610,6 +1680,65 @@
                 scrollIndicator.style.opacity = '0';
             } else {
                 scrollIndicator.style.opacity = '1';
+            }
+        });
+        
+        // أزرار التحكم بحجم الخط
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontReset = document.getElementById('fontReset');
+        const fontIncrease = document.getElementById('fontIncrease');
+        const articleContent = document.querySelector('.article-content');
+        const publishDate = document.querySelector('.publish-date');
+        
+        let originalFontSize, originalDateSize;
+        let currentScale = 1;
+        const minScale = 0.5;
+        const maxScale = 4;
+        
+        function applyFontScale() {
+            if (articleContent) {
+                articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            }
+            if (publishDate) {
+                publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            }
+        }
+        
+        fontDecrease.addEventListener('click', () => {
+            currentScale = Math.max(minScale, currentScale / 1.2);
+            applyFontScale();
+        });
+        
+        fontIncrease.addEventListener('click', () => {
+            currentScale = Math.min(maxScale, currentScale * 1.2);
+            applyFontScale();
+        });
+        
+        fontReset.addEventListener('click', () => {
+            currentScale = 1;
+            applyFontScale();
+        });
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            if (articleContent) {
+                originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
+            }
+            if (publishDate) {
+                originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
+            }
+            
+            const rootStyles = getComputedStyle(document.documentElement);
+            const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
+            const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
+            const varFontControlRight = rootStyles.getPropertyValue('--font-control-right');
+            const varFontControlLeft = rootStyles.getPropertyValue('--font-control-left');
+            
+            const controls = document.querySelector('.font-controls');
+            if (controls) {
+                controls.style.top = varFontControlTop;
+                controls.style.bottom = varFontControlBottom;
+                controls.style.right = varFontControlRight;
+                controls.style.left = varFontControlLeft;
             }
         });
     </script>
