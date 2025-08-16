@@ -41,14 +41,14 @@
             --font-control-button-font-size: 18px;
         }
         
-        /* إعادة تعيين الهوامش والحشوات لجميع العناصر -->
+        /* إعادة تعيين الهوامش والحشوات لجميع العناصر */
         * {
             box-sizing: border-box; /* تضمين الحشوة والحدود في حساب العرض */
             margin: 0;
             padding: 0;
         }
         
-        /* تنسيقات عامة للجسم -->
+        /* تنسيقات عامة للجسم */
         body {
             font-family: 'Tajawal', sans-serif; /* نوع الخط */
             line-height: 1.8; /* ارتفاع السطر */
@@ -62,14 +62,14 @@
             flex-direction: column; /* ترتيب العناصر كعمود */
         }
         
-        /* منع التمرير عند فتح القائمة -->
+        /* منع التمرير عند فتح القائمة */
         body.menu-open {
             overflow: hidden;
             position: fixed;
             width: 100%;
         }
         
-        /* ==================== الشريط العلوي المحسّن ==================== -->
+        /* ==================== الشريط العلوي المحسّن ==================== */
         .header {
             background: var(--glass-bg); /* خلفية شفافة */
             backdrop-filter: blur(10px); /* تأثير ضبابي */
@@ -84,14 +84,14 @@
             border-bottom: 1px solid rgba(255,255,255,0.15); /* حد سفلي */
         }
         
-        /* تنسيقات الهيدر عند التمرير -->
+        /* تنسيقات الهيدر عند التمرير */
         .header.scrolled {
             height: 60px; /* تصغير الارتفاع */
             box-shadow: 0 4px 25px rgba(0,0,0,0.2); /* ظل أعمق */
             background: var(--header-purple); /* لون خلفية غير شفاف */
         }
         
-        /* حاوية محتوى الهيدر -->
+        /* حاوية محتوى الهيدر */
         .header-container {
             max-width: 1200px; /* أقصى عرض */
             margin: 0 auto; /* توسيط أفقي */
@@ -102,7 +102,7 @@
             height: 100%;
         }
         
-        /* حاوية الشعار -->
+        /* حاوية الشعار */
         .logo-container {
             display: flex;
             align-items: center;
@@ -111,24 +111,24 @@
             margin-right: auto; /* دفع العناصر لليمين */
         }
         
-        /* تعديلات الشعار عند التمرير -->
+        /* تعديلات الشعار عند التمرير */
         .header.scrolled .logo-container {
             gap: 10px;
         }
         
-        /* تنسيقات الشعار -->
+        /* تنسيقات الشعار */
         .logo {
             height: 45px; /* ارتفاع الشعار */
             transition: transform 0.3s; /* تأثير تكبير */
             filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2)); /* ظل */
         }
         
-        /* تأثير عند المرور على الشعار -->
+        /* تأثير عند المرور على الشعار */
         .logo:hover {
             transform: scale(1.05); /* تكبير طفيف */
         }
         
-        /* ==================== أزرار التنقل المحسّنة ==================== -->
+        /* ==================== أزرار التنقل المحسّنة ==================== */
         .nav-buttons {
             display: flex;
             gap: 8px; /* مسافة بين الأزرار */
@@ -136,7 +136,7 @@
             height: 100%;
         }
         
-        /* تنسيقات زر التنقل -->
+        /* تنسيقات زر التنقل */
         .nav-btn {
             position: relative;
             display: inline-flex;
@@ -155,7 +155,7 @@
             cursor: pointer; /* شكل المؤشر */
         }
         
-        /* خط تحت الزر عند المرور -->
+        /* خط تحت الزر عند المرور */
         .nav-btn::after {
             content: '';
             position: absolute;
@@ -169,37 +169,37 @@
             opacity: 0; /* غير مرئي في البداية */
         }
         
-        /* تأثير عند المرور على الزر -->
+        /* تأثير عند المرور على الزر */
         .nav-btn:hover {
             color: white; /* تغيير لون النص */
         }
         
-        /* ظهور الخط عند المرور -->
+        /* ظهور الخط عند المرور */
         .nav-btn:hover::after {
             width: 100%; /* ملء عرض الزر */
             opacity: 1; /* إظهار الخط */
         }
         
-        /* تنسيقات الزر النشط -->
+        /* تنسيقات الزر النشط */
         .nav-btn.active {
             color: white;
             font-weight: 700;
         }
         
-        /* تنسيقات أيقونات الأزرار -->
+        /* تنسيقات أيقونات الأزرار */
         .nav-btn i {
             font-size: 18px;
             transition: transform 0.3s; /* تأثير حركة */
             color: var(--accent-color); /* اللون الأصفر */
         }
         
-        /* تأثير على الأيقونة عند المرور -->
+        /* تأثير على الأيقونة عند المرور */
         .nav-btn:hover i {
             transform: translateX(5px); /* حركة لليمين */
             color: white; /* تغيير اللون */
         }
         
-        /* مؤشر التنقل -->
+        /* مؤشر التنقل */
         .nav-indicator {
             position: absolute;
             bottom: 0;
@@ -211,7 +211,7 @@
             opacity: 0; /* مخفي في البداية */
         }
         
-        /* زر القائمة في الجوال -->
+        /* زر القائمة في الجوال */
         .hamburger {
             display: none; /* مخفي افتراضيًا */
             background: none;
@@ -233,13 +233,13 @@
             margin-left: auto; /* توسيط تلقائي */
         }
         
-        /* تأثير عند المرور على زر القائمة -->
+        /* تأثير عند المرور على زر القائمة */
         .hamburger:hover {
             background: rgba(255,255,255,0.25); /* خلفية أفتح */
             transform: scale(1.05); /* تكبير طفيف */
         }
         
-        /* ==================== قائمة الجوال المحسّنة ==================== -->
+        /* ==================== قائمة الجوال المحسّنة ==================== */
         .mobile-nav {
             position: fixed;
             top: var(--mobile-header-height);
@@ -259,19 +259,19 @@
             border-bottom-left-radius: 20px;
             border-left: 1px solid rgba(255,255,255,0.15); /* حد جانبي */
             
-            /* تمكين التمرير السلس على الجوال -->
+            /* تمكين التمرير السلس على الجوال */
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
         }
         
-        /* فتح القائمة -->
+        /* فتح القائمة */
         .mobile-nav.open {
             right: 0;
             position: fixed;
             overflow-y: auto;
         }
         
-        /* تنسيقات أزرار القائمة في الجوال -->
+        /* تنسيقات أزرار القائمة في الجوال */
         .mobile-nav .nav-btn {
             width: 100%;
             max-width: 300px;
@@ -286,40 +286,40 @@
             height: auto;
         }
         
-        /* تنسيقات أيقونات القائمة في الجوال -->
+        /* تنسيقات أيقونات القائمة في الجوال */
         .mobile-nav .nav-btn i {
             color: var(--accent-color);
         }
         
-        /* تأثير عند المرور على أزرار القائمة في الجوال -->
+        /* تأثير عند المرور على أزرار القائمة في الجوال */
         .mobile-nav .nav-btn:hover {
             transform: translateX(-8px); /* حركة لليسار */
             background: rgba(255,255,255,0.25); /* خلفية أفتح */
         }
         
-        /* شريط التمرير للقائمة المنسدلة -->
+        /* شريط التمرير للقائمة المنسدلة */
         .mobile-nav::-webkit-scrollbar {
             width: 8px; /* عرض شريط التمرير */
         }
         
-        /* مسار شريط التمرير -->
+        /* مسار شريط التمرير */
         .mobile-nav::-webkit-scrollbar-track {
             background: rgba(0,0,0,0.1); /* لون خلفية */
             border-radius: 4px; /* زوايا مدورة */
         }
         
-        /* مقبض شريط التمرير -->
+        /* مقبض شريط التمرير */
         .mobile-nav::-webkit-scrollbar-thumb {
             background: rgba(255,255,255,0.3); /* لون المقبض */
             border-radius: 4px; /* زوايا مدورة */
         }
         
-        /* تأثير عند المرور على مقبض التمرير -->
+        /* تأثير عند المرور على مقبض التمرير */
         .mobile-nav::-webkit-scrollbar-thumb:hover {
             background: rgba(255,255,255,0.5); /* لون أفتح */
         }
         
-        /* مؤشر التمرير في الأسفل -->
+        /* مؤشر التمرير في الأسفل */
         .scroll-indicator {
             position: fixed;
             bottom: 20px;
@@ -338,25 +338,25 @@
             transition: opacity 0.3s; /* تأثير ظهور */
         }
         
-        /* إظهار المؤشر عند فتح القائمة -->
+        /* إظهار المؤشر عند فتح القائمة */
         .mobile-nav.open .scroll-indicator {
             opacity: 1;
         }
         
-        /* تنسيقات أيقونة المؤشر -->
+        /* تنسيقات أيقونة المؤشر */
         .scroll-indicator i {
             color: white;
             font-size: 20px;
         }
         
-        /* حركة ارتداد للمؤشر -->
+        /* حركة ارتداد للمؤشر */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateX(50%) translateY(0);}
             40% {transform: translateX(50%) translateY(-15px);}
             60% {transform: translateX(50%) translateY(-7px);}
         }
         
-        /* تنسيقات الأزرار العامة -->
+        /* تنسيقات الأزرار العامة */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -375,27 +375,27 @@
             font-size: 17px;
         }
         
-        /* تأثير عند المرور على الزر -->
+        /* تأثير عند المرور على الزر */
         .btn:hover {
             background-color: #6A45B0; /* لون خلفية مختلف */
             transform: translateY(-2px); /* حركة للأعلى */
             box-shadow: 0 4px 15px rgba(0,0,0,0.15); /* ظل أعمق */
         }
         
-        /* تنسيقات الزر ذو الإطار -->
+        /* تنسيقات الزر ذو الإطار */
         .btn-outline {
             background-color: transparent; /* خلفية شفافة */
             color: white; /* لون النص */
             border: 2px solid white; /* حد أبيض */
         }
         
-        /* تأثير عند المرور على الزر ذو الإطار -->
+        /* تأثير عند المرور على الزر ذو الإطار */
         .btn-outline:hover {
             background-color: white; /* خلفية بيضاء */
             color: var(--primary-color); /* لون نص أرجواني */
         }
         
-        /* حاوية المحتوى الرئيسي -->
+        /* حاوية المحتوى الرئيسي */
         .container {
             max-width: 1000px; /* أقصى عرض */
             margin: 40px auto; /* توسيط أفقي */
@@ -403,7 +403,7 @@
             flex: 1; /* ملء المساحة المتاحة */
         }
         
-        /* تنسيقات بطاقة المقالة -->
+        /* تنسيقات بطاقة المقالة */
         .article-card {
             background-color: var(--article-beige); /* خلفية بيج فاتحة */
             border-radius: 20px; /* زوايا مدورة */
@@ -416,7 +416,7 @@
             overflow: hidden;
         }
         
-        /* خط ملون أعلى بطاقة المقالة -->
+        /* خط ملون أعلى بطاقة المقالة */
         .article-card::before {
             content: '';
             position: absolute;
@@ -427,7 +427,7 @@
             background: linear-gradient(to right, var(--primary-color), var(--accent-color)); /* تدرج لوني */
         }
         
-        /* تنسيقات رأس المقالة -->
+        /* تنسيقات رأس المقالة */
         .article-header {
             position: relative;
             padding-bottom: 25px; /* حشوة سفلية */
@@ -435,7 +435,7 @@
             text-align: center; /* توسيط النص */
         }
         
-        /* خط تحت رأس المقالة -->
+        /* خط تحت رأس المقالة */
         .article-header::after {
             content: '';
             position: absolute;
@@ -449,7 +449,7 @@
             border-radius: 3px; /* زوايا مدورة */
         }
         
-        /* تنسيقات العنوان الرئيسي -->
+        /* تنسيقات العنوان الرئيسي */
         h1 {
             color: var(--primary-color); /* لون أرجواني */
             font-size: 32px; /* حجم كبير */
@@ -460,7 +460,7 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* ظل للنص */
         }
         
-        /* تنسيقات تاريخ النشر -->
+        /* تنسيقات تاريخ النشر */
         .publish-date {
             display: flex;
             align-items: center;
@@ -470,12 +470,12 @@
             justify-content: center; /* توسيط أفقي */
         }
         
-        /* تنسيقات أيقونة التاريخ -->
+        /* تنسيقات أيقونة التاريخ */
         .date-icon {
             color: var(--primary-color); /* لون أرجواني */
         }
         
-        /* تنسيقات محتوى المقالة -->
+        /* تنسيقات محتوى المقالة */
         .article-content {
             font-size: 18px; /* حجم الخط */
             text-align: justify; /* محاذاة النص */
@@ -484,12 +484,12 @@
             margin: 0 auto; /* توسيط أفقي */
         }
         
-        /* تنسيقات الفقرات -->
+        /* تنسيقات الفقرات */
         .article-content p {
             margin-bottom: 25px; /* هامش سفلي بين الفقرات */
         }
         
-        /* تنسيقات الآيات والاقتباسات -->
+        /* تنسيقات الآيات والاقتباسات */
         .verse {
             color: var(--primary-color); /* لون أرجواني */
             font-weight: bold; /* نص عريض */
@@ -505,7 +505,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* ظل خفيف */
         }
         
-        /* تنسيقات عناوين الأقسام -->
+        /* تنسيقات عناوين الأقسام */
         .section-title {
             color: var(--primary-color); /* لون أرجواني */
             font-size: 26px; /* حجم كبير */
@@ -515,7 +515,7 @@
             font-weight: 600; /* سمك متوسط */
         }
         
-        /* خط تحت عنوان القسم -->
+        /* خط تحت عنوان القسم */
         .section-title::before {
             content: '';
             position: absolute;
@@ -527,20 +527,20 @@
             border-radius: 3px; /* زوايا مدورة */
         }
         
-        /* تنسيقات القوائم المرتبة وغير المرتبة -->
+        /* تنسيقات القوائم المرتبة وغير المرتبة */
         ol, ul {
             padding-right: 30px; /* حشوة يمينية */
             margin: 25px 0; /* هوامش */
         }
         
-        /* تنسيقات عناصر القائمة -->
+        /* تنسيقات عناصر القائمة */
         li {
             margin-bottom: 18px; /* هامش سفلي */
             position: relative;
             padding-right: 25px; /* حشوة يمينية */
         }
         
-        /* تنسيقات القوائم غير المرتبة -->
+        /* تنسيقات القوائم غير المرتبة */
         ul li::before {
             content: '•'; /* نقطة */
             color: var(--primary-color); /* لون أرجواني */
@@ -550,7 +550,7 @@
             font-size: 22px; /* حجم كبير */
         }
         
-        /* تنسيقات القوائم المرتبة -->
+        /* تنسيقات القوائم المرتبة */
         ol {
             counter-reset: section; /* إعادة تعيين العد */
         }
@@ -568,7 +568,7 @@
             font-size: 20px; /* حجم متوسط */
         }
         
-        /* تنسيقات قسم الخاتمة -->
+        /* تنسيقات قسم الخاتمة */
         .conclusion {
             background-color: var(--light-purple); /* خلفية أرجوانية فاتحة */
             padding: 30px; /* حشوة داخلية */
@@ -580,7 +580,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* ظل خفيف */
         }
         
-        /* خط أعلى الخاتمة -->
+        /* خط أعلى الخاتمة */
         .conclusion::before {
             content: '';
             position: absolute;
@@ -592,7 +592,7 @@
             border-radius: 3px; /* زوايا مدورة */
         }
         
-        /* تنسيقات أزرار المقالة (مشاركة، طباعة) -->
+        /* تنسيقات أزرار المقالة (مشاركة، طباعة) */
         .article-actions {
             display: flex;
             gap: 20px; /* مسافة بين الأزرار */
@@ -603,7 +603,7 @@
             justify-content: center; /* توسيط أفقي */
         }
         
-        /* تنسيقات زر المقالة -->
+        /* تنسيقات زر المقالة */
         .article-button {
             background: white; /* خلفية بيضاء */
             border: none;
@@ -621,7 +621,7 @@
             border: 1px solid var(--border-color); /* حد خفيف */
         }
         
-        /* تأثير عند المرور على زر المقالة -->
+        /* تأثير عند المرور على زر المقالة */
         .article-button:hover {
             transform: translateY(-5px); /* حركة للأعلى */
             box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* ظل أعمق */
@@ -629,12 +629,12 @@
             background-color: var(--primary-color); /* خلفية أرجوانية */
         }
         
-        /* حاوية زر المشاركة -->
+        /* حاوية زر المشاركة */
         .share-button-container {
             position: relative;
         }
         
-        /* قائمة مشاركة المقالة -->
+        /* قائمة مشاركة المقالة */
         .article-share-menu {
             position: absolute;
             bottom: calc(100% + 15px); /* فوق الزر */
@@ -651,7 +651,7 @@
             animation: slideIn 0.3s ease-out forwards; /* تأثير ظهور */
         }
         
-        /* عنوان قائمة المشاركة -->
+        /* عنوان قائمة المشاركة */
         .share-title {
             margin-bottom: 20px; /* هامش سفلي */
             color: var(--primary-color); /* لون أرجواني */
@@ -660,7 +660,7 @@
             font-size: 20px; /* حجم متوسط */
         }
         
-        /* منصة مشاركة الوسائط -->
+        /* منصة مشاركة الوسائط */
         .share-platforms {
             display: flex;
             justify-content: center; /* توسيط أفقي */
@@ -669,7 +669,7 @@
             margin-bottom: 20px; /* هامش سفلي */
         }
         
-        /* زر منصة المشاركة -->
+        /* زر منصة المشاركة */
         .share-platform {
             width: 50px;
             height: 50px;
@@ -683,18 +683,18 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.1); /* ظل خفيف */
         }
         
-        /* تأثير عند المرور على زر المشاركة -->
+        /* تأثير عند المرور على زر المشاركة */
         .share-platform:hover {
             transform: scale(1.15); /* تكبير */
             background-color: var(--primary-color) !important; /* خلفية أرجوانية */
         }
         
-        /* تغيير لون الأيقونة عند المرور -->
+        /* تغيير لون الأيقونة عند المرور */
         .share-platform:hover img {
             filter: brightness(0) invert(1); /* لون أبيض */
         }
         
-        /* زر نسخ الرابط -->
+        /* زر نسخ الرابط */
         .copy-link-btn {
             display: flex;
             align-items: center;
@@ -713,12 +713,12 @@
             cursor: pointer;
         }
         
-        /* تأثير عند المرور على زر نسخ الرابط -->
+        /* تأثير عند المرور على زر نسخ الرابط */
         .copy-link-btn:hover {
             background-color: var(--secondary-color); /* خلفية أرجوانية */
         }
         
-        /* تنسيقات صور منصات المشاركة -->
+        /* تنسيقات صور منصات المشاركة */
         .share-platform img {
             width: 26px;
             height: 26px;
@@ -726,14 +726,14 @@
             transition: filter 0.3s; /* تأثير تغيير اللون */
         }
         
-        /* تنسيقات صور أزرار المقالة -->
+        /* تنسيقات صور أزرار المقالة */
         .article-button img {
             width: 24px;
             height: 24px;
             object-fit: contain; /* احتواء الصورة */
         }
         
-        /* تنسيقات أمثلة الكود -->
+        /* تنسيقات أمثلة الكود */
         .example-block h4 {
             color: var(--primary-color); /* لون أرجواني */
             font-weight: 600; /* سمك متوسط */
@@ -741,7 +741,7 @@
             font-size: 20px; /* حجم متوسط */
         }
         
-        /* زر العودة للأعلى -->
+        /* زر العودة للأعلى */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -763,60 +763,60 @@
             transform: translateY(20px); /* مبدئيًا أسفل */
         }
         
-        /* إظهار زر العودة للأعلى -->
+        /* إظهار زر العودة للأعلى */
         .back-to-top.show {
             opacity: 1; /* مرئي */
             visibility: visible; /* ظاهر */
             transform: translateY(0); /* في مكانه */
         }
         
-        /* تأثير عند المرور على الزر -->
+        /* تأثير عند المرور على الزر */
         .back-to-top:hover {
             background: var(--accent-color); /* خلفية صفراء */
             transform: translateY(-5px); /* حركة للأعلى */
         }
         
-        /* تنسيقات أيقونة الزر -->
+        /* تنسيقات أيقونة الزر */
         .back-to-top i {
             font-size: 24px;
             transition: transform 0.3s; /* تأثير حركة */
         }
         
-        /* تأثير على الأيقونة عند المرور -->
+        /* تأثير على الأيقونة عند المرور */
         .back-to-top:hover i {
             transform: translateY(-3px); /* حركة للأعلى */
         }
         
-        /* ==================== تأثيرات حركية ==================== -->
-        /* تأثير ظهور تدريجي -->
+        /* ==================== تأثيرات حركية ==================== */
+        /* تأثير ظهور تدريجي */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* تأثير انزلاق من الأسفل -->
+        /* تأثير انزلاق من الأسفل */
         @keyframes slideIn {
             from { opacity: 0; transform: translate(-50%, 20px); }
             to { opacity: 1; transform: translate(-50%, 0); }
         }
         
-        /* تأثير اختفاء تدريجي -->
+        /* تأثير اختفاء تدريجي */
         @keyframes fadeOut {
             from { opacity: 1; transform: translate(-50%, 0); }
             to { opacity: 0; transform: translate(-50%, 20px); }
         }
         
-        /* تطبيق تأثير الظهور على بطاقة المقالة -->
+        /* تطبيق تأثير الظهور على بطاقة المقالة */
         .article-card {
             animation: fadeIn 0.7s ease-out forwards;
         }
         
-        /* تطبيق تأثير الانزلاق على قائمة المشاركة -->
+        /* تطبيق تأثير الانزلاق على قائمة المشاركة */
         .article-share-menu {
             animation: slideIn 0.3s ease-out forwards;
         }
         
-        /* تأثير الاختفاء عند إغلاق قائمة المشاركة -->
+        /* تأثير الاختفاء عند إغلاق قائمة المشاركة */
         .share-menu-closing {
             animation: fadeOut 0.2s ease-out forwards;
         }
@@ -900,21 +900,21 @@
             }
         }
         
-        /* ==================== طباعة ==================== -->
+        /* ==================== طباعة ==================== */
         @media print {
-            /* إخفاء العناصر غير المرغوب فيها عند الطباعة -->
+            /* إخفاء العناصر غير المرغوب فيها عند الطباعة */
             .header, .article-actions, .back-btn, .back-to-top, .font-controls {
                 display: none;
             }
             
-            /* تنسيقات الطباعة -->
+            /* تنسيقات الطباعة */
             body {
                 background: none; /* إزالة الخلفية */
                 color: #000; /* لون أسود */
                 padding-top: 0; /* إزالة الحشوة العلوية */
             }
             
-            /* تنسيقات بطاقة المقالة للطباعة -->
+            /* تنسيقات بطاقة المقالة للطباعة */
             .article-card {
                 box-shadow: none; /* إزالة الظل */
                 padding: 0; /* إزالة الحشوة */
@@ -923,7 +923,7 @@
                 border-radius: 0; /* إزالة الزوايا المدورة */
             }
             
-            /* تنسيقات الآيات للطباعة -->
+            /* تنسيقات الآيات للطباعة */
             .verse {
                 background: none; /* إزالة الخلفية */
                 border-right: none; /* إزالة الحد */
@@ -931,21 +931,21 @@
             }
         }
         
-        /* تنسيقات النص المميز -->
+        /* تنسيقات النص المميز */
         .highlight {
             background-color: rgba(255, 193, 7, 0.2); /* خلفية صفراء شفافة */
             padding: 2px 5px; /* حشوة داخلية */
             border-radius: 4px; /* زوايا مدورة */
         }
         
-        /* تنسيقات الملاحظات المميزة -->
+        /* تنسيقات الملاحظات المميزة */
         .note-highlight {
             color: red; /* لون أحمر */
             font-weight: bold; /* عريض */
         }
         
-        /* ==================== وسائط متجاوبة ==================== -->
-        /* شاشات متوسطة الحجم (992px) -->
+        /* ==================== وسائط متجاوبة ==================== */
+        /* شاشات متوسطة الحجم (992px) */
         @media (max-width: 992px) {
             .header-container {
                 padding: 0 15px; /* تقليل الحشوة */
@@ -978,7 +978,7 @@
             }
         }
         
-        /* شاشات صغيرة (768px) -->
+        /* شاشات صغيرة (768px) */
         @media (max-width: 768px) {
             .nav-buttons {
                 display: none; /* إخفاء أزرار التنقل */
@@ -1036,7 +1036,7 @@
                 height: 22px;
             }
             
-            /* زر العودة للأعلى في الجوال -->
+            /* زر العودة للأعلى في الجوال */
             .back-to-top {
                 width: 50px; /* تصغير حجم الزر */
                 height: 50px;
@@ -1048,7 +1048,7 @@
                 font-size: 20px; /* تصغير حجم الأيقونة */
             }
             
-            /* توسيط الشعار في الهيدر -->
+            /* توسيط الشعار في الهيدر */
             .logo-container {
                 position: absolute;
                 left: 50%;
@@ -1064,12 +1064,12 @@
                 z-index: 1001; /* فوق الشعار */
             }
             
-            /* تحريك زر القائمة لليسار -->
+            /* تحريك زر القائمة لليسار */
             .header-container {
                 justify-content: flex-start; /* توسيط لليسار */
             }
             
-            /* تعديلات القائمة المنسدلة -->
+            /* تعديلات القائمة المنسدلة */
             .mobile-nav {
                 padding: 15px 12px 100px; /* تقليل الحشوة */
             }
@@ -1081,14 +1081,14 @@
             }
         }
         
-        /* إخفاء زر القائمة في الشاشات الكبيرة -->
+        /* إخفاء زر القائمة في الشاشات الكبيرة */
         @media (min-width: 769px) {
             .hamburger {
                 display: none !important;
             }
         }
         
-        /* شاشات صغيرة جدًا (576px) -->
+        /* شاشات صغيرة جدًا (576px) */
         @media (max-width: 576px) {
             .header {
                 height: 65px; /* تصغير ارتفاع الهيدر */
@@ -1129,7 +1129,7 @@
                 height: 20px;
             }
             
-            /* زر العودة للأعلى في الجوال الصغير -->
+            /* زر العودة للأعلى في الجوال الصغير */
             .back-to-top {
                 width: 45px; /* تصغير حجم الزر */
                 height: 45px;
@@ -1141,7 +1141,7 @@
                 font-size: 18px; /* تصغير حجم الأيقونة */
             }
             
-            /* تحسين لوحة المشاركة -->
+            /* تحسين لوحة المشاركة */
             .article-share-menu {
                 width: 92vw; /* عرض نسبي */
                 max-width: 300px; /* أقصى عرض */
@@ -1164,7 +1164,7 @@
                 scrollbar-width: none; /* إخفاء شريط التمرير */
             }
             
-            /* إخفاء شريط التمرير في متصفحات الويب كيت -->
+            /* إخفاء شريط التمرير في متصفحات الويب كيت */
             .share-platforms::-webkit-scrollbar {
                 display: none;
             }
@@ -1198,7 +1198,7 @@
             }
         }
         
-        /* شاشات صغيرة جدًا (400px) -->
+        /* شاشات صغيرة جدًا (400px) */
         @media (max-width: 400px) {
             .header {
                 height: 60px; /* تصغير ارتفاع الهيدر */
@@ -1243,7 +1243,7 @@
             }
         }
         
-        /* تنسيقات رابط الفيديو -->
+        /* تنسيقات رابط الفيديو */
         .video-link {
             display: inline-block;
             padding: 12px 25px;
@@ -1261,7 +1261,7 @@
             animation: glow 3s infinite; /* تأثير توهج */
         }
         
-        /* طبقة شفافة فوق الزر -->
+        /* طبقة شفافة فوق الزر */
         .video-link::before {
             content: '';
             position: absolute;
@@ -1274,7 +1274,7 @@
             border-radius: 50px; /* زوايا مدورة */
         }
         
-        /* تأثير عند المرور على الزر -->
+        /* تأثير عند المرور على الزر */
         .video-link:hover {
             transform: translateY(-5px); /* حركة للأعلى */
             box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* ظل أعمق */
@@ -1282,42 +1282,42 @@
             animation: pulse 1.5s infinite; /* تأثير نبض */
         }
         
-        /* تنسيقات أيقونة الزر -->
+        /* تنسيقات أيقونة الزر */
         .video-link i {
             margin-left: 10px; /* هامش يساري */
             transition: transform 0.5s ease; /* تأثير دوران */
         }
         
-        /* تأثير على الأيقونة عند المرور -->
+        /* تأثير على الأيقونة عند المرور */
         .video-link:hover i {
             transform: rotate(10deg); /* دوران طفيف */
         }
         
-        /* تأثير النبض -->
+        /* تأثير النبض */
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
         
-        /* تأثير التوهج -->
+        /* تأثير التوهج */
         @keyframes glow {
             0% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
             50% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.9); }
             100% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
         }
         
-        /* زر اليوتيوب في القائمة -->
+        /* زر اليوتيوب في القائمة */
         .youtube-btn {
             background: rgba(255, 0, 0, 0.15) !important; /* خلفية حمراء شفافة */
         }
         
-        /* تأثير عند المرور على زر اليوتيوب -->
+        /* تأثير عند المرور على زر اليوتيوب */
         .youtube-btn:hover {
             background: rgba(255, 0, 0, 0.3) !important; /* خلفية حمراء أفتح */
         }
         
-        /* ================ أنماط الفوتر ================ -->
+        /* ================ أنماط الفوتر ================ */
         footer {
           text-align: center; /* توسيط النص */
           padding: 18px; /* حشوة */
@@ -1329,7 +1329,7 @@
           box-sizing: border-box; /* تضمين الحشوة في العرض */
         }
 
-        /* روابط التواصل الاجتماعي -->
+        /* روابط التواصل الاجتماعي */
         .social-links {
           display: flex;
           justify-content: center; /* توسيط أفقي */
@@ -1338,7 +1338,7 @@
           flex-wrap: wrap; /* التفاف عند الضرورة */
         }
 
-        /* تنسيقات روابط التواصل -->
+        /* تنسيقات روابط التواصل */
         .social-links a {
           color: white; /* لون النص */
           font-size: 0.9em; /* حجم الخط */
@@ -1354,13 +1354,13 @@
           border: none !important; /* إزالة الحدود */
         }
 
-        /* تأثير عند المرور على روابط التواصل -->
+        /* تأثير عند المرور على روابط التواصل */
         .social-links a:hover {
           color: white; /* لون النص */
           transform: scale(1.1); /* تكبير طفيف */
         }
         
-        /* ألوان خاصة بكل منصة -->
+        /* ألوان خاصة بكل منصة */
         .social-links a.facebook:hover { background: #1877F2; } /* فيسبوك */
         .social-links a.instagram:hover { background: #E4405F; } /* إنستجرام */
         .social-links a.youtube:hover { background: #FF0000; } /* يوتيوب */
@@ -1368,7 +1368,7 @@
         .social-links a.snapchat:hover { background: #FFFC00; color: #000; } /* سناب شات */
         .social-links a.telegram:hover { background: #2AABEE; } /* تلغرام */
 
-        /* حقوق النشر -->
+        /* حقوق النشر */
         .copyright {
           margin-top: 10px; /* هامش علوي */
           padding-top: 10px; /* حشوة علوية */
