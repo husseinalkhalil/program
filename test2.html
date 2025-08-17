@@ -919,12 +919,13 @@
 #pagination-wrapper {
     position: relative;
     text-align: center;
-    margin: 40px 0;
+    margin: 40px auto;
     padding: 15px;
     background: #f8f3ff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(94, 44, 165, 0.1);
     border-top: 3px solid #6a4c93;
+    max-width: 900px;
 }
 
 #pageInfo {
@@ -1453,7 +1454,13 @@
 </div>
 </div>
 
-<!-- تم نقل شريط التحكم بالصفحات إلى هنا (أسفل المقالات) -->
+<!-- تم نقل شريط التحكم بالصفحات إلى أسفل الصفحة فوق الفوتر -->
+<div id="message"></div>
+<!-- زر العودة للأعلى -->
+<button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
+</div> <!-- نهاية .container -->
+
+<!-- شريط التحكم بالصفحات (تم نقله إلى هنا) -->
 <div id="pagination-wrapper">
 <div id="pageInfo" style="font-weight:bold; color:#5e2ca5; margin-bottom:10px;">
         الصفحة 1 من ? - إجمالي المقالات: ?
@@ -1464,11 +1471,6 @@
 <button id="nextPage" onclick="nextPage()">التالي »</button>
 </div>
 </div>
-
-<div id="message"></div>
-<!-- زر العودة للأعلى -->
-<button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
-</div> <!-- نهاية .container -->
 
 <!-- التذييل من الكود الأول -->
 <footer>
