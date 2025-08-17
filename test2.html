@@ -7,7 +7,7 @@
 <title>المقالات</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 <!-- إضافة كود AdSense هنا -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndicate.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
 <style>
     /* إصلاح عام لمنع التجاوز الأفقي */
     * {
@@ -1494,6 +1494,9 @@
 
       document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline-block' : 'none';
       document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline-block' : 'none';
+      
+      // التمرير إلى أعلى الصفحة عند تغيير الصفحة
+      document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
     }
 
     function nextPage() {
