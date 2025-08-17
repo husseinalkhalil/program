@@ -1520,6 +1520,7 @@
             </div>
             
             <!-- محتوى المقالة -->
+            <div class="article-content">
                 <p>يكاد جميع المسلمين (إلّا من رحم الله) قد يكون مقتنعاً أن كلمة <strong> "الأعراب" </strong> تعني العرب، أي القومية العربية، وعلى وجه الخصوص أهل البادية أو البدو.</p>
                 <p>وعلى هذا يتم الانتقاص من أهل البادية باعتبارهم منافقين بدليل القرآن!</p>
                 <p>لكن في حقيقة الأمر أن كلمة الأعراب في كتاب الله لا تعني العرب أو البدو، والكلمة لا تتحدث عن قوميات.</p>
@@ -1543,13 +1544,12 @@
                 <p>كلمة "الأعراب" في القرآن الكريم لا تعني العرب أو البدو، بل تشير إلى الفئة المعرضة عن الحق والمتمسكة بالضلال.</p>
                 <p>يجب علينا تصحيح هذا الفهم الخاطئ الذي أدى إلى تمييز وظلم ضد أهل البادية، والتمسك بالمنهج القرآني الذي يرفض التعميم والتنميط.</p>
                 <p>الله سبحانه وتعالى أنزل القرآن بلسان عربي مبين، وأمرنا بالتدبر في آياته، وليس بالتعصب لتفاسير قد تكون بعيدة عن المعنى الحقيقي الذي قصده الله في كتابه الكريم.</p>
-                
+            </div>
+            
             <!-- فاصل زخرفي -->
             <div style="text-align: center; margin-top: 40px;">
                 <span style="font-size: 24px; color: #5e2ca5;">✦ ✦ ✦</span>
-            
-
-                </div>
+            </div>
             
             <!-- أزرار المقالة (طباعة، مشاركة) -->
             <div class="article-actions">
@@ -1816,8 +1816,8 @@
         let originalFontSize, originalDateSize;
         
         let currentScale = 1;
-        const minScale = 0.5;
-        const maxScale = 4;
+        const minScale = 0.8; // تصغير أقل
+        const maxScale = 1.5; // تكبير أكثر
         
         function applyFontScale() {
             articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
@@ -1825,12 +1825,12 @@
         }
         
         fontDecrease.addEventListener('click', () => {
-            currentScale = Math.max(minScale, currentScale / 1.2);
+            currentScale = Math.max(minScale, currentScale - 0.1);
             applyFontScale();
         });
         
         fontIncrease.addEventListener('click', () => {
-            currentScale = Math.min(maxScale, currentScale * 1.2);
+            currentScale = Math.min(maxScale, currentScale + 0.1);
             applyFontScale();
         });
         
@@ -1840,9 +1840,11 @@
         });
         
         document.addEventListener('DOMContentLoaded', () => {
+            // الحصول على حجم الخط الأصلي
             originalFontSize = parseFloat(getComputedStyle(articleContent).fontSize);
             originalDateSize = parseFloat(getComputedStyle(publishDate).fontSize);
             
+            // تحديد موقع عناصر التحكم بالخط
             const rootStyles = getComputedStyle(document.documentElement);
             const varFontControlTop = rootStyles.getPropertyValue('--font-control-top');
             const varFontControlBottom = rootStyles.getPropertyValue('--font-control-bottom');
