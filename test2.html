@@ -20,6 +20,7 @@
       width: 100%;
       overflow-x: hidden;
       position: relative;
+      min-height: 100vh;
     }
     
     /* أنماط الشريط العلوي من الكود الأول */
@@ -774,6 +775,8 @@
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
       -webkit-overflow-scrolling: touch; /* تمكين التمرير السلس على iOS */
+      display: flex;
+      flex-direction: column;
     }
 
     @keyframes gradientBG {
@@ -789,6 +792,7 @@
       text-align: center;
       padding-top: 100px;
       overflow: hidden;
+      flex: 1;
     }
 
     h1 {
@@ -1279,7 +1283,7 @@
 <div class="article-actions">
 <button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ وهم الحقيقة المطلقة.')">
           ⭐
-        </button>>
+        </button>
 </div>
 </div>
 <div class="article" id="article-12">
@@ -1392,6 +1396,8 @@
         </button>
 </div>
 </div>
+
+<!-- أزرار التحكم بالصفحات -->
 <div id="pagination-wrapper" style="text-align:center; margin: 40px 0;">
 <div id="pageInfo" style="font-weight:bold; color:#5e2ca5; margin-bottom:10px;">
         الصفحة 1 من ? - إجمالي المقالات: ?
@@ -1402,6 +1408,27 @@
 <button id="nextPage" onclick="nextPage()" style="background-color:#a88ee6; border:none; color:white; padding:8px 14px; border-radius:8px; cursor:pointer;">التالي »</button>
 </div>
 </div>
+
+<div id="message"></div>
+<!-- زر العودة للأعلى -->
+<button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
+</div> <!-- نهاية .container -->
+
+<!-- التذييل من الكود الأول -->
+<footer>
+<div class="social-links">
+<a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+<a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&amp;utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+<a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
+<a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+<a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
+<a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
+</div>
+<div class="copyright">
+      حسين الخليل - جميع الحقوق محفوظة © 2025
+    </div>
+</footer>
+
 <script>
     // تغيير عدد المقالات في الصفحة إلى 10
     const articlesPerPage = 10;
@@ -1428,7 +1455,6 @@
       if (currentPage < totalPages) {
         currentPage++;
         paginateArticles();
-        // إزالة التمرير للأعلى لمنع فتح المقالة الأولى
       }
     }
 
@@ -1436,14 +1462,12 @@
       if (currentPage > 1) {
         currentPage--;
         paginateArticles();
-        // إزالة التمرير للأعلى لمنع فتح المقالة الأولى
       }
     }
 
     function goToFirstPage() {
       currentPage = 1;
       paginateArticles();
-      // إزالة التمرير للأعلى لمنع فتح المقالة الأولى
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -1458,25 +1482,7 @@
         });
       }
     });
-    </script>
-<div id="message"></div>
-<!-- زر العودة للأعلى -->
-<button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
-<!-- التذييل من الكود الأول -->
-<footer>
-<div class="social-links">
-<a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-<a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&amp;utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
-<a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
-<a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
-<a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
-<a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
-</div>
-<div class="copyright">
-      حسين الخليل - جميع الحقوق محفوظة © 2025
-    </div>
-</footer>
-<script>
+
     // وظائف الشريط العلوي من الكود الأول
     function toggleMobileMenu() {
       const menu = document.querySelector(".nav-links");
