@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تأثير وميض النقطة المضيئة</title>
+    <title>تأثير وميض النقطة المضيئة على الحواف</title>
     <style>
         * {
             box-sizing: border-box;
@@ -238,12 +238,12 @@
             background: #ff3366;
             box-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366;
             z-index: 4;
-            animation: dotMove 5s linear infinite;
+            animation: dotMove 5s linear infinite paused;
             pointer-events: none;
         }
         
         .book-tab:hover .dot-effect {
-            animation: dotMove 5s linear infinite;
+            animation-play-state: running;
         }
         
         @keyframes dotMove {
