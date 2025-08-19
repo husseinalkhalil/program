@@ -2,28 +2,139 @@
 <html dir="rtl" lang="ar">
 <head>
 <meta charset="utf-8"/>
-<!-- إصلاح إعدادات viewport لمنع الميل والزوم غير المرغوب فيه -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>المقالات</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-<!-- إضافة كود AdSense هنا -->
-<script async src="https://pagead2.googlesyndicate.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>حسين الخليل - الموقع الرسمي</title>
+<!-- Favicon إعدادات -->
+<link href="images/logo-small.png" rel="icon" type="image/png"/>
+<link href="images/logo-small.png" rel="apple-touch-icon"/>
+<!-- Schema.org بيانات للباحث -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "حسين الخليل",
+    "url": "https://www.husseinalkhalil.com",
+    "sameAs": [
+      "https://youtube.com/@husseinalkhalil",
+      "https://www.facebook.com/share/1AfcTRqi7c/?mibextid=wwXIfr",
+      "https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr",
+      "https://www.tiktok.com/@h.alkhalil?_t=ZS-8wDY80w1Esj&_r=1",
+      "https://t.me/tanoeer"
+    ]
+  }
+</script>
+  </script>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546"></script>
 <style>
-    /* إصلاح عام لمنع التجاوز الأفقي */
-    * {
-      box-sizing: border-box;
-      max-width: 100%;
-      text-decoration: none !important; /* إزالة الخطوط تحت جميع العناصر */
-    }
-    
-    html, body {
-      width: 100%;
-      overflow-x: hidden;
+    /* أنماط البحث المحسنة - التعديلات الجديدة */
+    .universal-search {
+      max-width: 600px; /* الحجم الأقصى لنسخة الكمبيوتر */
+      margin: 20px auto;
       position: relative;
-      min-height: 100vh;
+      padding: 0 15px;
+      width: 100%; /* عرض كامل في نسخة الكمبيوتر */
+      box-sizing: border-box; /* تضمن حساب الحشو بشكل صحيح */
     }
-    
-    /* أنماط الشريط العلوي من الكود الأول */
+
+    #globalSearch {
+      width: 100%;
+      padding: 12px 45px 12px 20px;
+      border: 2px solid #5e2ca5;
+      border-radius: 30px;
+      font-size: 16px;
+      background: #f8f3ff;
+      color: #2e0854;
+      direction: rtl;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-sizing: border-box; /* تضمن حساب الحشو بشكل صحيح */
+    }
+
+    .search-results {
+      position: absolute;
+      width: 100%;
+      background: #f3e9ff;
+      border: 1px solid #d9c7ff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(94, 44, 165, 0.15);
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+      margin-top: 10px;
+    }
+
+    .search-item {
+      padding: 15px;
+      border-bottom: 1px solid #e6d9ff;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: right;
+      background-color: #f3e9ff;
+    }
+
+    .search-item:hover {
+      background-color: #e9dcff !important;
+      transform: translateX(-5px);
+    }
+
+    .search-item h3 {
+      color: #5e2ca5;
+      margin: 0 0 8px 0;
+      font-size: 1.1em;
+    }
+
+    .search-item p {
+      color: #555;
+      margin: 8px 0;
+      line-height: 1.6;
+    }
+
+    .search-item small {
+      color: #888;
+      font-size: 0.8em;
+      display: block;
+      margin-top: 8px;
+    }
+
+    mark {
+      background-color: #ffeb3b;
+      color: #000;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .universal-search {
+        max-width: 100%; /* السماح بالتمدد الكامل في الجوال */
+        padding: 0 10px;
+        margin: 15px auto;
+        width: 95%;
+      }
+      
+      #globalSearch {
+        font-size: 16px;
+        padding: 12px 45px 12px 20px;
+      }
+      
+      .search-results {
+        max-height: 60vh;
+      }
+      
+      .search-item {
+        padding: 12px;
+      }
+    }
+
+    /* بقية الأنماط الأصلية */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5efff;
+      margin: 0;
+      padding: 0;
+      color: #2f003f;
+      overflow-x: hidden;
+    }
+
     .nav-overlay {
       position: fixed;
       top: 0;
@@ -33,34 +144,30 @@
       background: rgba(0,0,0,0.7);
       z-index: 998;
       display: none;
-      backdrop-filter: blur(5px);
     }
 
+    /* التعديلات الجديدة على شريط التنقل */
     nav {
-      background: linear-gradient(135deg, #6a4c93, #5e2ca5);
-      padding: 0.6em 5%;
-      position: fixed;
-      width: 100%;
-      top: 0;
+      background-color: #5e2ca5;
+      padding: 0.8em 5%;
+      position: relative;
       z-index: 1000;
       display: flex;
       align-items: center;
-      gap: 25px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      box-shadow: 0 4px 15px rgba(94, 44, 165, 0.2);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      justify-content: space-between;
     }
 
     .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      padding: 5px 0;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      margin: 0 auto;
+      padding: 5px 0;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
 
     .nav-links::-webkit-scrollbar {
@@ -71,547 +178,69 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
-      font-size: 0.85em;
+      font-size: 0.95em;
       white-space: nowrap;
-      padding: 6px 12px;
-      border-radius: 30px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    nav a:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
     }
 
     .logo-container {
-      margin-right: auto;
-      margin-left: 0;
+      margin-left: auto;
+      margin-right: 0;
     }
 
     .logo-container img {
-      height: 40px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      height: 45px;
+      transition: all 0.3s ease-in-out;
       transform-origin: center;
       cursor: pointer;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
     }
 
     .logo-container img:hover {
-      transform: scale(1.1) rotate(5deg);
-      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
     }
 
     .hamburger {
       display: none;
       color: white;
       cursor: pointer;
-      font-size: 1.3em;
-      padding: 6px;
-      border-radius: 5px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-size: 1.5em;
+      margin-left: 15px;
     }
 
-    .hamburger:hover {
-      background: rgba(255, 255, 255, 0.15);
+    .mobile-email:hover img {
+      transform: scale(1.1);
     }
 
-    @media (min-width: 1400px) {
-      .nav-links a {
-        position: relative;
-      }
-
-      .nav-links a::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 0;
-        height: 2px;
-        background: #ffd166;
-        transition: width 0.3s ease;
-      }
-
-      .nav-links a:hover::after {
-        width: 100%;
-      }
-
-      .logo-container {
-        order: -1;
-        margin-right: 30px;
-      }
-    }
-
-    @media (max-width: 767px) {
-      nav {
-        padding: 0.6em 3%;
-        justify-content: space-between;
-      }
-
-      .hamburger {
-        display: block;
-        order: -1;
-      }
-
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 60px;
-        right: 15px;
-        background: #5e2ca5;
-        width: 230px;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(94, 44, 165, 0.15);
-        flex-direction: column;
-        padding: 1.2em;
-        z-index: 999;
-        left: auto;
-        transform: none;
-        animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        max-height: 80vh;
-        overflow-y: auto;
-        padding-bottom: 10px;
-      }
-
-      .nav-links.show {
-        display: flex;
-      }
-
-      .nav-links a {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        margin: 4px 0;
-        font-size: 0.9em;
-      }
-
-      .logo-container {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        margin: 0;
-      }
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(-20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    /* أنماط أزرار المقالات */
-    .article-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-
-    .article-button {
-      background-color: #b08cf2;
-      color: white;
-      padding: 8px 15px;
-      border: 2px solid #dcc7fc;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
-      position: relative;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      text-decoration: none !important; /* إزالة الخط تحت الأيقونة */
-    }
-
-    .article-button:hover {
-      transform: scale(1.07);
-      background-color: #9d7ae8;
-    }
-
-    .article-button.active {
-      background-color: #4b0082;
-      border-color: #4b0082;
-    }
-
-    .article-button:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 125%;
-      right: 50%;
-      transform: translateX(50%);
-      background-color: #7b3fcf;
-      color: #e8d7ff;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 0.85em;
-      white-space: nowrap;
-      pointer-events: none;
-      z-index: 10;
-      min-width: 120px;
-      text-align: center;
-    }
-
-    /* أنماط قائمة المشاركة للمقالات */
-    .article-share-menu {
-      display: none;
-      position: absolute;
-      bottom: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #f8f3ff;
-      border: 1px solid #e6daff;
-      border-radius: 12px;
-      padding: 15px;
-      width: 180px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      z-index: 10;
-    }
-
-    .article-share-menu a img {
-      transition: transform 0.2s ease;
-    }
-
-    .article-share-menu a:hover img {
-      transform: scale(1.15);
-    }
-
-    .share-button-container {
-      position: relative;
-    }
-
-    /* تغيير لون أيقونة المشاركة فقط إلى اللون الوردي */
-    .share-button-container .article-button img {
-      filter: hue-rotate(300deg) saturate(2) brightness(0.9);
-    }
-
-    /* رسائل التنبيه */
-    #message {
+    /* أنماط زر المشاركة المعدلة */
+    .share-button {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #7b3fcf;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 15px;
-      display: none;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      max-width: 90%;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .copy-alert {
-      position: fixed;
-      top: 100px;
-      left: 30%;
-      transform: translateX(-50%);
-      background-color: #c29eea;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      font-weight: bold;
-      font-size: 1em;
-      z-index: 9999;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .copy-alert.show {
-      opacity: 1;
-    }
-
-    /* زر العودة لجميع المقالات */
-    .back-to-all {
-      margin: 20px auto;
-      display: block;
-      padding: 10px 20px;
-      background-color: #5e2ca5;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: all 0.3s ease;
-    }
-
-    .back-to-all:hover {
-      background-color: #4a208f;
-      transform: translateY(-2px);
-    }
-
-    /* تمييز الكلمات التي تم البحث عنها - لون أغمق */
-    .highlight {
-      background-color: #d9c4ff;
-      padding: 2px 4px;
-      border-radius: 3px;
-      color: #4a208f;
-      font-weight: bold;
-    }
-
-    /* زر العودة للأعلى */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
+      top: 20px;
       left: 30px;
-      width: 50px;
-      height: 50px;
-      background-color: #5e2ca5;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
+      z-index: 1001;
+    }
+
+    .share-button img {
+      width: 35px;
+      height: 35px;
       cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 999;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .back-to-top:hover {
-      background-color: #4a208f;
-      transform: translateY(-3px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    /* تحسينات لعرض المقالات في الجوال */
-    @media (max-width: 767px) {
-      .highlight {
-        background-color: #d9c4ff;
-        padding: 2px 3px;
-        border-radius: 2px;
-      }
-      
-      /* تحسينات لعرض المقالات في الجوال */
-      .article p {
-        max-height: 6em;
-        -webkit-line-clamp: 4;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        transition: max-height 0.5s ease, -webkit-line-clamp 0.5s ease;
-      }
-      
-      .article.expanded p {
-        max-height: none;
-        -webkit-line-clamp: unset;
-        display: block;
-      }
-      
-      .article.expanded img {
-        max-width: 100%;
-        height: auto;
-      }
-
-      /* تعديلات زر العودة للأعلى للجوال */
-      .back-to-top {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-        bottom: 20px;
-        left: 20px;
-      }
-    }
-
-    /* رسالة عدم وجود نتائج بحث */
-    .no-results {
-      text-align: center;
-      padding: 30px;
-      font-size: 1.2em;
-      color: #5e2ca5;
-      display: none;
-    }
-
-    /* أنماط مربع البحث الجديد - من الكود الأول */
-    .section-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .section-header h1 {
-      color: #5e2ca5;
-      font-size: 2.2em;
-      margin-bottom: 15px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .section-header p {
-      color: #4a208f;
-      font-size: 1.1em;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .search-container {
-      max-width: 600px;
-      margin: 0 auto 30px;
-      position: relative;
-    }
-
-    .search-box {
-      width: 100%;
-      padding: 15px 50px 15px 20px;
-      border: 2px solid #6a4c93;
-      border-radius: 50px;
-      font-size: 1.1em;
-      box-shadow: 0 5px 15px rgba(94, 44, 165, 0.1);
+      filter: hue-rotate(40deg) saturate(0.6) brightness(1.4);
       transition: all 0.3s ease;
     }
 
-    .search-box:focus {
-      outline: none;
-      border-color: #ffd166;
-      box-shadow: 0 5px 20px rgba(94, 44, 165, 0.2);
+    .share-button img:hover {
+      transform: scale(1.2);
+      animation: pulse 1s infinite;
     }
 
-    .search-icon {
-      position: absolute;
-      top: 50%;
-      left: 20px;
-      transform: translateY(-50%);
-      color: #6a4c93;
-      font-size: 1.2em;
-    }
-
-    .search-results-info {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 1.1em;
-      color: #5e2ca5;
-      display: none;
-    }
-    
-    /* تحسينات خاصة بالجوال لمنع الميلان */
-    @media (max-width: 767px) {
-      .section-header {
-        margin-bottom: 25px;
-        padding: 0 15px;
+    @keyframes pulse {
+      0% {
+        opacity: 1;
       }
-      
-      .section-header h1 {
-        font-size: 1.6em;
-        padding-bottom: 8px;
+      50% {
+        opacity: 0.7;
       }
-      
-      .section-header h1::after {
-        height: 3px;
-        width: 60px;
-      }
-      
-      .section-header p {
-        font-size: 0.95em;
-      }
-      
-      .search-container {
-        width: 95%;
-        margin: 0 auto 20px;
-      }
-      
-      .search-box {
-        padding: 10px 40px 10px 15px;
-        font-size: 0.95em;
-      }
-      
-      .search-icon {
-        left: 15px;
-        font-size: 1em;
-      }
-      
-      .search-results-info {
-        font-size: 0.95em;
-      }
-      
-      .container {
-        padding: 1em;
-        padding-top: 85px;
-        width: 100%;
-        max-width: 100%;
-      }
-      
-      .article {
-        padding: 1.2em;
-        margin-bottom: 1.2em;
-        width: 100%;
-        overflow: hidden;
-      }
-      
-      .article h2 {
-        font-size: 1.1em;
-      }
-      
-      .article p {
-        font-size: 0.95em;
-        line-height: 1.7;
-        word-wrap: break-word;
-      }
-      
-      .article-button {
-        padding: 7px 12px;
-        font-size: 13px;
-      }
-      
-      .publish-date {
-        font-size: 0.85em;
-        padding: 4px 8px;
-      }
-      
-      .creative-text {
-        font-size: 1.8em;
-        margin-bottom: 0.8em;
-        white-space: normal;
-      }
-      
-      .intro {
-        font-size: 1em;
-        margin-bottom: 1.5em;
-        padding: 0 10px;
-      }
-      
-      #pagination-wrapper {
-        margin: 25px 0;
-      }
-      
-      #pageInfo {
-        font-size: 0.9em;
-        margin-bottom: 8px;
-      }
-      
-      #prevPage, #nextPage, #firstPage {
-        padding: 6px 12px;
-        font-size: 0.9em;
-      }
-      
-      /* إصلاحات لمنع التجاوز الأفقي */
-      .article-actions {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .podcasts-grid, .podcasts-section {
-        width: 100%;
-        max-width: 100%;
-      }
-      
-      .nav-links {
-        width: 95%;
-      }
-      
-      /* إصلاحات لمنع التكبير التلقائي */
-      input, textarea, select {
-        font-size: 16px !important;
+      100% {
+        opacity: 1;
       }
     }
 
@@ -642,19 +271,48 @@
         width: 100%;
       }
 
-      .logo-container {
-        order: -1;
-        margin-right: 40px;
+      .tooltip-text {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        background: #a98efa;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 6px;
+        font-size: 0.9em;
+        transition: opacity 0.3s ease;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       }
 
-      .hamburger {
-        display: none !important;
+      .share-button:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      #share-menu {
+        background: #f8f3ff !important;
+        border: 1px solid #e6daff !important;
+        border-radius: 12px !important;
+        padding: 15px !important;
+        gap: 12px !important;
+      }
+
+      #share-menu a img {
+        transition: transform 0.2s ease;
+      }
+
+      #share-menu a:hover img {
+        transform: scale(1.15);
       }
     }
 
     @media (max-width: 767px) {
       nav {
-        padding: 0.6em 3%;
+        padding: 0.8em 15px;
         justify-content: space-between;
       }
 
@@ -663,23 +321,41 @@
         order: -1;
       }
 
+      /* التعديل هنا: تغيير اتجاه القائمة المنسدلة إلى عمودي */
       .nav-links {
         display: none;
         position: fixed;
         top: 60px;
         right: 15px;
+        left: auto;
+        transform: none;
         background: #5e2ca5;
-        width: 200px;
+        min-width: 200px;
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        flex-direction: column;
-        padding: 1em;
+        flex-direction: column; /* تغيير من row إلى column */
+        padding: 0; /* إزالة الحشو القديم */
         z-index: 999;
+        gap: 0; /* إزالة الفراغ بين العناصر */
       }
 
       .nav-links.show {
         display: flex;
         animation: slideIn 0.3s ease;
+      }
+
+      /* إضافة أنماط للروابط في القائمة العمودية */
+      .nav-links a {
+        display: block;
+        padding: 12px 20px;
+        text-align: right;
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(255,255,255,0.1); /* خط فاصل */
+      }
+
+      .nav-links a:last-child {
+        border-bottom: none;
       }
 
       .logo-container {
@@ -694,13 +370,30 @@
         filter: none;
       }
 
-      .article-button {
-        padding: 8px 12px;
-        font-size: 13px;
+      .share-button, .email-button {
+        display: none;
       }
 
-      .back-to-all {
-        width: 90%;
+      .tooltip-text {
+        display: none !important;
+      }
+
+      /* التعديل على زر المشاركة للجوال - داخل الشريط العلوي */
+      .mobile-share {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        margin-left: -230px;
+      }
+
+      .mobile-share img {
+        width: 30px;
+        height: 30px;
+        filter: brightness(0) invert(1);
+      }
+
+      .share-button {
+        display: none;
       }
     }
 
@@ -709,279 +402,1084 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
-    /* أنماط التذييل من الكود الأول */
-    footer {
-      text-align: center;
-      padding: 18px;
-      background: #5e2ca5;
-      color: white;
-      font-size: 0.85em;
-      margin-top: 40px;
-      width: 100%;
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 2em;
+      max-width: 1100px;
+      margin: auto;
     }
 
-    .social-links {
+    .header img {
+      width: 100px;
+      height: 120px;
+      border-radius: 10px;
+      margin-left: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .intro-text {
+      flex-grow: 1;
+    }
+
+    .intro-text h2 {
+      margin: 0 0 10px 0;
+      font-size: 1.4em;
+      color: #5e2ca5;
+    }
+
+    .intro-text p {
+      margin: 0;
+      font-size: 1.1em;
+    }
+
+    .title {
+      text-align: center;
+      margin-top: 1em;
+    }
+
+    .title h1 {
+      font-size: 2.2em;
+      color: #5e2ca5;
+      margin-bottom: 0.2em;
+    }
+
+    .title h3 {
+      font-size: 1.4em;
+      font-weight: normal;
+      color: #4b007d;
+    }
+
+    /* أنماط قسم آخر التحديثات */
+    .updates-section {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 1em;
+      background: #e8f4ff;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(94, 44, 165, 0.1);
+      border: 1px solid rgba(94, 44, 165, 0.1);
+    }
+
+    .updates-section h2 {
+      color: #5e2ca5;
+      text-align: center;
+      margin-bottom: 1em;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .updates-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #5e2ca5, #8a4fff);
+      border-radius: 3px;
+    }
+
+    .updates-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .update-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      background-color: #fff1f3;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(94, 44, 165, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .update-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(94, 44, 165, 0.2);
+    }
+
+    .update-badge {
+  background-color: #ff0000; /* أحمر نقي */
+  color: white;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  margin-left: 10px;
+  font-weight: bold;
+  animation: blink 1s infinite; /* تأثير وميض */
+  box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.7); /* توهج أصفر */
+}
+
+@keyframes blink {
+  0% { 
+    opacity: 1;
+    box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.7); 
+  }
+  50% { 
+    opacity: 0.8; 
+    box-shadow: 0 0 20px 8px rgba(255, 215, 0, 0.9); /* توهج أقوى أثناء الوميض */
+  }
+  100% { 
+    opacity: 1;
+    box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.7);
+  }
+}
+
+.update-item:hover .update-badge {
+  animation: blink 0.7s infinite; /* تسريع الوميض عند التحويم */
+    }
+
+    .update-link {
+      flex-grow: 1;
+      color: #5e2ca5;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .update-link:hover {
+      color: #8a4fff;
+      text-decoration: underline;
+    }
+
+    .update-date {
+      color: #888;
+      font-size: 0.9em;
+      margin-right: 10px;
+    }
+
+    .updates-alert {
+      background-color: #fff3f3;
+      border: 1px solid #ffcccc;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #d63031;
+      font-weight: bold;
+    }
+
+    .updates-alert button {
+      background: none;
+      border: none;
+      color: #d63031;
+      font-size: 1.2em;
+      cursor: pointer;
+      padding: 0 5px;
+    }
+
+    @media (max-width: 768px) {
+      .updates-section {
+        margin: 1em;
+        padding: 1em;
+      }
+      
+      .update-item {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 5px;
+      }
+      
+      .update-badge {
+        margin-left: 0;
+        margin-bottom: 5px;
+      }
+      
+      .update-date {
+        align-self: flex-end;
+        margin-right: 0;
+        font-size: 0.8em;
+      }
+    }
+    
+    /* قسم التبويبات الجديد */
+    .book-tabs-section {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 0 15px;
+      text-align: center;
+    }
+
+    .book-tabs-title {
+      color: #5e2ca5;
+      font-size: 1.8em;
+      margin-bottom: 1em;
+      position: relative;
+      display: inline-block;
+    }
+
+    .book-tabs-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #5e2ca5, #8a4fff);
+      border-radius: 3px;
+    }
+
+    .book-tabs-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .book-tab {
+      background: #fff5f8;
+      border: 2px solid #d9c7ff;
+      border-radius: 14px;
+      padding: 10px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(94, 44, 165, 0.15);
+    }
+
+    .book-tab:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 18px rgba(94, 44, 165, 0.25);
+    }
+
+    .book-tab img {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border: 1px solid #e0d0f0;
+    }
+
+    .book-tab h4 {
+      margin: 0;
+      font-size: 0.85em;
+      color: #5e2ca5;
+      font-weight: bold;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+      .book-tabs-container {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+
+    /* أنماط الشريط المتحرك من الكود الثاني */
+    .slider-section {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 0 15px;
+    }
+    
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(94, 44, 165, 0.3);
+      height: 250px;
+      border: 2px solid #5e2ca5;
+    }
+    
+    .slider {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+      height: 100%;
+    }
+    
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    
+    .slide a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .slide-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 12px;
+      text-align: center;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+    }
+    
+    .slide:hover .slide-overlay {
+      background: rgba(94, 44, 165, 0.9);
+    }
+    
+    .slider-controls {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin: 15px 0;
-      flex-wrap: wrap;
+      margin-top: 15px;
+      gap: 15px;
     }
-
-    .social-links a {
+    
+    .slider-btn {
+      background: #5e2ca5;
       color: white;
-      font-size: 0.9em;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      text-decoration: none !important;
-      border: none !important;
-    }
-
-    .social-links a:hover {
-      color: white;
-      transform: scale(1.1);
+      font-size: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     
-    .social-links a.facebook:hover { background: #1877F2; }
-    .social-links a.instagram:hover { background: #E4405F; }
-    .social-links a.youtube:hover { background: #FF0000; }
-    .social-links a.tiktok:hover { background: #000000; }
-    .social-links a.snapchat:hover { background: #FFFC00; color: #000; }
-    .social-links a.telegram:hover { background: #2AABEE; }
-
-    .copyright {
-      margin-top: 10px;
-      padding-top: 10px;
-      font-size: 0.95em;
-      font-weight: 600;
-      color: #ffd166;
+    .slider-btn:hover {
+      background: #8a4fff;
+      transform: scale(1.15);
     }
-
-    /* باقي أنماط الصفحة الأصلية */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5efff;
-      margin: 0;
-      padding: 0;
-      color: #2f003f;
-      min-height: 100vh;
-      background-attachment: fixed;
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      -webkit-overflow-scrolling: touch; /* تمكين التمرير السلس على iOS */
+    
+    .slider-dots {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      margin-top: 15px;
+      gap: 10px;
     }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .container {
-      padding: 2em;
-      max-width: 900px;
-      margin: auto;
-      text-align: center;
-      padding-top: 100px;
-      overflow: hidden;
-      flex: 1;
-    }
-
-    h1 {
-      color: #5e2ca5;
-      margin-bottom: 0.5em;
-    }
-
-    p.intro {
-      font-size: 1.1em;
-      margin-bottom: 2em;
-      color: #4a208f;
-    }
-
-    .article {
-      background-color: #ebddff;
-      padding: 1.5em;
-      border-radius: 10px;
-      margin-bottom: 1.5em;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-      text-align: right;
+    
+    .slider-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #d0bfff;
+      cursor: pointer;
       transition: all 0.3s ease;
+    }
+    
+    .slider-dot.active {
+      background: #5e2ca5;
+      transform: scale(1.3);
+      box-shadow: 0 0 10px rgba(94, 44, 165, 0.5);
+    }
+
+    /* إصلاحات للجوال للشريط المتحرك */
+    @media (max-width: 768px) {
+      .slider-container {
+        height: 200px;
+      }
+      
+      .slide-overlay {
+        padding: 10px;
+        font-size: 1em;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .slider-container {
+        height: 180px;
+      }
+      
+      .slide-overlay {
+        font-size: 0.9em;
+        padding: 8px;
+      }
+    }
+
+    /* أنماط جديدة للبطاقات المعدلة بلمسات إبداعية */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      padding: 2em;
+      max-width: 1200px;
+      margin: 2em auto;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #faf4ff 0%, #f0e5ff 100%);
+      padding: 1.8em;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(94, 44, 165, 0.1);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      cursor: pointer;
+      position: relative;
       overflow: hidden;
+      border: 1px solid rgba(94, 44, 165, 0.1);
     }
 
-    .article:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(94, 44, 165, 0.05) 0%, transparent 100%);
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .article h2 {
-      color: #2563eb; /* تغيير لون العناوين إلى الأزرق */
-      margin-top: 0;
-      overflow-wrap: break-word;
-      text-decoration: none;
-      border-bottom: none;
-      transition: color 0.3s ease;
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 25px rgba(94, 44, 165, 0.2);
     }
 
-    /* التعديل الرئيسي هنا: تغيير لون التمرير للعناوين إلى البنفسجي */
-    .article h2 a {
-      color: #2563eb; /* لون روابط العناوين بالأزرق */
-      text-decoration: none;
-      transition: color 0.3s ease;
-      display: block; /* لجعل النقر على العنوان فقط */
-      padding: 5px 0; /* مساحة حول النص للتأكد من أن النقر على العنوان فقط */
+    .card:hover::before {
+      opacity: 1;
     }
 
-    .article h2 a:hover {
-      color: #8A2BE2; /* لون بنفسجي عند التمرير */
+    .card img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1.2em;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 4px 8px rgba(94, 44, 165, 0.2));
     }
 
-    .article p {
-      line-height: 1.8;
-      white-space: pre-line;
-      overflow: hidden;
-      max-height: 4.5em;
-      transition: max-height 0.4s ease;
-      overflow-wrap: break-word;
-      text-decoration: none;
-      border-bottom: none;
+    .card:hover img {
+      transform: scale(1.1) rotate(5deg);
     }
 
-    .article.expanded p {
-      max-height: 1200px;
-    }
-
-    .article a.read-more {
+    .card div {
+      font-size: 1.2em;
+      color: #5e2ca5;
+      font-weight: 600;
+      margin-bottom: 0.5em;
+      position: relative;
       display: inline-block;
-      margin-top: 10px;
-      color: #6a0dad;
+    }
+
+    .card div::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #5e2ca5;
+      transition: width 0.3s ease;
+    }
+
+    .card:hover div::after {
+      width: 100%;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 1em;
+      color: white;
       font-weight: bold;
       text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.2s ease, color 0.2s ease;
+      background: linear-gradient(45deg, #5e2ca5, #8a4fff);
+      padding: 8px 20px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(94, 44, 165, 0.3);
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
     }
 
-    .article a.read-more:hover {
-      color: #4b0082;
-      transform: scale(1.05);
+    .card a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #8a4fff, #5e2ca5);
+      transition: left 0.3s ease;
+      z-index: -1;
     }
 
-    /* تحسينات لتاريخ النشر */
-    .publish-date {
-      font-size: 0.9em;
-      color: #666;
-      margin: 5px 0 15px;
-      display: block;
-      background-color: #e0d0ff;
-      padding: 5px 10px;
-      border-radius: 15px;
+    .card a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(94, 44, 165, 0.4);
+    }
+
+    .card a:hover::before {
+      left: 0;
+    }
+
+    /* تأثيرات خاصة لكل بطاقة */
+    .card:nth-child(1) { transition-delay: 0.05s; }
+    .card:nth-child(2) { transition-delay: 0.1s; }
+    .card:nth-child(3) { transition-delay: 0.15s; }
+    .card:nth-child(4) { transition-delay: 0.2s; }
+    .card:nth-child(5) { transition-delay: 0.25s; }
+    .card:nth-child(6) { transition-delay: 0.3s; }
+    .card:nth-child(7) { transition-delay: 0.35s; }
+    .card:nth-child(8) { transition-delay: 0.4s; }
+
+    /* تأثيرات دخول البطاقات */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    /* تنسيق جديد للبطاقات في الجوال - التعديل المطلوب هنا */
+    @media (max-width: 768px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 1em;
+      }
+      
+      .card {
+        padding: 1.2em;
+        margin-bottom: 0;
+      }
+      
+      .card img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 0.8em;
+      }
+      
+      .card div {
+        font-size: 1em;
+        margin-bottom: 0.3em;
+      }
+      
+      .card a {
+        padding: 6px 12px;
+        font-size: 0.9em;
+        margin-top: 0.8em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      
+      .card {
+        padding: 1.2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .card img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 0.5em;
+      }
+      
+      .card div {
+        font-size: 0.95em;
+      }
+      
+      .card a {
+        width: 100%;
+        padding: 6px;
+        font-size: 0.85em;
+        margin-top: 0.5em;
+      }
+    }
+
+    /* أنماط مواقع التواصل المعدلة */
+    .social-section {
+      text-align: center;
+      padding: 2em 0;
+      background: linear-gradient(135deg, #f8f3ff 0%, #ece2ff 100%);
+      margin: 2em auto;
+      border-radius: 16px;
+      max-width: 1200px;
+      box-shadow: 0 8px 20px rgba(94, 44, 165, 0.1);
+      border: 1px solid rgba(94, 44, 165, 0.1);
+    }
+
+    .social-section h2 {
+      color: #5e2ca5;
+      font-size: 1.8em;
+      margin-bottom: 1.5em;
+      position: relative;
       display: inline-block;
     }
+
+    .social-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #5e2ca5, #8a4fff);
+      border-radius: 3px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin-top: 1em;
+    }
+
+    .social-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #5e2ca5, #8a4fff);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .social-icon img {
+      width: 32px;
+      height: 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+    }
+
+    /* تأثيرات خاصة بكل شبكة اجتماعية */
+    .social-icon:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .social-icon:hover::before {
+      opacity: 1;
+    }
+
+    .social-icon:hover img {
+      filter: brightness(0) invert(1) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+    }
+
+    /* ألوان خاصة لكل شبكة اجتماعية عند التحويم */
+    .social-icon.youtube:hover::before {
+      background: linear-gradient(45deg, #FF0000, #FF5E5E);
+    }
+
+    .social-icon.facebook:hover::before {
+      background: linear-gradient(45deg, #1877F2, #00B3FF);
+    }
+
+    .social-icon.instagram:hover::before {
+      background: linear-gradient(45deg, #E1306C, #F77737, #FCAF45);
+    }
+
+    .social-icon.telegram:hover::before {
+      background: linear-gradient(45deg, #0088CC, #00B3FF);
+    }
+
+    .social-icon.tiktok:hover::before {
+      background: linear-gradient(45deg, #010101, #25F4EE, #FE2C55);
+    }
     
-    .date-icon {
-      margin-left: 5px;
-      color: #5e2ca5;
+    .social-icon.snap:hover::before {
+      background: linear-gradient(45deg, #FFFC00, #FFF200, #FFE600);
+    }
+
+    /* تأثيرات إضافية */
+    .social-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease;
+      z-index: 1;
+    }
+
+    .social-icon:hover::after {
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .social-icons {
+        gap: 15px;
+      }
+      
+      .social-icon {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .social-icon img {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    /* التعديلات على الفوتر حسب الطلب */
+    footer {
+      background-color: #5e2ca5; /* بنفسجي غامق مثل الشريط العلوي */
+      text-align: center;
+      padding: 1.2em 0;
+      margin-top: 2em;
+      color: white; /* تغيير لون النص إلى الأبيض */
+      font-weight: bold;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #FFD700, #ffffff, #FFD700);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    footer a {
+      color: #FFD700; /* اللون الذهبي للروابط */
+      text-decoration: none;
+      margin: 0 8px; /* تصغير الهوامش */
+      padding: 5px 0;
+      position: relative;
+      transition: all 0.3s ease;
+      display: inline-block;
+      font-size: 12px; /* تصغير حجم الخط من 15px إلى 12px */
+    }
+
+    footer a:hover {
+      color: white; /* اللون الأبيض عند المرور */
+    }
+
+    /* تأثير الإبداعي عند المرور */
+    footer a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    footer a:hover::after {
+      width: 100%;
+    }
+
+    footer a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background: #FFD700;
+      transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    footer a:hover::before {
+      width: 100%;
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 13px;
+    }
+
+    footer .copyright {
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+    /* تعديلات للجوال */
+    @media (max-width: 480px) {
+      footer a {
+        font-size: 11px; /* حجم أصغر للجوال */
+        margin: 0 5px; /* تقليل الهوامش */
+      }
+    }
+
+    .copy-alert {
+      position: fixed;
+      top: 100px;
+      left: 30%;
+      transform: translateX(-50%);
+      background-color: #c29eea;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+      font-size: 1em;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .copy-alert.show {
+      opacity: 1;
     }
   
-.creative-text {
+.header {
   position: relative;
-  display: inline-block;
-  color: #5e2ca5;
-  margin-bottom: 1.3em;
-  font-size: 2.3em;
-  padding-bottom: 12px;
-  font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  text-align: center;
-  width: 100%;
+  padding: 2em;
+  max-width: 1100px;
+  margin: auto;
+  background-color: #f5efff;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
-.creative-text::after {
+
+.intro-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.intro-content img {
+  width: 100px;
+  height: 120px;
+  border-radius: 10px;
+  margin-left: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.intro-text h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.4em;
+  color: #5e2ca5;
+}
+
+.intro-text p {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+/* أنماط أزرار اليوتيوب الجديدة */
+.youtube-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px auto;
+  max-width: 600px;
+  flex-wrap: wrap;
+}
+
+.youtube-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FF0000;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.youtube-btn:hover {
+  background-color: #CC0000;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.youtube-btn::before {
   content: '';
   position: absolute;
-  bottom: 0;
-  right: 50%;
-  transform: translateX(50%);
-  width: 90px;
-  height: 3px;
-  background: linear-gradient(90deg, #ffd166, #ff6b6b);
-  border-radius: 10px;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
-/* تعديلات تنسيق شريط التحكم بالصفحات في موقعه الجديد */
-#pagination-wrapper {
-    position: relative;
+.youtube-btn:hover::before {
+  left: 100%;
+}
+
+.youtube-btn i {
+  margin-left: 8px;
+  font-size: 1.2em;
+}
+
+@media (max-width: 768px) {
+  .youtube-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .youtube-btn {
+    width: 90%;
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+  
+  .header {
+    align-items: center;
+  }
+
+  .intro-content {
+    flex-direction: row;
+    align-items: center;
     text-align: center;
-    margin: 40px auto;
-    padding: 15px;
-    background: #f8f3ff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(94, 44, 165, 0.1);
-    border-top: 3px solid #6a4c93;
-    max-width: 900px;
+  }
 }
 
-#pageInfo {
-    font-weight: bold;
-    color: #5e2ca5;
+/* التعديلات الجديدة للجوال */
+@media (max-width: 768px) {
+  /* التعديلات الجديدة للهيدر في الجوال */
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1em;
+  }
+
+  .intro-content {
+    flex-direction: column;
+    align-items: center;
+    order: 2; /* جعل هذا العنصر يأتي بعد العنوان */
+  }
+
+  .intro-content img {
+    margin-left: 0;
     margin-bottom: 15px;
+    width: 120px;
+    height: 140px;
+    order: 1; /* الصورة في المركز */
+  }
+
+  .intro-text {
+    order: 2; /* النص يأتي بعد الصورة */
+  }
+
+  .title {
+    order: 1; /* العنوان يأتي في البداية */
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  /* تعديلات على العناوين */
+  .title h1 {
+    font-size: 1.8em;
+  }
+
+  .title h3 {
     font-size: 1.1em;
-}
+  }
 
-#prevPage, #nextPage, #firstPage {
-    background-color: #a88ee6;
-    border: none;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
+  .intro-text h2 {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+  }
+
+  .intro-text p {
     font-size: 1em;
-    transition: all 0.3s ease;
-    margin: 0 5px;
-}
-
-#prevPage:hover, #nextPage:hover, #firstPage:hover {
-    background-color: #8a6ed6;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(94, 44, 165, 0.2);
-}
-
-#firstPage {
-    background-color: #f3eaff;
-    color: #5e2ca5;
-}
-
-#firstPage:hover {
-    background-color: #e0d0ff;
+  }
 }
 </style>
 </head>
 <body>
 <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
-<!-- الشريط العلوي من الكود الأول مع إزالة مربع البحث -->
+<!-- زر المشاركة للكمبيوتر -->
+<div class="share-button">
+<img alt="مشاركة" onclick="toggleShareMenu()" src="images/share.png"/>
+<div class="tooltip-text">مشاركة الموقع</div>
+<div id="share-menu" style="display:none; position:absolute; top:50px; left:0; width:180px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+<div onclick="copyLink()" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5;">🔗 نسخ الرابط</div>
+<div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://www.husseinalkhalil.com" target="_blank"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+<a href="https://api.whatsapp.com/send?text=https://www.husseinalkhalil.com" target="_blank"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+<a href="https://t.me/share/url?url=https://www.husseinalkhalil.com" target="_blank"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+<a href="https://x.com/intent/tweet?url=https://www.husseinalkhalil.com" target="_blank"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+<a href="https://www.instagram.com/" target="_blank"><img src="icons/instagram.png" title="إنستغرام" width="32"/></a>
+<a href="https://www.tiktok.com/" target="_blank"><img src="icons/tiktok.png" title="تيك توك" width="32"/></a>
+<a href="https://www.youtube.com/" target="_blank"><img src="icons/youtube.png" title="يوتيوب" width="32"/></a>
+</div>
+</div>
+</div>
+<!-- القائمة العلوية المعدلة -->
 <nav>
 <div class="hamburger" onclick="toggleMobileMenu()">☰ القائمة</div>
+<!-- زر المشاركة للجوال داخل الشريط العلوي -->
+<div class="mobile-share" onclick="handleMobileShare()" style="display:none;">
+<img alt="مشاركة" src="images/share.png"/>
+</div>
+<!-- زر المراسلة للجوال - نفس الأيقونة المستخدمة في الكمبيوتر -->
+<div class="mobile-email">
+<a href="mailto:info@husseinalkhalil.com">
+</a>
+</div>
 <div class="nav-links">
-<a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-<a href="books.html"><i class="fas fa-book"></i> الكتب</a>
-<a href="articles.html"><i class="fas fa-newspaper"></i> المقالات</a>
-<a href="khawatir.html"><i class="fas fa-lightbulb"></i> خواطر</a>
-<a href="videos.html"><i class="fas fa-video"></i> الفيديوهات</a>
-<a href="history.html"><i class="fas fa-hourglass-half"></i> التاريخ</a>
-<a class="active" href="podcast.html"><i class="fas fa-podcast"></i> البودكاست</a>
-<a href="ask.html"><i class="fas fa-question-circle"></i> الأسئلة</a>
-<a href="hewar.html"><i class="fas fa-comments"></i> حوارات</a>
-<a href="favorites.html"><i class="fas fa-star"></i> المفضلة</a>
-<a href="support.html"><i class="fas fa-hand-holding-heart"></i> دعم المحتوى</a>
-<a href="#" onclick="window.print()"><i class="fas fa-print"></i> طباعة</a>
-<!-- تمت إزالة مربع البحث من هنا -->
+<a href="index.html">الرئيسية</a>
+<a href="books.html">الكتب</a>
+<a href="articles.html">المقالات</a>
+<a href="khawatir.html">خواطر</a>
+<a href="videos.html">الفيديوهات</a>
+<a href="history.html">التاريخ</a>
+<a href="podcast.html">البودكاست</a>
+<a href="ask.html">الأسئلة</a>
+<a href="hewar.html">حوارات</a>
+<a href="favorites.html">المفضلة</a>
+<a href="support.html">دعم المحتوى</a>
+<a href="about.html">من نحن</a>
+<a href="#" onclick="window.print()">🖨️</a>
 </div>
 <div class="logo-container">
 <a href="index.html">
@@ -989,562 +1487,472 @@
 </a>
 </div>
 </nav>
+<!-- نظام البحث المحسن -->
+<div class="universal-search">
+<input id="globalSearch" placeholder="ابحث في جميع المحتويات..." type="text"/>
+<div class="search-results" id="searchResults"></div>
+</div>
+<!-- الكاتب -->
+<div class="header">
+<div class="intro-content">
+<a href="about.html" title="تعرف على حسين الخليل"><img alt="صورة حسين" onmouseout="this.style.transform='scale(1)'" onmouseover="this.style.transform='scale(1.05)'" src="images/profile.png" style="cursor: pointer; width: 140px; height: 160px; transition: transform 0.3s ease;"/></a>
+<div class="intro-text">
+<h2>حسين الخليل - أهلاً بك في موقعي الشخصي</h2>
+<p>قراءة عقلانية ونقد للتراث بمنهج معاصر</p>
+</div>
+</div>
+</div>
+<!-- العنوان -->
+<div class="title">
+<h1>مرحباً بك</h1>
+<h3>كل ما أنشره لا أزعم فيه امتلاك الحقيقة المطلقة، ولا أُلزم به أحداً. غايتي أن أفتح نافذة للتفكير والتأمل.</h3>
+<h3>نرحب بمشاركتك لأفكارك واقتراحاتك لتطوير الموقع وتحسينه، من خلال صفحة <a href="feedback.html" style="color: #d63384; font-weight: bold; text-decoration: none;" target="_blank">شاركنا رأيك</a></h3>
+</div>
 
-<!-- المحتوى الأصلي -->
-<div class="container">
-<!-- إضافة قسم العنوان ومربع البحث الجديد -->
-<div class="section-header">
-  <h1 class="creative-text" style="text-align: center;">المقالات</h1>
-  <p class="intro">في هذه الصفحة أشارك مقالات من خارج الصندوق، ونقد الموروث بوعي واحترام للعقل.</p>
-  
-  <!-- مربع البحث الجديد بنفس شكل الكود الأول -->
-  <div class="search-container">
-    <div class="search-icon">
-      <i class="fas fa-search"></i>
+<!-- أزرار قنوات اليوتيوب الجديدة -->
+<div class="youtube-buttons">
+  <a href="https://www.youtube.com/@husseinalkhalil" class="youtube-btn" target="_blank">
+    القناة الرئيسية <i></i>
+  </a>
+  <a href="https://www.youtube.com/@hussein.ch2" class="youtube-btn" target="_blank">
+    قناة التاريخ <i></i>
+  </a>
+</div>
+
+<!-- قسم آخر التحديثات -->
+<div class="updates-section">
+<h2>آخر التحديثات</h2>
+<div class="updates-container" id="updatesContainer">
+<!-- سيتم ملؤه بواسطة JavaScript -->
+</div>
+</div>
+
+<!-- التبويبات الثلاثة الجديدة -->
+<div class="book-tabs-section">
+  <h2 class="book-tabs-title">كتب ينصح بقرائتها</h2>
+  <div class="book-tabs-container">
+    <div class="book-tab">
+      <a href="https://husseinalkhalil.com/books?book=book-5" style="text-decoration: none; color: inherit;">
+        <img src="images/1.png" alt="كتاب فكري يتناول أهم المسائل الجدلية">
+        <h4>كتاب فكري يتناول أهم المسائل الجدلية بمفهوم القرآن وأبرزها الصلاة</h4>
+      </a>
     </div>
-    <input type="text" id="searchInput" class="search-box" placeholder="ابحث في المقالات...">
-    <div id="searchResultsInfo" class="search-results-info">
-      <span id="resultsCount">0</span> نتيجة
+    <div class="book-tab">
+      <a href="https://husseinalkhalil.com/books?book=book-2" style="text-decoration: none; color: inherit;">
+        <img src="images/2.png" alt="هتون الحب، رواية">
+        <h4>هتون الحب، رواية تتناول الحب، الخرافة، وتضليل البسطاء باسم الدين</h4>
+      </a>
+    </div>
+    <div class="book-tab">
+      <a href="https://husseinalkhalil.com/books?book=book-4" style="text-decoration: none; color: inherit;">
+        <img src="images/3.png" alt="الإسلام بين الكتاب والتراث">
+        <h4>الإسلام بين الكتاب والتراث، حوار بين عقلين يمثلان رؤيتين مختلفتين للدين.</h4>
+      </a>
     </div>
   </div>
 </div>
 
-<!-- رسالة عدم وجود نتائج بحث -->
-<div class="no-results" id="noResultsMessage">
-      لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
-</div>
-<div class="article" id="article-44">
-<h2><a href="article/44.html">❖ مفهوم الربا من كتاب الله</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 يوليو 2025</span>
-<p>تتين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ مفهوم الربا من كتاب الله')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-43">
-<h2><a href="article/43.html">❖ للذكر مثل حظ الانثيين</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 يوليو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ للذكر مثل حظ الانثيين')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-42">
-<h2><a href="article/42.html">❖ وطني أولاً، هل أصبحت الوطنية تهمة؟</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 10 يوليو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ وطني أولاً، هل أصبحت الوطنية تهمة؟')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-41">
-<h2><a href="article/41.html">❖ لا تبرر، أنت لست موظفًا في خدمة أفكار الآخرين.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 9 يوليو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا تبرر، أنت لست موظفًا في خدمة أفكار الآخرين.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-40">
-<h2><a href="article/40.html">❖ فلسطين وحصان طروادة.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 5 يوليو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ فلسطين وحصان طروادة.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-39">
-<h2><a href="article/39.html">❖ الحور العين.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 20 يونيو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الحور العين.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-38">
-<h2><a href="article/38.html">❖ الإيمان الصادق لا يحتاج إلى ترويج</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 9 يونيو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الإيمان الصادق لا يحتاج إلى ترويج.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-37">
-<h2><a href="article/37.html">❖ بني إسرائيل.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 30 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ بني إسرائيل.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-36">
-<h2><a href="article/36.html">❖ العقل والنقل.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 30 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ العقل والنقل.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-35">
-<h2><a href="article/35.html">❖ رسالة إلى صديقي المتمسك بالتراث الديني.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي المتمسك بالتراث الديني.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-34">
-<h2><a href="article/34.html">❖ رسالة إلى صديقي الملحد.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي الملحد.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-33">
-<h2><a href="article/33.html">❖ رسالة إلى صديقي السُنّي وصديقي الشيعي.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي السُنّي وصديقي الشيعي.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-32">
-<h2><a href="article/32.html">❖ رسالة إلى صديقي المثقف.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي المثقف.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-31">
-<h2><a href="article/31.html">❖ قتل الوزغ.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ قتل الوزغ.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-30">
-<h2><a href="article/30.html">❖ لا عنصرية في الإسلام.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا عنصرية في الإسلام.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-29">
-<h2><a href="article/29.html">❖ نعمة العقل.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ نعمة العقل.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-28">
-<h2><a href="article/28.html">❖ الخمر وحكمه.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الخمر وحكمه.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-27">
-<h2><a href="article/27.html">❖ حياة النبي.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ حياة النبي.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-26">
-<h2><a href="article/26.html">❖ الجرح والتعديل.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الجرح والتعديل.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-25">
-<h2><a href="article/25.html">❖ معالجة الخطأ بالخطأ.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ معالجة الخطأ بالخطأ.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-24">
-<h2><a href="article/24.html">❖ أنا والعندليب.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ أنا والعندليب.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-23">
-<h2><a href="article/23.html">❖ مفاهيم مغلوطة.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 27 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ مفاهيم مغلوطة.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-22">
-<h2><a href="article/22.html">❖ حُسن الخاتمة وسوء الخاتمة.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ حُسن الخاتمة وسوء الخاتمة.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-21">
-<h2><a href="article/21.html">❖ الأعراب أشد كفراً ونفاقا.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الأعراب أشد كفراً ونفاقا.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-20">
-<h2><a href="article/20.html">❖ الملحد وأنواعه</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الملحد وأنواعه')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-19">
-<h2><a href="article/19.html">❖ تغسيل الميت وتكفينه</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ تغسيل الميت وتكفينه')">
-          ⭐
-        </button>
-    </div>
-</div>
-<div class="article" id="article-18">
-<h2><a href="article/18.html">❖ الناسخ والمنسوخ.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الناسخ والمنسوخ.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-17">
-<h2><a href="article/17.html">❖ أكذوبة أسباب النزول</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ أسباب النزول')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-16">
-<h2><a href="article/16.html">❖ القرآن أم التراث؟</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 26 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ القرآن أم التراث؟')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-15">
-<h2><a href="article/15.html">❖ أصحاب القوقعة.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ أصحاب القوقعة.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-14">
-<h2><a href="article/14.html">❖ حذارِ.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ حذارِ.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-13">
-<h2><a href="article/13.html">❖ وهم الحقيقة المطلقة.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ وهم الحقيقة المطلقة.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-12">
-<h2><a href="article/12.html">❖ كيف تُشيّطن أفكارك؟</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ كيف تُشيّطن أفكارك؟')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-11">
-<h2><a href="article/11.html">❖ قصة قصيرة.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ قصة قصيرة.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-10">
-<h2><a href="article/9.html">❖ أعراض فهم الدين بالمقلوب.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖  أعراض فهم الدين بالمقلوب.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-9">
-<h2><a href="article/9.html">❖ الباحث عن الأضواء.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖  الباحث عن الأضواء.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-8">
-<h2><a href="article/8.html">❖ النقل على العقل.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖  النقل على العقل.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-7">
-<h2><a href="article/7.html">❖ وهم الحواس في الإلحاد، الحقيقة أوسع مما يُرى.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ وهم الحواس في الإلحاد، الحقيقة أوسع مما يُرى.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-6">
-<h2><a href="article/6.html">❖ لا تسعَ لإرضاء أحد.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ لا تسعَ لإرضاء أحد.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-5">
-<h2><a href="article/5.html">❖ ازدواجية الضمير</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ ازدواجية الضمير')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-4">
-<h2><a href="article/4.html">❖ دعهم يتكلمون، وواصل طريقك بسلام</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ دعهم يتكلمون، وواصل طريقك بسلام')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-3">
-<h2><a href="article/3.html">❖ هوامش على الطريق.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 13 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ هوامش على الطريق.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-2">
-<h2><a href="article/2.html">❖ نظرية الحصان الميت.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 10 مايو 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ نظرية الحصان الميت.')">
-          ⭐
-        </button>
-</div>
-</div>
-<div class="article" id="article-1">
-<h2><a href="article/1.html">❖ الجدال مع المؤدلجين، معركة خاسرة.</a></h2>
-<span class="publish-date"><span class="date-icon">📅</span> 28 فبراير 2025</span>
-<p>تتناين.</p>
-<div class="article-actions">
-<button class="article-button" data-tooltip="أضف للمفضلة" onclick="toggleFavorite(this, '❖ الجدال مع المؤدلجين، معركة خاسرة.')">
-          ⭐
-        </button>
-</div>
-</div>
-
-<!-- تم نقل شريط التحكم بالصفحات إلى أسفل الصفحة فوق الفوتر -->
-<div id="message"></div>
-<!-- زر العودة للأعلى -->
-<button class="back-to-top" onclick="scrollToTop()" title="العودة للأعلى">↑</button>
-</div> <!-- نهاية .container -->
-
-<!-- شريط التحكم بالصفحات (تم نقله إلى هنا) -->
-<div id="pagination-wrapper">
-<div id="pageInfo" style="font-weight:bold; color:#5e2ca5; margin-bottom:10px;">
-        الصفحة 1 من ? - إجمالي المقالات: ?
-    </div>
-<div style="display:inline-flex; gap: 8px; flex-wrap: wrap; justify-content:center;">
-<button id="prevPage" onclick="prevPage()">« السابق</button>
-<button id="firstPage" onclick="goToFirstPage()">الصفحة الأولى</button>
-<button id="nextPage" onclick="nextPage()">التالي »</button>
-</div>
-</div>
-
-<!-- التذييل من الكود الأول -->
+<!-- الشريط المتحرك من الكود الثاني -->
+<div class="slider-section">
+<div class="slider-container">
+<div class="slider" id="slider">
+<div class="slide">
+<a href="https://youtu.be/8h2dx_yuB6U?si=aF36xN-WAvsuONBZ" target="_blank">
+<img alt="الفيديوهات" src="images/test1.jpg"/>
+<div class="slide-overlay">هل الإسلام دين العنف والكراهية؟</div>
+</a>
+</div>
+<div class="slide">
+<a href="https://youtu.be/1w_LMI36_u0?si=l00HQA075je9nS4d" target="_blank">
+<img alt="الفيديوهات" src="images/test2.jpg"/>
+<div class="slide-overlay">الاحتفال بعيد الميلاد وعيد الأم وباقي المناسبات.</div>
+</a>
+</div>
+<div class="slide">
+<a href="https://youtu.be/qQ3oRyO3pGw?si=9PyzV6QwcXHbWH_V" target="_blank">
+<img alt="التاريخ" src="images/test3.jpg"/>
+<div class="slide-overlay">الشينتوية</div>
+</a>
+</div>
+</div>
+</div>
+<div class="slider-controls">
+<button class="slider-btn" onclick="prevSlide()">→</button>
+<button class="slider-btn" onclick="nextSlide()">←</button>
+</div>
+<div class="slider-dots" id="sliderDots">
+<div class="slider-dot active" onclick="goToSlide(0)"></div>
+<div class="slider-dot" onclick="goToSlide(1)"></div>
+<div class="slider-dot" onclick="goToSlide(2)"></div>
+</div>
+</div>
+<!-- الأقسام المعدلة بلمسات إبداعية -->
+<div class="cards">
+<div class="card" onclick="location.href='books.html'">
+<img alt="الكتب" src="icons/books.png"/>
+<div>الكتب</div>
+<a href="books.html">تصفح الكتب</a>
+</div>
+<div class="card" onclick="location.href='articles.html'">
+<img alt="المقالات" src="icons/articles.png"/>
+<div>المقالات</div>
+<a href="articles.html">اقرأ المقالات</a>
+</div>
+<div class="card" onclick="location.href='videos.html'">
+<img alt="الفيديوهات" src="icons/videos.png"/>
+<div>الفيديوهات</div>
+<a href="videos.html">شاهد الفيديوهات</a>
+</div>
+<div class="card" onclick="location.href='history.html'">
+<img alt="التاريخ" src="icons/history.png"/>
+<div>التاريخ</div>
+<a href="videos.html">شاهد الحلقات</a>
+</div>
+<div class="card" onclick="location.href='podcast.html'">
+<img alt="البودكاست" src="icons/podcast.png"/>
+<div>البودكاست</div>
+<a href="videos.html">استمع للحلقات</a>
+</div>
+<div class="card" onclick="location.href='ask.html'">
+<img alt="اطرح سؤالك" src="icons/ask.png"/>
+<div>الأسئلة</div>
+<a href="ask.html">اطرح سؤالك</a>
+</div>
+<div class="card" onclick="location.href='hewar.html'">
+<img alt="الحوارات" src="icons/hewar.png"/>
+<div>الحوارات</div>
+<a href="hewar.html">اقرأ الحوارات</a>
+</div>
+<div class="card" onclick="location.href='favorites.html'">
+<img alt="المفضلة" src="icons/favorites.png"/>
+<div>المفضلة</div>
+<a href="favorites.html">استكشف المفضلة</a>
+</div>
+<div class="card" onclick="location.href='khawatir.html'">
+<img alt="خواطر" src="icons/khawatir.png"/>
+<div>خواطر</div>
+<a href="khawatir.html">اقرأ الخواطر</a>
+</div>
+<div class="card" onclick="location.href='support.html'">
+<img alt="دعم المحتوى" src="icons/support.png"/>
+<div>دعم المحتوى</div>
+<a href="support.html">ادعم المحتوى</a>
+</div>
+</div>
+<!-- تابعني على مواقع التواصل - النسخة المعدلة -->
+<div class="social-section">
+<h2>تابعني على مواقع التواصل</h2>
+<div class="social-icons">
+<a class="social-icon youtube" href="https://youtube.com/@husseinalkhalil" target="_blank">
+<img alt="يوتيوب" src="icons/yot-soc.png"/>
+</a>
+<a class="social-icon facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank">
+<img alt="فيسبوك" src="icons/fac-soc.png"/>
+</a>
+<a class="social-icon instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&amp;utm_source=qr" target="_blank">
+<img alt="إنستغرام" src="icons/ins-soc.png"/>
+</a>
+<a class="social-icon telegram" href="https://t.me/tanoeer" target="_blank">
+<img alt="تلغرام" src="icons/tel-soc.png"/>
+</a>
+<a class="social-icon tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank">
+<img alt="تيك توك" src="icons/tik-soc.png"/>
+</a>
+<a class="social-icon snap" href="https://snapchat.com/t/sFLWjw3K" target="_blank">
+<img alt="سناب شات" src="icons/snap.png"/>
+</a>
+</div>
+</div>
+<!-- الفوتر المحدث مع حجم خط أصغر للروابط -->
 <footer>
-<div class="social-links">
-<a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-<a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&amp;utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
-<a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
-<a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
-<a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
-<a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
-</div>
-<div class="copyright">
-      حسين الخليل - جميع الحقوق محفوظة © 2025
-    </div>
+<p>
+<a href="terms_and_conditions_ar.html">الشروط والأحكام</a> |
+      <a href="privacy.html">سياسة الخصوصية</a> |
+      <a href="contact.html">اتصل بنا</a> |
+      <a href="feedback.html">شاركنا رأيك</a>
+</p>
+<p class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</p>
 </footer>
-
+<!-- السكريبتات -->
 <script>
-    // تغيير عدد المقالات في الصفحة إلى 10
-    const articlesPerPage = 10;
-    let currentPage = 1;
+    // نظام البحث المحسن مع البحث المباشر في الصفحات
+    let cachedPagesContent = null;
+    let isSearchInitialized = false;
+    const SEARCHABLE_PAGES = [
+        'index.html',
+        'books.html',
+        'articles.html',
+        'khawatir.html',
+        'videos.html',
+        'ask.html',
+        'hewar.html',
+        'favorites.html',
+        'support.html',
+        'about.html'
+    ];
 
-    function paginateArticles() {
-      const articles = document.querySelectorAll('.article');
-      const totalPages = Math.ceil(articles.length / articlesPerPage);
-      const pageInfo = document.getElementById('pageInfo');
-      if (pageInfo) pageInfo.textContent = `الصفحة ${currentPage} من ${totalPages} - إجمالي المقالات: ${articles.length}`;
-
-      articles.forEach((article, index) => {
-        const start = (currentPage - 1) * articlesPerPage;
-        const end = currentPage * articlesPerPage;
-        article.style.display = (index >= start && index < end) ? 'block' : 'none';
-      });
-
-      document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline-block' : 'none';
-      document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline-block' : 'none';
-      
-      // التمرير إلى أعلى الصفحة عند تغيير الصفحة
-      document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+    async function fetchPageContent(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Failed to fetch ${url}`);
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            // استخراج المحتوى الرئيسي (تعدل حسب هيكل كل صفحة)
+            const mainContent = doc.querySelector('.cards, .header, .title, article') || doc.body;
+            return {
+                page: doc.title,
+                url: url,
+                content: mainContent.textContent.trim()
+            };
+        } catch (error) {
+            console.error(`Error loading page ${url}:`, error);
+            return null;
+        }
     }
 
-    function nextPage() {
-      const totalPages = Math.ceil(document.querySelectorAll('.article').length / articlesPerPage);
-      if (currentPage < totalPages) {
-        currentPage++;
-        paginateArticles();
-      }
+    async function loadAllPagesContent() {
+        if (cachedPagesContent) return cachedPagesContent;
+        
+        const loadingPromises = SEARCHABLE_PAGES.map(page => fetchPageContent(page));
+        const results = await Promise.all(loadingPromises);
+        
+        cachedPagesContent = results.filter(Boolean);
+        return cachedPagesContent;
     }
 
-    function prevPage() {
-      if (currentPage > 1) {
-        currentPage--;
-        paginateArticles();
-      }
+    function normalizeArabic(text) {
+        if (!text) return '';
+        
+        // استبدال جميع أشكال الهمزات بأحرفها الأساسية
+        return text
+            .replace(/[أإآءؤئ]/g, function(c) {
+                return {
+                    'أ': 'ا', 'إ': 'ا', 'آ': 'ا', 'ء': '',
+                    'ؤ': 'و', 'ئ': 'ي'
+                }[c];
+            })
+            .replace(/[ً-ِ]/g, '') // إزالة التشكيل (الحركات)
+            .replace(/[ة]/g, 'ه') // تحويل التاء المربوطة إلى هاء
+            .replace(/\s+/g, ' ') // استبدال المسافات المتعددة بمسافة واحدة
+            .trim()
+            .toLowerCase();
     }
 
-    function goToFirstPage() {
-      currentPage = 1;
-      paginateArticles();
+    function highlightMatches(text, query) {
+        if (!text || !query) return text;
+        
+        const normalizedText = normalizeArabic(text);
+        const normalizedQuery = normalizeArabic(query);
+        
+        if (!normalizedText.includes(normalizedQuery)) {
+            return text;
+        }
+        
+        // إنشاء نمط regex يتطابق مع جميع أشكال الحرف مع التشكيل
+        const regexPattern = normalizedQuery.split('').map(char => {
+            switch(char) {
+                case 'ا': return '[أإآا]';
+                case 'ه': return '[هة]';
+                case 'و': return '[ؤو]';
+                case 'ي': return '[ئيى]';
+                default: return char;
+            }
+        }).join('[ً-ِ]*'); // السماح بوجود تشكيل بعد كل حرف
+        
+        const regex = new RegExp(regexPattern, 'gi');
+        
+        return text.replace(regex, match => `<mark>${match}</mark>`);
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-      paginateArticles();
+    function createContentPreview(content, query) {
+        const normalizedContent = normalizeArabic(content);
+        const normalizedQuery = normalizeArabic(query);
+        const index = normalizedContent.indexOf(normalizedQuery);
+        
+        if (index === -1) {
+            return content.substring(0, 120) + '...';
+        }
+        
+        const start = Math.max(0, index - 50);
+        const end = Math.min(content.length, index + normalizedQuery.length + 50);
+        return '...' + content.substring(start, end) + '...';
+    }
 
-      // إضافة ربط مباشر عند الضغط على زر الصفحة الأولى
-      const firstBtn = document.getElementById('firstPage');
-      if (firstBtn) {
-        firstBtn.addEventListener('click', () => {
-          currentPage = 1;
-          paginateArticles();
+    function displayResults(results, query, resultsContainer) {
+        resultsContainer.innerHTML = '';
+        
+        if (results.length === 0) {
+            resultsContainer.innerHTML = `
+                <div class="search-item">
+                    <p>⚠️ لم يتم العثور على نتائج لـ "${query}"</p>
+                </div>
+            `;
+            resultsContainer.style.display = 'block';
+            return;
+        }
+
+        results.forEach(item => {
+            const resultElement = document.createElement('div');
+            resultElement.className = 'search-item';
+            const preview = createContentPreview(item.content, query);
+            
+            resultElement.innerHTML = `
+                <h3>${highlightMatches(item.page, query)}</h3>
+                <p>${highlightMatches(preview, query)}</p>
+                <small>${item.url}</small>
+            `;
+            resultElement.onclick = () => window.location.href = item.url;
+            resultsContainer.appendChild(resultElement);
         });
-      }
+
+        resultsContainer.style.display = 'block';
+    }
+
+    async function performSearch(query) {
+        const resultsContainer = document.getElementById('searchResults');
+        if (!query || query.length < 2) {
+            resultsContainer.style.display = 'none';
+            return;
+        }
+
+        resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+        resultsContainer.style.display = 'block';
+
+        const searchData = await loadAllPagesContent();
+        const normalizedQuery = normalizeArabic(query);
+        const results = searchData.filter(item => {
+            const fullText = normalizeArabic(item.page + ' ' + item.content);
+            return fullText.includes(normalizedQuery);
+        });
+
+        displayResults(results, query, resultsContainer);
+    }
+
+    async function initSearch() {
+        if (isSearchInitialized) return;
+        isSearchInitialized = true;
+
+        const searchInput = document.getElementById('globalSearch');
+        const resultsContainer = document.getElementById('searchResults');
+
+        if (!searchInput || !resultsContainer) {
+            console.error('Search elements not found!');
+            return;
+        }
+
+        // تحميل المحتوى مسبقاً ولكن دون إظهار رسالة التحميل
+        await loadAllPagesContent();
+
+        // البحث عند الضغط على Enter
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch(this.value.trim());
+                this.blur(); // إخفاء لوحة المفاتيح بعد البحث
+            }
+        });
+
+        // البحث أثناء الكتابة (بعد تأخير 500 مللي ثانية)
+        let typingTimer;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(() => {
+                performSearch(this.value.trim());
+            }, 500);
+        });
+
+        // إخفاء النتائج عند النقر خارجها
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+                resultsContainer.style.display = 'none';
+            }
+        });
+
+        // إخفاء لوحة المفاتيح عند لمس النتائج في الجوال
+        resultsContainer.addEventListener('touchstart', function() {
+            searchInput.blur();
+        });
+    }
+
+    // تهيئة البحث عند التركيز على حقل البحث
+    document.getElementById('globalSearch').addEventListener('focus', () => {
+        if (!isSearchInitialized) {
+            initSearch();
+        }
     });
 
-    // وظائف الشريط العلوي من الكود الأول
+    // آخر التحديثات - يمكن استبدالها ببيانات حقيقية من قاعدة بيانات
+    const latestUpdates = [
+        {
+            title: "تحديث كامل لصفحة المقالات",
+            url: "https://husseinalkhalil.com/articles",
+            date: "18 أغسطس 2025",
+            isNew: true
+        },
+        {
+            title: "مقالة جديدة: مفهوم الربا في كتاب الله ",
+            url: "https://husseinalkhalil.com/article/43",
+            date: "24 يوليو 2025",
+            isNew: true
+        },
+        {
+            title: "إصدار جديد: كتاب: فكر من جديد ",
+            url: "https://husseinalkhalil.com/books?book=book-6",
+            date: "1 يونيو 2025",
+            isNew: true
+        }
+    ];
+
+    function renderUpdates() {
+        const container = document.getElementById('updatesContainer');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        latestUpdates.forEach(update => {
+            const item = document.createElement('div');
+            item.className = 'update-item';
+            
+            item.innerHTML = `
+                ${update.isNew ? '<span class="update-badge">جديد</span>' : ''}
+                <a href="${update.url}" class="update-link">${update.title}</a>
+                <span class="update-date">${update.date}</span>
+            `;
+            
+            container.appendChild(item);
+        });
+    }
+
+    function checkForNewUpdates() {
+        const lastVisit = localStorage.getItem('lastVisit');
+        const now = new Date().toISOString();
+        
+        if (!lastVisit) {
+            localStorage.setItem('lastVisit', now);
+            return;
+        }
+        
+        const newUpdates = latestUpdates.filter(update => {
+            const updateDate = new Date(update.date);
+            const lastVisitDate = new Date(lastVisit);
+            return updateDate > lastVisitDate;
+        });
+        
+        if (newUpdates.length > 0) {
+            const alertBox = document.createElement('div');
+            alertBox.className = 'updates-alert';
+            alertBox.innerHTML = `
+                <span>❗ لديك ${newUpdates.length} تحديثات جديدة منذ زيارتك الأخيرة</span>
+                <button onclick="this.parentElement.remove()">✕</button>
+            `;
+            document.querySelector('.updates-section').prepend(alertBox);
+        }
+        
+        localStorage.setItem('lastVisit', now);
+    }
+
+    // السكريبتات الأصلية
     function toggleMobileMenu() {
       const menu = document.querySelector(".nav-links");
       const overlay = document.querySelector(".nav-overlay");
@@ -1553,351 +1961,50 @@
       document.body.classList.toggle("nav-open");
     }
 
-    document.addEventListener('click', (e) => {
-      const navMenu = document.querySelector(".nav-links");
-      const hamburger = document.querySelector(".hamburger");
-      const overlay = document.querySelector(".nav-overlay");
-      
-      if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
-        navMenu.classList.remove("show");
-        overlay.style.display = "none";
-        document.body.classList.remove("nav-open");
+    function toggleShareMenu() {
+      if (window.innerWidth >= 768) {
+        const menu = document.getElementById("share-menu");
+        menu.style.display = (menu.style.display === "none") ? "block" : "none";
       }
-    });
-
-    // دالة لتنسيق التاريخ بالعربية
-    function formatArabicDate(date) {
-      const options = { 
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      };
-      return date.toLocaleDateString('ar-EG', options);
     }
 
-    // دالة لترتيب المقالات
-    function sortArticles() {
-      const container = document.querySelector('.container');
-      const articles = Array.from(document.querySelectorAll('.article'));
-      
-      // إضافة تاريخ النشر التلقائي إذا لم يكن موجودًا
-      articles.forEach(article => {
-        if (!article.querySelector('.publish-date')) {
-          const now = new Date();
-          article.setAttribute('data-date', now.toISOString());
-          
-          const dateElement = document.createElement('span');
-          dateElement.className = 'publish-date';
-          dateElement.innerHTML = `<span class="date-icon">📅</span> ${formatArabicDate(now)}`;
-          
-          const title = article.querySelector('h2');
-          title.after(dateElement);
-        }
-      });
-
-      // الترتيب من الأحدث إلى الأقدم
-      articles.sort((a, b) => {
-        return new Date(b.getAttribute('data-date')) - new Date(a.getAttribute('data-date'));
-      });
-
-      // إعادة إضافة المقالات بالترتيب الجديد
-      articles.forEach(article => {
-        container.appendChild(article);
-      });
-    }
-
-    // دالة إضافة/إزالة من المفضلة
-    function toggleFavorite(button, item) {
-        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        const isFavorite = favorites.includes(item);
-        
-        if (isFavorite) {
-            favorites = favorites.filter(i => i !== item);
-            button.classList.remove("active");
-            button.setAttribute('data-tooltip', 'أضف للمفضلة');
-            showMessage("تمت إزالة العنصر من المفضلة");
-        } else {
-            favorites.push(item);
-            button.classList.add("active");
-            button.setAttribute('data-tooltip', 'إزالة من المفضلة');
-            showMessage("تمت إضافة العنصر إلى المفضلة");
-        }
-
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-    }
-
-    function toggleArticle(link) {
-        const article = link.closest('.article');
-        const content = article.querySelector('p');
-        article.classList.toggle('expanded');
-        
-        if (article.classList.contains('expanded')) {
-            content.style.maxHeight = 'none';
-            content.style.display = 'block';
-            link.textContent = 'إخفاء النص';
-        } else {
-            content.style.maxHeight = '6em';
-            content.style.display = '-webkit-box';
-            link.textContent = 'قراءة المزيد';
-        }
-    }
-
-    function printArticle(button) {
-        const article = button.closest(".article").cloneNode(true);
-        const printWindow = window.open('', '_blank');
-        
-        article.querySelectorAll('.read-more, .article-actions').forEach(el => el.remove());
-        
-        printWindow.document.write(`
-            <html>
-                <head>
-                    <title>طباعة المقالة</title>
-                    <style>
-                        body { 
-                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                            padding: 20px; 
-                            direction: rtl;
-                            line-height: 1.7;
-                        }
-                        h2 {
-                            color: #4a208f;
-                        }
-                        .publish-date {
-                            color: #666;
-                            font-size: 0.9em;
-                            margin-bottom: 15px;
-                        }
-                    </style>
-                </head>
-                <body>
-                    ${article.innerHTML}
-                    <script>
-                        window.onload = function() {
-                            window.print();
-                            window.onafterprint = function() {
-                                window.close();
-                            };
-                        };
-                    <\/script>
-                </body>
-            </html>
-        `);
-        printWindow.document.close();
-    }
-
-    function showMessage(text) {
-        const message = document.getElementById("message");
-        message.textContent = text;
-        message.style.display = "block";
-        setTimeout(() => message.style.display = "none", 2000);
-    }
-
-    // دالة لتحويل النص إلى شكل بدون همزات أو تشكيل
-    function normalizeArabicText(text) {
-      return text
-        .replace(/[\u064B-\u065F\u0670]/g, "") // إزالة التشكيل
-        .replace(/[أإآاءئؤ]/g, "ا") // توحيد الهمزات والألفات
-        .replace(/[ة]/g, "ه") // تحويل التاء المربوطة إلى هاء
-        .replace(/[ى]/g, "ي"); // تحويل الألف المقصورة إلى ياء
-    }
-
-    // دالة لتمييز النص الذي تم البحث عنه
-    function highlightText(element, searchTerm) {
-      // إزالة التمييز السابق
-      const highlightedElements = element.querySelectorAll('.highlight');
-      highlightedElements.forEach(el => {
-        const parent = el.parentNode;
-        parent.replaceChild(document.createTextNode(el.textContent), el);
-        parent.normalize();
-      });
-
-      if (!searchTerm) return;
-
-      const normalizedSearchTerm = normalizeArabicText(searchTerm);
-      const textNodes = [];
-
-      // جمع جميع العقد النصية
-      function collectTextNodes(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-          textNodes.push(node);
-        } else if (node.nodeType === Node.ELEMENT_NODE && 
-                  !['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT'].includes(node.tagName)) {
-          for (let i = 0; i < node.childNodes.length; i++) {
-            collectTextNodes(node.childNodes[i]);
-          }
-        }
-      }
-
-      collectTextNodes(element);
-
-      // تمييز النص المطابق
-      textNodes.forEach(node => {
-        const parent = node.parentNode;
-        const text = node.nodeValue;
-        const normalizedText = normalizeArabicText(text);
-
-        // إنشاء تعبير منتظم لاكتشاف الكلمة بأي شكل من أشكالها
-        const regexPattern = normalizedSearchTerm.split('').map(char => {
-          if (char === 'ا') return '[أإآاءئؤ]';
-          if (char === 'ه') return '[هة]';
-          if (char === 'ي') return '[يى]';
-          return char;
-        }).join('[\u064B-\u065F\u0670]*'); // السماح بوجود أي تشكيل بعد كل حرف
-
-        const regex = new RegExp(regexPattern, 'gi');
-        let match;
-        let lastIndex = 0;
-        const fragment = document.createDocumentFragment();
-
-        while ((match = regex.exec(text)) !== null) {
-          // إضافة النص قبل المطابقة
-          if (match.index > lastIndex) {
-            fragment.appendChild(document.createTextNode(text.substring(lastIndex, match.index)));
-          }
-
-          // إضافة النص المطابق مع تمييزه
-          const span = document.createElement('span');
-          span.className = 'highlight';
-          span.textContent = match[0];
-          fragment.appendChild(span);
-
-          lastIndex = match.index + match[0].length;
-        }
-
-        // إضافة النص المتبقي بعد آخر مطابقة
-        if (lastIndex < text.length) {
-          fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
-        }
-
-        // استبدال العقدة الأصلية بالعقدة الجديدة
-        if (fragment.childNodes.length > 0) {
-          parent.replaceChild(fragment, node);
-        }
-      });
-    }
-
-    // وظيفة البحث في المقالات مع تمييز النتائج (معدلة من الكود الأول)
-    function setupSearch() {
-      const searchInput = document.getElementById('searchInput');
-      const resultsInfo = document.getElementById('searchResultsInfo');
-      const resultsCount = document.getElementById('resultsCount');
-      const articles = document.querySelectorAll('.article');
-      const noResultsMessage = document.getElementById('noResultsMessage');
-      const originalArticles = Array.from(articles);
-      
-      function performSearch() {
-        const searchTerm = searchInput.value.trim().toLowerCase();
-        
-        // إخفاء جميع المقالات
-        articles.forEach(article => {
-          article.style.display = 'none';
+    function handleMobileShare() {
+      const link = "https://www.husseinalkhalil.com";
+      if (navigator.share) {
+        navigator.share({
+          title: 'موقع حسين الخليل',
+          url: link
+        }).catch(console.error);
+      } else {
+        navigator.clipboard.writeText(link).then(() => {
+          showCopyAlert("تم نسخ الرابط بنجاح ✅");
+        }).catch(() => {
+          // Fallback إذا فشل Clipboard API
+          const textarea = document.createElement('textarea');
+          textarea.value = link;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showCopyAlert("تم نسخ الرابط بنجاح ✅");
         });
-        
-        if (searchTerm === '') {
-          // إعادة عرض جميع المقالات عند إفراغ البحث
-          originalArticles.forEach(article => {
-            article.style.display = 'block';
-            highlightText(article, '');
-          });
-          resultsInfo.style.display = 'none';
-          noResultsMessage.style.display = 'none';
-          return;
-        }
-        
-        // فلترة المقالات حسب البحث
-        let count = 0;
-        originalArticles.forEach(article => {
-          const titleElement = article.querySelector('h2');
-          const contentElement = article.querySelector('p');
-          const title = titleElement.textContent.toLowerCase();
-          const content = contentElement.textContent.toLowerCase();
-          
-          if (title.includes(searchTerm) || content.includes(searchTerm)) {
-            count++;
-            article.style.display = 'block';
-            
-            // تمييز النص المطابق
-            highlightText(article, searchTerm);
-          }
-        });
-        
-        // عرض معلومات النتائج
-        if (count > 0) {
-          resultsCount.textContent = count;
-          resultsInfo.style.display = 'block';
-          noResultsMessage.style.display = 'none';
-        } else {
-          resultsInfo.style.display = 'none';
-          noResultsMessage.style.display = 'block';
-        }
       }
-      
-      // البحث عند الكتابة
-      searchInput.addEventListener('input', performSearch);
-      
-      // البحث عند الضغط على Enter
-      searchInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          performSearch();
-        }
-      });
     }
 
-    // وظائف مشاركة المقالات
-    function toggleArticleShareMenu(button) {
-      const menu = button.nextElementSibling;
-      const allMenus = document.querySelectorAll('.article-share-menu');
-      
-      // إغلاق جميع قوائم المشاركة الأخرى
-      allMenus.forEach(m => {
-        if (m !== menu) m.style.display = 'none';
+    function copyLink() {
+      const link = "https://www.husseinalkhalil.com";
+      navigator.clipboard.writeText(link).then(() => {
+        showCopyAlert("تم نسخ الرابط بنجاح ✅");
+      }).catch(() => {
+        // Fallback إذا فشل Clipboard API
+        const textarea = document.createElement('textarea');
+        textarea.value = link;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showCopyAlert("تم نسخ الرابط بنجاح ✅");
       });
-      
-      // تبديل القائمة الحالية
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function copyArticleLink(article) {
-      const articleId = article.id;
-      const articleUrl = window.location.href.split('#')[0] + '#' + articleId;
-      
-      navigator.clipboard.writeText(articleUrl).then(() => {
-        showCopyAlert("تم نسخ رابط المقالة بنجاح ✅");
-      });
-      
-      // إغلاق القائمة بعد النسخ
-      article.querySelector('.article-share-menu').style.display = 'none';
-    }
-
-    function shareArticleOn(platform, article) {
-      const articleTitle = article.querySelector('h2').textContent;
-      const articleId = article.id;
-      const articleUrl = window.location.href.split('#')[0] + '#' + articleId;
-      
-      let shareUrl = '';
-      
-      switch(platform) {
-        case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}&quote=${encodeURIComponent(articleTitle)}`;
-          break;
-        case 'twitter':
-          shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(articleTitle)}&url=${encodeURIComponent(articleUrl)}`;
-          break;
-        case 'whatsapp':
-          shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(articleTitle + ' - ' + articleUrl)}`;
-          break;
-        case 'telegram':
-          shareUrl = `https://t.me/share/url?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent(articleTitle)}`;
-          break;
-      }
-      
-      window.open(shareUrl, '_blank');
-      
-      // إغلاق القائمة بعد المشاركة
-      article.querySelector('.article-share-menu').style.display = 'none';
     }
 
     function showCopyAlert(message) {
@@ -1913,115 +2020,116 @@
       }, 2500);
     }
 
-    // عرض مقالة واحدة عند فتح رابط معين
-    function loadSpecificArticle() {
-      const hash = window.location.hash;
-      const allArticles = document.querySelectorAll('.article');
-      
-      if (hash) {
-        const targetArticle = document.querySelector(hash);
-        if (targetArticle) {
-          // إخفاء جميع المقالات
-          allArticles.forEach(article => {
-            article.style.display = 'none';
-          });
-          
-          // عرض المقالة المطلوبة فقط
-          targetArticle.style.display = 'block';
-          targetArticle.scrollIntoView({ behavior: 'smooth' });
-          
-          // تحديث أزرار المفضلة للمقالة المعروضة
-          const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-          const favoriteButton = targetArticle.querySelector('.article-button');
-          if (favoriteButton) {
-              const match = favoriteButton.getAttribute("onclick")?.match(/'([^']+)'/);
-              if (match) {
-                  const isFavorite = favorites.includes(match[1]);
-                  favoriteButton.setAttribute('data-tooltip', isFavorite ? 'إزالة من المفضلة' : 'أضف للمفضلة');
-                  if (isFavorite) {
-                      favoriteButton.classList.add("active");
-                  } else {
-                      favoriteButton.classList.remove("active");
-                  }
-              }
-          }
-          
-          // إضافة زر للعودة لعرض جميع المقالات
-          const backButton = document.createElement('button');
-          backButton.textContent = 'عرض جميع المقالات';
-          backButton.className = 'back-to-all';
-          
-          backButton.addEventListener('click', function() {
-            allArticles.forEach(article => {
-              article.style.display = 'block';
-            });
-            backButton.remove();
-            window.history.pushState(null, null, ' ');
-          });
-          
-          targetArticle.after(backButton);
+    window.addEventListener('load', () => {
+      if (window.innerWidth < 768) {
+        document.querySelector('.mobile-share').style.display = 'block';
+      }
+      renderUpdates();
+      checkForNewUpdates();
+    });
+
+    document.addEventListener('click', (e) => {
+      const shareMenu = document.getElementById("share-menu");
+      const shareButton = document.querySelector(".share-button");
+      const navMenu = document.querySelector(".nav-links");
+      const hamburger = document.querySelector(".hamburger");
+      const overlay = document.querySelector(".nav-overlay");
+
+      if (window.innerWidth >= 768) {
+        if (!shareMenu.contains(e.target) && !shareButton.contains(e.target)) {
+          shareMenu.style.display = "none";
         }
       }
-    }
 
-    // وظيفة العودة للأعلى
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-
-    // إظهار/إخفاء زر العودة للأعلى عند التمرير
-    window.addEventListener('scroll', function() {
-      const backToTopButton = document.querySelector('.back-to-top');
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('visible');
-      } else {
-        backToTopButton.classList.remove('visible');
+      if (navMenu.contains(e.target)) {
+        if (e.target.tagName === 'A') {
+          navMenu.classList.remove("show");
+          document.body.classList.remove("nav-open");
+          overlay.style.display = "none";
+        }
+      } else if (e.target === overlay || !hamburger.contains(e.target)) {
+        navMenu.classList.remove("show");
+        document.body.classList.remove("nav-open");
+        overlay.style.display = "none";
       }
     });
 
-    // إغلاق قوائم المشاركة عند النقر خارجها
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.share-button-container')) {
-        document.querySelectorAll('.article-share-menu').forEach(menu => {
-          menu.style.display = 'none';
-        });
+    document.querySelector('.nav-links').addEventListener('wheel', (e) => {
+      e.stopPropagation();
+    });
+
+    // سكريبتات الشريط المتحرك من الكود الثاني
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    let slideInterval;
+    
+    function showSlide(index) {
+      slides.forEach(slide => slide.style.display = 'none');
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      slides[index].style.display = 'block';
+      dots[index].classList.add('active');
+      currentSlide = index;
+    }
+    
+    function nextSlide() {
+      let newIndex = (currentSlide + 1) % slides.length;
+      showSlide(newIndex);
+      resetInterval();
+    }
+    
+    function prevSlide() {
+      let newIndex = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(newIndex);
+      resetInterval();
+    }
+    
+    function goToSlide(index) {
+      showSlide(index);
+      resetInterval();
+    }
+    
+    function startInterval() {
+      slideInterval = setInterval(nextSlide, 3000);
+    }
+    
+    function resetInterval() {
+      clearInterval(slideInterval);
+      startInterval();
+    }
+    
+    // تحكم باللمس للجوال
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const sliderContainer = document.querySelector('.slider-container');
+    
+    function handleTouchStart(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }
+    
+    function handleTouchEnd(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleGesture();
+    }
+    
+    function handleGesture() {
+      if (touchEndX < touchStartX) {
+        nextSlide();
       }
-    });
-
-    // تهيئة الصفحة
-    window.addEventListener('DOMContentLoaded', function() {
-        // ترتيب المقالات حسب التاريخ
-        sortArticles();
-        
-        // تهيئة أزرار المفضلة
-        const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        document.querySelectorAll(".article-button").forEach(button => {
-            const match = button.getAttribute("onclick")?.match(/'([^']+)'/);
-            if (match && button.textContent.includes('⭐')) {
-                const articleTitle = match[1];
-                const isFavorite = favorites.includes(articleTitle);
-                button.setAttribute('data-tooltip', isFavorite ? 'إزالة من المفضلة' : 'أضف للمفضلة');
-                if (isFavorite) {
-                    button.classList.add("active");
-                } else {
-                    button.classList.remove("active");
-                }
-            }
-        });
-
-        // تهيئة وظيفة البحث
-        setupSearch();
-        
-        // تحميل مقالة محددة إذا كان الرابط يحتوي على معرف مقالة
-        loadSpecificArticle();
-    });
-
-    // إعادة تحميل المقالة عند تغيير الهاش في الرابط
-    window.addEventListener('hashchange', function() {
-      loadSpecificArticle();
+      
+      if (touchEndX > touchStartX) {
+        prevSlide();
+      }
+    }
+    
+    // تهيئة الشريط المتحرك
+    document.addEventListener('DOMContentLoaded', () => {
+      showSlide(0);
+      startInterval();
+      
+      sliderContainer.addEventListener('touchstart', handleTouchStart, false);
+      sliderContainer.addEventListener('touchend', handleTouchEnd, false);
     });
   </script>
 </body>
