@@ -607,33 +607,10 @@
       position: relative;
     }
 
-    /* تأثير التوهج حول القسم بأكمله */
-    .book-tabs-section::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      background: linear-gradient(45deg, #5e2ca5, #8a4fff, #ff00cc, #5e2ca5);
-      background-size: 400% 400%;
-      border-radius: 20px;
-      z-index: -1;
-      animation: glowingBorder 3s ease infinite;
-      opacity: 0.7;
-      filter: blur(15px);
-    }
-
-    @keyframes glowingBorder {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     .book-tabs-title {
       color: #5e2ca5;
       font-size: 2em; /* زيادة حجم الخط */
-      margin-bottom: 1em;
+      margin-bottom: 1.5em;
       position: relative;
       display: inline-block;
       font-weight: bold;
@@ -643,7 +620,7 @@
     .book-tabs-title::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -15px;
       left: 50%;
       transform: translateX(-50%);
       width: 100px;
@@ -655,26 +632,39 @@
     .book-tabs-container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 25px;
     }
 
     .book-tab {
       background: linear-gradient(135deg, #fff5f8 0%, #f9f3ff 100%);
       border: 2px solid transparent;
-      border-radius: 14px;
-      padding: 15px;
+      border-radius: 16px;
+      padding: 20px;
       text-align: center;
       transition: all 0.5s ease;
-      box-shadow: 0 8px 20px rgba(94, 44, 165, 0.2);
+      box-shadow: 0 10px 25px rgba(94, 44, 165, 0.2);
       position: relative;
       overflow: hidden;
       animation: subtlePulse 4s infinite ease-in-out;
+      z-index: 1;
     }
 
     @keyframes subtlePulse {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-      100% { transform: translateY(0); }
+      0% { 
+        transform: translateY(0) scale(1);
+        box-shadow: 0 10px 25px rgba(94, 44, 165, 0.2), 
+                    0 0 30px rgba(142, 68, 173, 0.3);
+      }
+      50% { 
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(94, 44, 165, 0.3), 
+                    0 0 40px rgba(142, 68, 173, 0.4);
+      }
+      100% { 
+        transform: translateY(0) scale(1);
+        box-shadow: 0 10px 25px rgba(94, 44, 165, 0.2), 
+                    0 0 30px rgba(142, 68, 173, 0.3);
+      }
     }
 
     .book-tab::before {
@@ -687,10 +677,9 @@
       background: linear-gradient(45deg, #5e2ca5, #8a4fff, #ff00cc, #5e2ca5);
       background-size: 400% 400%;
       z-index: -1;
-      border-radius: 16px;
-      animation: glowing 3s ease infinite;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      border-radius: 18px;
+      animation: glowing 6s ease infinite;
+      opacity: 0.8;
     }
 
     @keyframes glowing {
@@ -699,43 +688,45 @@
       100% { background-position: 0% 50%; }
     }
 
-    .book-tab:hover::before {
-      opacity: 1;
-    }
-
     .book-tab:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 15px 30px rgba(94, 44, 165, 0.3);
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(94, 44, 165, 0.4), 
+                  0 0 50px rgba(142, 68, 173, 0.5);
     }
 
     .book-tab img {
       width: 100%;
-      height: 150px;
-      border-radius: 8px;
+      height: 180px;
+      border-radius: 10px;
       object-fit: cover;
-      margin-bottom: 15px;
-      border: 2px solid #e0d0f0;
+      margin-bottom: 20px;
+      border: 3px solid #e0d0f0;
       transition: all 0.4s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
     .book-tab:hover img {
-      transform: scale(1.05);
+      transform: scale(1.08);
       border-color: #8a4fff;
-      box-shadow: 0 8px 20px rgba(94, 44, 165, 0.3);
+      box-shadow: 0 12px 25px rgba(94, 44, 165, 0.4);
     }
 
     .book-tab h4 {
       margin: 0;
-      font-size: 0.95em;
+      font-size: 1.1em;
       color: #5e2ca5;
       font-weight: bold;
-      line-height: 1.5;
+      line-height: 1.6;
       transition: color 0.3s ease;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .book-tab:hover h4 {
       color: #8a4fff;
+      text-shadow: 0 2px 4px rgba(94, 44, 165, 0.2);
     }
 
     /* تأثيرات خاصة لكل بطاقة */
@@ -751,13 +742,35 @@
       animation-delay: 0.3s;
     }
 
-    @media (max-width: 768px) {
+    /* تأثيرات إضافية للبطاقات */
+    .book-tab::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      z-index: -1;
+      border-radius: 16px;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 900px) {
+      .book-tabs-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 600px) {
       .book-tabs-container {
         grid-template-columns: repeat(1, 1fr);
+        gap: 25px;
       }
       
       .book-tab {
-        padding: 12px;
+        padding: 15px;
       }
       
       .book-tabs-title {
@@ -1641,7 +1654,7 @@
     <div class="book-tab">
       <a href="https://husseinalkhalil.com/books?book=book-4" style="text-decoration: none; color: inherit;">
         <img src="images/3.png" alt="الإسلام بين الكتاب والتراث">
-        <h4>الإسلام между الكتاب والتراث، حوار بين عقلين يمثلان رؤيتين مختلفتين للدين.</h4>
+        <h4>الإسلام بين الكتاب والتراث، حوار بين عقلين يمثلان رؤيتين مختلفتين للدين.</h4>
       </a>
     </div>
   </div>
@@ -1742,7 +1755,7 @@
 <img alt="يوتيوب" src="icons/yot-soc.png"/>
 </a>
 <a class="social-icon facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank">
-<img alt="فيسبوك" src="icons/fac-soc.png"/>
+<img alt="فيسبook" src="icons/fac-soc.png"/>
 </a>
 <a class="social-icon instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&amp;utm_source=qr" target="_blank">
 <img alt="إنستغرام" src="icons/ins-soc.png"/>
@@ -1751,7 +1764,7 @@
 <img alt="تلغرام" src="icons/tel-soc.png"/>
 </a>
 <a class="social-icon tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank">
-<img alt="تيك تок" src="icons/tik-soc.png"/>
+<img alt="تيك توك" src="icons/tik-soc.png"/>
 </a>
 <a class="social-icon snap" href="https://snapchat.com/t/sFLWjw3K" target="_blank">
 <img alt="سناب شات" src="icons/snap.png"/>
@@ -1885,24 +1898,23 @@
                 </div>
             `;
             resultsContainer.style.display = 'block';
-            return;
+        } else {
+            results.forEach(item => {
+                const resultElement = document.createElement('div');
+                resultElement.className = 'search-item';
+                const preview = createContentPreview(item.content, query);
+                
+                resultElement.innerHTML = `
+                    <h3>${highlightMatches(item.page, query)}</h3>
+                    <p>${highlightMatches(preview, query)}</p>
+                    <small>${item.url}</small>
+                `;
+                resultElement.onclick = () => window.location.href = item.url;
+                resultsContainer.appendChild(resultElement);
+            });
+
+            resultsContainer.style.display = 'block';
         }
-
-        results.forEach(item => {
-            const resultElement = document.createElement('div');
-            resultElement.className = 'search-item';
-            const preview = createContentPreview(item.content, query);
-            
-            resultElement.innerHTML = `
-                <h3>${highlightMatches(item.page, query)}</h3>
-                <p>${highlightMatches(preview, query)}</p>
-                <small>${item.url}</small>
-            `;
-            resultElement.onclick = () => window.location.href = item.url;
-            resultsContainer.appendChild(resultElement);
-        });
-
-        resultsContainer.style.display = 'block';
     }
 
     async function performSearch(query) {
@@ -1915,14 +1927,22 @@
         resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
         resultsContainer.style.display = 'block';
 
-        const searchData = await loadAllPagesContent();
-        const normalizedQuery = normalizeArabic(query);
-        const results = searchData.filter(item => {
-            const fullText = normalizeArabic(item.page + ' ' + item.content);
-            return fullText.includes(normalizedQuery);
-        });
+        try {
+            const searchData = await loadAllPagesContent();
+            const normalizedQuery = normalizeArabic(query);
+            const results = searchData.filter(item => {
+                const fullText = normalizeArabic(item.page + ' ' + item.content);
+                return fullText.includes(normalizedQuery);
+            });
 
-        displayResults(results, query, resultsContainer);
+            displayResults(results, query, resultsContainer);
+        } catch (error) {
+            resultsContainer.innerHTML = `
+                <div class="search-item">
+                    <p>⚠️ حدث خطأ أثناء البحث</p>
+                </div>
+            `;
+        }
     }
 
     async function initSearch() {
@@ -1938,7 +1958,11 @@
         }
 
         // تحميل المحتوى مسبقاً ولكن دون إظهار رسالة التحميل
-        await loadAllPagesContent();
+        try {
+            await loadAllPagesContent();
+        } catch (error) {
+            console.error('Error preloading content:', error);
+        }
 
         // البحث عند الضغط على Enter
         searchInput.addEventListener('keypress', function(e) {
@@ -1964,7 +1988,7 @@
             }
         });
 
-        // إخفاء لوحة المفاتيح عند لمس النتائج в الجوال
+        // إخفاء لوحة المفاتيح عند لمس النتائج في الجوال
         resultsContainer.addEventListener('touchstart', function() {
             searchInput.blur();
         });
@@ -2131,27 +2155,29 @@
       const overlay = document.querySelector(".nav-overlay");
 
       if (window.innerWidth >= 768) {
-        if (!shareMenu.contains(e.target) && !shareButton.contains(e.target)) {
+        if (shareMenu && !shareMenu.contains(e.target) && shareButton && !shareButton.contains(e.target)) {
           shareMenu.style.display = "none";
         }
       }
 
-      if (navMenu.contains(e.target)) {
+      if (navMenu && navMenu.contains(e.target)) {
         if (e.target.tagName === 'A') {
           navMenu.classList.remove("show");
           document.body.classList.remove("nav-open");
-          overlay.style.display = "none";
+          if (overlay) overlay.style.display = "none";
         }
-      } else if (e.target === overlay || !hamburger.contains(e.target)) {
-        navMenu.classList.remove("show");
+      } else if (overlay && (e.target === overlay || (hamburger && !hamburger.contains(e.target)))) {
+        if (navMenu) navMenu.classList.remove("show");
         document.body.classList.remove("nav-open");
         overlay.style.display = "none";
       }
     });
 
-    document.querySelector('.nav-links').addEventListener('wheel', (e) => {
-      e.stopPropagation();
-    });
+    if (document.querySelector('.nav-links')) {
+      document.querySelector('.nav-links').addEventListener('wheel', (e) => {
+        e.stopPropagation();
+      });
+    }
 
     // سكريبتات الشريط المتحرك من الكود الثاني
     let currentSlide = 0;
@@ -2160,6 +2186,8 @@
     let slideInterval;
     
     function showSlide(index) {
+      if (slides.length === 0) return;
+      
       slides.forEach(slide => slide.style.display = 'none');
       dots.forEach(dot => dot.classList.remove('active'));
       
@@ -2181,8 +2209,10 @@
     }
     
     function goToSlide(index) {
-      showSlide(index);
-      resetInterval();
+      if (index >= 0 && index < slides.length) {
+        showSlide(index);
+        resetInterval();
+      }
     }
     
     function startInterval() {
@@ -2220,11 +2250,15 @@
     
     // تهيئة الشريط المتحرك
     document.addEventListener('DOMContentLoaded', () => {
-      showSlide(0);
-      startInterval();
-      
-      sliderContainer.addEventListener('touchstart', handleTouchStart, false);
-      sliderContainer.addEventListener('touchend', handleTouchEnd, false);
+      if (slides.length > 0) {
+        showSlide(0);
+        startInterval();
+        
+        if (sliderContainer) {
+          sliderContainer.addEventListener('touchstart', handleTouchStart, false);
+          sliderContainer.addEventListener('touchend', handleTouchEnd, false);
+        }
+      }
     });
   </script>
 </body>
