@@ -23,6 +23,7 @@
     ]
   }
 </script>
+  </script>
 <script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546"></script>
 <style>
     /* أنماط البحث المحسنة - التعديلات الجديدة */
@@ -105,7 +106,7 @@
     @media (max-width: 768px) {
       .universal-search {
         max-width: 100%; /* السماح بالتمدد الكامل في الجوال */
-        padding: 极 0 10px;
+        padding: 0 10px;
         margin: 15px auto;
         width: 95%;
       }
@@ -164,7 +165,7 @@
       align-items: center;
       gap: 25px;
       margin: 0 auto;
-      padding极: 5px 0;
+      padding: 5px 0;
       overflow-x: auto;
       scrollbar-width: none;
     }
@@ -250,7 +251,7 @@
         padding: 5px 0;
       }
 
-      .nav极-links a:hover {
+      .nav-links a:hover {
         color: #d0bfff !important;
         transform: translateY(-2px);
       }
@@ -263,7 +264,7 @@
         width: 0;
         height: 2px;
         background: #d0bfff;
-        transition: width 极 0.3s ease;
+        transition: width 0.3s ease;
       }
 
       .nav-links a:hover::after {
@@ -294,7 +295,7 @@
 
       #share-menu {
         background: #f8f3ff !important;
-        border: 1px solid #e6极daff !important;
+        border: 1px solid #e6daff !important;
         border-radius: 12px !important;
         padding: 15px !important;
         gap: 12px !important;
@@ -304,7 +305,7 @@
         transition: transform 0.2s ease;
       }
 
-      #极 share-menu a:hover img {
+      #share-menu a:hover img {
         transform: scale(1.15);
       }
     }
@@ -449,7 +450,7 @@
       color: #4b007d;
     }
 
-    /* أنماط قسم آخر التحديثات مع الوميض المضاف */
+    /* أنماط قسم آخر التحديثات */
     .updates-section {
       max-width: 800px;
       margin: 2em auto;
@@ -494,53 +495,42 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(94, 44, 165, 0.1);
       transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* إضافة وميض متداخل لكل تحديث جديد */
-    .update-item::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, rgba(255, 215, 0, 0) 0%, rgba(255, 215, 0, 0.8) 50%, rgba(255, 215, 0, 0) 100%);
-      transform: rotate(45deg);
-      animation: updateGlow 3s infinite linear;
-      z-index: 1;
-      animation-delay: 0s; /* تأخير الصفر للعنصر الأول */
-    }
-
-    .update-item:nth-child(2极)::before {
-      animation-delay: 1s; /* تأخير ثانية للعنصر الثاني */
-    }
-
-    .update-item:nth-child(3)::before {
-      animation-delay: 2s; /* تأخير ثانيتين للعنصر الثالث */
-    }
-
-    @keyframes updateGlow {
-      0% { transform: rotate(45deg) translate(-50%, -50%); }
-      100% { transform: rotate(45deg) translate(50%, 50%); }
     }
 
     .update-item:hover {
       transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(94, 44, 165, 极 0.2);
+      box-shadow: 0 4px 12px rgba(94, 44, 165, 0.2);
     }
 
     .update-badge {
-      background-color: #ff0000; /* أحمر نقي */
-      color: white;
-      padding: 3px 8px;
-      border-radius: 20px;
-      font-size: 0.8em;
-      margin-left: 10px;
-      font-weight: bold;
-      position: relative;
-      z-index: 2;
+  background-color: #ff0000; /* أحمر نقي */
+  color: white;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  margin-left: 10px;
+  font-weight: bold;
+  animation: blink 1s infinite; /* تأثير وميض */
+  box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.7); /* توهج أصفر */
+}
+
+@keyframes blink {
+  0% { 
+    opacity: 1;
+    box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.7); 
+  }
+  50% { 
+    opacity: 0.8; 
+    box-shadow: 0 0 20px 8px rgba(255, 215, 0, 0.9); /* توهج أقوى أثناء الوميض */
+  }
+  100% { 
+    opacity: 1;
+    box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.7);
+  }
+}
+
+.update-item:hover .update-badge {
+  animation: blink 0.7s infinite; /* تسريع الوميض عند التحويم */
     }
 
     .update-link {
@@ -549,8 +539,6 @@
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
-      position: relative;
-      z-index: 2;
     }
 
     .update-link:hover {
@@ -562,13 +550,11 @@
       color: #888;
       font-size: 0.9em;
       margin-right: 10px;
-      position: relative;
-      z-index: 2;
     }
 
     .updates-alert {
-      background-color极: #fff3f3;
-      border: 1px solid #极ffcccc;
+      background-color: #fff3f3;
+      border: 1px solid #ffcccc;
       padding: 10px 15px;
       border-radius: 8px;
       margin-bottom: 15px;
@@ -612,7 +598,7 @@
       }
     }
     
-    /* قسم التبويبات الجديد مع تأثير النقطة المضيئة */
+    /* قسم التبويبات الجديد */
     .book-tabs-section {
       max-width: 800px;
       margin: 2em auto;
@@ -634,7 +620,7 @@
       bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 60极px;
+      width: 60px;
       height: 3px;
       background: linear-gradient(90deg, #5e2ca5, #8a4fff);
       border-radius: 3px;
@@ -656,139 +642,6 @@
       box-shadow: 0 4px 12px rgba(94, 44, 165, 0.15);
       position: relative;
       overflow: hidden;
-      height: 380px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    /* تأثير النقطة المضيئة على الحواف - الجديد */
-    .book-tab::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      z-index: 2;
-      background: linear-gradient(45deg, #ff0066, #ff9900, #33cc33, #3399ff, #cc66ff, #ff0066);
-      background-size: 400%;
-      border-radius: 16px;
-      animation: glowing-border 20s linear infinite;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .book-tab:hover::before {
-      opacity: 1;
-    }
-    
-    .book-tab::after {
-      content: '';
-      position: absolute;
-      top: 1px;
-      left: 1px;
-      right: 1px;
-      bottom: 1px;
-      background: #fff5f8;
-      border-radius: 14px;
-      z-index: 1;
-    }
-    
-    @keyframes glowing-border {
-      0% {
-        background-position: 0 0;
-      }
-      50% {
-        background-position: 400% 0;
-      }
-      100% {
-        background-position: 0 0;
-      }
-    }
-    
-    .book-content {
-      position: relative;
-      z-index: 3;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    /* تأثير النقطة المضيئة المنفصلة */
-    .dot-effect {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #ff3366;
-      box-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366;
-      z-index: 4;
-      animation: dotMove 5s linear infinite paused;
-      pointer-events: none;
-    }
-    
-    .book-tab:hover .dot-effect {
-      animation-play-state: running;
-    }
-    
-    @keyframes dotMove {
-      0% {
-        top: -5px;
-        left: -5px;
-        opacity: 0;
-      }
-      5% {
-        opacity: 1;
-      }
-      25% {
-        top: -5px;
-        left: calc(100% - 7px);
-      }
-      50% {
-        top: calc(100% - 7px);
-        left: calc(100% - 7px);
-      }
-      75% {
-        top: calc(100% - 7px);
-        left: -5px;
-      }
-      95% {
-        opacity: 1;
-      }
-      100% {
-        top: -5px;
-        left: -5px;
-        opacity: 0;
-      }
-    }
-    
-    /* تأثير الذيل */
-    .dot-effect::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 30px;
-      height: 30px;
-      background: radial-gradient(circle, rgba(255, 51, 102, 0.7) 0%, rgba(255, 51, 102, 0) 70%);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: pulse 1s infinite;
-    }
-    
-    @keyframes pulse {
-      0% {
-        width: 30px;
-        height: 30px;
-        opacity: 0.7;
-      }
-      100% {
-        width: 60px;
-        height: 60px;
-        opacity: 0;
-      }
     }
 
     .book-tab:hover {
@@ -803,13 +656,6 @@
       object-fit: cover;
       margin-bottom: 10px;
       border: 1px solid #e0d0f0;
-      position: relative;
-      z-index: 2;
-      transition: transform 0.3s ease;
-    }
-    
-    .book-tab:hover img {
-      transform: scale(1.05);
     }
 
     .book-tab h4 {
@@ -818,15 +664,87 @@
       color: #5e2ca5;
       font-weight: bold;
       line-height: 1.4;
-      position: relative;
-      z-index: 2;
-      flex-grow: 1;
     }
-    
-    .book-tab p {
-      color: #7f8c8d;
-      font-size: 0.95rem;
-      margin-bottom: 15px;
+
+    /* تأثير النقطة المضيئة (الشهب) على البطاقات */
+    .book-tab::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: rotate(45deg);
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .book-tab:hover::before {
+      opacity: 1;
+      animation: shootingStar 2s linear;
+    }
+
+    @keyframes shootingStar {
+      0% {
+        transform: translate(-100%, -100%) rotate(45deg);
+      }
+      100% {
+        transform: translate(100%, 100%) rotate(45deg);
+      }
+    }
+
+    /* تأثير النقطة المضيئة على الحواف */
+    .book-tab::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 14px;
+      padding: 2px;
+      background: linear-gradient(45deg, #ff6b6b, #ffa500, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff6b6b);
+      background-size: 400% 400%;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+    }
+
+    .book-tab:hover::after {
+      opacity: 1;
+      animation: glowingBorder 3s linear infinite;
+    }
+
+    @keyframes glowingBorder {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* توقيتات مختلفة لكل بطاقة */
+    .book-tab:nth-child(1):hover::after {
+      animation-delay: 0s;
+    }
+
+    .book-tab:nth-child(2):hover::after {
+      animation-delay: 2s;
+    }
+
+    .book-tab:nth-child(3):hover::after {
+      animation-delay: 4s;
     }
 
     @media (max-width: 768px) {
@@ -893,7 +811,7 @@
       background: rgba(94, 44, 165, 0.9);
     }
     
-    .slider-control极s {
+    .slider-controls {
       display: flex;
       justify-content: center;
       margin-top: 15px;
@@ -1069,7 +987,7 @@
       position: absolute;
       top: 0;
       left: -100%;
-      width: 极 100%;
+      width: 100%;
       height: 100%;
       background: linear-gradient(45deg, #8a4fff, #5e2ca5);
       transition: left 0.3s ease;
@@ -1081,7 +999,7 @@
       box-shadow: 0 6px 15px rgba(94, 44, 165, 0.4);
     }
 
-    .极 card a:hover::before {
+    .card a:hover::before {
       left: 0;
     }
 
@@ -1140,7 +1058,7 @@
     @media (max-width: 480px) {
       .cards {
         grid-template-columns: repeat(2, 1fr);
-        gap极: 15px;
+        gap: 15px;
       }
       
       .card {
@@ -1227,10 +1145,10 @@
       content: '';
       position: absolute;
       top: 0;
-      left极: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(45deg, #5e2ca5, #8a极4fff);
+      background: linear-gradient(45deg, #5e2ca5, #8a4fff);
       opacity: 0;
       transition: opacity 0.3s ease;
       z-index: 1;
@@ -1248,7 +1166,7 @@
     /* تأثيرات خاصة بكل شبكة اجتماعية */
     .social-icon:hover {
       transform: translateY(-5px) scale(1.1);
-      box-shadow: 极 0 10px 25px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
 
     .social-icon:hover::before {
@@ -1269,7 +1187,7 @@
     }
 
     .social-icon.instagram:hover::before {
-      background: linear-gradient(45deg, #E1306极C, #F77737, #FCAF45);
+      background: linear-gradient(45deg, #E1306C, #F77737, #FCAF45);
     }
 
     .social-icon.telegram:hover::before {
@@ -1397,11 +1315,13 @@
     footer p {
       margin: 5px 0;
       font-size: 13px;
+      color: white;
     }
 
     footer .copyright {
       margin-top: 15px;
       font-size: 13px;
+      color: white;
     }
 
     /* تعديلات للجوال */
@@ -1531,7 +1451,7 @@
   
   .youtube-btn {
     width: 90%;
-    padding极: 10px 20px;
+    padding: 10px 20px;
     font-size: 0.9em;
   }
   
@@ -1606,8 +1526,8 @@
 <div class="share-button">
 <img alt="مشاركة" onclick="toggleShareMenu()" src="images/share.png"/>
 <div class="tooltip-text">مشاركة الموقع</div>
-<div id="share-menu" style="display:none; position:absolute; top:50px; left:0; width:180px; box-shadow:0 0 10px rgba极(0,0,0,0.2);">
-<div onclick极="copyLink()" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5;">🔗 نسخ الرابط</div>
+<div id="share-menu" style="display:none; position:absolute; top:50px; left:0; width:180px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+<div onclick="copyLink()" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5;">🔗 نسخ الرابط</div>
 <div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
 <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.husseinalkhalil.com" target="_blank"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
 <a href="https://api.whatsapp.com/send?text=https://www.husseinalkhalil.com" target="_blank"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
@@ -1671,7 +1591,7 @@
 <div class="title">
 <h1>مرحباً بك</h1>
 <h3>كل ما أنشره لا أزعم فيه امتلاك الحقيقة المطلقة، ولا أُلزم به أحداً. غايتي أن أفتح نافذة للتفكير والتأمل.</h3>
-<h3>نرحب بمشاركتك لأفكارك واقتراحاتك لتطوير الموقع وتحسينه، من خلال صفحة <a href="feedback.html" style="color: #d63384; font-weight: bold; text-decoration: none;" target="_blank">شاركنا رأيك</a></极h3>
+<h3>نرحب بمشاركتك لأفكارك واقتراحاتك لتطوير الموقع وتحسينه، من خلال صفحة <a href="feedback.html" style="color: #d63384; font-weight: bold; text-decoration: none;" target="_blank">شاركنا رأيك</a></h3>
 </div>
 
 <!-- أزرار قنوات اليوتيوب الجديدة -->
@@ -1692,36 +1612,27 @@
 </div>
 </div>
 
-<!-- التبويبات الثلاثة الجديدة مع تأثير النقطة المضيئة -->
+<!-- التبويبات الثلاثة الجديدة -->
 <div class="book-tabs-section">
   <h2 class="book-tabs-title">كتب ينصح بقرائتها</h2>
   <div class="book-tabs-container">
     <div class="book-tab">
-      <div class="dot-effect"></div>
-      <div class="book-content">
-        <a href="https://husseinalkhalil.com/books?book=book-5" style="text-decoration: none; color: inherit;">
-          <img src="images/1.png" alt="كتاب فكري يتناول أهم المسائل الجدلية">
-          <h4>كتاب فكري يتناول أهم المسائل الجدلية بمفهوم القرآن وأبرزها الصلاة</h4>
-        </a>
-      </div>
+      <a href="https://husseinalkhalil.com/books?book=book-5" style="text-decoration: none; color: inherit;">
+        <img src="images/1.png" alt="كتاب فكري يتناول أهم المسائل الجدلية">
+        <h4>كتاب فكري يتناول أهم المسائل الجدلية بمفهوم القرآن وأبرزها الصلاة</h4>
+      </a>
     </div>
     <div class="book-tab">
-      <div class="dot-effect"></div>
-      <div class="book-content">
-        <a href="https://husseinalkhalil.com/books?book=book-2" style="text-decoration: none; color: inherit;">
-          <img src="images/2.png" alt="هتون الحب، رواية">
-          <h4>هتون الحب، رواية تتناول الحب، الخرافة، وتضليل البسطاء باسم الدين</h4>
-        </a>
-      </div>
+      <a href="https://husseinalkhalil.com/books?book=book-2" style="text-decoration: none; color: inherit;">
+        <img src="images/2.png" alt="هتون الحب، رواية">
+        <h4>هتون الحب، رواية تتناول الحب، الخرافة، وتضليل البسطاء باسم الدين</h4>
+      </a>
     </div>
     <div class="book-tab">
-      <div class="dot-effect"></div>
-      <div class="book-content">
-        <a href="https://husseinalkhalil.com/books?book=book-4" style="text-decoration: none; color: inherit;">
-          <img src="images/3.png" alt="الإسلام بين الكتاب والتراث">
-          <h4>الإسلام بين الكتاب والتراث، حوار بين عقلين يمثلان رؤيتين مختلفتين للدين.</h4>
-        </a>
-      </div>
+      <a href="https://husseinalkhalil.com/books?book=book-4" style="text-decoration: none; color: inherit;">
+        <img src="images/3.png" alt="الإسلام بين الكتاب والتراث">
+        <h4>الإسلام بين الكتاب والتراث، حوار بين عقلين يمثلان رؤيتين مختلفتين للدين.</h4>
+      </a>
     </div>
   </div>
 </div>
@@ -1731,9 +1642,9 @@
 <div class="slider-container">
 <div class="slider" id="slider">
 <div class="slide">
-<a href="https://youtu.be/8h2dx_y极uB6U?si=aF36xN-WAvsuONBZ" target="_blank">
+<a href="https://youtu.be/8h2dx_yuB6U?si=aF36xN-WAvsuONBZ" target="_blank">
 <img alt="الفيديوهات" src="images/test1.jpg"/>
-<div class="slide-overlay">هل الإسلام دين العنف والكراهية؟</div>
+<div class="slide-overlay">هل الإسلام دين العنف والكراهية?</div>
 </a>
 </div>
 <div class="slide">
@@ -1744,7 +1655,7 @@
 </div>
 <div class="slide">
 <a href="https://youtu.be/qQ3oRyO3pGw?si=9PyzV6QwcXHbWH_V" target="_blank">
-<img alt="التاريخ" src="images极/test3.jpg"/>
+<img alt="التاريخ" src="images/test3.jpg"/>
 <div class="slide-overlay">الشينتوية</div>
 </a>
 </div>
@@ -1797,7 +1708,7 @@
 <div>الحوارات</div>
 <a href="hewar.html">اقرأ الحوارات</a>
 </div>
-<div class="card极" onclick="location.href='favorites.html'">
+<div class="card" onclick="location.href='favorites.html'">
 <img alt="المفضلة" src="icons/favorites.png"/>
 <div>المفضلة</div>
 <a href="favorites.html">استكشف المفضلة</a>
@@ -1806,9 +1717,9 @@
 <img alt="خواطر" src="icons/khawatir.png"/>
 <div>خواطر</div>
 <a href="khawatir.html">اقرأ الخواطر</a>
-</极div>
+</div>
 <div class="card" onclick="location.href='support.html'">
-<img alt="دعم المحتوى" src="极icons/support.png"/>
+<img alt="دعم المحتوى" src="icons/support.png"/>
 <div>دعم المحتوى</div>
 <a href="support.html">ادعم المحتوى</a>
 </div>
@@ -1821,7 +1732,7 @@
 <img alt="يوتيوب" src="icons/yot-soc.png"/>
 </a>
 <a class="social-icon facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank">
-<img alt="فيسبوك" src="icons/fac-soc.png"/>
+<img alt="فيسبook" src="icons/fac-soc.png"/>
 </a>
 <a class="social-icon instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&amp;utm_source=qr" target="_blank">
 <img alt="إنستغرام" src="icons/ins-soc.png"/>
@@ -1829,7 +1740,7 @@
 <a class="social-icon telegram" href="https://t.me/tanoeer" target="_blank">
 <img alt="تلغرام" src="icons/tel-soc.png"/>
 </a>
-<a class="social-icon tiktok" href="https://www极.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank">
+<a class="social-icon tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&amp;_r=1" target="_blank">
 <img alt="تيك توك" src="icons/tik-soc.png"/>
 </a>
 <a class="social-icon snap" href="https://snapchat.com/t/sFLWjw3K" target="_blank">
@@ -1889,7 +1800,7 @@
     async function loadAllPagesContent() {
         if (cachedPagesContent) return cachedPagesContent;
         
-        const loadingPromises = SEARCHABLE_PAGES.map(page => fetch极PageContent(page));
+        const loadingPromises = SEARCHABLE_PAGES.map(page => fetchPageContent(page));
         const results = await Promise.all(loadingPromises);
         
         cachedPagesContent = results.filter(Boolean);
@@ -1933,7 +1844,7 @@
                 case 'ي': return '[ئيى]';
                 default: return char;
             }
-        }).join('[ً-ِ]*'); // السماح بوجود تشكيل بعد كل حرف
+        }).join('[ً-ِ]*'); // السماح بوجود تشكيل после كل حرف
         
         const regex = new RegExp(regexPattern, 'gi');
         
@@ -1991,7 +1902,7 @@
             return;
         }
 
-        resultsContainer.innerHTML = '<div class极="search-item"><p>جاري البحث...</p></div>';
+        resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
         resultsContainer.style.display = 'block';
 
         const searchData = await loadAllPagesContent();
@@ -2009,7 +1920,7 @@
         isSearchInitialized = true;
 
         const searchInput = document.getElementById('globalSearch');
-极        const resultsContainer = document.getElementById('searchResults');
+        const resultsContainer = document.getElementById('searchResults');
 
         if (!searchInput || !resultsContainer) {
             console.error('Search elements not found!');
@@ -2167,7 +2078,7 @@
 
     function copyLink() {
       const link = "https://www.husseinalkhalil.com";
-      navigator.clipboard.writeText极(link).then(() => {
+      navigator.clipboard.writeText(link).then(() => {
         showCopyAlert("تم نسخ الرابط بنجاح ✅");
       }).catch(() => {
         // Fallback إذا فشل Clipboard API
@@ -2194,27 +2105,12 @@
       }, 2500);
     }
 
-    window.addEventListener('load', () => {
+    window.addEventListener('load', () {
       if (window.innerWidth < 768) {
         document.querySelector('.mobile-share').style.display = 'block';
       }
       renderUpdates();
       checkForNewUpdates();
-      
-      // بدء تحريك النقطة المضيئة في قسم الكتب
-      const bookTabs = document.querySelectorAll('.book-tab');
-      bookTabs.forEach(tab => {
-        // إضافة تأثيرات إضافية عند التمرير
-        tab.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-5px)';
-          this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
-        });
-        
-        tab.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0)';
-          this.style.boxShadow = '0 4px 12px rgba(94, 44, 165, 0.15)';
-        });
-      });
     });
 
     document.addEventListener('click', (e) => {
@@ -2243,7 +2139,7 @@
       }
     });
 
-    document.querySelector('.nav-links').addEventListener('wheel', (极e) => {
+    document.querySelector('.nav-links').addEventListener('wheel', (e) {
       e.stopPropagation();
     });
 
@@ -2279,7 +2175,7 @@
       resetInterval();
     }
     
-    function startInterval极() {
+    function startInterval() {
       slideInterval = setInterval(nextSlide, 3000);
     }
     
