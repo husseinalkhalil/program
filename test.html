@@ -271,6 +271,75 @@
             color: white;
         }
 
+        /* Section Title (Added for Social Section) */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Social Section Styles (Matches index.html) */
+        .social-section {
+            text-align: center;
+            margin-bottom: 60px;
+            background: var(--surface-color);
+            padding: 40px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .social-btn img { width: 24px; height: 24px; transition: filter 0.3s; }
+        
+        .social-btn:hover { transform: translateY(-5px) scale(1.1); }
+        .social-btn.facebook:hover { background: #1877F2; }
+        .social-btn.instagram:hover { background: #E4405F; }
+        .social-btn.youtube:hover { background: #FF0000; }
+        .social-btn.tiktok:hover { background: #000000; }
+        .social-btn.telegram:hover { background: #0088CC; }
+        .social-btn.snap:hover { background: #FFFC00; }
+        
+        .social-btn:hover img { filter: brightness(0) invert(1); }
+        .social-btn.snap:hover img { filter: none; } 
+
         /* Footer */
         footer {
             background: var(--primary-dark);
@@ -294,27 +363,6 @@
         }
         
         .footer-links a:hover { color: var(--accent-color); }
-
-        .social-grid-footer {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .social-btn-footer {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-        
-        .social-btn-footer img { width: 20px; filter: brightness(0) invert(1); }
-        .social-btn-footer:hover { background: var(--accent-color); transform: translateY(-3px); }
 
         .copyright {
             color: rgba(255,255,255,0.6);
@@ -377,11 +425,35 @@
             .about-card { padding: 30px 20px; margin-top: -40px; }
             .share-fixed-btn { display: none; }
             
-            .footer-links { gap: 12px; flex-wrap: wrap; justify-content: center; }
-            .footer-links a { font-size: 0.9rem; white-space: nowrap; }
-            
             .about-text { text-align: center; }
             .highlight-box { text-align: center; border-right: none; border-top: 4px solid var(--accent-color); }
+
+            /* تعديلات الفوتر للموبايل (مطابقة للصفحة الرئيسية) */
+            .footer-links {
+                gap: 12px;
+                flex-wrap: wrap; 
+                justify-content: center;
+            }
+            .footer-links a {
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+            
+            /* أيقونات السوشيال ميديا: كبيرة ومتلاصقة في سطر واحد */
+            .social-grid {
+                gap: 5px; 
+                flex-wrap: nowrap; 
+                justify-content: center;
+            }
+            .social-btn {
+                width: 48px;
+                height: 48px;
+                flex-shrink: 0;
+            }
+            .social-btn img {
+                width: 24px;
+                height: 24px;
+            }
         }
     </style>
 </head>
@@ -460,6 +532,33 @@
                 </div>
             </div>
         </div>
+
+        <!-- Social Media (Added to match index layout) -->
+        <div class="social-section">
+            <div class="section-title">
+                <h2>تابعني على مواقع التواصل</h2>
+            </div>
+            <div class="social-grid">
+                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn youtube" title="يوتيوب">
+                    <img src="icons/yot-soc.png" alt="يوتيوب">
+                </a>
+                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" class="social-btn facebook" title="فيسبوك">
+                    <img src="icons/fac-soc.png" alt="فيسبوك">
+                </a>
+                <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" class="social-btn instagram" title="إنستغرام">
+                    <img src="icons/ins-soc.png" alt="إنستغرام">
+                </a>
+                <a href="https://t.me/tanoeer" target="_blank" class="social-btn telegram" title="تلغرام">
+                    <img src="icons/tel-soc.png" alt="تلغرام">
+                </a>
+                <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" class="social-btn tiktok" title="تيك توك">
+                    <img src="icons/tik-soc.png" alt="تيك توك">
+                </a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn snap" title="سناب شات">
+                    <img src="icons/snap.png" alt="سناب شات">
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- Fixed Share Button -->
@@ -469,24 +568,12 @@
 
     <footer>
         <div class="container">
-            <!-- Footer Links -->
             <div class="footer-links">
                 <a href="terms_and_conditions_ar.html">الشروط والأحكام</a>
                 <a href="privacy.html">سياسة الخصوصية</a>
                 <a href="contact.html">اتصل بنا</a>
                 <a href="feedback.html">شاركنا رأيك</a>
             </div>
-            
-            <!-- Social Icons in Footer -->
-            <div class="social-grid-footer">
-                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn-footer"><img src="icons/yot-soc.png"></a>
-                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" class="social-btn-footer"><img src="icons/fac-soc.png"></a>
-                <a href="https://www.instagram.com/husseinalkhalil" target="_blank" class="social-btn-footer"><img src="icons/ins-soc.png"></a>
-                <a href="https://t.me/tanoeer" target="_blank" class="social-btn-footer"><img src="icons/tel-soc.png"></a>
-                <a href="https://www.tiktok.com/@h.alkhalil" target="_blank" class="social-btn-footer"><img src="icons/tik-soc.png"></a>
-                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn-footer"><img src="icons/snap.png" style="filter: none;"></a>
-            </div>
-
             <div class="copyright">
                 حسين الخليل - جميع الحقوق محفوظة © 2025
             </div>
