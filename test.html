@@ -66,6 +66,22 @@
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
+        /* ==================== Animations ==================== */
+        @media (prefers-reduced-motion: no-preference) {
+            .reveal-up {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+            }
+            
+            .reveal-up.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Staggered delay for grid items can be handled via JS or CSS nth-child if static */
+        }
+
         /* ==================== Navigation ==================== */
         .nav-overlay {
             position: fixed;
@@ -253,7 +269,13 @@
         .search-item:hover { background: #f8fafc; }
         .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; }
         .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
-        .search-item mark { background: #fff3cd; color: inherit; padding: 0 2px; }
+        /* Highlighting Style */
+        .search-item mark { 
+            background-color: #fde047; 
+            color: #422006; 
+            padding: 0 2px;
+            border-radius: 2px;
+        }
 
         /* ==================== Quick Actions (YouTube) ==================== */
         .quick-actions {
@@ -994,6 +1016,33 @@
     <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
 
     <script>
+        // ==================== Animation Observer ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1, // Trigger when 10% visible
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Animate only once
+                    }
+                });
+            }, observerOptions);
+
+            // Select elements to animate
+            const animatedElements = document.querySelectorAll(
+                '.hero-content, .quick-actions, .section-title, .updates-container, .feature-card, .book-card, .slider-section, .social-section, .footer-links'
+            );
+
+            animatedElements.forEach(el => {
+                el.classList.add('reveal-up');
+                observer.observe(el);
+            });
+        });
+
         // ==================== Mobile Menu ====================
         function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
@@ -1015,7 +1064,7 @@
             }
         });
 
-        // ==================== Search Functionality ====================
+        // ==================== Advanced Search Functionality ====================
         let cachedPagesContent = null;
         let isSearchInitialized = false;
         const SEARCHABLE_PAGES = [
@@ -1031,11 +1080,15 @@
                 const html = await response.text();
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
+                
+                // Clean content: remove scripts, styles, navs, footers
+                doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                
                 const mainContent = doc.querySelector('.container, main, body') || doc.body;
                 return {
-                    page: doc.title,
+                    page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة',
                     url: url,
-                    content: mainContent.textContent.trim()
+                    content: mainContent.textContent.replace(/\s+/g, ' ').trim()
                 };
             } catch (e) { return null; }
         }
@@ -1048,27 +1101,72 @@
             return cachedPagesContent;
         }
 
+        // Advanced Arabic Normalization & Regex Generation
         function normalizeArabic(text) {
             if (!text) return '';
-            return text
-                .replace(/[أإآءؤئ]/g, 'ا')
-                .replace(/[ً-ِ]/g, '')
-                .replace(/[ة]/g, 'ه')
-                .replace(/\s+/g, ' ')
-                .trim().toLowerCase();
+            text = text.replace(/[\u064B-\u065F\u0670]/g, ''); // Remove Tashkeel
+            text = text.replace(/[أإآ]/g, 'ا');
+            text = text.replace(/[ة]/g, 'ه');
+            text = text.replace(/[ى]/g, 'ي');
+            text = text.replace(/[ؤ]/g, 'و');
+            text = text.replace(/[ئ]/g, 'ي');
+            return text;
         }
 
-        function displayResults(results, query, container) {
+        function getSafeRegex(searchTerm) {
+            let regexStr = '';
+            const cleanTerm = normalizeArabic(searchTerm);
+            
+            for (let i = 0; i < cleanTerm.length; i++) {
+                const char = cleanTerm[i];
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else if (char.match(/[a-zA-Z]/)) regexStr += char; // English letters
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escape special chars
+                
+                // Allow optional Tashkeel after every character
+                regexStr += '[\\u064B-\\u065F\\u0670]*'; 
+            }
+            return new RegExp(regexStr, 'gi');
+        }
+
+        function displayResults(results, queryRegex, container) {
             container.innerHTML = '';
             if (results.length === 0) {
                 container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
                 container.style.display = 'block';
                 return;
             }
+            
             results.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
-                div.innerHTML = `<h3>${item.page}</h3><p>${item.url}</p>`;
+                
+                // Highlight Title
+                const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
+                
+                // Create Snippet
+                let snippet = '';
+                // Find first match index in content
+                queryRegex.lastIndex = 0; // Reset regex
+                const match = queryRegex.exec(item.content);
+                
+                if (match) {
+                    const start = Math.max(0, match.index - 60);
+                    const end = Math.min(item.content.length, match.index + 100);
+                    snippet = item.content.substring(start, end);
+                    if (start > 0) snippet = '...' + snippet;
+                    if (end < item.content.length) snippet = snippet + '...';
+                } else {
+                    snippet = item.content.substring(0, 150) + '...';
+                }
+                
+                // Highlight Snippet
+                const highlightedSnippet = snippet.replace(queryRegex, match => `<mark>${match}</mark>`);
+
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${highlightedSnippet}</p>`;
                 div.onclick = () => window.location.href = item.url;
                 container.appendChild(div);
             });
@@ -1086,13 +1184,17 @@
             resultsContainer.style.display = 'block';
 
             const data = await loadAllPagesContent();
-            const normQuery = normalizeArabic(query);
+            const searchRegex = getSafeRegex(query);
+            
             const results = data.filter(item => {
-                const text = normalizeArabic(item.page + ' ' + item.content);
-                return text.includes(normQuery);
+                searchRegex.lastIndex = 0;
+                const titleMatch = searchRegex.test(item.page);
+                searchRegex.lastIndex = 0;
+                const contentMatch = searchRegex.test(item.content);
+                return titleMatch || contentMatch;
             });
 
-            displayResults(results, query, resultsContainer);
+            displayResults(results, searchRegex, resultsContainer);
         }
 
         const searchInput = document.getElementById('globalSearch');
@@ -1143,8 +1245,6 @@
             const lastVisit = localStorage.getItem('lastVisit');
             const now = new Date().toISOString();
             if (!lastVisit) { localStorage.setItem('lastVisit', now); return; }
-            
-            // Logic to show alert if strictly needed (simplified for this design)
             localStorage.setItem('lastVisit', now);
         }
 
