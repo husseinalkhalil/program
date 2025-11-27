@@ -95,7 +95,7 @@
         nav {
             background: rgba(94, 44, 165, 0.95);
             backdrop-filter: blur(10px);
-            padding: 0.8rem 5%;
+            padding: 0.8rem 2%;
             position: fixed;
             width: 100%;
             top: 0;
@@ -113,19 +113,22 @@
 
         .nav-links {
             display: flex;
-            gap: 15px;
+            gap: 5px; /* مسافة أصغر لاستيعاب عدد الروابط الكبير */
             align-items: center;
+            flex-wrap: wrap; /* السماح بالالتفاف إذا لزم الأمر */
+            justify-content: center;
         }
 
         .nav-links a {
             color: white;
             font-weight: 500;
-            font-size: 0.95rem;
-            padding: 8px 12px;
+            font-size: 0.85rem; /* خط أصغر قليلاً */
+            padding: 6px 10px;
             border-radius: 20px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
+            white-space: nowrap;
         }
 
         .nav-links a:hover {
@@ -141,20 +144,23 @@
         }
 
         /* Mobile Nav */
-        @media (max-width: 992px) {
+        @media (max-width: 1200px) { /* تغيير نقطة الانهيار لاستيعاب الروابط الكثيرة */
             .hamburger { display: block; }
             .nav-links {
                 position: fixed;
-                top: 70px;
-                right: -100%;
-                width: 250px;
+                top: 60px;
+                right: -280px;
+                width: 280px;
                 background: white;
                 flex-direction: column;
                 padding: 20px;
-                height: calc(100vh - 70px);
+                height: calc(100vh - 60px);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1);
                 transition: right 0.3s ease;
                 overflow-y: auto;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                gap: 10px;
             }
             .nav-links.show { right: 0; }
             .nav-links a {
@@ -162,12 +168,16 @@
                 width: 100%;
                 padding: 12px;
                 border-radius: 8px;
+                font-size: 1rem;
+                justify-content: flex-start;
             }
             .nav-links a:hover {
                 background: var(--bg-color);
                 color: var(--primary-color);
                 transform: none;
             }
+            
+            nav { padding: 0.8rem 5%; }
         }
 
         /* ==================== Hero Section ==================== */
@@ -783,10 +793,18 @@
             <a href="index.html" style="background: rgba(255,255,255,0.2);"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="books.html"><i class="fas fa-book"></i> الكتب</a>
             <a href="articles.html"><i class="fas fa-newspaper"></i> المقالات</a>
+            <a href="khawatir.html"><i class="fas fa-lightbulb"></i> خواطر</a>
             <a href="videos.html"><i class="fas fa-video"></i> الفيديوهات</a>
-            <a href="manhaj.html"><i class="fas fa-book-open"></i> المنهج</a>
+            <a href="history.html"><i class="fas fa-hourglass-half"></i> التاريخ</a>
+            <a href="podcast.html"><i class="fas fa-microphone"></i> البودكاست</a>
             <a href="ask.html"><i class="fas fa-question-circle"></i> الأسئلة</a>
+            <a href="hewar.html"><i class="fas fa-comments"></i> حوارات</a>
+            <a href="inq.html"><i class="fas fa-question"></i> تساؤلات</a>
+            <a href="manhaj.html"><i class="fas fa-book-open"></i> المنهج</a>
+            <a href="favorites.html"><i class="fas fa-star"></i> المفضلة</a>
+            <a href="support.html"><i class="fas fa-heart"></i> دعم المحتوى</a>
             <a href="about.html"><i class="fas fa-user"></i> من نحن</a>
+            <a href="#" onclick="window.print()"><i class="fas fa-print"></i> طباعة</a>
             <a href="#" onclick="handleMobileShare(); return false;" class="mobile-share-link" style="display: none;"><i class="fas fa-share-alt"></i> مشاركة</a>
         </div>
 
@@ -809,7 +827,7 @@
             <!-- Universal Search inside Hero -->
             <div class="universal-search">
                 <i class="fas fa-search search-icon-placeholder"></i>
-                <input type="text" id="globalSearch" placeholder="ابحث في الكتب، المقالات، والفيديوهات..." />
+                <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
                 <div class="search-results" id="searchResults"></div>
             </div>
         </div>
@@ -839,7 +857,7 @@
             </div>
         </div>
 
-        <!-- Main Content Grid -->
+        <!-- Main Content Grid - 12 Cards -->
         <div class="section-title">
             <h2>استكشف المحتوى</h2>
         </div>
@@ -922,6 +940,46 @@
                 <h3>الأسئلة</h3>
                 <p>مساحة لطرح تساؤلاتك والبحث عن إجابات منطقية.</p>
                 <span class="card-link">اطرح سؤالك <i class="fas fa-arrow-left"></i></span>
+            </div>
+
+            <!-- Hewar (Dialogues) -->
+            <div class="feature-card" onclick="location.href='hewar.html'">
+                <div class="card-icon-wrapper">
+                    <img src="icons/hewar.png" alt="حوارات">
+                </div>
+                <h3>حوارات</h3>
+                <p>مناقشات فكرية معمقة مع مختلف التوجهات والآراء.</p>
+                <span class="card-link">اقرأ الحوارات <i class="fas fa-arrow-left"></i></span>
+            </div>
+
+            <!-- Inq (Inquiries) -->
+            <div class="feature-card" onclick="location.href='inq.html'">
+                <div class="card-icon-wrapper">
+                    <img src="icons/inq.png" alt="تساؤلات">
+                </div>
+                <h3>تساؤلات</h3>
+                <p>إجابات مختصرة ومباشرة على تساؤلات شائعة.</p>
+                <span class="card-link">تصفح التساؤلات <i class="fas fa-arrow-left"></i></span>
+            </div>
+
+            <!-- Favorites -->
+            <div class="feature-card" onclick="location.href='favorites.html'">
+                <div class="card-icon-wrapper">
+                    <img src="icons/favorites.png" alt="المفضلة">
+                </div>
+                <h3>المفضلة</h3>
+                <p>مجموعة مختارة من أفضل المحتويات وأكثرها تأثيراً.</p>
+                <span class="card-link">استكشف المفضلة <i class="fas fa-arrow-left"></i></span>
+            </div>
+
+            <!-- Support -->
+            <div class="feature-card" onclick="location.href='support.html'">
+                <div class="card-icon-wrapper">
+                    <img src="icons/support.png" alt="دعم المحتوى">
+                </div>
+                <h3>دعم المحتوى</h3>
+                <p>ساهم في دعم المشروع واستمرارية نشر المعرفة.</p>
+                <span class="card-link">ادعم المحتوى <i class="fas fa-arrow-left"></i></span>
             </div>
         </div>
 
@@ -1055,18 +1113,15 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Add a small delay for staggering effect if it has a delay style
                         const delay = entry.target.dataset.delay || 0;
                         setTimeout(() => {
                             entry.target.classList.add('is-visible');
                         }, delay);
-                        
-                        observer.unobserve(entry.target); // Animate only once
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
-            // Select general elements to animate
             const animatedElements = document.querySelectorAll(
                 '.hero-content, .quick-actions, .section-title, .updates-container, .book-card, .slider-section, .social-section, .footer-links'
             );
@@ -1076,13 +1131,9 @@
                 observer.observe(el);
             });
 
-            // Handle Feature Cards specifically for staggered animation
             const featureCards = document.querySelectorAll('.feature-card');
             featureCards.forEach((card, index) => {
                 card.classList.add('reveal-up');
-                // Calculate delay based on index (e.g., 0ms, 100ms, 200ms...)
-                // We use modulus to reset delay for new rows if needed, or just linear
-                // Using dataset to pass delay to the observer callback
                 card.dataset.delay = (index % 4) * 100; 
                 observer.observe(card);
             });
@@ -1101,9 +1152,8 @@
             }
         }
 
-        // Show mobile share in menu on small screens
         window.addEventListener('load', () => {
-            if (window.innerWidth < 992) {
+            if (window.innerWidth < 1200) {
                 const mobileShareLink = document.querySelector('.mobile-share-link');
                 if(mobileShareLink) mobileShareLink.style.display = 'flex';
             }
@@ -1115,7 +1165,7 @@
         const SEARCHABLE_PAGES = [
             'index.html', 'books.html', 'articles.html', 'khawatir.html', 
             'videos.html', 'ask.html', 'hewar.html', 'favorites.html', 
-            'support.html', 'about.html'
+            'support.html', 'about.html', 'manhaj.html', 'inq.html', 'history.html'
         ];
 
         async function fetchPageContent(url) {
@@ -1126,7 +1176,6 @@
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
                 
-                // Clean content: remove scripts, styles, navs, footers
                 doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                 
                 const mainContent = doc.querySelector('.container, main, body') || doc.body;
@@ -1146,7 +1195,6 @@
             return cachedPagesContent;
         }
 
-        // Advanced Arabic Normalization & Regex Generation
         function normalizeArabic(text) {
             if (!text) return '';
             text = text.replace(/[\u064B-\u065F\u0670]/g, ''); // Remove Tashkeel
@@ -1168,10 +1216,9 @@
                 else if (char === 'ه') regexStr += '[هة]';
                 else if (char === 'ي') regexStr += '[يىئ]';
                 else if (char === 'و') regexStr += '[وؤ]';
-                else if (char.match(/[a-zA-Z]/)) regexStr += char; // English letters
-                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escape special chars
+                else if (char.match(/[a-zA-Z]/)) regexStr += char;
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 
-                // Allow optional Tashkeel after every character
                 regexStr += '[\\u064B-\\u065F\\u0670]*'; 
             }
             return new RegExp(regexStr, 'gi');
@@ -1189,13 +1236,10 @@
                 const div = document.createElement('div');
                 div.className = 'search-item';
                 
-                // Highlight Title
                 const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
                 
-                // Create Snippet
                 let snippet = '';
-                // Find first match index in content
-                queryRegex.lastIndex = 0; // Reset regex
+                queryRegex.lastIndex = 0;
                 const match = queryRegex.exec(item.content);
                 
                 if (match) {
@@ -1208,7 +1252,6 @@
                     snippet = item.content.substring(0, 150) + '...';
                 }
                 
-                // Highlight Snippet
                 const highlightedSnippet = snippet.replace(queryRegex, match => `<mark>${match}</mark>`);
 
                 div.innerHTML = `<h3>${highlightedTitle}</h3><p>${highlightedSnippet}</p>`;
@@ -1254,7 +1297,6 @@
             });
         }
 
-        // Close search when clicking outside
         document.addEventListener('click', (e) => {
             const searchContainer = document.querySelector('.universal-search');
             if(searchContainer && !searchContainer.contains(e.target)) {
@@ -1301,7 +1343,6 @@
         function initSlider() {
             if(slides.length === 0) return;
             
-            // Create dots
             slides.forEach((_, idx) => {
                 const dot = document.createElement('div');
                 dot.className = `slider-dot ${idx === 0 ? 'active' : ''}`;
