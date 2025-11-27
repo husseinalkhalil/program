@@ -1,798 +1,2453 @@
-<!-- الشريط العلوي المطابق تماماً للصفحة الرئيسية -->
-<div class="nav-overlay" onclick="toggleMobileMenu()"></div>
-
-<nav>
-    <div class="hamburger" onclick="toggleMobileMenu()">☰ القائمة</div>
-    
-    <!-- زر المشاركة للجوال داخل الشريط العلوي -->
-    <div class="mobile-share" onclick="handleMobileShare()" style="display:none;">
-        <img alt="مشاركة" src="images/share.png"/>
-    </div>
-    
-    <div class="nav-links">
-        <a href="index.html">الرئيسية</a>
-        <a href="books.html">الكتب</a>
-        <a href="articles.html">المقالات</a>
-        <a href="khawatir.html">خواطر</a>
-        <a href="videos.html">الفيديوهات</a>
-        <a href="history.html">التاريخ</a>
-        <a href="podcast.html">البودكاست</a>
-        <a href="ask.html">الأسئلة</a>
-        <a href="hewar.html">حوارات</a>
-        <a href="inq.html">تساؤلات</a>
-        <a href="manhaj.html">المنهج</a>
-        <a href="favorites.html">المفضلة</a>
-        <a href="support.html">دعم المحتوى</a>
-        <a href="about.html">من نحن</a>
-        <a href="#" onclick="window.print()">طباعة</a>
-    </div>
-
-    <div class="logo-container">
-        <a href="index.html">
-            <img src="images/logo.png" alt="شعار الموقع" />
-        </a>
-    </div>
-</nav>
-
-<!-- أزرار التحكم بالخط من الكود الأول -->
-<div class="font-controls">
-    <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
-        <i class="fas fa-search-minus"></i>
-    </button>
-    <button id="fontReset" title="الحجم الطبيعي (Reset)">
-        <i class="fas fa-font"></i>
-    </button>
-    <button id="fontIncrease" title="تكبير الخط (Zoom In)">
-        <i class="fas fa-search-plus"></i>
-    </button>
-</div>
-
-<div class="container">
-    <div class="article-card">
-        <div class="article-header">
-            <h1>الأسئلة الشائعة</h1>
-            <div class="meta">إطار نقدي لطرح الأسئلة وفحصها بميزان القرآن</div>
-        </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسئلة الشائعة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #5e2ca5;
+            --secondary-color: #9575CD;
+            --accent-color: #FFC107;
+            --text-color: #333333;
+            --light-bg: #F5F5F5;
+            --light-beige: #F8F3E6;
+            --article-beige: #F5EFE1;
+            --light-purple: #EDE7F6;
+            --border-color: #E0E0E0;
+            --header-purple: #5e2ca5;
+            --mobile-header-height: 70px;
+            --glass-bg: rgba(94, 44, 165, 0.92);
+            --font-control-position: top right;
+            --font-control-top: 120px;
+            --font-control-bottom: auto;
+            --font-control-right: 250px;
+            --font-control-left: auto;
+            --font-control-button-size: 30px;
+            --font-control-button-font-size: 18px;
+            --light-beige-bg: #FCF8F0; /* اللون البيج الفاتح الجديد */
+        }
         
-        <div class="article-content">
-            <section id="intro" class="card" aria-labelledby="intro-heading">
-                <h2 id="intro-heading">مقدمة</h2>
-                <p>هذه الصفحة تجمع جملة من الأسئلة المتداولة مع محاولات للإجابة عليها وفق منهج تدبّري يعتمد قراءة النص القرآني من داخله. الإجابات المعروضة هنا ليست حقائق نهائية ولا مسلمات ملزمة، بل اجتهادات تفسيرية قابلة للمراجعة والتعديل كلما تطوّرت الأدوات المعرفية واتّسع نطاق الفهم. الغاية هي فتح باب التفكير وتقديم مسار منهجي لمن يرغب في البحث، لا إصدار أحكام أو فتاوى معلبة وجاهزة أو تبنّي يقينيات مغلقة.</p>
-            </section>
-
-            <section id="faq">
-                <h2>الأسئلة الشائعة</h2>
-
-                <!-- الصفحة الأولى من الأسئلة -->
-                <div class="question-page active" id="page1">
-                    <details>
-                        <summary>هل هناك وحي غير القرآن؟</summary>
-                        <p>لا؛ الوحي واحد فقط وهو القرآن، إستناداً لقوله تعالى (وَأُوحِيَ إِلَيَّ هَٰذَا الْقُرْآنُ لِأُنذِرَكُم بِهِ)</p>
-                    </details>
-
-                    <details>
-                        <summary>من صاحب مقولة: الوحي الثاني؟</summary>
-                        <p>أول من أطلق هذه المقولة هو الإمام الشافعي، فقبل هذه  المقولة لا وجود لمصطلح الوحي الثاني.</p>
-                    </details>
-
-                    <details>
-                        <summary> هل هناك عقوبة لتارك الصلاة أو المتهاون بها؟ </summary>
-                        <p> لا يوجد في القرآن أي إشارة لعقوبة تارك او المتهاون بالصلاة الحركية. </p>
-                    </details>
-
-                    <details>
-                        <summary> هل للصلاة في القرآن مفهوم واحد؟ </summary>
-                        <p> لا، بل تنقسم إلى قسمين، الأول الصلاة الروحانية، أي الصلة بالله، والثاني الصلاة الحركية، التركيز كله والوعيد على الصلاة الروحانية وليس الحركية. </p>
-                    </details>
-
-                    <details>
-                        <summary> هل يجوز للحائض أن تصوم وتصلي؟ </summary>
-                        <p> نعم، إذا استطاعت ذلك فلها أن تصوم وتصلي لأن المنع جاء من التراث وليس القرآن، لكن إذا شق عليها ذلك، فعليها أن تتوقف وتأخذ حكم المريض. </p>
-                    </details>
-
-                    <details>
-                        <summary> هل يجوز للحائض لمس القرآن والقراءة منه؟ </summary>
-                        <p> نعم يجوز لها أن تتصفحه وتقرأ منه. </p>
-                    </details>
-
-                    <details>
-                        <summary> هل الرجم تشريع في الدين؟ </summary>
-                        <p> لا، القرآن لم يذكر الرجم كعقوبة، بل جاء به رجال الدين من التراث وليس من القرآن. </p>
-                    </details>
-
-                    <details>
-                        <summary> هل طلاء الأظافر (المناكير) يبطل الوضوء أو الصلاة؟ </summary>
-                        <p> لا، وهل الغلو في الدين جاء به رجال الدين وليس القرآن، فالمرأة لها أن تتوضأ وتصلي وهي تضع طلاء الأظافر. </p>
-                    </details>
-
-                    <details>
-                        <summary> هل الختان واجب على الذكر؟ </summary>
-                        <p> الختان جريمة بحق الإنسانية والإسلام بريء منه ولم يشرّعه الله بل رجال الدين. </p>
-                    </details>
-
-                    <details>
-                        <summary> هل يجوز للمرأة أن تصلي بملابسها العادية داخل البيت دون أن تلبس ملابس الصلاة؟ </summary>
-                        <p> نعم يجوز لها ذلك. </p>
-                    </details>
-
-                    <details>
-                        <summary> صديقي مسيحي وقدم لي طعامًا، فهل يجوز أن آكله؟ </summary>
-                        <p> نعم يجوز لك ذلك ﴿وَطَعامُ الَّذينَ أوتُوا الكِتابَ حِلٌّ لَكُم وَطَعامُكُم حِلٌّ لَهُم﴾ [المائدة: 5] </p>
-                    </details>
-
-                    <details>
-                        <summary> أقوم بتربية كلب في بيتي وسمعت أن هذا محرم ويمنع دخول الملائكة البيت، فما حكم القرآن؟ </summary>
-                        <p> هذا الكلام غير صحيح، القرآن لم يمنع تربية الكلب في البيت طالما أنها خالية من أي أمراض مضرة. </p>
-                    </details>
-
-                    <details>
-                        <summary> هل يصل ثواب قراءة القرآن للميت؟ </summary>
-                        <p> لا، لأن الإنسان محاسب على أفعاله هو. ﴿وَأَن لَيسَ لِلإِنسانِ إِلّا ما سَعى﴾ [النجم: 39] </p>
-                    </details>
-
-                    <details>
-                        <summary> مسلم دفن في مقابر اليهود ويهودي دفن في مقابر المسلمين، هل يغير شيء من مصير الميت وهل الدفن جائز؟ </summary>
-                        <p> دفن المسلم في مقابر غير المسلمين أو دفنه في البقيع أو موته ساجدًا أو يوم الجمعة أو في رمضان وغيره، لا يغير شيء من مصيره لأن الله سيحاسبه على عمله الذي فعله في حياته وليس على طريقة موته أو أين دفن، والقرآن لم يمنع دفن المسلم في مقابر غير المسلمين أو العكس، كل هذا إنما عادات مجتمعية لا أكثر لأن طريقة الدفن والمكان لا يؤثر شيئًا في مصير الميت. </p>
-                    </details>
-
-                    <details>
-                        <summary> هل هناك عذاب في القبر؟ </summary>
-                        <p> لا يوجد عذاب في القبر، والقرآن يعطي دلالات ينفي هذا الشيء، عذاب القبر جاء عن طريق التراث وليس القرآن. </p>
-                    </details>
-
-                    <details>
-                        <summary> ما حقيقة الثعبان الأقرع؟ </summary>
-                        <p> خرافة تراثية ما أنزل الله بها من سلطان. </p>
-                    </details>
-
-                    <details>
-                        <summary> ما حقيقة ضغطة القبر؟ </summary>
-                        <p> خرافة تراثية ما أنزل الله بها من سلطان. </p>
-                    </details>
-
-                    <details>
-                        <summary> ما حقيقة منكر ونكير؟ </summary>
-                        <p> خرافة تراثية ما أنزل الله بها من سلطان. </p>
-                    </details>
-
-                    <details>
-                        <summary> كفّروني بعض رجال الدين لأني لم أؤمن بكتب التراث وقالوا أني خرجت عن الملة. </summary>
-                        <p> تكفيرهم لك لا يقدم ولا يؤخر وليس له أي اعتبار عند الله لأنهم بشر مثلك لا يملكون من أمرهم شيء، الله سيحاسبك بناءًا على عملك وعلمه هو بك وليس بناءًا على تزكية البشر أو تكفيرهم لك. </p>
-                    </details>
-
-                    <details>
-                        <summary> هل الموسيقى حرام؟ </summary>
-                        <p> كلا، بل هي غذاء للروح، القرآن لم يحرمها. </p>
-                    </details>
-
-                    <details>
-                        <summary>لماذا لا نؤمن بالروايات؟</summary>
-                        <p>لأن القرآن لم يطلب مرجعًا فوقه، ولأن الروايات كُتبت بعد وفاة النبي بمئات السنين.</p>
-                    </details>
-
-                    <details>
-                        <summary>هل يجب أن نلتزم بتفاسير الأولين وهل هي تفاسير توقيفية؟</summary>
-                        <p>القرآن يفهم بحسب الزمان والمكان وبحسب الأدوات المعرفية، التفاسير السابقة صالحة لزمانها ومكانها وغير صالحة لهذا الزمان ولسنا مطالبين بها لأنها اجتهادات بشرية قابلة للنقد.</p>
-                    </details>
-                    
-                    <details>
-                        <summary>هل نحن ملزمون بكتب الروايات واجماع الفقهاء؟</summary>
-                        <p>لا، نحن ملزمون بالوحي الوحيد فقط، (القرآن)، وكل ما هو دون القرآن من كتب روايات وفقه واجماع واتفاق، إنما هي اجتهادات بشرية لا قداسة لها.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما هو أساس التفكير القرآني؟</summary>
-                        <p>الأساس هو العقل والمنطق والفطرة السليمة، مع الاعتماد على النص القرآني كمصدر رئيسي أوحد.</p>
-                    </details>
-
-                    <details>
-                        <summary>هل يمكن الجمع بين القرآن والتراث؟</summary>
-                        <p>يمكن الاستفادة من التراث كخلفية تاريخية، لكن لا يمكن جعله مساوياً أو أعلى من النص القرآني.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما موقفكم من الأحاديث النبوية?</summary>
-                        <p>نحترم الأحاديث النبوية ولكن نتعامل معها كروايات تاريخية تحتاج إلى تمحيص ولا نعتبرها مصدراً تشريعياً ملزماً.</p>
-                    </details>
-
-                    <details>
-                        <summary>كيف نتعامل مع الاختلافات في التفسير؟</summary>
-                        <p> الاختلاف سنة، ونحن نرى فيه ثراءً فكرياً ما دام محكوماً بضوابط المنهج القرآني.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما هي أهم مبادئ المنهج القرآني؟</summary>
-                        <p>أهم المبادئ: العقلانية، الوضوح، الاتساق الداخلي، والانسجام مع الفطرة الإنسانية.</p>
-                    </details>
-
-                    <details>
-                        <summary>هل هناك مرجعية بشرية في المنهج القرآني؟</summary>
-                        <p>لا توجد مرجعية بشرية مطلقة، المرجعية الوحيدة هي للنص القرآني مع فهمه بالعقل والمنطق.</p>
-                    </details>
-
-                    <details>
-                        <summary>كيف نثبت صحة المنهج القرآني؟</summary>
-                        <p>بنتائجه العملية في حياة الإنسان، وبقدرته على تقديم إجابات مقنعة ومنطقية للتحديات المعاصرة.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما الفرق بين القرآن والتراث؟</summary>
-                        <p>القرآن هو الوحي الإلهي الثابت، والتراث هو الفهم البشري المتغير عبر العصور.</p>
-                    </details>
-
-                    <details>
-                        <summary>هل يمكن تطوير المنهج القرآني؟</summary>
-                        <p>نعم، المنهج قابلاً للتطوير والمراجعة المستمرة مع تطور المعرفة الإنسانية.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما دور العقل في المنهج القرآني؟</summary>
-                        <p>العقل هو الأداة الرئيسية لفهم النص القرآني وتطبيقه في الواقع المعاصر.</p>
-                    </details>
-                </div>
-
-                <!-- الصفحة الثانية من الأسئلة -->
-                <div class="question-page" id="page2">
-                    <details>
-                        <summary>كيف نتعامل مع النصوص التي تبدو متعارضة؟</summary>
-                        <p>نبحث عن السياق والمقصد العام، ونتعامل مع النص ككل متكامل لا كمقاطع منفصلة.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما أهمية السياق في فهم النص القرآني؟</summary>
-                        <p>السياق أساسي لفهم أي نص، وهو الذي يحدد المعنى الحقيقي والدلالة المقصودة.</p>
-                    </details>
-
-                    <details>
-                        <summary>هل يمكن فهم القرآن دون معرفة باللسان العربي؟</summary>
-                        <p>المعرفة باللسان العربي يساعد، لكن الفهم الجوهري ممكن عبر الترجمات والتفكر في المقاصد.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما موقف المنهج القرآني من العلوم الحديثة؟</summary>
-                        <p>نرحب بالعلوم الحديثة ونتعامل معها كوسائل لفهم أعمق للكون والحياة، دون تعارض مع المبادئ القرآنية.</p>
-                    </details>
-
-                    <details>
-                        <summary>كيف نوفق بين النص والعقل عندما يبدوان متعارضين؟</summary>
-                        <p>لا تعارض حقيقي بين النص الصحيح والعقل السليم، وأي تعارض ظاهري يحتاج إلى إعادة نظر في الفهم.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما دور الأخلاق في المنهج القرآني؟</summary>
-                        <p>الأخلاق هي الغاية الأساسية من التشريع، وكل فهم يخالف الأخلاق يحتاج إلى مراجعة.</p>
-                    </details>
-
-                    <details>
-                        <summary>هل المنهج القرآني يصلح لكل زمان ومكان؟</summary>
-                        <p>نعم، لأنه يعتمد على مبادئ ثابتة قابلة للتطبيق في مختلف الظروف والأزمنة.</p>
-                    </details>
-
-                    <details>
-                        <summary>كيف نتعامل مع التراث الفقهي الإسلامي؟</summary>
-                        <p>نتعامل معه كتراث فكري إنساني قابل للدراسة والنقد، وليس كنصوص مقدسة.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما الفرق بين الدين والتديّن؟</summary>
-                        <p>الدين هو المبادئ الثابتة، والتديّن هو الممارسات البشرية المتغيرة التي قد تصيب وقد تخطئ.</p>
-                    </details>
-
-                    <details>
-                        <summary>هل يمكن أن يتطور الفهم الديني؟</summary>
-                        <p>نعم، الفهم الديني يتطور مع تطور المعرفة والإدراك الإنساني.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما معنى "لا إكراه في الدين" في التطبيق العملي؟</summary>
-                        <p>يعني حرية الاعتقاد والضمير، ورفض أي شكل من أشكال الإجبار في الأمور الدينية.</p>
-                    </details>
-
-                    <details>
-                        <summary>كيف نحدد ما هو أساسي وما هو ثانوي في الدين؟</summary>
-                        <p>الأساسيات هي المبادئ الكبرى والأخلاق والقيم، والثانويات هي التفاصيل والشكليات.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما دور المرأة في المنهج القرآني؟</summary>
-                        <p>المرأة شريكة كاملة في المسؤولية والحقوق، ولها مكانة متساوية مع الرجل في الكرامة الإنسانية.</p>
-                    </details>
-
-                    <details>
-                        <summary>هل هناك قداسة للشخصيات الدينية؟</summary>
-                        <p>لا قداسة لأي شخص، الجميع بشر يصيبون ويخطئون، والقداسة لله وحده.</p>
-                    </details>
-                </div>
-
-                <!-- الصفحة الثالثة من الأسئلة -->
-                <div class="question-page" id="page3">
-                    <details>
-                        <summary>كيف نتعامل مع التنوع الديني والمذهبي؟</summary>
-                        <p>بالاحترام والحوار، والاعتراف بحق الآخر في الاختلاف، مع التركيز على القواسم المشتركة.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما هو مفهوم الجهاد في المنهج القرآني؟</summary>
-                        <p>الجهاد هو الكفاح من أجل الحق والعدل، وليس قتالاً من أجل الإكراه أو السيطرة.</p>
-                    </details>
-
-                    <details>
-                        <summary>كيف نطبق المنهج القرآني في الحياة اليومية؟</summary>
-                        <p>بجعل القيم القرآنية دليلًا في التعاملات، والتفكر في الآيات، والسعي للعدل والإحسان.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما موقف المنهج القرآني من الديمقراطية؟</summary>
-                        <p>لا تعارض بين المبادئ القرآنية والديمقراطية، بل يمكن أن يتكاملَا في إطار القيم المشتركة.</p>
-                    </details>
-
-                    <details>
-                        <summary>كيف نربي الأبناء على المنهج القرآني؟</summary>
-                        <p>بغرس قيم التساؤل والتفكر، وتعليمهم احترام التنوع، وتنمية الضمير الأخلاقي.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما مفهوم الحرية في المنهج القرآني؟</summary>
-                        <p>الحرية مسؤولية، وهي حق أساسي للإنسان في الفكر والاعتقاد والممارسة ما لم تضر بالآخرين.</p>
-                    </details>
-
-                    <details>
-                        <summary>كيف نتعامل مع النصوص التي تبدو صعبة الفهم؟</summary>
-                        <p>بالرجوع إلى السياق، والمقصد العام، واستشارة مختلف أهل المعرفة، والصبر في البحث.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما دور الفنون في المنهج القرآني؟</summary>
-                        <p>الفنون تعبير عن الجمال والإبداع، وهي وسيلة للتعبير عن القيم والمشاعر الإنسانية النبيلة.</p>
-                    </details>
-
-                    <details>
-                        <summary>هل يمكن التوفيق بين الدين والعلم؟</summary>
-                        <p>نعم، لا تعارض بين الدين الحقيقي والعلم الصحيح، بل يتكاملان في البحث عن الحقيقة.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما مفهوم العدالة الاجتماعية في المنهج القرآني؟</summary>
-                        <p>العدالة الاجتماعية هي تحقيق التوازن في توزيع الثروات والفرص، وحماية حقوق الضعفاء.</p>
-                    </details>
-
-                    <details>
-                        <summary>كيف نطور فهمنا للقرآن؟</summary>
-                        <p>بالدراسة المستمرة، والحوار مع الآخرين، والانفتاح على مختلف التفسيرات والآراء.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما موقف المنهج القرآني من حقوق الإنسان؟</summary>
-                        <p>يؤكد على كرامة الإنسان وحقوقه الأساسية، ويعتبر العدل والحرية من القيم المركزية.</p>
-                    </details>
-
-                    <details>
-                        <summary>كيف نتعامل مع التحديات المعاصرة؟</summary>
-                        <p>باستلهام المبادئ القرآنية، والاجتهاد الجماعي، والانفتاح على الحكمة.</p>
-                    </details>
-
-                    <details>
-                        <summary>ما هو مستقبل المنهج القرآني؟</summary>
-                        <p>مستقبله مشرق لأنه يستجيب لحاجات العصر، ويقدم إجابات منطقية للتحديات المعاصرة.</p>
-                    </details>
-                </div>
-            </section>
-
-        </div>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         
-        <div class="article-actions">
-            <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
-                <i class="fas fa-print"></i>
-            </button>
-            <div class="share-button-container">
-                <button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleShareMenu(event)">
-                    <i class="fas fa-share-alt"></i>
-                </button>
-                <div class="article-share-menu" id="shareMenu">
-                    <div class="share-title">مشاركة المقالة</div>
-                    <div class="share-platforms">
-                        <a href="#" onclick="shareOnSocial('facebook')" class="share-platform">
-                            <img src="icons/fac-soc.png" alt="مشاركة على فيسبوك">
-                        </a>
-                        <a href="#" onclick="shareOnSocial('telegram')" class="share-platform">
-                            <img src="icons/tel-soc.png" alt="مشاركة على تلغرام">
-                        </a>
-                        <a href="#" onclick="shareOnSocial('whatsapp')" class="share-platform">
-                            <img src="icons/tel-soc.png" alt="مشاركة على واتساب">
-                        </a>
-                        <a href="#" onclick="shareOnSocial('twitter')" class="share-platform">
-                            <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
-                        </a>
-                    </div>
-                    <button class="copy-link-btn" onclick="copyArticleLink()">
-                        <i class="fas fa-link"></i>
-                        نسخ رابط المقالة
-                    </button>
-                </div>
+        /* أنماط الشريط العلوي من الكود الأول - نسخة طبق الأصل */
+        .nav-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0,0,0,0.7);
+          z-index: 998;
+          display: none;
+          backdrop-filter: blur(5px);
+        }
+
+        nav {
+          background: linear-gradient(135deg, #6a4c93, #5e2ca5);
+          padding: 0.6em 5%;
+          position: fixed;
+          width: 100%;
+          top: 0;
+          z-index: 1000;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          box-shadow: 0 4px 15px rgba(94, 44, 165, 0.2);
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-links {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          overflow-x: auto;
+          scrollbar-width: none;
+          padding: 5px 0;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .nav-links::-webkit-scrollbar {
+          display: none;
+        }
+
+        nav a {
+          color: white;
+          text-decoration: none;
+          font-weight: bold;
+          font-size: 0.85em;
+          white-space: nowrap;
+          padding: 6px 10px;
+          border-radius: 30px;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        nav a:hover {
+          background: rgba(255, 255, 255, 0.15);
+          transform: translateY(-2px);
+        }
+
+        .logo-container {
+          margin-right: auto;
+          margin-left: 0;
+        }
+
+        .logo-container img {
+          height: 40px;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transform-origin: center;
+          cursor: pointer;
+          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .logo-container img:hover {
+          transform: scale(1.1) rotate(5deg);
+          filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+        }
+
+        .hamburger {
+          display: none;
+          color: white;
+          cursor: pointer;
+          font-size: 1.3em;
+          padding: 6px;
+          border-radius: 5px;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .hamburger:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
+
+        @media (min-width: 768px) {
+          .nav-links a {
+            position: relative;
+          }
+
+          .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd166;
+            transition: width 0.3s ease;
+          }
+
+          .nav-links a:hover::after {
+            width: 100%;
+          }
+
+          .logo-container {
+            order: -1;
+            margin-right: 20px;
+          }
+        }
+
+        @media (max-width: 767px) {
+          nav {
+            padding: 0.6em 3%;
+            justify-content: space-between;
+            gap: 10px;
+          }
+
+          .hamburger {
+            display: block;
+            order: -1;
+          }
+
+          .nav-links {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 15px;
+            background: #5e2ca5;
+            width: 230px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(94, 44, 165, 0.15);
+            flex-direction: column;
+            padding: 1em;
+            z-index: 999;
+            left: auto;
+            transform: none;
+            animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 80vh;
+            overflow-y: auto;
+            padding-bottom: 10px;
+            gap: 8px;
+          }
+
+          .nav-links.show {
+            display: flex;
+          }
+
+          .nav-links a {
+            width: 100%;
+            text-align: center;
+            padding: 8px;
+            margin: 2px 0;
+            font-size: 0.9em;
+          }
+
+          .logo-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+          }
+        }
+
+        @keyframes slideIn {
+          from { transform: translateY(-20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* إضافة زر المشاركة للكمبيوتر - مطابق للصفحة الرئيسية */
+        .share-button {
+          position: fixed;
+          top: 20px;
+          left: 30px;
+          z-index: 1001;
+          cursor: pointer;
+        }
+
+        .share-button img {
+          width: 35px;
+          height: 35px;
+          cursor: pointer;
+          filter: hue-rotate(40deg) saturate(0.6) brightness(1.4);
+          transition: all 0.3s ease;
+        }
+
+        .share-button img:hover {
+          transform: scale(1.2);
+          animation: pulse 1s infinite;
+        }
+
+        .share-button:active img {
+          transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.7;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: #a98efa;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          }
+
+          .share-button:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+          }
+
+          #share-menu {
+            background: #f8f3ff !important;
+            border: 1px solid #e6daff !important;
+            border-radius: 12px !important;
+            padding: 15px !important;
+            gap: 12px !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+            animation: fadeIn 0.3s ease-out !important;
+          }
+
+          #share-menu a img {
+            transition: transform 0.2s ease;
+          }
+
+          #share-menu a:hover img {
+            transform: scale(1.15);
+          }
+        }
+
+        @media (max-width: 767px) {
+          .share-button, .email-button {
+            display: none;
+          }
+
+          .tooltip-text {
+            display: none !important;
+          }
+
+          /* التعديل على زر المشاركة للجوال - داخل الشريط العلوي */
+          .mobile-share {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            margin-left: -230px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background 0.3s;
+          }
+
+          .mobile-share:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+
+          .mobile-share img {
+            width: 30px;
+            height: 30px;
+            filter: brightness(0) invert(1);
+          }
+
+          .share-button {
+            display: none;
+          }
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* إضافة أنماط التنبيهات المطابقة للصفحة الرئيسية */
+        .copy-alert {
+          position: fixed;
+          top: 100px;
+          left: 30%;
+          transform: translateX(-50%);
+          background-color: #c29eea;
+          color: white;
+          padding: 12px 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          font-weight: bold;
+          font-size: 1em;
+          z-index: 9999;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        }
+
+        .copy-alert.show {
+          opacity: 1;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--light-beige);
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f3e6 0%, #ede7f6 100%);
+            padding-top: 80px;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        /* إزالة الأنماط القديمة للشريط العلوي */
+        .header, .header-container, .nav-buttons, .nav-btn, .nav-indicator {
+            display: none;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 17px;
+        }
+        
+        .btn:hover {
+            background-color: #6A45B0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+        
+        .article-card {
+            background-color: var(--article-beige);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            margin-bottom: 50px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        }
+        
+        .article-header {
+            position: relative;
+            padding-bottom: 25px;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+        
+        .article-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: 0 auto;
+            width: 120px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 3px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.4;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            font-size: 26px;
+            margin: 40px 0 20px;
+            padding-right: 20px;
+            position: relative;
+            font-weight: 600;
+        }
+        
+        h2::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -7px;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 3px;
+        }
+        
+        h3 {
+            color: var(--primary-color);
+            font-size: 22px;
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+        
+        .publish-date {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+            font-size: 18px;
+            justify-content: center;
+        }
+        
+        .date-icon {
+            color: var(--primary-color);
+        }
+        
+        .article-content {
+            font-size: 18px;
+            text-align: justify;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .article-content p {
+            margin-bottom: 25px;
+        }
+        
+        .verse {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 22px;
+            display: block;
+            margin: 30px 0;
+            text-align: center;
+            line-height: 1.7;
+            padding: 20px;
+            background-color: var(--light-purple);
+            border-radius: 12px;
+            border-right: 5px solid var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 26px;
+            margin: 40px 0 20px;
+            padding-right: 20px;
+            position: relative;
+            font-weight: 600;
+        }
+        
+        .section-title::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -7px;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 3px;
+        }
+        
+        ol, ul {
+            padding-right: 30px;
+            margin: 25px 0;
+        }
+        
+        li {
+            margin-bottom: 18px;
+            position: relative;
+            padding-right: 25px;
+        }
+        
+        ul li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+            font-size: 22px;
+        }
+        
+        ol {
+            counter-reset: section;
+        }
+        
+        ol li {
+            counter-increment: section;
+        }
+        
+        ol li::before {
+            content: counter(section) ".";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+            font-size: 20px;
+        }
+        
+        .conclusion {
+            background-color: var(--light-purple);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            border: 1px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .conclusion::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            border-radius: 3px;
+        }
+        
+        .article-actions {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .article-button {
+            background: white;
+            border: none;
+            cursor: pointer;
+            font-size: 22px;
+            color: var(--primary-color);
+            transition: all 0.3s;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .article-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            color: var(--accent-color);
+            background-color: var(--primary-color);
+        }
+        
+        .share-button-container {
+            position: relative;
+        }
+        
+        .article-share-menu {
+            position: absolute;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: none;
+            width: 280px;
+            z-index: 1000;
+            border: 1px solid var(--border-color);
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        
+        .share-title {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        .share-platforms {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .share-platform {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            background-color: white !important;
+            border: 1px solid #ddd;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .share-platform:hover {
+            transform: scale(1.15);
+            background-color: var(--primary-color) !important;
+        }
+        
+        .share-platform:hover img {
+            filter: brightness(0) invert(1);
+        }
+        
+        .copy-link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 18px;
+            background-color: var(--light-purple);
+            color: var(--primary-color);
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 17px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        .copy-link-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .share-platform img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            transition: filter 0.3s;
+        }
+        
+        .article-button img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        
+        .example-block h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        /* زر العودة للأعلى */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .back-to-top i {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+        
+        .back-to-top:hover i {
+            transform: translateY(-3px);
+        }
+        
+        /* ==================== تأثيرات حركية ==================== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translate(-50%, 20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translate(-50%, 0); }
+            to { opacity: 0; transform: translate(-50%, 20px); }
+        }
+        
+        .article-card {
+            animation: fadeIn 0.7s ease-out forwards;
+        }
+        
+        .article-share-menu {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        
+        .share-menu-closing {
+            animation: fadeOut 0.2s ease-out forwards;
+        }
+        
+        /* ==================== طباعة ==================== */
+        @media print {
+            .header, .article-actions, .back-btn, .back-to-top, .font-controls, .search-wrapper {
+                display: none;
+            }
+            
+            body {
+                background: none;
+                color: #000;
+                padding-top: 0;
+            }
+            
+            .article-card {
+                box-shadow: none;
+                padding: 0;
+                background: none;
+                border: none;
+                border-radius: 0;
+            }
+            
+            .verse {
+                background: none;
+                border-right: none;
+                padding: 0;
+            }
+        }
+        
+        .highlight {
+            background-color: rgba(255, 193, 7, 0.2);
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+        
+        .note-highlight {
+            color: red;
+            font-weight: bold;
+        }
+        
+        /* ==================== أزرار التحكم بالخط من الكود الأول ==================== */
+        .font-controls {
+            position: fixed;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease-out;
+            top: var(--font-control-top);
+            bottom: var(--font-control-bottom);
+            right: var(--font-control-right);
+            left: var(--font-control-left);
+        }
+        
+        .font-controls button {
+            width: var(--font-control-button-size);
+            height: var(--font-control-button-size);
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-control-button-font-size);
+            transition: all 0.3s;
+        }
+        
+        .font-controls button:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .font-controls button i {
+            transition: transform 0.2s;
+        }
+        
+        .font-controls button:active i {
+            transform: scale(0.9);
+        }
+        
+        .font-controls button::after {
+            content: attr(title);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .font-controls button:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .font-controls {
+                --font-control-top: 100px;
+                --font-control-right: 10px;
+                --font-control-button-size: 36px;
+                --font-control-button-font-size: 15px;
+                gap: 6px;
+                padding: 8px;
+            }
+        }
+        
+        /* ==================== وسائط متجاوبة ==================== */
+        @media (max-width: 992px) {
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .article-card {
+                padding: 35px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .article-content {
+                font-size: 17px;
+            }
+            
+            .verse {
+                font-size: 20px;
+                padding: 15px;
+            }
+            
+            .nav-btn {
+                font-size: 16px;
+                padding: 0 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-buttons {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .header {
+                height: 70px;
+            }
+            
+            .logo {
+                height: 50px;
+            }
+            
+            .scrolled .logo {
+                height: 45px;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .article-card {
+                padding: 30px;
+                border-radius: 18px;
+            }
+            
+            h1 {
+                font-size: 26px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+            }
+            
+            .verse {
+                font-size: 18px;
+            }
+            
+            .conclusion {
+                padding: 25px;
+            }
+            
+            .article-button {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .article-button img {
+                width: 22px;
+                height: 22px;
+            }
+            
+            /* زر العودة للأعلى في الجوال */
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .back-to-top i {
+                font-size: 20px;
+            }
+            
+            /* وضع الشعار في وسط الشريط العلوي في الجوال */
+            .logo-container {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1000;
+                margin: 0;
+                text-align: center;
+            }
+            
+            .hamburger {
+                position: relative;
+                z-index: 1001;
+            }
+            
+            /* تحريك زر الهامبرغر إلى اليسار */
+            .header-container {
+                justify-content: flex-start;
+            }
+            
+            /* تعديلات القائمة المنسدلة على الجوال */
+            .mobile-nav {
+                padding: 15px 12px 100px;
+            }
+            
+            .mobile-nav .nav-btn {
+                margin-bottom: 8px;
+                padding: 12px 15px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header {
+                height: 65px;
+            }
+            
+            .logo {
+                height: 45px;
+            }
+            
+            .article-card {
+                padding: 25px;
+                border-radius: 15px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .section-title {
+                font-size: 20px;
+            }
+            
+            .verse {
+                font-size: 16px;
+            }
+            
+            .article-actions {
+                gap: 15px;
+            }
+            
+            .article-button {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .article-button img {
+                width: 20px;
+                height: 20px;
+            }
+            
+            /* زر العودة للأعلى في الجوال الصغير */
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .back-to-top i {
+                font-size: 18px;
+            }
+            
+            /* تحسين لوحة المشاركة على الجوال */
+            .article-share-menu {
+                width: 92vw;
+                max-width: 300px;
+                padding: 18px 15px;
+                bottom: calc(100% + 12px);
+            }
+            
+            .share-title {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            
+            .share-platforms {
+                flex-wrap: nowrap;
+                justify-content: space-around;
+                gap: 12px;
+                margin-bottom: 15px;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                scrollbar-width: none;
+            }
+            
+            .share-platforms::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .share-platform {
+                width: 44px;
+                height: 44px;
+                flex-shrink: 0;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            }
+            
+            .share-platform img {
+                width: 22px;
+                height: 22px;
+            }
+            
+            .copy-link-btn {
+                font-size: 16px;
+                padding: 12px 10px;
+                border-radius: 25px;
+            }
+            
+            .mobile-nav {
+                width: 80%;
+                padding: 12px 10px 90px;
+            }
+            
+            .mobile-nav .nav-btn {
+                font-size: 16px;
+                padding: 10px 12px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .header {
+                height: 60px;
+            }
+            
+            .logo {
+                height: 40px;
+            }
+            
+            .article-share-menu {
+                width: 90vw;
+                padding: 16px 12px;
+            }
+            
+            .share-platforms {
+                gap: 8px;
+            }
+            
+            .share-platform {
+                width: 42px;
+                height: 42px;
+            }
+            
+            .share-platform img {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .copy-link-btn {
+                font-size: 15px;
+                padding: 10px;
+            }
+            
+            .mobile-nav {
+                width: 85%;
+                padding: 10px 8px 80px;
+            }
+            
+            .mobile-nav .nav-btn {
+                font-size: 15px;
+                padding: 8px 10px;
+            }
+        }
+        
+        .video-link {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.5s ease;
+            background: linear-gradient(135deg, #7E57C2, #FFC107);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            margin: 20px 0;
+            font-size: 18px;
+            animation: glow 3s infinite;
+        }
+        
+        .video-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            z-index: -1;
+            border-radius: 50px;
+        }
+        
+        .video-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #6A45B0, #FFA000);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .video-link i {
+            margin-left: 10px;
+            transition: transform 0.5s ease;
+        }
+        
+        .video-link:hover i {
+            transform: rotate(10deg);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
+            50% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.9); }
+            100% { box-shadow: 0 0 5px rgba(255, 193, 7, 0.6); }
+        }
+        
+        /* مؤشر التمرير في الأسفل */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 50%;
+            transform: translateX(50%);
+            background: rgba(255, 255, 255, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s infinite;
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .mobile-nav.open .scroll-indicator {
+            opacity: 1;
+        }
+        
+        .scroll-indicator i {
+            color: white;
+            font-size: 20px;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(50%) translateY(0);}
+            40% {transform: translateX(50%) translateY(-15px);}
+            60% {transform: translateX(50%) translateY(-7px);}
+        }
+        
+        /* زر اليوتيوب في القائمة */
+        .youtube-btn {
+            background: rgba(255, 0, 0, 0.15) !important;
+        }
+        
+        .youtube-btn:hover {
+            background: rgba(255, 0, 0, 0.3) !important;
+        }
+        
+        /* ================ أنماط الفوتر من الكود الأول ================ */
+        footer {
+          text-align: center;
+          padding: 18px;
+          background: #5e2ca5;
+          color: white;
+          font-size: 0.85em;
+          margin-top: auto;
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        .social-links {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          margin: 15px 0;
+          flex-wrap: wrap;
+        }
+
+        .social-links a {
+          color: white;
+          font-size: 0.9em;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.1);
+          text-decoration: none !important;
+          border: none !important;
+        }
+
+        .social-links a:hover {
+          color: white;
+          transform: scale(1.1);
+        }
+        
+        .social-links a.facebook:hover { background: #1877F2; }
+        .social-links a.instagram:hover { background: #E4405F; }
+        .social-links a.youtube:hover { background: #FF0000; }
+        .social-links a.tiktok:hover { background: #000000; }
+        .social-links a.snapchat:hover { background: #FFFC00; color: #000; }
+        .social-links a.telegram:hover { background: #2AABEE; }
+
+        .copyright {
+          margin-top: 10px;
+          padding-top: 10px;
+          font-size: 0.95em;
+          font-weight: 600;
+          color: #ffd166;
+        }
+        
+        /* ================ أنماط خاصة بالمحتوى من الكود الثاني ================ */
+        .meta {
+            font-size: 16px;
+            color: var(--muted);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background-color: var(--light-beige-bg);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        }
+        
+        .toc {
+            background-color: var(--light-beige-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .examples {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        @media (min-width: 820px) {
+            .examples {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        details {
+            background: var(--light-beige-bg);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+        
+        code {
+            background: #0f172a;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* ==================== أنماط قسم الإحصائيات من الكود الأول ==================== */
+        #pagination-wrapper {
+            position: relative;
+            text-align: center;
+            margin: 40px auto;
+            padding: 15px;
+            background: #f8f3ff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(94, 44, 165, 0.1);
+            border-top: 3px solid #6a4c93;
+            max-width: 900px;
+        }
+
+        #pageInfo {
+            font-weight: bold;
+            color: #5e2ca5;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        #prevPage, #nextPage, #firstPage {
+            background-color: #a88ee6;
+            border: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+        }
+
+        #prevPage:hover, #nextPage:hover, #firstPage:hover {
+            background-color: #8a6ed6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(94, 44, 165, 0.2);
+        }
+
+        #firstPage {
+            background-color: #f3eaff;
+            color: #5e2ca5;
+        }
+
+        #firstPage:hover {
+            background-color: #e0d0ff;
+        }
+
+        /* أنماط خاصة بالأسئلة */
+        .question-page {
+            display: none;
+        }
+
+        .question-page.active {
+            display: block;
+        }
+
+        /* ==================== إضافة أنماط مربع البحث ==================== */
+        .search-wrapper {
+            position: relative;
+            margin: 0 auto 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .search-wrapper input {
+            width: 100%;
+            padding: 15px 60px 15px 20px; /* مسافة للأيقونة على اليمين */
+            border-radius: 50px;
+            border: 2px solid #e0e0e0;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            outline: none;
+            background: white;
+        }
+        
+        .search-wrapper input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(94, 44, 165, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 18px;
+            pointer-events: none;
+        }
+        
+        .no-results {
+            text-align: center;
+            color: #d9534f;
+            font-weight: bold;
+            display: none;
+            padding: 20px;
+            background: #fff5f5;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ffcccc;
+        }
+    </style>
+</head>
+<body>
+    <!-- زر المشاركة للكمبيوتر - مطابق للصفحة الرئيسية -->
+    <div class="share-button">
+        <img alt="مشاركة" onclick="toggleShareMenu(event)" src="images/share.png"/>
+        <div class="tooltip-text">مشاركة الموقع</div>
+        <div id="share-menu" style="display:none; position:absolute; top:50px; left:0; width:180px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+            <div onclick="copyLink()" style="margin-bottom:10px; cursor:pointer; color:#5e2ca5;">🔗 نسخ الرابط</div>
+            <div style="display:flex; justify-content:space-between; flex-wrap: wrap; gap: 10px;">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.husseinalkhalil.com" target="_blank"><img src="icons/facebook.png" title="فيسبوك" width="32"/></a>
+                <a href="https://api.whatsapp.com/send?text=https://www.husseinalkhalil.com" target="_blank"><img src="icons/whatsapp.png" title="واتساب" width="32"/></a>
+                <a href="https://t.me/share/url?url=https://www.husseinalkhalil.com" target="_blank"><img src="icons/telegram.png" title="تلغرام" width="32"/></a>
+                <a href="https://x.com/intent/tweet?url=https://www.husseinalkhalil.com" target="_blank"><img src="icons/x.png" title="تويتر/X" width="32"/></a>
+                <a href="https://www.instagram.com/" target="_blank"><img src="icons/instagram.png" title="إنستغرام" width="32"/></a>
+                <a href="https://www.tiktok.com/" target="_blank"><img src="icons/tiktok.png" title="تيك توك" width="32"/></a>
+                <a href="https://www.youtube.com/" target="_blank"><img src="icons/youtube.png" title="يوتيوب" width="32"/></a>
             </div>
         </div>
     </div>
 
-    <!-- قسم الإحصائيات من الكود الأول -->
-    <div id="pagination-wrapper">
-        <div id="pageInfo" style="font-weight:bold; color:#5e2ca5; margin-bottom:10px;">
-            الصفحة 1 من 3 - إجمالي الأسئلة: 45
-        </div>
-        <div style="display:inline-flex; gap: 8px; flex-wrap: wrap; justify-content:center;">
-            <button id="prevPage" onclick="prevPage()">« السابق</button>
-            <button id="firstPage" onclick="goToFirstPage()">الصفحة الأولى</button>
-            <button id="nextPage" onclick="nextPage()">التالي »</button>
-        </div>
-    </div>
-</div>
+    <!-- الشريط العلوي المطابق تماماً للصفحة الرئيسية -->
+    <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
 
-<!-- الفوتر من الكود الأول -->
-<footer>
-    <div class="social-links">
-        <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
-        <a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
-        <a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
-        <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
+    <nav>
+        <div class="hamburger" onclick="toggleMobileMenu()">☰ القائمة</div>
+        
+        <!-- زر المشاركة للجوال داخل الشريط العلوي -->
+        <div class="mobile-share" onclick="handleMobileShare()" style="display:none;">
+            <img alt="مشاركة" src="images/share.png"/>
+        </div>
+        
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="books.html">الكتب</a>
+            <a href="articles.html">المقالات</a>
+            <a href="khawatir.html">خواطر</a>
+            <a href="videos.html">الفيديوهات</a>
+            <a href="history.html">التاريخ</a>
+            <a href="podcast.html">البودكاست</a>
+            <a href="ask.html">الأسئلة</a>
+            <a href="hewar.html">حوارات</a>
+            <a href="inq.html">تساؤلات</a>
+            <a href="manhaj.html">المنهج</a>
+            <a href="favorites.html">المفضلة</a>
+            <a href="support.html">دعم المحتوى</a>
+            <a href="about.html">من نحن</a>
+            <a href="#" onclick="window.print()">طباعة</a>
+        </div>
+
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="images/logo.png" alt="شعار الموقع" />
+            </a>
+        </div>
+    </nav>
+    
+    <!-- أزرار التحكم بالخط من الكود الأول -->
+    <div class="font-controls">
+        <button id="fontDecrease" title="تصغير الخط (Zoom Out)">
+            <i class="fas fa-search-minus"></i>
+        </button>
+        <button id="fontReset" title="الحجم الطبيعي (Reset)">
+            <i class="fas fa-font"></i>
+        </button>
+        <button id="fontIncrease" title="تكبير الخط (Zoom In)">
+            <i class="fas fa-search-plus"></i>
+        </button>
     </div>
     
-    <div class="copyright">
-        حسين الخليل - جميع الحقوق محفوظة © 2025
+    <div class="container">
+        <div class="article-card">
+            <div class="article-header">
+                <h1>الأسئلة الشائعة</h1>
+                <div class="meta">إطار نقدي لطرح الأسئلة وفحصها بميزان القرآن</div>
+            </div>
+            
+            <div class="article-content">
+                <section id="intro" class="card" aria-labelledby="intro-heading">
+                    <h2 id="intro-heading">مقدمة</h2>
+                    <p>هذه الصفحة تجمع جملة من الأسئلة المتداولة مع محاولات للإجابة عليها وفق منهج تدبّري يعتمد قراءة النص القرآني من داخله. الإجابات المعروضة هنا ليست حقائق نهائية ولا مسلمات ملزمة، بل اجتهادات تفسيرية قابلة للمراجعة والتعديل كلما تطوّرت الأدوات المعرفية واتّسع نطاق الفهم. الغاية هي فتح باب التفكير وتقديم مسار منهجي لمن يرغب في البحث، لا إصدار أحكام أو فتاوى معلبة وجاهزة أو تبنّي يقينيات مغلقة.</p>
+                </section>
+
+                <section id="faq">
+                    <h2>الأسئلة الشائعة</h2>
+                    
+                    <!-- إضافة مربع البحث -->
+                    <div class="search-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="faqSearch" placeholder="ابحث عن سؤال أو كلمة مفتاحية..." onkeyup="filterQuestions()">
+                    </div>
+                    <div id="no-results" class="no-results">لا توجد نتائج تطابق بحثك</div>
+
+                    <!-- الصفحة الأولى من الأسئلة -->
+                    <div class="question-page active" id="page1">
+                        <details>
+                            <summary>هل هناك وحي غير القرآن؟</summary>
+                            <p>لا؛ الوحي واحد فقط وهو القرآن، إستناداً لقوله تعالى (وَأُوحِيَ إِلَيَّ هَٰذَا الْقُرْآنُ لِأُنذِرَكُم بِهِ)</p>
+                        </details>
+
+                        <details>
+                            <summary>من صاحب مقولة: الوحي الثاني؟</summary>
+                            <p>أول من أطلق هذه المقولة هو الإمام الشافعي، فقبل هذه  المقولة لا وجود لمصطلح الوحي الثاني.</p>
+                        </details>
+
+                        <details>
+                            <summary> هل هناك عقوبة لتارك الصلاة أو المتهاون بها؟ </summary>
+                            <p> لا يوجد في القرآن أي إشارة لعقوبة تارك او المتهاون بالصلاة الحركية. </p>
+                        </details>
+
+                        <details>
+                            <summary> هل للصلاة في القرآن مفهوم واحد؟ </summary>
+                            <p> لا، بل تنقسم إلى قسمين، الأول الصلاة الروحانية، أي الصلة بالله، والثاني الصلاة الحركية، التركيز كله والوعيد على الصلاة الروحانية وليس الحركية. </p>
+                        </details>
+
+                        <details>
+                            <summary> هل يجوز للحائض أن تصوم وتصلي؟ </summary>
+                            <p> نعم، إذا استطاعت ذلك فلها أن تصوم وتصلي لأن المنع جاء من التراث وليس القرآن، لكن إذا شق عليها ذلك، فعليها أن تتوقف وتأخذ حكم المريض. </p>
+                        </details>
+
+                        <details>
+                            <summary> هل يجوز للحائض لمس القرآن والقراءة منه؟ </summary>
+                            <p> نعم يجوز لها أن تتصفحه وتقرأ منه. </p>
+                        </details>
+
+                        <details>
+                            <summary> هل الرجم تشريع في الدين؟ </summary>
+                            <p> لا، القرآن لم يذكر الرجم كعقوبة، بل جاء به رجال الدين من التراث وليس من القرآن. </p>
+                        </details>
+
+                        <details>
+                            <summary> هل طلاء الأظافر (المناكير) يبطل الوضوء أو الصلاة؟ </summary>
+                            <p> لا، وهل الغلو في الدين جاء به رجال الدين وليس القرآن، فالمرأة لها أن تتوضأ وتصلي وهي تضع طلاء الأظافر. </p>
+                        </details>
+
+                        <details>
+                            <summary> هل الختان واجب على الذكر؟ </summary>
+                            <p> الختان جريمة بحق الإنسانية والإسلام بريء منه ولم يشرّعه الله بل رجال الدين. </p>
+                        </details>
+
+                        <details>
+                            <summary> هل يجوز للمرأة أن تصلي بملابسها العادية داخل البيت دون أن تلبس ملابس الصلاة؟ </summary>
+                            <p> نعم يجوز لها ذلك. </p>
+                        </details>
+
+                        <details>
+                            <summary> صديقي مسيحي وقدم لي طعامًا، فهل يجوز أن آكله؟ </summary>
+                            <p> نعم يجوز لك ذلك ﴿وَطَعامُ الَّذينَ أوتُوا الكِتابَ حِلٌّ لَكُم وَطَعامُكُم حِلٌّ لَهُم﴾ [المائدة: 5] </p>
+                        </details>
+
+                        <details>
+                            <summary> أقوم بتربية كلب في بيتي وسمعت أن هذا محرم ويمنع دخول الملائكة البيت، فما حكم القرآن؟ </summary>
+                            <p> هذا الكلام غير صحيح، القرآن لم يمنع تربية الكلب في البيت طالما أنها خالية من أي أمراض مضرة. </p>
+                        </details>
+
+                        <details>
+                            <summary> هل يصل ثواب قراءة القرآن للميت؟ </summary>
+                            <p> لا، لأن الإنسان محاسب على أفعاله هو. ﴿وَأَن لَيسَ لِلإِنسانِ إِلّا ما سَعى﴾ [النجم: 39] </p>
+                        </details>
+
+                        <details>
+                            <summary> مسلم دفن في مقابر اليهود ويهودي دفن في مقابر المسلمين، هل يغير شيء من مصير الميت وهل الدفن جائز؟ </summary>
+                            <p> دفن المسلم في مقابر غير المسلمين أو دفنه في البقيع أو موته ساجدًا أو يوم الجمعة أو في رمضان وغيره، لا يغير شيء من مصيره لأن الله سيحاسبه على عمله الذي فعله في حياته وليس على طريقة موته أو أين دفن، والقرآن لم يمنع دفن المسلم في مقابر غير المسلمين أو العكس، كل هذا إنما عادات مجتمعية لا أكثر لأن طريقة الدفن والمكان لا يؤثر شيئًا في مصير الميت. </p>
+                        </details>
+
+                        <details>
+                            <summary> هل هناك عذاب في القبر؟ </summary>
+                            <p> لا يوجد عذاب في القبر، والقرآن يعطي دلالات ينفي هذا الشيء، عذاب القبر جاء عن طريق التراث وليس القرآن. </p>
+                        </details>
+
+                        <details>
+                            <summary> ما حقيقة الثعبان الأقرع؟ </summary>
+                            <p> خرافة تراثية ما أنزل الله بها من سلطان. </p>
+                        </details>
+
+                        <details>
+                            <summary> ما حقيقة ضغطة القبر؟ </summary>
+                            <p> خرافة تراثية ما أنزل الله بها من سلطان. </p>
+                        </details>
+
+                        <details>
+                            <summary> ما حقيقة منكر ونكير؟ </summary>
+                            <p> خرافة تراثية ما أنزل الله بها من سلطان. </p>
+                        </details>
+
+                        <details>
+                            <summary> كفّروني بعض رجال الدين لأني لم أؤمن بكتب التراث وقالوا أني خرجت عن الملة. </summary>
+                            <p> تكفيرهم لك لا يقدم ولا يؤخر وليس له أي اعتبار عند الله لأنهم بشر مثلك لا يملكون من أمرهم شيء، الله سيحاسبك بناءًا على عملك وعلمه هو بك وليس بناءًا على تزكية البشر أو تكفيرهم لك. </p>
+                        </details>
+
+                        <details>
+                            <summary> هل الموسيقى حرام؟ </summary>
+                            <p> كلا، بل هي غذاء للروح، القرآن لم يحرمها. </p>
+                        </details>
+
+                        <details>
+                            <summary>لماذا لا نؤمن بالروايات؟</summary>
+                            <p>لأن القرآن لم يطلب مرجعًا فوقه، ولأن الروايات كُتبت بعد وفاة النبي بمئات السنين.</p>
+                        </details>
+
+                        <details>
+                            <summary>هل يجب أن نلتزم بتفاسير الأولين وهل هي تفاسير توقيفية؟</summary>
+                            <p>القرآن يفهم بحسب الزمان والمكان وبحسب الأدوات المعرفية، التفاسير السابقة صالحة لزمانها ومكانها وغير صالحة لهذا الزمان ولسنا مطالبين بها لأنها اجتهادات بشرية قابلة للنقد.</p>
+                        </details>
+                        
+                        <details>
+                            <summary>هل نحن ملزمون بكتب الروايات واجماع الفقهاء؟</summary>
+                            <p>لا، نحن ملزمون بالوحي الوحيد فقط، (القرآن)، وكل ما هو دون القرآن من كتب روايات وفقه واجماع واتفاق، إنما هي اجتهادات بشرية لا قداسة لها.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما هو أساس التفكير القرآني؟</summary>
+                            <p>الأساس هو العقل والمنطق والفطرة السليمة، مع الاعتماد على النص القرآني كمصدر رئيسي أوحد.</p>
+                        </details>
+
+                        <details>
+                            <summary>هل يمكن الجمع بين القرآن والتراث؟</summary>
+                            <p>يمكن الاستفادة من التراث كخلفية تاريخية، لكن لا يمكن جعله مساوياً أو أعلى من النص القرآني.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما موقفكم من الأحاديث النبوية?</summary>
+                            <p>نحترم الأحاديث النبوية ولكن نتعامل معها كروايات تاريخية تحتاج إلى تمحيص ولا نعتبرها مصدراً تشريعياً ملزماً.</p>
+                        </details>
+
+                        <details>
+                            <summary>كيف نتعامل مع الاختلافات في التفسير؟</summary>
+                            <p> الاختلاف سنة، ونحن نرى فيه ثراءً فكرياً ما دام محكوماً بضوابط المنهج القرآني.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما هي أهم مبادئ المنهج القرآني؟</summary>
+                            <p>أهم المبادئ: العقلانية، الوضوح، الاتساق الداخلي، والانسجام مع الفطرة الإنسانية.</p>
+                        </details>
+
+                        <details>
+                            <summary>هل هناك مرجعية بشرية في المنهج القرآني؟</summary>
+                            <p>لا توجد مرجعية بشرية مطلقة، المرجعية الوحيدة هي للنص القرآني مع فهمه بالعقل والمنطق.</p>
+                        </details>
+
+                        <details>
+                            <summary>كيف نثبت صحة المنهج القرآني؟</summary>
+                            <p>بنتائجه العملية في حياة الإنسان، وبقدرته على تقديم إجابات مقنعة ومنطقية للتحديات المعاصرة.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما الفرق بين القرآن والتراث؟</summary>
+                            <p>القرآن هو الوحي الإلهي الثابت، والتراث هو الفهم البشري المتغير عبر العصور.</p>
+                        </details>
+
+                        <details>
+                            <summary>هل يمكن تطوير المنهج القرآني؟</summary>
+                            <p>نعم، المنهج قابلاً للتطوير والمراجعة المستمرة مع تطور المعرفة الإنسانية.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما دور العقل في المنهج القرآني؟</summary>
+                            <p>العقل هو الأداة الرئيسية لفهم النص القرآني وتطبيقه في الواقع المعاصر.</p>
+                        </details>
+                    </div>
+
+                    <!-- الصفحة الثانية من الأسئلة -->
+                    <div class="question-page" id="page2">
+                        <details>
+                            <summary>كيف نتعامل مع النصوص التي تبدو متعارضة؟</summary>
+                            <p>نبحث عن السياق والمقصد العام، ونتعامل مع النص ككل متكامل لا كمقاطع منفصلة.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما أهمية السياق في فهم النص القرآني؟</summary>
+                            <p>السياق أساسي لفهم أي نص، وهو الذي يحدد المعنى الحقيقي والدلالة المقصودة.</p>
+                        </details>
+
+                        <details>
+                            <summary>هل يمكن فهم القرآن دون معرفة باللسان العربي؟</summary>
+                            <p>المعرفة باللسان العربي يساعد، لكن الفهم الجوهري ممكن عبر الترجمات والتفكر في المقاصد.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما موقف المنهج القرآني من العلوم الحديثة؟</summary>
+                            <p>نرحب بالعلوم الحديثة ونتعامل معها كوسائل لفهم أعمق للكون والحياة، دون تعارض مع المبادئ القرآنية.</p>
+                        </details>
+
+                        <details>
+                            <summary>كيف نوفق بين النص والعقل عندما يبدوان متعارضين؟</summary>
+                            <p>لا تعارض حقيقي بين النص الصحيح والعقل السليم، وأي تعارض ظاهري يحتاج إلى إعادة نظر في الفهم.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما دور الأخلاق في المنهج القرآني؟</summary>
+                            <p>الأخلاق هي الغاية الأساسية من التشريع، وكل فهم يخالف الأخلاق يحتاج إلى مراجعة.</p>
+                        </details>
+
+                        <details>
+                            <summary>هل المنهج القرآني يصلح لكل زمان ومكان؟</summary>
+                            <p>نعم، لأنه يعتمد على مبادئ ثابتة قابلة للتطبيق في مختلف الظروف والأزمنة.</p>
+                        </details>
+
+                        <details>
+                            <summary>كيف نتعامل مع التراث الفقهي الإسلامي؟</summary>
+                            <p>نتعامل معه كتراث فكري إنساني قابل للدراسة والنقد، وليس كنصوص مقدسة.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما الفرق بين الدين والتديّن؟</summary>
+                            <p>الدين هو المبادئ الثابتة، والتديّن هو الممارسات البشرية المتغيرة التي قد تصيب وقد تخطئ.</p>
+                        </details>
+
+                        <details>
+                            <summary>هل يمكن أن يتطور الفهم الديني؟</summary>
+                            <p>نعم، الفهم الديني يتطور مع تطور المعرفة والإدراك الإنساني.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما معنى "لا إكراه في الدين" في التطبيق العملي؟</summary>
+                            <p>يعني حرية الاعتقاد والضمير، ورفض أي شكل من أشكال الإجبار في الأمور الدينية.</p>
+                        </details>
+
+                        <details>
+                            <summary>كيف نحدد ما هو أساسي وما هو ثانوي في الدين؟</summary>
+                            <p>الأساسيات هي المبادئ الكبرى والأخلاق والقيم، والثانويات هي التفاصيل والشكليات.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما دور المرأة في المنهج القرآني؟</summary>
+                            <p>المرأة شريكة كاملة في المسؤولية والحقوق، ولها مكانة متساوية مع الرجل في الكرامة الإنسانية.</p>
+                        </details>
+
+                        <details>
+                            <summary>هل هناك قداسة للشخصيات الدينية؟</summary>
+                            <p>لا قداسة لأي شخص، الجميع بشر يصيبون ويخطئون، والقداسة لله وحده.</p>
+                        </details>
+                    </div>
+
+                    <!-- الصفحة الثالثة من الأسئلة -->
+                    <div class="question-page" id="page3">
+                        <details>
+                            <summary>كيف نتعامل مع التنوع الديني والمذهبي؟</summary>
+                            <p>بالاحترام والحوار، والاعتراف بحق الآخر في الاختلاف، مع التركيز على القواسم المشتركة.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما هو مفهوم الجهاد في المنهج القرآني؟</summary>
+                            <p>الجهاد هو الكفاح من أجل الحق والعدل، وليس قتالاً من أجل الإكراه أو السيطرة.</p>
+                        </details>
+
+                        <details>
+                            <summary>كيف نطبق المنهج القرآني في الحياة اليومية؟</summary>
+                            <p>بجعل القيم القرآنية دليلًا في التعاملات، والتفكر في الآيات، والسعي للعدل والإحسان.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما موقف المنهج القرآني من الديمقراطية؟</summary>
+                            <p>لا تعارض بين المبادئ القرآنية والديمقراطية، بل يمكن أن يتكاملَا في إطار القيم المشتركة.</p>
+                        </details>
+
+                        <details>
+                            <summary>كيف نربي الأبناء على المنهج القرآني؟</summary>
+                            <p>بغرس قيم التساؤل والتفكر، وتعليمهم احترام التنوع، وتنمية الضمير الأخلاقي.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما مفهوم الحرية في المنهج القرآني؟</summary>
+                            <p>الحرية مسؤولية، وهي حق أساسي للإنسان في الفكر والاعتقاد والممارسة ما لم تضر بالآخرين.</p>
+                        </details>
+
+                        <details>
+                            <summary>كيف نتعامل مع النصوص التي تبدو صعبة الفهم؟</summary>
+                            <p>بالرجوع إلى السياق، والمقصد العام، واستشارة مختلف أهل المعرفة، والصبر في البحث.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما دور الفنون في المنهج القرآني؟</summary>
+                            <p>الفنون تعبير عن الجمال والإبداع، وهي وسيلة للتعبير عن القيم والمشاعر الإنسانية النبيلة.</p>
+                        </details>
+
+                        <details>
+                            <summary>هل يمكن التوفيق بين الدين والعلم؟</summary>
+                            <p>نعم، لا تعارض بين الدين الحقيقي والعلم الصحيح، بل يتكاملان في البحث عن الحقيقة.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما مفهوم العدالة الاجتماعية في المنهج القرآني؟</summary>
+                            <p>العدالة الاجتماعية هي تحقيق التوازن في توزيع الثروات والفرص، وحماية حقوق الضعفاء.</p>
+                        </details>
+
+                        <details>
+                            <summary>كيف نطور فهمنا للقرآن؟</summary>
+                            <p>بالدراسة المستمرة، والحوار مع الآخرين، والانفتاح على مختلف التفسيرات والآراء.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما موقف المنهج القرآني من حقوق الإنسان؟</summary>
+                            <p>يؤكد على كرامة الإنسان وحقوقه الأساسية، ويعتبر العدل والحرية من القيم المركزية.</p>
+                        </details>
+
+                        <details>
+                            <summary>كيف نتعامل مع التحديات المعاصرة؟</summary>
+                            <p>باستلهام المبادئ القرآنية، والاجتهاد الجماعي، والانفتاح على الحكمة.</p>
+                        </details>
+
+                        <details>
+                            <summary>ما هو مستقبل المنهج القرآني؟</summary>
+                            <p>مستقبله مشرق لأنه يستجيب لحاجات العصر، ويقدم إجابات منطقية للتحديات المعاصرة.</p>
+                        </details>
+                    </div>
+                </section>
+
+            </div>
+            
+            <div class="article-actions">
+                <button class="article-button print-button" data-tooltip="طباعة المقالة" onclick="window.print()">
+                    <i class="fas fa-print"></i>
+                </button>
+                <div class="share-button-container">
+                    <button class="article-button" data-tooltip="مشاركة المقالة" onclick="toggleShareMenu(event)">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                    <div class="article-share-menu" id="shareMenu">
+                        <div class="share-title">مشاركة المقالة</div>
+                        <div class="share-platforms">
+                            <a href="#" onclick="shareOnSocial('facebook')" class="share-platform">
+                                <img src="icons/fac-soc.png" alt="مشاركة على فيسبوك">
+                            </a>
+                            <a href="#" onclick="shareOnSocial('telegram')" class="share-platform">
+                                <img src="icons/tel-soc.png" alt="مشاركة على تلغرام">
+                            </a>
+                            <a href="#" onclick="shareOnSocial('whatsapp')" class="share-platform">
+                                <img src="icons/tel-soc.png" alt="مشاركة على واتساب">
+                            </a>
+                            <a href="#" onclick="shareOnSocial('twitter')" class="share-platform">
+                                <img src="icons/tel-soc.png" alt="مشاركة على تويتر">
+                            </a>
+                        </div>
+                        <button class="copy-link-btn" onclick="copyArticleLink()">
+                            <i class="fas fa-link"></i>
+                            نسخ رابط المقالة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم الإحصائيات من الكود الأول -->
+        <div id="pagination-wrapper">
+            <div id="pageInfo" style="font-weight:bold; color:#5e2ca5; margin-bottom:10px;">
+                الصفحة 1 من 3 - إجمالي الأسئلة: 45
+            </div>
+            <div style="display:inline-flex; gap: 8px; flex-wrap: wrap; justify-content:center;">
+                <button id="prevPage" onclick="prevPage()">« السابق</button>
+                <button id="firstPage" onclick="goToFirstPage()">الصفحة الأولى</button>
+                <button id="nextPage" onclick="nextPage()">التالي »</button>
+            </div>
+        </div>
     </div>
-</footer>
 
-<!-- زر العودة إلى الأعلى -->
-<div class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-</div>
-
-<script>
-    // وظائف الشريط العلوي من الكود الأول - مطابقة تماماً
-    function toggleMobileMenu() {
-      const menu = document.querySelector(".nav-links");
-      const overlay = document.querySelector(".nav-overlay");
-      menu.classList.toggle("show");
-      overlay.style.display = menu.classList.contains("show") ? "block" : "none";
-      document.body.classList.toggle("nav-open");
-    }
-
-    // دالة موحدة لتفعيل زر المشاركة
-    function toggleShareMenu(event) {
-      // منع انتشار الحدث لتجنب إغلاق القائمة فوراً
-      if(event) event.stopPropagation();
-      
-      if (window.innerWidth >= 768) {
-        // نسخة الكمبيوتر - استخدام القائمة الموجودة في زر المشاركة العلوي
-        const menu = document.getElementById("share-menu");
-        const isOpen = menu.style.display === "block";
+    <!-- الفوتر من الكود الأول -->
+    <footer>
+        <div class="social-links">
+            <a class="facebook" href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a class="instagram" href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a class="youtube" href="https://youtube.com/@husseinalkhalil" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a class="tiktok" href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a class="snapchat" href="https://snapchat.com/t/sFLWjw3K" target="_blank"><i class="fab fa-snapchat-ghost"></i></a>
+            <a class="telegram" href="https://t.me/tanoeer" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
         
-        if (isOpen) {
-          menu.style.display = "none";
-        } else {
-          menu.style.display = "block";
+        <div class="copyright">
+            حسين الخليل - جميع الحقوق محفوظة © 2025
+        </div>
+    </footer>
+
+    <!-- زر العودة إلى الأعلى -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // وظائف الشريط العلوي من الكود الأول - مطابقة تماماً
+        function toggleMobileMenu() {
+          const menu = document.querySelector(".nav-links");
+          const overlay = document.querySelector(".nav-overlay");
+          menu.classList.toggle("show");
+          overlay.style.display = menu.classList.contains("show") ? "block" : "none";
+          document.body.classList.toggle("nav-open");
         }
-      } else {
-        // نسخة الجوال - استخدام القائمة الموجودة في المقالة
-        const shareMenu = document.getElementById('shareMenu');
-        const isOpen = shareMenu.style.display === 'block';
-        
-        if (isOpen) {
-          shareMenu.classList.add('share-menu-closing');
+
+        // دالة موحدة لتفعيل زر المشاركة
+        function toggleShareMenu(event) {
+          // منع انتشار الحدث لتجنب إغلاق القائمة فوراً
+          if(event) event.stopPropagation();
+          
+          if (window.innerWidth >= 768) {
+            // نسخة الكمبيوتر - استخدام القائمة الموجودة في زر المشاركة العلوي
+            const menu = document.getElementById("share-menu");
+            const isOpen = menu.style.display === "block";
+            
+            if (isOpen) {
+              menu.style.display = "none";
+            } else {
+              menu.style.display = "block";
+            }
+          } else {
+            // نسخة الجوال - استخدام القائمة الموجودة في المقالة
+            const shareMenu = document.getElementById('shareMenu');
+            const isOpen = shareMenu.style.display === 'block';
+            
+            if (isOpen) {
+              shareMenu.classList.add('share-menu-closing');
+              setTimeout(() => {
+                shareMenu.style.display = 'none';
+                shareMenu.classList.remove('share-menu-closing');
+              }, 200);
+            } else {
+              shareMenu.style.display = 'block';
+            }
+          }
+        }
+
+        // إغلاق قائمة المشاركة عند النقر خارجها
+        function closeShareMenuOutside(e) {
+          if (window.innerWidth >= 768) {
+            const shareMenu = document.getElementById("share-menu");
+            const shareButton = document.querySelector(".share-button");
+            
+            if (!shareMenu.contains(e.target) && !shareButton.contains(e.target)) {
+              shareMenu.style.display = "none";
+            }
+          } else {
+            const shareMenu = document.getElementById('shareMenu');
+            const shareButton = document.querySelector('.share-button-container button');
+            
+            if (!shareMenu.contains(e.target) && e.target !== shareButton) {
+              toggleShareMenu();
+            }
+          }
+        }
+
+        // إضافة مستمع الحدث لإغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', closeShareMenuOutside);
+
+        function handleMobileShare() {
+          const link = "https://www.husseinalkhalil.com";
+          if (navigator.share) {
+            navigator.share({
+              title: 'موقع حسين الخليل',
+              url: link
+            }).catch(console.error);
+          } else {
+            navigator.clipboard.writeText(link).then(() => {
+              showCopyAlert("تم نسخ الرابط بنجاح ✅");
+            }).catch(() => {
+              // Fallback إذا فشل Clipboard API
+              const textarea = document.createElement('textarea');
+              textarea.value = link;
+              document.body.appendChild(textarea);
+              textarea.select();
+              document.execCommand('copy');
+              document.body.removeChild(textarea);
+              showCopyAlert("تم نسخ الرابط بنجاح ✅");
+            });
+          }
+        }
+
+        function copyLink() {
+          const link = "https://www.husseinalkhalil.com";
+          navigator.clipboard.writeText(link).then(() => {
+            showCopyAlert("تم نسخ الرابط بنجاح ✅");
+          }).catch(() => {
+            // Fallback إذا فشل Clipboard API
+            const textarea = document.createElement('textarea');
+            textarea.value = link;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showCopyAlert("تم نسخ الرابط بنجاح ✅");
+          });
+        }
+
+        function showCopyAlert(message) {
+          let alertBox = document.createElement("div");
+          alertBox.className = "copy-alert";
+          alertBox.innerText = message;
+          document.body.appendChild(alertBox);
+
+          setTimeout(() => alertBox.classList.add("show"), 10);
           setTimeout(() => {
-            shareMenu.style.display = 'none';
-            shareMenu.classList.remove('share-menu-closing');
-          }, 200);
-        } else {
-          shareMenu.style.display = 'block';
+            alertBox.classList.remove("show");
+            setTimeout(() => document.body.removeChild(alertBox), 500);
+          }, 2500);
         }
-      }
-    }
 
-    // إغلاق قائمة المشاركة عند النقر خارجها
-    function closeShareMenuOutside(e) {
-      if (window.innerWidth >= 768) {
-        const shareMenu = document.getElementById("share-menu");
-        const shareButton = document.querySelector(".share-button");
-        
-        if (!shareMenu.contains(e.target) && !shareButton.contains(e.target)) {
-          shareMenu.style.display = "none";
-        }
-      } else {
-        const shareMenu = document.getElementById('shareMenu');
-        const shareButton = document.querySelector('.share-button-container button');
-        
-        if (!shareMenu.contains(e.target) && e.target !== shareButton) {
-          toggleShareMenu();
-        }
-      }
-    }
+        document.addEventListener('click', (e) => {
+          const navMenu = document.querySelector(".nav-links");
+          const hamburger = document.querySelector(".hamburger");
+          const overlay = document.querySelector(".nav-overlay");
 
-    // إضافة مستمع الحدث لإغلاق القائمة عند النقر خارجها
-    document.addEventListener('click', closeShareMenuOutside);
-
-    function handleMobileShare() {
-      const link = "https://www.husseinalkhalil.com";
-      if (navigator.share) {
-        navigator.share({
-          title: 'موقع حسين الخليل',
-          url: link
-        }).catch(console.error);
-      } else {
-        navigator.clipboard.writeText(link).then(() => {
-          showCopyAlert("تم نسخ الرابط بنجاح ✅");
-        }).catch(() => {
-          // Fallback إذا فشل Clipboard API
-          const textarea = document.createElement('textarea');
-          textarea.value = link;
-          document.body.appendChild(textarea);
-          textarea.select();
-          document.execCommand('copy');
-          document.body.removeChild(textarea);
-          showCopyAlert("تم نسخ الرابط بنجاح ✅");
+          if (navMenu.contains(e.target)) {
+            if (e.target.tagName === 'A') {
+              navMenu.classList.remove("show");
+              document.body.classList.remove("nav-open");
+              overlay.style.display = "none";
+            }
+          } else if (e.target === overlay || !hamburger.contains(e.target)) {
+            navMenu.classList.remove("show");
+            document.body.classList.remove("nav-open");
+            overlay.style.display = "none";
+          }
         });
-      }
-    }
 
-    function copyLink() {
-      const link = "https://www.husseinalkhalil.com";
-      navigator.clipboard.writeText(link).then(() => {
-        showCopyAlert("تم نسخ الرابط بنجاح ✅");
-      }).catch(() => {
-        // Fallback إذا فشل Clipboard API
-        const textarea = document.createElement('textarea');
-        textarea.value = link;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        showCopyAlert("تم نسخ الرابط بنجاح ✅");
-      });
-    }
-
-    function showCopyAlert(message) {
-      let alertBox = document.createElement("div");
-      alertBox.className = "copy-alert";
-      alertBox.innerText = message;
-      document.body.appendChild(alertBox);
-
-      setTimeout(() => alertBox.classList.add("show"), 10);
-      setTimeout(() => {
-        alertBox.classList.remove("show");
-        setTimeout(() => document.body.removeChild(alertBox), 500);
-      }, 2500);
-    }
-
-    document.addEventListener('click', (e) => {
-      const navMenu = document.querySelector(".nav-links");
-      const hamburger = document.querySelector(".hamburger");
-      const overlay = document.querySelector(".nav-overlay");
-
-      if (navMenu.contains(e.target)) {
-        if (e.target.tagName === 'A') {
-          navMenu.classList.remove("show");
-          document.body.classList.remove("nav-open");
-          overlay.style.display = "none";
-        }
-      } else if (e.target === overlay || !hamburger.contains(e.target)) {
-        navMenu.classList.remove("show");
-        document.body.classList.remove("nav-open");
-        overlay.style.display = "none";
-      }
-    });
-
-    document.querySelector('.nav-links').addEventListener('wheel', (e) => {
-      e.stopPropagation();
-    });
-
-    // تهيئة القائمة المتنقلة - مطابقة للصفحة الرئيسية
-    document.addEventListener('DOMContentLoaded', () => {
-      const links = document.querySelectorAll('.nav-links a');
-      const mobileNav = document.querySelector(".nav-links");
-      
-      // إغلاق القائمة عند النقر على أي رابط
-      links.forEach(link => {
-        link.addEventListener('click', () => {
-          mobileNav.classList.remove("show");
-          document.querySelector(".nav-overlay").style.display = "none";
+        document.querySelector('.nav-links').addEventListener('wheel', (e) => {
+          e.stopPropagation();
         });
-      });
-      
-      // إظهار زر المشاركة للجوال
-      if (window.innerWidth < 768) {
-        document.querySelector('.mobile-share').style.display = 'block';
-      }
-    });
 
-    function copyArticleLink() {
-        const url = window.location.href;
-        navigator.clipboard.writeText(url).then(() => {
-            alert('تم نسخ رابط المقالة بنجاح');
-            toggleShareMenu();
-        }).catch(err => {
-            console.error('Failed to copy: ', err);
+        // تهيئة القائمة المتنقلة - مطابقة للصفحة الرئيسية
+        document.addEventListener('DOMContentLoaded', () => {
+          const links = document.querySelectorAll('.nav-links a');
+          const mobileNav = document.querySelector(".nav-links");
+          
+          // إغلاق القائمة عند النقر على أي رابط
+          links.forEach(link => {
+            link.addEventListener('click', () => {
+              mobileNav.classList.remove("show");
+              document.querySelector(".nav-overlay").style.display = "none";
+            });
+          });
+          
+          // إظهار زر المشاركة للجوال
+          if (window.innerWidth < 768) {
+            document.querySelector('.mobile-share').style.display = 'block';
+          }
         });
-    }
-    
-    function shareOnSocial(platform) {
-        const url = encodeURIComponent(window.location.href);
-        const title = encodeURIComponent(document.title);
-        
-        let shareUrl = '';
-        switch(platform) {
-            case 'facebook':
-                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-                break;
-            case 'twitter':
-                shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
-                break;
-            case 'whatsapp':
-                shareUrl = `https://wa.me/?text=${title} ${url}`;
-                break;
-            case 'telegram':
-                shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
-                break;
-        }
-        
-        window.open(shareUrl, '_blank', 'width=600,height=400');
-        toggleShareMenu();
-    }
-    
-    // إغلاق قائمة المشاركة عند التمرير
-    window.addEventListener('scroll', () => {
-        const shareMenu = document.getElementById('shareMenu');
-        if (shareMenu.style.display === 'block') {
-            toggleShareMenu();
-        }
-    });
-    
-    // وظيفة زر العودة للأعلى
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    // ==================== كود التحكم بحجم الخط المعدل ====================
-    const fontDecrease = document.getElementById('fontDecrease');
-    const fontReset = document.getElementById('fontReset');
-    const fontIncrease = document.getElementById('fontIncrease');
-    const articleContent = document.querySelector('.article-content');
-    const publishDate = document.querySelector('.publish-date');
-    
-    let originalFontSize = 18; // الحجم الأصلي للخط في البكسلات
-    let originalDateSize = 18; // الحجم الأصلي لتاريخ النشر
-    
-    let currentScale = 1;
-    const minScale = 0.5;
-    const maxScale = 4;
-    
-    // تطبيق تغيير حجم الخط
-    function applyFontScale() {
-        articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
-        if(publishDate) {
-            publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
-        }
-    }
-    
-    // تصغير الخط
-    fontDecrease.addEventListener('click', () => {
-        currentScale = Math.max(minScale, currentScale / 1.2);
-        applyFontScale();
-    });
-    
-    // تكبير الخط
-    fontIncrease.addEventListener('click', () => {
-        currentScale = Math.min(maxScale, currentScale * 1.2);
-        applyFontScale();
-    });
-    
-    // إعادة تعيين الخط إلى الحجم الأصلي
-    fontReset.addEventListener('click', () => {
-        currentScale = 1;
-        applyFontScale();
-    });
-    
-    // الحصول على الأحجام الأصلية عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', () => {
-        if(articleContent) {
-            const computedStyle = getComputedStyle(articleContent);
-            originalFontSize = parseFloat(computedStyle.fontSize);
-        }
-        
-        if(publishDate) {
-            const computedDateStyle = getComputedStyle(publishDate);
-            originalDateSize = parseFloat(computedDateStyle.fontSize);
-        }
-    });
 
-    // ==================== وظائف قسم الأسئلة والصفحات ====================
-    const questionsPerPage = 15;
-    let currentPage = 1;
-    let totalQuestions = 0;
-    let totalPages = 0;
-
-    function initializePagination() {
-        const questionPages = document.querySelectorAll('.question-page');
-        totalQuestions = document.querySelectorAll('details').length;
-        totalPages = questionPages.length;
-        
-        updatePageInfo();
-        showCurrentPage();
-    }
-
-    function updatePageInfo() {
-        const pageInfo = document.getElementById('pageInfo');
-        if (pageInfo) {
-            pageInfo.textContent = `الصفحة ${currentPage} من ${totalPages} - إجمالي الأسئلة: ${totalQuestions}`;
-        }
-
-        // إظهار/إخفاء أزرار التصفح
-        document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline-block' : 'none';
-        document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline-block' : 'none';
-    }
-
-    function showCurrentPage() {
-        // إخفاء جميع الصفحات
-        document.querySelectorAll('.question-page').forEach(page => {
-            page.classList.remove('active');
-        });
-        
-        // إظهار الصفحة الحالية فقط
-        const currentPageElement = document.getElementById(`page${currentPage}`);
-        if (currentPageElement) {
-            currentPageElement.classList.add('active');
-        }
-        
-        // التمرير إلى أعلى الصفحة عند تغيير الصفحة
-        document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function nextPage() {
-        if (currentPage < totalPages) {
-            currentPage++;
-            updatePageInfo();
-            showCurrentPage();
-        }
-    }
-
-    function prevPage() {
-        if (currentPage > 1) {
-            currentPage--;
-            updatePageInfo();
-            showCurrentPage();
-        }
-    }
-
-    function goToFirstPage() {
-        currentPage = 1;
-        updatePageInfo();
-        showCurrentPage();
-    }
-
-    // تهيئة التصفح عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', function() {
-        initializePagination();
-
-        // إضافة ربط مباشر عند الضغط على زر الصفحة الأولى
-        const firstBtn = document.getElementById('firstPage');
-        if (firstBtn) {
-            firstBtn.addEventListener('click', () => {
-                currentPage = 1;
-                updatePageInfo();
-                showCurrentPage();
+        function copyArticleLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('تم نسخ رابط المقالة بنجاح');
+                toggleShareMenu();
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
             });
         }
-    });
-
-    // إظهار/إخفاء زر العودة للأعلى عند التمرير
-    window.addEventListener('scroll', function() {
-        const backToTopButton = document.querySelector('.back-to-top');
-        if (window.pageYOffset > 300) {
-            backToTopButton.classList.add('show');
-        } else {
-            backToTopButton.classList.remove('show');
+        
+        function shareOnSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            
+            let shareUrl = '';
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${title} ${url}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
+                    break;
+            }
+            
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+            toggleShareMenu();
         }
-    });
-</script>
+        
+        // إغلاق قائمة المشاركة عند التمرير
+        window.addEventListener('scroll', () => {
+            const shareMenu = document.getElementById('shareMenu');
+            if (shareMenu.style.display === 'block') {
+                toggleShareMenu();
+            }
+        });
+        
+        // وظيفة زر العودة للأعلى
+        const backToTop = document.getElementById('backToTop');
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // ==================== كود التحكم بحجم الخط المعدل ====================
+        const fontDecrease = document.getElementById('fontDecrease');
+        const fontReset = document.getElementById('fontReset');
+        const fontIncrease = document.getElementById('fontIncrease');
+        const articleContent = document.querySelector('.article-content');
+        const publishDate = document.querySelector('.publish-date');
+        
+        let originalFontSize = 18; // الحجم الأصلي للخط في البكسلات
+        let originalDateSize = 18; // الحجم الأصلي لتاريخ النشر
+        
+        let currentScale = 1;
+        const minScale = 0.5;
+        const maxScale = 4;
+        
+        // تطبيق تغيير حجم الخط
+        function applyFontScale() {
+            articleContent.style.fontSize = (originalFontSize * currentScale) + 'px';
+            if(publishDate) {
+                publishDate.style.fontSize = (originalDateSize * currentScale) + 'px';
+            }
+        }
+        
+        // تصغير الخط
+        fontDecrease.addEventListener('click', () => {
+            currentScale = Math.max(minScale, currentScale / 1.2);
+            applyFontScale();
+        });
+        
+        // تكبير الخط
+        fontIncrease.addEventListener('click', () => {
+            currentScale = Math.min(maxScale, currentScale * 1.2);
+            applyFontScale();
+        });
+        
+        // إعادة تعيين الخط إلى الحجم الأصلي
+        fontReset.addEventListener('click', () => {
+            currentScale = 1;
+            applyFontScale();
+        });
+        
+        // الحصول على الأحجام الأصلية عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            if(articleContent) {
+                const computedStyle = getComputedStyle(articleContent);
+                originalFontSize = parseFloat(computedStyle.fontSize);
+            }
+            
+            if(publishDate) {
+                const computedDateStyle = getComputedStyle(publishDate);
+                originalDateSize = parseFloat(computedDateStyle.fontSize);
+            }
+        });
+
+        // ==================== وظائف قسم الأسئلة والصفحات ====================
+        const questionsPerPage = 15;
+        let currentPage = 1;
+        let totalQuestions = 0;
+        let totalPages = 0;
+
+        function initializePagination() {
+            const questionPages = document.querySelectorAll('.question-page');
+            totalQuestions = document.querySelectorAll('details').length;
+            totalPages = questionPages.length;
+            
+            updatePageInfo();
+            showCurrentPage();
+        }
+
+        function updatePageInfo() {
+            const pageInfo = document.getElementById('pageInfo');
+            if (pageInfo) {
+                pageInfo.textContent = `الصفحة ${currentPage} من ${totalPages} - إجمالي الأسئلة: ${totalQuestions}`;
+            }
+
+            // إظهار/إخفاء أزرار التصفح
+            document.getElementById('prevPage').style.display = currentPage > 1 ? 'inline-block' : 'none';
+            document.getElementById('nextPage').style.display = currentPage < totalPages ? 'inline-block' : 'none';
+        }
+
+        function showCurrentPage() {
+            // إخفاء جميع الصفحات
+            document.querySelectorAll('.question-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // إظهار الصفحة الحالية فقط
+            const currentPageElement = document.getElementById(`page${currentPage}`);
+            if (currentPageElement) {
+                currentPageElement.classList.add('active');
+            }
+            
+            // التمرير إلى أعلى الصفحة عند تغيير الصفحة
+            document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePageInfo();
+                showCurrentPage();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePageInfo();
+                showCurrentPage();
+            }
+        }
+
+        function goToFirstPage() {
+            currentPage = 1;
+            updatePageInfo();
+            showCurrentPage();
+        }
+        
+        // ==================== وظيفة البحث ====================
+        function filterQuestions() {
+            const input = document.getElementById('faqSearch');
+            const filter = input.value.toUpperCase();
+            const allPages = document.querySelectorAll('.question-page');
+            const allDetails = document.querySelectorAll('details');
+            const paginationWrapper = document.getElementById('pagination-wrapper');
+            const noResultsMsg = document.getElementById('no-results');
+            let hasResults = false;
+
+            // إذا كان حقل البحث فارغاً، نعيد حالة الصفحات الطبيعية
+            if (filter === "") {
+                allPages.forEach(page => {
+                    page.style.display = ""; // إعادة النمط الأصلي للكلاس active
+                });
+                
+                // إغلاق جميع الإجابات
+                allDetails.forEach(detail => {
+                    detail.removeAttribute('open');
+                    detail.style.display = "";
+                });
+                
+                // إظهار الترقيم والعودة للصفحة الحالية
+                paginationWrapper.style.display = "block";
+                noResultsMsg.style.display = "none";
+                showCurrentPage(); // العودة للصفحة الحالية النشطة
+                return;
+            }
+
+            // إذا كان هناك بحث، نخفي الترقيم ونظهر كل الصفحات للبحث فيها
+            paginationWrapper.style.display = "none";
+            allPages.forEach(page => {
+                page.style.display = "block"; // إجبار إظهار كل الحاويات
+            });
+
+            allDetails.forEach(detail => {
+                const summary = detail.querySelector('summary');
+                const content = detail.querySelector('p');
+                const textValue = (summary.textContent || summary.innerText) + " " + (content.textContent || content.innerText);
+                
+                if (textValue.toUpperCase().indexOf(filter) > -1) {
+                    detail.style.display = "";
+                    detail.setAttribute('open', 'true'); // فتح السؤال الذي يحتوي على النتيجة
+                    hasResults = true;
+                } else {
+                    detail.style.display = "none";
+                    detail.removeAttribute('open');
+                }
+            });
+            
+            // إظهار رسالة لا توجد نتائج
+            if (!hasResults) {
+                noResultsMsg.style.display = "block";
+            } else {
+                noResultsMsg.style.display = "none";
+            }
+        }
+
+        // تهيئة التصفح عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePagination();
+
+            // إضافة ربط مباشر عند الضغط على زر الصفحة الأولى
+            const firstBtn = document.getElementById('firstPage');
+            if (firstBtn) {
+                firstBtn.addEventListener('click', () => {
+                    currentPage = 1;
+                    updatePageInfo();
+                    showCurrentPage();
+                });
+            }
+        });
+
+        // إظهار/إخفاء زر العودة للأعلى عند التمرير
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
