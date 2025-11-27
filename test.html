@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
@@ -17,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Shared Variables & Styles form Index */
+        /* Shared Variables & Styles form Index/About */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -55,7 +54,7 @@
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* ==================== Navigation (Exact match with Index) ==================== */
+        /* ==================== Navigation ==================== */
         .nav-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -117,14 +116,14 @@
             cursor: pointer;
         }
 
-        /* Mobile Nav (Exact match with Index) */
+        /* Mobile Nav Configuration (Matches about.html) */
         @media (max-width: 1200px) {
             .hamburger { 
                 display: block; 
-                order: 1; 
+                order: 1; /* يظهر يمين الشاشة في RTL */
             }
             .logo-container {
-                order: 2; 
+                order: 2; /* يظهر يسار الشاشة في RTL */
             }
 
             .nav-links {
@@ -163,7 +162,7 @@
             nav { padding: 0.8rem 5%; }
         }
 
-        /* Hero Section (Adapted) */
+        /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             padding: 120px 20px 100px;
@@ -196,7 +195,7 @@
             margin: 0 auto;
         }
 
-        /* Search Box (Hero) */
+        /* Search Box in Hero */
         .universal-search {
             width: 100%;
             max-width: 600px;
@@ -231,18 +230,24 @@
             pointer-events: none;
         }
 
-        /* Main Container */
+        /* Container Structure */
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        .main-wrapper {
             position: relative;
             z-index: 20;
             margin-top: -50px; /* Overlap Hero */
-            flex: 1;
+            flex: 1; /* For sticky footer */
+            max-width: 1000px; /* Limit width for articles for readability */
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Results Count Info */
+        /* Results Info */
         .search-results-info {
             text-align: center;
             margin-bottom: 20px;
@@ -251,10 +256,7 @@
             font-weight: bold;
             font-size: 1.2rem;
         }
-        .search-results-info span {
-            color: inherit;
-        }
-
+        
         /* Articles Grid Layout */
         #articlesList {
             display: grid;
@@ -430,7 +432,7 @@
         #firstPage { background: rgba(94, 44, 165, 0.1); color: var(--primary-color); }
         #firstPage:hover { background: var(--primary-color); color: white; }
 
-        /* ==================== Social Section (Exact match with Index) ==================== */
+        /* Social Section */
         .social-section {
             text-align: center;
             margin-bottom: 60px;
@@ -456,7 +458,7 @@
         .social-btn.snap:hover { background: #FFFC00; }
         .social-btn.snap:hover img { filter: none; }
 
-        /* ==================== Footer (Exact match with Index) ==================== */
+        /* Footer (Clean & Independent) */
         footer {
             background: var(--primary-dark);
             color: white;
@@ -488,7 +490,7 @@
             margin-top: 20px;
         }
 
-        /* Extras */
+        /* Fixed Buttons */
         .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
         .share-fixed-btn:hover { transform: scale(1.1); }
         .share-fixed-btn img { width: 24px; filter: brightness(0); }
@@ -500,7 +502,7 @@
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
 
-        /* ==================== Mobile Adjustments (Index Match) ==================== */
+        /* ==================== Mobile Adjustments (Match about.html & index.html) ==================== */
         @media (max-width: 900px) {
             #articlesList { grid-template-columns: 1fr; } /* بطاقة واحدة في الجوال */
             .hero-text h1 { font-size: 2rem; }
@@ -508,8 +510,8 @@
             .share-fixed-btn { display: none; }
         }
 
-        /* Mobile Footer Specifics from Index */
         @media (max-width: 768px) {
+            /* تعديلات الفوتر للموبايل */
             .footer-links {
                 gap: 12px;
                 flex-wrap: wrap; 
@@ -520,7 +522,7 @@
                 white-space: nowrap;
             }
             
-            /* Social Icons Mobile */
+            /* أيقونات السوشيال ميديا للموبايل */
             .social-grid {
                 gap: 5px; 
                 flex-wrap: nowrap; 
@@ -590,7 +592,8 @@
         </div>
     </header>
 
-    <div class="container">
+    <!-- Main Content Wrapper (Creates the Overlap) -->
+    <div class="container main-wrapper">
         
         <div id="searchResultsInfo" class="search-results-info">
             <span id="resultsCount">0</span> نتيجة بحث
