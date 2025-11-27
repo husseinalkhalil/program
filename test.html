@@ -855,15 +855,26 @@
                 });
             }
 
+            // Arabic Text Normalization
+            function normalizeArabicText(text) {
+                if (!text) return "";
+                return text
+                    .replace(/[\u064B-\u065F\u0670]/g, "")
+                    .replace(/[أإآاءئؤ]/g, "ا")
+                    .replace(/[ة]/g, "ه")
+                    .replace(/[ى]/g, "ي")
+                    .toLowerCase();
+            }
+
             // Search Logic
             function performSearch() {
-                const term = searchInput.value.trim().toLowerCase();
+                const term = normalizeArabicText(searchInput.value.trim());
                 if (!term) {
                     filteredQuestions = [...allQuestions];
                 } else {
                     filteredQuestions = allQuestions.filter(q => 
-                        q.question.toLowerCase().includes(term) || 
-                        (q.answer && q.answer.toLowerCase().includes(term))
+                        normalizeArabicText(q.question).includes(term) || 
+                        (q.answer && normalizeArabicText(q.answer).includes(term))
                     );
                 }
                 
@@ -873,9 +884,12 @@
                 if (filteredQuestions.length === 0 && term !== '') {
                     noResultsMessage.style.display = 'block';
                     questionsList.style.display = 'none';
+                    paginationInfo.style.display = 'none';
+                    paginationContainer.innerHTML = '';
                 } else {
                     noResultsMessage.style.display = 'none';
                     questionsList.style.display = 'flex';
+                    paginationInfo.style.display = 'block';
                 }
             }
 
@@ -946,10 +960,7 @@
                 paginationContainer.appendChild(prevBtn);
 
                 // Numbers
-                // Simple logic: show all or max 5 pages logic could be added here.
-                // For simplicity showing buttons around current page
                 for (let i = 1; i <= totalPages; i++) {
-                    // Logic to show limited pages if too many
                     if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
                         const btn = document.createElement('button');
                         btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
@@ -993,3 +1004,4 @@
     </script>
 </body>
 </html>
+    
