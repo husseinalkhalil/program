@@ -1564,6 +1564,15 @@
             margin-bottom: 20px;
             border: 1px solid #ffcccc;
         }
+
+        /* تنسيق تمييز الكلمات */
+        mark.search-highlight {
+            background-color: #ffeb3b;
+            color: #000;
+            border-radius: 2px;
+            padding: 0 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
@@ -2313,6 +2322,12 @@
             totalQuestions = document.querySelectorAll('details').length;
             totalPages = questionPages.length;
             
+            // حفظ المحتوى الأصلي لكل سؤال لاستعادته عند مسح البحث
+            document.querySelectorAll('details').forEach(detail => {
+                detail.dataset.originalSummary = detail.querySelector('summary').innerHTML;
+                detail.dataset.originalP = detail.querySelector('p').innerHTML;
+            });
+            
             updatePageInfo();
             showCurrentPage();
         }
@@ -2366,57 +2381,122 @@
             showCurrentPage();
         }
         
-        // ==================== وظيفة البحث ====================
+        // ==================== وظائف البحث المتقدم ====================
+        
+        // دالة لتوحيد النصوص العربية (تجاهل التشكيل والهمزات)
+        function normalizeArabic(text) {
+            text = text.replace(/([^\u0621-\u063A\u0641-\u064A\u0660-\u0669a-zA-Z 0-9])/g, ''); // إزالة التشكيل
+            text = text.replace(/(أ|إ|آ)/g, 'ا'); // توحيد الألف
+            text = text.replace(/(ة)/g, 'ه'); // توحيد التاء المربوطة
+            text = text.replace(/(ى)/g, 'ي'); // توحيد الياء
+            return text;
+        }
+
+        // دالة لإنشاء تعبير نمطي للبحث مع تجاهل التشكيل والهمزات في النص الأصلي
+        function getSafeRegex(searchTerm) {
+            let regexStr = '';
+            const cleanTerm = normalizeArabic(searchTerm);
+            
+            for (let i = 0; i < cleanTerm.length; i++) {
+                const char = cleanTerm[i];
+                // السماح بأي تشكيل بين الحروف
+                // التعامل مع البدائل للأحرف المتشابهة
+                if (char === 'ا') {
+                    regexStr += '[اأإآ]';
+                } else if (char === 'ه') {
+                    regexStr += '[هة]';
+                } else if (char === 'ي') {
+                    regexStr += '[يى]';
+                } else {
+                    // الهروب من الأحرف الخاصة في Regex
+                    regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                }
+                // إضافة إمكانية وجود تشكيل بعد كل حرف
+                regexStr += '[\\u064B-\\u065F\\u0670]*';
+            }
+            return new RegExp(regexStr, 'gi');
+        }
+
         function filterQuestions() {
             const input = document.getElementById('faqSearch');
-            const filter = input.value.toUpperCase();
+            const rawFilter = input.value;
+            const filter = normalizeArabic(rawFilter);
             const allPages = document.querySelectorAll('.question-page');
             const allDetails = document.querySelectorAll('details');
             const paginationWrapper = document.getElementById('pagination-wrapper');
             const noResultsMsg = document.getElementById('no-results');
             let hasResults = false;
 
-            // إذا كان حقل البحث فارغاً، نعيد حالة الصفحات الطبيعية
-            if (filter === "") {
+            // إذا كان حقل البحث فارغاً
+            if (filter.trim() === "") {
                 allPages.forEach(page => {
-                    page.style.display = ""; // إعادة النمط الأصلي للكلاس active
+                    page.style.display = ""; // إعادة النمط الأصلي
                 });
                 
-                // إغلاق جميع الإجابات
+                // استعادة النصوص الأصلية وإغلاق الإجابات
                 allDetails.forEach(detail => {
+                    if (detail.dataset.originalSummary) {
+                        detail.querySelector('summary').innerHTML = detail.dataset.originalSummary;
+                        detail.querySelector('p').innerHTML = detail.dataset.originalP;
+                    }
                     detail.removeAttribute('open');
                     detail.style.display = "";
                 });
                 
-                // إظهار الترقيم والعودة للصفحة الحالية
                 paginationWrapper.style.display = "block";
                 noResultsMsg.style.display = "none";
-                showCurrentPage(); // العودة للصفحة الحالية النشطة
+                showCurrentPage();
                 return;
             }
 
-            // إذا كان هناك بحث، نخفي الترقيم ونظهر كل الصفحات للبحث فيها
+            // تفعيل وضع البحث
             paginationWrapper.style.display = "none";
             allPages.forEach(page => {
-                page.style.display = "block"; // إجبار إظهار كل الحاويات
+                page.style.display = "block";
             });
 
+            const searchRegex = getSafeRegex(rawFilter);
+
             allDetails.forEach(detail => {
-                const summary = detail.querySelector('summary');
-                const content = detail.querySelector('p');
-                const textValue = (summary.textContent || summary.innerText) + " " + (content.textContent || content.innerText);
+                // استخدام المحتوى الأصلي للمقارنة دائماً
+                const originalSummary = detail.dataset.originalSummary || detail.querySelector('summary').innerHTML;
+                const originalP = detail.dataset.originalP || detail.querySelector('p').innerHTML;
                 
-                if (textValue.toUpperCase().indexOf(filter) > -1) {
+                const normalizedSummary = normalizeArabic(detail.querySelector('summary').textContent);
+                const normalizedP = normalizeArabic(detail.querySelector('p').textContent);
+                
+                // التحقق من وجود النص في السؤال أو الجواب
+                const matchInSummary = normalizedSummary.includes(filter);
+                const matchInP = normalizedP.includes(filter);
+                
+                if (matchInSummary || matchInP) {
                     detail.style.display = "";
-                    detail.setAttribute('open', 'true'); // فتح السؤال الذي يحتوي على النتيجة
+                    detail.setAttribute('open', 'true');
                     hasResults = true;
+
+                    // تمييز النتائج (Highlighting)
+                    if (matchInSummary) {
+                        detail.querySelector('summary').innerHTML = originalSummary.replace(searchRegex, match => `<mark class="search-highlight">${match}</mark>`);
+                    } else {
+                        // إعادة النص الأصلي إذا لم يكن هناك تطابق في هذا الجزء
+                        detail.querySelector('summary').innerHTML = originalSummary;
+                    }
+
+                    if (matchInP) {
+                        detail.querySelector('p').innerHTML = originalP.replace(searchRegex, match => `<mark class="search-highlight">${match}</mark>`);
+                    } else {
+                        detail.querySelector('p').innerHTML = originalP;
+                    }
+
                 } else {
                     detail.style.display = "none";
                     detail.removeAttribute('open');
+                    // إعادة النص الأصلي للمخفي لضمان النظافة
+                    detail.querySelector('summary').innerHTML = originalSummary;
+                    detail.querySelector('p').innerHTML = originalP;
                 }
             });
             
-            // إظهار رسالة لا توجد نتائج
             if (!hasResults) {
                 noResultsMsg.style.display = "block";
             } else {
