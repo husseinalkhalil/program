@@ -432,6 +432,15 @@
             line-height: 1.6;
         }
 
+        /* Highlighting for search matches */
+        .highlight {
+            background-color: var(--accent-color);
+            color: #422006;
+            padding: 0 3px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
         /* Pagination */
         #pagination-container {
             display: flex;
@@ -754,7 +763,7 @@
 
         // Firebase & Page Logic
         document.addEventListener('DOMContentLoaded', function() {
-            // Firebase Config (Using the keys provided in your original file)
+            // Firebase Config
             const firebaseConfig = {
                 apiKey: "AIzaSyBS2bmHfbwGkYitxGQKKzzsX9wLgj0i8_Q",
                 authDomain: "question-755b8.firebaseapp.com",
@@ -855,7 +864,7 @@
                 });
             }
 
-            // Arabic Text Normalization
+            // Arabic Text Normalization (For matching only)
             function normalizeArabicText(text) {
                 if (!text) return "";
                 return text
@@ -864,6 +873,25 @@
                     .replace(/[ة]/g, "ه")
                     .replace(/[ى]/g, "ي")
                     .toLowerCase();
+            }
+
+            // Create Regex for Highlighting (Preserves Original Characters)
+            function getSafeRegex(searchTerm) {
+                let regexStr = '';
+                const cleanTerm = normalizeArabicText(searchTerm);
+                
+                for (let i = 0; i < cleanTerm.length; i++) {
+                    const char = cleanTerm[i];
+                    if (char === 'ا') regexStr += '[اأإآ]';
+                    else if (char === 'ه') regexStr += '[هة]';
+                    else if (char === 'ي') regexStr += '[يىئ]';
+                    else if (char === 'و') regexStr += '[وؤ]';
+                    else if (char.match(/[a-zA-Z]/)) regexStr += char;
+                    else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    
+                    regexStr += '[\\u064B-\\u065F\\u0670]*'; // Allow diacritics
+                }
+                return new RegExp(regexStr, 'gi');
             }
 
             // Search Logic
@@ -895,7 +923,7 @@
 
             searchInput.addEventListener('input', performSearch);
 
-            // Display Logic
+            // Display Logic (With Highlighting)
             function displayQuestions() {
                 questionsList.innerHTML = '';
                 
@@ -913,6 +941,10 @@
                 const end = start + questionsPerPage;
                 const pageQuestions = filteredQuestions.slice(start, end);
 
+                // Prepare regex if search exists
+                const searchTerm = searchInput.value.trim();
+                const searchRegex = searchTerm ? getSafeRegex(searchTerm) : null;
+
                 pageQuestions.forEach(q => {
                     const card = document.createElement('div');
                     card.className = 'question-card';
@@ -920,19 +952,31 @@
                     const nameDisplay = (q.showName && q.name) ? q.name : 'مجهول';
                     const dateDisplay = new Date(q.timestamp).toLocaleDateString('ar-SA');
 
+                    // Highlight Question Text
+                    let questionText = q.question.replace(/\n/g, '<br>');
+                    if (searchRegex) {
+                        questionText = questionText.replace(searchRegex, match => `<span class="highlight">${match}</span>`);
+                    }
+
                     let html = `
                         <div class="q-header">
                             <span class="q-name"><i class="fas fa-user-circle"></i> ${nameDisplay}</span>
                             <span class="q-date"><i class="far fa-clock"></i> ${dateDisplay}</span>
                         </div>
-                        <div class="q-text">${q.question.replace(/\n/g, '<br>')}</div>
+                        <div class="q-text">${questionText}</div>
                     `;
 
                     if (q.answer) {
+                        // Highlight Answer Text
+                        let answerText = q.answer.replace(/\n/g, '<br>');
+                        if (searchRegex) {
+                            answerText = answerText.replace(searchRegex, match => `<span class="highlight">${match}</span>`);
+                        }
+
                         html += `
                             <div class="answer-box">
                                 <span class="answer-label">الإجابة</span>
-                                <div class="answer-text">${q.answer.replace(/\n/g, '<br>')}</div>
+                                <div class="answer-text">${answerText}</div>
                             </div>
                         `;
                     }
@@ -1004,4 +1048,3 @@
     </script>
 </body>
 </html>
-    
