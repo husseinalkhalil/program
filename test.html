@@ -113,17 +113,18 @@
 
         .nav-links {
             display: flex;
-            gap: 5px; /* مسافة أصغر لاستيعاب عدد الروابط الكبير */
+            flex: 1; /* ملء المساحة المتبقية */
+            justify-content: space-evenly; /* توزيع متساوي */
             align-items: center;
-            flex-wrap: wrap; /* السماح بالالتفاف إذا لزم الأمر */
-            justify-content: center;
+            flex-wrap: wrap; 
+            margin: 0 20px; /* مسافة جانبية */
         }
 
         .nav-links a {
             color: white;
-            font-weight: 500;
-            font-size: 0.85rem; /* خط أصغر قليلاً */
-            padding: 6px 10px;
+            font-weight: 700; /* خط سميك */
+            font-size: 1.05rem; /* حجم أكبر */
+            padding: 8px 12px;
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -168,6 +169,8 @@
                 flex-wrap: nowrap;
                 justify-content: flex-start;
                 gap: 10px;
+                margin: 0; /* إعادة تعيين الهامش */
+                flex: unset; /* إلغاء التمدد */
             }
             .nav-links.show { right: 0; }
             .nav-links a {
