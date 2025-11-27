@@ -47,9 +47,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            /* Removed flex display to match about.html structure and fix footer overlap */
         }
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
@@ -241,10 +239,10 @@
             position: relative;
             z-index: 20;
             margin-top: -50px; /* Overlap Hero */
-            flex: 1; /* For sticky footer */
             max-width: 1000px; /* Limit width for articles for readability */
             margin-left: auto;
             margin-right: auto;
+            margin-bottom: 60px; /* Space between content and footer */
         }
 
         /* Results Info */
