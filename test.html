@@ -113,22 +113,22 @@
 
         .nav-links {
             display: flex;
-            gap: 15px;
+            gap: 5px; /* مسافة أصغر لاستيعاب عدد الروابط الكبير */
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* السماح بالالتفاف إذا لزم الأمر */
             justify-content: center;
         }
 
         .nav-links a {
             color: white;
             font-weight: 500;
-            font-size: 0.9rem;
-            padding: 6px 12px;
+            font-size: 0.85rem; /* خط أصغر قليلاً */
+            padding: 6px 10px;
             border-radius: 20px;
             display: flex;
             align-items: center;
+            gap: 5px;
             white-space: nowrap;
-            transition: background 0.3s;
         }
 
         .nav-links a:hover {
@@ -144,7 +144,7 @@
         }
 
         /* Mobile Nav */
-        @media (max-width: 1200px) {
+        @media (max-width: 1200px) { /* تغيير نقطة الانهيار لاستيعاب الروابط الكثيرة */
             .hamburger { display: block; }
             .nav-links {
                 position: fixed;
@@ -189,6 +189,7 @@
             border-radius: 0 0 50px 50px;
             position: relative;
             margin-bottom: 60px;
+            z-index: 20; /* رفع الطبقة لتظهر نتائج البحث فوق العناصر التالية */
         }
 
         .hero-content {
@@ -263,7 +264,7 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
             max-height: 400px;
             overflow-y: auto;
-            z-index: 100;
+            z-index: 1000;
             text-align: right;
             display: none;
             color: var(--text-primary);
@@ -804,7 +805,7 @@
             <a href="favorites.html">المفضلة</a>
             <a href="support.html">دعم المحتوى</a>
             <a href="about.html">من نحن</a>
-            <a href="#" onclick="window.print()">طباعة</a>
+            <a href="#" onclick="window.print()" title="طباعة"><i class="fas fa-print"></i></a>
             <a href="#" onclick="handleMobileShare(); return false;" class="mobile-share-link" style="display: none;">مشاركة</a>
         </div>
 
