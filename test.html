@@ -43,9 +43,11 @@
             --surface-color: #ffffff;
             --text-primary: #1e293b;
             --text-secondary: #64748b;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 6px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 25px rgba(0,0,0,0.1);
+            
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
         }
@@ -70,7 +72,7 @@
         @media (prefers-reduced-motion: no-preference) {
             .reveal-up {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
                 transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
             }
             
@@ -78,8 +80,6 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-
-            /* Staggered delay for grid items can be handled via JS or CSS nth-child if static */
         }
 
         /* ==================== Navigation ==================== */
@@ -404,57 +404,79 @@
             border: 1px solid #fecaca;
         }
 
-        /* ==================== Cards Grid (Main Content) ==================== */
+        /* ==================== Improved Feature Cards ==================== */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
         }
 
         .feature-card {
             background: white;
-            border-radius: var(--radius-lg);
-            padding: 30px 20px;
+            border-radius: var(--radius-xl);
+            padding: 35px 25px;
             text-align: center;
             box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #f1f5f9;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        /* Top colored bar on hover */
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .feature-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
             box-shadow: var(--shadow-lg);
-            border-color: var(--primary-light);
+            border-color: transparent;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
         }
 
         .card-icon-wrapper {
-            width: 70px;
-            height: 70px;
-            background: #f3e8ff;
+            width: 80px;
+            height: 80px;
+            background: #f8fafc;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            transition: transform 0.3s;
+            margin-bottom: 25px;
+            transition: all 0.4s ease;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
         }
 
         .feature-card:hover .card-icon-wrapper {
-            transform: scale(1.1) rotate(5deg);
             background: var(--primary-color);
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 10px 20px rgba(94, 44, 165, 0.3);
         }
 
         .card-icon-wrapper img {
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             object-fit: contain;
             transition: filter 0.3s;
+            filter: grayscale(100%) opacity(0.7);
         }
 
         .feature-card:hover .card-icon-wrapper img {
@@ -462,30 +484,38 @@
         }
 
         .feature-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             color: var(--text-primary);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-weight: 700;
         }
 
         .feature-card p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-secondary);
-            margin-bottom: 20px;
-            line-height: 1.5;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            flex-grow: 1;
         }
 
         .card-link {
-            margin-top: auto;
             color: var(--primary-color);
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.95rem;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: #f3e8ff;
+            transition: all 0.3s;
         }
 
-        .card-link i { transition: transform 0.3s; }
-        .feature-card:hover .card-link i { transform: translateX(-5px); }
+        .feature-card:hover .card-link {
+            background: var(--primary-color);
+            color: white;
+            padding-right: 25px; /* Slight expansion */
+        }
 
         /* ==================== Book Tabs ==================== */
         .book-tabs {
@@ -654,7 +684,7 @@
         .social-btn.snap:hover { background: #FFFC00; }
         
         .social-btn:hover img { filter: brightness(0) invert(1); }
-        .social-btn.snap:hover img { filter: none; } /* Snap icon is usually black/white */
+        .social-btn.snap:hover img { filter: none; } 
 
         /* ==================== Footer ==================== */
         footer {
@@ -731,7 +761,7 @@
             .hero-text h1 { font-size: 1.8rem; }
             .hero-section { padding: 100px 20px 80px; border-radius: 0 0 30px 30px; }
             .youtube-btn { width: 100%; justify-content: center; }
-            .share-fixed-btn { display: none; } /* Hide fixed share on mobile, rely on nav share */
+            .share-fixed-btn { display: none; }
             .book-tabs { grid-template-columns: 1fr; }
         }
     </style>
@@ -757,7 +787,6 @@
             <a href="manhaj.html"><i class="fas fa-book-open"></i> المنهج</a>
             <a href="ask.html"><i class="fas fa-question-circle"></i> الأسئلة</a>
             <a href="about.html"><i class="fas fa-user"></i> من نحن</a>
-            <!-- زر المشاركة للجوال في القائمة -->
             <a href="#" onclick="handleMobileShare(); return false;" class="mobile-share-link" style="display: none;"><i class="fas fa-share-alt"></i> مشاركة</a>
         </div>
 
@@ -816,7 +845,7 @@
         </div>
         <div class="cards-grid">
             <!-- Books -->
-            <div class="feature-card" onclick="location.href='books.html'" style="cursor: pointer;">
+            <div class="feature-card" onclick="location.href='books.html'">
                 <div class="card-icon-wrapper">
                     <img src="icons/books.png" alt="الكتب">
                 </div>
@@ -826,7 +855,7 @@
             </div>
 
             <!-- Articles -->
-            <div class="feature-card" onclick="location.href='articles.html'" style="cursor: pointer;">
+            <div class="feature-card" onclick="location.href='articles.html'">
                 <div class="card-icon-wrapper">
                     <img src="icons/articles.png" alt="المقالات">
                 </div>
@@ -836,7 +865,7 @@
             </div>
 
             <!-- Videos -->
-            <div class="feature-card" onclick="location.href='videos.html'" style="cursor: pointer;">
+            <div class="feature-card" onclick="location.href='videos.html'">
                 <div class="card-icon-wrapper">
                     <img src="icons/videos.png" alt="الفيديوهات">
                 </div>
@@ -846,7 +875,7 @@
             </div>
 
             <!-- Manhaj -->
-            <div class="feature-card" onclick="location.href='manhaj.html'" style="cursor: pointer;">
+            <div class="feature-card" onclick="location.href='manhaj.html'">
                 <div class="card-icon-wrapper">
                     <img src="icons/manhaj.png" alt="المنهج">
                 </div>
@@ -856,7 +885,7 @@
             </div>
 
             <!-- Khawatir -->
-            <div class="feature-card" onclick="location.href='khawatir.html'" style="cursor: pointer;">
+            <div class="feature-card" onclick="location.href='khawatir.html'">
                 <div class="card-icon-wrapper">
                     <img src="icons/khawatir.png" alt="خواطر">
                 </div>
@@ -866,7 +895,7 @@
             </div>
 
             <!-- History -->
-            <div class="feature-card" onclick="location.href='history.html'" style="cursor: pointer;">
+            <div class="feature-card" onclick="location.href='history.html'">
                 <div class="card-icon-wrapper">
                     <img src="icons/history.png" alt="التاريخ">
                 </div>
@@ -876,7 +905,7 @@
             </div>
             
             <!-- Podcast -->
-            <div class="feature-card" onclick="location.href='podcast.html'" style="cursor: pointer;">
+            <div class="feature-card" onclick="location.href='podcast.html'">
                 <div class="card-icon-wrapper">
                     <img src="icons/podcast.png" alt="بودكاست">
                 </div>
@@ -886,7 +915,7 @@
             </div>
 
             <!-- Questions -->
-            <div class="feature-card" onclick="location.href='ask.html'" style="cursor: pointer;">
+            <div class="feature-card" onclick="location.href='ask.html'">
                 <div class="card-icon-wrapper">
                     <img src="icons/ask.png" alt="الأسئلة">
                 </div>
@@ -1026,20 +1055,36 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
+                        // Add a small delay for staggering effect if it has a delay style
+                        const delay = entry.target.dataset.delay || 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, delay);
+                        
                         observer.unobserve(entry.target); // Animate only once
                     }
                 });
             }, observerOptions);
 
-            // Select elements to animate
+            // Select general elements to animate
             const animatedElements = document.querySelectorAll(
-                '.hero-content, .quick-actions, .section-title, .updates-container, .feature-card, .book-card, .slider-section, .social-section, .footer-links'
+                '.hero-content, .quick-actions, .section-title, .updates-container, .book-card, .slider-section, .social-section, .footer-links'
             );
 
             animatedElements.forEach(el => {
                 el.classList.add('reveal-up');
                 observer.observe(el);
+            });
+
+            // Handle Feature Cards specifically for staggered animation
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach((card, index) => {
+                card.classList.add('reveal-up');
+                // Calculate delay based on index (e.g., 0ms, 100ms, 200ms...)
+                // We use modulus to reset delay for new rows if needed, or just linear
+                // Using dataset to pass delay to the observer callback
+                card.dataset.delay = (index % 4) * 100; 
+                observer.observe(card);
             });
         });
 
