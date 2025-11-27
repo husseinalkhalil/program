@@ -39,8 +39,8 @@
             --primary-dark: #451b7a;
             --primary-light: #8a5bc7;
             --accent-color: #ffd700;
-            --bg-color: #f9f7f2; /* تم التعديل إلى البيج المريح للعين */
-            --surface-color: #ffffff;
+            --bg-color: #efeadd; /* تم تغميق البيج قليلاً */
+            --surface-color: #efeadd; /* توحيد لون البطاقات مع الخلفية */
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             
@@ -159,7 +159,7 @@
                 top: 60px;
                 right: -280px;
                 width: 280px;
-                background: white;
+                background: var(--surface-color); /* توحيد الخلفية */
                 flex-direction: column;
                 padding: 20px;
                 height: calc(100vh - 60px);
@@ -182,7 +182,7 @@
                 justify-content: flex-start;
             }
             .nav-links a:hover {
-                background: var(--bg-color);
+                background: rgba(0,0,0,0.05);
                 color: var(--primary-color);
                 transform: none;
             }
@@ -253,6 +253,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             font-family: 'Tajawal', sans-serif;
             outline: none;
+            background: white; /* الحفاظ على صندوق البحث أبيض للوضوح */
         }
 
         .search-icon-placeholder {
@@ -269,7 +270,7 @@
             top: 110%;
             left: 0;
             right: 0;
-            background: white;
+            background: var(--surface-color);
             border-radius: 15px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
             max-height: 400px;
@@ -282,12 +283,12 @@
 
         .search-item {
             padding: 15px 20px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
             cursor: pointer;
             transition: background 0.2s;
         }
 
-        .search-item:hover { background: #f8fafc; }
+        .search-item:hover { background: rgba(0,0,0,0.03); }
         .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; }
         .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
         /* Highlighting Style */
@@ -312,7 +313,7 @@
         }
 
         .youtube-btn {
-            background: white;
+            background: var(--surface-color);
             color: #ff0000;
             padding: 12px 30px;
             border-radius: 50px;
@@ -330,6 +331,7 @@
             box-shadow: var(--shadow-lg);
             background: #ff0000;
             color: white;
+            border-color: #ff0000;
         }
 
         /* ==================== Updates Section ==================== */
@@ -366,11 +368,11 @@
         }
 
         .updates-container {
-            background: white;
+            background: var(--surface-color);
             border-radius: var(--radius-lg);
             padding: 25px;
             box-shadow: var(--shadow-sm);
-            border: 1px solid #eee;
+            border: 1px solid rgba(0,0,0,0.05);
             margin-bottom: 60px;
         }
 
@@ -378,12 +380,12 @@
             display: flex;
             align-items: center;
             padding: 15px;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
             transition: transform 0.2s;
         }
 
         .update-item:last-child { border-bottom: none; }
-        .update-item:hover { transform: translateX(-5px); background: #f8fafc; }
+        .update-item:hover { transform: translateX(-5px); background: rgba(0,0,0,0.02); }
 
         .update-badge {
             background: #ef4444;
@@ -434,13 +436,13 @@
         }
 
         .feature-card {
-            background: white;
+            background: var(--surface-color);
             border-radius: var(--radius-xl);
             padding: 35px 25px;
             text-align: center;
             box-shadow: var(--shadow-sm);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid #f1f5f9;
+            border: 1px solid rgba(0,0,0,0.05);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -476,7 +478,7 @@
         .card-icon-wrapper {
             width: 80px;
             height: 80px;
-            background: #f8fafc;
+            background: rgba(0,0,0,0.03);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -528,7 +530,7 @@
             gap: 8px;
             padding: 8px 20px;
             border-radius: 20px;
-            background: #f3e8ff;
+            background: rgba(94, 44, 165, 0.1);
             transition: all 0.3s;
         }
 
@@ -547,12 +549,12 @@
         }
 
         .book-card {
-            background: white;
+            background: var(--surface-color);
             border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
             transition: transform 0.3s;
-            border: 1px solid #eee;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .book-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
@@ -669,7 +671,7 @@
         .social-section {
             text-align: center;
             margin-bottom: 60px;
-            background: white;
+            background: var(--surface-color);
             padding: 40px;
             border-radius: var(--radius-xl);
             box-shadow: var(--shadow-sm);
@@ -690,7 +692,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f1f5f9;
+            background: rgba(0,0,0,0.05);
             transition: all 0.3s;
         }
 
