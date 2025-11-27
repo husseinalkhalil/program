@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
@@ -16,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Shared Variables & Styles */
+        /* Shared Variables & Styles form Index */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -54,7 +55,7 @@
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* Navigation */
+        /* ==================== Navigation (Exact match with Index) ==================== */
         .nav-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -116,9 +117,16 @@
             cursor: pointer;
         }
 
+        /* Mobile Nav (Exact match with Index) */
         @media (max-width: 1200px) {
-            .hamburger { display: block; order: 1; }
-            .logo-container { order: 2; }
+            .hamburger { 
+                display: block; 
+                order: 1; 
+            }
+            .logo-container {
+                order: 2; 
+            }
+
             .nav-links {
                 position: fixed;
                 top: 60px;
@@ -151,10 +159,11 @@
                 color: var(--primary-color);
                 transform: none;
             }
+            
             nav { padding: 0.8rem 5%; }
         }
 
-        /* Hero Section */
+        /* Hero Section (Adapted) */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             padding: 120px 20px 100px;
@@ -224,7 +233,7 @@
 
         /* Main Container */
         .container {
-            max-width: 1000px; /* زيادة العرض قليلاً لاستيعاب بطاقتين */
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
@@ -238,7 +247,7 @@
             text-align: center;
             margin-bottom: 20px;
             display: none;
-            color: #FFD200; /* اللون الأصفر المطلوب */
+            color: #FFD200;
             font-weight: bold;
             font-size: 1.2rem;
         }
@@ -249,7 +258,7 @@
         /* Articles Grid Layout */
         #articlesList {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* بطاقتين في الصف */
+            grid-template-columns: 1fr 1fr;
             gap: 25px;
         }
 
@@ -258,7 +267,6 @@
             background: var(--surface-color);
             border-radius: 16px;
             padding: 30px;
-            /* margin-bottom removed, handled by grid gap */
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             border: 1px solid rgba(0,0,0,0.03);
             border-right: 5px solid var(--primary-color);
@@ -268,7 +276,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 100%; /* لضمان تساوي الارتفاع */
+            height: 100%;
         }
 
         .article:hover {
@@ -279,7 +287,7 @@
 
         /* Background Icon Decoration */
         .article::before {
-            content: '\f1ea'; /* FontAwesome Newspaper Icon */
+            content: '\f1ea';
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
             position: absolute;
@@ -422,7 +430,7 @@
         #firstPage { background: rgba(94, 44, 165, 0.1); color: var(--primary-color); }
         #firstPage:hover { background: var(--primary-color); color: white; }
 
-        /* Social Section & Footer */
+        /* ==================== Social Section (Exact match with Index) ==================== */
         .social-section {
             text-align: center;
             margin-bottom: 60px;
@@ -448,12 +456,39 @@
         .social-btn.snap:hover { background: #FFFC00; }
         .social-btn.snap:hover img { filter: none; }
 
-        footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
-        .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
-        .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
-        .footer-links a:hover { color: var(--accent-color); }
-        .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        /* ==================== Footer (Exact match with Index) ==================== */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: auto;
+        }
 
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover { color: var(--accent-color); }
+
+        .copyright {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        /* Extras */
         .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
         .share-fixed-btn:hover { transform: scale(1.1); }
         .share-fixed-btn img { width: 24px; filter: brightness(0); }
@@ -465,15 +500,41 @@
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
 
+        /* ==================== Mobile Adjustments (Index Match) ==================== */
         @media (max-width: 900px) {
-            #articlesList { grid-template-columns: 1fr; } /* بطاقة واحدة في الجوال والتابلت */
+            #articlesList { grid-template-columns: 1fr; } /* بطاقة واحدة في الجوال */
             .hero-text h1 { font-size: 2rem; }
             .hero-section { padding: 100px 20px 80px; }
             .share-fixed-btn { display: none; }
-            .footer-links { gap: 12px; flex-wrap: wrap; justify-content: center; }
-            .footer-links a { font-size: 0.9rem; white-space: nowrap; }
-            .social-grid { gap: 5px; flex-wrap: nowrap; justify-content: center; }
-            .social-btn { width: 48px; height: 48px; flex-shrink: 0; }
+        }
+
+        /* Mobile Footer Specifics from Index */
+        @media (max-width: 768px) {
+            .footer-links {
+                gap: 12px;
+                flex-wrap: wrap; 
+                justify-content: center;
+            }
+            .footer-links a {
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+            
+            /* Social Icons Mobile */
+            .social-grid {
+                gap: 5px; 
+                flex-wrap: nowrap; 
+                justify-content: center;
+            }
+            .social-btn {
+                width: 48px;
+                height: 48px;
+                flex-shrink: 0;
+            }
+            .social-btn img {
+                width: 24px;
+                height: 24px;
+            }
         }
     </style>
 </head>
@@ -481,10 +542,14 @@
 
     <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
 
+    <!-- Navigation -->
     <nav>
         <div class="logo-container">
-            <a href="index.html"><img src="images/logo.png" alt="شعار حسين الخليل" /></a>
+            <a href="index.html">
+                <img src="images/logo.png" alt="شعار حسين الخليل" />
+            </a>
         </div>
+
         <div class="nav-links">
             <a href="index.html">الرئيسية</a>
             <a href="books.html">الكتب</a>
@@ -503,6 +568,7 @@
             <a href="#" onclick="window.print()" title="طباعة"><i class="fas fa-print"></i></a>
             <a href="#" onclick="handleMobileShare(); return false;" class="mobile-share-link" style="display: none;">مشاركة</a>
         </div>
+
         <div class="hamburger" onclick="toggleMobileMenu()">
             <i class="fas fa-bars"></i>
         </div>
