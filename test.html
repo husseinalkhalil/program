@@ -404,6 +404,14 @@
             border-color: var(--accent-color);
         }
 
+        /* Highlighting */
+        .highlight {
+            background-color: var(--accent-color);
+            color: #422006;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
         /* Fixed Share & Top Buttons */
         .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
         .share-fixed-btn:hover { transform: scale(1.1); }
@@ -763,7 +771,7 @@
             setTimeout(() => message.style.display = "none", 2000);
         }
 
-        // Search
+        // Search & Highlight Logic
         function normalizeArabicText(text) {
             return text
                 .replace(/[\u064B-\u065F\u0670]/g, "")
@@ -773,22 +781,72 @@
                 .toLowerCase();
         }
 
+        // Regex builder for highlighting
+        function getSafeRegex(searchTerm) {
+            let regexStr = '';
+            const cleanTerm = normalizeArabicText(searchTerm);
+            
+            for (let i = 0; i < cleanTerm.length; i++) {
+                const char = cleanTerm[i];
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else if (char.match(/[a-zA-Z]/)) regexStr += char;
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                
+                regexStr += '[\\u064B-\\u065F\\u0670]*'; 
+            }
+            return new RegExp(regexStr, 'gi');
+        }
+
+        // Store original content on load to prevent highlight buildup/corruption
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.book-card').forEach(card => {
+                const h2 = card.querySelector('h2');
+                const p = card.querySelector('p');
+                if(h2) h2.dataset.original = h2.innerHTML;
+                if(p) p.dataset.original = p.innerHTML;
+            });
+        });
+
         function setupSearch() {
             const searchInput = document.getElementById('globalSearch');
             const books = document.querySelectorAll('.book-card');
             const noResults = document.getElementById('noResultsMessage');
             
             searchInput.addEventListener('input', function() {
-                const searchTerm = normalizeArabicText(this.value.trim());
+                const term = this.value.trim();
+                const normalizedTerm = normalizeArabicText(term);
+                const regex = term ? getSafeRegex(term) : null;
                 let hasResults = false;
                 
                 books.forEach(book => {
-                    const title = normalizeArabicText(book.querySelector('h2').textContent);
-                    const desc = normalizeArabicText(book.querySelector('p').textContent);
+                    const h2 = book.querySelector('h2');
+                    const p = book.querySelector('p');
                     
-                    if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                    // Reset content first
+                    if(h2) h2.innerHTML = h2.dataset.original;
+                    if(p) p.innerHTML = p.dataset.original;
+
+                    if (!term) {
                         book.style.display = 'flex';
                         hasResults = true;
+                        return;
+                    }
+
+                    const titleText = h2 ? h2.textContent : '';
+                    const descText = p ? p.textContent : '';
+                    const normalizedTitle = normalizeArabicText(titleText);
+                    const normalizedDesc = normalizeArabicText(descText);
+                    
+                    if (normalizedTitle.includes(normalizedTerm) || normalizedDesc.includes(normalizedTerm)) {
+                        book.style.display = 'flex';
+                        hasResults = true;
+
+                        // Apply Highlight
+                        if(h2) h2.innerHTML = h2.dataset.original.replace(regex, match => `<span class="highlight">${match}</span>`);
+                        if(p) p.innerHTML = p.dataset.original.replace(regex, match => `<span class="highlight">${match}</span>`);
                     } else {
                         book.style.display = 'none';
                     }
@@ -815,7 +873,6 @@
             // Check favorites
             const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
             document.querySelectorAll('.favorite-btn').forEach(btn => {
-                // Extract title from onclick attribute
                 const match = btn.getAttribute('onclick').match(/'([^']+)'/);
                 if (match) {
                     const title = match[1];
