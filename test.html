@@ -224,7 +224,7 @@
 
         /* Main Container */
         .container {
-            max-width: 900px;
+            max-width: 1000px; /* زيادة العرض قليلاً لاستيعاب بطاقتين */
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
@@ -238,14 +238,19 @@
             text-align: center;
             margin-bottom: 20px;
             display: none;
+            color: #FFD200; /* اللون الأصفر المطلوب */
+            font-weight: bold;
+            font-size: 1.2rem;
         }
         .search-results-info span {
-            background: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-sm);
-            color: var(--primary-color);
-            font-weight: bold;
+            color: inherit;
+        }
+
+        /* Articles Grid Layout */
+        #articlesList {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* بطاقتين في الصف */
+            gap: 25px;
         }
 
         /* Professional Article Cards */
@@ -253,7 +258,7 @@
             background: var(--surface-color);
             border-radius: 16px;
             padding: 30px;
-            margin-bottom: 25px;
+            /* margin-bottom removed, handled by grid gap */
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             border: 1px solid rgba(0,0,0,0.03);
             border-right: 5px solid var(--primary-color);
@@ -263,6 +268,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            height: 100%; /* لضمان تساوي الارتفاع */
         }
 
         .article:hover {
@@ -320,16 +326,17 @@
             border-top: 1px solid rgba(0,0,0,0.05);
             position: relative;
             z-index: 1;
+            gap: 10px;
         }
 
         .publish-date {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
             display: inline-flex;
             align-items: center;
             gap: 8px;
             background: #f8fafc;
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 20px;
             font-weight: 500;
         }
@@ -340,7 +347,7 @@
             background: transparent;
             border: 1px solid #e2e8f0;
             color: var(--text-secondary);
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 20px;
             cursor: pointer;
             font-family: 'Tajawal', sans-serif;
@@ -348,8 +355,8 @@
             transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+            gap: 6px;
+            font-size: 0.85rem;
         }
 
         .article-button:hover {
@@ -458,7 +465,8 @@
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            #articlesList { grid-template-columns: 1fr; } /* بطاقة واحدة في الجوال والتابلت */
             .hero-text h1 { font-size: 2rem; }
             .hero-section { padding: 100px 20px 80px; }
             .share-fixed-btn { display: none; }
@@ -527,7 +535,7 @@
             لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
         </div>
 
-        <!-- Articles Container -->
+        <!-- Articles Container (Grid) -->
         <div id="articlesList">
             <!-- Article 45 -->
             <div class="article" id="article-45">
@@ -1098,6 +1106,7 @@
             articles.forEach((article, index) => {
                 const start = (currentPage - 1) * articlesPerPage;
                 const end = currentPage * articlesPerPage;
+                // Using 'flex' because .article is a flex container, and it is a grid item.
                 article.style.display = (index >= start && index < end) ? 'flex' : 'none';
             });
 
