@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>خواطر - حسين الخليل</title>
+    <title>الأسئلة - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Shared Variables & Styles form Index/About/Articles */
+        /* Shared Variables & Styles */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -228,7 +228,7 @@
             pointer-events: none;
         }
 
-        /* Container Structure */
+        /* Main Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -239,212 +239,292 @@
             position: relative;
             z-index: 20;
             margin-top: -50px; /* Overlap Hero */
-            max-width: 1000px;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 60px;
         }
 
-        /* Results Info */
-        .search-results-info {
-            text-align: center;
-            margin-bottom: 20px;
-            display: none;
-            color: #FFD200;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        /* Grid Layout */
-        #thoughtsList {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-
-        /* Thought Card Styles */
-        .thought-card {
+        /* Form Styling */
+        .ask-form-card {
             background: var(--surface-color);
-            border-radius: 16px;
+            border-radius: var(--radius-xl);
             padding: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 40px;
             border: 1px solid rgba(0,0,0,0.03);
-            border-right: 5px solid var(--primary-color);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-            height: 100%;
         }
 
-        .thought-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        /* Background Icon Decoration (Lightbulb) */
-        .thought-card::before {
-            content: '\f0eb'; 
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            left: -20px;
-            bottom: -20px;
-            font-size: 8rem;
-            color: rgba(94, 44, 165, 0.03);
-            transform: rotate(15deg);
-            pointer-events: none;
-            transition: all 0.4s;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--primary-dark);
         }
 
-        .thought-card:hover::before {
-            transform: rotate(0deg) scale(1.1);
-            color: rgba(94, 44, 165, 0.05);
-        }
-
-        .thought-content {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: var(--text-primary);
-            margin-bottom: 25px;
-            white-space: pre-line;
-            flex-grow: 1;
-            position: relative;
-            z-index: 1;
-        }
-
-        .highlight {
-            background-color: var(--accent-color);
-            color: #422006;
-            padding: 0 4px;
-            border-radius: 4px;
-        }
-
-        .meta-data {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            padding-top: 15px;
-            margin-top: auto;
-            position: relative;
-            z-index: 1;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .publish-date {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            background: #f8fafc;
-            padding: 6px 12px;
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
-        }
-        .publish-date i { color: var(--primary-light); }
-
-        .actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .action-btn {
-            background: transparent;
-            border: 1px solid #e2e8f0;
-            color: var(--text-secondary);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
             font-size: 1rem;
+            background: #f8fafc;
+            transition: all 0.3s;
         }
 
-        .action-btn:hover {
+        textarea:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(94, 44, 165, 0.1);
+        }
+
+        .name-toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+
+        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--primary-color); }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        .submit-btn {
             background: var(--primary-color);
             color: white;
-            border-color: var(--primary-color);
-            transform: scale(1.1);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-md);
         }
 
-        .action-btn.favorited {
-            color: #fbbf24;
-            border-color: #fbbf24;
-        }
-        .action-btn.favorited:hover {
-            background: #fbbf24;
-            color: white;
+        .submit-btn:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* Pagination */
-        #pagination-wrapper {
-            background: var(--surface-color);
-            padding: 25px;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
+        .submit-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        /* Questions List */
+        .section-header {
             text-align: center;
-            margin: 40px auto;
-            border: 1px solid rgba(0,0,0,0.05);
-            max-width: 500px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
         }
 
-        #pageInfo {
-            display: block;
+        #questionsList {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .question-card {
+            background: var(--surface-color);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.03);
+            border-right: 5px solid var(--primary-color);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .question-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .q-name {
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .q-text {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            line-height: 1.7;
             margin-bottom: 15px;
-            color: var(--primary-color);
+        }
+
+        .answer-box {
+            background: #fdfceb; /* Light yellow/beige for answer */
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-right: 4px solid var(--accent-color);
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .answer-label {
+            position: absolute;
+            top: -12px;
+            right: 15px;
+            background: var(--accent-color);
+            color: #422006;
+            font-size: 0.8rem;
+            padding: 2px 10px;
+            border-radius: 10px;
             font-weight: 700;
         }
 
-        .pagination-btn {
-            background: #f1f5f9;
-            color: var(--text-primary);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            margin: 0 5px;
-            font-family: 'Tajawal', sans-serif;
-            font-weight: 600;
-            transition: all 0.3s;
+        .answer-text {
+            color: #422006;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
-        .pagination-btn:hover {
+        /* Pagination */
+        #pagination-container {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 40px 0;
+        }
+
+        .page-btn {
+            background: white;
+            border: 1px solid #e2e8f0;
+            width: 40px; height: 40px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            color: var(--primary-color);
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .page-btn:hover:not(:disabled) {
             background: var(--primary-color);
             color: white;
-            transform: translateY(-2px);
         }
 
-        .pagination-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-            background: #e2e8f0;
-            color: #94a3b8;
+        .page-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
         }
         
-        #firstPage { background: rgba(94, 44, 165, 0.1); color: var(--primary-color); }
-        #firstPage:hover { background: var(--primary-color); color: white; }
+        .page-btn:disabled {
+            background: #f1f5f9;
+            color: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        #paginationInfo {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* Alerts */
+        .alert {
+            position: fixed;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            padding: 20px 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 10000;
+            text-align: center;
+            display: none;
+            min-width: 300px;
+        }
+        .alert.success { border-top: 5px solid #4CAF50; color: #2e7d32; }
+        .alert.error { border-top: 5px solid #f44336; color: #c62828; }
+        .alert-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5); z-index: 9999; display: none;
+        }
+
+        /* Footer & Shared Components */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-links {
+            display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;
+        }
+        .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--accent-color); }
+        .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+
+        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
+        .share-fixed-btn:hover { transform: scale(1.1); }
+        .share-fixed-btn img { width: 24px; filter: brightness(0); }
+
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
+        .back-to-top.visible { opacity: 1; pointer-events: all; }
+        .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
 
         /* Social Section */
-        .social-section {
-            text-align: center;
-            margin-bottom: 60px;
-            background: var(--surface-color);
-            padding: 40px;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-sm);
-        }
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
-
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
         .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: all 0.3s; }
         .social-btn img { width: 24px; height: 24px; transition: filter 0.3s; }
@@ -458,53 +538,7 @@
         .social-btn.snap:hover { background: #FFFC00; }
         .social-btn.snap:hover img { filter: none; }
 
-        /* Footer (Clean & Independent) */
-        footer {
-            background: var(--primary-dark);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            margin-top: auto;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.8);
-            font-size: 0.9rem;
-        }
-
-        .footer-links a:hover { color: var(--accent-color); }
-
-        .copyright {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            margin-top: 20px;
-        }
-
-        /* Fixed Buttons */
-        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
-        .share-fixed-btn:hover { transform: scale(1.1); }
-        .share-fixed-btn img { width: 24px; filter: brightness(0); }
-
-        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-        .copy-alert.show { opacity: 1; }
-
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
-        .back-to-top.visible { opacity: 1; pointer-events: all; }
-        .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
-
-        /* ==================== Mobile Adjustments ==================== */
         @media (max-width: 900px) {
-            #thoughtsList { grid-template-columns: 1fr; }
             .hero-text h1 { font-size: 2rem; }
             .hero-section { padding: 100px 20px 80px; }
             .share-fixed-btn { display: none; }
@@ -517,6 +551,9 @@
             .social-btn { width: 48px; height: 48px; flex-shrink: 0; }
             .social-btn img { width: 24px; height: 24px; }
         }
+        
+        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+        .copy-alert.show { opacity: 1; }
     </style>
 </head>
 <body>
@@ -535,11 +572,11 @@
             <a href="index.html">الرئيسية</a>
             <a href="books.html">الكتب</a>
             <a href="articles.html">المقالات</a>
-            <a href="khawatir.html" style="background: rgba(255,255,255,0.2);">خواطر</a>
+            <a href="khawatir.html">خواطر</a>
             <a href="videos.html">الفيديوهات</a>
             <a href="history.html">التاريخ</a>
             <a href="podcast.html">البودكاست</a>
-            <a href="ask.html">الأسئلة</a>
+            <a href="ask.html" style="background: rgba(255,255,255,0.2);">الأسئلة</a>
             <a href="hewar.html">حوارات</a>
             <a href="inq.html">تساؤلات</a>
             <a href="manhaj.html">المنهج</a>
@@ -555,18 +592,18 @@
         </div>
     </nav>
 
-    <!-- Header / Hero Section -->
+    <!-- Hero Section -->
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>خواطر</h1>
-                <p>تأملات قصيرة وإضاءات سريعة حول الحياة والدين</p>
+                <h1>الأسئلة</h1>
+                <p>مساحة لطرح تساؤلاتك والبحث عن إجابات منطقية</p>
             </div>
             
-            <!-- Universal Search inside Hero -->
+            <!-- Universal Search inside Hero (Local Filter) -->
             <div class="universal-search">
                 <i class="fas fa-search search-icon-placeholder"></i>
-                <input type="text" id="globalSearch" placeholder="ابحث في الخواطر..." />
+                <input type="text" id="globalSearch" placeholder="ابحث في الأسئلة المطروحة..." />
             </div>
         </div>
     </header>
@@ -574,848 +611,49 @@
     <!-- Main Content Wrapper -->
     <div class="container main-wrapper">
         
-        <div id="searchResultsInfo" class="search-results-info">
-            <span id="resultsCount">0</span> نتيجة بحث
+        <!-- Question Form -->
+        <div class="ask-form-card">
+            <h2 style="color: var(--primary-dark); margin-bottom: 20px; text-align: center;">اطرح سؤالك</h2>
+            <form id="questionForm">
+                <div class="form-group">
+                    <label for="question">نص السؤال:</label>
+                    <textarea id="question" name="question" required="" rows="5" placeholder="اكتب سؤالك هنا بوضوح..."></textarea>
+                </div>
+                
+                <div class="name-toggle">
+                    <label for="showName" style="margin:0; cursor:pointer;">إظهار الإسم مع السؤال</label>
+                    <label class="switch">
+                        <input checked="" id="showName" type="checkbox"/>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div id="nameField" class="form-group">
+                    <label for="name">الاسم (اختياري):</label>
+                    <input id="name" name="name" placeholder="الاسم الذي سيظهر بجانب سؤالك" type="text"/>
+                </div>
+                
+                <button id="submitBtn" type="submit" class="submit-btn">إرسال السؤال</button>
+            </form>
         </div>
 
-        <div id="noResultsMessage" style="display:none; text-align:center; padding:30px; color:var(--text-secondary); background:var(--surface-color); border-radius:var(--radius-lg); margin-bottom:20px;">
-            <i class="fas fa-search" style="font-size:2rem; margin-bottom:10px; color:var(--text-secondary); opacity:0.5;"></i><br>
+        <!-- Questions List -->
+        <div class="section-header">أسئلة الزوّار</div>
+        
+        <div id="noResultsMessage" style="display:none; text-align:center; padding:30px; color:var(--text-secondary); background:var(--surface-color); border-radius:var(--radius-lg);">
             لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
         </div>
 
-        <!-- Thoughts Grid -->
-        <div id="thoughtsList">
-            
-            <div class="thought-card" id="thought-64">
-                <div class="thought-content"> "لحكمة لا يعلمها إلّا الله"
-مقولةٌ تحوّلت لدى كثيرين إلى ذريعة تُعطَّل بها العقول ويُوقَف بها التفكير.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 16 نوفمبر 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(64, 'لحكمة لا يعلمها إلّا الله', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-63">
-                <div class="thought-content"> الإله الذي يحاسبك بناءًا على دينك "الذي ورثته".
-إله غير عادل. بل متحيّز.
-الإله الذي يحاسبك بناءًا على أعمالك وسلوكك، إله عادل. </div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 أغسطس 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(63, 'الإله الذي يحاسبك', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-62">
-                <div class="thought-content">بعد أن حرم أخواته من ميراث أبيهن، وابتلع نصيب أبناء أخيه اليتامى بحجة الوصاية، واقتطع من أجر عامله القليل أصلًا، وغشّ زبونه ببيع سلعة مقلدة بعدما أقسم بأغلظ الأيمان أنها أصلية.
-لمح جاره يستمع للأغاني في سيارته.
-تقدم إليه بوجه عابس وقال: "جزاك الله خيرًا يا جار، ألا تعلم أن الموسيقى حرام؟ اتقِ الله، فأنت في ذنب عظيم!" ثم أردف: "ولِم لا أراك في المسجد؟ الصلاة عماد الدين وأول ما يُحاسب عليه العبد يوم القيامة."
-ومضى إلى المسجد، وفي الوضوء كان يتفقد فمه بعناية، حرصًا ألّا تتسرب قطرة ماء إلى جوفه، فهو صائم تطوعًا، ابتغاء مرضاة الله.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 أغسطس 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(62, 'بعد أن حرم أخواته', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-61">
-                <div class="thought-content">أقوى أنواع المخدرات ليست تلك التي نسمع عنها، بل كتاب تراث تقرأه مرة واحدة، فتعيش مخدَّرًا به طول عمرك، تائهًا في نشوة الوهم، غائبًا عن وعيك وأنت تظن أنك على بصيرة.
-ما في داعي تشتري مخدرات، وفر فلوسك واقرأ كتاب واحد من هذه الكتب.
-جرعة واحدة تكفي تخليك تهلوس لسنين، تشوف الحق على شكل لحية وعمامة، وتفكر كل من خالفك كافر وزنديق، تحس حالك فقيه، وأنت بالحقيقة مجرد ضحية تردد كلام شيخك وتظنه وحيًا.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 يوليو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(61, 'أقوى أنواع المخدرات', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-60">
-                <div class="thought-content">اقترحت فكرة،
-قالوا لك: وهل أنت أعلم من السلف؟
-وكأن الحقيقة وُلدت في القرن الثاني الهجري.
-ثم ماتت بعدها إلى الأبد!</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 يوليو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(60, 'اقترحت فكرة', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-59">
-                <div class="thought-content">ربّونا على أن نعبد الله خوفًا من العذاب،
-لا حبًا في العدل.
-نصلي كي لا نحترق، لا كي نرتقي.
-ندعو كي لا نخسر، لا لأننا نثق.
-هكذا صارت علاقتنا بالله:
-معاملة مشروطة، لا محبة مطلقة.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 يوليو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(59, 'ربونا', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-58">
-                <div class="thought-content">من أصعب الأوهام النفسية: أن يظن الإنسان ويتخيل أن رأيه في شخص أو مجتمع أو تقييمه للناس، له أثر وقيمة عند الله.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 يوليو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(58, 'من أصعب الأوهام النفسية', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-57">
-                <div class="thought-content">أنت لا تحتاج أن تكفر بالقرآن، ولا حتى تنتقد كتب التراث لإثارة غضب "ملائكة الأرض".
-يكفي فقط أن تترحم على إنسان غير مسلم، وستجدهم يكفّرونك فورًا، ويُخرجونك من الملة دون تردد، بل يرون أن مجرد السكوت عنك يستوجب غضب الإله. 
-طبعًا، إله التراث، لا إله القرآن.
-فالدين بالنسبة لهم ليس منهج حياة أو خلق أو عدل، بل شعارات دفاعية جاهزة:
-من ترحم على غير المسلم؟ كافر!
-من سكت عن الترحم؟ منافق!
-من ناقش الحكم؟ زنديق!</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 يوليو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(57, 'أنت لا تحتاج', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-56">
-                <div class="thought-content">أكثر كتاب أساء للإسلام، هو كتاب البخاري.
-ومن أكثر الكتب المقدسة عند المسلمين، هو كتاب البخاري!</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 30 يونيو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(56, 'أكثر كتاب أساء للإسلام', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-55">
-                <div class="thought-content">أول ما يُسأل عنه الحاكم يوم القيامة:
-1- القضاء.
-2- التعليم.
-3- الصحة.
-فإذا صَلُحت صَلُح باقي عمله واذا فسدت فسد باقي عمله.
-وأول ما يُسأل عنه العبد يوم القيامة الشرك والظلم فإذا صَلُحت صَلُح باقي عمله واذا فسدت فسد باقي عمله.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(55, 'أول ما يُسأل عنه الحاكم', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-54">
-                <div class="thought-content">هناك من يُفكّر بذكاء وهناك من يُفكّر بغباء، فلا تتعجّب من أفكارهم.
-لا تنسى أن العمود الفقري يربط بين المؤخرة والدماغ.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(54, 'هناك من يفكر بذكاء', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-53">
-                <div class="thought-content">سمعت عن امرأة غير مُحجبة تضامنت مع امرأة مُحجبة أُجبرت على خلع حجابها في مكان عملها أو أي مكان آخر.
-لكني لم أسمع عن امرأة مُحجبة تضامنت مع امرأة غير مُحجبة خلعت حجابها لعدم اقتناعها به، بل غالباً ما تنعتها بأقذع الكلمات والأوصاف بعد أن تتوعدها بنار جهنم!!
-لماذا في مجتمعنا يتم ربط الطهارة والعفاف والأخلاق والشرف بقطعة قماش توضع على رأس الأنثى!!
-لماذا في مجتمعنا يكون شرف الرجل مرتبطاً بأخلاق أخته أو بوصف أدق يكون الشرف بين أفخاذ الأنثى!!
-ماهو السبب ياترى؟
-على هالحالة يلي ماعنده أخت يكون بدون شرف!</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(53, 'سمعت عن امرأة', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-51">
-                <div class="thought-content">البعض يلي يقول أن رمضان ليس فقط الصيام عن الطعام والشراب، بل وأيضا الصيام عن أذية الناس والغيبة والنميمة وغيره.
-لا يا صديقي أنت مخطئ، فهذا النوع من الصيام مطالب به بكل أيام السنة وليس فقط في رمضان.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(51, 'البعض يقول', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-50">
-                <div class="thought-content">يتعافى المرء إذا تركته بحاله وما حشرت أنفك بحياته وخصوصياته وعملت عليه قاضي.
-أنت بس اتركه بحاله وهو بألف خير.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(50, 'يتعافى المرء', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-49">
-                <div class="thought-content">ظل ملحداً إلى أن مات والده، فقال لأخته: أختاه للذكر مثل حظ الانثيين.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(49, 'ظل ملحدًا', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-48">
-                <div class="thought-content">في دين الكهنة، إذا أكلت من لحم الابل، فعليك اعادة الوضوء، لأن لحم الابل يُفسد الوضوء، بينما إذا شرِبت من أبوالها فستُشفى من أمراضك</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(48, 'في دين الكهنة', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-47">
-                <div class="thought-content">زوجة تشتكي من قلة حفظ زوجها للقرآن.
-فأقسمت لو حفظ القرآن في سنة واحدة، ستُزوِّجُه بالثانية.
-فانكبَّ الرجل على حفظه حتى حفظه في غضون ستة أشهر فقط.
-فصامت الزوجة ثلاثة أيام.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(47, 'زوجة تشتكي', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-46">
-                <div class="thought-content">قام شخص بذبح عجل سمين وأشعل المشواة وقال لأخيه: "اخرج استدعِ لنا الأحباب والجيران ليأكلوا معنا.
-‏خرج أخوه ليصرخ: "يا ناس ساعدونا حريق في منزل أخي.
-‏لحظات قليلة خرج مجموعة من الناس والبقية عملوا كأنهم لم يسمعوا.. 
-‏الناس التي أتت قاموا بالأكل والشرب حتى انتفخوا.. 
-‏التفت الأخ لأخيه متعجباً وقال: "الأشخاص الذين أتوا لا أعرفهم ولم يسبق لي رؤيتهم فأين أحبابنا وأصحابنا؟".
-‏فقال الأخ: "الذين خرجوا من بيوتهم أتوا ليساعدونا لإطفاء حريق ببيتنا وليس لأجل الوليمة، فهؤلاء من يستحقون الكرم والضيافة".
-الخلاصة: الذي لا تجده بجانبك في وقت الشدة لا تسميه صديقاً أو أخًا أو حبيبًا، فذاك من يضحك عليك وقت الضيق، ولا يستحق منك الود والكرم والاهتمام.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(46, 'قام شخص بذبح عجل', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-45">
-                <div class="thought-content">لو عاد النبي وأراد أن يُصلّي بنا، فعلى أي مذهب سيُصلّي؟
-فالصلاة على النبي في التشهد الأول، سُنّة عند الشافعي وليست سُنّة عند الحنفي ومكروهة عند المالكي!
-والتسليمة الثانية، فرض عند الحنبلي ومبطلة للصلاة بتركها عند الشافعي، ولا تبطل الصلاة عند الحنفي، وسُنّة عند المالكي!
-البسملة في أول الفاتحة، فصلاتك باطلة لا تصح إذا تركتها عند الشافعي، وتصُحْ عند المالكي والحنفي!</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(45, 'لو عاد النبي', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-44">
-                <div class="thought-content">متبع الظن يؤمن بحقيقة مطلقة مفادها أن كل الأديان والملل والطوائف شركية وباطلة، وأن معتقده هو الصحيح فقط.
-لديه إثباتات (من مراجعه) لجميع المخالفين له أنهم على ضلال، واذا ما أحدًا ما أثبت له شرك معتقده، أنكر عليه وتطاول عليه بالسبّ والشتم.
-في نظره، الكل على باطل وعلى ضلال إلّا هو.
-أنت حبيبه ومن أروع ما يكون واحترامك موجود عنده، لكن بمجرد ما يعرف انك تختلف معاه بالمعتقد تصير كافر وزنديق وملحد وضال ومُضل.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(44, 'متبع الظن', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-43">
-                <div class="thought-content">لا تُناقش ولا تُحاور شخصًا يراك على باطل وضلال.
-لا تناقش شخصًا هدفه الوحيد من مناقشتك هو إثبات أنك على باطل وهو على حق.
-لا تُناقش من لا يؤمن بالاختلاف.
-لا تُناقش من يؤمن بسياسة الإقصاء.
-ناقش الشخص الذي يؤمن بالاختلاف في كل المجالات.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(43, 'لا تناقش ولا تحاور', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-42">
-                <div class="thought-content">منهجية الكهنوت الديني في تعاطيهم وتعاملهم مع الناس كمنهجية فرعون عندما قال (مَآ أُرِيكُمْ إِلَّا مَآ أَرَىٰ)
-ما يؤمن به الكاهن وما يراه الكاهن هو الحقيقة المطلقة التي لا يجوز التشكيك بها، والتي يجب أن يؤمن بها الجميع!</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(42, 'منهجية الكهنوت', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-41">
-                <div class="thought-content">في الخطاب القرآني ما بين الله سبحانه وتعالى والملائكة في موضوع خلق آدم.
-يقول ربنا عن الملائكة (أَتَجْعَلُ فِيهَا مَن يُفْسِدُ فِيهَا وَيَسْفِكُ ٱلدِّمَآءَ)
-الملائكة لم تَقُل: أتجعل فيها من يُشرك فيها أو يكفر أو يُلحد فيها.
-بل قالوا: من يُفسد فيها ويسفك الدماء.
-لأن الكفر والشرك والإلحاد يعود إلى صاحبه فقط، فإن كان هناك من ضرر فهو يقع على الشخص نفسه ولا ضرر على المجتمع.
-أما الفساد والإفساد وسفك الدماء، فالضرر يصيب المجتمع بأكمله.
-فكان اهتمام الملائكة وتركيزها على المصلحة العامة فقط.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(41, 'في الخطاب القرآني', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-40">
-                <div class="thought-content">هناك فرقٌ كبير ببن ابداء الرأي وفرض الرأي.
-فالأول من أبسط حقوقك.
-أما الثاني فليس من حقك، بل هو تعدي على الآخرين.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(40, 'هناك فرق', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-39">
-                <div class="thought-content">إذا كنت تؤمن بأن كل ما ورثته هو حقيقة مطلقة وخارج نطاق النقد، ابقَ على أفكارك ولا تتعب نفسك في البحث والنقاش لأنك لن تصل إلى نتيحة.
-فأول خطوة في طريق المعرفة هو إلغاء التقديس.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(39, 'إذا كنت مؤمن', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-38">
-                <div class="thought-content">عند المشاكل ابحث عن الحلول أولًا، لا عن الأسباب.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(38, 'عند المشاكل', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-37">
-                <div class="thought-content">بعض (الرجال) في المجتمع الإسباني يمتنعون عن تقبيل زوجاتهم وحضنها أمام أطفالهم، لما في ذلك من قلة أدب وفجور وفسق للأخلاق.
-لكنهم لا يتوانون عن إهانتها وضربها أمامهم، لما في ذلك من رجولة وفحولة وقِوامة.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(37, 'بعض الرجال', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-36">
-                <div class="thought-content">يقول الله سبحانه وتعالى (وَلَوْلَآ أَن تُصِيبَهُم مُّصِيبَةٌۢ بِمَا قَدَّمَتْ أَيْدِيهِمْ فَيَقُولُوا۟ رَبَّنَا لَوْلَآ أَرْسَلْتَ إِلَيْنَا رَسُولًا 👈فَنَتَّبِعَ ءَايَٰتِكَ👉 وَنَكُونَ مِنَ ٱلْمُؤْمِنِينَ)
-بحسب الحكم القرآني، فالإيمان يكمن بإتباع آيات الله.
-أما بالحكم الكهنوتي، فالإيمان يلزمه اتباع كتب البشر وإلّا أصبحت كافر وستدخل جهنم.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(36, 'ولولا أن تصيبهم', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-35">
-                <div class="thought-content">(وَجَعَلْنَٰكُمْ شُعُوبًا وَقَبَآئِلَ 👈لِتَعَارَفُوٓا۟👉)
-لتعارفوا وليس لتناحروا ويُكفّر بعضكم البعض ويكره ويُقصي بعضكم البعض.
-الحياة من حق الجميع وليست حكرًا لي ولا لك ولا لأي أحد، ولسنا محور هذا الكون.
-الدنيا تتسع لكل من كان قلبه صافيًا ونقيًّا.
-أما الذي في قلبه مرض، فلا يسعه إلّا سريرًا في مستشفى الأمراض العقلية.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(35, 'وجَعَلْنَٰكُمْ شُعُوبًا', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-34">
-                <div class="thought-content">غطاء الرأس في المجتمع الياباني دليل العمل وفي المجتمع الروسي دليل البرد وفي افريقيا دليل الحر أما في المجتمع الاسباني فهو دليل الشرف والعفة والطهارة.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(34, 'غطاء الرأس', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-33">
-                <div class="thought-content">حدثني أحد الثقات فقال لي:
-يقول مُغسّل الأموات: جلسنا ساعة ونحن نحاول ننزع أنفه يلي كان حاشره بخصوصيات الناس، لكن ما قدرنا واضطرينا لقصه، وبذلك دفناه من دون أنف.
-هو مات بس أنفه بقي محشور بخصوصيات الناس.
-</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(33, 'حدثني أحد الثقات', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-32">
-                <div class="thought-content">إذا كان الحق يخشى على نفسه من النقد فهو باطل وليس حق، لأن الحق لا يخشى النقد.
-بمنطق الكهنوت، فإن التحريض على استخدام العقل والمنطق والتفكير السليم والتشكيك في كل معلومة حتى يثبت العكس، يسمونه إلحاد وزندقة وخروج عن الملة، أما التحريض على القتل وسفك الدماء والعنصرية والتكفير والكراهية والتطرف يسمونه ايمان وتقوى وجهاد في سبيل الله!!
-</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(32, 'إذا كان الحق', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-31">
-                <div class="thought-content">لا نشاهد التلفاز حتى لا تتزعزع عقيدتنا.
-لا نستمع للموسيقى ولا الغناء حتى لا تتزعزع عقيدتنا.
-لا نعيش في بلاد الغرب حتى لا تتزعزع عقيدتنا.
-لا نقرأ لكتب الفلاسفة حتى لا تتزعزع عقيدتنا.
-لا نندمج مع المجتمعات الاخرى حتى لا تتزعزع عقيدتنا.
-لا نستخدم الشبكة العنكبوتية حتى لا تتزعزع عقيدتنا.
-لا نستمع لمحاضرة مفكر أو فيلسوف حتى لا تتزعزع عقيدتنا.
-لا نشاهد الافلام حتى لا تتزعزع عقيدتنا.
-لا نستخدم الأجهزة الذكية حتى لا تتزعزع عقيدتنا.
-لا نستخدم مواقع التواصل حتى لا تتزعزع عقيدتنا.
-
-المشكلة إذًا بعقيدتنا وليست بهذه الأشياء.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(31, 'بل نشاهد التلفاز', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-30">
-                <div class="thought-content">قال عقلك هذا رح يوصلك للإلحاد.
-على أساس عقولكم أوصلتكم للمريخ!
-عقولكم أيضًا أوصلتكم للتداوي ببول البعير!</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(30, 'قال عقلك', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-29">
-                <div class="thought-content">ترى مفهوم التواتر هو نفس الآية ﴿قالوا بَل نَتَّبِعُ ما وَجَدنا عَلَيهِ آباءَنا﴾ بس حاطين له مكياج.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(29, 'ترى مفهوم التواتر', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-28">
-                <div class="thought-content">مين شيخك؟
-يعني نترك العلماء ونتبعك!!
-الترجمة الحرفية لهذه المقولة هي المثل القائل: الغنم تحتاج راعي يسوقها لانها ما تدل الدرب وحدها.
-وفي رواية ثانية صححها المعزاني: لا بد للقطيع من مرياع.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(28, 'مين شيخك؟', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-27">
-                <div class="thought-content">تتفاخرُ البغال دائمًا بأنّ أسلافها كانوا خيولًا.
-(مثل ألماني)</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(27, 'تتفاخر البغال', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-26">
-                <div class="thought-content">إن أعدل ما في الأرض أن الجميع سيموت.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(26, 'إن أعدل', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-25">
-                <div class="thought-content">لا يمكن لمجتمع أن يكون فاضلًا وهو لا يمتلك حرية ارتكاب الرذيلة.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(25, 'لا يمكن لمجتمع', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-24">
-                <div class="thought-content">دخول الجنة لا يعتمد مُطلقًا على معاييرك أو معايير مذهبك أو فهمك أو فهم مذهبك لدين الله.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(24, 'دخول الجنة', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-23">
-                <div class="thought-content">تصغر العقول عندما تنشغل بعقول الآخرين، وتكبر عندما تُركِّز على ذاتها.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(23, 'تصغر العقول', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-22">
-                <div class="thought-content">المستحيلات الثلاثة:
-1- رجل دين يُقدِّم العقل على النقل.
-2- أختاه تقتنع أنها ليست ناقصة ولا عورة.
-3- تراثي يحترم المختلف عنه ولا يدخل بنواياه.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(22, 'المستحيلات الثلاثة', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-21">
-                <div class="thought-content">متى تُدرك أنك بحاجة إلى طبيب نفسي؟
-عندما تنفعل وتجادل وتُخاصم بسبب أحداث وقعت قبل 1400 سنة، نُقلت إليك عبر أشخاص معاصرين.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(21, 'متى تدرك؟', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-20">
-                <div class="thought-content">إن شئت، كن شيطانًا في فكرك، وإنسانًا في سلوكك، لكن إيّاك أن تكون إنسانًا في فكرك، وشيطانًا في سلوكك، قد يُغفر لك تمرّدك الفكري إن كنت نقيّ السلوك، لكن لا يُغتفر لك سلوكك الشيطاني، وإن كنت تتغنّى بالصلاة والصيام وترفع راية الإيمان والتقوى.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(20, 'إن شئت', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-19">
-                <div class="thought-content">حين يريد الملحد الطعن في الإسلام، تجده يدافع عن كتب التراث أكثر من التراثيين أنفسهم، يتحول إلى حارس لتراثٍ لم يؤمن به قط، مدافعًا عن كتبٍ هي عنده خرافات.
-ليس حبًّا بها، بل لأنها تمنحه ذخيرة وأرض خصبة للطعن والسخرية من الإسلام.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(19, 'حين يريد الملحد', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-18">
-                <div class="thought-content">العين التي اعتادت الظلام، يؤذيها النور.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(18, 'العين التي اعتادت الظلام', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-17">
-                <div class="thought-content">البيئة التي تنشأ فيها تُشكّل وعيك، تصوغ مفاهيمك، وتغرس فيك معتقداتك ودينك. فإن لم تتمرد عليها في سعيك للحقيقة، ستظل سجينًا في حدودها، تحسب أنك ترى بينما أنت محجوب.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 29 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(17, 'البيئة التي تنشأ فيها', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-16">
-                <div class="thought-content">الفرق الجوهري بين من يتمسّك بالقرآن ومن يتمسّك بالتراث يكمن في القاعدة التي يتخذها كل منهما ميزانًا للحكم على الأمور.
-فعلى سبيل المثال: عند الحديث عن موضوع "نِصاب الزكاة" فإن من جعل القرآن مرجعيته ومقياسه الأول، يبدأ بالبحث فيه، فلا يجد أي ذكر لهذا المصطلح، فيرفضه ويراه باطلًا لأنه لم يُذكر في كتاب الله "الذي جعله المعيار".
-أما من جعل التراث مرجعيته وميزانه، فإنه إذا بحث في القرآن عن هذا المصطلح ولم يجده، لا يشكك في صحة ميزانه (التراث)، بل يُسارع إلى اتهام القرآن بالنقص، لأن مقياسه الأساسي هو ما ورثه من كتب التراث لا كتاب الله.
-المشكلة إذًا ليست في النصوص وحدها، بل في "منظومة الميزان" التي نزن بها النصوص.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(16, 'الفرق الجوهري', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-15">
-                <div class="thought-content">المشكلة ليست بمن لا يقرأ، المشكلة بمن يقرأ ولا يتغيّر.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(15, 'المشكلة ليست بمن لا يقرأ', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-14">
-                <div class="thought-content">بدي أسألك سؤال بس لا تزعل.
-الترجمة الحرفية لهذه الجملة: بدي أزعّلك بس لا تزعل.
-لذلك وفّر على نفسك وجع الراس وقول له: لا تسأل لأني رح أزعل.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(14, 'بدي أسألك سؤال', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-13">
-                <div class="thought-content">في جميع المحافل يقيمون مسابقات لحفظ القران، لكنك لن تسمع عن مسابقات لتدبر القران.
-هل تعلم لماذا؟
-لأن كهنة الدين (نواب الله في الأرض) يعتبرون أن تدبُّر القران خاص بهم فقط.
-مسموح لك يا مسلم أن "تحفظ" القران، لكن إياك أن تتدبره.
-إذا أردت فهمه فعليك العودة إلى الصندوق الذي تركه لنا أسلافنا والبحث عن "تفسير" الآيات التي تريدها.
-فعندما يحتفلون بحفظ مئة مسلم للقرآن، ما هي النتيجة؟
-النتيجة زادت عدد نسخ القرآن مئة نسخة.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(13, 'في جميع المحافل', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-12">
-                <div class="thought-content">في الفقه الموروث يجوز تزويج الطفلة لكن لا يجوز لها حق الانتخاب لأنها قاصر، بل ولا يجوز للمرأة بالكُلّية التصويت لأنهن ناقصات عقل ودين وما أفلح قوم ولّوا أمرهم امرأ، لكن عندما يتعلق الموضوع بالجنس والشهوة البهيمية تصبح (انسانة) واعية وكاملة النضوج.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(12, 'في الفقه الموروث', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-11">
-                <div class="thought-content">خداع الناس اسهل من اقناعهم بأنه تم خداعهم.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(11, 'خداع الناس', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-10">
-                <div class="thought-content">دينك وعقيدتك ومذهبك واسمك ولغتك رهين البيئة التي تولد بها، عائلتك هي من تقرر أي دين وأي مذهب تعتنق، فلا تتعصّب لشيء أنت ورثته بالتدجين والتلقين بسبب "مصادفة" ودلاتك في تلك البيئة، فلا توهم نفسك وتوهم الآخرين أن ما ورثته هو الحق وباقي المعتقدات باطلة، فصدفة ولادتك في بيئة ما، لا تجعل منك مميّزًا عن باقي مليارات البشر.
-فيا من تتعصّب لسلفيتك، لو ولدت بايران ستتعصب لشيعيتك، ولو ولدت بالنيبال ستتعصب لبوذيتك، ولو ولدت بالهند ستتعصّب لهندوسيتك، ولو ولدت بالفاتيكان ستتعصّب لمسيحيتك، ولو ولدت في تل ابيب ستتعصب ليهوديتك.
-فلا تتعصب يا صديقي لشيء أنت لم تختره.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(10, 'دينك وعقيدتك', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-9">
-                <div class="thought-content">هناك أمة تأكل مما لا تزرع، وتلبس مما لا تنسج، وتتعالج بما لا تصنع، تؤمن بأن العالم بأكمله يتآمر عليها!</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(9, 'هناك أمة تأكل', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-8">
-                <div class="thought-content">في المنطق الكهنوتي، إذا تكذب وتنصب عالناس وتغشهم وتاكل حقوقهم، يعتبرونك عاصي لله.
-أما إذا ما تعمل كل هالأشياء لكنك تدخن أو حليق اللحية أو تسمع للأغاني أو تأكل بشمالك أو (أنثى غير محجبة)، فيعتبرونك عاصي لله برو ماكس.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(8, 'في المنطق الكهنوتي', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-7">
-                <div class="thought-content">هناك أخوة لنا يظنون أنهم محور الكون وأن الله سبحانه وتعالى يقصدهم وحدهم في قوله ﴿إِنَّ الدّينَ عِندَ اللَّهِ الإِسلامُ﴾ ولا يعلم هؤلاء أن كل إنسان مسالم يعيش بسلام في مجتمعه ولا يؤذِ أحد هو مسلم عند الله وداخل في دينه أيًّا كان معتقده.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(7, 'هناك أخوة لنا يظنون', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-6">
-                <div class="thought-content">نسمع ونحفظ قوله تعالى: ﴿تِلكَ أُمَّةٌ قَدْ خَلَتْ لَهَا مَا كَسَبَتْ وَلَكُمْ مَا كَسَبْتُمْ وَلا تُسْأَلُونَ عَمَّا كَانُوا يَعْمَلُونَ﴾، ومع ذلك، لا نزال نتجادل: من المخطئ ومن المصيب؟ من الظالم ومن المظلوم؟ من صاحب الحق ومن صاحب الباطل؟ من القاتل ومن المقتول؟ لا نزال نقتل بعضنا، ونكره بعضنا، ونحقد على بعضنا بسبب أحداث وقعت قبل 1400 سنة، ولا نعرف عنها شيئًا إلا ما قيل لنا!
-وكأن الله سيحاسبنا على أحداث لم نعشها ولم نعاصرها!</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 15 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(6, 'نسمع ونحفظ', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-5">
-                <div class="thought-content">كيف تعرف أصحاب العقول المؤدلجة؟
-عندما تجدهم يهتمون بالقائل وليس بالقول.
-عندما تجدهم يشخصنون الموضوع ولا يناقشون القول.
-ما هي الغاية من معرفتهم؟
-شراء راحة البال من مناقشته اختصارًا لوقتك، قول له انت الصح وأنا الغلط وريّح راسك. </div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 7 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(5, 'كيف تعرف أصحاب العقول المؤدلجة؟', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-4">
-                <div class="thought-content">بمنطق البعض، تتمثل محبة الرسول واحترامه ليس في إنكار الروايات المسيئة له، بل في الصلاة عليه عند نطق اسمه أو سماعه.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 7 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(4, 'بمنطق البعض', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-3">
-                <div class="thought-content">إذا اردت الترويج لاي كذبة، غلفها بغلاف ديني.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 7 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(3, 'إذا اردت الترويج', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-2">
-                <div class="thought-content">* الأسد والفهد و التمساح لطيفون جدًا.
-أخطر الحيوانات هي الدجاج والعصافير 
-(هكذا كانت وصية الدودة لأولادها)
-* الدجاج والعصافير لطيفون جدًا.
-أخطر الحيوانات هي الاسود الفهود والتماسيح.
-(هكذا كانت وصية الغزالة لأولادها) </div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 7 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(2, 'الأسد والفهد', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="thought-card" id="thought-1">
-                <div class="thought-content">التكنولوجيا لا تعني الاجهزة الحديثة وإنما العمل بما موجود لتحقيق الهدف الذي نريد.</div>
-                <div class="meta-data">
-                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 7 مايو 2025</span>
-                    <div class="actions">
-                        <button class="action-btn favorite-btn" onclick="toggleFavorite(1, 'التكنولوجيا', this)" title="أضف للمفضلة"><i class="far fa-star"></i></button>
-                        <button class="action-btn" onclick="printThought(this)" title="طباعة"><i class="fas fa-print"></i></button>
-                    </div>
-                </div>
-            </div>
-
+        <div id="questionsList">
+            <p style="text-align:center; color:#666;">جاري تحميل الأسئلة...</p>
         </div>
 
         <!-- Pagination -->
-        <div id="pagination-wrapper">
-            <span id="pageInfo">الصفحة 1 من 1</span>
-            <div style="margin-top: 15px;">
-                <button id="firstPage" class="pagination-btn">الأولى</button>
-                <button id="prevPage" class="pagination-btn">السابق</button>
-                <button id="nextPage" class="pagination-btn">التالي</button>
-            </div>
-        </div>
+        <div id="paginationInfo" style="margin-top: 20px;"></div>
+        <div id="pagination-container"></div>
 
         <!-- Social Media -->
-        <div class="social-section">
+        <div class="social-section" style="margin-top: 60px;">
             <div class="section-title">
                 <h2>تابعني على مواقع التواصل</h2>
             </div>
@@ -1451,6 +689,11 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
+    <!-- Alert Elements -->
+    <div class="alert-overlay" id="alertOverlay"></div>
+    <div class="alert" id="alertMessage"></div>
+    <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
+
     <footer>
         <div class="container">
             <div class="footer-links">
@@ -1465,8 +708,9 @@
         </div>
     </footer>
 
-    <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
-    <div id="message" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);"></div>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
 
     <script>
         // Toggle Mobile Menu
@@ -1479,9 +723,9 @@
 
         // Share
         function handleMobileShare() {
-            const link = "https://www.husseinalkhalil.com/khawatir.html";
+            const link = "https://www.husseinalkhalil.com/ask.html";
             if (navigator.share) {
-                navigator.share({ title: 'خواطر - حسين الخليل', url: link }).catch(console.error);
+                navigator.share({ title: 'الأسئلة - حسين الخليل', url: link }).catch(console.error);
             } else {
                 navigator.clipboard.writeText(link).then(() => {
                     const alert = document.getElementById('copyAlert');
@@ -1498,176 +742,6 @@
             }
         });
 
-        // Pagination Logic
-        const thoughtsPerPage = 10;
-        let currentPage = 1;
-
-        function paginateThoughts() {
-            const thoughts = Array.from(document.querySelectorAll('.thought-card'));
-            const isSearching = document.getElementById('globalSearch').value.trim() !== '';
-
-            if (isSearching) {
-                 document.getElementById('pagination-wrapper').style.display = 'none';
-                 return;
-            } else {
-                document.getElementById('pagination-wrapper').style.display = 'block';
-            }
-
-            const totalPages = Math.ceil(thoughts.length / thoughtsPerPage);
-            const pageInfo = document.getElementById('pageInfo');
-            if (pageInfo) pageInfo.textContent = `الصفحة ${currentPage} من ${totalPages}`;
-
-            thoughts.forEach((thought, index) => {
-                const start = (currentPage - 1) * thoughtsPerPage;
-                const end = currentPage * thoughtsPerPage;
-                thought.style.display = (index >= start && index < end) ? 'flex' : 'none';
-            });
-
-            document.getElementById('prevPage').disabled = currentPage === 1;
-            document.getElementById('nextPage').disabled = currentPage === totalPages;
-            document.getElementById('firstPage').disabled = currentPage === 1;
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        document.getElementById('nextPage').onclick = function() {
-            const totalPages = Math.ceil(document.querySelectorAll('.thought-card').length / thoughtsPerPage);
-            if (currentPage < totalPages) {
-                currentPage++;
-                paginateThoughts();
-            }
-        };
-
-        document.getElementById('prevPage').onclick = function() {
-            if (currentPage > 1) {
-                currentPage--;
-                paginateThoughts();
-            }
-        };
-
-        document.getElementById('firstPage').onclick = function() {
-            currentPage = 1;
-            paginateThoughts();
-        };
-
-        // Favorites
-        function toggleFavorite(id, title, btn) {
-            let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            const existingIndex = favorites.findIndex(item => item.id === id && item.type === 'thought');
-            
-            if (existingIndex === -1) {
-                favorites.push({ id: id, title: title, type: 'thought' });
-                btn.classList.add("favorited");
-                showMessage("تمت الإضافة إلى المفضلة");
-            } else {
-                favorites.splice(existingIndex, 1);
-                btn.classList.remove("favorited");
-                showMessage("تمت الإزالة من المفضلة");
-            }
-            localStorage.setItem("favorites", JSON.stringify(favorites));
-        }
-
-        function showMessage(text) {
-            const message = document.getElementById("message");
-            message.textContent = text;
-            message.style.display = "block";
-            setTimeout(() => message.style.display = "none", 2000);
-        }
-
-        // Print
-        function printThought(btn) {
-            const card = btn.closest('.thought-card');
-            const content = card.querySelector('.thought-content').innerHTML;
-            const date = card.querySelector('.publish-date').textContent;
-
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <html dir="rtl">
-                <head>
-                    <title>طباعة الخاطرة</title>
-                    <style>
-                        body { font-family: sans-serif; padding: 40px; line-height: 1.8; }
-                        .content { font-size: 18px; margin-bottom: 20px; white-space: pre-line; }
-                        .date { color: #666; font-size: 14px; }
-                    </style>
-                </head>
-                <body>
-                    <div class="content">${content}</div>
-                    <div class="date">${date}</div>
-                <\/body>
-                <\/html>
-            `);
-            printWindow.document.close();
-            printWindow.print();
-        }
-
-        // Local Search
-        function normalizeArabicText(text) {
-            return text
-                .replace(/[\u064B-\u065F\u0670]/g, "")
-                .replace(/[أإآاءئؤ]/g, "ا")
-                .replace(/[ة]/g, "ه")
-                .replace(/[ى]/g, "ي")
-                .toLowerCase();
-        }
-
-        function setupSearch() {
-            const searchInput = document.getElementById('globalSearch');
-            const resultsInfo = document.getElementById('searchResultsInfo');
-            const resultsCount = document.getElementById('resultsCount');
-            const thoughts = document.querySelectorAll('.thought-card');
-            const noResultsMessage = document.getElementById('noResultsMessage');
-            
-            function performSearch() {
-                const searchTerm = searchInput.value.trim();
-                let count = 0;
-                
-                // Clear highlights
-                thoughts.forEach(thought => {
-                    const contentDiv = thought.querySelector('.thought-content');
-                    contentDiv.innerHTML = contentDiv.textContent; // Remove highlight spans
-                });
-
-                if (searchTerm === '') {
-                    paginateThoughts();
-                    resultsInfo.style.display = 'none';
-                    noResultsMessage.style.display = 'none';
-                    return;
-                }
-                
-                const normalizedSearchTerm = normalizeArabicText(searchTerm);
-                
-                thoughts.forEach(thought => {
-                    const contentDiv = thought.querySelector('.thought-content');
-                    const text = contentDiv.textContent;
-                    
-                    if (normalizeArabicText(text).includes(normalizedSearchTerm)) {
-                        thought.style.display = 'flex';
-                        count++;
-                        // Highlight logic (simple)
-                        const regex = new RegExp(`(${searchTerm})`, 'gi');
-                        // Note: complex highlighting in Arabic with normalization is tricky, 
-                        // simple text highlighting here.
-                    } else {
-                        thought.style.display = 'none';
-                    }
-                });
-
-                document.getElementById('pagination-wrapper').style.display = 'none';
-                
-                if (count > 0) {
-                    resultsCount.textContent = count;
-                    resultsInfo.style.display = 'block';
-                    noResultsMessage.style.display = 'none';
-                } else {
-                    resultsInfo.style.display = 'none';
-                    noResultsMessage.style.display = 'block';
-                }
-            }
-            
-            searchInput.addEventListener('input', performSearch);
-        }
-
         // Back to Top
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1678,22 +752,244 @@
             else btn.classList.remove('visible');
         });
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            paginateThoughts();
-            setupSearch();
-            
-            // Init Favorites State
-            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            document.querySelectorAll('.thought-card').forEach(card => {
-                const id = parseInt(card.id.replace('thought-', ''));
-                const btn = card.querySelector('.favorite-btn');
-                if (favorites.some(item => item.id === id && item.type === 'thought')) {
-                    btn.classList.add("favorited");
+        // Firebase & Page Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            // Firebase Config (Using the keys provided in your original file)
+            const firebaseConfig = {
+                apiKey: "AIzaSyBS2bmHfbwGkYitxGQKKzzsX9wLgj0i8_Q",
+                authDomain: "question-755b8.firebaseapp.com",
+                databaseURL: "https://question-755b8-default-rtdb.firebaseio.com",
+                projectId: "question-755b8",
+                storageBucket: "question-755b8.appspot.com",
+                messagingSenderId: "204517132715",
+                appId: "1:204517132715:web:3d1619613e820948442aee",
+                measurementId: "G-NH9D1PJ6GM"
+            };
+
+            let db;
+            try {
+                const app = firebase.initializeApp(firebaseConfig);
+                db = firebase.database();
+                console.log("Firebase Initialized");
+            } catch (error) {
+                console.error("Firebase Error:", error);
+                showAlert("خطأ في الاتصال بالخادم", "error");
+            }
+
+            // Elements
+            const questionForm = document.getElementById('questionForm');
+            const showNameToggle = document.getElementById('showName');
+            const nameField = document.getElementById('nameField');
+            const submitBtn = document.getElementById('submitBtn');
+            const questionsList = document.getElementById('questionsList');
+            const paginationContainer = document.getElementById('pagination-container');
+            const paginationInfo = document.getElementById('paginationInfo');
+            const searchInput = document.getElementById('globalSearch');
+            const noResultsMessage = document.getElementById('noResultsMessage');
+
+            // State
+            let allQuestions = [];
+            let filteredQuestions = [];
+            const questionsPerPage = 10;
+            let currentPage = 1;
+
+            // Toggle Name Field
+            showNameToggle.addEventListener('change', function() {
+                nameField.style.display = this.checked ? 'block' : 'none';
+            });
+
+            // Submit Question
+            questionForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const qText = document.getElementById('question').value.trim();
+                const qName = showNameToggle.checked ? document.getElementById('name').value.trim() : '';
+
+                if (!qText) {
+                    showAlert("الرجاء إدخال نص السؤال", "error");
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'جاري الإرسال...';
+
+                try {
+                    await db.ref('questions').push().set({
+                        question: qText,
+                        name: qName,
+                        showName: showNameToggle.checked,
+                        answer: '',
+                        timestamp: firebase.database.ServerValue.TIMESTAMP,
+                        approved: false
+                    });
+                    showAlert("تم إرسال السؤال بنجاح، وسيظهر بعد الموافقة عليه", "success");
+                    questionForm.reset();
+                } catch (error) {
+                    console.error(error);
+                    showAlert("فشل في إرسال السؤال", "error");
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'إرسال السؤال';
                 }
             });
+
+            // Load Questions
+            function loadQuestions() {
+                if (!db) return;
+                
+                db.ref('questions').orderByChild('approved').equalTo(true).on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    if (!data) {
+                        allQuestions = [];
+                        filteredQuestions = [];
+                        displayQuestions();
+                        return;
+                    }
+
+                    allQuestions = Object.keys(data).map(key => ({
+                        id: key,
+                        ...data[key]
+                    })).sort((a, b) => b.timestamp - a.timestamp);
+
+                    // Filter based on search input if any
+                    performSearch();
+                });
+            }
+
+            // Search Logic
+            function performSearch() {
+                const term = searchInput.value.trim().toLowerCase();
+                if (!term) {
+                    filteredQuestions = [...allQuestions];
+                } else {
+                    filteredQuestions = allQuestions.filter(q => 
+                        q.question.toLowerCase().includes(term) || 
+                        (q.answer && q.answer.toLowerCase().includes(term))
+                    );
+                }
+                
+                currentPage = 1;
+                displayQuestions();
+                
+                if (filteredQuestions.length === 0 && term !== '') {
+                    noResultsMessage.style.display = 'block';
+                    questionsList.style.display = 'none';
+                } else {
+                    noResultsMessage.style.display = 'none';
+                    questionsList.style.display = 'flex';
+                }
+            }
+
+            searchInput.addEventListener('input', performSearch);
+
+            // Display Logic
+            function displayQuestions() {
+                questionsList.innerHTML = '';
+                
+                if (filteredQuestions.length === 0) {
+                    if (searchInput.value.trim() === '') {
+                        questionsList.innerHTML = '<p style="text-align:center; padding:20px;">لا توجد أسئلة لعرضها حالياً.</p>';
+                    }
+                    paginationContainer.innerHTML = '';
+                    paginationInfo.textContent = '';
+                    return;
+                }
+
+                const totalPages = Math.ceil(filteredQuestions.length / questionsPerPage);
+                const start = (currentPage - 1) * questionsPerPage;
+                const end = start + questionsPerPage;
+                const pageQuestions = filteredQuestions.slice(start, end);
+
+                pageQuestions.forEach(q => {
+                    const card = document.createElement('div');
+                    card.className = 'question-card';
+                    
+                    const nameDisplay = (q.showName && q.name) ? q.name : 'مجهول';
+                    const dateDisplay = new Date(q.timestamp).toLocaleDateString('ar-SA');
+
+                    let html = `
+                        <div class="q-header">
+                            <span class="q-name"><i class="fas fa-user-circle"></i> ${nameDisplay}</span>
+                            <span class="q-date"><i class="far fa-clock"></i> ${dateDisplay}</span>
+                        </div>
+                        <div class="q-text">${q.question.replace(/\n/g, '<br>')}</div>
+                    `;
+
+                    if (q.answer) {
+                        html += `
+                            <div class="answer-box">
+                                <span class="answer-label">الإجابة</span>
+                                <div class="answer-text">${q.answer.replace(/\n/g, '<br>')}</div>
+                            </div>
+                        `;
+                    }
+
+                    card.innerHTML = html;
+                    questionsList.appendChild(card);
+                });
+
+                paginationInfo.textContent = `الصفحة ${currentPage} من ${totalPages}`;
+                setupPagination(totalPages);
+            }
+
+            // Pagination UI
+            function setupPagination(totalPages) {
+                paginationContainer.innerHTML = '';
+                
+                if (totalPages <= 1) return;
+
+                // Prev
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'page-btn';
+                prevBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                prevBtn.disabled = currentPage === 1;
+                prevBtn.onclick = () => { currentPage--; displayQuestions(); window.scrollTo({top: 400, behavior:'smooth'}); };
+                paginationContainer.appendChild(prevBtn);
+
+                // Numbers
+                // Simple logic: show all or max 5 pages logic could be added here.
+                // For simplicity showing buttons around current page
+                for (let i = 1; i <= totalPages; i++) {
+                    // Logic to show limited pages if too many
+                    if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                        const btn = document.createElement('button');
+                        btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                        btn.textContent = i;
+                        btn.onclick = () => { currentPage = i; displayQuestions(); window.scrollTo({top: 400, behavior:'smooth'}); };
+                        paginationContainer.appendChild(btn);
+                    } else if (i === currentPage - 2 || i === currentPage + 2) {
+                        const span = document.createElement('span');
+                        span.textContent = '...';
+                        span.style.padding = '0 5px';
+                        paginationContainer.appendChild(span);
+                    }
+                }
+
+                // Next
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'page-btn';
+                nextBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                nextBtn.disabled = currentPage === totalPages;
+                nextBtn.onclick = () => { currentPage++; displayQuestions(); window.scrollTo({top: 400, behavior:'smooth'}); };
+                paginationContainer.appendChild(nextBtn);
+            }
+
+            // Alert System
+            function showAlert(msg, type) {
+                const alertBox = document.getElementById('alertMessage');
+                const overlay = document.getElementById('alertOverlay');
+                alertBox.textContent = msg;
+                alertBox.className = `alert ${type}`;
+                alertBox.style.display = 'block';
+                overlay.style.display = 'block';
+                
+                setTimeout(() => {
+                    alertBox.style.display = 'none';
+                    overlay.style.display = 'none';
+                }, 3000);
+            }
+
+            loadQuestions();
         });
     </script>
 </body>
 </html>
-    
