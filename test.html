@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>المنهج - حسين الخليل</title>
+    <title>البودكاست - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
@@ -253,133 +253,257 @@
             font-weight: bold;
             font-size: 1.2rem;
         }
-
-        /* Manhaj Specific Styles */
-        .intro-card, .conclusion-card {
-            background: var(--surface-color);
-            border-radius: var(--radius-xl);
-            padding: 40px;
-            box-shadow: var(--shadow-sm);
-            text-align: center;
-            margin-bottom: 50px;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-primary);
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-
-        .principles-grid {
+        
+        /* Podcast Grid */
+        .podcasts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
-            margin-bottom: 50px;
+            justify-content: center;
         }
 
-        .principle-card {
+        .podcast-card {
             background: var(--surface-color);
             border-radius: 16px;
-            padding: 25px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(0,0,0,0.03);
-            border-right: 5px solid var(--primary-color);
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .principle-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .principle-card h3 {
-            color: var(--primary-dark);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            font-weight: 800;
-        }
-
-        .principle-card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* Accordion for Examples and FAQs */
-        .accordion-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 50px;
-        }
-
-        details {
-            background: var(--surface-color);
-            border-radius: 16px;
-            box-shadow: var(--shadow-sm);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-
-        details:hover {
-            box-shadow: var(--shadow-md);
-        }
-
-        details[open] {
-            border-color: rgba(94, 44, 165, 0.2);
-        }
-
-        summary {
-            padding: 20px 25px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--primary-dark);
-            cursor: pointer;
-            list-style: none;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
             position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .podcast-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+
+        .podcast-card.active-podcast {
+            border: 2px solid var(--primary-color);
+            background: #fcfaff;
+        }
+
+        .podcast-cover-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .podcast-cover-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .podcast-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .podcast-card h2 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            line-height: 1.4;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .listen-link {
+            background: var(--surface-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            transition: background 0.3s;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+            margin-bottom: 15px;
         }
 
-        summary::-webkit-details-marker { display: none; }
-
-        summary::after {
-            content: '\f078'; /* Chevron Down */
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            color: var(--primary-color);
-            transition: transform 0.3s;
+        .listen-link:hover {
+            background: var(--primary-color);
+            color: white;
         }
 
-        details[open] summary::after {
-            transform: rotate(180deg);
+        .podcast-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 15px;
         }
 
-        details[open] summary {
-            background: rgba(94, 44, 165, 0.05);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        details p {
-            padding: 25px;
-            margin: 0;
+        .action-btn {
+            background: transparent;
+            border: 1px solid #e2e8f0;
             color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .action-btn.active {
+            background: var(--accent-color);
+            color: #422006;
+            border-color: var(--accent-color);
+        }
+
+        /* Podcast Player */
+        .podcast-player {
+            background: linear-gradient(145deg, #ffffff, #f8f5ff);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(94, 44, 165, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .podcast-player::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 6px; height: 100%;
+            background: var(--primary-color);
+        }
+
+        .episode-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .episode-date {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .control-btn {
             background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .control-btn.main-play {
+            width: 65px;
+            height: 65px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(94, 44, 165, 0.3);
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            position: relative;
+            direction: ltr;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            direction: ltr;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+            color: var(--text-secondary);
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100px;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
         }
 
         /* Highlighting */
         .highlight {
             background-color: var(--accent-color);
             color: #422006;
-            padding: 0 3px;
-            border-radius: 3px;
-            font-weight: 500;
+            padding: 0 2px;
+            border-radius: 2px;
         }
 
         /* Social Section */
@@ -418,12 +542,13 @@
 
         .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
         .copy-alert.show { opacity: 1; }
+        
+        #message { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
         @media (max-width: 900px) {
             .hero-text h1 { font-size: 2rem; }
             .hero-section { padding: 100px 20px 80px; }
             .share-fixed-btn { display: none; }
-            .principles-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -432,6 +557,7 @@
             .social-grid { gap: 5px; flex-wrap: nowrap; justify-content: center; }
             .social-btn { width: 48px; height: 48px; flex-shrink: 0; }
             .social-btn img { width: 24px; height: 24px; }
+            .podcasts-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
         }
     </style>
 </head>
@@ -454,11 +580,11 @@
             <a href="khawatir.html">خواطر</a>
             <a href="videos.html">الفيديوهات</a>
             <a href="history.html">التاريخ</a>
-            <a href="podcast.html">البودكاست</a>
+            <a href="podcast.html" style="background: rgba(255,255,255,0.2);">البودكاست</a>
             <a href="ask.html">الأسئلة</a>
             <a href="hewar.html">حوارات</a>
             <a href="inq.html">تساؤلات</a>
-            <a href="manhaj.html" style="background: rgba(255,255,255,0.2);">المنهج</a>
+            <a href="manhaj.html">المنهج</a>
             <a href="favorites.html">المفضلة</a>
             <a href="support.html">دعم المحتوى</a>
             <a href="about.html">من نحن</a>
@@ -475,19 +601,20 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>منهج فهم القرآن</h1>
-                <p>إطار منهجي مباشر وواضح لقراءة القرآن من داخله</p>
+                <h1>البودكاست</h1>
+                <p>استمع إلى حلقات بودكاست "فكر من جديد" التي تناقش مواضيع فكرية معاصرة</p>
             </div>
             
             <!-- Universal Search inside Hero -->
             <div class="universal-search">
                 <i class="fas fa-search search-icon-placeholder"></i>
-                <input type="text" id="globalSearch" placeholder="ابحث في أساسيات المنهج..." />
+                <input type="text" id="globalSearch" placeholder="ابحث عن بودكاست..." />
+                <div class="search-results" id="searchResults"></div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Wrapper -->
+    <!-- Main Content -->
     <div class="container main-wrapper">
         
         <div id="searchResultsInfo" class="search-results-info">
@@ -499,112 +626,151 @@
             لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
         </div>
 
-        <div id="manhajContent">
-            <!-- Introduction -->
-            <div class="intro-card searchable-item">
-                <h2 style="color:var(--primary-color); margin-bottom:15px;">مقدمة</h2>
-                <p>الهدف من هذا المنهج هو تقديم إطار واضح يسمح بقراءة القرآن من داخله، بعيدًا عن سلطة الروايات والتقليد، ومن دون تبعية لمذهب أو مرجعية بشرية. المرجعية الأولى والأخيرة هي النص القرآني؛ وما عداه يُعامل كمادة تاريخية أو لغوية لا كسُلطة فوق النص ولا في موازاته أو جنبًا إلى جنب معه.</p>
+        <!-- Podcast Player -->
+        <div class="podcast-player">
+            <div class="episode-title" id="current-title">اختر حلقة للاستماع</div>
+            <div class="episode-date" id="current-date">ستظهر معلومات الحلقة هنا</div>
+            
+            <div class="player-controls">
+                <button class="control-btn" onclick="skipBackward()" title="تراجع 15 ثانية"><i class="fas fa-undo"></i></button>
+                <button class="control-btn main-play" onclick="togglePlay()" id="playBtn"><i class="fas fa-play"></i></button>
+                <button class="control-btn" onclick="skipForward()" title="تقدم 15 ثانية"><i class="fas fa-redo"></i></button>
             </div>
+            
+            <div class="progress-container" onclick="setProgress(event)">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="time-info">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+            
+            <div class="volume-control">
+                <i class="fas fa-volume-down"></i>
+                <input type="range" min="0" max="100" value="80" id="volumeSlider" oninput="changeVolume()">
+                <i class="fas fa-volume-up"></i>
+            </div>
+        </div>
 
-            <!-- Principles -->
-            <div class="section-title"><h2>أساسيات المنهج</h2></div>
-            <div class="principles-grid">
-                <div class="principle-card searchable-item">
-                    <h3>1) مركزية النص القرآني</h3>
-                    <p>الفهم يبدأ من الآية نفسها ومن مجموع النص، لا من الشروح اللاحقة. لا تُقدّم الروايات أو التفاسير على القرآن، وأي فهم يصطدم بظاهر النص أو بمبادئه الكبرى يُعاد تقييمه.</p>
+        <!-- Podcast Grid -->
+        <div class="podcasts-grid" id="podcastsGrid">
+            
+            <!-- Ep 56 -->
+            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-24/404459013-44100-2-2fe8fe2931b35.m4a" id="podcast-56">
+                <div class="podcast-cover-container">
+                    <img src="images/pod.jpg" alt="Cover">
                 </div>
-                <div class="principle-card searchable-item">
-                    <h3>2) وحدة المفهوم القرآني</h3>
-                    <p>لا نستخلص المعنى من آية وحيدة، بل من مجموع استعمال الكلمة في القرآن: جذرها، اشتقاقاتها، سياقاتها ومواضع ورودها والمجال الدلالي الذي تتشكل منه.</p>
-                </div>
-                <div class="principle-card searchable-item">
-                    <h3>3) السياق البنيوي لا السياق الخارجي</h3>
-                    <p>القرآن يفسّر بعضه بعضًا داخل بنيته النصية: ترتيب الأفكار، العلاقات الحجاجية، والانتقال الدلالي داخل السورة. ما يرد من روايات يُعامل كمرجع تاريخي وليس كأداة تفسيرية ملزمة.</p>
-                </div>
-                <div class="principle-card searchable-item">
-                    <h3>4) الدقة اللغوية غير التراثية</h3>
-                    <p>نعتمد المعنى العربي الأصلي للكلمات قبل أن تتحملها المدارس الاصطلاحية اللاحقة. نفرّق بين المعنى اللغوي والأثر المذهبي.</p>
-                </div>
-                <div class="principle-card searchable-item">
-                    <h3>5) القراءة الأخلاقية للنص</h3>
-                    <p>الالتزام بمبادئ كبرى متكررة في القرآن: العدل، الرحمة، عدم الظلم، والمسؤولية الفردية. أي فهم ينتج عنه ظلم أو تبرير للإكراه يُعد فهمًا ناقصًا.</p>
-                </div>
-                <div class="principle-card searchable-item">
-                    <h3>6) نزع القداسة عن البشر</h3>
-                    <p>لا عصمة إلّا للوحي نفسه. الفقهاء جزء من التاريخ الفكري، يمكن الأخذ منهم أو الرد عليهم، لكن لا تُسلم لهم السلطة على النص، وكل ما يقولون، إنما هو اجتهادهم قابل للأخذ والرد ولا يمكن أن يمنح صفة القداسة ولا الحقيقة المطلقة.</p>
-                </div>
-                <div class="principle-card searchable-item">
-                    <h3>7) بناء الاستنتاج على منطق محكم</h3>
-                    <p>الاستنتاج يقوم على دليل لغوي، اتساق نصي، والالتزام بالمبادئ الأخلاقية. إذا اختل عنصر، يجب مراجعة الاستنتاج.</p>
-                </div>
-                <div class="principle-card searchable-item">
-                    <h3>8) ترتيل القرآن</h3>
-                    <p>الترتيل هنا ليس القراءة الصوتية، بل جمعُ الآيات التي تتناول الموضوع الواحد وترتيبُها في بنية متكاملة لفهم مراد النص. فلا تُفهم المسألة القرآنية من آية منفردة، بل من خلال ضمّ جميع الآيات المتعلقة بها وترتيبها وتنظيمها وفق سياقها ودلالاتها وجذرها اللغوي.</p>
-                </div>
-                <div class="principle-card searchable-item">
-                    <h3>9) قاعدة الارتكاز</h3>
-                    <p>القرآن هو المصدر الوحيد للتشريع الديني، ولا يُقدَّم عليه أي نص أو رواية أو تراث. هو القاعدة والميزان والمعيار الذي تُقاس به المفاهيم؛ فما وافقه قُبل، وما خالفه رُدّ.</p>
-                </div>
-                <div class="principle-card searchable-item">
-                    <h3>10) القراءة العقلانية</h3>
-                    <p>عند تدبر القرآن، ينبغي الدخول إلى النص من دون حمولات مسبقة أو مفاهيم ورثتها عبر المذاهب والفتاوى. لا تبحث عمّا لقّنوك إياه داخل القرآن؛ بل اقرأه كأنك تقرأه للمرة الأولى، بعقل مفتوح وقلب خالٍ من التوجّهات المسبقة.</p>
-                </div>
-                <div class="principle-card searchable-item">
-                    <h3>11) الإسقاطات</h3>
-                    <p>عند التعامل مع أي مفهوم موروث، اجعل القرآن هو المرجعية التي تُسقط عليها الفكرة، لا العكس. فإن وُجد لها أصل قرآني فهي مقبولة، وإن لم يوجد فهي إضافة بشرية لا حجّية لها.</p>
-                </div>
-                <div class="principle-card searchable-item">
-                    <h3>12) لا تُحمّل القرآن ما لا يقوله</h3>
-                    <p>عند تحليل أي قضية دينية، لا يجوز أن نأتي بمفاهيم أو أحكام من خارج القرآن ثم نبحث لها عن أصل داخله أو نحاول إسقاط القرآن عليها. المنهج الصحيح هو أن يبدأ الباحث من داخل القرآن لا من خارجه.</p>
+                <h2>هل الصلاة فرض على المسلم؟</h2>
+                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
+                <div class="podcast-actions">
+                    <button class="action-btn" onclick="sharePodcast('podcast-56')"><i class="fas fa-share-alt"></i></button>
+                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل الصلاة فرض على المسلم؟', 'podcast-56')"><i class="far fa-star"></i></button>
                 </div>
             </div>
 
-            <!-- Examples -->
-            <div class="section-title"><h2>أمثلة تطبيقية مختصرة</h2></div>
-            <div class="accordion-wrapper">
-                <details class="searchable-item">
-                    <summary>الذكر</summary>
-                    <p>يوضع جذر <code>ذ-ك-ر</code> موضع الدراسة، ويتم تتبع مواضع ورود الكلمة لفهم حقلها الدلالي: التذكير، البيان، التبليغ والوعي—لا مجرد نص محفوظ.</p>
-                </details>
-                <details class="searchable-item">
-                    <summary>الشيطان</summary>
-                    <p>يُنظر إليه في سياق القرآن كمفهوم يشمل النزعات والإغواء والسلوك الذي يصدّ عن الهدى، وليس كمجرد شخصية متجسدة بالضرورة.</p>
-                </details>
-                <details class="searchable-item">
-                    <summary>الدين</summary>
-                    <p>يُفهم كمنظومة قيم وسلوك لا كمؤسسة كهنوتية أو مجرد طقوس، وفق ما يظهر من استعمال الكلمة النصي، علينا أن نعي جيدًا أن الإيمان مسألة فردية.</p>
-                </details>
+            <!-- Ep 55 -->
+            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-12/403797674-44100-2-f53f8ef599752.m4a" id="podcast-55">
+                <div class="podcast-cover-container">
+                    <img src="images/pod.jpg" alt="Cover">
+                </div>
+                <h2>هل الله خلق الظلم؟</h2>
+                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
+                <div class="podcast-actions">
+                    <button class="action-btn" onclick="sharePodcast('podcast-55')"><i class="fas fa-share-alt"></i></button>
+                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل الله خلق الظلم؟', 'podcast-55')"><i class="far fa-star"></i></button>
+                </div>
             </div>
 
-            <!-- FAQs -->
-            <div class="section-title"><h2>اعتراضات وأسئلة شائعة</h2></div>
-            <div class="accordion-wrapper">
-                <details class="searchable-item">
-                    <summary>هل يلغي هذا التراث؟</summary>
-                    <p>لا؛ التراث يبقى مادة بشرية تُستخدم أو تُقوّم، لكن لا تُمنح سلطة فوق النص القرآني.</p>
-                </details>
-                <details class="searchable-item">
-                    <summary>من يضمن صحة الفهم؟</summary>
-                    <p>لا يوجد ضامن بشري. الضمان منهجي: وضوح خطوات التحليل يجعل النتيجة قابلة للنقد والمراجعة.</p>
-                </details>
-                <details class="searchable-item">
-                    <summary>لماذا لا نعتمد الروايات؟</summary>
-                    <p>لأن النص (القرآن) لم يطلب مرجعًا فوقه، ولأن الروايات تأتي بعد النص بزمن وتختلف في دقتها ودلالتها.</p>
-                </details>
-                <details class="searchable-item">
-                    <summary>هل المنهج مغلق؟</summary>
-                    <p>المنهج قابلاً للمراجعة، لكنه يستند إلى أسس ثابتة: النص، اللغة، الأخلاق، والمنطق.</p>
-                </details>
-                <details class="searchable-item">
-                    <summary>هل نحن ملزمون بكتب الروايات واجماع الفقهاء؟</summary>
-                    <p>لا، نحن ملزمون بالوحي الوحيد فقط، (القرآن)، وكل ما هو دون القرآن من كتب روايات وفقه واجماع واتفاق، إنما هي اجتهادات بشرية لا قداسة لها.</p>
-                </details>
+            <!-- Ep 54 -->
+            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-9/403624728-44100-2-821a645b1d4e1.m4a" id="podcast-54">
+                <div class="podcast-cover-container">
+                    <img src="images/pod.jpg" alt="Cover">
+                </div>
+                <h2>الصلاة كما أرادها الله</h2>
+                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
+                <div class="podcast-actions">
+                    <button class="action-btn" onclick="sharePodcast('podcast-54')"><i class="fas fa-share-alt"></i></button>
+                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الصلاة كما أرادها الله', 'podcast-54')"><i class="far fa-star"></i></button>
+                </div>
+            </div>
+            
+             <!-- Ep 53 -->
+            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-29/375941594-44100-2-fb93811371068.m4a" id="podcast-53">
+                <div class="podcast-cover-container">
+                    <img src="images/pod.jpg" alt="Cover">
+                </div>
+                <h2>نظرية الحلوى المكشوفة</h2>
+                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
+                <div class="podcast-actions">
+                    <button class="action-btn" onclick="sharePodcast('podcast-53')"><i class="fas fa-share-alt"></i></button>
+                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'نظرية الحلوى المكشوفة', 'podcast-53')"><i class="far fa-star"></i></button>
+                </div>
+            </div>
+            
+            <!-- Ep 52 -->
+            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-29/375941252-44100-2-92ba1fdab4323.m4a" id="podcast-52">
+                <div class="podcast-cover-container">
+                    <img src="images/pod.jpg" alt="Cover">
+                </div>
+                <h2>مصير الهندوسي أو البوذي؟</h2>
+                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
+                <div class="podcast-actions">
+                    <button class="action-btn" onclick="sharePodcast('podcast-52')"><i class="fas fa-share-alt"></i></button>
+                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'مصير الهندوسي أو البوذي؟', 'podcast-52')"><i class="far fa-star"></i></button>
+                </div>
             </div>
 
-            <!-- Conclusion -->
-            <div class="conclusion-card searchable-item">
-                <h2 style="color:var(--primary-color); margin-bottom:15px;">خاتمة</h2>
-                <p>المنهج هنا أداة لتحرير القراءة من القيود غير النصية؛ ليس مذهبًا جديدًا، بل إطارًا عمليًا لقراءةٍ منضبطة وقابلة للنقد. الهدف: الوصول إلى فهم أقرب للنص عبر خطوات واضحة ومفتوحة للمراجعة.</p>
+            <!-- Ep 51 -->
+            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-16/374554834-44100-2-a7fc3525b18a1.m4a" id="podcast-51">
+                <div class="podcast-cover-container">
+                    <img src="images/pod.jpg" alt="Cover">
+                </div>
+                <h2>لماذا أخلاق الموروث سيئة؟</h2>
+                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
+                <div class="podcast-actions">
+                    <button class="action-btn" onclick="sharePodcast('podcast-51')"><i class="fas fa-share-alt"></i></button>
+                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'لماذا أخلاق الموروث سيئة؟', 'podcast-51')"><i class="far fa-star"></i></button>
+                </div>
+            </div>
+            
+            <!-- Ep 50 -->
+            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-12/374097843-44100-2-45524aa7b6248.m4a" id="podcast-50">
+                <div class="podcast-cover-container">
+                    <img src="images/pod.jpg" alt="Cover">
+                </div>
+                <h2>هل ذكر الله عدد ركعات الصلاة؟</h2>
+                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
+                <div class="podcast-actions">
+                    <button class="action-btn" onclick="sharePodcast('podcast-50')"><i class="fas fa-share-alt"></i></button>
+                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل ذكر الله عدد ركعات الصلاة؟', 'podcast-50')"><i class="far fa-star"></i></button>
+                </div>
+            </div>
+
+            <!-- Ep 49 -->
+            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685968-44100-2-d9b6b161a46e4.m4a" id="podcast-49">
+                <div class="podcast-cover-container">
+                    <img src="images/pod.jpg" alt="Cover">
+                </div>
+                <h2>القراءات السبعة للقرآن</h2>
+                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
+                <div class="podcast-actions">
+                    <button class="action-btn" onclick="sharePodcast('podcast-49')"><i class="fas fa-share-alt"></i></button>
+                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'القراءات السبعة للقرآن', 'podcast-49')"><i class="far fa-star"></i></button>
+                </div>
+            </div>
+            
+            <!-- Ep 48 -->
+             <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685523-44100-2-e01b42113f1b9.m4a" id="podcast-48">
+                <div class="podcast-cover-container">
+                    <img src="images/pod.jpg" alt="Cover">
+                </div>
+                <h2>القضاء والقدر</h2>
+                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
+                <div class="podcast-actions">
+                    <button class="action-btn" onclick="sharePodcast('podcast-48')"><i class="fas fa-share-alt"></i></button>
+                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'القضاء والقدر', 'podcast-48')"><i class="far fa-star"></i></button>
+                </div>
             </div>
         </div>
 
@@ -646,6 +812,7 @@
     </div>
 
     <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
+    <div id="message"></div>
 
     <footer>
         <div class="container">
@@ -662,7 +829,7 @@
     </footer>
 
     <script>
-        // Toggle Mobile Menu
+        // Mobile Menu
         function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
@@ -672,9 +839,9 @@
 
         // Share
         function handleMobileShare() {
-            const link = "https://www.husseinalkhalil.com/manhaj.html";
+            const link = "https://www.husseinalkhalil.com/podcast.html";
             if (navigator.share) {
-                navigator.share({ title: 'منهج فهم القرآن - حسين الخليل', url: link }).catch(console.error);
+                navigator.share({ title: 'بودكاست حسين الخليل', url: link }).catch(console.error);
             } else {
                 navigator.clipboard.writeText(link).then(() => {
                     const alert = document.getElementById('copyAlert');
@@ -691,19 +858,167 @@
             }
         });
 
-        // Back to Top
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Single Podcast Share
+        function sharePodcast(id) {
+            const link = window.location.origin + window.location.pathname + "?podcast=" + id;
+            if (navigator.share) {
+                navigator.share({ title: 'بودكاست - حسين الخليل', url: link }).catch(console.error);
+            } else {
+                const alert = document.getElementById('copyAlert');
+                navigator.clipboard.writeText(link).then(() => {
+                    alert.textContent = 'تم نسخ رابط الحلقة ✅';
+                    alert.classList.add('show');
+                    setTimeout(() => {
+                         alert.classList.remove('show');
+                         alert.textContent = 'تم نسخ الرابط بنجاح ✅';
+                    }, 2000);
+                });
+            }
         }
-        window.addEventListener('scroll', () => {
-            const btn = document.querySelector('.back-to-top');
-            if (window.scrollY > 300) btn.classList.add('visible');
-            else btn.classList.remove('visible');
+
+        // Favorites
+        function toggleFavorite(button, title, id) {
+            let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            // Check if exists based on ID and Type
+            const existingIndex = favorites.findIndex(item => item.id === id && item.type === 'podcast');
+            
+            if (existingIndex === -1) {
+                // Add
+                favorites.push({
+                    id: id,
+                    title: title,
+                    type: 'podcast',
+                    // We could save audio url here if needed for the favorites page
+                });
+                button.classList.add("active");
+                showMessage("تمت الإضافة إلى المفضلة");
+            } else {
+                // Remove
+                favorites.splice(existingIndex, 1);
+                button.classList.remove("active");
+                showMessage("تمت الإزالة من المفضلة");
+            }
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+        }
+
+        function showMessage(text) {
+            const message = document.getElementById("message");
+            message.textContent = text;
+            message.style.display = "block";
+            setTimeout(() => message.style.display = "none", 2000);
+        }
+
+        // Audio Player Logic
+        let currentAudio = null;
+        let isPlaying = false;
+
+        // Listen click handler
+        document.querySelectorAll('.listen-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Reset styles
+                document.querySelectorAll('.podcast-card').forEach(c => c.classList.remove('active-podcast'));
+                const card = this.closest('.podcast-card');
+                card.classList.add('active-podcast');
+
+                // Update Player Info
+                const title = card.querySelector('h2').textContent;
+                document.getElementById('current-title').textContent = title;
+                document.getElementById('current-date').textContent = 'جاري التشغيل...';
+
+                // Setup Audio
+                const audioSrc = card.getAttribute('data-audio');
+                setupAudio(audioSrc);
+                
+                // Scroll to player
+                document.querySelector('.podcast-player').scrollIntoView({ behavior: 'smooth' });
+            });
         });
 
-        // Search & Highlight Logic
+        function setupAudio(src) {
+            if (currentAudio) {
+                currentAudio.pause();
+            }
+            currentAudio = new Audio(src);
+            
+            currentAudio.addEventListener('timeupdate', updateProgress);
+            currentAudio.addEventListener('loadedmetadata', () => {
+                document.getElementById('duration').textContent = formatTime(currentAudio.duration);
+            });
+            currentAudio.addEventListener('ended', () => {
+                isPlaying = false;
+                document.querySelector('.main-play i').className = 'fas fa-play';
+            });
+
+            // Set volume
+            currentAudio.volume = document.getElementById('volumeSlider').value / 100;
+            
+            togglePlay();
+        }
+
+        function togglePlay() {
+            if (!currentAudio) return;
+            const btnIcon = document.querySelector('.main-play i');
+            
+            if (isPlaying) {
+                currentAudio.pause();
+                btnIcon.className = 'fas fa-play';
+                isPlaying = false;
+            } else {
+                currentAudio.play();
+                btnIcon.className = 'fas fa-pause';
+                isPlaying = true;
+            }
+        }
+
+        function skipForward() {
+            if (currentAudio) currentAudio.currentTime += 15;
+        }
+
+        function skipBackward() {
+            if (currentAudio) currentAudio.currentTime -= 15;
+        }
+
+        function updateProgress() {
+            if (!currentAudio) return;
+            const progressBar = document.getElementById('progressBar');
+            const current = currentAudio.currentTime;
+            const duration = currentAudio.duration;
+            const percent = (current / duration) * 100;
+            
+            progressBar.style.width = `${percent}%`;
+            document.getElementById('currentTime').textContent = formatTime(current);
+        }
+
+        function setProgress(e) {
+            if (!currentAudio) return;
+            const width = e.currentTarget.clientWidth;
+            const clickX = e.offsetX; // Use offsetX for LTR calculation inside element
+            const duration = currentAudio.duration;
+            
+            // Since we are in RTL but progress is LTR visual, calculation might need care.
+            // However, offsetX usually relates to the element start.
+            // Let's verify direction. CSS has direction: ltr on progress container.
+            currentAudio.currentTime = (clickX / width) * duration;
+        }
+
+        function changeVolume() {
+            const slider = document.getElementById('volumeSlider');
+            if (currentAudio) {
+                currentAudio.volume = slider.value / 100;
+            }
+        }
+
+        function formatTime(seconds) {
+            if (!seconds || isNaN(seconds)) return "0:00";
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        // Search Logic
         function normalizeArabicText(text) {
-            if(!text) return "";
             return text
                 .replace(/[\u064B-\u065F\u0670]/g, "")
                 .replace(/[أإآاءئؤ]/g, "ا")
@@ -715,7 +1030,6 @@
         function getSafeRegex(searchTerm) {
             let regexStr = '';
             const cleanTerm = normalizeArabicText(searchTerm);
-            
             for (let i = 0; i < cleanTerm.length; i++) {
                 const char = cleanTerm[i];
                 if (char === 'ا') regexStr += '[اأإآ]';
@@ -724,91 +1038,59 @@
                 else if (char === 'و') regexStr += '[وؤ]';
                 else if (char.match(/[a-zA-Z]/)) regexStr += char;
                 else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                
                 regexStr += '[\\u064B-\\u065F\\u0670]*'; 
             }
             return new RegExp(regexStr, 'gi');
         }
 
-        // Store original content
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.searchable-item').forEach(item => {
-                const elementsToSave = item.querySelectorAll('h2, h3, p, summary');
-                elementsToSave.forEach(el => {
-                    if(!el.dataset.original) el.dataset.original = el.innerHTML;
-                });
-            });
-        });
-
         function setupSearch() {
             const searchInput = document.getElementById('globalSearch');
-            const items = document.querySelectorAll('.searchable-item');
+            const grid = document.getElementById('podcastsGrid');
+            const cards = document.querySelectorAll('.podcast-card');
             const noResults = document.getElementById('noResultsMessage');
             const resultsInfo = document.getElementById('searchResultsInfo');
             const resultsCount = document.getElementById('resultsCount');
             
+            // Save original content
+            cards.forEach(card => {
+                const h2 = card.querySelector('h2');
+                h2.dataset.original = h2.innerHTML;
+            });
+
             searchInput.addEventListener('input', function() {
                 const term = this.value.trim();
                 const normalizedTerm = normalizeArabicText(term);
                 const regex = term ? getSafeRegex(term) : null;
                 let count = 0;
-                
-                // Clear state
-                noResults.style.display = 'none';
-                
-                if (!term) {
-                    items.forEach(item => {
-                        item.style.display = 'flex'; // Default for principle card
-                        if(item.tagName === 'DETAILS') {
-                            item.style.display = 'block';
-                            item.open = false;
-                        } else if (item.classList.contains('intro-card') || item.classList.contains('conclusion-card')) {
-                            item.style.display = 'block';
-                        }
 
-                        // Restore original content
-                        item.querySelectorAll('h2, h3, p, summary').forEach(el => {
-                            if(el.dataset.original) el.innerHTML = el.dataset.original;
-                        });
+                if (!term) {
+                    cards.forEach(c => {
+                        c.style.display = 'flex';
+                        c.querySelector('h2').innerHTML = c.querySelector('h2').dataset.original;
                     });
                     resultsInfo.style.display = 'none';
+                    noResults.style.display = 'none';
                     return;
                 }
 
-                items.forEach(item => {
-                    let hasMatch = false;
-                    const elementsToCheck = item.querySelectorAll('h2, h3, p, summary');
+                cards.forEach(card => {
+                    const h2 = card.querySelector('h2');
+                    const titleText = h2.textContent;
                     
-                    elementsToCheck.forEach(el => {
-                        // Restore first to clean previous highlights
-                        if(el.dataset.original) el.innerHTML = el.dataset.original;
-                        
-                        const text = el.textContent;
-                        if (normalizeArabicText(text).includes(normalizedTerm)) {
-                            hasMatch = true;
-                            // Highlight
-                            el.innerHTML = el.dataset.original.replace(regex, match => `<span class="highlight">${match}</span>`);
-                        }
-                    });
-
-                    if (hasMatch) {
-                        if(item.tagName === 'DETAILS') {
-                            item.style.display = 'block';
-                            item.open = true;
-                        } else if (item.classList.contains('principle-card')) {
-                            item.style.display = 'flex';
-                        } else {
-                            item.style.display = 'block';
-                        }
+                    if (normalizeArabicText(titleText).includes(normalizedTerm)) {
+                        card.style.display = 'flex';
                         count++;
+                        // Highlight
+                        h2.innerHTML = h2.dataset.original.replace(regex, match => `<span class="highlight">${match}</span>`);
                     } else {
-                        item.style.display = 'none';
+                        card.style.display = 'none';
                     }
                 });
                 
                 if (count > 0) {
                     resultsCount.textContent = count;
                     resultsInfo.style.display = 'block';
+                    noResults.style.display = 'none';
                 } else {
                     resultsInfo.style.display = 'none';
                     noResults.style.display = 'block';
@@ -816,7 +1098,48 @@
             });
         }
 
-        setupSearch();
+        // Back to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSearch();
+            
+            // Init Favorites
+            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                // We need to extract ID from onclick or dataset. 
+                // In HTML above, onclick is: toggleFavorite(this, 'Title', 'ID')
+                // Let's extract ID from that.
+                const match = btn.getAttribute('onclick').match(/'([^']+)'\)$/); // Get last argument
+                if (match) {
+                    const id = match[1];
+                    if (favorites.some(f => f.id === id && f.type === 'podcast')) {
+                        btn.classList.add("active");
+                    }
+                }
+            });
+
+            // URL Param for single podcast
+            const params = new URLSearchParams(window.location.search);
+            const podcastId = params.get("podcast");
+            if (podcastId) {
+                const target = document.getElementById(podcastId);
+                if(target) {
+                    document.querySelectorAll('.podcast-card').forEach(c => {
+                        if(c.id !== podcastId) c.style.display = 'none';
+                    });
+                    // Show a "Show all" button logic here if needed, but user asked for standard behavior
+                }
+            }
+        });
     </script>
 </body>
 </html>
