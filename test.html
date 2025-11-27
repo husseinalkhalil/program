@@ -145,7 +145,14 @@
 
         /* Mobile Nav */
         @media (max-width: 1200px) { /* تغيير نقطة الانهيار لاستيعاب الروابط الكثيرة */
-            .hamburger { display: block; }
+            .hamburger { 
+                display: block; 
+                order: 1; /* يظهر زر الهمبرغر أولاً (يمين الشاشة في RTL) */
+            }
+            .logo-container {
+                order: 2; /* يظهر الشعار ثانياً (يسار الشاشة في RTL) */
+            }
+
             .nav-links {
                 position: fixed;
                 top: 60px;
