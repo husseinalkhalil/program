@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Shared Variables & Styles (Matches Index/About) */
+        /* Shared Variables & Styles */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -187,7 +187,7 @@
             margin: 0 auto;
         }
 
-        /* Universal Search (Hero) */
+        /* Search Box (Hero) */
         .universal-search {
             width: 100%;
             max-width: 600px;
@@ -205,6 +205,12 @@
             font-family: 'Tajawal', sans-serif;
             outline: none;
             background: white;
+            transition: all 0.3s;
+        }
+        
+        #globalSearch:focus {
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
         }
 
         .search-icon-placeholder {
@@ -215,34 +221,6 @@
             color: var(--primary-color);
             pointer-events: none;
         }
-
-        .search-results {
-            position: absolute;
-            top: 110%;
-            left: 0;
-            right: 0;
-            background: var(--surface-color);
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            max-height: 400px;
-            overflow-y: auto;
-            z-index: 1000;
-            text-align: right;
-            display: none;
-            color: var(--text-primary);
-        }
-
-        .search-item {
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .search-item:hover { background: rgba(0,0,0,0.03); }
-        .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; }
-        .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
-        .search-item mark { background-color: #fde047; color: #422006; padding: 0 2px; border-radius: 2px; }
-
 
         /* Main Container */
         .container {
@@ -255,109 +233,118 @@
             flex: 1;
         }
 
-        /* In-Page Article Search */
-        .article-search-container {
-            background: var(--surface-color);
-            padding: 20px;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .article-search-box {
-            flex: 1;
-            padding: 12px 20px;
-            border: 2px solid #eee;
-            border-radius: 30px;
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .article-search-box:focus {
-            border-color: var(--primary-color);
-        }
-
+        /* Results Count Info */
         .search-results-info {
-            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .search-results-info span {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
             color: var(--primary-color);
             font-weight: bold;
-            display: none;
-            background: rgba(94, 44, 165, 0.1);
-            padding: 8px 15px;
-            border-radius: 20px;
         }
 
-        /* Articles List */
+        /* Professional Article Cards */
         .article {
             background: var(--surface-color);
-            border-radius: var(--radius-lg);
+            border-radius: 16px;
             padding: 30px;
             margin-bottom: 25px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0,0,0,0.03);
+            border-right: 5px solid var(--primary-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             text-align: right;
-            border-right: 4px solid var(--primary-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .article:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-            border-right-color: var(--accent-color);
+            transform: translateY(-7px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-right-width: 8px;
+        }
+
+        /* Background Icon Decoration */
+        .article::before {
+            content: '\f1ea'; /* FontAwesome Newspaper Icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: -20px;
+            bottom: -20px;
+            font-size: 8rem;
+            color: rgba(94, 44, 165, 0.03);
+            transform: rotate(15deg);
+            pointer-events: none;
+            transition: all 0.4s;
+        }
+
+        .article:hover::before {
+            transform: rotate(0deg) scale(1.1);
+            color: rgba(94, 44, 165, 0.05);
         }
 
         .article h2 {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             margin-top: 0;
+            position: relative;
+            z-index: 1;
         }
 
         .article h2 a {
-            color: var(--primary-color);
+            color: var(--text-primary);
             font-size: 1.3rem;
-            font-weight: 700;
+            font-weight: 800;
             display: block;
+            line-height: 1.4;
         }
 
         .article h2 a:hover {
-            color: var(--primary-dark);
+            color: var(--primary-color);
+        }
+
+        .meta-data {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 1;
         }
 
         .publish-date {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            background: rgba(0,0,0,0.03);
-            padding: 5px 12px;
+            gap: 8px;
+            background: #f8fafc;
+            padding: 6px 14px;
             border-radius: 20px;
-            margin-bottom: 15px;
+            font-weight: 500;
         }
-
-        .article-actions {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 15px;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 15px;
-        }
+        
+        .publish-date i { color: var(--primary-light); }
 
         .article-button {
             background: transparent;
-            border: 2px solid #e2e8f0;
+            border: 1px solid #e2e8f0;
             color: var(--text-secondary);
-            padding: 8px 18px;
+            padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
             font-family: 'Tajawal', sans-serif;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s;
             display: flex;
             align-items: center;
@@ -365,14 +352,18 @@
             font-size: 0.9rem;
         }
 
-        .article-button:hover, .article-button.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
+        .article-button:hover {
+            background: #fef9c3;
+            color: #b45309;
+            border-color: #fde047;
+            transform: scale(1.05);
         }
-        
-        .article-button.active i {
-            color: #ffd700;
+
+        .article-button.active {
+            background: var(--accent-color);
+            color: #422006;
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
         }
 
         /* Pagination */
@@ -384,6 +375,7 @@
             text-align: center;
             margin: 40px auto;
             border: 1px solid rgba(0,0,0,0.05);
+            max-width: 500px;
         }
 
         #pageInfo {
@@ -397,8 +389,8 @@
             background: #f1f5f9;
             color: var(--text-primary);
             border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
+            padding: 10px 20px;
+            border-radius: 12px;
             cursor: pointer;
             margin: 0 5px;
             font-family: 'Tajawal', sans-serif;
@@ -416,12 +408,14 @@
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
+            background: #e2e8f0;
+            color: #94a3b8;
         }
         
         #firstPage { background: rgba(94, 44, 165, 0.1); color: var(--primary-color); }
         #firstPage:hover { background: var(--primary-color); color: white; }
 
-        /* Social Section & Footer (Matches Index) */
+        /* Social Section & Footer */
         .social-section {
             text-align: center;
             margin-bottom: 60px;
@@ -514,27 +508,22 @@
                 <p>قراءة عقلانية ونقد للموروث بوعي واحترام للعقل</p>
             </div>
             
-            <!-- Universal Search inside Hero -->
+            <!-- Universal Search inside Hero (Modified for Local Filtering) -->
             <div class="universal-search">
                 <i class="fas fa-search search-icon-placeholder"></i>
-                <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
-                <div class="search-results" id="searchResults"></div>
+                <input type="text" id="globalSearch" placeholder="ابحث في عناوين المقالات..." />
             </div>
         </div>
     </header>
 
     <div class="container">
         
-        <!-- Local Search for Articles -->
-        <div class="article-search-container">
-            <i class="fas fa-filter" style="color: var(--primary-color);"></i>
-            <input type="text" id="searchInput" class="article-search-box" placeholder="ابحث في عناوين المقالات في هذه الصفحة...">
-            <div id="searchResultsInfo" class="search-results-info">
-                <span id="resultsCount">0</span> نتيجة
-            </div>
+        <div id="searchResultsInfo" class="search-results-info">
+            <span id="resultsCount">0</span> نتيجة بحث
         </div>
-        
+
         <div id="noResultsMessage" style="display:none; text-align:center; padding:30px; color:var(--text-secondary); background:var(--surface-color); border-radius:var(--radius-lg); margin-bottom:20px;">
+            <i class="fas fa-search" style="font-size:2rem; margin-bottom:10px; color:var(--text-secondary); opacity:0.5;"></i><br>
             لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
         </div>
 
@@ -543,8 +532,8 @@
             <!-- Article 45 -->
             <div class="article" id="article-45">
                 <h2><a href="article/45.html">❖ زنا التنفس.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 24 أغسطس 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 24 أغسطس 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ زنا التنفس.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -553,8 +542,8 @@
 
             <div class="article" id="article-44">
                 <h2><a href="article/44.html">❖ مفهوم الربا من كتاب الله</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 يوليو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 يوليو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ مفهوم الربا من كتاب الله')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -563,8 +552,8 @@
 
             <div class="article" id="article-43">
                 <h2><a href="article/43.html">❖ للذكر مثل حظ الانثيين</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 يوليو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 يوليو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ للذكر مثل حظ الانثيين')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -573,8 +562,8 @@
 
             <div class="article" id="article-42">
                 <h2><a href="article/42.html">❖ وطني أولاً، هل أصبحت الوطنية تهمة؟</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 10 يوليو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 10 يوليو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ وطني أولاً، هل أصبحت الوطنية تهمة؟')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -583,8 +572,8 @@
 
             <div class="article" id="article-41">
                 <h2><a href="article/41.html">❖ لا تبرر، أنت لست موظفًا في خدمة أفكار الآخرين.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 9 يوليو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 9 يوليو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ لا تبرر، أنت لست موظفًا في خدمة أفكار الآخرين.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -593,8 +582,8 @@
 
             <div class="article" id="article-40">
                 <h2><a href="article/40.html">❖ فلسطين وحصان طروادة.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 5 يوليو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 5 يوليو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ فلسطين وحصان طروادة.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -603,8 +592,8 @@
 
             <div class="article" id="article-39">
                 <h2><a href="article/39.html">❖ الحور العين.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 20 يونيو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 20 يونيو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ الحور العين.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -613,8 +602,8 @@
 
             <div class="article" id="article-38">
                 <h2><a href="article/38.html">❖ الإيمان الصادق لا يحتاج إلى ترويج</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 9 يونيو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 9 يونيو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ الإيمان الصادق لا يحتاج إلى ترويج.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -623,8 +612,8 @@
 
             <div class="article" id="article-37">
                 <h2><a href="article/37.html">❖ بني إسرائيل.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 30 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 30 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ بني إسرائيل.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -633,8 +622,8 @@
 
             <div class="article" id="article-36">
                 <h2><a href="article/36.html">❖ العقل والنقل.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 30 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 30 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ العقل والنقل.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -643,8 +632,8 @@
 
             <div class="article" id="article-35">
                 <h2><a href="article/35.html">❖ رسالة إلى صديقي المتمسك بالتراث الديني.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي المتمسك بالتراث الديني.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -653,8 +642,8 @@
 
             <div class="article" id="article-34">
                 <h2><a href="article/34.html">❖ رسالة إلى صديقي الملحد.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي الملحد.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -663,8 +652,8 @@
 
             <div class="article" id="article-33">
                 <h2><a href="article/33.html">❖ رسالة إلى صديقي السُنّي وصديقي الشيعي.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي السُنّي وصديقي الشيعي.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -673,8 +662,8 @@
 
             <div class="article" id="article-32">
                 <h2><a href="article/32.html">❖ رسالة إلى صديقي المثقف.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ رسالة إلى صديقي المثقف.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -683,8 +672,8 @@
 
             <div class="article" id="article-31">
                 <h2><a href="article/31.html">❖ قتل الوزغ.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ قتل الوزغ.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -693,8 +682,8 @@
 
             <div class="article" id="article-30">
                 <h2><a href="article/30.html">❖ لا عنصرية في الإسلام.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ لا عنصرية في الإسلام.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -703,8 +692,8 @@
 
             <div class="article" id="article-29">
                 <h2><a href="article/29.html">❖ نعمة العقل.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ نعمة العقل.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -713,8 +702,8 @@
 
             <div class="article" id="article-28">
                 <h2><a href="article/28.html">❖ الخمر وحكمه.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ الخمر وحكمه.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -723,8 +712,8 @@
 
             <div class="article" id="article-27">
                 <h2><a href="article/27.html">❖ حياة النبي.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ حياة النبي.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -733,8 +722,8 @@
 
             <div class="article" id="article-26">
                 <h2><a href="article/26.html">❖ الجرح والتعديل.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ الجرح والتعديل.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -743,8 +732,8 @@
 
             <div class="article" id="article-25">
                 <h2><a href="article/25.html">❖ معالجة الخطأ بالخطأ.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ معالجة الخطأ بالخطأ.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -753,8 +742,8 @@
 
             <div class="article" id="article-24">
                 <h2><a href="article/24.html">❖ أنا والعندليب.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ أنا والعندليب.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -763,8 +752,8 @@
 
             <div class="article" id="article-23">
                 <h2><a href="article/23.html">❖ مفاهيم مغلوطة.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ مفاهيم مغلوطة.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -773,8 +762,8 @@
 
             <div class="article" id="article-22">
                 <h2><a href="article/22.html">❖ حُسن الخاتمة وسوء الخاتمة.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ حُسن الخاتمة وسوء الخاتمة.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -783,8 +772,8 @@
 
             <div class="article" id="article-21">
                 <h2><a href="article/21.html">❖ الأعراب أشد كفراً ونفاقا.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ الأعراب أشد كفراً ونفاقا.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -793,8 +782,8 @@
 
             <div class="article" id="article-20">
                 <h2><a href="article/20.html">❖ الملحد وأنواعه</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ الملحد وأنواعه')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -803,8 +792,8 @@
 
             <div class="article" id="article-19">
                 <h2><a href="article/19.html">❖ تغسيل الميت وتكفينه</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ تغسيل الميت وتكفينه')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -813,8 +802,8 @@
 
             <div class="article" id="article-18">
                 <h2><a href="article/18.html">❖ الناسخ والمنسوخ.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ الناسخ والمنسوخ.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -823,8 +812,8 @@
 
             <div class="article" id="article-17">
                 <h2><a href="article/17.html">❖ أكذوبة أسباب النزول</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ أكذوبة أسباب النزول')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -833,8 +822,8 @@
 
             <div class="article" id="article-16">
                 <h2><a href="article/16.html">❖ القرآن أم التراث؟</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ القرآن أم التراث؟')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -843,8 +832,8 @@
 
             <div class="article" id="article-15">
                 <h2><a href="article/15.html">❖ أصحاب القوقعة.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ أصحاب القوقعة.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -853,8 +842,8 @@
 
             <div class="article" id="article-14">
                 <h2><a href="article/14.html">❖ حذارِ.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ حذارِ.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -863,8 +852,8 @@
 
             <div class="article" id="article-13">
                 <h2><a href="article/13.html">❖ وهم الحقيقة المطلقة.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ وهم الحقيقة المطلقة.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -873,8 +862,8 @@
 
             <div class="article" id="article-12">
                 <h2><a href="article/12.html">❖ كيف تُشيّطن أفكارك؟</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ كيف تُشيّطن أفكارك؟')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -883,8 +872,8 @@
 
             <div class="article" id="article-11">
                 <h2><a href="article/11.html">❖ قصة قصيرة.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ قصة قصيرة.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -893,8 +882,8 @@
 
             <div class="article" id="article-10">
                 <h2><a href="article/9.html">❖ أعراض فهم الدين بالمقلوب.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖  أعراض فهم الدين بالمقلوب.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -903,8 +892,8 @@
 
             <div class="article" id="article-9">
                 <h2><a href="article/9.html">❖ الباحث عن الأضواء.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖  الباحث عن الأضواء.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -913,8 +902,8 @@
 
             <div class="article" id="article-8">
                 <h2><a href="article/8.html">❖ النقل على العقل.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖  النقل على العقل.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -923,8 +912,8 @@
 
             <div class="article" id="article-7">
                 <h2><a href="article/7.html">❖ وهم الحواس في الإلحاد، الحقيقة أوسع مما يُرى.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ وهم الحواس في الإلحاد، الحقيقة أوسع مما يُرى.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -933,8 +922,8 @@
 
             <div class="article" id="article-6">
                 <h2><a href="article/6.html">❖ لا تسعَ لإرضاء أحد.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ لا تسعَ لإرضاء أحد.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -943,8 +932,8 @@
 
             <div class="article" id="article-5">
                 <h2><a href="article/5.html">❖ ازدواجية الضمير</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ ازدواجية الضمير')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -953,8 +942,8 @@
 
             <div class="article" id="article-4">
                 <h2><a href="article/4.html">❖ دعهم يتكلمون، وواصل طريقك بسلام</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ دعهم يتكلمون، وواصل طريقك بسلام')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -963,8 +952,8 @@
 
             <div class="article" id="article-3">
                 <h2><a href="article/3.html">❖ هوامش على الطريق.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ هوامش على الطريق.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -973,8 +962,8 @@
 
             <div class="article" id="article-2">
                 <h2><a href="article/2.html">❖ نظرية الحصان الميت.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 10 مايو 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 10 مايو 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ نظرية الحصان الميت.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -983,8 +972,8 @@
 
             <div class="article" id="article-1">
                 <h2><a href="article/1.html">❖ الجدال مع المؤدلجين، معركة خاسرة.</a></h2>
-                <span class="publish-date"><i class="far fa-calendar-alt"></i> 28 فبراير 2025</span>
-                <div class="article-actions">
+                <div class="meta-data">
+                    <span class="publish-date"><i class="far fa-calendar-alt"></i> 28 فبراير 2025</span>
                     <button class="article-button" onclick="toggleFavorite(this, '❖ الجدال مع المؤدلجين، معركة خاسرة.')">
                         <i class="far fa-star"></i> أضف للمفضلة
                     </button>
@@ -1092,14 +1081,8 @@
         let currentPage = 1;
 
         function paginateArticles() {
-            const articles = Array.from(document.querySelectorAll('.article')).filter(a => a.style.display !== 'none');
-            // If filtering is active (display none by search), pagination should adapt or hide?
-            // The existing search logic hides articles. So we should only paginate visible ones?
-            // Or better: Search disables pagination view, showing all results.
-            // Let's stick to the previous logic: Pagination works on ALL articles unless searching.
-            
-            const allArticles = document.querySelectorAll('.article');
-            const isSearching = document.getElementById('searchInput').value.trim() !== '';
+            const articles = Array.from(document.querySelectorAll('.article'));
+            const isSearching = document.getElementById('globalSearch').value.trim() !== '';
 
             if (isSearching) {
                  document.getElementById('pagination-wrapper').style.display = 'none';
@@ -1108,14 +1091,14 @@
                 document.getElementById('pagination-wrapper').style.display = 'block';
             }
 
-            const totalPages = Math.ceil(allArticles.length / articlesPerPage);
+            const totalPages = Math.ceil(articles.length / articlesPerPage);
             const pageInfo = document.getElementById('pageInfo');
-            if (pageInfo) pageInfo.textContent = `الصفحة ${currentPage} من ${totalPages} - إجمالي المقالات: ${allArticles.length}`;
+            if (pageInfo) pageInfo.textContent = `الصفحة ${currentPage} من ${totalPages} - إجمالي المقالات: ${articles.length}`;
 
-            allArticles.forEach((article, index) => {
+            articles.forEach((article, index) => {
                 const start = (currentPage - 1) * articlesPerPage;
                 const end = currentPage * articlesPerPage;
-                article.style.display = (index >= start && index < end) ? 'block' : 'none';
+                article.style.display = (index >= start && index < end) ? 'flex' : 'none';
             });
 
             document.getElementById('prevPage').disabled = currentPage === 1;
@@ -1143,21 +1126,6 @@
         function goToFirstPage() {
             currentPage = 1;
             paginateArticles();
-        }
-
-        // Sort Articles by Date
-        function sortArticles() {
-            const container = document.getElementById('articlesList');
-            const articles = Array.from(document.querySelectorAll('.article'));
-            
-            articles.sort((a, b) => {
-                const dateTextA = a.querySelector('.publish-date').textContent.replace(/[^\u0600-\u06FF0-9 ]/g, '').trim();
-                // Simple parsing helper or just rely on DOM order if dates are standard?
-                // Assuming format "DD Month YYYY" in Arabic. 
-                // Let's rely on standard creation order for now as date parsing Arabic text can be complex without a library.
-                // Or better, let's assume they are already sorted or leave as is.
-                return 0; 
-            });
         }
 
         // Favorites
@@ -1197,7 +1165,7 @@
         }
 
         function setupSearch() {
-            const searchInput = document.getElementById('searchInput');
+            const searchInput = document.getElementById('globalSearch');
             const resultsInfo = document.getElementById('searchResultsInfo');
             const resultsCount = document.getElementById('resultsCount');
             const articles = document.querySelectorAll('.article');
@@ -1219,7 +1187,7 @@
                 articles.forEach(article => {
                     const title = article.querySelector('h2').textContent;
                     if (normalizeArabicText(title).includes(normalizedSearchTerm)) {
-                        article.style.display = 'block';
+                        article.style.display = 'flex';
                         count++;
                     } else {
                         article.style.display = 'none';
@@ -1259,9 +1227,6 @@
             // Init Favorites State
             const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
             document.querySelectorAll(".article-button").forEach(button => {
-                const title = button.parentElement.parentElement.querySelector('h2 a').textContent;
-                // Need to extract raw title from onclick or DOM
-                // The onclick has 'Title', let's match that
                 const match = button.getAttribute("onclick").match(/'([^']+)'/);
                 if (match) {
                     const item = match[1];
@@ -1271,99 +1236,6 @@
                     }
                 }
             });
-        });
-
-        // ==================== Universal Search (Index Logic) ====================
-        let cachedPagesContent = null;
-        let isSearchInitialized = false;
-        const SEARCHABLE_PAGES = [
-            'index.html', 'books.html', 'articles.html', 'khawatir.html', 
-            'videos.html', 'ask.html', 'hewar.html', 'favorites.html', 
-            'support.html', 'about.html', 'manhaj.html', 'inq.html', 'history.html'
-        ];
-
-        async function fetchPageContent(url) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Failed');
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                doc.querySelectorAll('script, style, nav, footer').forEach(el => el.remove());
-                const mainContent = doc.querySelector('.container, main, body') || doc.body;
-                return {
-                    page: doc.title.replace('حسين الخليل - ', '').trim(),
-                    url: url,
-                    content: mainContent.textContent.replace(/\s+/g, ' ').trim()
-                };
-            } catch (e) { return null; }
-        }
-
-        async function loadAllPagesContent() {
-            if (cachedPagesContent) return cachedPagesContent;
-            const results = await Promise.all(SEARCHABLE_PAGES.map(page => fetchPageContent(page)));
-            cachedPagesContent = results.filter(Boolean);
-            return cachedPagesContent;
-        }
-
-        function getSafeRegex(searchTerm) {
-            let regexStr = '';
-            const cleanTerm = normalizeArabicText(searchTerm);
-            for (let i = 0; i < cleanTerm.length; i++) {
-                const char = cleanTerm[i];
-                if (char.match(/[a-zA-Z]/)) regexStr += char;
-                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                regexStr += '[\\u064B-\\u065F\\u0670]*'; 
-            }
-            return new RegExp(regexStr, 'gi');
-        }
-
-        function displayResults(results, queryRegex, container) {
-            container.innerHTML = '';
-            if (results.length === 0) {
-                container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
-                container.style.display = 'block';
-                return;
-            }
-            results.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'search-item';
-                div.innerHTML = `<h3>${item.page}</h3><p>${item.content.substring(0, 100)}...</p>`;
-                div.onclick = () => window.location.href = item.url;
-                container.appendChild(div);
-            });
-            container.style.display = 'block';
-        }
-
-        async function performGlobalSearch(query) {
-            const resultsContainer = document.getElementById('searchResults');
-            if (!query || query.length < 2) {
-                resultsContainer.style.display = 'none';
-                return;
-            }
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
-            resultsContainer.style.display = 'block';
-            const data = await loadAllPagesContent();
-            // Simple filter for demo
-            const results = data.filter(item => item.content.includes(query) || item.page.includes(query));
-            displayResults(results, new RegExp(query, 'gi'), resultsContainer);
-        }
-
-        const globalSearchInput = document.getElementById('globalSearch');
-        if(globalSearchInput) {
-            let timer;
-            globalSearchInput.addEventListener('input', (e) => {
-                clearTimeout(timer);
-                timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500);
-            });
-            globalSearchInput.addEventListener('focus', () => {
-                if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; }
-            });
-        }
-        document.addEventListener('click', (e) => {
-            if(!document.querySelector('.universal-search').contains(e.target)) {
-                document.getElementById('searchResults').style.display = 'none';
-            }
         });
     </script>
 </body>
