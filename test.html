@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>شاركنا رأيك - حسين الخليل</title>
+    <title>سياسة الخصوصية - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
@@ -203,101 +203,95 @@
             position: relative;
             z-index: 20;
             margin-top: -50px; /* Overlap Hero */
-            max-width: 800px; /* Narrower for form */
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 60px;
         }
 
-        /* Feedback Form Styling */
-        .feedback-card {
+        /* Privacy Content Styling */
+        .privacy-card {
             background: var(--surface-color);
             border-radius: var(--radius-xl);
-            padding: 40px;
+            padding: 50px;
             box-shadow: var(--shadow-lg);
             border: 1px solid rgba(0,0,0,0.03);
             margin-bottom: 40px;
         }
 
-        .description {
-            background: #fdfceb;
-            border-right: 4px solid var(--primary-color);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            line-height: 1.8;
-            font-size: 1rem;
-            color: var(--text-primary);
+        .privacy-content h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(94, 44, 165, 0.1);
+            padding-bottom: 10px;
         }
-        
-        .description .note { color: #e53e3e; font-weight: 700; }
-        .description a { color: var(--primary-color); text-decoration: underline; font-weight: 700; }
 
-        .form-group {
+        .privacy-content h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .privacy-content p {
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .privacy-content ul {
+            padding-right: 20px;
             margin-bottom: 20px;
         }
 
-        input[type="text"],
-        textarea,
-        input[type="file"] {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1rem;
-            background: #f8fafc;
-            transition: all 0.3s;
-        }
-        
-        input[type="file"] {
-            background: white;
-            cursor: pointer;
-            padding: 10px;
+        .privacy-content li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            position: relative;
+            list-style-type: none;
         }
 
-        input[type="text"]:focus,
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            background: white;
-            box-shadow: 0 0 0 4px rgba(94, 44, 165, 0.1);
+        .privacy-content li::before {
+            content: '•';
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            right: -20px;
+            font-size: 1.2em;
         }
 
-        button[type="submit"] {
-            background: var(--primary-color);
-            color: white;
-            padding: 15px 30px;
-            border: none;
+        .last-update {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            font-weight: bold;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
             border-radius: 50px;
-            font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
-            width: 100%;
             transition: all 0.3s;
-            box-shadow: var(--shadow-md);
-            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
         }
 
-        button[type="submit"]:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+        .back-btn:hover {
+            background: var(--primary-color);
+            color: white;
         }
-
-        .thank-you {
-            font-weight: bold;
-            margin-top: 20px;
-            color: var(--primary-dark);
-            text-align: center;
-            line-height: 1.8;
-            background: rgba(94, 44, 165, 0.05);
-            padding: 20px;
-            border-radius: 12px;
-            animation: fadeIn 0.5s;
-        }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* Social Section */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
@@ -331,7 +325,7 @@
 
         .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
         .copy-alert.show { opacity: 1; }
-        
+
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
@@ -340,6 +334,7 @@
             .hero-text h1 { font-size: 2rem; }
             .hero-section { padding: 100px 20px 80px; }
             .share-fixed-btn { display: none; }
+            .privacy-card { padding: 30px 20px; }
         }
 
         @media (max-width: 768px) {
@@ -348,8 +343,6 @@
             .social-grid { gap: 5px; flex-wrap: nowrap; justify-content: center; }
             .social-btn { width: 48px; height: 48px; flex-shrink: 0; }
             .social-btn img { width: 24px; height: 24px; }
-            
-            .feedback-card { padding: 25px; }
         }
     </style>
 </head>
@@ -393,47 +386,58 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>شاركنا رأيك بسرية</h1>
-                <p>مساحة آمنة للتعبير عن رأيك أو نقدك بكل حرية</p>
+                <h1>سياسة الخصوصية</h1>
+                <p>تعرف على كيفية حمايتنا لبياناتك وخصوصيتك</p>
             </div>
-            <!-- No Search Bar Here as requested -->
         </div>
     </header>
 
     <!-- Main Content Wrapper -->
     <div class="container main-wrapper">
         
-        <div class="feedback-card">
-            <p class="description">
-                هذه الصفحة تتيح لك إرسال رسالة مجهولة تمامًا، سواء كانت رأيًا، نقدًا، أو اقتراح أو غير ذلك. <br>
-                لا نقوم بجمع أي معلومات شخصية عنك، ولا يتم تسجيل عنوان بريد أو أي وسيلة تعريف.<br>
-                بإمكانك إدخال اسم مستعار إن أردت، أو تركه فارغًا. كل ما ترسله يصل بسرّية تامة.
-                <span style="color: #ef4444; display:block; margin-top:10px;">لا يمكننا الرد على هذه الرسالة بأي شكل من الأشكال لأننا لا نمتلك بياناتك.</span>
-                <br>
-                <span class="note">ملاحظة:</span> في حال كان لديك سؤال وتنتظر منه إجابة، يمكنك طرحه من خلال صفحة <a href="ask.html" target="_blank">الأسئلة</a>.
-            </p>
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            <i class="fas fa-arrow-right" style="margin-left: 8px;"></i> العودة للصفحة الرئيسية
+        </button>
 
-            <!-- Netlify Form -->
-            <form name="anonymous-message" method="POST" data-netlify="true" enctype="multipart/form-data">
-                <input type="hidden" name="form-name" value="anonymous-message">
-                <input type="hidden" name="bot-field">
+        <div class="privacy-card">
+            <div class="privacy-content">
+                <p>نحن نحترم خصوصيتك ونتعهد بحماية أي معلومات شخصية تقدمها لنا أو يتم جمعها من خلال استخدامك لهذا الموقع.</p>
 
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="الاسم (اختياري)">
-                </div>
+                <h2>1. جمع المعلومات</h2>
+                <p>نقوم بجمع معلومات غير شخصية بشكل تلقائي عند تصفح الموقع، مثل نوع المتصفح، نظام التشغيل، الدولة، الصفحات التي تمت زيارتها، ومدة الزيارة، وذلك باستخدام أدوات تحليل مثل <strong>Google Analytics</strong> لتحسين تجربة المستخدم.</p>
+                <p>لا نقوم بجمع معلومات شخصية مثل الاسم أو البريد الإلكتروني إلا إذا قمت بإدخالها طوعًا عبر نموذج تواصل أو أي وسيلة أخرى على الموقع.</p>
 
-                <div class="form-group">
-                    <textarea name="message" placeholder="اكتب رسالتك هنا بكل حرية..." rows="6" required></textarea>
-                </div>
+                <h2>2. استخدام المعلومات</h2>
+                <p>نستخدم المعلومات التي يتم جمعها من أجل:</p>
+                <ul>
+                    <li>تحسين محتوى الموقع وأدائه.</li>
+                    <li>الرد على استفساراتك في حال تواصلت معنا.</li>
+                    <li>تحليل سلوك الزوار لتقديم تجربة أفضل.</li>
+                </ul>
+                <p>لا نقوم بمشاركة معلوماتك الشخصية مع أي طرف ثالث دون إذن صريح منك، إلا إذا تطلب الأمر قانونيًا.</p>
 
-                <div class="form-group">
-                    <input type="file" name="file">
-                </div>
+                <h2>3. ملفات تعريف الارتباط (Cookies)</h2>
+                <p>يستخدم الموقع ملفات تعريف الارتباط لتخزين تفضيلات المستخدم وتحليل استخدام الموقع. يمكنك التحكم بملفات الكوكيز من خلال إعدادات المتصفح الخاص بك.</p>
 
-                <button type="submit">إرسال الرسالة</button>
-            </form>
+                <h2>4. حماية البيانات</h2>
+                <p>نلتزم باتخاذ التدابير المناسبة لحماية أي معلومات شخصية قد تقدمها لنا، ونحرص على عدم الوصول غير المصرح به أو التعديل أو الإفصاح عنها.</p>
 
-            <div id="response"></div>
+                <h2>5. حقوقك</h2>
+                <p>لديك الحق في:</p>
+                <ul>
+                    <li>طلب معرفة المعلومات التي قد نحتفظ بها عنك (إن وجدت).</li>
+                    <li>طلب تصحيحها أو حذفها.</li>
+                    <li>سحب موافقتك في أي وقت إذا كنت قد قدمتها سابقًا.</li>
+                </ul>
+                <p>يرجى التواصل معنا عبر صفحة "اتصل بنا" لممارسة أي من هذه الحقوق.</p>
+
+                <h2>6. التعديلات</h2>
+                <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سيتم نشر أي تغييرات على هذه الصفحة، ويُنصح بزيارتها بشكل دوري.</p>
+            </div>
+
+            <div class="last-update">
+                تاريخ آخر تحديث: 4 يونيو 2025
+            </div>
         </div>
 
         <!-- Social Media -->
@@ -479,7 +483,7 @@
         <div class="container">
             <div class="footer-links">
                 <a href="terms_and_conditions_ar.html">الشروط والأحكام</a>
-                <a href="privacy.html">سياسة الخصوصية</a>
+                <a href="privacy.html" style="color:var(--accent-color);">سياسة الخصوصية</a>
                 <a href="contact.html">اتصل بنا</a>
                 <a href="feedback.html">شاركنا رأيك</a>
             </div>
@@ -500,9 +504,9 @@
 
         // Share
         function handleMobileShare() {
-            const link = "https://www.husseinalkhalil.com/feedback.html";
+            const link = "https://www.husseinalkhalil.com/privacy.html";
             if (navigator.share) {
-                navigator.share({ title: 'شاركنا رأيك - حسين الخليل', url: link }).catch(console.error);
+                navigator.share({ title: 'سياسة الخصوصية - حسين الخليل', url: link }).catch(console.error);
             } else {
                 navigator.clipboard.writeText(link).then(() => {
                     const alert = document.getElementById('copyAlert');
@@ -527,39 +531,6 @@
             const btn = document.querySelector('.back-to-top');
             if (window.scrollY > 300) btn.classList.add('visible');
             else btn.classList.remove('visible');
-        });
-
-        // Form Submission Logic
-        const form = document.querySelector('form[name="anonymous-message"]');
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'جاري الإرسال...';
-            submitBtn.disabled = true;
-
-            const formData = new FormData(form);
-
-            fetch('/', {
-                method: 'POST',
-                body: formData
-            }).then(() => {
-                form.remove();
-                document.getElementById('response').innerHTML = `
-                    <div class="thank-you">
-                        <i class="fas fa-check-circle" style="font-size: 2rem; color: #5e2ca5; display: block; margin-bottom: 10px;"></i>
-                        شكراً لمشاركتك! تم استلام رسالتك بنجاح.<br>
-                        لا نحتفظ بأي معلومات تعريفية عنك، وهذه الرسالة مجهولة تمامًا.<br>
-                        نقدر شجاعتك وصدقك في التعبير. 🕊️
-                    </div>
-                `;
-                window.scrollTo({ top: 200, behavior: 'smooth' });
-            }).catch(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                document.getElementById('response').innerHTML = '<p style="color:red; text-align:center; margin-top:10px;">حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.</p>';
-            });
         });
     </script>
 </body>
