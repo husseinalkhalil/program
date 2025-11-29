@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -151,6 +151,29 @@
 
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
 
         /* Video Link Style */
         .video-link {
@@ -191,14 +214,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -355,30 +370,27 @@
             <!-- Content Body -->
             <div class="article-body" id="articleBody">
                 <p style="margin-bottom:20px;">اقرأوا معي هذه الآيات:</p>
-                <div style="background:#f9f7f2; padding:20px; border-radius:8px; border:1px solid #eee; margin-bottom:25px;">
-                    <p><strong>1- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿ٱتَّبِعْ مَآ أُوحِىَ إِلَيْكَ مِن رَّبِّكَ ۖ لَآ إِلَٰهَ إِلَّا هُوَ ۖ وَأَعْرِضْ عَنِ ٱلْمُشْرِكِينَ ۞ وَلَوْ شَآءَ ٱللَّهُ مَآ أَشْرَكُوا۟ ۗ وَمَا جَعَلْنَٰكَ عَلَيْهِمْ حَفِيظًا ۖ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ﴾</span> الأنعام [ 106-107]. </p>
-                    <p><strong>2- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّكَ لَا تَهْدِى مَنْ أَحْبَبْتَ وَلَٰكِنَّ ٱللَّهَ يَهْدِى مَن يَشَآءُ ۚ وَهُوَ أَعْلَمُ بِٱلْمُهْتَدِينَ﴾</span> القصص [56]. </p>
-                    <p><strong>3- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّآ أَنزَلْنَا عَلَيْكَ ٱلْكِتَٰبَ لِلنَّاسِ بِٱلْحَقِّ ۖ فَمَنِ ٱهْتَدَىٰ فَلِنَفْسِهِۦ ۖ وَمَن ضَلَّ فَإِنَّمَا يَضِلُّ عَلَيْهَا ۖ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ﴾</span> الزمر [41]. </p>
-                    <p><strong>4- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَٱلَّذِينَ ٱتَّخَذُوا۟ مِن دُونِهِۦٓ أَوْلِيَآءَ ٱللَّهُ حَفِيظٌ عَلَيْهِمْ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ﴾</span> الشورى [6]. </p>
-                    <p><strong>5- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَقُلِ ٱلْحَقُّ مِن رَّبِّكُمْ ۖ فَمَن شَآءَ فَلْيُؤْمِن وَمَن شَآءَ فَلْيَكْفُرْ﴾</span> الكهف [29]. </p>
-                    <p><strong>6- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَعَلَى ٱللَّهِ قَصْدُ ٱلسَّبِيلِ وَمِنْهَا جَآئِرٌ ۚ وَلَوْ شَآءَ لَهَدَىٰكُمْ أَجْمَعِينَ﴾</span> النحل [9]. </p>
-                    <p><strong>7- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَمَن كَفَرَ فَلَا يَحْزُنكَ كُفْرُهُۥٓ ۚ إِلَيْنَا مَرْجِعُهُمْ فَنُنَبِّئُهُم بِمَا عَمِلُوٓا۟ ۚ إِنَّ ٱللَّهَ عَلِيمٌۢ بِذَاتِ ٱلصُّدُورِ﴾</span> لقمان [23]. </p>
-                    <p><strong>8- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿لَّسْتَ عَلَيْهِم بِمُصَيْطِرٍ﴾</span> الغاشية [22]. </p>
-                    <p><strong>9- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَمَا خَلَقْنَا ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَآ إِلَّا بِٱلْحَقِّ ۗ وَإِنَّ ٱلسَّاعَةَ لَأَتِيَةٌ ۖ فَٱصْفَحِ ٱلصَّفْحَ ٱلْجَمِيلَ﴾</span> الحِجر [85]. </p>
-                    <p><strong>10- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿ٱدْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِٱلْحِكْمَةِ وَٱلْمَوْعِظَةِ ٱلْحَسَنَةِ ۖ وَجَٰدِلْهُم بِٱلَّتِى هِىَ أَحْسَنُ ۚ إِنَّ رَبَّكَ هُوَ أَعْلَمُ بِمَن ضَلَّ عَن سَبِيلِهِۦ ۖ وَهُوَ أَعْلَمُ بِٱلْمُهْتَدِينَ﴾</span> النحل [125]. </p>
-                    <p><strong>11- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَلَا تُجَٰدِلُوٓا۟ أَهْلَ ٱلْكِتَٰبِ إِلَّا بِٱلَّتِى هِىَ أَحْسَنُ إِلَّا ٱلَّذِينَ ظَلَمُوا۟ مِنْهُمْ ۖ وَقُولُوٓا۟ ءَامَنَّا بِٱلَّذِىٓ أُنزِلَ إِلَيْنَا وَأُنزِلَ إِلَيْكُمْ وَإِلَٰهُنَا وَإِلَٰهُكُمْ وَٰحِدٌ وَنَحْنُ لَهُۥ مُسْلِمُونَ﴾</span> العنكبوت [46]. </p>
-                    <p><strong>12- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿لَّا يَنْهَىٰكُمُ ٱللَّهُ عَنِ ٱلَّذِينَ لَمْ يُقَٰتِلُوكُمْ فِى ٱلدِّينِ وَلَمْ يُخْرِجُوكُم مِّن دِيَٰرِكُمْ أَن تَبَرُّوهُمْ وَتُقْسِطُوٓا۟ إِلَيْهِمْ ۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلْمُقْسِطِينَ﴾</span> الممتحنة [8]. </p>
-                </div>
+                
+                <p><strong>1- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿ٱتَّبِعْ مَآ أُوحِىَ إِلَيْكَ مِن رَّبِّكَ ۖ لَآ إِلَٰهَ إِلَّا هُوَ ۖ وَأَعْرِضْ عَنِ ٱلْمُشْرِكِينَ ۞ وَلَوْ شَآءَ ٱللَّهُ مَآ أَشْرَكُوا۟ ۗ وَمَا جَعَلْنَٰكَ عَلَيْهِمْ حَفِيظًا ۖ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ﴾</span> الأنعام [ 106-107]. </p>
+                <p><strong>2- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّكَ لَا تَهْدِى مَنْ أَحْبَبْتَ وَلَٰكِنَّ ٱللَّهَ يَهْدِى مَن يَشَآءُ ۚ وَهُوَ أَعْلَمُ بِٱلْمُهْتَدِينَ﴾</span> القصص [56]. </p>
+                <p><strong>3- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّآ أَنزَلْنَا عَلَيْكَ ٱلْكِتَٰبَ لِلنَّاسِ بِٱلْحَقِّ ۖ فَمَنِ ٱهْتَدَىٰ فَلِنَفْسِهِۦ ۖ وَمَن ضَلَّ فَإِنَّمَا يَضِلُّ عَلَيْهَا ۖ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ﴾</span> الزمر [41]. </p>
+                <p><strong>4- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَٱلَّذِينَ ٱتَّخَذُوا۟ مِن دُونِهِۦٓ أَوْلِيَآءَ ٱللَّهُ حَفِيظٌ عَلَيْهِمْ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ﴾</span> الشورى [6]. </p>
+                <p><strong>5- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَقُلِ ٱلْحَقُّ مِن رَّبِّكُمْ ۖ فَمَن شَآءَ فَلْيُؤْمِن وَمَن شَآءَ فَلْيَكْفُرْ﴾</span> الكهف [29]. </p>
+                <p><strong>6- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَعَلَى ٱللَّهِ قَصْدُ ٱلسَّبِيلِ وَمِنْهَا جَآئِرٌ ۚ وَلَوْ شَآءَ لَهَدَىٰكُمْ أَجْمَعِينَ﴾</span> النحل [9]. </p>
+                <p><strong>7- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَمَن كَفَرَ فَلَا يَحْزُنكَ كُفْرُهُۥٓ ۚ إِلَيْنَا مَرْجِعُهُمْ فَنُنَبِّئُهُم بِمَا عَمِلُوٓا۟ ۚ إِنَّ ٱللَّهَ عَلِيمٌۢ بِذَاتِ ٱلصُّدُورِ﴾</span> لقمان [23]. </p>
+                <p><strong>8- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿لَّسْتَ عَلَيْهِم بِمُصَيْطِرٍ﴾</span> الغاشية [22]. </p>
+                <p><strong>9- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَمَا خَلَقْنَا ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَآ إِلَّا بِٱلْحَقِّ ۗ وَإِنَّ ٱلسَّاعَةَ لَأَتِيَةٌ ۖ فَٱصْفَحِ ٱلصَّفْحَ ٱلْجَمِيلَ﴾</span> الحِجر [85]. </p>
+                <p><strong>10- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿ٱدْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِٱلْحِكْمَةِ وَٱلْمَوْعِظَةِ ٱلْحَسَنَةِ ۖ وَجَٰدِلْهُم بِٱلَّتِى هِىَ أَحْسَنُ ۚ إِنَّ رَبَّكَ هُوَ أَعْلَمُ بِمَن ضَلَّ عَن سَبِيلِهِۦ ۖ وَهُوَ أَعْلَمُ بِٱلْمُهْتَدِينَ﴾</span> النحل [125]. </p>
+                <p><strong>11- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَلَا تُجَٰدِلُوٓا۟ أَهْلَ ٱلْكِتَٰبِ إِلَّا بِٱلَّتِى هِىَ أَحْسَنُ إِلَّا ٱلَّذِينَ ظَلَمُوا۟ مِنْهُمْ ۖ وَقُولُوٓا۟ ءَامَنَّا بِٱلَّذِىٓ أُنزِلَ إِلَيْنَا وَأُنزِلَ إِلَيْكُمْ وَإِلَٰهُنَا وَإِلَٰهُكُمْ وَٰحِدٌ وَنَحْنُ لَهُۥ مُسْلِمُونَ﴾</span> العنكبوت [46]. </p>
+                <p><strong>12- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿لَّا يَنْهَىٰكُمُ ٱللَّهُ عَنِ ٱلَّذِينَ لَمْ يُقَٰتِلُوكُمْ فِى ٱلدِّينِ وَلَمْ يُخْرِجُوكُم مِّن دِيَٰرِكُمْ أَن تَبَرُّوهُمْ وَتُقْسِطُوٓا۟ إِلَيْهِمْ ۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلْمُقْسِطِينَ﴾</span> الممتحنة [8]. </p>
 
                 <p>جميلة هي هذه الآيات أليس كذلك.</p>
                 <p>فهي تريح القلب وتمنح الطمأنينة، كيف لا وهي تدعو إلى التسامح والمحبة وحرية الاعتقاد.</p>
                 <p> لكن يؤسفني أن أخبركم بأن جميع هذه الآيات <strong> منسوخة! </strong></p>
                 
-                <div style="background:#fff1f2; padding:15px; border-radius:8px; border-right:4px solid #e11d48; margin:20px 0;">
-                    <p><strong><span style="color: #e11d48;">منسوخة؟</span></strong></p>
-                    <p><strong><span style="color: green;">نعم منسوخة!!</span></strong></p>
-                    <p>منسوخة، ملغية، أي لا يُحتجّ بها، وهي موجودة فقط من أجل القراءة! هذا ما يقوله الشيخ: <span style="color: #1d4ed8;"> أبي محمد مكي ابن ابي طالب القيسي </span> في كتابه: الايضاح لناسخ القرآن ومنسوخه. </p>
-                </div>
+                <p><strong><span style="color: #e11d48;">منسوخة؟</span></strong></p>
+                <p><strong><span style="color: green;">نعم منسوخة!!</span></strong></p>
+                <p>منسوخة، ملغية، أي لا يُحتجّ بها، وهي موجودة فقط من أجل القراءة! هذا ما يقوله الشيخ: <span style="color: #1d4ed8;"> أبي محمد مكي ابن ابي طالب القيسي </span> في كتابه: الايضاح لناسخ القرآن ومنسوخه. </p>
 
                 <p>هذا هو مفهوم التراث للدين!</p>
                 <p>ما الذي نسخها؟ من الذي تجرّأ وألغى آيات من كتاب الله؟!</p>
@@ -398,12 +410,11 @@
                 <p>وبما أن العقول معطلة وتكتفي فقط بالنقل من رجال الدين، فلن يفكر أحد بسؤال: كيف لرسول الله أن يخالف كتاب الله؟!</p>
                 <p>فأصبح العقل الجمعي للمسلم يتوقف ويصدّق ويؤمن بما سيقال ويسمع لمجرد أن يسمع مقولة "قال رسول الله".</p>
                 <p>افتروا على الرسول كذباً بمقولات تخالف كتاب الله، مثل:</p>
-                <div style="background:#fff1f2; padding:15px; border-radius:8px; border-right:4px solid #e11d48; margin:20px 0;">
-                    <p><strong><span style="color: blue;">1- </span></strong><span style="color: #e11d48;">من بدل دينه فاقتلوه.</span></p>
-                    <p><strong><span style="color: blue;">2- </span></strong><span style="color: #e11d48;">أُمرت أن أقاتل الناس.</span></p>
-                    <p><strong><span style="color: blue;">3- </span></strong><span style="color: #e11d48;">جئتكم بالذبح.</span></p>
-                    <p><strong><span style="color: blue;">4- </span></strong><span style="color: #e11d48;">حديث الرجم.</span></p>
-                </div>
+                
+                <p><strong><span style="color: blue;">1- </span></strong><span style="color: #e11d48;">من بدل دينه فاقتلوه.</span></p>
+                <p><strong><span style="color: blue;">2- </span></strong><span style="color: #e11d48;">أُمرت أن أقاتل الناس.</span></p>
+                <p><strong><span style="color: blue;">3- </span></strong><span style="color: #e11d48;">جئتكم بالذبح.</span></p>
+                <p><strong><span style="color: blue;">4- </span></strong><span style="color: #e11d48;">حديث الرجم.</span></p>
                 
                 <p>والكثير من المرويات التي تخالف كتاب الله وتتعدى على الآمنين باسم الفتوحات الاسلامية واغتصاب النساء باسم السبي. ولا ننسَ بأن المرأة كان لها حصة الأسد من تلك المرويات التي تهينها وتنتقص منها وتُشبّهها بالحمار والشيطان والدابة والكلب والناقصة ومرويات اللعن.</p>
                 <p>كان لديهم عقلية جنسية بهيمية بيدوفيلية تحب التلذذ بالاطفال، فادعوا أن الرسول تزوج بطفلة ودخل بها وهي ابنة تسع سنوات حتى يُحللوا لأنفسهم هذه الجريمة.</p>
@@ -422,25 +433,23 @@
                 <p>فبدلاً من تجفيف المستنقع، يكتفون بقتل البعوض فقط.</p>
                 <p></span>ومن المفارقات العجيبة، أن أهم كتب الروايات والتي تُتعبر "ثلاث أرباع الدين" بحسب المفهوم الكهنوتي، والتي تقضي على القرآن إذا تعارضت مع آيات الله، أن أصحاب هذه الكُتب ليسوا عرباً (مع احترامي لجميع القوميات دون استثناء) ولا يتكلمون اللغة العربية ولم يعيشوا في المجتمع العربي ولا يعرفون العادات والتقاليد العربية، بل جميعهم من شرق آسيا!</p>
                 <p>فمثلاً:</p>
-                <ul style="list-style:none; padding:0; margin:20px 0;">
-                    <li style="margin-bottom:5px;"><strong>1- </strong>البخاري من مدينة بخارى بأوزبكستان.</li>
-                    <li style="margin-bottom:5px;"><strong>2- </strong>مسلم من مدينة نيسابور بإيران.</li>
-                    <li style="margin-bottom:5px;"><strong>3- </strong>الترمذي من مدينة ترمذ بأوزبكستان.</li>
-                    <li style="margin-bottom:5px;"><strong>4- </strong> ابن ماجه من مدينة قزوين بإيران.</li>
-                    <li style="margin-bottom:5px;"><strong>5- </strong>ابو داوود من مدينة سجستان بأفغانستان.</li>
-                    <li style="margin-bottom:5px;"><strong>6- </strong>النسائي من مدينة نسا بتركمانستان.</li>
-                    <li style="margin-bottom:5px;"><strong>7- </strong>الكُليني من ايران.</li>
-                    <li style="margin-bottom:5px;"><strong>8- </strong>الطوسي من ايران.</li>
-                    <li style="margin-bottom:5px;"><strong>9- </strong> الشيخ الصدوق من ايران.</li>
+                <ul>
+                    <li><strong>1- </strong>البخاري من مدينة بخارى بأوزبكستان.</li>
+                    <li><strong>2- </strong>مسلم من مدينة نيسابور بإيران.</li>
+                    <li><strong>3- </strong>الترمذي من مدينة ترمذ بأوزبكستان.</li>
+                    <li><strong>4- </strong> ابن ماجه من مدينة قزوين بإيران.</li>
+                    <li><strong>5- </strong>ابو داوود من مدينة سجستان بأفغانستان.</li>
+                    <li><strong>6- </strong>النسائي من مدينة نسا بتركمانستان.</li>
+                    <li><strong>7- </strong>الكُليني من ايران.</li>
+                    <li><strong>8- </strong>الطوسي من ايران.</li>
+                    <li><strong>9- </strong> الشيخ الصدوق من ايران.</li>
                 </ul>
                 <p><span style="color: red;">غريب: </span>ألا يوجد من بين الصحابة أو التابعين رجل رشيد يجمع أحاديث رسول الله باعتباره عاش معه وهو أعلم بالدين ممن سيأتي بعد مئتي سنة ويقدم لنا كُتُب ويقول أنها المكملة للدين!؟ </p>
                 
-                <div class="conclusion-box">
-                    <h3 class="section-title" style="margin-top:0;">الخلاصة:</h3>
-                    <p>الناسخ والمنسوخ هي من أخبث الأفكار ومن أقذر الجرائم التي ارتُكِبت بحق الإسلام.</p>
-                    <p>لقد تجرأ رجال الدين على تحريف الدين وتشويه صورة الإسلام الحقيقي الذي يدعو إلى التسامح والحرية والسلام.</p>
-                    <p>اخترعوا مصادر للدين ونسبوا إليها ما يخدم أغراضهم السياسية والاجتماعية، مستغلين غياب الوعي النقدي لدى عامة المسلمين. يجب علينا العودة إلى القرآن الكريم كمصدر وحيد للدين، ورفض كل ما يتعارض مع روحه ومبادئه السامية التي تحترم الإنسان وتكفل حريته وتدعو إلى التعايش السلمي بين جميع البشر.</p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>الناسخ والمنسوخ هي من أخبث الأفكار ومن أقذر الجرائم التي ارتُكِبت بحق الإسلام.</p>
+                <p>لقد تجرأ رجال الدين على تحريف الدين وتشويه صورة الإسلام الحقيقي الذي يدعو إلى التسامح والحرية والسلام.</p>
+                <p>اخترعوا مصادر للدين ونسبوا إليها ما يخدم أغراضهم السياسية والاجتماعية، مستغلين غياب الوعي النقدي لدى عامة المسلمين. يجب علينا العودة إلى القرآن الكريم كمصدر وحيد للدين، ورفض كل ما يتعارض مع روحه ومبادئه السامية التي تحترم الإنسان وتكفل حريته وتدعو إلى التعايش السلمي بين جميع البشر.</p>
 
                 <!-- Video Link -->
                 <div style="text-align: center; margin: 40px 0;">
