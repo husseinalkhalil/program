@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -152,6 +152,16 @@
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
 
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
         /* Font Controls (Fixed) */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
@@ -176,14 +186,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -339,12 +341,10 @@
 
             <!-- Content Body -->
             <div class="article-body" id="articleBody">
-                <div style="background:#fcfaff; padding:20px; border-radius:8px; margin-bottom:25px; border-right:4px solid var(--accent-color);">
-                    <p style="margin-bottom:10px; font-style:italic;">يُحكى أنه في إحدى البلدان الاوروبية، تشاجر رجلان عربيان، أحدهما سُني والآخر شيعي.</p>
-                    <p style="margin-bottom:10px;">وبعد أن ألقت الشرطة القبض عليهما، سأل القاضي عن سبب الخلاف؟ فقيل له: يا سيدي القاضي، لقد تشاجرا بسبب <strong>الحسين بن علي ويزيد بن معاوية</strong>.</p>
-                    <p style="margin-bottom:10px;">فأمر القاضي بإحضار الحسين ويزيد! فقيل له: سيدي القاضي، إن الحسين ويزيد قد توفيا منذ <strong>1400 سنة</strong>!</p>
-                    <p style="margin:0; font-weight:bold; color:var(--primary-dark);">على الفور، أمر القاضي بإحالة الشابين المتخاصمين إلى مستشفى الأمراض العقلية.</p>
-                </div>
+                <p style="font-style:italic; margin-bottom:10px;">يُحكى أنه في إحدى البلدان الاوروبية، تشاجر رجلان عربيان، أحدهما سُني والآخر شيعي.</p>
+                <p>وبعد أن ألقت الشرطة القبض عليهما، سأل القاضي عن سبب الخلاف؟ فقيل له: يا سيدي القاضي، لقد تشاجرا بسبب <strong>الحسين بن علي ويزيد بن معاوية</strong>.</p>
+                <p>فأمر القاضي بإحضار الحسين ويزيد! فقيل له: سيدي القاضي، إن الحسين ويزيد قد توفيا منذ <strong>1400 سنة</strong>!</p>
+                <p style="font-weight:bold; color:var(--primary-dark);">على الفور، أمر القاضي بإحالة الشابين المتخاصمين إلى مستشفى الأمراض العقلية.</p>
 
                 <p>لو كنت أنا القاضي، لن أتوانا أبدًا عن مثل هذا الحكم، فمن يحقد ويكره ويحارب ويقتل من أجل أشخاص ماتوا قبل أكثر من 1400 سنة، بالتأكيد سيكون مجنونًا.</p>
                 <p>جميع الصحابة والتابعين، بمن فيهم الحسين ويزيد، عاشوا وماتوا وأفضوا إلى ما قدموا، نحن لم نعيش في زمانهم ولم نقابلهم. كل ما نعرفه عنهم هي كتب التاريخ المليئة بالأكاذيب والتدليس.</p>
@@ -355,21 +355,13 @@
                 
                 <p>لماذا لم نرَ كاهن شيعي يجلد نفسه بالسكاكين كما يفعله عوام الشيعة!؟ لماذا لم نرَ كاهن سُني يقاتل في الدول المشتعلة بالحروب كما يفعل عوام السُنَة!؟</p>
 
-                <div style="margin:30px 0;">
-                    <p style="background:#f0f9ff; padding:10px; border-radius:6px; border:1px solid #bae6fd;">
-                        <strong><span style="color: #0369a1;">أخي الشيعي:</span></strong> السُنّي ليس عدوًا لك، وقتله لن يدخلك الجنة، بل يودي بك في نار جهنم.
-                    </p>
-                    <p style="background:#f0fdf4; padding:10px; border-radius:6px; border:1px solid #bbf7d0; margin-top:10px;">
-                        <strong><span style="color: #15803d;">أخي السُنّي:</span></strong> الشيعي ليس عدوًا لك، وقتله لن يدخلك الجنة، بل يودي بك في نار جهنم.
-                    </p>
-                </div>
+                <p><strong><span style="color: #0369a1;">أخي الشيعي:</span></strong> السُنّي ليس عدوًا لك، وقتله لن يدخلك الجنة، بل يودي بك في نار جهنم.</p>
+                <p><strong><span style="color: #15803d;">أخي السُنّي:</span></strong> الشيعي ليس عدوًا لك، وقتله لن يدخلك الجنة، بل يودي بك في نار جهنم.</p>
 
                 <p>كفاكم طائفية وعنصرية. أنتم مسلمون وكتابكم <strong><span style="color: var(--primary-color);">القرآن</span></strong>، عودوا إلى كتابكم وانبذوا عنكم كهنة الدين وكُتبهم وفتاويهم.</p>
                 
-                <div class="conclusion-box">
-                    <h3 style="margin-top:0;">الخلاصة:</h3>
-                    <p>لن تنطفئ هذه الحرب إلّا بتشغيل عقولكم. عند تشغيل العقل سيسقط كهنة الدين ولن يبقَ هناك طائفية ولا عنصرية. الأولين عاشوا وانتهت حياتهم، فكّروا في حاضرتكم ومستقبلكم. التاريخ عبارة عن مجموعة من الأكاذيب متفق عليها.</p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>لن تنطفئ هذه الحرب إلّا بتشغيل عقولكم. عند تشغيل العقل سيسقط كهنة الدين ولن يبقَ هناك طائفية ولا عنصرية. الأولين عاشوا وانتهت حياتهم، فكّروا في حاضرتكم ومستقبلكم. التاريخ عبارة عن مجموعة من الأكاذيب متفق عليها.</p>
             </div>
 
             <!-- Actions -->
