@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -151,6 +151,29 @@
 
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
 
         /* Video Link Style */
         .video-link {
@@ -191,14 +214,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -357,16 +372,14 @@
                 <p>رسول الله في حياته وفي زمانه، كان يعيش حياته الطبيعية مثله مثل أي انسان في ذلك الزمان، كان ينظف أسنانه بالسواك بحسب الأدوات المتاحة في ذلك الزمان، فالسواك ما هو إلّا الوسيلة المتاحة لتنظيف الأسنان في ذلك الزمان.</p>
                 <p>فلم يكن للفرشاة والمعجون أي وجود، فاستخدم رسولنا الكريم الأدوات المتاحة في زمانه، فلو عاش في زماننا هذا، لاستخدم الفرشاة والمعجون بدلاً من السواك، لأنها الأدوات المتاحة في زماننا هذا، ولربما لبس البنطال والقميص، واستخدم الحمّام الافرنجي بدلاً من الاستنجاء بثلاث حجرات (كما تقول الرواية)، وركب الطائرة والسيارة واستخدم الهاتف النقّال.</p>
                 
-                <div style="margin:20px 0; background:#fcfaff; border-radius:8px; padding:20px; border-right:4px solid var(--primary-color);">
-                    <p>رسول الله لم يخالف قومه في ملبسهم ومأكلهم:</p>
-                    <ul style="list-style:none; padding:0;">
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> لبس كما يلبس ابو بكر و أبو لهب و أبو طالب وغيرهم.</li>
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> ينام كما ينامون.</li>
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> يلبس كما يلبسون.</li>
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> يأكل كما يأكلون.</li>
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> مارس حياته الطبيعية كإنسان مثله مثل باقي البشر.</li>
-                    </ul>
-                </div>
+                <p>رسول الله لم يخالف قومه في ملبسهم ومأكلهم:</p>
+                <ul>
+                    <li>لبس كما يلبس ابو بكر و أبو لهب و أبو طالب وغيرهم.</li>
+                    <li>ينام كما ينامون.</li>
+                    <li>يلبس كما يلبسون.</li>
+                    <li>يأكل كما يأكلون.</li>
+                    <li>مارس حياته الطبيعية كإنسان مثله مثل باقي البشر.</li>
+                </ul>
 
                 <p>فكفاكم تقزيماً لهذا الدين وجعل كل أفعال الرسول ديناً وأن كل أفعاله توقيفية لا تقبل الحداثة حتى في زماننا هذا.</p>
                 <p>الكثير لم يفهم معنى كلمة "الرسول" لو فهمنا قوله تعالى:</p>
@@ -382,12 +395,10 @@
                 
                 <p>رسول الله صاحب رسالة إلهية ومطالب بتبليغنا ما أمره الله به، أما أعماله وأفعاله وأقواله، فهي ليست ديناً من عند الله، ولسنا مطالبين بها، فمن شاء فليفعل كما كان يفعله النبي لكن عليه أن يعلم أن دين الله يتمثل في كتابه وليس في حياة انسان.</p>
                 
-                <div class="conclusion-box">
-                    <h3 style="margin-top:0;">الخلاصة:</h3>
-                    <p>حياة النبي كانت حياة بشرية طبيعية تعكس ظروف عصره وأدوات زمانه.</p>
-                    <p>الرسالة التي جاء بها هي الدين الذي يجب أن نتمسك به، وليست التفاصيل الحياتية التي كانت مناسبة لزمانه.</p>
-                    <p>فهمنا لدور الرسول يجب أن يرتكز على مهمته الأساسية وهي تبليغ الرسالة الإلهية، وليس جعل كل تفاصيل حياته ديناً يتبع حرفياً في كل العصور.</p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>حياة النبي كانت حياة بشرية طبيعية تعكس ظروف عصره وأدوات زمانه.</p>
+                <p>الرسالة التي جاء بها هي الدين الذي يجب أن نتمسك به، وليست التفاصيل الحياتية التي كانت مناسبة لزمانه.</p>
+                <p>فهمنا لدور الرسول يجب أن يرتكز على مهمته الأساسية وهي تبليغ الرسالة الإلهية، وليس جعل كل تفاصيل حياته ديناً يتبع حرفياً في كل العصور.</p>
 
                 <!-- Video Link -->
                 <div style="text-align: center; margin: 40px 0;">
