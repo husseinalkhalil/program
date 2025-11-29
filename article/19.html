@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -151,6 +151,16 @@
 
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
 
         /* Video Link Style */
         .video-link {
@@ -191,14 +201,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -370,10 +372,8 @@
                 <p>بالاضافة إلى ذلك، فإن هذا العمل هو انتهاك صارخ لخصوصية الميت وكشف لعورته وعبث بها، وما يتبع ذلك من تصرفات عبثية من خلال وضع القطن أو القماش في المناطق الحسّاسة بالجسم، ولا ننسَ القصص التي تُسرّب من قِبَل المُغسّلين وخصوصاً النساء، عن فضح بعض خصوصيات الميت.</p>
                 <p>كل هذا عبث وانتهاك لحرمة الميت، فالأولى أن الميت تُنزع منه الأشياء ذات القيمة حتى يستفيد منها الحيّ ثم يدفن بملابسه.</p>
                 
-                <div style="background:#f9f7f2; padding:20px; border-radius:8px; border-right:4px solid var(--accent-color); margin:20px 0;">
-                    <p style="margin-bottom:10px;"><strong><span style="color: blue;">السؤال المباشر:</span></strong> ماذا سيحصل لو لم يُغسّل الميت ولم يُكفّن ولم يُصلّى عليه ودُفن بالملابس التي مات فيها؟ </p>
-                    <p style="margin:0;"><strong><span style="color: green;">الجواب:</span></strong> لا شيء، لن يُغيّر ذلك من مصير الميت، فالميت له عمله الذي لن ينقص ولن يزيد ولن يتأثر إذا غُسّل أم لم يُغسّل، واذا صُليّ عليه أم لم يُصلّى عليه. </p>
-                </div>
+                <p><strong><span style="color: blue;">السؤال المباشر:</span></strong> ماذا سيحصل لو لم يُغسّل الميت ولم يُكفّن ولم يُصلّى عليه ودُفن بالملابس التي مات فيها؟ </p>
+                <p><strong><span style="color: green;">الجواب:</span></strong> لا شيء، لن يُغيّر ذلك من مصير الميت، فالميت له عمله الذي لن ينقص ولن يزيد ولن يتأثر إذا غُسّل أم لم يُغسّل، واذا صُليّ عليه أم لم يُصلّى عليه. </p>
 
                 <p>وهذا تأكيداً لقوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿وَأَن لَّيْسَ لِلْإِنسَٰنِ إِلَّا مَا سَعَىٰ﴾</span> النجم [39]. </p>
                 <p>هل إذا لم يُغسّل الميت أو لم يُصلّى عليه سيُدخله الله النار!</p>
@@ -386,11 +386,9 @@
                 <p>وقوله <span style="color: #5e2ca5; font-weight: bold;">﴿رَبَّنَا ٱغْفِرْ لِى وَلِوَٰلِدَىَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ ٱلْحِسَابُ﴾</span> إبراهيم [41]. </p>    
                 <p>فأقصى ما نُقدمه للميت هو الدعاء، والله هو صاحب القبول أو الرفض.</p>
                 
-                <div class="conclusion-box">
-                    <h3 style="margin-top:0;">الخلاصة:</h3>
-                    <p>صلاة الجنازة بوضعها الحالي، تعطي طمأنينة لأهل الميت وتبعث لهم السكينة بعد فقدانهم انسان عزيز عليهم، فلا يوجد بها أي انتهاك لخصوصية الميت على عكس التغسيل والتكفين.</p>
-                    <p>القرآن الكريم لم يذكر شيئاً عن تغسيل الميت، بل ركز على أهمية الدعاء للميت. الأفضل دفن الميت بملابسه مع إزالة الأشياء القيّمة للاستفادة منها، وهذا أكثر احتراماً للميت وأكثر توافقاً مع روح الإسلام الحنيف.</p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>صلاة الجنازة بوضعها الحالي، تعطي طمأنينة لأهل الميت وتبعث لهم السكينة بعد فقدانهم انسان عزيز عليهم، فلا يوجد بها أي انتهاك لخصوصية الميت على عكس التغسيل والتكفين.</p>
+                <p>القرآن الكريم لم يذكر شيئاً عن تغسيل الميت، بل ركز على أهمية الدعاء للميت. الأفضل دفن الميت بملابسه مع إزالة الأشياء القيّمة للاستفادة منها، وهذا أكثر احتراماً للميت وأكثر توافقاً مع روح الإسلام الحنيف.</p>
 
                 <!-- Video Link -->
                 <div style="text-align: center; margin: 40px 0;">
