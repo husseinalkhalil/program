@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>الخمر وحكمه - حسين الخليل</title>
+    <title>الجدال مع المؤدلجين - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==================== Shared Styles (Unified Identity) ==================== */
+        /* ==================== Shared Styles ==================== */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -114,10 +114,12 @@
         }
 
         /* Container & Main Layout */
+        /* تعديل: زيادة العرض العام */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
+            /* تعديل: زيادة عرض المقالة من 900px إلى 1100px */
             max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
@@ -127,7 +129,7 @@
         .article-content-container {
             background: var(--surface-color);
             border-radius: var(--radius-xl);
-            padding: 50px;
+            padding: 50px; /* زيادة بسيطة في الحواف الداخلية */
             box-shadow: var(--shadow-md);
             border: 1px solid rgba(0,0,0,0.03);
             position: relative;
@@ -144,7 +146,7 @@
         .article-meta i { color: var(--primary-color); }
 
         .article-body {
-            font-size: 1.2rem;
+            font-size: 1.2rem; /* تكبير الخط الافتراضي قليلاً للقراءة */
             color: var(--text-primary);
             text-align: justify; line-height: 1.9;
         }
@@ -156,14 +158,13 @@
             color: var(--primary-color);
             margin: 30px 0 15px;
             position: relative; display: inline-block;
-            font-size: 1.4rem; font-weight: 800;
         }
         .article-body h3::after {
             content: ''; display: block; width: 40px; height: 3px;
             background: var(--accent-color); margin-top: 5px;
         }
 
-        /* Font Controls (Fixed Left) */
+        /* Font Controls (Integrated Style) */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
             display: flex; flex-direction: column; gap: 10px;
@@ -189,7 +190,15 @@
             animation: highlightFade 2s forwards;
         }
 
-        /* Action Buttons */
+        /* Conclusion Section */
+        .conclusion-box {
+            background: #fcfaff;
+            border-right: 4px solid var(--primary-color);
+            padding: 25px 25px 25px 35px;
+            border-radius: 8px; margin-top: 30px;
+        }
+
+        /* Action Buttons (Share/Print) inside article */
         .article-actions {
             margin-top: 50px; padding-top: 25px;
             border-top: 1px solid #eee;
@@ -205,12 +214,7 @@
         }
         .action-btn-pill:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
 
-        /* Separator */
-        .text-separator {
-            text-align: center; margin: 40px 0; color: var(--primary-color); font-size: 1.5rem;
-        }
-
-        /* Footer */
+        /* Footer & Others */
         footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
         .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
         .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
@@ -236,6 +240,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
+        /* Print Media */
         @media print {
             nav, .hero-section, .font-controls-fixed, .article-actions, footer, .back-to-top, .universal-search { display: none; }
             .main-wrapper { margin: 0; max-width: 100%; }
@@ -243,6 +248,7 @@
             body { background: white; color: black; }
         }
 
+        /* Responsive */
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
@@ -261,7 +267,7 @@
             
             .font-controls-fixed {
                 top: auto; bottom: 30px; left: 30px; 
-                flex-direction: row; 
+                flex-direction: row; /* Horizontal on mobile */
             }
         }
 
@@ -269,6 +275,8 @@
             .hero-text h1 { font-size: 1.8rem; }
             .article-content-container { padding: 25px; }
             .footer-links { gap: 12px; }
+            
+            /* تعديل العرض على الجوال ليبقى مناسباً */
             .main-wrapper { max-width: 100%; }
         }
     </style>
@@ -312,8 +320,8 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>❖ الخمر وحكمه</h1>
-                <p>هل الاجتناب يعني التحريم؟ قراءة في النصوص والمفاهيم</p>
+                <h1>الجدال مع المؤدلجين، معركة خاسرة</h1>
+                <p>قراءة عقلانية في فن إدارة النقاش واختيار المعارك الفكرية</p>
             </div>
             
             <!-- Universal Search inside Hero -->
@@ -339,74 +347,33 @@
     <div class="container main-wrapper">
         <div class="article-content-container">
             <div class="article-meta">
-                <span><i class="far fa-calendar-alt"></i> 27 مايو 2025</span>
+                <span><i class="far fa-calendar-alt"></i> 28 فبراير 2025</span>
                 <span><i class="far fa-folder"></i> مقالات فكرية</span>
             </div>
 
-            <!-- Content Body (محتوى المقال: الخمر وحكمه) -->
+            <!-- Content Body -->
             <div class="article-body" id="articleBody">
-                <p>هل الخمر <strong><span style="color: #ef4444;">محرم؟</span></strong></p>
-                <p>هل الاجتناب يعني التحريم؟</p>
-                <p>هل يصل إلى درجة التحريم بما أنه إثم؟</p>
+                <p>كم مرة وجدت نفسك في جدال محتدم مع شخص عنيد لا يقبل المنطق، مهما كانت الحجج واضحة وضوح الشمس؟</p>
+                <p>المجادلة مع المؤدلجين تشبه تمامًا محاولة قتل بعوضة وقفت على خدك؛ قد تنجح في التخلص منها، وقد لا تفعل، لكن في النهاية، ستصفع نفسك بلا فائدة.</p>
+                <p>الأحمق لا يناقش ليصل إلى الحقيقة، بل يجادل ليُثبت نفسه، حتى لو كان في قمة الجهل. لا يهتم بالأدلة، ولا يتراجع أمام المنطق، بل يرى الجدال ساحة معركة <strong>"يجب أن ينتصر فيها"</strong>، حتى لو كان سلاحه الوحيد هو الصراخ أو تكرار كلام بلا معنى.</p>    
                 
-                <h3>مفهوم الاجتناب:</h3>
+                <h3 class="section-title">لماذا الجدال معهم مضيعة للوقت؟</h3>
+                <p><strong>1- العقل المغلق لا يفتح بالحوار: </strong>الشخص الذي يرفض الاستماع لا يمكن إقناعه، مهما قدمت له من حجج عقلية أو أدلة واضحة.</p>
+                <p><strong>2- الجدال يتحول إلى استنزاف نفسي: </strong> بدل أن توصل فكرتك، تجد نفسك غارقًا في إحباط وغضب، كأنك تحاول إطفاء النار بالزيت.</p>
+                <p><strong>3- المشكلة ليست فيك، بل فيهم: </strong> بعض العقول لا تريد الفهم، بل تريد فقط المجادلة من أجل المجادلة، والاستفزاز من أجل المتعة.</p>
                 
-                <p>عند دخولك إلى مدينة كبرى، تجد لافتة مكتوب عليها عبارتين:</p>
-                <p><strong><span style="color: var(--primary-color);">الأولى:</span></strong> لو أكملت مسارك بشكل مستقيم ستدخل إلى وسط المدينة.</p>
-                <p><strong><span style="color: var(--primary-color);">الثانية:</span></strong> لو انعطفت يمينًا، ستجد طريقًا جانبيًا يجنبك الدخول إلى وسط المدينة.</p>
+                <p>وأفضل تعامل معهم، ألّا تدخل في جدال عبثي، فالسكوت أحيانًا هو أبلغ رد.</p>
+                <p>اختر معاركك بحكمة، فليس كل نقاش يستحق وقتك وجهدك.</p>
+                <p>ابتسم وانسحب بذكاء، لأن بعض الأشخاص لا يستحقون حتى عناء الرد.</p>
+                <p>فمن الحكمة أن تدرك أن إقناع الجاهل أصعب من إقناع الصخرة، فلا تهدر وقتك على من لا يستحق، لأنك في النهاية ستصفع نفسك بدل أن تغيّر رأيه.</p>
                 
-                <p>لك حرية الاختيار، إذا سلكت الطريق الجانبي، ستتجنب الكثير من المشاكل بدخولك إلى وسط المدينة، كتجنب إشارات المرور والازدحام والشرطة والمطبات ووو...الخ.</p>
-                <p>لكن هذا لا يعني أن الدخول إلى وسط المدينة خطر أو ممنوع قانونيًّا، ولكن إذا قررت الدخول إلى وسط المدينة فعليك تحمل المسؤولية.</p>
-                
-                <p><span style="color: var(--primary-color); font-weight: bold;">أما من الناحية الشرعية:</span></p>
-                <p>الاجتناب درجة مختلفة عن التحريم، وتكون في أمر مذموم وفي أحيان يبلغ درجة المنكر <strong>"مثل قول الزور"</strong> وهي لا تعني أيضاً أن الخمر أمر محمود بالمطلق.</p>
-                
-                <p>أخبرنا الله سبحانه وتعالى في القرآن: <span style="color: var(--primary-color); font-weight: bold;">﴿إِن تَجْتَنِبُوا كَبَائِرَ مَا تُنْهَوْنَ عَنْهُ نُكَفِّرْ عَنكُمْ سَيِّئَاتِكُمْ وَنُدْخِلْكُم مُّدْخَلًا كَرِيمًا﴾</span> النساء [31].</p>
-                
-                <p><strong><span style="color: var(--primary-color);">فهل الخمر من كبائر ما نُهينا عنه؟</span></strong></p>
-                <p>لا أعتقد ذلك وفق الآيات، فلا يمكن أن نضع الخمر بجانب أكل أموال الناس بالباطل، لكن إدمان الخمر وسوء استخدامه قد يؤدي بصاحب النفس المائلة، إلى الفجور، وقد يرتكب من المظالم ما هو أشنع من قول الزور عند شربه للخمر.</p>
-                
-                <p><strong><span style="color: var(--primary-color);">هل الخمر أمر سيء؟</span></strong></p>
-                <p>في الغالب، <strong>نعم،</strong> إذا نظرنا إلى المجتمعات المتعارف فيها شرب الخمر، نجد البعض يتحول إلى بهيمة هائجة عند شربه له، والبعض يصبح إنسانًا شاعريًا، والآخر يسرد كل تاريخه الفاضح، مع أنه في صباح نفس اليوم، كان يحاضر فريق عمله في الأخلاق وضبط النفس.</p>
-                <p>في تلك المجتمعات، نُصادف قلة من الناس لا يتبعون أي مذهب أو تعاليم في كتاب يمنعهم من الخمر، لكنهم يختارون اجتنابها طلبًا لسلامة البدن والعقل.</p>
-                
-                <p>لذلك مسألة الخمر أراها تعتمد على الشخص نفسه وقابليته لاستغلالها بالدرجة الأولى، لا أقول أنها حلال بل هي أقرب للحرام ولكن لا يمكن أن أضعها في سلة واحدة مع الشرك بالله وقتل النفس التي حرم الله وأكل أموال اليتامى ظلماً والسرقة وعبادة الطاغوت.</p>
-                
-                <p>شارب الخمر أعتقد أنه مُسائل أمام الله بجريرة ما يرتكب من أمور عند شربه، فلو سكر واعتدى بالضرب أو قتل أو سرق، فلا أعتقد أن سكرته تعذره بأي شكل من الأشكال عن أخذ جزاء ما ارتكب أمام الله، لذا فالأمر خطير جداً.</p>
-                <p>في المقابل إن شرب ولم يسكر، وكان واعي فيما يقول، فلا مشكلة لديه إطلاقاً في أن يقيم الصلاة.</p>
-                
-                <p>هنا الضابط <span style="color: var(--primary-color); font-weight: bold;">﴿يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَقْرَبُوا الصَّلَاةَ وَأَنتُمْ سُكَارَىٰ حَتَّىٰ تَعْلَمُوا مَا تَقُولُونَ﴾</span> النساء [43].</p>
-                
-                <p><strong><span style="color: var(--primary-color);">لكن ما معنى سُكارى وما علاقتها بالخمر؟</span></strong></p>
-                <p>سكارى تعني حالة من اللا وعي وعدم إدراك ما يفعل أو ما يقول، وقد يكون ذلك أيضاً بسبب التعب الجسدي بسبب إرهاق العمل.</p>
-                <p>فالشخص الذي في حالة سُكر، هو شخص مشوش الأفكار وغير مُدرك لما يفعل ويقول.</p>
-                <p>لهذا، أمر الله الإنسان بعدم الصلاة في هذه الحالة حتى يذهب عنه سُكْرُه ويصبح خالي الذهن ومن ثم يصلي.</p>
-                
-                <p>يقول تعالى: <span style="color: var(--primary-color); font-weight: bold;">﴿وَتَرَى ٱلنَّاسَ سُكَٰرَىٰ وَمَا هُم بِسُكَٰرَىٰ وَلَٰكِنَّ عَذَابَ ٱللَّهِ شَدِيدٌ﴾</span> الحج [2].</p>
-                <p>يعطي لنا الله في هذه الآية توضيحاً لكلمة سُكارى وهو عدم الإدراك واللا وعي من هول الموقف عند قيام الساعة. فالسُكْر لا يقتصر على الخمر فقط، فكل ما يُذهِب العقل هو مُسكِر.</p>
-                
-                <p>أما اعتبار الخمر محرّم لأنه من الفواحش، وأن الله حرّم الفواحش <span style="color: var(--primary-color); font-weight: bold;">﴿قُلْ إِنَّمَا حَرَّمَ رَبِّىَ ٱلْفَوَٰحِشَ مَا ظَهَرَ مِنْهَا وَمَا بَطَنَ﴾</span> الأعراف [33].</p>
-                
-                <p>فعلينا أولاً أن نراجع الآيات التي ذكر الله فيها <strong>"إثم"</strong> ونقابلها بالآيات التي جاءت فيها مُعرّفة (الإثم).</p>
-                
-                <p><strong><span style="color: var(--primary-color);">سأعطي مثالاً:</span></strong></p>
-                <p><strong>1-</strong> <span style="color: var(--primary-color); font-weight: bold;">﴿لَوْلَا يَنْهَاهُمُ الرَّبَّانِيُّونَ وَالْأَحْبَارُ عَن قَوْلِهِمُ الْإِثْمَ وَأَكْلِهِمُ السُّحْتَ ۚ لَبِئْسَ مَا كَانُوا يَصْنَعُونَ﴾</span> المائدة [63].</p>
-                <p>فهنا الإثم "قول" لا علاقة له بالخمر.</p>
-                
-                <p><strong>2-</strong> <span style="color: var(--primary-color); font-weight: bold;">﴿يَا أَيُّهَا الَّذِينَ آمَنُوا اجْتَنِبُوا كَثِيرًا مِّنَ الظَّنِّ إِنَّ بَعْضَ الظَّنِّ إِثْمٌ ۖ وَلَا تَجَسَّسُوا وَلَا يَغْتَب بَّعْضُكُم بَعْضًا﴾</span> الحجرات [12].</p>
-                <p>في هذه الآية ورد لفظ <strong>"إثم"</strong> غير مُعرّف.</p>
-                
-                <p><strong><span style="color: var(--primary-color);">فهل يصح أن نقول أن بعض الظن محرم؟</span></strong></p>
-                <p>لا أعتقد.</p>
-                <p>الأصح أن نقول هو إثم كما قالت الآية، أي معناه أنه شيء مُضر للفرد والمجتمع.</p>
-                <p>وكذلك الخمر فيها من الضرر ما فيها (إثم كبير).</p>
-                
-                <p><strong><span style="color: var(--primary-color);">هل هو من كبائر الإثم؟</span></strong></p>
-                <p>قد يكون ذلك في حالة الإدمان وإهلاك النفس.</p>
-                <p>فالخمر هو كل ما يخامر عقل الإنسان أو يغلق منافذ الإدراك عنه.</p>
-                <p>الله يشفي كل مُبتلى بإدمان هذا المنكر ويعوضه فيما يغنيه عن إضرار هذا الابتلاء.</p>
-                
-                <div class="text-separator">✦ ✦ ✦</div>
+                <h3 class="section-title">الخلاصة</h3>
+                    <p>الجدال مع المؤدلجين معركة خاسرة لا طائل من ورائها.</p>
+                    <p>العقل المغلق لا يتفتح بالحجج، والطاقة النفسية ثمينة لا يجب هدرها في صراعات عقيمة.</p>
+                    <p>الحكمة تكمن في اختيار المعارك التي تستحق خوضها، والانسحاب بذكاء من تلك التي لا طائل منها.</p>
+                    <p>تذكر دائمًا أن السكوت في وجه الجدال العقيم ليس ضعفًا، بل قوة وحكمة.</p>
+                    <p>استثمر وقتك وطاقتك في ما ينفعك، واترك المؤدلجين في دوائرهم المغلقة.</p>
+                </div>
             </div>
 
             <!-- Actions -->
@@ -455,7 +422,7 @@
 
         // Font Resizing Logic
         const articleBody = document.getElementById('articleBody');
-        const defaultFontSize = 1.2; // rem
+        const defaultFontSize = 1.2; // rem (updated default)
         let currentFontSize = defaultFontSize;
 
         document.getElementById('fontIncrease').addEventListener('click', () => {
@@ -494,6 +461,7 @@
             }
 
             // Create regex for search (case insensitive, global)
+            // Special handling to avoid breaking HTML tags
             const regex = new RegExp(`(${searchTerm})`, 'gi');
             
             // Temporary container to parse HTML
