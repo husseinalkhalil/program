@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -151,6 +151,16 @@
 
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
 
         /* Video Link Style */
         .video-link {
@@ -191,14 +201,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -357,9 +359,7 @@
                 <p>التناقضات الموجودة في التراث الديني، لا يغفل عنها أي مسلم، حتى التراثيين أنفسهم (إلّا المعاندين).</p>
                 <p>فعندما ننتقد مسألة معينة منسوبة زوراً وبهتاناً للإسلام، ونقول أنها لا تمُت للإسلام بصلة، ونحاول تنقية هذا الدين الحنيف من كل ما أُلصق به من أخطاء تراثية.</p>
                 
-                <div style="margin:20px 0; background:#f9f7f2; padding:20px; border-radius:8px; border-right:4px solid var(--accent-color);">
-                    <p><strong>فعلى سبيل المثال:</strong> مسألة ضرب الزوجة أو الروايات الكثيرة التي تلعنها كالنامصة، والتي لا تُلبي زوجها للفراش، وغيرها والتي يعلم الجميع تلك الروايات.</p>
-                </div>
+                <p><strong>فعلى سبيل المثال:</strong> مسألة ضرب الزوجة أو الروايات الكثيرة التي تلعنها كالنامصة، والتي لا تُلبي زوجها للفراش، وغيرها والتي يعلم الجميع تلك الروايات.</p>
 
                 <p>يأتي من يعالج الخطأ بالخطأ، فيقول: ولماذا تُركّز على هذه الروايات ولا تذكر الروايات التي تمدح المرأة والتي فيها إكراماً للمرأة، كحديث: <strong>"استوصوا بالنساء خيراً"</strong> وحديث <strong>"رفقًا بالقوارير"</strong>؟</p>  
                 
@@ -372,12 +372,10 @@
                 
                 <p>فعندما ننتقد جرائم المسلمين، فهذا لا يعني أننا نؤيد جرائم غيرهم، فالعنف والجرم مرفوض أيّاً كان فاعله، فالإنسانية لا تتجزأ. فنحن كمسلمين، من واجبنا أن نبرّئ ديننا الحنيف من كل الجرائم التي نُسبت له، والواجب علينا إظهاره على طبيعته التي أرادها الله في كتابه، وليس في كتب التراث.</p>
                 
-                <div class="conclusion-box">
-                    <h3 style="margin-top:0;">الخلاصة:</h3>
-                    <p>معالجة الخطأ بالخطأ هي منهجية خاطئة تمنع التقدم والتصحيح الحقيقي.</p>
-                    <p>يجب علينا كمسلمين أن نتحلى بالشجاعة في نقد التراث الديني وتنقيته من كل ما يخالف القرآن الكريم، بدلاً من محاولة تبرير الأخطاء أو تغطيتها بترقيعات لا تحل المشكلة الجوهرية.</p>
-                    <p>الدين الإسلامي دين العدل والرحمة، وواجبنا أن نقدمه كما أراده الله في كتابه العزيز، بعيداً عن الإضافات البشرية التي شوهت صورته الحقيقية.</p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>معالجة الخطأ بالخطأ هي منهجية خاطئة تمنع التقدم والتصحيح الحقيقي.</p>
+                <p>يجب علينا كمسلمين أن نتحلى بالشجاعة في نقد التراث الديني وتنقيته من كل ما يخالف القرآن الكريم، بدلاً من محاولة تبرير الأخطاء أو تغطيتها بترقيعات لا تحل المشكلة الجوهرية.</p>
+                <p>الدين الإسلامي دين العدل والرحمة، وواجبنا أن نقدمه كما أراده الله في كتابه العزيز، بعيداً عن الإضافات البشرية التي شوهت صورته الحقيقية.</p>
 
                 <!-- Video Link -->
                 <div style="text-align: center; margin: 40px 0;">
