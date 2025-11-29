@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==================== Shared Styles (From Code 1) ==================== */
+        /* ==================== Shared Styles ==================== */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -152,6 +152,30 @@
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
 
+        /* Headings Style */
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* List Styles */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
+
         /* Font Controls (Fixed) */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
@@ -177,16 +201,6 @@
             border-radius: 2px;
             animation: highlightFade 2s forwards;
         }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
-        }
-        
-        .conclusion-box h3 { color: var(--primary-dark); margin-bottom: 15px; }
 
         /* Action Buttons */
         .article-actions {
@@ -339,7 +353,7 @@
                 <span><i class="far fa-folder"></i> مقالات فكرية</span>
             </div>
 
-            <!-- Content Body (From Code 2 content) -->
+            <!-- Content Body -->
             <div class="article-body" id="articleBody">
                 <p>الحقيقة المطلقة الوحيدة التي أؤمن بها هو <strong style="color: var(--primary-color);">الله</strong>.</p>
                 <p>جميع الأفكار والتدبرات هي حقائق نسبية، ترتفع نسبتها وتنخفض من شخص لآخر.</p>
@@ -347,30 +361,26 @@
                 <p>لا تحتكر الحقيقة لنفسك وتصادر أفكار الآخرين، فكلنا في رحلة بحث والعلم لا يزال مستمرًا.</p>
                 <p>فالحقيقة هو <strong style="color: var(--primary-color);">الله</strong>، لكن طريقة الوصول إلى هذا الإله تختلف من شخص لآخر.</p>
                 
-                <div style="background:#f9f7f2; padding:25px; border-radius:8px; border-right:4px solid var(--primary-color); margin:25px 0;">
-                    <p style="margin-bottom:15px; font-weight:bold;">فعندما يقول معلم رياضيات لطلابه: أعطوني رقمين مجموعهما يساوي 10</p>
-                    <p style="margin-bottom:5px;">فتختلف الإجابات بين الطلاب:</p>
-                    <ul style="list-style:none; padding-right:15px;">
-                        <li>• الأول أجاب: <strong>5 + 5 = 10</strong></li>
-                        <li>• والثاني أجاب: <strong>4 + 6 = 10</strong></li>
-                        <li>• والثالث أجاب: <strong>2 + 8 = 10</strong></li>
-                    </ul>
-                    <p style="margin-top:15px;">كل هذه الإجابات صحيحة لكن <strong>"طريقة التفكير"</strong> تختلف من طالب لآخر.</p>
-                </div>
+                <p style="margin-bottom:15px; font-weight:bold;">فعندما يقول معلم رياضيات لطلابه: أعطوني رقمين مجموعهما يساوي 10</p>
+                <p style="margin-bottom:5px;">فتختلف الإجابات بين الطلاب:</p>
+                <ul>
+                    <li>الأول أجاب: <strong>5 + 5 = 10</strong></li>
+                    <li>والثاني أجاب: <strong>4 + 6 = 10</strong></li>
+                    <li>والثالث أجاب: <strong>2 + 8 = 10</strong></li>
+                </ul>
+                <p>كل هذه الإجابات صحيحة لكن <strong>"طريقة التفكير"</strong> تختلف من طالب لآخر.</p>
 
                 <p>لذلك لا تحتكر لنفسك الحقيقة ولا تجعل طريقتك في الوصول إلى الله على أنها هي الطريقة الصحيحة والوحيدة، هي حقيقة بالنسبة لك، لذلك ابقَ عليها ودع غيرك يصل إلى الله بطريقته ولا تعتدي عليه.</p>
                 
-                <div class="conclusion-box">
-                    <h3>الخلاصة:</h3>
-                    <p>من صُوَر الاعتداء أن يصادر الإنسان حق غيره في التفكير.</p>
-                    <p>فمن الجهل والاجحاف أن يصادر الإنسان أفكار غيره ويدّعي أنها باطلة لمجرد أنها لم توافق أفكاره ولم تأتِ على هواه أو تُخالف موروثه.</p>
-                    <p>فلا تُصادر يا صديقي العزيز أفكار غيرك.</p>
-                    <p style="margin-top:20px; font-size:1.3rem; text-align:center;">
-                         وتذكّر قوله تعالى: <br>
-                         <span style="color: var(--primary-color); font-weight: bold;">﴿وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ﴾</span>
-                         <br><small style="color:gray; font-size:0.9rem;">[هود 111]</small>
-                    </p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>من صُوَر الاعتداء أن يصادر الإنسان حق غيره في التفكير.</p>
+                <p>فمن الجهل والاجحاف أن يصادر الإنسان أفكار غيره ويدّعي أنها باطلة لمجرد أنها لم توافق أفكاره ولم تأتِ على هواه أو تُخالف موروثه.</p>
+                <p>فلا تُصادر يا صديقي العزيز أفكار غيرك.</p>
+                <p style="margin-top:20px; font-size:1.3rem; text-align:center;">
+                     وتذكّر قوله تعالى: <br>
+                     <span style="color: var(--primary-color); font-weight: bold;">﴿وَلَوْ شَآءَ رَبُّكَ لَجَعَلَ ٱلنَّاسَ أُمَّةً وَٰحِدَةً ۖ وَلَا يَزَالُونَ مُخْتَلِفِينَ﴾</span>
+                     <br><small style="color:gray; font-size:0.9rem;">[هود 111]</small>
+                </p>
             </div>
 
             <!-- Actions -->
