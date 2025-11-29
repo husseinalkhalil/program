@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -152,6 +152,29 @@
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
 
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
+
         /* Font Controls (Fixed) */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
@@ -176,14 +199,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -344,19 +359,17 @@
                 <p>لكن في حقيقة الأمر أن كلمة الأعراب في كتاب الله لا تعني العرب أو البدو، والكلمة لا تتحدث عن قوميات.</p>
                 <p>فالعربي هو الشيء المُعرّب والمفهوم والواضح، وهذه الكلمة لا تعني القومية العربية أو اللغة العربية.</p>
                 
-                <div style="background:#f9f7f2; padding:20px; border-radius:8px; border-right:4px solid var(--primary-color); margin:25px 0;">
-                    <p style="margin-bottom:10px;">فقوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿قُرْءَانًا عَرَبِيًّا غَيْرَ ذِى عِوَجٍ لَّعَلَّهُمْ يَتَّقُونَ﴾</span> تعني أنه قُرآناً مفهوماً وواضحاً وهو الخالي والتام من العيب والنقص والاعوجاج.</p>
-                    <p style="margin-bottom:10px;">وهذا تأكيداً لقوله تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَقَدْ جِئْنَٰهُم بِكِتَٰبٍ فَصَّلْنَٰهُ عَلَىٰ عِلْمٍ هُدًى وَرَحْمَةً لِّقَوْمٍ يُؤْمِنُونَ﴾</span> الأعراف [52].</p>    
-                    <p style="margin:0;">وقوله تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وَكُلَّ شَىْءٍ فَصَّلْنَٰهُ تَفْصِيلًا﴾</span> الإسراء [12].</p>
-                </div>
+                <p>فقوله تعالى <span style="color: #5e2ca5; font-weight: bold;">﴿قُرْءَانًا عَرَبِيًّا غَيْرَ ذِى عِوَجٍ لَّعَلَّهُمْ يَتَّقُونَ﴾</span> تعني أنه قُرآناً مفهوماً وواضحاً وهو الخالي والتام من العيب والنقص والاعوجاج.</p>
+                <p>وهذا تأكيداً لقوله تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَقَدْ جِئْنَٰهُم بِكِتَٰبٍ فَصَّلْنَٰهُ عَلَىٰ عِلْمٍ هُدًى وَرَحْمَةً لِّقَوْمٍ يُؤْمِنُونَ﴾</span> الأعراف [52].</p>    
+                <p>وقوله تعالى: <span style="color: #5e2ca5; font-weight: bold;">﴿وَكُلَّ شَىْءٍ فَصَّلْنَٰهُ تَفْصِيلًا﴾</span> الإسراء [12].</p>
 
                 <p>وبالعودة لكلمة "الأعراب" فهي النقيض لكلمة "عرب" بسبب دخول همزة التعدّي على الكلمة، فقلبت المعنى إلى النقيض.</p>
                 
-                <div style="display:flex; gap:20px; flex-wrap:wrap; margin:20px 0;">
-                    <span style="background:#e0f2fe; color:#0369a1; padding:5px 15px; border-radius:20px; font-weight:bold;">عرب ↔ أعرب</span>
-                    <span style="background:#dcfce7; color:#15803d; padding:5px 15px; border-radius:20px; font-weight:bold;">قسط ↔ أقسط</span>
-                    <span style="background:#fce7f3; color:#be185d; padding:5px 15px; border-radius:20px; font-weight:bold;">عرض ↔ أعرض</span>
-                </div>
+                <ul>
+                    <li><strong>عرب ↔ أعرب</strong></li>
+                    <li><strong>قسط ↔ أقسط</strong></li>
+                    <li><strong>عرض ↔ أعرض</strong></li>
+                </ul>
 
                 <p>فعندما دخلت همزة التعدي على الكلمة تغير المعنى إلى النقيض.</p>
                 <p>حتى في المدرسة عندما يقول المُعلّم للطالب: اعرب ما تحته خط، أو اعرب البيت التالي، فهو يقصد اشرح ووضّح لي.</p>
@@ -371,12 +384,10 @@
                 
                 <p>فلو كان معنى "الأعراب" هم أهل البادية كما يعتقد البعض، لقال الله <strong>"البدو أشد كفراً ونفاقاً"</strong> وانتهى الأمر.</p>
 
-                <div class="conclusion-box">
-                    <h3 style="margin-top:0;">الخلاصة:</h3>
-                    <p>كلمة "الأعراب" في القرآن الكريم لا تعني العرب أو البدو، بل تشير إلى الفئة المعرضة عن الحق والمتمسكة بالضلال.</p>
-                    <p>يجب علينا تصحيح هذا الفهم الخاطئ الذي أدى إلى تمييز وظلم ضد أهل البادية، والتمسك بالمنهج القرآني الذي يرفض التعميم والتنميط.</p>
-                    <p>الله سبحانه وتعالى أنزل القرآن بلسان عربي مبين، وأمرنا بالتدبر في آياته، وليس بالتعصب لتفاسير قد تكون بعيدة عن المعنى الحقيقي الذي قصده الله في كتابه الكريم.</p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>كلمة "الأعراب" في القرآن الكريم لا تعني العرب أو البدو، بل تشير إلى الفئة المعرضة عن الحق والمتمسكة بالضلال.</p>
+                <p>يجب علينا تصحيح هذا الفهم الخاطئ الذي أدى إلى تمييز وظلم ضد أهل البادية، والتمسك بالمنهج القرآني الذي يرفض التعميم والتنميط.</p>
+                <p>الله سبحانه وتعالى أنزل القرآن بلسان عربي مبين، وأمرنا بالتدبر في آياته، وليس بالتعصب لتفاسير قد تكون بعيدة عن المعنى الحقيقي الذي قصده الله في كتابه الكريم.</p>
             </div>
 
             <!-- Actions -->
