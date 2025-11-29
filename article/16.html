@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -151,6 +151,29 @@
 
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
 
         /* Video Link Style */
         .video-link {
@@ -354,23 +377,15 @@
                 
                 <p><strong>خذ مثالًا على ذلك: </strong> موضوع "نِصاب الزكاة" من يرجع إلى القرآن، سيلاحظ أن كتاب الله لم يحدد مقدارًا معينًا للمال الذي يجب فيه الزكاة، لا في الذهب ولا في الفضة ولا في الأنعام، (بغض النظر عن مفهوم كلمة الزكاة) لا تجد في القرآن لفظ “النِصاب” أصلًا. </p>    
                 
-                <div style="margin:30px 0; background: #f8fafc; padding: 20px; border-radius: 8px; border-right: 4px solid var(--primary-color);">
-                    <p style="margin-bottom:15px;"><strong><span style="color: green;">من جعل القرآن ميزانه، سيقول: </span></strong> إذا لم يرد النص، فلا يجوز لنا إلزام الناس به.</p>
-                    <p style="margin:0;"><strong><span style="color: #ef4444;">أما من جعل التراث ميزانه، </span></strong> فإذا لم يجد في القرآن نصًّا عن “النِصاب” لا يشكك في صحة التراث، بل يُسارع إلى اتهام القرآن بالنقص أو الإيجاز المُخل، ويبدأ في تبرير غياب النص.</p>
-                </div>
+                <p><strong><span style="color: green;">من جعل القرآن ميزانه، سيقول: </span></strong> إذا لم يرد النص، فلا يجوز لنا إلزام الناس به.</p>
+                <p><strong><span style="color: #ef4444;">أما من جعل التراث ميزانه، </span></strong> فإذا لم يجد في القرآن نصًّا عن “النِصاب” لا يشكك في صحة التراث، بل يُسارع إلى اتهام القرآن بالنقص أو الإيجاز المُخل، ويبدأ في تبرير غياب النص.</p>
 
                 <p>وهذا الموضوع مهم جدًا، لأننا حين نختلف في “الميزان”، سنختلف في كل شيء بعده.</p>
                 <p>من يزن بالقرآن سيرى الأمور بعين مختلفة كليًا عمّن يزن بالمنقول.</p>
                 
-                <ul style="list-style:none; padding:0; margin:20px 0;">
-                    <li style="margin-bottom:10px; display:flex; align-items:center; gap:10px;">
-                        <i class="fas fa-check-circle" style="color:var(--primary-color);"></i>
-                        <strong>الأول:</strong> يبدأ من النص الإلهي وينتهي برأيه.
-                    </li>
-                    <li style="display:flex; align-items:center; gap:10px;">
-                        <i class="fas fa-times-circle" style="color:var(--text-secondary);"></i>
-                        <strong>الثاني:</strong> يبدأ من الرأي أو الموروث ثم يُلوي أعناق النصوص لتتوافق معه.
-                    </li>
+                <ul>
+                    <li><strong>الأول:</strong> يبدأ من النص الإلهي وينتهي برأيه.</li>
+                    <li><strong>الثاني:</strong> يبدأ من الرأي أو الموروث ثم يُلوي أعناق النصوص لتتوافق معه.</li>
                 </ul>
 
                 <p>ولهذا، فإن أعظم إصلاح فكري يمكن أن يقوم به الإنسان هو أن يُراجع ميزانه، ويُحدد: هل القرآن هو الأصل الذي يُقاس عليه كل شيء؟ أم أنه تابع يُؤوّل ويُفسّر بما يتماشى مع ما ورثناه من السابقين؟</p>
