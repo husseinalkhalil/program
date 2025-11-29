@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -152,19 +152,27 @@
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
 
-        /* Video Link Style */
-        .video-link {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 12px 25px; border-radius: 50px;
-            font-weight: 700; text-decoration: none;
-            background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
-            color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-            margin: 20px auto;
-            transition: all 0.3s;
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
         }
-        .video-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
         }
 
         /* Font Controls (Fixed) */
@@ -191,14 +199,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -356,20 +356,18 @@
             <div class="article-body" id="articleBody">
                 <p>ميّز الله الإنسان عن غيره بالعقل والقدرة على التفكير والاختيار، فكان مع العقل الحرية، ودعا في أكثر من موضع إلى استخدام العقل.</p>
                 
-                <div style="background:#f9f7f2; padding:20px; border-radius:8px; margin:25px 0; border-right:4px solid var(--primary-color);">
-                    <p style="margin-bottom:10px;"><strong>ذكر الله في القرآن:</strong></p>
-                    <ul style="list-style:none; padding:0;">
-                        <li><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّ فِى ذَٰلِكَ لَأيَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ﴾</span> (6 مرات)</li>
-                        <li><span style="color: #5e2ca5; font-weight: bold;">﴿لَعَلَّهُمْ يَتَفَكَّرُونَ﴾</span> (3 مرات)</li>
-                        <li>كلمة <span style="color: #5e2ca5; font-weight: bold;">﴿يَعْقِلُونَ﴾</span> (22 مرة)</li>
-                    </ul>
-                </div>
+                <p style="margin-bottom:10px;"><strong>ذكر الله في القرآن:</strong></p>
+                <ul>
+                    <li><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّ فِى ذَٰلِكَ لَأيَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ﴾</span> (6 مرات)</li>
+                    <li><span style="color: #5e2ca5; font-weight: bold;">﴿لَعَلَّهُمْ يَتَفَكَّرُونَ﴾</span> (3 مرات)</li>
+                    <li>كلمة <span style="color: #5e2ca5; font-weight: bold;">﴿يَعْقِلُونَ﴾</span> (22 مرة)</li>
+                </ul>
 
                 <p>ودعا إلى عدم تحييده: <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَا تَقْفُ مَا لَيْسَ لَكَ بِهِۦ عِلْمٌ﴾</span> [الإسراء 36].</p>
                 <p>وجعل العلم أساس التوحيد: <span style="color: #5e2ca5; font-weight: bold;">﴿فَٱعْلَمْ أَنَّهُۥ لَآ إِلَٰهَ إِلَّا ٱللَّهُ﴾</span> [محمد 19].</p>
                 
                 <p>وشنّع من لا يستخدم عقله:</p>
-                <ul style="list-style:none; padding:0; margin-bottom:20px;">
+                <ul>
                     <li><span style="color: #5e2ca5; font-weight: bold;">﴿كَلَّا ۖ بَلْ ۜ رَانَ عَلَىٰ قُلُوبِهِم﴾</span> [المطففين 14]</li>
                     <li><span style="color: #5e2ca5; font-weight: bold;">﴿أَمْ عَلَىٰ قُلُوبٍ أَقْفَالُهَآ﴾</span> [محمد 24]</li>
                 </ul>
@@ -379,7 +377,7 @@
                 <p>وبعد كل هذا يطل علينا أحد رجال الدين ليقول لنا: <strong>"عقلك كالحمار، عندما تصل إلى الشيخ، اربطه وادخل لتتلقى النقل بلا عقل."</strong></p>
                 <p>والشيخ الآخر يقول لنا بكل جرأة: <strong>"إن تقديم العقل على النقل هو طريقة أهل الضلال."</strong></p> 
                 
-                <div style="margin:30px 0; padding:20px; background:#f0fdf4; border-radius:8px; border:1px solid #dcfce7; text-align:center;">
+                <div style="text-align:center; margin:30px 0;">
                     <p style="font-size:1.3rem; color:#166534; font-weight:bold;">﴿وَقالوا لَو كُنّا نَسمَعُ أَو نَعقِلُ ما كُنّا في أَصحابِ السَّعيرِ﴾</p>
                     <span style="color:gray; font-size:0.9rem;">[الملك 10]</span>
                     <p style="margin-top:10px;">صدق الله وكذب الجاهلون.</p>
