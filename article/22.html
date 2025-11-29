@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -151,6 +151,29 @@
 
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
 
         /* Video Link Style */
         .video-link {
@@ -191,14 +214,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -359,27 +374,23 @@
                 <p>فإذا سمعنا أن شخصاً مات وهو يُصلّي أو في المسجد أو مات وهو يقرأ القرآن، نقول: نياله على هالموتة، فقد أحسن الله خاتمته، وعلى الفور نضمن له الجنة!</p>
                 <p>ولكن إذا مات الانسان وهو يستمع للأغاني (باعتبارها مُحرّمة) أو مات وهو يشاهد فيلماً أو مات وهو يغني، نقول: اللهم أحسن خاتمتنا، ظنّاً منّا أن خاتمته سيئة لأن الميت يُبعث على ما مات عليه كما أسلفنا.</p>
                 
-                <div style="background:#fcfaff; padding:20px; border-radius:8px; margin:25px 0; border:1px solid #eee;">
-                    <p>حسن الخاتمة وسوء الخاتمة ما هي إلّا مقولات تراثية ما أنزل الله بها من سلطان. حسن الخاتمة الحقيقي هو:</p>
-                    <ul style="list-style:none; padding:0;">
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> أن تموت وقلبك صافياً من الشرك.</li>
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> أن تموت ولم تظلم أحداً.</li>
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> أن تموت ولم تشهد زوراً.</li>
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> أن تموت ولم تأكل مال اليتيم.</li>
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> أن تموت ولم تأكل ميراث أخواتك.</li>
-                        <li><i class="fas fa-check-circle" style="color:green; margin-left:5px;"></i> أن تموت ولم تتعدّى على حقوق غيرك.</li>
-                    </ul>
-                    <p style="text-align:center; font-weight:bold; margin-top:15px;">هذا هو <span style="color: green;">حسن الخاتمة</span> وعكسه <span style="color: red;">سوء الخاتمة</span>.</p>
-                </div>
+                <p>حسن الخاتمة وسوء الخاتمة ما هي إلّا مقولات تراثية ما أنزل الله بها من سلطان. حسن الخاتمة الحقيقي هو:</p>
+                <ul>
+                    <li>أن تموت وقلبك صافياً من الشرك.</li>
+                    <li>أن تموت ولم تظلم أحداً.</li>
+                    <li>أن تموت ولم تشهد زوراً.</li>
+                    <li>أن تموت ولم تأكل مال اليتيم.</li>
+                    <li>أن تموت ولم تأكل ميراث أخواتك.</li>
+                    <li>أن تموت ولم تتعدّى على حقوق غيرك.</li>
+                </ul>
+                <p style="text-align:center; font-weight:bold; margin-top:15px;">هذا هو <span style="color: green;">حسن الخاتمة</span> وعكسه <span style="color: red;">سوء الخاتمة</span>.</p>
 
                 <p>أما أن تموت وأن ساجد أو تموت وأن تشاهد التلفاز وتستمع للأغاني التي يعتبرونها محرمة في التراث، فهذا ليس له اعتبار عند <span style="color: green; font-weight:bold;"> الله </span>.</p>
                 <p>إذا مُتَّ وأنت ساجد فلن يزيد من حسناتك، وإذا مُتَّ وأنت تسمع الأغاني، فلن يُنقص ذلك من حسناتك.</p>
                 <p>الله سبحانه وتعالى يُخبرنا بأنه لن يُضيع مثقال ذرة من عمل سواءً صالحاً أو طالحاً.</p>
                 
-                <div style="margin:25px 0;">
-                    <p>يقول تعالى: <span style="background:#f0fdf4; padding:3px 8px; border-radius:4px; border:1px solid #dcfce7; color:#166534;">﴿فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ ۞ وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ﴾</span> الزلزلة [7-8].</p>
-                    <p>يقول تعالى: <span style="background:#f0fdf4; padding:3px 8px; border-radius:4px; border:1px solid #dcfce7; color:#166534;">﴿وَأَن لَّيْسَ لِلْإِنسَٰنِ إِلَّا مَا سَعَىٰ﴾</span> النجم [39].</p>
-                </div>
+                <p>يقول تعالى: <span style="background:#f0fdf4; padding:3px 8px; border-radius:4px; border:1px solid #dcfce7; color:#166534;">﴿فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ ۞ وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ﴾</span> الزلزلة [7-8].</p>
+                <p>يقول تعالى: <span style="background:#f0fdf4; padding:3px 8px; border-radius:4px; border:1px solid #dcfce7; color:#166534;">﴿وَأَن لَّيْسَ لِلْإِنسَٰنِ إِلَّا مَا سَعَىٰ﴾</span> النجم [39].</p>
 
                 <p>كتاب الله لا يُخبرنا بأن من يموت ساجداً فله الجنة.</p>
                 <p>كتاب الله لا يُخبرنا بأن من يموت وهو يسمع الأغاني فليتبوّأ مقعده من النار.</p>
@@ -390,13 +401,11 @@
                 
                 <p><strong><span style="color: red;">ملاحظة:</span></strong> سماع الأغاني هي مجازية لأنهم دائماً ما يجعلونها مقياساً لسوء الخاتمة، وقس على ذلك كل ما هو مُحرّم أو منبوذ في التراث.</p>
 
-                <div class="conclusion-box">
-                    <h3 style="margin-top:0;">الخلاصة:</h3>
-                    <p>الانسان على أي حالٍ مات، فهو سيُحاسب على ما عمل في حياته.</p>
-                    <p>حسن الخاتمة الحقيقي ليس مرتبطاً بالظروف التي يموت فيها الإنسان، بل بالأعمال الصالحة التي قام بها طوال حياته.</p>
-                    <p>القرآن الكريم يؤكد مبدأ المسؤولية الفردية وأن كل إنسان سيحاسب على أعماله فقط.</p>
-                    <p>يجب علينا التمييز بين المفاهيم القرآنية الصحيحة والمفاهيم التراثية التي قد لا تتوافق مع روح العدل الإلهي.</p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>الانسان على أي حالٍ مات، فهو سيُحاسب على ما عمل في حياته.</p>
+                <p>حسن الخاتمة الحقيقي ليس مرتبطاً بالظروف التي يموت فيها الإنسان، بل بالأعمال الصالحة التي قام بها طوال حياته.</p>
+                <p>القرآن الكريم يؤكد مبدأ المسؤولية الفردية وأن كل إنسان سيحاسب على أعماله فقط.</p>
+                <p>يجب علينا التمييز بين المفاهيم القرآنية الصحيحة والمفاهيم التراثية التي قد لا تتوافق مع روح العدل الإلهي.</p>
 
                 <!-- Video Link -->
                 <div style="text-align: center; margin: 40px 0;">
