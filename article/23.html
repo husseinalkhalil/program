@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -151,6 +151,29 @@
 
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
 
         /* Video Link Style */
         .video-link {
@@ -191,14 +214,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -354,15 +369,12 @@
 
             <!-- Content Body -->
             <div class="article-body" id="articleBody">
-                <div style="background:#fcfaff; border-right:4px solid var(--primary-color); padding:15px; margin-bottom:20px;">
-                    <p><strong><span style="color: #e11d48;">فلان اغتصب فتاة.</span></strong> <br> <span style="color: #2563eb;">ردة فعل المجتمع: الله رح يبعث من يغتصب بناته.</span></p>
-                    <hr style="border:0; border-top:1px dashed #ddd; margin:10px 0;">
-                    <p><strong><span style="color: #e11d48;">فلان خدع فتاة وقهرها.</span></strong> <br> <span style="color: #2563eb;">بكرة الله يبعث من يقهر بنته/اخته.</span></p>
-                    <hr style="border:0; border-top:1px dashed #ddd; margin:10px 0;">
-                    <p><strong><span style="color: #e11d48;">فلان ظلم زوجته.</span></strong> <br> <span style="color: #2563eb;">بكرة الله يبعثله من يظلم بناته.</span></p>
-                    <hr style="border:0; border-top:1px dashed #ddd; margin:10px 0;">
-                    <p><strong><span style="color: #e11d48;">فلان خدع فتاة وكسر قلبها.</span></strong> <br> <span style="color: #2563eb;">بكرة الله ينتقم منه ببناته، يمهل ولا يهمل.</span></p>
-                </div>
+                <ul>
+                    <li><strong><span style="color: #e11d48;">فلان اغتصب فتاة.</span></strong> <br> <span style="color: #2563eb;">ردة فعل المجتمع: الله رح يبعث من يغتصب بناته.</span></li>
+                    <li><strong><span style="color: #e11d48;">فلان خدع فتاة وقهرها.</span></strong> <br> <span style="color: #2563eb;">بكرة الله يبعث من يقهر بنته/اخته.</span></li>
+                    <li><strong><span style="color: #e11d48;">فلان ظلم زوجته.</span></strong> <br> <span style="color: #2563eb;">بكرة الله يبعثله من يظلم بناته.</span></li>
+                    <li><strong><span style="color: #e11d48;">فلان خدع فتاة وكسر قلبها.</span></strong> <br> <span style="color: #2563eb;">بكرة الله ينتقم منه ببناته، يمهل ولا يهمل.</span></li>
+                </ul>
 
                 <p>لا أعلم هذا التفسير المغلوط إلى متى سيستمر!؟ ما علاقة الفتاة "ابنة، أخت، زوجة، أم" بفعل مُشين قام به الرجل؟</p>
                 <p>لماذا لا تدور الدنيا عليه ويتم الانتقام منه؟ إذا اغتُصب فتاة، لماذا لا تقولون: سيأتي من يغتصبه هو؟!</p>
@@ -373,10 +385,11 @@
                 <p>لماذا تُصوّرون الأنثى على أنها يجب أن تكون مُكفّرة لأخطاء الرجل! هي لها كيانها الخاص بها، وتُحاسب على أخطائها هي وليس على أخطاء من تكون تحت وصايته.</p>
                 <p>تجد أن الأنثى نفسها تستنكر ما قام به الرجل وتتبرّأ منه، ومع ذلك المطلوب أن تدفع هي الثمن! ويشمتون بها إذا أصابها مكروه، ويرون أن هذا انتقام إلهي.</p>
                 
-                <div style="margin:30px 0; padding:20px; background:#f0fdf4; border-radius:8px; border:1px solid #dcfce7; text-align:center;">
-                    <p style="font-size:1.3rem; margin-bottom:10px; color:#166534; font-weight:bold;">﴿وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَىٰ﴾</p>
-                    <p style="margin:0;">ألا تقرأون القرآن!؟</p>
-                </div>
+                <p style="text-align:center; font-size:1.3rem; margin:20px 0; color:var(--primary-dark);">
+                    <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَىٰ﴾</span>
+                    <br>
+                    ألا تقرأون القرآن!؟
+                </p>
 
                 <p>عندما تظلم الأنثى أحدهم، لماذا لا نسمعهم يقولون: بكرة الله رح يبعث من يظلم ابنها أو زوجها أو والدها؟ لماذا الأنثى فقط هي من يجب أن يدفع الثمن؟!</p>
                 
