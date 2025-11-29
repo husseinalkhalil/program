@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -151,6 +151,16 @@
 
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
 
         /* Font Controls (Fixed) */
         .font-controls-fixed {
@@ -331,9 +341,7 @@
 
             <!-- Content Body -->
             <div class="article-body" id="articleBody">
-                <div style="background:#fcfaff; border-right:4px solid var(--accent-color); padding:20px; margin-bottom:25px;">
-                    <p style="margin:0;">في الحديث: أن رسول الله أمر بقتل الوزغ <strong>"أبو بريص"</strong> وقال: (كان ينفخ على ابراهيم عليه السلام). أخرجه البخاري برقم (3359). وفي رواية مسلم بحديث رقم (2238) أن رسول الله أمر بقتل الوزغ وسمّاه فويسقاً.</p>
-                </div>
+                <p>في الحديث: أن رسول الله أمر بقتل الوزغ <strong>"أبو بريص"</strong> وقال: (كان ينفخ على ابراهيم عليه السلام). أخرجه البخاري برقم (3359). وفي رواية مسلم بحديث رقم (2238) أن رسول الله أمر بقتل الوزغ وسمّاه فويسقاً.</p>
 
                 <p>لكن في قصة حرق إبراهيم، أنه من شدة اشتعال النار، أنها كانت تحرق الطائر الذي يمُرّ من فوقها، وأنه من قوة اللهب، لم يستطيعوا أن يتقدموا ليُلقوا إبراهيم فيها، فقاموا برميه بالمنجنيق من بعيد (كما في القصة).</p>
                 
@@ -343,7 +351,7 @@
                 
                 <p>إذا كان هو فعلاً فعل هذا، فما ذنب أبناءه وذريته من بعده لفعل فعله مخلوق واحد؟ هل من العدالة أن تُحاسب كل السلالة بسبب خطأ مخلوق واحد!؟</p>
                 
-                <p style="margin-top:30px; font-weight:bold; color:var(--primary-dark);">يا ترى ماذا فعلت أيها الفويسق الزنديق المهرطق الكافر الفاجر العاهر لكي يؤلفوا عليك ما يؤلفوا!</p>
+                <h3 style="color:var(--primary-dark);">يا ترى ماذا فعلت أيها الفويسق الزنديق المهرطق الكافر الفاجر العاهر لكي يؤلفوا عليك ما يؤلفوا!</h3>
             </div>
 
             <!-- Actions -->
