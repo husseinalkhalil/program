@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==================== Shared Styles (From Code 1) ==================== */
+        /* ==================== Shared Styles ==================== */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -152,6 +152,29 @@
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
 
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
+
         /* Font Controls (Fixed) */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
@@ -177,16 +200,6 @@
             border-radius: 2px;
             animation: highlightFade 2s forwards;
         }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
-        }
-        
-        .conclusion-box h3 { color: var(--primary-dark); margin-bottom: 15px; }
 
         /* Action Buttons */
         .article-actions {
@@ -308,7 +321,7 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>الإيمان الصادق لا يحتاج إلى ترويج.</h1>
+                <h1>الإيمان الصادق لا يحتاج إلى ترويج</h1>
                 <p>لماذا يحتاج من يؤمن بدينٍ ما إلى الترويج له؟ ولماذا نجد هذا السلوك أكثر وضوحًا في ديانات ومجتمعات معينة؟</p>
             </div>
             
@@ -339,7 +352,7 @@
                 <span><i class="far fa-folder"></i> مقالات فكرية</span>
             </div>
 
-            <!-- Content Body (From Code 2 content) -->
+            <!-- Content Body -->
             <div class="article-body" id="articleBody">
                 <p>في عالم يعج بالشعارات الدينية، والدعوات المتكررة إلى اعتناق هذا المعتقد أو ذاك، يتبادر إلى الذهن سؤال بسيط لكنه عميق:</p>
                 <p>لماذا يحتاج من يؤمن بدينٍ ما إلى الترويج له؟ ولماذا نجد هذا السلوك أكثر وضوحًا في ديانات ومجتمعات معينة دون غيرها؟</p>
@@ -347,10 +360,8 @@
                 
                 <p>المعتقد الذي يحتاج إلى ترويج، هو معتقد مرتبك، فعندما ترى من يوزع القرآن في الشوارع، أو من تمسك بحجاب وتبدأ في دعوة الأخريات إليه بإلحاح في الشوارع بغية تجريبه، أو من يكرر على مسامعك أنه <strong> “من أهل التقوى” </strong>.</p>
                 
-                <div style="background:#f9f7f2; padding:20px; border-radius:8px; border-right:4px solid var(--primary-color); margin:25px 0;">
-                    <p style="margin-bottom:10px;"><strong>اسأل نفسك: لماذا؟</strong></p>
-                    <p style="margin:0;">هل لأن هذا الشخص مرتاح جدًا بما يؤمن به؟ أم لأنه يحتاج إلى من يشبهه كي يشعر بالاطمئنان؟</p>
-                </div>
+                <h3>اسأل نفسك: لماذا؟</h3>
+                <p>هل لأن هذا الشخص مرتاح جدًا بما يؤمن به؟ أم لأنه يحتاج إلى من يشبهه كي يشعر بالاطمئنان؟</p>
 
                 <p>في كثير من الحالات، لا يكون الدافع هو “حب الخير للناس” كما يُقال، بل حاجة نفسية خفية: أنا أحتاج إلى أن تكون أنت مثلي، لأنني غير واثق تمامًا مما أنا عليه، وأحتاج إلى التكرار والانتشار كي أشعر بالطمأنينة، أو لا أرفض الاختلاف لأنني أرى أني أمتلك الحقيقة المطلقة <strong>"بعد أن ورثتها"</strong>.</p>
                 
@@ -363,11 +374,11 @@
                 
                 <p>في المقابل، ترى في بعض البيئات الإسلامية <strong>"وخاصة التقليدية"</strong> ميلاً شديدًا نحو الدعوة والمزايدة:</p>
                 
-                <div style="display:flex; gap:15px; flex-wrap:wrap; margin:20px 0;">
-                     <span style="background:#e0f2fe; color:#0369a1; padding:8px 20px; border-radius:20px; font-weight:bold;">فلانة غير محجبة؟ ← ضالة</span>
-                     <span style="background:#dcfce7; color:#15803d; padding:8px 20px; border-radius:20px; font-weight:bold;">لا يصلي مثلي؟ ← أقل إيمانًا</span>
-                     <span style="background:#fce7f3; color:#be185d; padding:8px 20px; border-radius:20px; font-weight:bold;">لا “تنشر” الدين؟ ← إيمان ناقص</span>
-                </div>
+                <ul>
+                    <li>فلانة غير محجبة؟ ← ضالة</li>
+                    <li>لا يصلي مثلي؟ ← أقل إيمانًا</li>
+                    <li>لا “تنشر” الدين؟ ← إيمان ناقص</li>
+                </ul>
 
                 <p>وتبدأ حلقة المزايدة بالتقوى، والتي هي في حقيقتها، نوع من القلق المقنّع الذي يبحث عن شرعية في عيون الآخرين. الحجاب مثالًا: بين القناعة والفرض الإجتماعي.</p>
                 <p>حين تروّج بعض النساء للحجاب بين أخريات غير محجبات، وتلاحقهن بكلمات <strong>“النصح”</strong> فهي لا تعبّر دائمًا عن محبة، بل ربما عن رغبة لا واعية في شرعنة قناعاتها أمام نفسها، وفرض هذه القناعة على الأخريات.</p>
@@ -375,13 +386,11 @@
                 <p>الدعوة الصادقة تنبع من محبة الإنسان للخير، دون ضغط، دون مزايدة، ودون فرض.</p>
                 <p>أما الترويج، فهو غالبًا محاولة يائسة لجعل الآخرين يدعمون إيمانًا لم ينضج بعد داخليًا.</p>
 
-                <div class="conclusion-box">
-                    <h3>الفرق واضح:</h3>
-                    <p><strong>الأول: </strong> هادئ، صادق، متزن.</p>
-                    <p><strong>الثاني: </strong> صاخب، مهووس بالإقناع، لا يرتاح حتى يُقنع الجميع، وغالبًا لا ينجح.</p>
-                    <p>ليس المطلوب أن نخجل مما نؤمن به، لكن علينا أن نميز بين: مشاركة المعتقد عن طمأنينة، وبين نشره عن قلق فكلما زاد صراخ الإيمان، قلّ صدقه.</p>
-                    <p>كلما احتاج أحدهم إلى <strong>“جيش من المتشابهين”</strong> كي يطمئن إلى دينه، فليعلم أن إيمانه هشّ، مهما كان مظهره قويًا.</p>
-                </div>
+                <h3>الفرق واضح:</h3>
+                <p><strong>الأول: </strong> هادئ، صادق، متزن.</p>
+                <p><strong>الثاني: </strong> صاخب، مهووس بالإقناع، لا يرتاح حتى يُقنع الجميع، وغالبًا لا ينجح.</p>
+                <p>ليس المطلوب أن نخجل مما نؤمن به، لكن علينا أن نميز بين: مشاركة المعتقد عن طمأنينة، وبين نشره عن قلق فكلما زاد صراخ الإيمان، قلّ صدقه.</p>
+                <p>كلما احتاج أحدهم إلى <strong>“جيش من المتشابهين”</strong> كي يطمئن إلى دينه، فليعلم أن إيمانه هشّ، مهما كان مظهره قويًا.</p>
             </div>
 
             <!-- Actions -->
