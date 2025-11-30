@@ -195,14 +195,6 @@
             margin-left: auto; margin-right: auto; margin-bottom: 60px;
         }
 
-        /* Results Info */
-        .search-results-info {
-            text-align: center; margin-bottom: 20px; display: none;
-            color: #FFD200; font-weight: bold; font-size: 1.2rem;
-            background: rgba(0,0,0,0.5); padding: 10px; border-radius: 10px;
-            display: inline-block; width: 100%;
-        }
-
         /* Manhaj Specific Styles */
         .intro-card, .conclusion-card {
             background: var(--surface-color); border-radius: var(--radius-xl);
@@ -251,9 +243,6 @@
         details[open] summary { background: rgba(94, 44, 165, 0.05); border-bottom: 1px solid rgba(0,0,0,0.05); }
         details p { padding: 25px; margin: 0; color: var(--text-secondary); line-height: 1.8; font-size: 1rem; background: white; }
 
-        /* Highlighting */
-        .highlight { background-color: var(--accent-color); color: #422006; padding: 0 3px; border-radius: 3px; font-weight: 500; }
-
         /* Social */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
@@ -261,7 +250,7 @@
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
         .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: all 0.3s; }
-        .social-btn img { width: 24px; height: 24px; transition: filter 0.3s; }
+        .social-btn img { width: 24px; height: 24px; transition: 0.3s; }
         .social-btn:hover { transform: translateY(-5px) scale(1.1); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
         .social-btn.facebook:hover { background: #1877F2; }
@@ -280,19 +269,18 @@
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
         /* Fixed Buttons */
-        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
+        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: 0.3s; }
         .share-fixed-btn:hover { transform: scale(1.1); }
         .share-fixed-btn img { width: 24px; filter: brightness(0); }
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
-        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: 0.3s; pointer-events: none; }
         .copy-alert.show { opacity: 1; }
 
         @media (max-width: 900px) {
             .hero-text h1 { font-size: 2rem; }
-            /* زيادة المسافة السفلية في الموبايل لتجنب التداخل */
-            .hero-section { padding: 100px 20px 160px; }
+            .hero-section { padding: 100px 20px 160px; } /* مسافة إضافية للموبايل */
             .share-fixed-btn { display: none; }
             .principles-grid { grid-template-columns: 1fr; }
         }
@@ -360,15 +348,6 @@
             <i class="fas fa-search search-icon-placeholder"></i>
             <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
             <div class="search-results" id="searchResults"></div>
-        </div>
-
-        <div id="searchResultsInfo" class="search-results-info">
-            <span id="resultsCount">0</span> نتيجة بحث
-        </div>
-
-        <div id="noResultsMessage" style="display:none; text-align:center; padding:30px; color:var(--text-secondary); background:var(--surface-color); border-radius:var(--radius-lg); margin-bottom:20px;">
-            <i class="fas fa-search" style="font-size:2rem; margin-bottom:10px; color:var(--text-secondary); opacity:0.5;"></i><br>
-            لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
         </div>
 
         <div id="manhajContent">
@@ -719,7 +698,8 @@
                 return;
             }
             
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            // Dropdown results
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث في جميع المحتويات...</p></div>';
             resultsContainer.style.display = 'block';
 
             const data = await loadAllPagesContent();
