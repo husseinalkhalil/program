@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==================== Shared Styles (From Code 1) ==================== */
+        /* ==================== Shared Styles ==================== */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -152,6 +152,29 @@
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
 
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
+
         /* Font Controls (Fixed) */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
@@ -177,16 +200,6 @@
             border-radius: 2px;
             animation: highlightFade 2s forwards;
         }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
-        }
-        
-        .conclusion-box h3 { color: var(--primary-dark); margin-bottom: 15px; }
 
         /* Action Buttons */
         .article-actions {
@@ -339,21 +352,19 @@
                 <span><i class="far fa-folder"></i> مقالات فكرية</span>
             </div>
 
-            <!-- Content Body (From Code 2 content) -->
+            <!-- Content Body -->
             <div class="article-body" id="articleBody">
                 <p>فلسطين ليست قضية شعب محتل، ولا كرامة أمة مسلوبة عند الأنظمة المستبدة.</p>
                 <p>هي ببساطة <strong style="color: #000;">"حصان طروادة"</strong> وبرواية ثانية <strong style="color: #000;">"مسمار جحا"</strong>.</p>
                 <p>الأنظمة المستبدة عرفت نقطة ضعف شعوبها، عرفت إن الشعب العربي عنده جرح حقيقي، وتعاطف إنساني صادق مع فلسطين.</p>
                 
-                <div style="background:#f9f7f2; padding:25px; border-radius:8px; border-right:4px solid var(--primary-color); margin:25px 0;">
-                    <p style="margin:0 0 10px 0;">فعرفت من وين تدخل وكيف تخدر شعوبها:</p>
-                    <ul style="list-style:none; padding-right:10px;">
-                        <li style="margin-bottom:8px;">• بدنا نحرر فلسطين.</li>
-                        <li style="margin-bottom:8px;">• العدو على الأبواب.</li>
-                        <li style="margin-bottom:8px;">• لازم ندعم فلسطين.</li>
-                        <li>• لازم نرجع الأقصى.</li>
-                    </ul>
-                </div>
+                <p>فعرفت من وين تدخل وكيف تخدر شعوبها:</p>
+                <ul>
+                    <li>بدنا نحرر فلسطين.</li>
+                    <li>العدو على الأبواب.</li>
+                    <li>لازم ندعم فلسطين.</li>
+                    <li>لازم نرجع الأقصى.</li>
+                </ul>
                 
                 <p>وكل ما الشعب اشتكى من الجوع، من القمع، من الفساد.</p>
                 <p>يُخرَج <strong> “حصان طروادة” </strong>المغبّر من المخزن، ويُقال لهم: اصبروا، نحن دولة مواجهة، العالم يتآمر علينا، فلسطين تناديكم، انظروا إلى الدول الثانية كيف منهارة.</p>
@@ -372,12 +383,10 @@
                 
                 <p>وفلسطين ما استفادت شي، لكن الطغاة فازوا بالمناصب، وأحكموا قبضتهم، وسرقوا باسم فلسطين، وزجّوا الأحرار في السجون باسم الخيانة والعمالة.</p>
 
-                <div class="conclusion-box">
-                    <h3>الخلاصة:</h3>
-                    <p>القضية الفلسطينية تحوّلت في يد الطغاة من قضية كرامة، إلى أداة استغلال نفسي وسياسي، تُستخدم فقط حين يحتاجها النظام.</p>
-                    <p>مثل مفتاح قديم، يفتح كل الأبواب إلا باب القدس.</p>
-                    <p>وحصان طروادة عرف كل الطرق، إلّا <strong> طريق القدس </strong>.</p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>القضية الفلسطينية تحوّلت في يد الطغاة من قضية كرامة، إلى أداة استغلال نفسي وسياسي، تُستخدم فقط حين يحتاجها النظام.</p>
+                <p>مثل مفتاح قديم، يفتح كل الأبواب إلا باب القدس.</p>
+                <p>وحصان طروادة عرف كل الطرق، إلّا <strong> طريق القدس </strong>.</p>
             </div>
 
             <!-- Actions -->
