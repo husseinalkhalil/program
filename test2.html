@@ -237,12 +237,13 @@
             margin: 0 auto 30px;
         }
 
-        /* Search Box in Hero */
+        /* ==================== Search Box Styles ==================== */
         .universal-search {
             width: 100%;
             max-width: 600px;
             position: relative;
             margin-top: 20px;
+            z-index: 1001; /* Ensure it stays on top */
         }
 
         #globalSearch {
@@ -255,6 +256,11 @@
             font-family: 'Tajawal', sans-serif;
             outline: none;
             background: white;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        #globalSearch:focus {
+            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.4); /* تأثير ذهبي عند الكتابة */
         }
 
         .search-icon-placeholder {
@@ -266,20 +272,35 @@
             pointer-events: none;
         }
 
+        /* تنسيق صندوق النتائج */
         .search-results {
             position: absolute;
-            top: 110%;
+            top: 110%; /* يظهر أسفل المربع مباشرة */
             left: 0;
             right: 0;
             background: var(--surface-color);
             border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
             max-height: 400px;
             overflow-y: auto;
-            z-index: 1000;
+            z-index: 1002;
             text-align: right;
-            display: none;
+            display: none; /* مخفي افتراضياً */
             color: var(--text-primary);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        /* تخصيص شريط التمرير داخل النتائج */
+        .search-results::-webkit-scrollbar {
+            width: 8px;
+        }
+        .search-results::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 0 0 0 15px;
+        }
+        .search-results::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 4px;
         }
 
         .search-item {
@@ -288,15 +309,19 @@
             cursor: pointer;
             transition: background 0.2s;
         }
+        
+        .search-item:last-child {
+            border-bottom: none;
+        }
 
-        .search-item:hover { background: rgba(0,0,0,0.03); }
-        .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; }
-        .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
+        .search-item:hover { background: rgba(94, 44, 165, 0.05); }
+        .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; font-weight: 700; }
+        .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
         .search-item mark { 
-            background-color: #fde047; 
+            background-color: #ffd700; 
             color: #422006; 
-            padding: 0 2px;
-            border-radius: 2px;
+            padding: 0 3px;
+            border-radius: 3px;
         }
 
         /* ==================== Quick Actions ==================== */
@@ -849,10 +874,12 @@
                 <p>قراءة عقلانية ونقد للتراث بمنهج معاصر. نافذة للتفكير والتأمل الحر.</p>
             </div>
             
-            <!-- Universal Search inside Hero -->
+            <!-- Universal Search inside Hero with Results Box -->
             <div class="universal-search">
                 <i class="fas fa-search search-icon-placeholder"></i>
                 <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+                
+                <!-- This is the Results Box - It will expand when searching -->
                 <div class="search-results" id="searchResults"></div>
             </div>
         </div>
@@ -882,7 +909,7 @@
             </div>
         </div>
 
-        <!-- Main Content Grid - 12 Cards -->
+        <!-- Main Content Grid -->
         <div class="section-title">
             <h2>استكشف المحتوى</h2>
         </div>
@@ -1188,22 +1215,20 @@
         let cachedPagesContent = null;
         let isSearchInitialized = false;
         
-        // الدالة المعدلة: تقوم بجلب ملف site-map.json ثم قراءة الروابط منه
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
 
             try {
-                // 1. جلب قائمة الروابط من الملف الخارجي
+                // 1. Fetch site-map.json with cache busting
                 const response = await fetch('site-map.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error('Could not load site-map.json');
                 const pagesList = await response.json();
 
-                // 2. معالجة كل رابط في القائمة
+                // 2. Process each item (String URL or Object)
                 const promises = pagesList.map(async (item) => {
-                    // دعم الحالة التي يكون فيها العنصر مجرد نص (رابط) أو كائن
                     let url = typeof item === 'string' ? item : item.url;
                     
-                    // إذا كان العنصر في ملف JSON يحتوي بالفعل على المحتوى (للتسريع)، نستخدمه مباشرة
+                    // Check if content is provided manually in JSON
                     let manualContent = (typeof item === 'object' && item.content) ? item.content : null;
                     let manualTitle = (typeof item === 'object' && item.page) ? item.page : null;
 
@@ -1215,7 +1240,7 @@
                         };
                     }
 
-                    // إذا لم يكن المحتوى موجوداً، نذهب لجلب الصفحة
+                    // Otherwise fetch the page content
                     try {
                         const pageResp = await fetch(url);
                         if (!pageResp.ok) return null;
