@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==================== Shared Styles (From Code 1) ==================== */
+        /* ==================== Shared Styles ==================== */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -152,6 +152,44 @@
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
 
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
+
+        /* Video Link Style */
+        .video-link {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 12px 25px; border-radius: 50px;
+            font-weight: 700; text-decoration: none;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+            color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            margin: 20px auto;
+            transition: all 0.3s;
+        }
+        .video-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
         /* Font Controls (Fixed) */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
@@ -177,31 +215,6 @@
             border-radius: 2px;
             animation: highlightFade 2s forwards;
         }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
-        }
-        
-        .conclusion-box h3 { color: var(--primary-dark); margin-bottom: 15px; }
-
-        /* Video CTA */
-        .video-cta {
-            background: linear-gradient(135deg, #7E57C2, #FFC107);
-            color: white !important;
-            padding: 12px 30px;
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            margin: 20px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        }
-        .video-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
 
         /* Action Buttons */
         .article-actions {
@@ -354,7 +367,7 @@
                 <span><i class="far fa-folder"></i> مقالات فكرية</span>
             </div>
 
-            <!-- Content Body (From Code 2 content) -->
+            <!-- Content Body -->
             <div class="article-body" id="articleBody">
                 <p>يقول تعالى: <span style="color: var(--primary-color); font-weight: bold;">﴿قَالُوٓاْ إِنَّمَا ٱلْبَيْعُ مِثْلُ ٱلرِّبَوٰاْ ۗ وَأَحَلَّ ٱللَّهُ ٱلْبَيْعَ وَحَرَّمَ ٱلرِّبَوٰاْ﴾</span>.</p>
                 <p>ما هو الربا؟ وهل التعامل مع البنوك <span style="color: red;">محرّم</span>؟</p>
@@ -367,74 +380,72 @@
 
                 <h3 style="color: var(--primary-dark); margin-top: 30px;">مواضع ذكر الربا في القرآن:</h3>
                 <p>يظهر مفهوم الربا في ثلاثة سياقات أساسية:</p>
-                <ul style="list-style:none; padding-right:10px; margin-bottom:20px;">
+                <ul>
                     <li>1. في التعاملات التجارية (البيع).</li>
                     <li>2. في التعامل مع مستحقي الصدقات.</li>
                     <li>3. في القروض (أموال الناس).</li>
                 </ul>
 
-                <h4 style="color: var(--primary-color);">أولًا: الربا في التعاملات التجارية (البيع):</h4>
+                <h3 style="color: var(--primary-color);">أولًا: الربا في التعاملات التجارية (البيع):</h3>
                 <p>في التجارة، يتم الاتفاق بين جميع الأطراف بالتراضي، وقد يحقق رأس المال ربحًا أو قد يتعرض لخسارة.</p>
                 <p>الربح الناتج عن بيع سلعة محددة هو ربح طبيعي، لأنه ليس متزايدًا بشكل متضاعف. لذلك جاء رد الله على الذين شبّهوا البيع بالربا:</p>
-                <ul style="list-style:none; padding-right:10px;">
-                    <li>• الزيادة الناتجة عن البيع حلال.</li>
-                    <li>• أما المضاعفة المستمرة للأرباح فهي ربا محرّم، لأنها ليست بيعًا بل استغلالًا ماليًا.</li>
+                <ul>
+                    <li>الزيادة الناتجة عن البيع حلال.</li>
+                    <li>أما المضاعفة المستمرة للأرباح فهي ربا محرّم، لأنها ليست بيعًا بل استغلالًا ماليًا.</li>
                 </ul>
 
-                <h4 style="color: var(--primary-color); margin-top: 20px;">ثانيًا: الربا مع مستحقي الصدقات:</h4>
+                <h3 style="color: var(--primary-color); margin-top: 20px;">ثانيًا: الربا مع مستحقي الصدقات:</h3>
                 <p>الله حذّر هنا بصرامة وقال: <span style="color: var(--primary-color); font-weight: bold;">﴿يَمْحَقُ ٱللَّهُ ٱلرِّبَوٰاْ وَيُرْبِى ٱلصَّدَقَٰتِ﴾</span>.</p>
                 <p>أي أن كل ربا يُؤخذ من شخص مستحق للصدقة سيمحقه الله.</p>
-                <ul style="list-style:none; padding-right:10px;">
-                    <li>• مستحق الصدقة شخص فقير، لا مصدر دخل له.</li>
-                    <li>• فرض الله له حقًّا في أموالنا من خلال الصدقات الفردية أو من خلال الزكاة التي تجمعها الدولة.</li>
+                <ul>
+                    <li>مستحق الصدقة شخص فقير، لا مصدر دخل له.</li>
+                    <li>فرض الله له حقًّا في أموالنا من خلال الصدقات الفردية أو من خلال الزكاة التي تجمعها الدولة.</li>
                 </ul>
                 <p>كيف نُقرض إنسانًا له حق في أموالنا أصلاً ولم ننفق عليه صدقته الواجبة؟ الله يذكّرنا أن الرزق الذي نملكه هو وديعة عندنا.</p>
                 <p>يقول تعالى: <span style="color: var(--primary-color); font-weight: bold;">﴿فَـَٔاتِ ذَا ٱلْقُرْبَىٰ حَقَّهُۥ وَٱلْمِسْكِينَ وَٱبْنَ ٱلسَّبِيلِ ۚ ذَٰلِكَ خَيْرٌ لِّلَّذِينَ يُرِيدُونَ وَجْهَ ٱللَّهِ ۖ وَأُوْلَٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ﴾</span>.</p>
 
-                <h4 style="color: var(--primary-color); margin-top: 20px;">ثالثًا: الربا في القروض (أموال الناس):</h4>
+                <h3 style="color: var(--primary-color); margin-top: 20px;">ثالثًا: الربا في القروض (أموال الناس):</h3>
                 <p>يقول تعالى: <span style="color: var(--primary-color); font-weight: bold;">﴿وَمَآ ءَاتَيْتُم مِّن رِّبًا لِّيَرْبُوَاْ فِىٓ أَمْوَٰلِ ٱلنَّاسِ فَلَا يَرْبُواْ عِندَ ٱللَّهِ ۖ وَمَآ ءَاتَيْتُم مِّن زَكَوٰةٍ تُرِيدُونَ وَجْهَ ٱللَّهِ فَأُوْلَٰٓئِكَ هُمُ ٱلْمُضْعِفُونَ﴾</span>.</p>
-                <ul style="list-style:none; padding-right:10px;">
-                    <li>• أي قرض يُعطى لشخص (حتى لو كان قادرًا على السداد) ويُشترط عليه زيادة مالية، فهو ربا محرّم.</li>
-                    <li>• الله لن يبارك هذه الزيادة، بل ستمحق كما في الآية السابقة.</li>
+                <ul>
+                    <li>أي قرض يُعطى لشخص (حتى لو كان قادرًا على السداد) ويُشترط عليه زيادة مالية، فهو ربا محرّم.</li>
+                    <li>الله لن يبارك هذه الزيادة، بل ستمحق كما في الآية السابقة.</li>
                 </ul>
                 <p><strong>أما الصدقات والزكاة:</strong> فهي القرض الحسن الذي وعدنا الله أن يضاعفه لنا.</p>
 
                 <h3 style="color: var(--primary-dark); margin-top: 30px;">كيفية ترك الربا:</h3>
                 <p>يقول تعالى: <span style="color: var(--primary-color); font-weight: bold;">﴿وَإِن تُبْتُمْ فَلَكُمْ رُءُوسُ أَمْوَٰلِكُمْ لَا تَظْلِمُونَ وَلَا تُظْلَمُونَ﴾</span>.</p>
-                <ul style="list-style:none; padding-right:10px;">
-                    <li>• لك الحق في رأس مالك فقط دون أي زيادة.</li>
-                    <li>• وإن كان المدين معسرًا، يجب منحه مهلة حتى تتحسن ظروفه.</li>
-                    <li>• ومن تصدّق على المدين وأسقط عنه الدين، فذلك خير له.</li>
+                <ul>
+                    <li>لك الحق في رأس مالك فقط دون أي زيادة.</li>
+                    <li>وإن كان المدين معسرًا، يجب منحه مهلة حتى تتحسن ظروفه.</li>
+                    <li>ومن تصدّق على المدين وأسقط عنه الدين، فذلك خير له.</li>
                 </ul>
 
                 <h3 style="color: var(--primary-dark); margin-top: 30px;">هل التعامل مع البنوك محرّم؟</h3>
                 <p>البنوك هي مؤسسات مالية تدير الأموال عبر الإقراض والاستثمار لصالح المجتمع. هناك حالتان للتعامل معها:</p>
                 
-                <div style="background:#f9f7f2; padding:20px; border-radius:8px; border-right:4px solid var(--primary-color); margin:20px 0;">
-                    <h4 style="margin-top:0;">1- إيداع الأموال مع فائدة ثابتة</h4>
-                    <p style="margin-bottom:5px;">• عند إيداع المال في البنك، فإنك توكله لاستثمار أموالك بشكل آمن.</p>
-                    <p style="margin-bottom:5px;">• الفائدة الثابتة على رأس المال ليست ربا، طالما لم تتحول إلى أضعاف مضاعفة.</p>
-                    <p style="margin-bottom:0;">• الفوائد البنكية عادةً ليست متضاعفة، لذا فهي حلال وفق تحليل الآيات.</p>
-                </div>
+                <h3 style="color: var(--primary-dark);">1- إيداع الأموال مع فائدة ثابتة</h3>
+                <ul>
+                    <li>عند إيداع المال في البنك، فإنك توكله لاستثمار أموالك بشكل آمن.</li>
+                    <li>الفائدة الثابتة على رأس المال ليست ربا، طالما لم تتحول إلى أضعاف مضاعفة.</li>
+                    <li>الفوائد البنكية عادةً ليست متضاعفة، لذا فهي حلال وفق تحليل الآيات.</li>
+                </ul>
 
-                <div style="background:#f9f7f2; padding:20px; border-radius:8px; border-right:4px solid var(--accent-color); margin:20px 0;">
-                    <h4 style="margin-top:0;">2- الاقتراض من البنك</h4>
-                    <p style="margin-bottom:5px;">• إذا اقترضت لتمويل مشروع مدروس، فالأمر يعد اتفاقًا تجاريًا، وليس ربًا، طالما أن البنك لا يفرض نسبًا متضاعفة.</p>
-                    <p style="margin-bottom:0;">• إن فشل المشروع وأعسر المقترض، فعلى البنك أن يتوقف عن احتساب الفوائد، وينتظر حتى تتحسن ظروف المقترض، أو يتفق معه على تسوية عادلة.</p>
-                </div>
+                <h3 style="color: var(--accent-color); color:#b8860b;">2- الاقتراض من البنك</h3>
+                <ul>
+                    <li>إذا اقترضت لتمويل مشروع مدروس، فالأمر يعد اتفاقًا تجاريًا، وليس ربًا، طالما أن البنك لا يفرض نسبًا متضاعفة.</li>
+                    <li>إن فشل المشروع وأعسر المقترض، فعلى البنك أن يتوقف عن احتساب الفوائد، وينتظر حتى تتحسن ظروف المقترض، أو يتفق معه على تسوية عادلة.</li>
+                </ul>
 
-                <div class="conclusion-box">
-                    <h3>الخلاصة:</h3>
-                    <ul style="list-style:none; padding-right:10px;">
-                        <li>• أي زيادة على القروض (أموال الناس) هي ربا محرّم.</li>
-                        <li>• أي إقراض لشخص مستحق للصدقات مع زيادة فهو ربا محرّم.</li>
-                        <li>• أي زيادة على رأس المال من بيع (تجارة) هي حلال، طالما لا تتحول إلى أرباح متضاعفة مستمرة.</li>
-                    </ul>
-                </div>
+                <h3>الخلاصة:</h3>
+                <ul>
+                    <li>أي زيادة على القروض (أموال الناس) هي ربا محرّم.</li>
+                    <li>أي إقراض لشخص مستحق للصدقات مع زيادة فهو ربا محرّم.</li>
+                    <li>أي زيادة على رأس المال من بيع (تجارة) هي حلال، طالما لا تتحول إلى أرباح متضاعفة مستمرة.</li>
+                </ul>
 
                 <!-- Video Link -->
-                <div style="text-align: center;">
-                    <a href="https://youtu.be/hTPaTdk4_8E?si=dFT5JD1uc28Ds1-G" target="_blank" class="video-cta">
+                <div style="text-align: center; margin: 40px 0;">
+                    <a href="https://youtu.be/hTPaTdk4_8E?si=dFT5JD1uc28Ds1-G" target="_blank" class="video-link">
                         <i class="fas fa-video"></i> حلقة مرئية عن الموضوع
                     </a>
                 </div>
