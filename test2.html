@@ -40,13 +40,17 @@
             --primary-light: #8a5bc7;
             --accent-color: #ffd700;
             --bg-color: #f9f7f2;
-            --surface-color: #ffffff;
+            
+            /* تم تغيير لون البطاقات ليتناسب مع الهوية (أبيض بنفسجي خفيف جداً) */
+            --surface-color: #F8F5FD; 
+            
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-            --shadow-md: 0 6px 12px rgba(0,0,0,0.08);
-            --shadow-lg: 0 15px 25px rgba(0,0,0,0.1);
+            /* تم تحسين الظل ليكون بلمسة بنفسجية خفيفة */
+            --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
+            --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
             
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
@@ -277,7 +281,7 @@
             top: 110%;
             left: 0;
             right: 0;
-            background: var(--surface-color);
+            background: #ffffff; /* جعل خلفية النتائج بيضاء لتباين أفضل */
             border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2);
             max-height: 400px;
@@ -289,7 +293,6 @@
             border: 1px solid rgba(0,0,0,0.05);
         }
         
-        /* شريط التمرير */
         .search-results::-webkit-scrollbar {
             width: 8px;
         }
@@ -305,12 +308,12 @@
         /* تنسيق عدد النتائج */
         .search-count {
             padding: 10px 20px;
-            font-size: 0.85rem;
-            color: #64748b;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid rgba(94, 44, 165, 0.1);
             background: #f8fafc;
             border-radius: 15px 15px 0 0;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .search-item {
