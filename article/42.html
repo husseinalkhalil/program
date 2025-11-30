@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==================== Shared Styles (From Code 1) ==================== */
+        /* ==================== Shared Styles ==================== */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -152,6 +152,29 @@
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
 
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
+
         /* Font Controls (Fixed) */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
@@ -177,16 +200,6 @@
             border-radius: 2px;
             animation: highlightFade 2s forwards;
         }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
-        }
-        
-        .conclusion-box h3 { color: var(--primary-dark); margin-bottom: 15px; }
 
         /* Action Buttons */
         .article-actions {
@@ -339,7 +352,7 @@
                 <span><i class="far fa-folder"></i> مقالات فكرية</span>
             </div>
 
-            <!-- Content Body (From Code 2 content) -->
+            <!-- Content Body -->
             <div class="article-body" id="articleBody">
                 <p>في كل مرة يُعلن فيها أحدهم أن قضيته الأولى هي وطنه، تنهال عليه الاتهامات: “مُطبّع”، “خائن”، “أناني”، وكأن حب الوطن والسعي لبنائه أصبح جريمة لا تُغتفر في زمن الشعارات الرنانة.</p>
                 <p>أكثر من يزايدون على غيرهم في هذا السياق، يعيشون في بلدان مستقرة، بعيدة عن أجواء الحروب والانهيارات، ينعمون بالأمان، وبخدمات التعليم والصحة والرواتب، ثم يطالبون شعوبًا أنهكتها الصراعات أن تُنكر أوطانها وتُضحي بها لأجل “قضايا الأمة”، وعلى رأسها قضية فلسطين.</p>
@@ -350,9 +363,7 @@
                 <p>والأغرب، أن نفس من يصرخون: “افتحوا لنا الحدود”، يعلمون جيدًا أنهم قادرون على الوصول لأي دولة في العالم، سواء بالطرق النظامية أو عبر التهريب.</p>
                 <p>هم أنفسهم يسافرون لحضور مؤتمرات ومناسبات وفعاليات، ويجولون العواصم بحرية، فلماذا يصبح دخول فلسطين بالذات متوقفًا على <strong>“فتح الحدود”؟</strong></p>
                 
-                <div style="background:#f9f7f2; padding:20px; border-radius:8px; border-right:4px solid var(--primary-color); margin:25px 0;">
-                    <p style="margin-bottom:10px;"><strong>الجواب واضح:</strong> لأن فتح الحدود ليس سوى “مسرحية خطابية”، تُقال لكسب الشعبية والتأييد، لا أكثر.</p>
-                </div>
+                <p><strong>الجواب واضح:</strong> لأن فتح الحدود ليس سوى “مسرحية خطابية”، تُقال لكسب الشعبية والتأييد، لا أكثر.</p>
 
                 <p>وإذا أردنا أن نتحدث بوضوح، فخذ مثالًا صارخًا:</p>
                 <p>إيران، التي بقيت <strong>14 سنة</strong> على حدود إسرائيل من جهة سورية، لم تُطلق رصاصة واحدة باتجاهها، بل وجهت كل نيرانها وآلة قتلها إلى صدور السوريين، دفاعًا عن مشروعها وعن الساقط الفار.</p>
@@ -374,27 +385,25 @@
                 <p>بلدي أولًا، ليست خيانة.</p>
                 <p>الخيانة الحقيقية هي أن تترك وطنك يغرق، بينما تحاضر في الفضيلة، وتُزايد بشعارات لا تطلق رصاصة ولا تُنقذ إنسانًا.</p>
 
-                <div class="conclusion-box">
-                    <h3>الخلاصة:</h3>
-                    <p>إن كنتم صادقين في نصرة فلسطين، ففلسطين الآن بأمسّ الحاجة إليكم من أي وقت آخر. كفّوا عن الخطابات والتغريدات، وكونوا قولًا وفعلًا ولو لمرة واحدة، لا كما عودتمونا أنتم وساستكم، على الكلام فقط.</p>
-                    <p>جيشكم الذي تتفاخرون به يمتلك من الطائرات والقطع البحرية ما يكفي ليصل فلسطين دون أن ينتظر “فتح الحدود” من أحد، ويمتلك أيضًا صواريخ قادرة على الوصول إلى أي نقطة في فلسطين دون الحاجة لتحريك جيوش أو فتح حدود.</p>
-                    <p>الميدان يا حميدان، والله يوفقكم وينصركم، ونحن سندعو لكم قيامًا وقعودًا.</p>
-                    <p>وإذا ما عندكم الموقع أو ما تعرفون الطريق لا أنتم ولا جيشكم، بلغوني، أرسل لكم العنوان من 
-                      <span style="font-weight: bold;">
-                        <span style="color: #4285F4;">G</span>
-                        <span style="color: #EA4335;">o</span>
-                        <span style="color: #FBBC05;">o</span>
-                        <span style="color: #4285F4;">g</span>
-                        <span style="color: #34A853;">l</span>
-                        <span style="color: #EA4335;">e</span>
-                        <span style="color: black;"> </span>
-                        <span style="color: #4285F4;">M</span>
-                        <span style="color: #34A853;">a</span>
-                        <span style="color: #FBBC05;">p</span>
-                        <span style="color: #EA4335;">s</span>
-                      </span>.
-                    </p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>إن كنتم صادقين في نصرة فلسطين، ففلسطين الآن بأمسّ الحاجة إليكم من أي وقت آخر. كفّوا عن الخطابات والتغريدات، وكونوا قولًا وفعلًا ولو لمرة واحدة، لا كما عودتمونا أنتم وساستكم، على الكلام فقط.</p>
+                <p>جيشكم الذي تتفاخرون به يمتلك من الطائرات والقطع البحرية ما يكفي ليصل فلسطين دون أن ينتظر “فتح الحدود” من أحد، ويمتلك أيضًا صواريخ قادرة على الوصول إلى أي نقطة في فلسطين دون الحاجة لتحريك جيوش أو فتح حدود.</p>
+                <p>الميدان يا حميدان، والله يوفقكم وينصركم، ونحن سندعو لكم قيامًا وقعودًا.</p>
+                <p>وإذا ما عندكم الموقع أو ما تعرفون الطريق لا أنتم ولا جيشكم، بلغوني، أرسل لكم العنوان من 
+                  <span style="font-weight: bold;">
+                    <span style="color: #4285F4;">G</span>
+                    <span style="color: #EA4335;">o</span>
+                    <span style="color: #FBBC05;">o</span>
+                    <span style="color: #4285F4;">g</span>
+                    <span style="color: #34A853;">l</span>
+                    <span style="color: #EA4335;">e</span>
+                    <span style="color: black;"> </span>
+                    <span style="color: #4285F4;">M</span>
+                    <span style="color: #34A853;">a</span>
+                    <span style="color: #FBBC05;">p</span>
+                    <span style="color: #EA4335;">s</span>
+                  </span>.
+                </p>
             </div>
 
             <!-- Actions -->
