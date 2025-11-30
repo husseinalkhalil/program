@@ -243,7 +243,7 @@
             max-width: 600px;
             position: relative;
             margin-top: 20px;
-            z-index: 1001; /* Ensure it stays on top */
+            z-index: 1001;
         }
 
         #globalSearch {
@@ -260,7 +260,7 @@
         }
         
         #globalSearch:focus {
-            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.4); /* تأثير ذهبي عند الكتابة */
+            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.4);
         }
 
         .search-icon-placeholder {
@@ -272,10 +272,9 @@
             pointer-events: none;
         }
 
-        /* تنسيق صندوق النتائج */
         .search-results {
             position: absolute;
-            top: 110%; /* يظهر أسفل المربع مباشرة */
+            top: 110%;
             left: 0;
             right: 0;
             background: var(--surface-color);
@@ -285,12 +284,12 @@
             overflow-y: auto;
             z-index: 1002;
             text-align: right;
-            display: none; /* مخفي افتراضياً */
+            display: none;
             color: var(--text-primary);
             border: 1px solid rgba(0,0,0,0.05);
         }
         
-        /* تخصيص شريط التمرير داخل النتائج */
+        /* شريط التمرير */
         .search-results::-webkit-scrollbar {
             width: 8px;
         }
@@ -301,6 +300,17 @@
         .search-results::-webkit-scrollbar-thumb {
             background: var(--primary-light);
             border-radius: 4px;
+        }
+
+        /* تنسيق عدد النتائج */
+        .search-count {
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            color: #64748b;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: #f8fafc;
+            border-radius: 15px 15px 0 0;
+            font-weight: bold;
         }
 
         .search-item {
@@ -1304,6 +1314,12 @@
                 container.style.display = 'block';
                 return;
             }
+            
+            // إضافة عدد النتائج في الأعلى
+            const countDiv = document.createElement('div');
+            countDiv.className = 'search-count';
+            countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
+            container.appendChild(countDiv);
             
             results.forEach(item => {
                 const div = document.createElement('div');
