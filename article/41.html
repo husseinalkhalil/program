@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==================== Shared Styles (From Code 1) ==================== */
+        /* ==================== Shared Styles ==================== */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -152,6 +152,16 @@
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
 
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
         /* Font Controls (Fixed) */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
@@ -177,16 +187,6 @@
             border-radius: 2px;
             animation: highlightFade 2s forwards;
         }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
-        }
-        
-        .conclusion-box h3 { color: var(--primary-dark); margin-bottom: 15px; }
 
         /* Action Buttons */
         .article-actions {
@@ -339,7 +339,7 @@
                 <span><i class="far fa-folder"></i> مقالات فكرية</span>
             </div>
 
-            <!-- Content Body (From Code 2 content) -->
+            <!-- Content Body -->
             <div class="article-body" id="articleBody">
                 <p>في هذا الزمن المليء بالصخب والتفسيرات الجاهزة والآراء المتزاحمة، يظن البعض أنك مجبر أن تشرح وتفسر وتدافع عن كل فكرة تكتبها، وكأنك محامٍ تقف في قفص الاتهام وتنتظر براءة من جمهور لا يعرف عنك شيئًا سوى كلمات عابرة. لكن الحقيقة مختلفة تمامًا: أنت لست مضطرًا لتبرير شيء.</p>
                 <p>حين تكتب فكرة، أو تنشر رأيًا، أو تشارك موقفًا، فأنت لا تطلب الإذن من أحد، هذه مساحتك، هذا صوتك، وهذا المنبر الصغير الذي اخترت أن تعبّر منه عمّا تعتقده، لا عمّا يريده الآخرون أن يسمعوه.</p>
@@ -347,17 +347,13 @@
                 <p>ليس من وظيفتك أن تشرح نفسك لكل شخص، لأن كل شخص يراك بعدسة تختلف عن الآخر، أحدهم سيفهمك كما تقصد، وآخر سيفسر كلامك كما يريد، وثالث سيُسقط عليك أفكاره ومخاوفه وأحكامه، وبعضهم يريدك ألّا تحيد عن الطريق الذي رسمه "هو" لك، وكل هذا ليس شغلك.</p>
                 <p>الأهم من أن “تعجب” الناس، هو أن تعجب أنت بنفسك. أن تنشر ما تؤمن به، لا ما يُطلب منك، أن تكتب ما تراه صوابًا، لا ما يصفق له الجمهور، لأنك حين تبدأ بالتنازل لإرضاء الكل، تنتهي بوجهٍ لا يشبهك، وصفحة لا تحمل صوتك، ووجود بلا لون.</p>
                 
-                <div style="background:#f9f7f2; padding:25px; border-radius:8px; border-right:4px solid var(--primary-color); margin:25px 0;">
-                    <p style="margin:0; font-size:1.25rem;"><strong>صدقني،</strong> كلما حاولت أن تكتب كما يريد الناس، ضعت، وكلما كتبت كما تريد أنت، وُجدت.</p>
-                </div>
+                <p><strong>صدقني،</strong> كلما حاولت أن تكتب كما يريد الناس، ضعت، وكلما كتبت كما تريد أنت، وُجدت.</p>
 
                 <p>اكتب وانشر وعبّر، ولا تلتفت كثيرًا، من فهمك، فله الشكر، ومن لم يفهمك، فتلك مشكلته لا مشكلتك.</p>
 
-                <div class="conclusion-box">
-                    <h3>الخلاصة:</h3>
-                    <p>في النهاية، هذه صفحتك، وهذا رأيك، وهذه حريتك، وهذه مساحتك الخاصة.</p>
-                    <p><strong>فاستخدمها ولا تبرر.</strong></p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>في النهاية، هذه صفحتك، وهذا رأيك، وهذه حريتك، وهذه مساحتك الخاصة.</p>
+                <p><strong>فاستخدمها ولا تبرر.</strong></p>
             </div>
 
             <!-- Actions -->
