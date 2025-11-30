@@ -219,14 +219,6 @@
         .about-text { font-size: 1.15rem; color: var(--text-primary); text-align: justify; }
         .about-text p { margin-bottom: 25px; }
 
-        .highlight-box {
-            background: #fffbeb; border-right: 4px solid var(--accent-color);
-            padding: 25px 30px; border-radius: 12px; margin: 35px 0;
-            font-style: italic; font-weight: 500; color: #422006;
-            position: relative; text-align: right; box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.05);
-        }
-        .highlight-box i { position: absolute; left: 20px; top: 20px; color: rgba(0,0,0,0.05); font-size: 3rem; }
-
         .contact-btn {
             display: inline-flex; align-items: center; gap: 10px;
             background: var(--primary-color); color: white; padding: 15px 40px;
@@ -289,12 +281,10 @@
 
         @media (max-width: 900px) {
             .hero-text h1 { font-size: 2rem; }
-            /* زيادة المسافة السفلية للموبايل */
-            .hero-section { padding: 100px 20px 160px; }
-            .about-card { padding: 30px 20px; margin-top: 0; } /* Reset margin for card */
+            .hero-section { padding: 100px 20px 160px; } /* زيادة المسافة السفلية */
+            .about-card { padding: 30px 20px; } 
             .share-fixed-btn { display: none; }
             .about-text { text-align: center; }
-            .highlight-box { text-align: center; border-right: none; border-top: 4px solid var(--accent-color); }
             .youtube-btn { width: 100%; justify-content: center; }
         }
 
@@ -365,10 +355,9 @@
                     حسين أحمد الخليل، من الجمهورية العربية السورية، ولد في مدينة الرقة عام 1983، إنسان عادي ذو خلفية سلفية، أبحث عن الحقيقة بعيدًا عن الآبائية والتلقين والتدجين. أؤمن أن العقل هو مناط التكليف.
                 </p>
 
-                <div class="highlight-box">
-                    <i class="fas fa-quote-right"></i>
+                <p>
                     أؤمن بالقاعدة التي تقول: الجدال والنقاش مع المغيبين عن الواقع، مضيعة للوقت، قُل الفكرة واترك لهم حرية التفكير، إن كان لهم عقل يفكر.
-                </div>
+                </p>
 
                 <p>أشارك أفكاري وتأملاتي مع من يسعى للتفكُّر والبحث.</p>
                 <p>مشغول بطرح فكرتي، لا بإثباتها لمن لا يريد أن يفهمها.</p>
@@ -376,9 +365,9 @@
                 <p>لا ألتفت لمن ينتقدني "لمجرد النقد"، فتركيزي منصبّ على من يبحث لا على من يُهاجم.</p>
                 <p>أؤمن أن الفكرة الجادة تُطرح وتمضي، لا تنتظر إذًا ولا تدخل معارك جانبية.</p>
 
-                <div class="highlight-box" style="border-color: var(--primary-color); background: rgba(94, 44, 165, 0.05);">
+                <p>
                     الدين والفكر وسائل، أما الغاية فهي الإنسان، لذلك أضع الإنسانية فوق كل انتماء.
-                </div>
+                </p>
 
                 <p style="text-align: center; font-weight: 800; color: var(--primary-color); font-size: 1.2rem; margin-top: 30px;">
                     قد نختلف في الطريق، لكننا نلتقي في الإنسانية، فهي الأصل والمعنى. 💜
@@ -459,17 +448,8 @@
         function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
-            const body = document.body;
-
             navLinks.classList.toggle('show');
-            
-            if(navLinks.classList.contains('show')) {
-                overlay.style.display = 'block';
-                body.classList.add('no-scroll');
-            } else {
-                overlay.style.display = 'none';
-                body.classList.remove('no-scroll');
-            }
+            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
         }
 
         // Share Functionality
