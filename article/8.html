@@ -152,18 +152,6 @@
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
 
-        /* Custom style for verses/quotes to match Code 1's theme */
-        .verse-highlight {
-            background: rgba(94, 44, 165, 0.05);
-            border-right: 4px solid var(--primary-color);
-            padding: 15px 20px;
-            margin: 25px 0;
-            border-radius: 8px;
-            font-weight: 500;
-            color: var(--primary-dark);
-            line-height: 1.8;
-        }
-
         .article-body h3 {
             color: var(--primary-color);
             margin: 30px 0 15px;
@@ -174,7 +162,7 @@
             background: var(--accent-color); margin-top: 5px;
         }
 
-        /* Font Controls (Integrated Style) */
+        /* Font Controls (Fixed) */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
             display: flex; flex-direction: column; gap: 10px;
@@ -200,7 +188,12 @@
             animation: highlightFade 2s forwards;
         }
 
-        /* Action Buttons (Share/Print) inside article */
+        /* Separator */
+        .text-separator {
+            text-align: center; margin: 40px 0; color: var(--primary-color); font-size: 1.5rem;
+        }
+
+        /* Action Buttons */
         .article-actions {
             margin-top: 50px; padding-top: 25px;
             border-top: 1px solid #eee;
@@ -240,11 +233,6 @@
             position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
             z-index: 990; font-weight: bold; display: none;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* Separator */
-        .text-separator {
-            text-align: center; margin: 40px 0; color: var(--primary-color); font-size: 1.5rem;
         }
 
         /* Print Media */
@@ -341,7 +329,7 @@
         تم العثور على <span id="matchCount">0</span> نتيجة
     </div>
 
-    <!-- Font Controls (Fixed on Left/Bottom) -->
+    <!-- Font Controls -->
     <div class="font-controls-fixed">
         <button class="font-btn" id="fontIncrease" title="تكبير الخط"><i class="fas fa-plus"></i></button>
         <button class="font-btn" id="fontReset" title="إعادة تعيين"><i class="fas fa-redo"></i></button>
@@ -356,16 +344,14 @@
                 <span><i class="far fa-folder"></i> مقالات فكرية</span>
             </div>
 
-            <!-- Content Body (محتوى المقال الثاني) -->
+            <!-- Content Body -->
             <div class="article-body" id="articleBody">
                 <p>في المجتمعات التي تقدّس النقل على العقل، يصبح التفكير النقدي والتساؤل جريمة، ويُنظر إلى من يستخدم عقله كخارج عن المألوف أو حتى كخطر يهدد “المسلمات”. هؤلاء الذين يعتمدون على النقل وحده، دون تدبُّر أو تحليل، يشعرون بالتهديد عندما يواجهون فكرة جديدة أو قراءة مختلفة، فيكون ردّهم الافتراضي ليس بالحوار، بل بالشتم والتخوين والتكفير أحيانًا. لكن في الحقيقة، الشتيمة من هؤلاء ليست إهانة، بل شهادة على أنك تفكر، وأنك تحررت من عقلية التلقين الأعمى. فالعقل هو أداة الإنسان الأولى للتمييز، والتشريع الإلهي نفسه في جوهره يخاطب العقول لا الحناجر المرددة. فحين تواجه مقاومة شرسة من أصحاب المنقول، اعلم أنك على طريق التفكر والتنوير، لأن الأفكار الراكدة وحدها لا تثير ردود الفعل، أما الأفكار الحية، فهي التي تُحدث الزلازل.</p>   
                 
                 <p>الصراع بين النقل والعقل ليس جديدًا، ولكنه يتجدد في كل عصر بأشكال مختلفة.</p>
                 <p>التحدي الحقيقي هو في الحفاظ على التوازن بين احترام الموروث والجرأة على التفكير النقدي.</p>
                 
-                <div class="verse-highlight">
-                    الشتائم والتخوين ليست سوى أسلحة الضعفاء الذين يخشون من قوة الفكر. فثِق بأن كل شتيمة توجه إليك بسبب تفكيرك النقدي هي في الحقيقة وسام شرف وإثبات على أنك تسير في الطريق الصحيح نحو التنوير والتحرر الفكري.
-                </div>
+                <p style="color: var(--primary-dark); font-weight: bold;">الشتائم والتخوين ليست سوى أسلحة الضعفاء الذين يخشون من قوة الفكر. فثِق بأن كل شتيمة توجه إليك بسبب تفكيرك النقدي هي في الحقيقة وسام شرف وإثبات على أنك تسير في الطريق الصحيح نحو التنوير والتحرر الفكري.</p>
                 
                 <p>ولهذا أقول: إذا أتتك الشتيمة من أصحاب النقل، فاعلم تمامًا انك من أصحاب العقل.</p>
                 
@@ -418,7 +404,7 @@
 
         // Font Resizing Logic
         const articleBody = document.getElementById('articleBody');
-        const defaultFontSize = 1.2; // rem (updated default)
+        const defaultFontSize = 1.2;
         let currentFontSize = defaultFontSize;
 
         document.getElementById('fontIncrease').addEventListener('click', () => {
@@ -442,31 +428,26 @@
 
         // Search and Highlight Logic
         const searchInput = document.getElementById('globalSearch');
-        const originalContent = articleBody.innerHTML; // Keep a clean copy
+        const originalContent = articleBody.innerHTML; 
 
         searchInput.addEventListener('input', function() {
             const searchTerm = this.value.trim();
             const alertBox = document.getElementById('searchAlert');
             const matchCountSpan = document.getElementById('matchCount');
 
-            // Reset if empty
             if (searchTerm === '') {
                 articleBody.innerHTML = originalContent;
                 alertBox.style.display = 'none';
                 return;
             }
 
-            // Create regex for search (case insensitive, global)
             const regex = new RegExp(`(${searchTerm})`, 'gi');
-            
-            // Temporary container to parse HTML
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = originalContent;
 
-            // Helper function to traverse text nodes
             let matchCount = 0;
             function highlightNodes(node) {
-                if (node.nodeType === 3) { // Text node
+                if (node.nodeType === 3) { 
                     const text = node.nodeValue;
                     if (regex.test(text)) {
                         const newHtml = text.replace(regex, `<span class="highlight-text">$1</span>`);
@@ -474,12 +455,10 @@
                         span.innerHTML = newHtml;
                         node.parentNode.replaceChild(span, node);
                         
-                        // Count occurrences (approximate)
                         const matches = text.match(regex);
                         if(matches) matchCount += matches.length;
                     }
                 } else if (node.nodeType === 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
-                    // Element node, recurse
                     for (let i = 0; i < node.childNodes.length; i++) {
                         highlightNodes(node.childNodes[i]);
                     }
@@ -493,7 +472,6 @@
                 matchCountSpan.textContent = matchCount;
                 alertBox.style.display = 'block';
                 
-                // Scroll to first match
                 const firstMatch = document.querySelector('.highlight-text');
                 if(firstMatch) {
                     firstMatch.scrollIntoView({behavior: 'smooth', block: 'center'});
