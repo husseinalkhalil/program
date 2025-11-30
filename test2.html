@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>الكتب - حسين الخليل</title>
+    <title>التاريخ - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Shared Variables */
+        /* Shared Variables & Styles */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -101,7 +101,8 @@
             .nav-links {
                 position: fixed; top: 60px; right: -280px; width: 280px;
                 background: var(--surface-color); /* استخدام اللون الجديد */
-                flex-direction: column; padding: 20px; height: calc(100vh - 60px);
+                flex-direction: column;
+                padding: 20px; height: calc(100vh - 60px);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
                 gap: 10px; margin: 0; flex: unset;
@@ -140,7 +141,7 @@
             z-index: 100; /* أعلى طبقة */
             margin: 0 auto 40px auto; 
         }
-
+        
         #globalSearch {
             width: 100%; padding: 18px 50px 18px 25px;
             border-radius: 50px; border: none; font-size: 1rem;
@@ -148,7 +149,6 @@
             font-family: 'Tajawal', sans-serif; outline: none; background: white;
             transition: box-shadow 0.3s ease;
         }
-        
         #globalSearch:focus { box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.4); }
 
         .search-icon-placeholder {
@@ -185,106 +185,75 @@
         .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
         .search-item mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
-        /* Container */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        /* Container Structure */
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper {
             position: relative;
             z-index: 20; /* طبقة البطاقات */
             margin-top: -90px; /* سحب للأعلى */
-            max-width: 1100px;
-            margin-left: auto; margin-right: auto; margin-bottom: 60px;
+            margin-bottom: 60px;
         }
 
-        /* Books Grid */
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
+        /* Video Grid */
+        .videos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
 
-        .book-card {
-            background: var(--surface-color); border-radius: 16px; padding: 25px;
+        /* Video Card */
+        .video-card {
+            background: var(--surface-color); border-radius: 16px; padding: 15px;
             box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
             transition: all 0.4s ease; position: relative; overflow: hidden;
-            display: flex; flex-direction: column; text-align: center;
+            display: flex; flex-direction: column;
         }
-
-        .book-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); }
-
-        .book-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+        .video-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); }
+        
+        /* Top Border Accent */
+        .video-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
             background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
             transition: height 0.3s ease;
         }
+        .video-card:hover::before { height: 6px; }
 
-        .book-card:hover::before { height: 8px; }
-
-        .book-cover-container {
-            border-radius: 10px; overflow: hidden; box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-            margin-bottom: 20px; position: relative; padding-top: 140%; background: #f1f5f9;
+        .video-thumbnail {
+            position: relative; width: 100%; padding-top: 56.25%; border-radius: 10px;
+            overflow: hidden; margin-bottom: 15px; cursor: pointer; background: #000;
         }
-
-        .book-cover-container img {
+        .video-thumbnail img {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; transition: transform 0.5s ease;
+            object-fit: cover; transition: transform 0.5s ease; opacity: 0.9;
+        }
+        .video-card:hover .video-thumbnail img { transform: scale(1.05); opacity: 1; }
+
+        .play-icon {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: white; font-size: 3rem; opacity: 0.8; transition: all 0.3s;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .video-card:hover .play-icon { transform: translate(-50%, -50%) scale(1.1); opacity: 1; color: var(--accent-color); }
+
+        .video-title {
+            font-size: 1.1rem; font-weight: 700; color: var(--text-primary);
+            margin-bottom: 10px; line-height: 1.4; flex-grow: 1; text-align: center;
         }
 
-        .book-card:hover .book-cover-container img { transform: scale(1.05); }
-
-        .book-card h2 { color: var(--text-primary); font-size: 1.4rem; margin-bottom: 10px; font-weight: 800; }
-        .book-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
-
-        .download-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; }
-
-        .download-link {
-            display: inline-flex; align-items: center; gap: 5px; background: #f8fafc;
-            color: var(--primary-dark); padding: 8px 15px; border-radius: 20px;
-            font-size: 0.85rem; font-weight: 600; border: 1px solid #e2e8f0; transition: all 0.3s;
+        .video-actions { margin-top: auto; text-align: center; }
+        .favorite-btn {
+            background: #f8fafc; border: 1px solid #e2e8f0; color: var(--text-secondary);
+            padding: 8px 16px; border-radius: 20px; cursor: pointer; font-family: 'Tajawal';
+            font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center;
+            gap: 6px; font-size: 0.85rem; width: 100%; justify-content: center;
         }
+        .favorite-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .favorite-btn.active { background: var(--accent-color); color: #422006; border-color: var(--accent-color); }
 
-        .download-link:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); transform: translateY(-2px); }
-
-        /* Support Icons Styling */
-        .support-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .support-links .download-link { padding: 8px; width: 45px; height: 45px; justify-content: center; border-radius: 12px; }
-        .support-links img { width: 24px; height: 24px; object-fit: contain; }
-
-        /* Actions Row */
-        .book-actions {
-            display: flex; justify-content: center; gap: 15px; margin-top: auto;
-            border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px;
-        }
-
-        .action-btn {
-            background: transparent; border: 1px solid #e2e8f0; color: var(--text-secondary);
-            padding: 8px 16px; border-radius: 20px; cursor: pointer;
-            font-family: 'Tajawal', sans-serif; font-weight: 600; transition: all 0.3s;
-            display: flex; align-items: center; gap: 6px; font-size: 0.9rem;
-        }
-
-        .action-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
-        .action-btn.active { background: var(--accent-color); color: #422006; border-color: var(--accent-color); }
-
-        /* Fixed Buttons */
-        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
-        .share-fixed-btn:hover { transform: scale(1.1); }
-        .share-fixed-btn img { width: 24px; filter: brightness(0); }
-
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
-        .back-to-top.visible { opacity: 1; pointer-events: all; }
-        .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
-
-        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-        .copy-alert.show { opacity: 1; }
-
-        /* Social Section */
+        /* Social */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: all 0.3s; }
-        .social-btn img { width: 24px; height: 24px; transition: filter 0.3s; }
+        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: 0.3s; }
+        .social-btn img { width: 24px; height: 24px; transition: 0.3s; }
         .social-btn:hover { transform: translateY(-5px) scale(1.1); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
         .social-btn.facebook:hover { background: #1877F2; }
@@ -302,22 +271,26 @@
         .footer-links a:hover { color: var(--accent-color); }
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .books-grid { grid-template-columns: 1fr; }
-            .hero-text h1 { font-size: 2rem; }
-            /* زيادة المساحة السفلية في الموبايل */
-            .hero-section { padding: 100px 20px 160px; } 
-            .share-fixed-btn { display: none; }
-        }
+        /* Fixed */
+        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: 0.3s; }
+        .share-fixed-btn:hover { transform: scale(1.1); }
+        .share-fixed-btn img { width: 24px; filter: brightness(0); }
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
+        .back-to-top.visible { opacity: 1; pointer-events: all; }
+        .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
+        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: 0.3s; pointer-events: none; }
+        .copy-alert.show { opacity: 1; }
 
-        @media (max-width: 768px) {
-            .footer-links { gap: 12px; flex-wrap: wrap; justify-content: center; }
-            .footer-links a { font-size: 0.9rem; white-space: nowrap; }
-            .social-grid { gap: 5px; flex-wrap: nowrap; justify-content: center; }
-            .social-btn { width: 48px; height: 48px; flex-shrink: 0; }
-            .social-btn img { width: 24px; height: 24px; }
+        @media (max-width: 1200px) { .videos-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 900px) { 
+            .videos-grid { grid-template-columns: repeat(2, 1fr); } 
+            .hero-text h1 { font-size: 2rem; } 
+            /* زيادة المسافة السفلية في الموبايل لتجنب التداخل */
+            .hero-section { padding: 100px 20px 160px; } 
+            .share-fixed-btn { display: none; } 
         }
+        @media (max-width: 600px) { .videos-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .footer-links { gap: 12px; } .social-grid { gap: 5px; flex-wrap: nowrap; } .social-btn { width: 48px; height: 48px; flex-shrink: 0; } }
     </style>
 </head>
 <body>
@@ -334,11 +307,11 @@
 
         <div class="nav-links">
             <a href="index.html">الرئيسية</a>
-            <a href="books.html" style="background: rgba(255,255,255,0.2);">الكتب</a>
+            <a href="books.html">الكتب</a>
             <a href="articles.html">المقالات</a>
             <a href="khawatir.html">خواطر</a>
             <a href="videos.html">الفيديوهات</a>
-            <a href="history.html">التاريخ</a>
+            <a href="history.html" style="background: rgba(255,255,255,0.2);">التاريخ</a>
             <a href="podcast.html">البودكاست</a>
             <a href="ask.html">الأسئلة</a>
             <a href="hewar.html">حوارات</a>
@@ -360,8 +333,8 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>مكتبتي الرقمية</h1>
-                <p>مجموعة من الكتب التي تتناول مواضيع فكرية ودينية معاصرة بأسلوب تحليلي نقدي</p>
+                <h1>التاريخ</h1>
+                <p>مقاطع مختارة عن الخرافات والتاريخ والأديان والملل الأخرى</p>
             </div>
         </div>
     </header>
@@ -376,121 +349,397 @@
             <div class="search-results" id="searchResults"></div>
         </div>
 
-        <div class="books-grid" id="booksList">
+        <div class="videos-grid" id="videosGrid">
+            <!-- Videos List -->
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('l6o1RGwy6TY')">
+                    <img src="https://img.youtube.com/vi/l6o1RGwy6TY/maxresdefault.jpg" alt="الأيزيديون">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الأيزيديون</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('l6o1RGwy6TY', 'الأيزيديون', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('OzA1NmopJ7k')">
+                    <img src="https://img.youtube.com/vi/OzA1NmopJ7k/maxresdefault.jpg" alt="الأعور الدجال">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الأعور الدجال</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('OzA1NmopJ7k', 'الأعور الدجال', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
             
-            <!-- Support Book -->
-            <div class="book-card" id="book-1">
-                <div class="book-cover-container">
-                    <img src="images/daam-cover.jpg" alt="غلاف الدعم">
+            <!-- NOTE: Add all other videos here -->
+            <!-- Keeping the list short for display, but you should copy all videos from your previous code -->
+            
+             <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('vxT082Eet7w')">
+                    <img src="https://img.youtube.com/vi/vxT082Eet7w/maxresdefault.jpg" alt="المهدي المنتظر">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-                <h2>ادعم المحتوى</h2>
-                <p>إذا وجدت في هذا المحتوى قيمة، يمكنك المساهمة بما تستطيع لدعم المحتوى، فمساهمتك، مهما كانت، تصنع فرقًا.</p>
-                <div class="support-links">
-                    <a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book3" target="_blank" title="Gumroad"><img src="images/gumroad.png" alt="Gumroad"/></a>
-                    <a class="download-link" href="https://www.paypal.com/paypalme/HusseinAlkhalil" target="_blank" title="PayPal"><img src="images/paypal.png" alt="paypal"/></a>
-                    <a class="download-link" href="https://ko-fi.com/s/763cb54e0a" target="_blank" title="Ko-fi"><img src="images/ko-fi.png" alt="ko-fi"/></a>
-                    <a class="download-link" href="https://payhip.com/b/qvP0F" target="_blank" title="Payhip"><img src="images/payhip.png" alt="payhip"/></a>
-                    <a class="download-link" href="https://buymeacoffee.com/husseinalkhalil/e/411365" target="_blank" title="BuyMeACoffee"><img src="images/buyme.png" alt="buyme"/></a>
-                </div>
-                <div class="book-actions">
-                    <button class="action-btn" onclick="shareBook('book-1')"><i class="fas fa-share-alt"></i> مشاركة</button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'ادعم المحتوى')"><i class="far fa-star"></i> المفضلة</button>
+                <h3 class="video-title">المهدي المنتظر</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('vxT082Eet7w', 'المهدي المنتظر', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <!-- Book 2 -->
-            <div class="book-card" id="book-2">
-                <div class="book-cover-container">
-                    <img src="images/haton-cover.jpg" alt="غلاف رواية هتون الحب">
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('dBG4w64cW8w')">
+                    <img src="https://img.youtube.com/vi/dBG4w64cW8w/maxresdefault.jpg" alt="الخوارج">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-                <h2>هتون الحب (رواية)</h2>
-                <p>رواية تتناول الحب، الزواج، الخرافة، والخروج عن المألوف وتضليل البسطاء باسم الدين والكرامات.</p>
-                <div class="download-links">
-                    <a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book2" target="_blank">Gumroad</a>
-                    <a class="download-link" href="https://payhip.com/b/dFNls" target="_blank">Payhip</a>
-                    <a class="download-link" href="https://ko-fi.com/s/7f16d1ddac" target="_blank">Ko-fi</a>
-                </div>
-                <div class="book-actions">
-                    <button class="action-btn" onclick="shareBook('book-2')"><i class="fas fa-share-alt"></i> مشاركة</button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'رواية هتون الحب')"><i class="far fa-star"></i> المفضلة</button>
+                <h3 class="video-title">الخوارج</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('dBG4w64cW8w', 'الخوارج', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <!-- Book 3 -->
-            <div class="book-card" id="book-3">
-                <div class="book-cover-container">
-                    <img src="images/jarima-cover.jpg" alt="غلاف كتاب جريمة في القلب">
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('VDynPZvNXM0')">
+                    <img src="https://img.youtube.com/vi/VDynPZvNXM0/maxresdefault.jpg" alt="المرشديون">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-                <h2>جريمة في القلب (رواية)</h2>
-                <p>تتصارع الأخلاق مع الفساد، رواية تجمع الفساد والتفكك الاسري والجريمة في دراما اجتماعية.</p>
-                <div class="download-links">
-                    <a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book4" target="_blank">Gumroad</a>
-                    <a class="download-link" href="https://payhip.com/b/LG3ZA" target="_blank">Payhip</a>
-                    <a class="download-link" href="https://ko-fi.com/s/f86f2b3c19" target="_blank">Ko-fi</a>
-                </div>
-                <div class="book-actions">
-                    <button class="action-btn" onclick="shareBook('book-3')"><i class="fas fa-share-alt"></i> مشاركة</button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'جريمة في القلب')"><i class="far fa-star"></i> المفضلة</button>
+                <h3 class="video-title">المرشديون</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('VDynPZvNXM0', 'المرشديون', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <!-- Book 4 -->
-            <div class="book-card" id="book-4">
-                <div class="book-cover-container">
-                    <img src="images/islam-cover.jpg" alt="غلاف كتاب الإسلام بين القرآن والتراث">
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('b2loDJqwnlQ')">
+                    <img src="https://img.youtube.com/vi/b2loDJqwnlQ/maxresdefault.jpg" alt="الإسماعيلية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-                <h2>الإسلام بين القرآن والتراث</h2>
-                <p>حوار بين عقلين يمثلان رؤيتين مختلفة للدين، أحدهما يرى أن القرآن هو المصدر، والآخر يخلط بين القرآن والتراث.</p>
-                <div class="download-links">
-                    <a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book5" target="_blank">Gumroad</a>
-                    <a class="download-link" href="https://payhip.com/b/jnVxT" target="_blank">Payhip</a>
-                    <a class="download-link" href="https://ko-fi.com/s/6f34541ce4" target="_blank">Ko-fi</a>
-                </div>
-                <div class="book-actions">
-                    <button class="action-btn" onclick="shareBook('book-4')"><i class="fas fa-share-alt"></i> مشاركة</button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الإسلام بين القرآن والتراث')"><i class="far fa-star"></i> المفضلة</button>
+                <h3 class="video-title">الإسماعيلية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('b2loDJqwnlQ', 'الإسماعيلية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <!-- Book 5 -->
-            <div class="book-card" id="book-5">
-                <div class="book-cover-container">
-                    <img src="images/quran-cover.jpg" alt="غلاف كتاب القرآن وكفى">
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('ltIYOyML3BE')">
+                    <img src="https://img.youtube.com/vi/ltIYOyML3BE/maxresdefault.jpg" alt="الإباضية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-                <h2>القرآن وكفى</h2>
-                <p>يتناول الكتاب المواضيع المهمة والمثيرة للجدل حول الإسلام، وإعادة قراءتها من جديد بطريقة معاصرة.</p>
-                <div class="download-links">
-                    <a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book6" target="_blank">Gumroad</a>
-                    <a class="download-link" href="https://payhip.com/b/QMfTl" target="_blank">Payhip</a>
-                    <a class="download-link" href="https://ko-fi.com/s/f5468a41b1" target="_blank">Ko-fi</a>
-                </div>
-                <div class="book-actions">
-                    <button class="action-btn" onclick="shareBook('book-5')"><i class="fas fa-share-alt"></i> مشاركة</button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'القرآن وكفى')"><i class="far fa-star"></i> المفضلة</button>
+                <h3 class="video-title">الإباضية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('ltIYOyML3BE', 'الإباضية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <!-- Book 6 -->
-            <div class="book-card" id="book-6">
-                <div class="book-cover-container">
-                    <img src="images/faker-cover.jpg" alt="غلاف كتاب فكر من جديد">
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('oDDBoTx0t5Q')">
+                    <img src="https://img.youtube.com/vi/oDDBoTx0t5Q/maxresdefault.jpg" alt="الياينية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-                <h2>فكر من جديد</h2>
-                <p>افتح نوافذ العقل، ودع النور يتسلل إلى زوايا الوعي، فإن أول ما نزل من الوحي كان دعوة صريحة: "اقرأ".</p>
-                <div class="download-links">
-                    <a class="download-link" href="https://husseinalkhalil.gumroad.com/l/book1" target="_blank">Gumroad</a>
-                    <a class="download-link" href="https://payhip.com/b/3g9xp" target="_blank">Payhip</a>
-                    <a class="download-link" href="https://ko-fi.com/s/d16f951c95" target="_blank">Ko-fi</a>
+                <h3 class="video-title">الياينية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('oDDBoTx0t5Q', 'الياينية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
-                <div class="book-actions">
-                    <button class="action-btn" onclick="shareBook('book-6')"><i class="fas fa-share-alt"></i> مشاركة</button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'كتاب فكر من جديد')"><i class="far fa-star"></i> المفضلة</button>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('i6x3cK2MuHY')">
+                    <img src="https://img.youtube.com/vi/i6x3cK2MuHY/maxresdefault.jpg" alt="الطاوية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الطاوية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('i6x3cK2MuHY', 'الطاوية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('qQ3oRyO3pGw')">
+                    <img src="https://img.youtube.com/vi/qQ3oRyO3pGw/maxresdefault.jpg" alt="الشينتوية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الشينتوية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('qQ3oRyO3pGw', 'الشينتوية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('cMUtBHMdgfk')">
+                    <img src="https://img.youtube.com/vi/cMUtBHMdgfk/maxresdefault.jpg" alt="العلويون">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">العلويون</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('cMUtBHMdgfk', 'العلويون', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('RV06KmxvzPA')">
+                    <img src="https://img.youtube.com/vi/RV06KmxvzPA/maxresdefault.jpg" alt="الدروز">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الدروز</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('RV06KmxvzPA', 'الدروز', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('eUtTHdTrRTk')">
+                    <img src="https://img.youtube.com/vi/eUtTHdTrRTk/maxresdefault.jpg" alt="الديانة البهائية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الديانة البهائية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('eUtTHdTrRTk', 'الديانة البهائية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('aba3m8xGGDo')">
+                    <img src="https://img.youtube.com/vi/aba3m8xGGDo/maxresdefault.jpg" alt="الديانة الكونفوشيوسية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الديانة الكونفوشيوسية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('aba3m8xGGDo', 'الديانة الكونفوشيوسية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('t1J3M8D4Xec')">
+                    <img src="https://img.youtube.com/vi/t1J3M8D4Xec/maxresdefault.jpg" alt="الديانة السيخية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الديانة السيخية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('t1J3M8D4Xec', 'الديانة السيخية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('jlnefbaCzUo')">
+                    <img src="https://img.youtube.com/vi/jlnefbaCzUo/maxresdefault.jpg" alt="قصة أصحاب الفيل">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">قصة أصحاب الفيل</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('jlnefbaCzUo', 'قصة أصحاب الفيل', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('svP8omiK_OA')">
+                    <img src="https://img.youtube.com/vi/svP8omiK_OA/maxresdefault.jpg" alt="الديانة البوذية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الديانة البوذية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('svP8omiK_OA', 'الديانة البوذية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('lZoTROZUoW0')">
+                    <img src="https://img.youtube.com/vi/lZoTROZUoW0/maxresdefault.jpg" alt="الديانة الهندوسية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الديانة الهندوسية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('lZoTROZUoW0', 'الديانة الهندوسية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('uOlb4xYpAms')">
+                    <img src="https://img.youtube.com/vi/uOlb4xYpAms/maxresdefault.jpg" alt="تدمير التماثيل تدميرًا للتاريخ">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">تدمير التماثيل تدميرًا للتاريخ</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('uOlb4xYpAms', 'تدمير التماثيل', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('-8HV__MVLNc')">
+                    <img src="https://img.youtube.com/vi/-8HV__MVLNc/maxresdefault.jpg" alt="خرافات في كتب الروايات">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">خرافات في كتب الروايات</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('-8HV__MVLNc', 'خرافات في كتب الروايات', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('Cplld9BB7i8')">
+                    <img src="https://img.youtube.com/vi/Cplld9BB7i8/maxresdefault.jpg" alt="خرافة تلبس الجن بالانسان">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">خرافة تلبس الجن بالانسان</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('Cplld9BB7i8', 'خرافة تلبس الجن', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('BDFnqLoPrTA')">
+                    <img src="https://img.youtube.com/vi/BDFnqLoPrTA/maxresdefault.jpg" alt="هاروت وماروت">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">هاروت وماروت</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('BDFnqLoPrTA', 'هاروت وماروت', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('xR9mxBhRw00')">
+                    <img src="https://img.youtube.com/vi/xR9mxBhRw00/maxresdefault.jpg" alt="السحر">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">السحر</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('xR9mxBhRw00', 'السحر', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('aKZnOZjXsw8')">
+                    <img src="https://img.youtube.com/vi/aKZnOZjXsw8/maxresdefault.jpg" alt="خرافة الحسد">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">خرافة الحسد</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('aKZnOZjXsw8', 'خرافة الحسد', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('W6DAvH4-kqo')">
+                    <img src="https://img.youtube.com/vi/W6DAvH4-kqo/maxresdefault.jpg" alt="خرافة الاصابة بالعين">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">خرافة الاصابة بالعين</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('W6DAvH4-kqo', 'خرافة الاصابة بالعين', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('tVTLhi_MAkM')">
+                    <img src="https://img.youtube.com/vi/tVTLhi_MAkM/maxresdefault.jpg" alt="خرافة سكب الماء الساخن">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">خرافة سكب الماء الساخن</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('tVTLhi_MAkM', 'خرافة سكب الماء', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('9KOvdr5pjyQ')">
+                    <img src="https://img.youtube.com/vi/9KOvdr5pjyQ/maxresdefault.jpg" alt="خرافة طي سجادة الصلاة">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">خرافة طي سجادة الصلاة</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('9KOvdr5pjyQ', 'خرافة طي السجادة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('U7fMWUd54N0')">
+                    <img src="https://img.youtube.com/vi/U7fMWUd54N0/maxresdefault.jpg" alt="خرافات صدقها المسلمون">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">خرافات صدقها المسلمون</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('U7fMWUd54N0', 'خرافات صدقها المسلمون', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('sYEPdEZQB50')">
+                    <img src="https://img.youtube.com/vi/sYEPdEZQB50/maxresdefault.jpg" alt="الترويج للدين بالخرافة">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الترويج للدين بالخرافة</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('sYEPdEZQB50', 'الترويج للدين بالخرافة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('wOsoyyneqmA')">
+                    <img src="https://img.youtube.com/vi/wOsoyyneqmA/maxresdefault.jpg" alt="عندما تبيع الوهم">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">عندما تبيع الوهم</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('wOsoyyneqmA', 'عندما تبيع الوهم', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('shXjuuUBOlA')">
+                    <img src="https://img.youtube.com/vi/shXjuuUBOlA/maxresdefault.jpg" alt="الصابئة المندائيون">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الصابئة المندائيون</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('shXjuuUBOlA', 'الصابئة المندائيون', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('0DpidAR1MPU')">
+                    <img src="https://img.youtube.com/vi/0DpidAR1MPU/maxresdefault.jpg" alt="السريان">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">السريان</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('0DpidAR1MPU', 'السريان', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('dQRovOQVoB4')">
+                    <img src="https://img.youtube.com/vi/dQRovOQVoB4/maxresdefault.jpg" alt="الديانة المانوية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الديانة المانوية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('dQRovOQVoB4', 'الديانة المانوية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('yfMETxdXqbs')">
+                    <img src="https://img.youtube.com/vi/yfMETxdXqbs/maxresdefault.jpg" alt="الديانة الزرادشتية">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الديانة الزرادشتية</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('yfMETxdXqbs', 'الديانة الزرادشتية', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('EfCEfaLgbYU')">
+                    <img src="https://img.youtube.com/vi/EfCEfaLgbYU/maxresdefault.jpg" alt="القدس ليست اورشليم">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">القدس ليست اورشليم</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('EfCEfaLgbYU', 'القدس ليست اورشليم', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
         </div>
-
-        <button id="showAllBooksBtn" class="action-btn active" style="margin: 30px auto; display: none;" onclick="window.location.href='books.html'">عرض جميع الكتب</button>
 
         <!-- Social Media -->
         <div class="social-section" style="margin-top: 60px;">
@@ -529,7 +778,6 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <!-- Alert & Copy -->
     <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
     <div id="message" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);"></div>
 
@@ -565,34 +813,16 @@
             }
         }
 
-        // Global Share
+        // Share
         function handleMobileShare() {
-            const link = "https://www.husseinalkhalil.com/books.html";
+            const link = "https://www.husseinalkhalil.com/history.html";
             if (navigator.share) {
-                navigator.share({ title: 'مكتبة حسين الخليل', url: link }).catch(console.error);
+                navigator.share({ title: 'التاريخ - حسين الخليل', url: link }).catch(console.error);
             } else {
                 navigator.clipboard.writeText(link).then(() => {
                     const alert = document.getElementById('copyAlert');
                     alert.classList.add('show');
                     setTimeout(() => alert.classList.remove('show'), 2000);
-                });
-            }
-        }
-
-        // Single Book Share
-        function shareBook(id) {
-            const link = window.location.origin + window.location.pathname + "?book=" + id;
-            if (navigator.share) {
-                navigator.share({ title: 'كتاب من مكتبة حسين الخليل', url: link }).catch(console.error);
-            } else {
-                navigator.clipboard.writeText(link).then(() => {
-                    const alert = document.getElementById('copyAlert');
-                    alert.textContent = 'تم نسخ رابط الكتاب ✅';
-                    alert.classList.add('show');
-                    setTimeout(() => {
-                        alert.classList.remove('show');
-                        alert.textContent = 'تم نسخ الرابط بنجاح ✅';
-                    }, 2000);
                 });
             }
         }
@@ -604,20 +834,30 @@
             }
         });
 
-        // Favorites
-        function toggleFavorite(button, title) {
+        // Open Video
+        function openYoutubeVideo(id) {
+            window.open(`https://www.youtube.com/watch?v=${id}`, '_blank');
+        }
+
+        // Favorites Logic
+        function toggleFavorite(id, title, btn) {
             let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            const index = favorites.indexOf(title);
+            const index = favorites.findIndex(item => item.id === id && item.type === 'video');
             
             if (index === -1) {
-                favorites.push(title);
-                button.classList.add("active");
-                button.innerHTML = '<i class="fas fa-star"></i> مفضلة';
+                favorites.push({
+                    id: id,
+                    title: title,
+                    type: 'video',
+                    url: `https://www.youtube.com/embed/${id}`
+                });
+                btn.classList.add("active");
+                btn.innerHTML = '<i class="fas fa-check"></i> في المفضلة';
                 showMessage("تمت الإضافة إلى المفضلة");
             } else {
                 favorites.splice(index, 1);
-                button.classList.remove("active");
-                button.innerHTML = '<i class="far fa-star"></i> المفضلة';
+                btn.classList.remove("active");
+                btn.innerHTML = '<i class="far fa-star"></i> أضف للمفضلة';
                 showMessage("تمت الإزالة من المفضلة");
             }
             localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -640,7 +880,7 @@
             else btn.classList.remove('visible');
         });
 
-        // ==================== Global Search Logic (New System) ====================
+        // ==================== Global Search Logic ====================
         let cachedPagesContent = null;
         let isSearchInitialized = false;
         
@@ -732,6 +972,7 @@
                 return;
             }
             
+            // Add Count
             const countDiv = document.createElement('div');
             countDiv.className = 'search-count';
             countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
@@ -759,8 +1000,10 @@
                 
                 const highlightedSnippet = snippet.replace(queryRegex, match => `<mark>${match}</mark>`);
 
+                // Pass query as parameter
+                const searchTerm = document.getElementById('globalSearch').value.trim();
                 div.innerHTML = `<h3>${highlightedTitle}</h3><p>${highlightedSnippet}</p>`;
-                div.onclick = () => window.location.href = item.url + "?highlight=" + encodeURIComponent(document.getElementById('globalSearch').value.trim());
+                div.onclick = () => window.location.href = item.url + "?highlight=" + encodeURIComponent(searchTerm);
                 container.appendChild(div);
             });
             container.style.display = 'block';
@@ -791,41 +1034,21 @@
             displayGlobalResults(results, searchRegex, resultsContainer);
         }
 
-        // Initialize & URL Params
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Check favorites
+            // Init Favorites State
             const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
             document.querySelectorAll('.favorite-btn').forEach(btn => {
                 const match = btn.getAttribute('onclick').match(/'([^']+)'/);
                 if (match) {
-                    const title = match[1];
-                    if (favorites.includes(title)) {
+                    const id = match[1];
+                    if (favorites.some(item => item.id === id && item.type === 'video')) {
                         btn.classList.add("active");
-                        btn.innerHTML = '<i class="fas fa-star"></i> مفضلة';
+                        btn.innerHTML = '<i class="fas fa-check"></i> في المفضلة';
                     }
                 }
             });
-
-            // Handle Book URL Parameter
-            const params = new URLSearchParams(window.location.search);
-            const bookId = params.get("book");
-            if (bookId) {
-                const allBooks = document.querySelectorAll('.book-card');
-                let found = false;
-                allBooks.forEach(book => {
-                    if (book.id !== bookId) {
-                        book.style.display = 'none';
-                    } else {
-                        found = true;
-                    }
-                });
-                
-                if (found) {
-                    document.getElementById('showAllBooksBtn').style.display = 'block';
-                    document.querySelector('.hero-text p').textContent = 'عرض كتاب محدد';
-                }
-            }
 
             // Setup Search Listener
             const searchInput = document.getElementById('globalSearch');
