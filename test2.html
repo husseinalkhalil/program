@@ -1194,7 +1194,7 @@
 
             try {
                 // 1. جلب قائمة الروابط من الملف الخارجي
-                const response = await fetch('site-map.json');
+                const response = await fetch('site-map.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error('Could not load site-map.json');
                 const pagesList = await response.json();
 
