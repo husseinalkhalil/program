@@ -22,17 +22,12 @@
             --primary-light: #8a5bc7;
             --accent-color: #ffd700;
             --bg-color: #f9f7f2;
-            
-            /* اللون الجديد الموحد: ضباب اللافندر */
             --surface-color: #F8F5FD; 
-            
             --text-primary: #1e293b;
             --text-secondary: #64748b;
-            
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
             --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
             --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
-            
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
         }
@@ -51,7 +46,6 @@
             overflow-x: hidden;
         }
 
-        /* منع السكرول عند فتح القائمة */
         body.no-scroll {
             overflow: hidden !important;
             height: 100vh;
@@ -98,9 +92,8 @@
             .logo-container { order: 2; }
             .nav-links {
                 position: fixed; top: 60px; right: -280px; width: 280px;
-                background: var(--surface-color); /* استخدام اللون الجديد */
-                flex-direction: column;
-                padding: 20px; height: calc(100vh - 60px);
+                background: var(--surface-color);
+                flex-direction: column; padding: 20px; height: calc(100vh - 60px);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
                 gap: 10px; margin: 0; flex: unset;
@@ -118,11 +111,11 @@
         /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 120px 20px 100px;
+            padding: 120px 20px 140px; /* زيادة المساحة السفلية لتدخل البطاقات فيها */
             text-align: center; color: white;
             border-radius: 0 0 50px 50px; 
             position: relative; 
-            z-index: 1; /* تصحيح: جعل الخلفية في طبقة سفلية لتظهر البطاقات فوقها */
+            z-index: 1; /* الخلفية في الطبقة السفلية */
         }
 
         .hero-content {
@@ -133,10 +126,12 @@
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
 
-        /* Global Search Box */
+        /* Global Search Box (Moved inside Main Wrapper via CSS logic) */
         .universal-search { 
-            width: 100%; max-width: 600px; position: relative; margin-top: 20px; 
-            z-index: 100; /* تصحيح: جعل البحث في أعلى طبقة ليغطي البطاقات عند الفتح */
+            width: 100%; max-width: 600px; 
+            position: relative; 
+            z-index: 100;
+            margin: 0 auto 40px auto; /* توسيط ومسافة من الأسفل */
         }
         
         #globalSearch {
@@ -158,7 +153,7 @@
             position: absolute; top: 110%; left: 0; right: 0;
             background: #ffffff; border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px;
-            overflow-y: auto; z-index: 102; text-align: right;
+            overflow-y: auto; z-index: 200; text-align: right;
             display: none; color: var(--text-primary);
             border: 1px solid rgba(0,0,0,0.05);
         }
@@ -166,7 +161,6 @@
         .search-results::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 0 0 0 15px; }
         .search-results::-webkit-scrollbar-thumb { background: var(--primary-light); border-radius: 4px; }
 
-        /* Search Count Style */
         .search-count {
             padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color);
             border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc;
@@ -187,8 +181,8 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper {
             position: relative; 
-            z-index: 20; /* تصحيح: جعل البطاقات أعلى من الخلفية لتغطية المنحنى */
-            margin-top: -60px; /* زيادة الهامش السالب قليلاً للتداخل الجميل */
+            z-index: 20; /* الطبقة العلوية لتغطي انحناء الخلفية */
+            margin-top: -90px; /* سحب المحتوى للأعلى ليتداخل مع البنفسجي */
             max-width: 1000px;
             margin-left: auto; margin-right: auto; margin-bottom: 60px;
         }
@@ -297,20 +291,19 @@
                 <h1>المقالات</h1>
                 <p>قراءة عقلانية ونقد للموروث بوعي واحترام للعقل</p>
             </div>
-            
-            <!-- Global Search Box -->
-            <div class="universal-search">
-                <i class="fas fa-search search-icon-placeholder"></i>
-                <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
-                
-                <!-- This is the Results Box -->
-                <div class="search-results" id="searchResults"></div>
-            </div>
+            <!-- تم نقل خانة البحث من هنا لتجنب مشاكل الطبقات -->
         </div>
     </header>
 
     <div class="container main-wrapper">
         
+        <!-- Global Search Box (Moved Here to be on Top) -->
+        <div class="universal-search">
+            <i class="fas fa-search search-icon-placeholder"></i>
+            <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+            <div class="search-results" id="searchResults"></div>
+        </div>
+
         <!-- Articles Grid -->
         <div id="articlesList">
             <div class="article"><h2><a href="article/45.html">❖ زنا التنفس.</a></h2><div class="meta-data"><span class="publish-date">24 أغسطس 2025</span><button class="article-button" onclick="toggleFavorite(this, '❖ زنا التنفس.')"><i class="far fa-star"></i> أضف للمفضلة</button></div></div>
@@ -472,9 +465,6 @@
             const articles = Array.from(document.querySelectorAll('.article'));
             const isSearching = document.getElementById('globalSearch').value.trim() !== '';
 
-            // عند البحث، لا نخفي القائمة لأننا نستخدم الـ Dropdown الآن
-            // لكن لإبقاء الكود نظيفاً، سنبقي التحكم بالصفحات كما هو للعرض الطبيعي
-            
             const totalPages = Math.ceil(articles.length / articlesPerPage);
             const pageInfo = document.getElementById('pageInfo');
             if (pageInfo) pageInfo.textContent = `الصفحة ${currentPage} من ${totalPages} - إجمالي المقالات: ${articles.length}`;
@@ -556,16 +546,13 @@
             if (cachedPagesContent) return cachedPagesContent;
 
             try {
-                // Fetch site-map.json with cache busting
                 const response = await fetch('site-map.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error('Could not load site-map.json');
                 const pagesList = await response.json();
 
-                // Process each item
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
                     
-                    // Check if content is provided manually in JSON
                     let manualContent = (typeof item === 'object' && item.content) ? item.content : null;
                     let manualTitle = (typeof item === 'object' && item.page) ? item.page : null;
 
@@ -577,7 +564,6 @@
                         };
                     }
 
-                    // Otherwise fetch the page content
                     try {
                         const pageResp = await fetch(url);
                         if (!pageResp.ok) return null;
@@ -642,7 +628,6 @@
                 return;
             }
             
-            // Add Result Count
             const countDiv = document.createElement('div');
             countDiv.className = 'search-count';
             countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
@@ -702,11 +687,9 @@
             displayGlobalResults(results, searchRegex, resultsContainer);
         }
 
-        // Initialize Everything
         document.addEventListener('DOMContentLoaded', () => {
             paginateArticles();
             
-            // Init Favorites State
             const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
             document.querySelectorAll(".article-button").forEach(button => {
                 const match = button.getAttribute("onclick").match(/'([^']+)'/);
@@ -719,7 +702,6 @@
                 }
             });
 
-            // Setup Search Listener
             const searchInput = document.getElementById('globalSearch');
             let timer;
             if(searchInput) {
@@ -732,7 +714,6 @@
                 });
             }
 
-            // Close search on outside click
             document.addEventListener('click', (e) => {
                 const searchContainer = document.querySelector('.universal-search');
                 if(searchContainer && !searchContainer.contains(e.target)) {
