@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -151,6 +151,29 @@
 
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
 
         /* Video Link Style */
         .video-link {
@@ -191,14 +214,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -359,46 +374,56 @@
                 
                 <p>من يقوم بتشغيل عقله لاستنباط أحكام الله وتدبر آياته، قد يُتهم بالكفر والزندقة. وكأن القرآن نزل على رجال الدين فقط، وهم المعنيون الوحيدون بتدبر كلام الله وتفسيره ومن ثم تقديمه لعامة المسلمين. فلو كان الأمر كذلك، لمنحهم الله عقولاً دون سواهم، ولأمَرَنا الله بإتباعهم!</p>
                 
-                <div style="background:#fff1f2; padding:20px; border-radius:8px; border-right:4px solid #e11d48; margin:25px 0;">
-                    <p style="margin:0;">إذًا، علينا أن نُعطّل عقولنا أمام الدين ونكتفي بالنقل، لأننا بتعطيل العقول سنبقى تابعين لهم، وسنلّجأ إليهم بكل صغيرة وكبيرة، وسيتحكمون بكل تفاصيل حياتنا، وبتشغيل العقول سيسقطون ويسقط معهم تراثهم.</p>
-                </div>
+                <p>إذًا، علينا أن نُعطّل عقولنا أمام الدين ونكتفي بالنقل، لأننا بتعطيل العقول سنبقى تابعين لهم، وسنلّجأ إليهم بكل صغيرة وكبيرة، وسيتحكمون بكل تفاصيل حياتنا، وبتشغيل العقول سيسقطون ويسقط معهم تراثهم.</p>
 
                 <p><strong>حسنًا،</strong> إذا كان الدين بالنقل وليس بالعقل، فعلى هذا، كان من الواجب على نبينا إبراهيم أن يعبد الأصنام الذي هو دين آبائه، لأن هذا الدين هو ما وَجَد عليه آبائه، يعني وصَلَهُ بالنقل، لكنهُ لم يقتنع بدين آبائه، لأن عقله لم يستوعب ما يقوم به قومه، فنبذ عبادة الأصنام وذَهَبَ ليجد ربَّهُ بعيداً عن عبادة الأصنام، كما أخبرنا الله بقصتهِ في سورة الأنعام.</p>    
 
-                <div style="margin:30px 0;">
-                    <h3 style="color:var(--primary-color);">السؤال هو:</h3>    
-                    <p>هل كان نبينا إبراهيم مخطئ أم مصيب بتشغيل عقله ونبذ دين آبائه؟</p>
-                    <ul style="list-style:none; padding:0;">
-                        <li style="margin-bottom:10px;">❌ من يقول إنه <strong><span style="color: #e11d48;">مخطئ،</span></strong> فقد ضلّ ضلالاً بعيدا.</li>
-                        <li>✅ ومن يقول إنه <strong><span style="color: #16a34a;">مصيب،</span></strong> فقد سقطت بذلك نظرية رجال الدين بتقديم النقل على العقل.</li>
-                    </ul>
-                </div>
+                <h3 style="color:var(--primary-color);">السؤال هو:</h3>    
+                <p>هل كان نبينا إبراهيم مخطئ أم مصيب بتشغيل عقله ونبذ دين آبائه؟</p>
+                <ul>
+                    <li>❌ من يقول إنه <strong><span style="color: #e11d48;">مخطئ،</span></strong> فقد ضلّ ضلالاً بعيدا.</li>
+                    <li>✅ ومن يقول إنه <strong><span style="color: #16a34a;">مصيب،</span></strong> فقد سقطت بذلك نظرية رجال الدين بتقديم النقل على العقل.</li>
+                </ul>
 
                 <p>فالأنبياء هم قدوتنا وليس كهنة الدين، والقرآن هو مرجعنا ومصدر الدين الوحيد وليست كتب التراث.</p>
                 
                 <p>في الكثير من الآيات، يخاطبنا الله ويطالبنا بتشغيل عقولنا بما يقارب <strong>خمسين مرة</strong>.</p>
                 <p>بل إنه أخبرنا أن عدم تشغيل العقل والعمل به، سيكون سبباً في دخول النار.</p>
 
-                <div style="margin:20px 0; padding:20px; background:#fcfaff; border-radius:8px; border:1px solid #e2e8f0; text-align:center;">
-                    <p style="font-size:1.3rem; color:var(--primary-dark); margin-bottom:10px; font-weight:bold;">﴿وَقَالُوا۟ لَوْ كُنَّا نَسْمَعُ أَوْ نَعْقِلُ مَا كُنَّا فِىٓ أَصْحَٰبِ ٱلسَّعِيرِ﴾</p>
-                    <span style="color:gray; font-size:0.9rem;">[الملك 10]</span>
-                    <hr style="margin:15px auto; width:50%; border:0; border-top:1px solid #ddd;">
-                    <p style="font-size:1.3rem; color:var(--primary-dark); margin-bottom:10px; font-weight:bold;">﴿وَيَجْعَلُ ٱلرِّجْسَ عَلَى ٱلَّذِينَ لَا يَعْقِلُونَ﴾</p>
-                    <span style="color:gray; font-size:0.9rem;">[يونس 100]</span>
-                </div>
+                <p style="margin-top:20px; font-bottom:10px;"><strong>ذكر الله في القرآن:</strong></p>
+                <ul>
+                    <li><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّ فِى ذَٰلِكَ لَأيَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ﴾</span> (6 مرات)</li>
+                    <li><span style="color: #5e2ca5; font-weight: bold;">﴿لَعَلَّهُمْ يَتَفَكَّرُونَ﴾</span> (3 مرات)</li>
+                    <li>كلمة <span style="color: #5e2ca5; font-weight: bold;">﴿يَعْقِلُونَ﴾</span> (22 مرة)</li>
+                </ul>
+
+                <p>ودعا إلى عدم تحييده: <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَا تَقْفُ مَا لَيْسَ لَكَ بِهِۦ عِلْمٌ﴾</span> [الإسراء 36].</p>
+                <p>وجعل العلم أساس التوحيد: <span style="color: #5e2ca5; font-weight: bold;">﴿فَٱعْلَمْ أَنَّهُۥ لَآ إِلَٰهَ إِلَّا ٱللَّهُ﴾</span> [محمد 19].</p>
+                
+                <p>وشنّع من لا يستخدم عقله:</p>
+                <ul>
+                    <li><span style="color: #5e2ca5; font-weight: bold;">﴿كَلَّا ۖ بَلْ ۜ رَانَ عَلَىٰ قُلُوبِهِم﴾</span> [المطففين 14]</li>
+                    <li><span style="color: #5e2ca5; font-weight: bold;">﴿أَمْ عَلَىٰ قُلُوبٍ أَقْفَالُهَآ﴾</span> [محمد 24]</li>
+                </ul>
+
+                <p>وأكثر من ذلك، ذمهم ووصفهم بأنهم أضل من الأنعام: <span style="color: #5e2ca5; font-weight: bold;">﴿وَلَهُمْ ءَاذَانٌ لَّا يَسْمَعُونَ بِهَآ ۚ أُو۟لَٰٓئِكَ كَٱلْأَنْعَٰمِ بَلْ هُمْ أَضَلُّ﴾</span> [الأعراف 179].</p>
+                
+                <p>وبعد كل هذا يطل علينا أحد رجال الدين ليقول لنا: <strong>"عقلك كالحمار، عندما تصل إلى الشيخ، اربطه وادخل لتتلقى النقل بلا عقل."</strong></p>
+                <p>والشيخ الآخر يقول لنا بكل جرأة: <strong>"إن تقديم العقل على النقل هو طريقة أهل الضلال."</strong></p> 
+                
+                <p style="text-align:center; font-size:1.3rem; margin-top:20px; color:var(--primary-dark); font-weight:bold;">﴿وَقَالُوا۟ لَوْ كُنَّا نَسْمَعُ أَوْ نَعْقِلُ مَا كُنَّا فِىٓ أَصْحَٰبِ ٱلسَّعِيرِ﴾</p>
+                <p style="text-align:center; font-size:0.9rem; color:gray;">[الملك 10]</p>
+                <p style="text-align:center; font-size:1.3rem; margin-top:15px; color:var(--primary-dark); font-weight:bold;">﴿وَيَجْعَلُ ٱلرِّجْسَ عَلَى ٱلَّذِينَ لَا يَعْقِلُونَ﴾</p>
+                <p style="text-align:center; font-size:0.9rem; color:gray;">[يونس 100]</p>
+                <p style="text-align:center; margin-top:10px;">صدق الله وكذب الجاهلون.</p>
 
                 <p>وعندما نذكر هذا الرقم (50 مرة) فعلينا أن نستيقظ من سباتنا، ونعي ونفهم جيداً أن الله يريد منّا تشغيل عقولنا، لأنه سيحاسبنا على فهمنا نحن، وليس بما فهم رجال الدين، وسيحاسبنا فرادى.</p>
 
-                <div class="conclusion-box">
-                    <h3 style="margin-top:0;">الخلاصة:</h3>
-                    <p>اعمل بعقلك، واحذر من تعطيله، فالذي سينفعك هو تدبرك لكتاب الله والعمل به، ولن تستطيع تدبر كتاب الله إلّا إذا كان عقلك في وضع التشغيل، ولن ينفعك اتباعك للشيخ العلّامة ولا العالِم الفهّامة، لأنهم يوم القيامة سيتبرأون منك، كما أخبرك الله بذلك.</p>
-                    <p style="margin-top:15px; text-align:center; font-weight:bold;">صدق الله وكذب الجاهلون.</p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>اعمل بعقلك، واحذر من تعطيله، فالذي سينفعك هو تدبرك لكتاب الله والعمل به، ولن تستطيع تدبر كتاب الله إلّا إذا كان عقلك في وضع التشغيل، ولن ينفعك اتباعك للشيخ العلّامة ولا العالِم الفهّامة، لأنهم يوم القيامة سيتبرأون منك، كما أخبرك الله بذلك.</p>
+                <p style="margin-top:15px; text-align:center; font-weight:bold;">صدق الله وكذب الجاهلون.</p>
 
-                <!-- Video Link -->
-                <div style="text-align: center; margin: 40px 0;">
-                    <a href="https://youtu.be/xWpw-b2uOq8?si=xQWaFkD5X7PT4unZ" target="_blank" class="video-link">
-                        <i class="fas fa-video"></i> حلقة مرئية عن الموضوع
+                
                     </a>
                 </div>
             </div>
