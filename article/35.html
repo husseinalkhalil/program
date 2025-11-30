@@ -113,12 +113,12 @@
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Container & Main Layout (Wide Width) */
+        /* Container & Main Layout */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; /* Wide reading area */
+            max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
         }
@@ -151,6 +151,29 @@
 
         .article-body p { margin-bottom: 20px; }
         .article-body strong { color: var(--primary-dark); }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            position: relative; display: inline-block;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-color); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 20px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--primary-color);
+            position: absolute; right: 0; font-weight: bold;
+        }
 
         /* Video Link Style */
         .video-link {
@@ -191,14 +214,6 @@
             padding: 2px 0;
             border-radius: 2px;
             animation: highlightFade 2s forwards;
-        }
-
-        /* Conclusion Section */
-        .conclusion-box {
-            background: #fcfaff;
-            border-right: 4px solid var(--primary-color);
-            padding: 25px 25px 25px 35px;
-            border-radius: 8px; margin-top: 30px;
         }
 
         /* Action Buttons */
@@ -369,27 +384,23 @@
                 
                 <p><span style="color: #5e2ca5; font-weight: bold;">القرآنيون</span> (كما تسمّونهم) يؤمنون بأن من يكتب شيئاً ويدّعي بأنه من عند الله فالويل كل الويل له يوم القيامة.</p>
                 
-                <ul style="list-style:none; padding:0; margin:20px 0;">
-                    <li style="margin-bottom:10px;"><span style="color: #ef4444;">🚫 الروايات التي تتعارض مع القرآن مرفوضة.</span></li>
-                    <li style="margin-bottom:10px;"><span style="color: #ef4444;">🚫 الروايات التي تزيد على القرآن مرفوضة.</span></li>
+                <ul>
+                    <li><span style="color: #ef4444;">🚫 الروايات التي تتعارض مع القرآن مرفوضة.</span></li>
+                    <li><span style="color: #ef4444;">🚫 الروايات التي تزيد على القرآن مرفوضة.</span></li>
                     <li><span style="color: #eab308;">⚠️ الروايات التي تتطابق مع القرآن تبقى ظنّية الثبوت، فلماذا يتم الأخذ بها ونحن لدينا الأصل "القرآن" الذي هو قطعي الثبوت!</span></li>
                 </ul>
 
-                <div style="background:#fcfaff; padding:20px; border-radius:8px; border-right:4px solid var(--primary-color); margin:25px 0;">
-                    <p>يكذبون على لسان رسول الله بأنه قال <strong>"تركت فيكم ما إن تمسكتم به فلن تضلوا بعدي أبدا، كتاب الله وسنتي"</strong>. وهذا كذب وافتراء على رسول الله. فهناك "3" روايات:</p>
-                    <ul style="list-style:none; padding:0; margin-top:10px;">
-                        <li>1- <span style="color: #ef4444;">كتاب الله وسنتي.</span></li>
-                        <li>2- <span style="color: #ef4444;">كتاب الله وعترتي.</span></li>
-                        <li>3- <span style="color: #10b981;">كتاب الله.</span></li>
-                    </ul>
-                    <p style="margin-top:10px;">كل حزب منكم طغى فيها كما يحب ويهوى.</p>
-                </div>
+                <p>يكذبون على لسان رسول الله بأنه قال <strong>"تركت فيكم ما إن تمسكتم به فلن تضلوا بعدي أبدا، كتاب الله وسنتي"</strong>. وهذا كذب وافتراء على رسول الله. فهناك "3" روايات:</p>
+                <ul>
+                    <li>1- <span style="color: #ef4444;">كتاب الله وسنتي.</span></li>
+                    <li>2- <span style="color: #ef4444;">كتاب الله وعترتي.</span></li>
+                    <li>3- <span style="color: #10b981;">كتاب الله.</span></li>
+                </ul>
+                <p>كل حزب منكم طغى فيها كما يحب ويهوى.</p>
                 
-                <div class="conclusion-box">
-                    <h3 style="margin-top:0;">الخلاصة:</h3>
-                    <p>فإن كنتم تريدون أن تكونوا من المصلحين، فأنصحكم أن تتمسّكوا بكتاب الله، وتتركوا ما ورثتموه من دونه من كتب البشر لكي لا يضيع أجركم. الله وحده يعلم بما تتقولون عليه وعلى رسوله، وليس عليّ إلّا أن أذكركم بالقرآن فقط.</p>
-                    <p style="text-align:center; margin-top:15px; font-weight:bold; color:var(--primary-dark);">﴿فَذَكِّرْ بِالْقُرْآنِ مَن يَخَافُ وَعِيدِ﴾ [ق 45]</p>
-                </div>
+                <h3>الخلاصة:</h3>
+                <p>فإن كنتم تريدون أن تكونوا من المصلحين، فأنصحكم أن تتمسّكوا بكتاب الله، وتتركوا ما ورثتموه من دونه من كتب البشر لكي لا يضيع أجركم. الله وحده يعلم بما تتقولون عليه وعلى رسوله، وليس عليّ إلّا أن أذكركم بالقرآن فقط.</p>
+                <p style="text-align:center; margin-top:15px; font-weight:bold; color:var(--primary-dark);">﴿فَذَكِّرْ بِالْقُرْآنِ مَن يَخَافُ وَعِيدِ﴾ [ق 45]</p>
 
                 <!-- Video Link -->
                 <div style="text-align: center; margin: 40px 0;">
