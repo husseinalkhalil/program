@@ -114,11 +114,11 @@
         /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 120px 20px 140px; /* مسافة سفلية إضافية لتدخل البطاقات */
+            padding: 120px 20px 140px; 
             text-align: center; color: white;
             border-radius: 0 0 50px 50px; 
             position: relative; 
-            z-index: 1; /* طبقة منخفضة */
+            z-index: 1; 
         }
 
         .hero-content {
@@ -129,11 +129,11 @@
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
 
-        /* Global Search Box - Now inside Main Wrapper */
+        /* Global Search Box */
         .universal-search { 
             width: 100%; max-width: 600px; 
             position: relative; 
-            z-index: 100; /* طبقة عالية جداً للبحث */
+            z-index: 100;
             margin: 0 auto 40px auto; 
         }
         
@@ -184,8 +184,8 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper {
             position: relative; 
-            z-index: 20; /* طبقة البطاقات فوق الخلفية */
-            margin-top: -90px; /* سحب للأعلى للتداخل */
+            z-index: 20; 
+            margin-top: -90px; 
             max-width: 1000px;
             margin-left: auto; margin-right: auto; margin-bottom: 60px;
         }
@@ -197,7 +197,7 @@
             box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
             border-right: 5px solid var(--primary-color); position: relative;
             display: flex; flex-direction: column; height: 100%; transition: 0.3s;
-            cursor: pointer; /* جعل البطاقة تظهر كمؤشر رابط */
+            cursor: pointer; 
         }
         .article:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); border-right-width: 8px; }
         .article h2 { margin-bottom: 15px; position: relative; z-index: 1; }
@@ -208,7 +208,7 @@
         .article-button { 
             background: transparent; border: 1px solid #e2e8f0; color: var(--text-secondary); 
             padding: 6px 14px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 0.85rem; 
-            position: relative; z-index: 5; /* جعل الزر فوق طبقة النقر للبطاقة */
+            position: relative; z-index: 5; 
         }
         .article-button:hover { background: #fef9c3; color: #b45309; border-color: #fde047; transform: scale(1.05); }
         .article-button.active { background: var(--accent-color); color: #422006; border-color: var(--accent-color); }
@@ -254,7 +254,15 @@
         .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: 0.3s; pointer-events: none; }
         .copy-alert.show { opacity: 1; }
 
-        @media (max-width: 900px) { #articlesList { grid-template-columns: 1fr; } .hero-text h1 { font-size: 2rem; } .hero-section { padding: 100px 20px 80px; } .share-fixed-btn { display: none; } }
+        @media (max-width: 900px) { 
+            #articlesList { grid-template-columns: 1fr; } 
+            .hero-text h1 { font-size: 2rem; } 
+            
+            /* تعديل مهم: زيادة البادينغ السفلي في الموبايل لمنع التداخل */
+            .hero-section { padding: 100px 20px 160px; } 
+            
+            .share-fixed-btn { display: none; } 
+        }
         @media (max-width: 768px) { .footer-links { gap: 12px; } .social-grid { gap: 5px; flex-wrap: nowrap; } .social-btn { width: 48px; height: 48px; flex-shrink: 0; } }
     </style>
 </head>
