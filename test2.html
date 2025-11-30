@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>الفيديوهات - حسين الخليل</title>
+    <title>دعم المحتوى - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
@@ -134,7 +134,7 @@
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
 
-        /* Global Search Box (Moved inside Main Wrapper) */
+        /* Global Search Box (Inside Main Wrapper) */
         .universal-search { 
             width: 100%; max-width: 600px; 
             position: relative; 
@@ -150,18 +150,18 @@
             transition: box-shadow 0.3s ease;
         }
         #globalSearch:focus { box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.4); }
-        
+
         .search-icon-placeholder {
             position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
             color: var(--primary-color); pointer-events: none;
         }
-
+        
         /* Search Results Dropdown */
         .search-results {
             position: absolute; top: 115%; left: 0; right: 0;
             background: #ffffff; border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px;
-            overflow-y: auto; z-index: 200; text-align: right;
+            overflow-y: auto; z-index: 10000; text-align: right;
             display: none; color: var(--text-primary);
             border: 1px solid rgba(0,0,0,0.05);
         }
@@ -186,68 +186,77 @@
         .search-item mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
         /* Container Structure */
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper {
             position: relative;
             z-index: 20; /* طبقة البطاقات */
             margin-top: -90px; /* سحب للأعلى */
-            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto; margin-right: auto; margin-bottom: 60px;
         }
 
-        /* Video Grid */
-        .videos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+        /* Support Content Styles */
+        .intro-card {
+            background: var(--surface-color); border-radius: var(--radius-xl);
+            padding: 40px; box-shadow: var(--shadow-sm); text-align: center;
+            margin-bottom: 50px; font-size: 1.1rem; line-height: 1.8;
+            color: var(--text-primary); border: 1px solid rgba(0,0,0,0.03);
+        }
 
-        /* Video Card */
-        .video-card {
-            background: var(--surface-color); border-radius: 16px; padding: 15px;
+        .support-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px; margin-bottom: 50px;
+        }
+
+        .support-card {
+            background: var(--surface-color); border-radius: 16px; padding: 30px;
             box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
-            transition: all 0.4s ease; position: relative; overflow: hidden;
-            display: flex; flex-direction: column;
-        }
-        .video-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); }
-        
-        /* Top Border Accent */
-        .video-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
-            transition: height 0.3s ease;
-        }
-        .video-card:hover::before { height: 6px; }
-
-        .video-thumbnail {
-            position: relative; width: 100%; padding-top: 56.25%; border-radius: 10px;
-            overflow: hidden; margin-bottom: 15px; cursor: pointer; background: #000;
-        }
-        .video-thumbnail img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; transition: transform 0.5s ease; opacity: 0.9;
-        }
-        .video-card:hover .video-thumbnail img { transform: scale(1.05); opacity: 1; }
-
-        .play-icon {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            color: white; font-size: 3rem; opacity: 0.8; transition: all 0.3s;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-        .video-card:hover .play-icon { transform: translate(-50%, -50%) scale(1.1); opacity: 1; color: var(--accent-color); }
-
-        .video-title {
-            font-size: 1.1rem; font-weight: 700; color: var(--text-primary);
-            margin-bottom: 10px; line-height: 1.4; flex-grow: 1; text-align: center;
+            transition: all 0.4s ease; display: flex; flex-direction: column;
+            align-items: center; text-align: center; cursor: pointer;
         }
 
-        .video-actions { margin-top: auto; text-align: center; }
-        .favorite-btn {
-            background: #f8fafc; border: 1px solid #e2e8f0; color: var(--text-secondary);
-            padding: 8px 16px; border-radius: 20px; cursor: pointer; font-family: 'Tajawal';
-            font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center;
-            gap: 6px; font-size: 0.85rem; width: 100%; justify-content: center;
+        .support-card:hover {
+            transform: translateY(-10px); box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
         }
-        .favorite-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
-        .favorite-btn.active { background: var(--accent-color); color: #422006; border-color: var(--accent-color); }
+
+        .support-icon {
+            width: 80px; height: 80px; margin-bottom: 20px;
+            border-radius: 50%; background: rgba(94, 44, 165, 0.05);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.4s;
+        }
+
+        .support-card:hover .support-icon {
+            background: var(--primary-color); transform: scale(1.1) rotate(10deg);
+        }
+
+        .support-icon img {
+            width: 45px; height: 45px; object-fit: contain;
+            transition: 0.4s;
+        }
+        .support-card:hover .support-icon img { filter: brightness(0) invert(1); }
+
+        .support-card h3 {
+            color: var(--text-primary); font-size: 1.4rem; margin-bottom: 10px;
+        }
+
+        .support-card p {
+            color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;
+        }
+
+        .support-btn {
+            margin-top: auto; background: var(--primary-color); color: white;
+            padding: 10px 30px; border-radius: 25px; font-weight: 700;
+            transition: 0.3s; display: inline-block;
+        }
+
+        .support-card:hover .support-btn {
+            background: var(--accent-color); color: #422006;
+        }
 
         /* Social */
-        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); max-width: 1200px; margin-left: auto; margin-right: auto;}
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
@@ -271,36 +280,38 @@
         .footer-links a:hover { color: var(--accent-color); }
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
-        /* Fixed */
-        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: 0.3s; }
+        /* Fixed Buttons */
+        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
         .share-fixed-btn:hover { transform: scale(1.1); }
         .share-fixed-btn img { width: 24px; filter: brightness(0); }
+
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
+
         .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
         .copy-alert.show { opacity: 1; }
-        
-        #message { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-        /* Responsive */
-        @media (max-width: 1200px) { .videos-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 900px) { 
-            .videos-grid { grid-template-columns: repeat(2, 1fr); } 
-            .hero-text h1 { font-size: 2rem; } 
+        @media (max-width: 900px) {
+            .hero-text h1 { font-size: 2rem; }
             /* زيادة المسافة السفلية في الموبايل لتجنب التداخل */
-            .hero-section { padding: 100px 20px 160px; } 
-            .share-fixed-btn { display: none; } 
+            .hero-section { padding: 100px 20px 160px; }
+            .share-fixed-btn { display: none; }
         }
-        @media (max-width: 600px) { .videos-grid { grid-template-columns: 1fr; } }
-        @media (max-width: 768px) { .footer-links { gap: 12px; } .social-grid { gap: 5px; flex-wrap: nowrap; } .social-btn { width: 48px; height: 48px; flex-shrink: 0; } }
+
+        @media (max-width: 768px) {
+            .footer-links { gap: 12px; flex-wrap: wrap; justify-content: center; }
+            .footer-links a { font-size: 0.9rem; white-space: nowrap; }
+            .social-grid { gap: 5px; flex-wrap: nowrap; justify-content: center; }
+            .social-btn { width: 48px; height: 48px; flex-shrink: 0; }
+            .social-btn img { width: 24px; height: 24px; }
+        }
     </style>
 </head>
 <body>
 
     <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
 
-    <!-- Navigation -->
     <nav>
         <div class="logo-container">
             <a href="index.html">
@@ -313,7 +324,7 @@
             <a href="books.html">الكتب</a>
             <a href="articles.html">المقالات</a>
             <a href="khawatir.html">خواطر</a>
-            <a href="videos.html" style="background: rgba(255,255,255,0.2);">الفيديوهات</a>
+            <a href="videos.html">الفيديوهات</a>
             <a href="history.html">التاريخ</a>
             <a href="podcast.html">البودكاست</a>
             <a href="ask.html">الأسئلة</a>
@@ -321,7 +332,7 @@
             <a href="inq.html">تساؤلات</a>
             <a href="manhaj.html">المنهج</a>
             <a href="favorites.html">المفضلة</a>
-            <a href="support.html">دعم المحتوى</a>
+            <a href="support.html" style="background: rgba(255,255,255,0.2);">دعم المحتوى</a>
             <a href="about.html">من نحن</a>
             <a href="#" onclick="window.print()" title="طباعة"><i class="fas fa-print"></i></a>
             <a href="#" onclick="handleMobileShare(); return false;" class="mobile-share-link" style="display: none;">مشاركة</a>
@@ -334,10 +345,14 @@
 
     <!-- Hero Section -->
     <header class="hero-section">
+        <!-- Background Layer -->
+        <div class="hero-layer-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg, var(--primary-color), var(--primary-dark)); border-radius:0 0 50px 50px; z-index:1;"></div>
+        
+        <!-- Content Layer -->
         <div class="hero-content">
             <div class="hero-text">
-                <h1>الفيديوهات</h1>
-                <p>مقاطع مختارة من قناتي على اليوتيوب تناقش مختلف القضايا</p>
+                <h1>دعم المحتوى</h1>
+                <p>مساهمتك تساعد في استمرار نشر المعرفة والتنوير</p>
             </div>
         </div>
     </header>
@@ -352,517 +367,57 @@
             <div class="search-results" id="searchResults"></div>
         </div>
 
-        <div class="videos-grid" id="videosGrid">
-            <!-- Videos List -->
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('7wIDSBlUAf8')">
-                    <img src="https://img.youtube.com/vi/7wIDSBlUAf8/maxresdefault.jpg" alt="التبرّج">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">التبرّج</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('7wIDSBlUAf8', 'التبرّج', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
+        <div class="intro-card">
+            <h2 style="color:var(--primary-color); margin-bottom:15px;">لماذا ندعم المحتوى؟</h2>
+            <p>إن تقديم محتوى فكري وتنويري يتطلب جهداً ووقتاً وموارد مستمرة. دعمكم المادي والمعنوي هو الوقود الذي يضمن استمرارية هذا المشروع، ويسمح بتطوير الأدوات والوسائل للوصول إلى شريحة أوسع من الباحثين عن الحقيقة. كل مساهمة، مهما كانت بسيطة، تصنع فرقاً كبيراً في مسيرتنا.</p>
+        </div>
+
+        <div class="section-title"><h2>طرق الدعم المتاحة</h2></div>
+        
+        <div class="support-grid">
+            <!-- PayPal -->
+            <div class="support-card" onclick="window.open('https://www.paypal.com/paypalme/HusseinAlkhalil', '_blank')">
+                <div class="support-icon"><img src="images/paypal.png" alt="PayPal"></div>
+                <h3>PayPal</h3>
+                <p>دعم مباشر وسريع وآمن عبر منصة باي بال العالمية.</p>
+                <span class="support-btn">ادعم الآن</span>
             </div>
 
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('S3oHA2a0c1M')">
-                    <img src="https://img.youtube.com/vi/S3oHA2a0c1M/maxresdefault.jpg" alt="لو صليت ألف ركعة وظلمت؟!">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">لو صليت ألف ركعة وظلمت؟!</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('S3oHA2a0c1M', 'لو صليت ألف ركعة وظلمت؟!', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
+            <!-- Gumroad -->
+            <div class="support-card" onclick="window.open('https://husseinalkhalil.gumroad.com/l/book3', '_blank')">
+                <div class="support-icon"><img src="images/gumroad.png" alt="Gumroad"></div>
+                <h3>Gumroad</h3>
+                <p>ادعم المحتوى عبر شراء المنتجات الرقمية أو الدعم المباشر.</p>
+                <span class="support-btn">ادعم الآن</span>
             </div>
 
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('C66NFtg-KPI')">
-                    <img src="https://img.youtube.com/vi/C66NFtg-KPI/maxresdefault.jpg" alt="وإن طائفتان من المؤمنين اقتتلوا">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">وإن طائفتان من المؤمنين اقتتلوا</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('C66NFtg-KPI', 'وإن طائفتان من المؤمنين اقتتلوا', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
+            <!-- Ko-fi -->
+            <div class="support-card" onclick="window.open('https://ko-fi.com/s/763cb54e0a', '_blank')">
+                <div class="support-icon"><img src="images/ko-fi.png" alt="Ko-fi"></div>
+                <h3>Ko-fi</h3>
+                <p>اشترِ لي قهوة! طريقة ودية وبسيطة لدعم صانع المحتوى.</p>
+                <span class="support-btn">ادعم الآن</span>
             </div>
 
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('SF45e62fWPg')">
-                    <img src="https://img.youtube.com/vi/SF45e62fWPg/maxresdefault.jpg" alt="من هو المؤمن؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">من هو المؤمن؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('SF45e62fWPg', 'من هو المؤمن؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
+            <!-- Buy Me A Coffee -->
+            <div class="support-card" onclick="window.open('https://buymeacoffee.com/husseinalkhalil/e/411365', '_blank')">
+                <div class="support-icon"><img src="images/buyme.png" alt="Buy Me A Coffee"></div>
+                <h3>Buy Me A Coffee</h3>
+                <p>منصة سهلة لدعم المبدعين ومشاركتهم التقدير.</p>
+                <span class="support-btn">ادعم الآن</span>
             </div>
 
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('EZlf4cuWC2k')">
-                    <img src="https://img.youtube.com/vi/EZlf4cuWC2k/maxresdefault.jpg" alt="جرائم في كتاب البخاري">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">جرائم في كتاب البخاري</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('EZlf4cuWC2k', 'جرائم في كتاب البخاري', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('fvdsqlD0YBY')">
-                    <img src="https://img.youtube.com/vi/fvdsqlD0YBY/maxresdefault.jpg" alt="بين تحريم القرآن وترهيب الكهنوت">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">بين تحريم القرآن وترهيب الكهنوت</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('fvdsqlD0YBY', 'بين تحريم القرآن وترهيب الكهنوت', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('ASnSsKFYDoU')">
-                    <img src="https://img.youtube.com/vi/ASnSsKFYDoU/maxresdefault.jpg" alt="أنا لا أعبد النبي ولا البخاري">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">أنا لا أعبد النبي ولا البخاري</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('ASnSsKFYDoU', 'أنا لا أعبد النبي ولا البخاري', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('JGv9cWsqbmc')">
-                    <img src="https://img.youtube.com/vi/JGv9cWsqbmc/maxresdefault.jpg" alt="هل الصلاة تنهى عن الفحشاء والمنكر؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">هل الصلاة تنهى عن الفحشاء والمنكر؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('JGv9cWsqbmc', 'هل الصلاة تنهى عن الفحشاء والمنكر؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('BlAdzlxf5fI')">
-                    <img src="https://img.youtube.com/vi/BlAdzlxf5fI/maxresdefault.jpg" alt="دفع الخمس عند الشيعة بين الحقيقة والسرقة">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">دفع الخمس عند الشيعة بين الحقيقة والسرقة</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('BlAdzlxf5fI', 'دفع الخمس عند الشيعة بين الحقيقة والسرقة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('mxi3kfRLMsY')">
-                    <img src="https://img.youtube.com/vi/mxi3kfRLMsY/maxresdefault.jpg" alt="سايكس بيكو الكهنوت">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">سايكس بيكو الكهنوت</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('mxi3kfRLMsY', 'سايكس بيكو الكهنوت', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('VmhNW3BPLAc')">
-                    <img src="https://img.youtube.com/vi/VmhNW3BPLAc/maxresdefault.jpg" alt="إجرام كهنوتي بحق الإسلام">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">إجرام كهنوتي بحق الإسلام</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('VmhNW3BPLAc', 'إجرام كهنوتي بحق الإسلام', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('faI1favhHBU')">
-                    <img src="https://img.youtube.com/vi/faI1favhHBU/maxresdefault.jpg" alt="تعقيد الشعائر، قرآني أم كهنوتي؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">تعقيد الشعائر، قرآني أم كهنوتي؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('faI1favhHBU', 'تعقيد الشعائر، قرآني أم كهنوتي؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('NQie8xW-x7E')">
-                    <img src="https://img.youtube.com/vi/NQie8xW-x7E/maxresdefault.jpg" alt="هل الله بحاجة لصلاتنا؟ ما حقيقة عقوبة تارك الصلاة؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">هل الله بحاجة لصلاتنا؟ ما حقيقة عقوبة تارك الصلاة؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('NQie8xW-x7E', 'هل الله بحاجة لصلاتنا؟ ما حقيقة عقوبة تارك الصلاة؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('ox6LhMhcn3E')">
-                    <img src="https://img.youtube.com/vi/ox6LhMhcn3E/maxresdefault.jpg" alt="هل تشعر بصلاتك أم أنها مجرد طقوس؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">هل تشعر بصلاتك أم أنها مجرد طقوس؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('ox6LhMhcn3E', 'هل تشعر بصلاتك أم أنها مجرد طقوس؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('3heav8z5LJ0')">
-                    <img src="https://img.youtube.com/vi/3heav8z5LJ0/maxresdefault.jpg" alt="بين برمجة المجتمع وعدل الله">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">بين برمجة المجتمع وعدل الله</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('3heav8z5LJ0', 'بين برمجة المجتمع وعدل الله', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('1MXWGGb-QvE')">
-                    <img src="https://img.youtube.com/vi/1MXWGGb-QvE/maxresdefault.jpg" alt="الذين يحاربون الله ورسوله">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">الذين يحاربون الله ورسوله</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('1MXWGGb-QvE', 'الذين يحاربون الله ورسوله', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('xL2M8_H8mNo')">
-                    <img src="https://img.youtube.com/vi/xL2M8_H8mNo/maxresdefault.jpg" alt="جريمة تكفير الناس">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">جريمة تكفير الناس</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('xL2M8_H8mNo', 'جريمة تكفير الناس', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('JC8lF54C7kk')">
-                    <img src="https://img.youtube.com/vi/JC8lF54C7kk/maxresdefault.jpg" alt="هل سيحاسبنا الله على ديننا أم أعمالنا؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">هل سيحاسبنا الله على ديننا أم أعمالنا؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('JC8lF54C7kk', 'هل سيحاسبنا الله على ديننا أم أعمالنا؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('8h2dx_yuB6U')">
-                    <img src="https://img.youtube.com/vi/8h2dx_yuB6U/maxresdefault.jpg" alt="هل الإسلام دين العنف؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">هل الإسلام دين العنف؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('8h2dx_yuB6U', 'هل الإسلام دين العنف؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('mdWxPStRfnE')">
-                    <img src="https://img.youtube.com/vi/mdWxPStRfnE/maxresdefault.jpg" alt="من هو أحمد؟ هل هو اسم آخر لنبينا محمد؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">من هو أحمد؟ هل هو اسم آخر لنبينا محمد؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('mdWxPStRfnE', 'من هو أحمد؟ هل هو اسم آخر لنبينا محمد؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('zN52VOu_n8I')">
-                    <img src="https://img.youtube.com/vi/zN52VOu_n8I/maxresdefault.jpg" alt="قراءة الفاتحة والتشهد في الصلاة">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">قراءة الفاتحة والتشهد في الصلاة</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('zN52VOu_n8I', 'قراءة الفاتحة والتشهد في الصلاة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('LoxvuToLaEU')">
-                    <img src="https://img.youtube.com/vi/LoxvuToLaEU/maxresdefault.jpg" alt="هل الصلاة فرض وواجب على المسلم؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">هل الصلاة فرض وواجب على المسلم؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('LoxvuToLaEU', 'هل الصلاة فرض وواجب على المسلم؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('U7AxdI5N87g')">
-                    <img src="https://img.youtube.com/vi/U7AxdI5N87g/maxresdefault.jpg" alt="ما معنى مكة وبكة والقبلة والبيت الحرام؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">ما معنى مكة وبكة والقبلة والبيت الحرام؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('U7AxdI5N87g', 'ما معنى مكة وبكة والقبلة والبيت الحرام؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('L7dKk3wk9Aw')">
-                    <img src="https://img.youtube.com/vi/L7dKk3wk9Aw/maxresdefault.jpg" alt="لماذا الله لا ينقذ الأبرياء؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">لماذا الله لا ينقذ الأبرياء؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('L7dKk3wk9Aw', 'لماذا الله لا ينقذ الأبرياء؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('bJChbYrr2hw')">
-                    <img src="https://img.youtube.com/vi/bJChbYrr2hw/maxresdefault.jpg" alt="الصلاة كما أرادها الله لا كما أرادها الكهنوت">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">الصلاة كما أرادها الله لا كما أرادها الكهنوت</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('bJChbYrr2hw', 'الصلاة كما أرادها الله لا كما أرادها الكهنوت', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('wEVNsdUnjMU')">
-                    <img src="https://img.youtube.com/vi/wEVNsdUnjMU/maxresdefault.jpg" alt="الحور العين">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">الحور العين</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('wEVNsdUnjMU', 'الحور العين', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('Q16Zmfe644A')">
-                    <img src="https://img.youtube.com/vi/Q16Zmfe644A/maxresdefault.jpg" alt="محرمات، الإسلام بريئ منها">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">محرمات، الإسلام بريئ منها</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('Q16Zmfe644A', 'محرمات، الإسلام بريئ منها', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('9351NKWhm7g')">
-                    <img src="https://img.youtube.com/vi/9351NKWhm7g/maxresdefault.jpg" alt="اكذوبة زواج النبي من طفلة">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">اكذوبة زواج النبي من طفلة</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('9351NKWhm7g', 'اكذوبة زواج النبي من طفلة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('ZsSs72rP64k')">
-                    <img src="https://img.youtube.com/vi/ZsSs72rP64k/maxresdefault.jpg" alt="التناقض بين القرآن والروايات">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">التناقض بين القرآن والروايات</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('ZsSs72rP64k', 'التناقض بين القرآن والروايات', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('ecNdpEu3Dko')">
-                    <img src="https://img.youtube.com/vi/ecNdpEu3Dko/maxresdefault.jpg" alt="تحليل السمك والكبد قرآنيًا">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">تحليل السمك والكبد قرآنيًا</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('ecNdpEu3Dko', 'تحليل السمك والكبد قرآنيًا', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('o6rOEWGxQSM')">
-                    <img src="https://img.youtube.com/vi/o6rOEWGxQSM/maxresdefault.jpg" alt="زواج المسلمة من غير المسلم بين الحقيقة والوهم">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">زواج المسلمة من غير المسلم</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('o6rOEWGxQSM', 'زواج المسلمة من غير المسلم', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('LLlVdPQtop0')">
-                    <img src="https://img.youtube.com/vi/LLlVdPQtop0/maxresdefault.jpg" alt="لماذا انتشرت أفكار التنويريين في هذا الوقت؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">انتشار أفكار التنويريين</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('LLlVdPQtop0', 'انتشار أفكار التنويريين', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('ifMKU0NYJL0')">
-                    <img src="https://img.youtube.com/vi/ifMKU0NYJL0/maxresdefault.jpg" alt="الخمر بين التحريم والاجتناب">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">الخمر بين التحريم والاجتناب</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('ifMKU0NYJL0', 'الخمر بين التحريم والاجتناب', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('6MmcZaOw6vw')">
-                    <img src="https://img.youtube.com/vi/6MmcZaOw6vw/maxresdefault.jpg" alt="صلاةالجمعة بين الحقيقة والوهم">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">صلاةالجمعة بين الحقيقة والوهم</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('6MmcZaOw6vw', 'صلاةالجمعة بين الحقيقة والوهم', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('rHQIbb4VLwA')">
-                    <img src="https://img.youtube.com/vi/rHQIbb4VLwA/maxresdefault.jpg" alt="هل أصلي بحسب استنباطي للصلاة من القرآن أم بحسب ما أجمعت عليه الأمة؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">كيف أصلي بحسب القرآن؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('rHQIbb4VLwA', 'كيف أصلي بحسب القرآن؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('kG5_euF30ec')">
-                    <img src="https://img.youtube.com/vi/kG5_euF30ec/maxresdefault.jpg" alt="ما هو مفهوم الجُنُب؟ وهل هناك طريقة معينة للإغتسال؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">مفهوم الجُنُب والإغتسال</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('kG5_euF30ec', 'مفهوم الجُنُب والإغتسال', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('oJXCZ7arX70')">
-                    <img src="https://img.youtube.com/vi/oJXCZ7arX70/maxresdefault.jpg" alt="سأحاجج ربي (حلقة مهمة)">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">سأحاجج ربي (حلقة مهمة)</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('oJXCZ7arX70', 'سأحاجج ربي', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('cqwPD1xzTVc')">
-                    <img src="https://img.youtube.com/vi/cqwPD1xzTVc/maxresdefault.jpg" alt="الحجاب عادة أم عبادة؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">الحجاب عادة أم عبادة؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('cqwPD1xzTVc', 'الحجاب عادة أم عبادة؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('l7ta3MoNREU')">
-                    <img src="https://img.youtube.com/vi/l7ta3MoNREU/maxresdefault.jpg" alt="الطلاق من كتاب الله">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">الطلاق من كتاب الله</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('l7ta3MoNREU', 'الطلاق من كتاب الله', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('fI_3ZGLMJPE')">
-                    <img src="https://img.youtube.com/vi/fI_3ZGLMJPE/maxresdefault.jpg" alt="مفهوم الصلاة على النبي">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">مفهوم الصلاة على النبي</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('fI_3ZGLMJPE', 'مفهوم الصلاة على النبي', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('Y5XQuJc3qRw')">
-                    <img src="https://img.youtube.com/vi/Y5XQuJc3qRw/maxresdefault.jpg" alt="هل لبس الحجاب واجب على المرأة أثناء الصلاة؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">الحجاب أثناء الصلاة</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('Y5XQuJc3qRw', 'الحجاب أثناء الصلاة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('aQeddsec4Mo')">
-                    <img src="https://img.youtube.com/vi/aQeddsec4Mo/maxresdefault.jpg" alt="هل الصلاة التواترية توقيفية؟">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">الصلاة التواترية توقيفية؟</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('aQeddsec4Mo', 'الصلاة التواترية توقيفية؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('AUMUy3VPDoQ')">
-                    <img src="https://img.youtube.com/vi/AUMUy3VPDoQ/maxresdefault.jpg" alt="مثنى وثلاث ورباع">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">مثنى وثلاث ورباع</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('AUMUy3VPDoQ', 'مثنى وثلاث ورباع', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-            
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('dIC9UHjVkP8')">
-                    <img src="https://img.youtube.com/vi/dIC9UHjVkP8/maxresdefault.jpg" alt="تحريف الإسلام">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">تحريف الإسلام</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('dIC9UHjVkP8', 'تحريف الإسلام', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('zh0jRbhLqQc')">
-                    <img src="https://img.youtube.com/vi/zh0jRbhLqQc/maxresdefault.jpg" alt="صحيح البخاري، ومنهجية صاحبه بجمع الكتاب">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">منهجية جمع البخاري</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('zh0jRbhLqQc', 'منهجية جمع البخاري', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-thumbnail" onclick="openYoutubeVideo('aiXBF_n7Sxk')">
-                    <img src="https://img.youtube.com/vi/aiXBF_n7Sxk/maxresdefault.jpg" alt="عدد ركعات الصلاة بحسب القرآن">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                </div>
-                <h3 class="video-title">عدد ركعات الصلاة</h3>
-                <div class="video-actions">
-                    <button class="favorite-btn" onclick="toggleFavorite('aiXBF_n7Sxk', 'عدد ركعات الصلاة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
-                </div>
+            <!-- Payhip -->
+            <div class="support-card" onclick="window.open('https://payhip.com/b/qvP0F', '_blank')">
+                <div class="support-icon"><img src="images/payhip.png" alt="Payhip"></div>
+                <h3>Payhip</h3>
+                <p>ادعم عبر تحميل الكتب والملفات الرقمية مباشرة.</p>
+                <span class="support-btn">ادعم الآن</span>
             </div>
         </div>
 
         <!-- Social Media -->
-        <div class="social-section" style="margin-top: 60px;">
+        <div class="social-section">
             <div class="section-title">
                 <h2>تابعني على مواقع التواصل</h2>
             </div>
@@ -899,7 +454,6 @@
     </div>
 
     <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
-    <div id="message" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);"></div>
 
     <footer>
         <div class="container">
@@ -935,9 +489,9 @@
 
         // Share
         function handleMobileShare() {
-            const link = "https://www.husseinalkhalil.com/videos.html";
+            const link = "https://www.husseinalkhalil.com/support.html";
             if (navigator.share) {
-                navigator.share({ title: 'فيديوهات حسين الخليل', url: link }).catch(console.error);
+                navigator.share({ title: 'دعم المحتوى - حسين الخليل', url: link }).catch(console.error);
             } else {
                 navigator.clipboard.writeText(link).then(() => {
                     const alert = document.getElementById('copyAlert');
@@ -953,44 +507,6 @@
                 if(mobileShareLink) mobileShareLink.style.display = 'flex';
             }
         });
-
-        // Open Video
-        function openYoutubeVideo(id) {
-            window.open(`https://www.youtube.com/watch?v=${id}`, '_blank');
-        }
-
-        // Favorites Logic
-        function toggleFavorite(id, title, btn) {
-            let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            const index = favorites.findIndex(item => item.id === id && item.type === 'video');
-            
-            if (index === -1) {
-                // Add
-                favorites.push({
-                    id: id,
-                    title: title,
-                    type: 'video',
-                    url: `https://www.youtube.com/embed/${id}`
-                });
-                btn.classList.add("active");
-                btn.innerHTML = '<i class="fas fa-check"></i> في المفضلة';
-                showMessage("تمت الإضافة إلى المفضلة");
-            } else {
-                // Remove
-                favorites.splice(index, 1);
-                btn.classList.remove("active");
-                btn.innerHTML = '<i class="far fa-star"></i> أضف للمفضلة';
-                showMessage("تمت الإزالة من المفضلة");
-            }
-            localStorage.setItem("favorites", JSON.stringify(favorites));
-        }
-
-        function showMessage(text) {
-            const message = document.getElementById("message");
-            message.textContent = text;
-            message.style.display = "block";
-            setTimeout(() => message.style.display = "none", 2000);
-        }
 
         // Back to Top
         function scrollToTop() {
@@ -1139,10 +655,7 @@
                 return;
             }
             
-            // Dropdown results -> we don't hide grid here to keep context
-            // results are absolute positioned over content.
-
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث في جميع المحتويات...</p></div>';
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
             resultsContainer.style.display = 'block';
 
             const data = await loadAllPagesContent();
@@ -1161,20 +674,6 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // Check favorites status
-            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            document.querySelectorAll('.favorite-btn').forEach(btn => {
-                const match = btn.getAttribute('onclick').match(/'([^']+)'/);
-                if (match) {
-                    const id = match[1];
-                    if (favorites.some(item => item.id === id && item.type === 'video')) {
-                        btn.classList.add("active");
-                        btn.innerHTML = '<i class="fas fa-check"></i> في المفضلة';
-                    }
-                }
-            });
-
             // Setup Search Listener
             const searchInput = document.getElementById('globalSearch');
             let timer;
