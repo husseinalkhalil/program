@@ -1188,40 +1188,59 @@
         let cachedPagesContent = null;
         let isSearchInitialized = false;
         
-        // 1. Pages to fetch (القائمة التي قمت بتصحيحها)
-        const SEARCHABLE_PAGES = [
-            'index.html', 'books.html', 'articles.html', 'khawatir.html', 
-            'videos.html', 'ask.html', 'hewar.html', 'favorites.html', 
-            'support.html', 'about.html', 'manhaj.html', 'inq.html', 'history.html', 
-            'search-data.json', 
-
-        ];
-
-        async function fetchPageContent(url) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Failed');
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                
-                doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
-                
-                const mainContent = doc.querySelector('.container, main, body') || doc.body;
-                return {
-                    page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة',
-                    url: url,
-                    content: mainContent.textContent.replace(/\s+/g, ' ').trim()
-                };
-            } catch (e) { return null; }
-        }
-
+        // الدالة المعدلة: تقوم بجلب ملف site-map.json ثم قراءة الروابط منه
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
-            const promises = SEARCHABLE_PAGES.map(page => fetchPageContent(page));
-            const results = await Promise.all(promises);
-            cachedPagesContent = results.filter(Boolean);
-            return cachedPagesContent;
+
+            try {
+                // 1. جلب قائمة الروابط من الملف الخارجي
+                const response = await fetch('site-map.json');
+                if (!response.ok) throw new Error('Could not load site-map.json');
+                const pagesList = await response.json();
+
+                // 2. معالجة كل رابط في القائمة
+                const promises = pagesList.map(async (item) => {
+                    // دعم الحالة التي يكون فيها العنصر مجرد نص (رابط) أو كائن
+                    let url = typeof item === 'string' ? item : item.url;
+                    
+                    // إذا كان العنصر في ملف JSON يحتوي بالفعل على المحتوى (للتسريع)، نستخدمه مباشرة
+                    let manualContent = (typeof item === 'object' && item.content) ? item.content : null;
+                    let manualTitle = (typeof item === 'object' && item.page) ? item.page : null;
+
+                    if (manualContent) {
+                        return { 
+                            page: manualTitle || url, 
+                            url: url, 
+                            content: manualContent 
+                        };
+                    }
+
+                    // إذا لم يكن المحتوى موجوداً، نذهب لجلب الصفحة
+                    try {
+                        const pageResp = await fetch(url);
+                        if (!pageResp.ok) return null;
+                        const html = await pageResp.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        
+                        doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                        const mainContent = doc.querySelector('.container, main, body') || doc.body;
+
+                        return {
+                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة',
+                            url: url,
+                            content: mainContent.textContent.replace(/\s+/g, ' ').trim()
+                        };
+                    } catch (e) { return null; }
+                });
+
+                const results = await Promise.all(promises);
+                cachedPagesContent = results.filter(Boolean);
+                return cachedPagesContent;
+            } catch (error) {
+                console.error("Search Error:", error);
+                return [];
+            }
         }
 
         function normalizeArabic(text) {
