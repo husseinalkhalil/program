@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>البودكاست - حسين الخليل</title>
+    <title>الفيديوهات - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
@@ -134,7 +134,7 @@
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
 
-        /* Global Search Box (Inside Main Wrapper) */
+        /* Global Search Box (Moved inside Main Wrapper) */
         .universal-search { 
             width: 100%; max-width: 600px; 
             position: relative; 
@@ -150,7 +150,7 @@
             transition: box-shadow 0.3s ease;
         }
         #globalSearch:focus { box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.4); }
-
+        
         .search-icon-placeholder {
             position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
             color: var(--primary-color); pointer-events: none;
@@ -161,7 +161,7 @@
             position: absolute; top: 115%; left: 0; right: 0;
             background: #ffffff; border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px;
-            overflow-y: auto; z-index: 10000; text-align: right;
+            overflow-y: auto; z-index: 200; text-align: right;
             display: none; color: var(--text-primary);
             border: 1px solid rgba(0,0,0,0.05);
         }
@@ -186,85 +186,82 @@
         .search-item mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
         /* Container Structure */
-        .container { max-width: 1350px; margin: 0 auto; padding: 0 10px; }
-        
-        /* Main Wrapper */
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper {
             position: relative;
             z-index: 20; /* طبقة البطاقات */
             margin-top: -90px; /* سحب للأعلى */
-            margin-left: auto; margin-right: auto; margin-bottom: 60px;
+            margin-bottom: 60px;
         }
 
-        /* Podcast Grid */
-        .podcasts-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; justify-content: center; }
-        .podcast-card {
-            background: var(--surface-color); border-radius: 12px; padding: 10px;
-            box-shadow: var(--shadow-sm); transition: all 0.4s;
-            position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,0.03);
+        /* Results Info */
+        .search-results-info {
+            text-align: center; margin-bottom: 20px; display: none;
+            color: #FFD200; font-weight: bold; font-size: 1.2rem;
+            background: rgba(0,0,0,0.5); padding: 10px; border-radius: 10px;
+            display: inline-block; width: 100%;
+        }
+
+        /* Video Grid */
+        .videos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+
+        /* Video Card */
+        .video-card {
+            background: var(--surface-color); border-radius: 16px; padding: 15px;
+            box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
+            transition: all 0.4s ease; position: relative; overflow: hidden;
             display: flex; flex-direction: column;
         }
-        .podcast-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
-        .podcast-card.active-podcast { border: 2px solid var(--primary-color); background: #fcfaff; }
+        .video-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); }
         
-        .podcast-cover-container {
-            position: relative; width: 100%; height: 140px; border-radius: 8px;
-            overflow: hidden; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        /* Top Border Accent */
+        .video-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            transition: height 0.3s ease;
         }
-        .podcast-cover-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .podcast-card:hover img { transform: scale(1.05); }
+        .video-card:hover::before { height: 6px; }
 
-        .podcast-card h2 {
-            color: var(--text-primary); font-size: 0.9rem; margin-bottom: 10px;
-            font-weight: 700; line-height: 1.3; flex-grow: 1; text-align: center;
+        .video-thumbnail {
+            position: relative; width: 100%; padding-top: 56.25%; border-radius: 10px;
+            overflow: hidden; margin-bottom: 15px; cursor: pointer; background: #000;
         }
-        .listen-link {
-            background: #fff; color: var(--primary-color);
-            border: 1px solid var(--primary-color); padding: 6px 12px; border-radius: 20px;
-            font-weight: 700; display: flex; align-items: center; justify-content: center;
-            gap: 5px; transition: 0.3s; margin-bottom: 10px; font-size: 0.8rem;
+        .video-thumbnail img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; transition: transform 0.5s ease; opacity: 0.9;
         }
-        .listen-link:hover { background: var(--primary-color); color: white; }
-        .podcast-actions { display: flex; justify-content: center; gap: 8px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 10px; }
-        .action-btn {
-            background: transparent; border: 1px solid #e2e8f0; color: var(--text-secondary);
-            width: 32px; height: 32px; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; cursor: pointer;
-            transition: 0.3s; font-size: 0.9rem;
-        }
-        .action-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); transform: scale(1.1); }
-        .action-btn.active { background: var(--accent-color); color: #422006; border-color: var(--accent-color); }
+        .video-card:hover .video-thumbnail img { transform: scale(1.05); opacity: 1; }
 
-        /* Podcast Player */
-        .podcast-player {
-            background: linear-gradient(145deg, #ffffff, #f8f5ff); border-radius: 20px;
-            padding: 20px; margin: 0 auto 40px; box-shadow: var(--shadow-md);
-            border: 1px solid rgba(94, 44, 165, 0.1); position: relative; overflow: hidden;
-            max-width: 800px;
-            z-index: 10;
+        .play-icon {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: white; font-size: 3rem; opacity: 0.8; transition: all 0.3s;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
-        .podcast-player::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--primary-color); }
-        .episode-title { font-size: 1.2rem; font-weight: 800; color: var(--primary-dark); text-align: center; margin-bottom: 5px; }
-        .episode-date { text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 15px; }
-        .player-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 15px; }
-        .control-btn { background: white; color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; font-size: 1rem; box-shadow: var(--shadow-sm); }
-        .control-btn.main-play { width: 55px; height: 55px; background: var(--primary-color); color: white; font-size: 1.5rem; box-shadow: 0 5px 15px rgba(94, 44, 165, 0.3); }
-        .control-btn:hover { transform: scale(1.1); }
-        .progress-container { width: 100%; height: 6px; background: #e2e8f0; border-radius: 4px; cursor: pointer; margin-bottom: 8px; position: relative; direction: ltr; }
-        .progress-bar { height: 100%; background: var(--primary-color); border-radius: 4px; width: 0%; transition: width 0.1s linear; }
-        .time-info { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; direction: ltr; }
-        .volume-control { display: flex; align-items: center; gap: 10px; justify-content: center; margin-top: 10px; color: var(--text-secondary); }
-        input[type=range] { -webkit-appearance: none; width: 80px; height: 4px; background: #e2e8f0; border-radius: 3px; outline: none; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--primary-color); cursor: pointer; }
+        .video-card:hover .play-icon { transform: translate(-50%, -50%) scale(1.1); opacity: 1; color: var(--accent-color); }
+
+        .video-title {
+            font-size: 1.1rem; font-weight: 700; color: var(--text-primary);
+            margin-bottom: 10px; line-height: 1.4; flex-grow: 1; text-align: center;
+        }
+
+        .video-actions { margin-top: auto; text-align: center; }
+        .favorite-btn {
+            background: #f8fafc; border: 1px solid #e2e8f0; color: var(--text-secondary);
+            padding: 8px 16px; border-radius: 20px; cursor: pointer; font-family: 'Tajawal';
+            font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center;
+            gap: 6px; font-size: 0.85rem; width: 100%; justify-content: center;
+        }
+        .favorite-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .favorite-btn.active { background: var(--accent-color); color: #422006; border-color: var(--accent-color); }
 
         /* Social */
-        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); max-width: 1200px; margin-left: auto; margin-right: auto;}
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: all 0.3s; }
-        .social-btn img { width: 24px; height: 24px; transition: filter 0.3s; }
+        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: 0.3s; }
+        .social-btn img { width: 24px; height: 24px; transition: 0.3s; }
         .social-btn:hover { transform: translateY(-5px) scale(1.1); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
         .social-btn.facebook:hover { background: #1877F2; }
@@ -282,29 +279,26 @@
         .footer-links a:hover { color: var(--accent-color); }
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
-        /* Fixed Buttons */
-        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
+        /* Fixed */
+        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: 0.3s; }
         .share-fixed-btn:hover { transform: scale(1.1); }
         .share-fixed-btn img { width: 24px; filter: brightness(0); }
-
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
-
-        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: 0.3s; pointer-events: none; }
         .copy-alert.show { opacity: 1; }
-        
-        #message { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-        /* Responsive */
-        @media (max-width: 1550px) { .podcasts-grid { grid-template-columns: repeat(5, 1fr); } }
-        @media (max-width: 1300px) { .podcasts-grid { grid-template-columns: repeat(4, 1fr); } }
-        @media (max-width: 992px) { .podcasts-grid { grid-template-columns: repeat(3, 1fr); } .hero-text h1 { font-size: 2rem; } .share-fixed-btn { display: none; } }
-        @media (max-width: 768px) { .podcasts-grid { grid-template-columns: repeat(2, 1fr); } .footer-links { gap: 12px; flex-wrap: wrap; justify-content: center; } .social-grid { gap: 5px; flex-wrap: nowrap; justify-content: center; } .social-btn { width: 48px; height: 48px; flex-shrink: 0; } }
-        @media (max-width: 480px) { .podcasts-grid { grid-template-columns: 1fr; } 
-            /* زيادة المسافة السفلية في الموبايل */
+        @media (max-width: 1200px) { .videos-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 900px) { 
+            .videos-grid { grid-template-columns: repeat(2, 1fr); } 
+            .hero-text h1 { font-size: 2rem; } 
+            /* زيادة المسافة السفلية في الموبايل لتجنب التداخل */
             .hero-section { padding: 100px 20px 160px; } 
+            .share-fixed-btn { display: none; } 
         }
+        @media (max-width: 600px) { .videos-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .footer-links { gap: 12px; } .social-grid { gap: 5px; flex-wrap: nowrap; } .social-btn { width: 48px; height: 48px; flex-shrink: 0; } }
     </style>
 </head>
 <body>
@@ -324,9 +318,9 @@
             <a href="books.html">الكتب</a>
             <a href="articles.html">المقالات</a>
             <a href="khawatir.html">خواطر</a>
-            <a href="videos.html">الفيديوهات</a>
+            <a href="videos.html" style="background: rgba(255,255,255,0.2);">الفيديوهات</a>
             <a href="history.html">التاريخ</a>
-            <a href="podcast.html" style="background: rgba(255,255,255,0.2);">البودكاست</a>
+            <a href="podcast.html">البودكاست</a>
             <a href="ask.html">الأسئلة</a>
             <a href="hewar.html">حوارات</a>
             <a href="inq.html">تساؤلات</a>
@@ -347,614 +341,538 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>البودكاست</h1>
-                <p>استمع إلى حلقات بودكاست "فكر من جديد" التي تناقش مواضيع فكرية معاصرة</p>
+                <h1>الفيديوهات</h1>
+                <p>مقاطع مختارة من قناتي على اليوتيوب تناقش مختلف القضايا</p>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main Content Wrapper -->
     <div class="container main-wrapper">
         
         <!-- Global Search Box (Inside Main Wrapper) -->
         <div class="universal-search">
             <i class="fas fa-search search-icon-placeholder"></i>
             <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
-            <!-- Search Results Container -->
             <div class="search-results" id="searchResults"></div>
         </div>
 
-        <!-- Podcast Player -->
-        <div class="podcast-player">
-            <div class="episode-title" id="current-title">اختر حلقة للاستماع</div>
-            <div class="episode-date" id="current-date">ستظهر معلومات الحلقة هنا</div>
-            
-            <div class="player-controls">
-                <button class="control-btn" onclick="skipBackward()" title="تراجع 15 ثانية"><i class="fas fa-undo"></i></button>
-                <button class="control-btn main-play" onclick="togglePlay()" id="playBtn"><i class="fas fa-play"></i></button>
-                <button class="control-btn" onclick="skipForward()" title="تقدم 15 ثانية"><i class="fas fa-redo"></i></button>
-            </div>
-            
-            <div class="progress-container" onclick="setProgress(event)">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            
-            <div class="time-info">
-                <span id="currentTime">0:00</span>
-                <span id="duration">0:00</span>
-            </div>
-            
-            <div class="volume-control">
-                <i class="fas fa-volume-down"></i>
-                <input type="range" min="0" max="100" value="80" id="volumeSlider" oninput="changeVolume()">
-                <i class="fas fa-volume-up"></i>
-            </div>
+        <div id="searchResultsInfo" class="search-results-info">
+            <span id="resultsCount">0</span> نتيجة بحث
         </div>
 
-        <!-- Podcast Grid -->
-        <div class="podcasts-grid" id="podcastsGrid">
-            
-            <!-- List of 56 Episodes -->
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-24/404459013-44100-2-2fe8fe2931b35.m4a" id="podcast-56">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>هل الصلاة فرض على المسلم؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-56')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل الصلاة فرض على المسلم؟', 'podcast-56')"><i class="far fa-star"></i></button>
+        <div id="noResultsMessage" style="display:none; text-align:center; padding:30px; color:var(--text-secondary); background:var(--surface-color); border-radius:var(--radius-lg); margin-bottom:20px;">
+            <i class="fas fa-search" style="font-size:2rem; margin-bottom:10px; color:var(--text-secondary); opacity:0.5;"></i><br>
+            لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
+        </div>
+
+        <div class="videos-grid" id="videosGrid">
+            <!-- Videos List -->
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('7wIDSBlUAf8')">
+                    <img src="https://img.youtube.com/vi/7wIDSBlUAf8/maxresdefault.jpg" alt="التبرّج">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">التبرّج</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('7wIDSBlUAf8', 'التبرّج', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-12/403797674-44100-2-f53f8ef599752.m4a" id="podcast-55">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>هل الله خلق الظلم؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-55')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل الله خلق الظلم؟', 'podcast-55')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('S3oHA2a0c1M')">
+                    <img src="https://img.youtube.com/vi/S3oHA2a0c1M/maxresdefault.jpg" alt="لو صليت ألف ركعة وظلمت؟!">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">لو صليت ألف ركعة وظلمت؟!</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('S3oHA2a0c1M', 'لو صليت ألف ركعة وظلمت؟!', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-9/403624728-44100-2-821a645b1d4e1.m4a" id="podcast-54">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الصلاة كما أرادها الله</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-54')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الصلاة كما أرادها الله', 'podcast-54')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('C66NFtg-KPI')">
+                    <img src="https://img.youtube.com/vi/C66NFtg-KPI/maxresdefault.jpg" alt="وإن طائفتان من المؤمنين اقتتلوا">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-            </div>
-            
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-29/375941594-44100-2-fb93811371068.m4a" id="podcast-53">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>نظرية الحلوى المكشوفة</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-53')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'نظرية الحلوى المكشوفة', 'podcast-53')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-            
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-29/375941252-44100-2-92ba1fdab4323.m4a" id="podcast-52">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>مصير الهندوسي أو البوذي؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-52')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'مصير الهندوسي أو البوذي؟', 'podcast-52')"><i class="far fa-star"></i></button>
+                <h3 class="video-title">وإن طائفتان من المؤمنين اقتتلوا</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('C66NFtg-KPI', 'وإن طائفتان من المؤمنين اقتتلوا', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-16/374554834-44100-2-a7fc3525b18a1.m4a" id="podcast-51">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>لماذا أخلاق الموروث سيئة؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-51')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'لماذا أخلاق الموروث سيئة؟', 'podcast-51')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('SF45e62fWPg')">
+                    <img src="https://img.youtube.com/vi/SF45e62fWPg/maxresdefault.jpg" alt="من هو المؤمن؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">من هو المؤمن؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('SF45e62fWPg', 'من هو المؤمن؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('EZlf4cuWC2k')">
+                    <img src="https://img.youtube.com/vi/EZlf4cuWC2k/maxresdefault.jpg" alt="جرائم في كتاب البخاري">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">جرائم في كتاب البخاري</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('EZlf4cuWC2k', 'جرائم في كتاب البخاري', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-12/374097843-44100-2-45524aa7b6248.m4a" id="podcast-50">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>هل ذكر الله عدد ركعات الصلاة؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-50')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل ذكر الله عدد ركعات الصلاة؟', 'podcast-50')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('fvdsqlD0YBY')">
+                    <img src="https://img.youtube.com/vi/fvdsqlD0YBY/maxresdefault.jpg" alt="بين تحريم القرآن وترهيب الكهنوت">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">بين تحريم القرآن وترهيب الكهنوت</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('fvdsqlD0YBY', 'بين تحريم القرآن وترهيب الكهنوت', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685968-44100-2-d9b6b161a46e4.m4a" id="podcast-49">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>القراءات السبعة للقرآن</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-49')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'القراءات السبعة للقرآن', 'podcast-49')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('ASnSsKFYDoU')">
+                    <img src="https://img.youtube.com/vi/ASnSsKFYDoU/maxresdefault.jpg" alt="أنا لا أعبد النبي ولا البخاري">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">أنا لا أعبد النبي ولا البخاري</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('ASnSsKFYDoU', 'أنا لا أعبد النبي ولا البخاري', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-             <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685523-44100-2-e01b42113f1b9.m4a" id="podcast-48">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>القضاء والقدر</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-48')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'القضاء والقدر', 'podcast-48')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('JGv9cWsqbmc')">
+                    <img src="https://img.youtube.com/vi/JGv9cWsqbmc/maxresdefault.jpg" alt="هل الصلاة تنهى عن الفحشاء والمنكر؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">هل الصلاة تنهى عن الفحشاء والمنكر؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('JGv9cWsqbmc', 'هل الصلاة تنهى عن الفحشاء والمنكر؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685270-44100-2-94c25034d70e2.m4a" id="podcast-47">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الهداية والمشيئة</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-47')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الهداية والمشيئة', 'podcast-47')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('BlAdzlxf5fI')">
+                    <img src="https://img.youtube.com/vi/BlAdzlxf5fI/maxresdefault.jpg" alt="دفع الخمس عند الشيعة بين الحقيقة والسرقة">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">دفع الخمس عند الشيعة بين الحقيقة والسرقة</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('BlAdzlxf5fI', 'دفع الخمس عند الشيعة بين الحقيقة والسرقة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('mxi3kfRLMsY')">
+                    <img src="https://img.youtube.com/vi/mxi3kfRLMsY/maxresdefault.jpg" alt="سايكس بيكو الكهنوت">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">سايكس بيكو الكهنوت</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('mxi3kfRLMsY', 'سايكس بيكو الكهنوت', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('VmhNW3BPLAc')">
+                    <img src="https://img.youtube.com/vi/VmhNW3BPLAc/maxresdefault.jpg" alt="إجرام كهنوتي بحق الإسلام">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">إجرام كهنوتي بحق الإسلام</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('VmhNW3BPLAc', 'إجرام كهنوتي بحق الإسلام', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('faI1favhHBU')">
+                    <img src="https://img.youtube.com/vi/faI1favhHBU/maxresdefault.jpg" alt="تعقيد الشعائر، قرآني أم كهنوتي؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">تعقيد الشعائر، قرآني أم كهنوتي؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('faI1favhHBU', 'تعقيد الشعائر، قرآني أم كهنوتي؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('NQie8xW-x7E')">
+                    <img src="https://img.youtube.com/vi/NQie8xW-x7E/maxresdefault.jpg" alt="هل الله بحاجة لصلاتنا؟ ما حقيقة عقوبة تارك الصلاة؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">هل الله بحاجة لصلاتنا؟ ما حقيقة عقوبة تارك الصلاة؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('NQie8xW-x7E', 'هل الله بحاجة لصلاتنا؟ ما حقيقة عقوبة تارك الصلاة؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('ox6LhMhcn3E')">
+                    <img src="https://img.youtube.com/vi/ox6LhMhcn3E/maxresdefault.jpg" alt="هل تشعر بصلاتك أم أنها مجرد طقوس؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">هل تشعر بصلاتك أم أنها مجرد طقوس؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('ox6LhMhcn3E', 'هل تشعر بصلاتك أم أنها مجرد طقوس؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370684968-44100-2-b901852b42c08.m4a" id="podcast-46">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>المذاهب الأربعة واختلافاتها</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-46')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'المذاهب الأربعة واختلافاتها', 'podcast-46')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('3heav8z5LJ0')">
+                    <img src="https://img.youtube.com/vi/3heav8z5LJ0/maxresdefault.jpg" alt="بين برمجة المجتمع وعدل الله">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">بين برمجة المجتمع وعدل الله</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('3heav8z5LJ0', 'بين برمجة المجتمع وعدل الله', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370684630-44100-2-06b5554303a56.m4a" id="podcast-45">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>العمل الصالح</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-45')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'العمل الصالح', 'podcast-45')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('1MXWGGb-QvE')">
+                    <img src="https://img.youtube.com/vi/1MXWGGb-QvE/maxresdefault.jpg" alt="الذين يحاربون الله ورسوله">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367353738-44100-2-e0b57d1bf8bac.m4a" id="podcast-44">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>هل نحن ملزمين بكتب أسباب النزول؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-44')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل نحن ملزمين بكتب أسباب النزول؟', 'podcast-44')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367353241-44100-2-d54c624af8817.m4a" id="podcast-43">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>هل التوراة والانجيل محرّفة؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-43')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل التوراة والانجيل محرّفة؟', 'podcast-43')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-0-11/392914886-44100-2-33b38030cf50e.m4a" id="podcast-42">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>هل كتاب البخاري صناعة يهودية؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-42')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل كتاب البخاري صناعة يهودية؟', 'podcast-42')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367352174-44100-2-f941b665764d6.m4a" id="podcast-41">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>هل الإجماع مصدر تشريع؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-41')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل الإجماع مصدر تشريع؟', 'podcast-41')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367351847-44100-2-695ef843a517b.m4a" id="podcast-40">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>من هو المسلم؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-40')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'من هو المسلم؟', 'podcast-40')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367351847-44100-2-695ef843a517b.m4a" id="podcast-39">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>من هو المسلم؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-39')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'من هو المسلم؟', 'podcast-39')"><i class="far fa-star"></i></button>
+                <h3 class="video-title">الذين يحاربون الله ورسوله</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('1MXWGGb-QvE', 'الذين يحاربون الله ورسوله', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367350787-44100-2-bb1a65c4ae514.m4a" id="podcast-38">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>قطع يد السارق بين الحقيقة والوهم</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-38')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'قطع يد السارق بين الحقيقة والوهم', 'podcast-38')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('xL2M8_H8mNo')">
+                    <img src="https://img.youtube.com/vi/xL2M8_H8mNo/maxresdefault.jpg" alt="جريمة تكفير الناس">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">جريمة تكفير الناس</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('xL2M8_H8mNo', 'جريمة تكفير الناس', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367350412-44100-2-12494d6db0695.m4a" id="podcast-37">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>فاسألوا أهل الذكر</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-37')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'فاسألوا أهل الذكر', 'podcast-37')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('JC8lF54C7kk')">
+                    <img src="https://img.youtube.com/vi/JC8lF54C7kk/maxresdefault.jpg" alt="هل سيحاسبنا الله على ديننا أم أعمالنا؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">هل سيحاسبنا الله على ديننا أم أعمالنا؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('JC8lF54C7kk', 'هل سيحاسبنا الله على ديننا أم أعمالنا؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367349906-44100-2-2ee0f74fd7ceb.m4a" id="podcast-36">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>صحيح البخاري</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-36')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'صحيح البخاري', 'podcast-36')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('8h2dx_yuB6U')">
+                    <img src="https://img.youtube.com/vi/8h2dx_yuB6U/maxresdefault.jpg" alt="هل الإسلام دين العنف؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">هل الإسلام دين العنف؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('8h2dx_yuB6U', 'هل الإسلام دين العنف؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346960-44100-2-ad4ae7943a43c.m4a" id="podcast-35">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الصراط المستقيم بين الحقيقة والوهم</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-35')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الصراط المستقيم بين الحقيقة والوهم', 'podcast-35')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('mdWxPStRfnE')">
+                    <img src="https://img.youtube.com/vi/mdWxPStRfnE/maxresdefault.jpg" alt="من هو أحمد؟ هل هو اسم آخر لنبينا محمد؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">من هو أحمد؟ هل هو اسم آخر لنبينا محمد؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('mdWxPStRfnE', 'من هو أحمد؟ هل هو اسم آخر لنبينا محمد؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346531-44100-2-fa5f197715506.m4a" id="podcast-34">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الرجم بين الحقيقة والوهم</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-34')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الرجم بين الحقيقة والوهم', 'podcast-34')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('zN52VOu_n8I')">
+                    <img src="https://img.youtube.com/vi/zN52VOu_n8I/maxresdefault.jpg" alt="قراءة الفاتحة والتشهد في الصلاة">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">قراءة الفاتحة والتشهد في الصلاة</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('zN52VOu_n8I', 'قراءة الفاتحة والتشهد في الصلاة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346217-44100-2-d26dce76a0f45.m4a" id="podcast-33">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الترحُّم على غير المسلمين</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-33')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الترحُّم على غير المسلمين', 'podcast-33')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('LoxvuToLaEU')">
+                    <img src="https://img.youtube.com/vi/LoxvuToLaEU/maxresdefault.jpg" alt="هل الصلاة فرض وواجب على المسلم؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346037-44100-2-c2b4a165fa3c1.m4a" id="podcast-32">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>التبني في الاسلام</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-32')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'التبني في الاسلام', 'podcast-32')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-27/357416853-44100-2-1cd9688646b46.m4a" id="podcast-31">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>هل الصلاة التواترية توقيفية؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-31')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل الصلاة التواترية توقيفية؟', 'podcast-31')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-21/356623843-44100-2-4b164060e77da.m4a" id="podcast-30">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>مثنى وثلاث ورباع</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-30')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'مثنى وثلاث ورباع', 'podcast-30')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-21/356623843-44100-2-4b164060e77da.m4a" id="podcast-29">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الغيبة والتجسس</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-29')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الغيبة والتجسس', 'podcast-29')"><i class="far fa-star"></i></button>
+                <h3 class="video-title">هل الصلاة فرض وواجب على المسلم؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('LoxvuToLaEU', 'هل الصلاة فرض وواجب على المسلم؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-1/353718794-44100-2-ebe4bd57c05a6.m4a" id="podcast-28">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>علامات الساعة بين الحقيقة والوهم</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-28')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'علامات الساعة بين الحقيقة والوهم', 'podcast-28')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('U7AxdI5N87g')">
+                    <img src="https://img.youtube.com/vi/U7AxdI5N87g/maxresdefault.jpg" alt="ما معنى مكة وبكة والقبلة والبيت الحرام؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">ما معنى مكة وبكة والقبلة والبيت الحرام؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('U7AxdI5N87g', 'ما معنى مكة وبكة والقبلة والبيت الحرام؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('L7dKk3wk9Aw')">
+                    <img src="https://img.youtube.com/vi/L7dKk3wk9Aw/maxresdefault.jpg" alt="لماذا الله لا ينقذ الأبرياء؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">لماذا الله لا ينقذ الأبرياء؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('L7dKk3wk9Aw', 'لماذا الله لا ينقذ الأبرياء؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-             <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-1/353718437-44100-2-6e57b7fc89c69.m4a" id="podcast-27">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>المثلية الجنسية</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-27')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'المثلية الجنسية', 'podcast-27')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('bJChbYrr2hw')">
+                    <img src="https://img.youtube.com/vi/bJChbYrr2hw/maxresdefault.jpg" alt="الصلاة كما أرادها الله لا كما أرادها الكهنوت">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الصلاة كما أرادها الله لا كما أرادها الكهنوت</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('bJChbYrr2hw', 'الصلاة كما أرادها الله لا كما أرادها الكهنوت', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-9-11/350697775-44100-2-3010dec3a7cde.m4a" id="podcast-26">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الطلاق من كتاب الله</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-26')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الطلاق من كتاب الله', 'podcast-26')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('wEVNsdUnjMU')">
+                    <img src="https://img.youtube.com/vi/wEVNsdUnjMU/maxresdefault.jpg" alt="الحور العين">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الحور العين</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('wEVNsdUnjMU', 'الحور العين', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-             <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-9-5/349902772-44100-2-edfb5dc8e42a3.m4a" id="podcast-25">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الحجاب عادة أم عبادة؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-25')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الحجاب عادة أم عبادة؟', 'podcast-25')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('Q16Zmfe644A')">
+                    <img src="https://img.youtube.com/vi/Q16Zmfe644A/maxresdefault.jpg" alt="محرمات، الإسلام بريئ منها">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">محرمات، الإسلام بريئ منها</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('Q16Zmfe644A', 'محرمات، الإسلام بريئ منها', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-9-5/349902213-44100-2-76b4451f43f95.m4a" id="podcast-24">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>سأنكر كل ما هو دون القرآن وسأحاجج ربي</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-24')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'سأنكر كل ما هو دون القرآن وسأحاجج ربي', 'podcast-24')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('9351NKWhm7g')">
+                    <img src="https://img.youtube.com/vi/9351NKWhm7g/maxresdefault.jpg" alt="اكذوبة زواج النبي من طفلة">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">اكذوبة زواج النبي من طفلة</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('9351NKWhm7g', 'اكذوبة زواج النبي من طفلة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('ZsSs72rP64k')">
+                    <img src="https://img.youtube.com/vi/ZsSs72rP64k/maxresdefault.jpg" alt="التناقض بين القرآن والروايات">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">التناقض بين القرآن والروايات</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('ZsSs72rP64k', 'التناقض بين القرآن والروايات', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-23/348198363-44100-2-558bc3296546.m4a" id="podcast-23">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>ما هو مفهوم الجُنُب؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-23')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'ما هو مفهوم الجُنُب؟', 'podcast-23')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('ecNdpEu3Dko')">
+                    <img src="https://img.youtube.com/vi/ecNdpEu3Dko/maxresdefault.jpg" alt="تحليل السمك والكبد قرآنيًا">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-17/347381814-44100-2-7ccd53ec818ef.m4a" id="podcast-22">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>لماذا القرآن نزل عربيًا؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-22')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'لماذا القرآن نزل عربيًا؟', 'podcast-22')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-11/346563815-44100-2-dbe146588121b.m4a" id="podcast-21">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>هل أصلي على كيفي أم على كيف الاجماع؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-21')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل أصلي على كيفي أم على كيف الاجماع؟', 'podcast-21')"><i class="far fa-star"></i></button>
+                <h3 class="video-title">تحليل السمك والكبد قرآنيًا</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('ecNdpEu3Dko', 'تحليل السمك والكبد قرآنيًا', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345320563-44100-2-2c5bddde79623.m4a" id="podcast-20">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>صلاة الجمعة بين الحقيقة والوهم</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-20')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'صلاة الجمعة بين الحقيقة والوهم', 'podcast-20')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('o6rOEWGxQSM')">
+                    <img src="https://img.youtube.com/vi/o6rOEWGxQSM/maxresdefault.jpg" alt="زواج المسلمة من غير المسلم بين الحقيقة والوهم">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345320099-44100-2-25697b82d90ac.m4a" id="podcast-19">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>لماذا انتشرت أفكار التنويريين في هذا الوقت؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-19')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'لماذا انتشرت أفكار التنويريين في هذا الوقت؟', 'podcast-19')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345318401-44100-2-4f0cfba8d4f71.m4a" id="podcast-18">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الخمر بين التحريم والاجتناب</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-18')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الخمر بين التحريم والاجتناب', 'podcast-18')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345317816-44100-2-a9c1100332161.m4a" id="podcast-17">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الأطعمة والسمك والكبد</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-17')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الأطعمة والسمك والكبد', 'podcast-17')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345317270-44100-2-442dd51f28c4f.m4a" id="podcast-16">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>زواج المسلمة من غير المسلم</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-16')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'زواج المسلمة من غير المسلم', 'podcast-16')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345316317-44100-2-7d9f3db2742d7.m4a" id="podcast-15">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>مفهوم واضربوهن</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-15')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'مفهوم واضربوهن', 'podcast-15')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345316177-44100-2-c085280cba311.m4a" id="podcast-14">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>أكذوبة زواج النبي من طفلة</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-14')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'أكذوبة زواج النبي من طفلة', 'podcast-14')"><i class="far fa-star"></i></button>
+                <h3 class="video-title">زواج المسلمة من غير المسلم</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('o6rOEWGxQSM', 'زواج المسلمة من غير المسلم', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345316177-44100-2-c085280cba311.m4a" id="podcast-13">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>لماذا خلقنا الله؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-13')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'لماذا خلقنا الله؟', 'podcast-13')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('LLlVdPQtop0')">
+                    <img src="https://img.youtube.com/vi/LLlVdPQtop0/maxresdefault.jpg" alt="لماذا انتشرت أفكار التنويريين في هذا الوقت؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345315951-44100-2-f9e569931af3b.m4a" id="podcast-12">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>حادثة الافك</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-12')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'حادثة الافك', 'podcast-12')"><i class="far fa-star"></i></button>
+                <h3 class="video-title">انتشار أفكار التنويريين</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('LLlVdPQtop0', 'انتشار أفكار التنويريين', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345315421-44100-2-0492d2e4a286a.m4a" id="podcast-11">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>التناقض بين الروايات والقران</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-11')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'التناقض بين الروايات والقران', 'podcast-11')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('ifMKU0NYJL0')">
+                    <img src="https://img.youtube.com/vi/ifMKU0NYJL0/maxresdefault.jpg" alt="الخمر بين التحريم والاجتناب">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الخمر بين التحريم والاجتناب</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('ifMKU0NYJL0', 'الخمر بين التحريم والاجتناب', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('6MmcZaOw6vw')">
+                    <img src="https://img.youtube.com/vi/6MmcZaOw6vw/maxresdefault.jpg" alt="صلاةالجمعة بين الحقيقة والوهم">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">صلاةالجمعة بين الحقيقة والوهم</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('6MmcZaOw6vw', 'صلاةالجمعة بين الحقيقة والوهم', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('rHQIbb4VLwA')">
+                    <img src="https://img.youtube.com/vi/rHQIbb4VLwA/maxresdefault.jpg" alt="هل أصلي بحسب استنباطي للصلاة من القرآن أم بحسب ما أجمعت عليه الأمة؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">كيف أصلي بحسب القرآن؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('rHQIbb4VLwA', 'كيف أصلي بحسب القرآن؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('kG5_euF30ec')">
+                    <img src="https://img.youtube.com/vi/kG5_euF30ec/maxresdefault.jpg" alt="ما هو مفهوم الجُنُب؟ وهل هناك طريقة معينة للإغتسال؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">مفهوم الجُنُب والإغتسال</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('kG5_euF30ec', 'مفهوم الجُنُب والإغتسال', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('oJXCZ7arX70')">
+                    <img src="https://img.youtube.com/vi/oJXCZ7arX70/maxresdefault.jpg" alt="سأحاجج ربي (حلقة مهمة)">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">سأحاجج ربي (حلقة مهمة)</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('oJXCZ7arX70', 'سأحاجج ربي', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('cqwPD1xzTVc')">
+                    <img src="https://img.youtube.com/vi/cqwPD1xzTVc/maxresdefault.jpg" alt="الحجاب عادة أم عبادة؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الحجاب عادة أم عبادة؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('cqwPD1xzTVc', 'الحجاب عادة أم عبادة؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('l7ta3MoNREU')">
+                    <img src="https://img.youtube.com/vi/l7ta3MoNREU/maxresdefault.jpg" alt="الطلاق من كتاب الله">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الطلاق من كتاب الله</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('l7ta3MoNREU', 'الطلاق من كتاب الله', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('fI_3ZGLMJPE')">
+                    <img src="https://img.youtube.com/vi/fI_3ZGLMJPE/maxresdefault.jpg" alt="مفهوم الصلاة على النبي">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">مفهوم الصلاة على النبي</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('fI_3ZGLMJPE', 'مفهوم الصلاة على النبي', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('Y5XQuJc3qRw')">
+                    <img src="https://img.youtube.com/vi/Y5XQuJc3qRw/maxresdefault.jpg" alt="هل لبس الحجاب واجب على المرأة أثناء الصلاة؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الحجاب أثناء الصلاة</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('Y5XQuJc3qRw', 'الحجاب أثناء الصلاة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('aQeddsec4Mo')">
+                    <img src="https://img.youtube.com/vi/aQeddsec4Mo/maxresdefault.jpg" alt="هل الصلاة التواترية توقيفية؟">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">الصلاة التواترية توقيفية؟</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('aQeddsec4Mo', 'الصلاة التواترية توقيفية؟', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-7-23/344201589-44100-2-928cd7afa617b.m4a" id="podcast-10">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الجرح والتعديل</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-10')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الجرح والتعديل', 'podcast-10')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('AUMUy3VPDoQ')">
+                    <img src="https://img.youtube.com/vi/AUMUy3VPDoQ/maxresdefault.jpg" alt="مثنى وثلاث ورباع">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">مثنى وثلاث ورباع</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('AUMUy3VPDoQ', 'مثنى وثلاث ورباع', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
             
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-7-10/342643787-44100-2-69858796fc4c3.m4a" id="podcast-9">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>حجاب المرأة</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-9')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'حجاب المرأة', 'podcast-9')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('dIC9UHjVkP8')">
+                    <img src="https://img.youtube.com/vi/dIC9UHjVkP8/maxresdefault.jpg" alt="تحريف الإسلام">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
                 </div>
-            </div>
-            
-             <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-6-27/340895826-44100-2-cadc6035241f2.m4a" id="podcast-8">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>ملك اليمين</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-8')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'ملك اليمين', 'podcast-8')"><i class="far fa-star"></i></button>
+                <h3 class="video-title">تحريف الإسلام</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('dIC9UHjVkP8', 'تحريف الإسلام', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-6-27/340895826-44100-2-cadc6035241f2.m4a" id="podcast-7">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>هل النبي كان فقيرًا؟</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-7')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'هل النبي كان فقيرًا؟', 'podcast-7')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('zh0jRbhLqQc')">
+                    <img src="https://img.youtube.com/vi/zh0jRbhLqQc/maxresdefault.jpg" alt="صحيح البخاري، ومنهجية صاحبه بجمع الكتاب">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">منهجية جمع البخاري</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('zh0jRbhLqQc', 'منهجية جمع البخاري', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
 
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-6-21/340080802-44100-2-f5e1bc473e858.m4a" id="podcast-6">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الفرق بين النبي والرسول</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-6')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الفرق بين النبي والرسول', 'podcast-6')"><i class="far fa-star"></i></button>
+            <div class="video-card">
+                <div class="video-thumbnail" onclick="openYoutubeVideo('aiXBF_n7Sxk')">
+                    <img src="https://img.youtube.com/vi/aiXBF_n7Sxk/maxresdefault.jpg" alt="عدد ركعات الصلاة بحسب القرآن">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+                <h3 class="video-title">عدد ركعات الصلاة</h3>
+                <div class="video-actions">
+                    <button class="favorite-btn" onclick="toggleFavorite('aiXBF_n7Sxk', 'عدد ركعات الصلاة', this)"><i class="far fa-star"></i> أضف للمفضلة</button>
                 </div>
             </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-5-10/334337459-44100-2-0defc0a3c56c7.m4a" id="podcast-5">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الناسخ والمنسوخ</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-5')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الناسخ والمنسوخ', 'podcast-5')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-5-1/332854542-44100-2-502f331af81db.m4a" id="podcast-4">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>شهادة الأنثى</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-4')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'شهادة الأنثى', 'podcast-4')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-5-8/334123023-44100-2-b0f6a2cfb737c.m4a" id="podcast-3">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>مفهوم الجهاد والقتال</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-3')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'مفهوم الجهاد والقتال', 'podcast-3')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-4-15/329694974-44100-2-dc82fef717a1f.m4a" id="podcast-2">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>الفرق بين التدبر والتفقه</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-2')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'الفرق بين التدبر والتفقه', 'podcast-2')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
-            <div class="podcast-card" data-audio="https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-4-11/329048140-44100-2-57046444006aa.m4a" id="podcast-1">
-                <div class="podcast-cover-container"><img src="images/pod.jpg" alt="Cover"></div>
-                <h2>حلقة تفصيلية</h2>
-                <a href="#" class="listen-link"><i class="fas fa-play-circle"></i> استمع الآن</a>
-                <div class="podcast-actions">
-                    <button class="action-btn" onclick="sharePodcast('podcast-1')"><i class="fas fa-share-alt"></i></button>
-                    <button class="action-btn favorite-btn" onclick="toggleFavorite(this, 'حلقة تفصيلية', 'podcast-1')"><i class="far fa-star"></i></button>
-                </div>
-            </div>
-
         </div>
 
         <!-- Social Media -->
@@ -995,7 +913,7 @@
     </div>
 
     <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
-    <div id="message"></div>
+    <div id="message" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);"></div>
 
     <footer>
         <div class="container">
@@ -1012,28 +930,19 @@
     </footer>
 
     <script>
-        // Mobile Menu
+        // Toggle Mobile Menu
         function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
-            const body = document.body;
-
             navLinks.classList.toggle('show');
-            
-            if(navLinks.classList.contains('show')) {
-                overlay.style.display = 'block';
-                body.classList.add('no-scroll');
-            } else {
-                overlay.style.display = 'none';
-                body.classList.remove('no-scroll');
-            }
+            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
         }
 
         // Share
         function handleMobileShare() {
-            const link = "https://www.husseinalkhalil.com/podcast.html";
+            const link = "https://www.husseinalkhalil.com/videos.html";
             if (navigator.share) {
-                navigator.share({ title: 'بودكاست حسين الخليل', url: link }).catch(console.error);
+                navigator.share({ title: 'فيديوهات حسين الخليل', url: link }).catch(console.error);
             } else {
                 navigator.clipboard.writeText(link).then(() => {
                     const alert = document.getElementById('copyAlert');
@@ -1050,40 +959,32 @@
             }
         });
 
-        // Single Podcast Share
-        function sharePodcast(id) {
-            const link = window.location.origin + window.location.pathname + "?podcast=" + id;
-            if (navigator.share) {
-                navigator.share({ title: 'بودكاست - حسين الخليل', url: link }).catch(console.error);
-            } else {
-                const alert = document.getElementById('copyAlert');
-                navigator.clipboard.writeText(link).then(() => {
-                    alert.textContent = 'تم نسخ رابط الحلقة ✅';
-                    alert.classList.add('show');
-                    setTimeout(() => {
-                         alert.classList.remove('show');
-                         alert.textContent = 'تم نسخ الرابط بنجاح ✅';
-                    }, 2000);
-                });
-            }
+        // Open Video
+        function openYoutubeVideo(id) {
+            window.open(`https://www.youtube.com/watch?v=${id}`, '_blank');
         }
 
-        // Favorites
-        function toggleFavorite(button, title, id) {
+        // Favorites Logic
+        function toggleFavorite(id, title, btn) {
             let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            const existingIndex = favorites.findIndex(item => item.id === id && item.type === 'podcast');
+            const index = favorites.findIndex(item => item.id === id && item.type === 'video');
             
-            if (existingIndex === -1) {
+            if (index === -1) {
+                // Add
                 favorites.push({
                     id: id,
                     title: title,
-                    type: 'podcast',
+                    type: 'video',
+                    url: `https://www.youtube.com/embed/${id}`
                 });
-                button.classList.add("active");
+                btn.classList.add("active");
+                btn.innerHTML = '<i class="fas fa-check"></i> في المفضلة';
                 showMessage("تمت الإضافة إلى المفضلة");
             } else {
-                favorites.splice(existingIndex, 1);
-                button.classList.remove("active");
+                // Remove
+                favorites.splice(index, 1);
+                btn.classList.remove("active");
+                btn.innerHTML = '<i class="far fa-star"></i> أضف للمفضلة';
                 showMessage("تمت الإزالة من المفضلة");
             }
             localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -1096,105 +997,17 @@
             setTimeout(() => message.style.display = "none", 2000);
         }
 
-        // Audio Player Logic
-        let currentAudio = null;
-        let isPlaying = false;
-
-        document.querySelectorAll('.listen-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                document.querySelectorAll('.podcast-card').forEach(c => c.classList.remove('active-podcast'));
-                const card = this.closest('.podcast-card');
-                card.classList.add('active-podcast');
-
-                const title = card.querySelector('h2').textContent;
-                document.getElementById('current-title').textContent = title;
-                document.getElementById('current-date').textContent = 'جاري التشغيل...';
-
-                const audioSrc = card.getAttribute('data-audio');
-                setupAudio(audioSrc);
-                
-                document.querySelector('.podcast-player').scrollIntoView({ behavior: 'smooth' });
-            });
+        // Back to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) btn.classList.add('visible');
+            else btn.classList.remove('visible');
         });
 
-        function setupAudio(src) {
-            if (currentAudio) {
-                currentAudio.pause();
-            }
-            currentAudio = new Audio(src);
-            
-            currentAudio.addEventListener('timeupdate', updateProgress);
-            currentAudio.addEventListener('loadedmetadata', () => {
-                document.getElementById('duration').textContent = formatTime(currentAudio.duration);
-            });
-            currentAudio.addEventListener('ended', () => {
-                isPlaying = false;
-                document.querySelector('.main-play i').className = 'fas fa-play';
-            });
-
-            currentAudio.volume = document.getElementById('volumeSlider').value / 100;
-            togglePlay();
-        }
-
-        function togglePlay() {
-            if (!currentAudio) return;
-            const btnIcon = document.querySelector('.main-play i');
-            
-            if (isPlaying) {
-                currentAudio.pause();
-                btnIcon.className = 'fas fa-play';
-                isPlaying = false;
-            } else {
-                currentAudio.play();
-                btnIcon.className = 'fas fa-pause';
-                isPlaying = true;
-            }
-        }
-
-        function skipForward() {
-            if (currentAudio) currentAudio.currentTime += 15;
-        }
-
-        function skipBackward() {
-            if (currentAudio) currentAudio.currentTime -= 15;
-        }
-
-        function updateProgress() {
-            if (!currentAudio) return;
-            const progressBar = document.getElementById('progressBar');
-            const current = currentAudio.currentTime;
-            const duration = currentAudio.duration;
-            const percent = (current / duration) * 100;
-            
-            progressBar.style.width = `${percent}%`;
-            document.getElementById('currentTime').textContent = formatTime(current);
-        }
-
-        function setProgress(e) {
-            if (!currentAudio) return;
-            const width = e.currentTarget.clientWidth;
-            const clickX = e.offsetX;
-            const duration = currentAudio.duration;
-            currentAudio.currentTime = (clickX / width) * duration;
-        }
-
-        function changeVolume() {
-            const slider = document.getElementById('volumeSlider');
-            if (currentAudio) {
-                currentAudio.volume = slider.value / 100;
-            }
-        }
-
-        function formatTime(seconds) {
-            if (!seconds || isNaN(seconds)) return "0:00";
-            const min = Math.floor(seconds / 60);
-            const sec = Math.floor(seconds % 60);
-            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
-        }
-
-        // Global Search Logic
+        // ==================== Global Search Logic ====================
         let cachedPagesContent = null;
         let isSearchInitialized = false;
         
@@ -1202,17 +1015,24 @@
             if (cachedPagesContent) return cachedPagesContent;
 
             try {
+                // Fetch site-map.json with cache busting
                 const response = await fetch('site-map.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error('Could not load site-map.json');
                 const pagesList = await response.json();
 
+                // Process each item
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
+                    
                     let manualContent = (typeof item === 'object' && item.content) ? item.content : null;
                     let manualTitle = (typeof item === 'object' && item.page) ? item.page : null;
 
                     if (manualContent) {
-                        return { page: manualTitle || url, url: url, content: manualContent };
+                        return { 
+                            page: manualTitle || url, 
+                            url: url, 
+                            content: manualContent 
+                        };
                     }
 
                     try {
@@ -1221,6 +1041,7 @@
                         const html = await pageResp.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
+                        
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                         const mainContent = doc.querySelector('.container, main, body') || doc.body;
 
@@ -1235,17 +1056,37 @@
                 const results = await Promise.all(promises);
                 cachedPagesContent = results.filter(Boolean);
                 return cachedPagesContent;
-            } catch (error) { return []; }
+            } catch (error) {
+                console.error("Search Error:", error);
+                return [];
+            }
+        }
+
+        function normalizeArabic(text) {
+            if (!text) return '';
+            text = text.replace(/[\u064B-\u065F\u0670]/g, ''); 
+            text = text.replace(/[أإآ]/g, 'ا');
+            text = text.replace(/[ة]/g, 'ه');
+            text = text.replace(/[ى]/g, 'ي');
+            text = text.replace(/[ؤ]/g, 'و');
+            text = text.replace(/[ئ]/g, 'ي');
+            return text;
         }
 
         function getSafeRegex(searchTerm) {
             let regexStr = '';
-            const cleanTerm = searchTerm.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي'); 
+            const cleanTerm = normalizeArabic(searchTerm);
+            
             for (let i = 0; i < cleanTerm.length; i++) {
                 const char = cleanTerm[i];
-                if (char.match(/[a-zA-Z0-9]/)) regexStr += char;
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else if (char.match(/[a-zA-Z]/)) regexStr += char;
                 else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                regexStr += '[\\u064B-\\u065F\\u0670]*';
+                
+                regexStr += '[\\u064B-\\u065F\\u0670]*'; 
             }
             return new RegExp(regexStr, 'gi');
         }
@@ -1258,6 +1099,7 @@
                 return;
             }
             
+            // Add Count
             const countDiv = document.createElement('div');
             countDiv.className = 'search-count';
             countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
@@ -1266,10 +1108,29 @@
             results.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
+                
                 const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
-                const snippet = item.content.substring(0, 150) + '...';
-                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet}</p>`;
-                div.onclick = () => window.location.href = item.url;
+                
+                let snippet = '';
+                queryRegex.lastIndex = 0;
+                const match = queryRegex.exec(item.content);
+                
+                if (match) {
+                    const start = Math.max(0, match.index - 60);
+                    const end = Math.min(item.content.length, match.index + 100);
+                    snippet = item.content.substring(start, end);
+                    if (start > 0) snippet = '...' + snippet;
+                    if (end < item.content.length) snippet = snippet + '...';
+                } else {
+                    snippet = item.content.substring(0, 150) + '...';
+                }
+                
+                const highlightedSnippet = snippet.replace(queryRegex, match => `<mark>${match}</mark>`);
+
+                // Pass query as parameter
+                const searchTerm = document.getElementById('globalSearch').value.trim();
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${highlightedSnippet}</p>`;
+                div.onclick = () => window.location.href = item.url + "?highlight=" + encodeURIComponent(searchTerm);
                 container.appendChild(div);
             });
             container.style.display = 'block';
@@ -1277,19 +1138,51 @@
 
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
+            const listContainer = document.getElementById('videosGrid');
+            const noResultsMessage = document.getElementById('noResultsMessage');
+
             if (!query || query.length < 2) {
                 resultsContainer.style.display = 'none';
                 return;
             }
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            
+            // Dropdown results -> we don't hide grid here to keep context
+            // results are absolute positioned over content.
+
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث في جميع المحتويات...</p></div>';
             resultsContainer.style.display = 'block';
+
             const data = await loadAllPagesContent();
             const searchRegex = getSafeRegex(query);
-            const results = data.filter(item => searchRegex.test(item.page) || searchRegex.test(item.content));
+            
+            const results = data.filter(item => {
+                searchRegex.lastIndex = 0;
+                const titleMatch = searchRegex.test(item.page);
+                searchRegex.lastIndex = 0;
+                const contentMatch = searchRegex.test(item.content);
+                return titleMatch || contentMatch;
+            });
+
             displayGlobalResults(results, searchRegex, resultsContainer);
         }
 
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // Check favorites status
+            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                const match = btn.getAttribute('onclick').match(/'([^']+)'/);
+                if (match) {
+                    const id = match[1];
+                    if (favorites.some(item => item.id === id && item.type === 'video')) {
+                        btn.classList.add("active");
+                        btn.innerHTML = '<i class="fas fa-check"></i> في المفضلة';
+                    }
+                }
+            });
+
+            // Setup Search Listener
             const searchInput = document.getElementById('globalSearch');
             let timer;
             if(searchInput) {
@@ -1302,36 +1195,13 @@
                 });
             }
 
+            // Close search on outside click
             document.addEventListener('click', (e) => {
                 const searchContainer = document.querySelector('.universal-search');
                 if(searchContainer && !searchContainer.contains(e.target)) {
                     document.getElementById('searchResults').style.display = 'none';
                 }
             });
-
-            // Favorites Init
-            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            document.querySelectorAll('.favorite-btn').forEach(btn => {
-                const match = btn.getAttribute('onclick').match(/'([^']+)'\)$/);
-                if (match) {
-                    const id = match[1];
-                    if (favorites.some(f => f.id === id && f.type === 'podcast')) {
-                        btn.classList.add("active");
-                    }
-                }
-            });
-
-            // URL Param
-            const params = new URLSearchParams(window.location.search);
-            const podcastId = params.get("podcast");
-            if (podcastId) {
-                const target = document.getElementById(podcastId);
-                if(target) {
-                    document.querySelectorAll('.podcast-card').forEach(c => {
-                        if(c.id !== podcastId) c.style.display = 'none';
-                    });
-                }
-            }
         });
     </script>
 </body>
