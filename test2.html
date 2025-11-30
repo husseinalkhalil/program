@@ -25,9 +25,11 @@
             --surface-color: #F8F5FD; 
             --text-primary: #1e293b;
             --text-secondary: #64748b;
+            
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
             --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
             --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
         }
@@ -46,6 +48,7 @@
             overflow-x: hidden;
         }
 
+        /* منع السكرول عند فتح القائمة */
         body.no-scroll {
             overflow: hidden !important;
             height: 100vh;
@@ -111,11 +114,11 @@
         /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 120px 20px 140px; /* زيادة المساحة السفلية لتدخل البطاقات فيها */
+            padding: 120px 20px 140px; /* مسافة سفلية إضافية لتدخل البطاقات */
             text-align: center; color: white;
             border-radius: 0 0 50px 50px; 
             position: relative; 
-            z-index: 1; /* الخلفية في الطبقة السفلية */
+            z-index: 1; /* طبقة منخفضة */
         }
 
         .hero-content {
@@ -126,12 +129,12 @@
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
 
-        /* Global Search Box (Moved inside Main Wrapper via CSS logic) */
+        /* Global Search Box - Now inside Main Wrapper */
         .universal-search { 
             width: 100%; max-width: 600px; 
             position: relative; 
-            z-index: 100;
-            margin: 0 auto 40px auto; /* توسيط ومسافة من الأسفل */
+            z-index: 100; /* طبقة عالية جداً للبحث */
+            margin: 0 auto 40px auto; 
         }
         
         #globalSearch {
@@ -181,8 +184,8 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper {
             position: relative; 
-            z-index: 20; /* الطبقة العلوية لتغطي انحناء الخلفية */
-            margin-top: -90px; /* سحب المحتوى للأعلى ليتداخل مع البنفسجي */
+            z-index: 20; /* طبقة البطاقات فوق الخلفية */
+            margin-top: -90px; /* سحب للأعلى للتداخل */
             max-width: 1000px;
             margin-left: auto; margin-right: auto; margin-bottom: 60px;
         }
@@ -194,6 +197,7 @@
             box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
             border-right: 5px solid var(--primary-color); position: relative;
             display: flex; flex-direction: column; height: 100%; transition: 0.3s;
+            cursor: pointer; /* جعل البطاقة تظهر كمؤشر رابط */
         }
         .article:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); border-right-width: 8px; }
         .article h2 { margin-bottom: 15px; position: relative; z-index: 1; }
@@ -201,7 +205,11 @@
         .article h2 a:hover { color: var(--primary-color); }
         .meta-data { margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
         .publish-date { font-size: 0.85rem; color: var(--text-secondary); background: rgba(94, 44, 165, 0.05); padding: 6px 12px; border-radius: 20px; }
-        .article-button { background: transparent; border: 1px solid #e2e8f0; color: var(--text-secondary); padding: 6px 14px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 0.85rem; }
+        .article-button { 
+            background: transparent; border: 1px solid #e2e8f0; color: var(--text-secondary); 
+            padding: 6px 14px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 0.85rem; 
+            position: relative; z-index: 5; /* جعل الزر فوق طبقة النقر للبطاقة */
+        }
         .article-button:hover { background: #fef9c3; color: #b45309; border-color: #fde047; transform: scale(1.05); }
         .article-button.active { background: var(--accent-color); color: #422006; border-color: var(--accent-color); }
 
@@ -291,13 +299,12 @@
                 <h1>المقالات</h1>
                 <p>قراءة عقلانية ونقد للموروث بوعي واحترام للعقل</p>
             </div>
-            <!-- تم نقل خانة البحث من هنا لتجنب مشاكل الطبقات -->
         </div>
     </header>
 
     <div class="container main-wrapper">
         
-        <!-- Global Search Box (Moved Here to be on Top) -->
+        <!-- Global Search Box -->
         <div class="universal-search">
             <i class="fas fa-search search-icon-placeholder"></i>
             <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
@@ -593,7 +600,7 @@
 
         function normalizeArabic(text) {
             if (!text) return '';
-            text = text.replace(/[\u064B-\u065F\u0670]/g, ''); // Remove Tashkeel
+            text = text.replace(/[\u064B-\u065F\u0670]/g, ''); 
             text = text.replace(/[أإآ]/g, 'ا');
             text = text.replace(/[ة]/g, 'ه');
             text = text.replace(/[ى]/g, 'ي');
@@ -719,6 +726,23 @@
                 if(searchContainer && !searchContainer.contains(e.target)) {
                     document.getElementById('searchResults').style.display = 'none';
                 }
+            });
+
+            // Make Article Cards Clickable Logic
+            document.querySelectorAll('.article').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // اذا تم النقر على زر المفضلة (أو الايقونة بداخله) لا تفعل شيئاً
+                    if (e.target.closest('.article-button')) return;
+                    
+                    const link = card.querySelector('h2 a');
+                    if(link) {
+                        // اذا كان النقر على الرابط نفسه، اتركه يعمل بشكل طبيعي
+                        if(e.target === link) return; 
+                        
+                        // عدا ذلك، قم بالتوجيه للرابط
+                        window.location.href = link.href;
+                    }
+                });
             });
         });
     </script>
