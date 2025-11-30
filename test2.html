@@ -29,7 +29,6 @@
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             
-            /* تحديث الظلال لتتناسب مع الهوية */
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
             --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
             --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
@@ -121,7 +120,9 @@
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             padding: 120px 20px 100px;
             text-align: center; color: white;
-            border-radius: 0 0 50px 50px; position: relative; z-index: 50; 
+            border-radius: 0 0 50px 50px; 
+            position: relative; 
+            z-index: 1; /* تصحيح: جعل الخلفية في طبقة سفلية لتظهر البطاقات فوقها */
         }
 
         .hero-content {
@@ -133,7 +134,11 @@
         .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
 
         /* Global Search Box */
-        .universal-search { width: 100%; max-width: 600px; position: relative; margin-top: 20px; z-index: 1001; }
+        .universal-search { 
+            width: 100%; max-width: 600px; position: relative; margin-top: 20px; 
+            z-index: 100; /* تصحيح: جعل البحث في أعلى طبقة ليغطي البطاقات عند الفتح */
+        }
+        
         #globalSearch {
             width: 100%; padding: 18px 50px 18px 25px;
             border-radius: 50px; border: none; font-size: 1rem;
@@ -153,7 +158,7 @@
             position: absolute; top: 110%; left: 0; right: 0;
             background: #ffffff; border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px;
-            overflow-y: auto; z-index: 1002; text-align: right;
+            overflow-y: auto; z-index: 102; text-align: right;
             display: none; color: var(--text-primary);
             border: 1px solid rgba(0,0,0,0.05);
         }
@@ -181,8 +186,10 @@
         /* Layout */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper {
-            position: relative; z-index: 10;
-            margin-top: -50px; max-width: 1000px;
+            position: relative; 
+            z-index: 20; /* تصحيح: جعل البطاقات أعلى من الخلفية لتغطية المنحنى */
+            margin-top: -60px; /* زيادة الهامش السالب قليلاً للتداخل الجميل */
+            max-width: 1000px;
             margin-left: auto; margin-right: auto; margin-bottom: 60px;
         }
 
