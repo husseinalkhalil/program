@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>دعم المحتوى - حسين الخليل</title>
+    <title>من نحن - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
@@ -49,7 +49,7 @@
             font-family: 'Tajawal', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.8;
             overflow-x: hidden;
         }
 
@@ -131,10 +131,17 @@
             display: flex; flex-direction: column; align-items: center; gap: 20px;
         }
 
-        .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
-        .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+        .profile-img {
+            width: 180px; height: 180px; border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.3); object-fit: cover;
+            object-position: center 15%; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        .profile-img:hover { transform: scale(1.05); }
 
-        /* Global Search Box (Inside Main Wrapper) */
+        .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
+
+        /* Global Search Box (Moved inside Main Wrapper) */
         .universal-search { 
             width: 100%; max-width: 600px; 
             position: relative; 
@@ -150,12 +157,12 @@
             transition: box-shadow 0.3s ease;
         }
         #globalSearch:focus { box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.4); }
-
+        
         .search-icon-placeholder {
             position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
             color: var(--primary-color); pointer-events: none;
         }
-        
+
         /* Search Results Dropdown */
         .search-results {
             position: absolute; top: 115%; left: 0; right: 0;
@@ -185,75 +192,63 @@
         .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
         .search-item mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
-        /* Container Structure */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        /* Container & Layout */
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        
         .main-wrapper {
             position: relative;
             z-index: 20; /* طبقة البطاقات */
             margin-top: -90px; /* سحب للأعلى */
-            max-width: 900px;
-            margin-left: auto; margin-right: auto; margin-bottom: 60px;
+            margin-bottom: 60px;
         }
 
-        /* Support Content Styles */
-        .intro-card {
+        /* About Card */
+        .about-card {
             background: var(--surface-color); border-radius: var(--radius-xl);
-            padding: 40px; box-shadow: var(--shadow-sm); text-align: center;
-            margin-bottom: 50px; font-size: 1.1rem; line-height: 1.8;
-            color: var(--text-primary); border: 1px solid rgba(0,0,0,0.03);
+            padding: 50px; box-shadow: var(--shadow-lg);
+            margin-bottom: 60px; border: 1px solid rgba(0,0,0,0.05);
+            text-align: center; position: relative;
+        }
+        .about-card::before {
+            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 80%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            border-radius: 0 0 4px 4px;
         }
 
-        .support-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px; margin-bottom: 50px;
+        .about-text { font-size: 1.15rem; color: var(--text-primary); text-align: justify; }
+        .about-text p { margin-bottom: 25px; }
+
+        .highlight-box {
+            background: #fffbeb; border-right: 4px solid var(--accent-color);
+            padding: 25px 30px; border-radius: 12px; margin: 35px 0;
+            font-style: italic; font-weight: 500; color: #422006;
+            position: relative; text-align: right; box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.05);
+        }
+        .highlight-box i { position: absolute; left: 20px; top: 20px; color: rgba(0,0,0,0.05); font-size: 3rem; }
+
+        .contact-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--primary-color); color: white; padding: 15px 40px;
+            border-radius: 50px; font-weight: 700; margin-top: 20px;
+            box-shadow: var(--shadow-md); transition: all 0.3s;
+        }
+        .contact-btn:hover { background: var(--primary-dark); transform: translateY(-5px); box-shadow: var(--shadow-lg); color: white; }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex; justify-content: center; gap: 20px;
+            margin-bottom: 50px; position: relative; z-index: 10;
+            padding: 0 20px; flex-wrap: wrap;
         }
 
-        .support-card {
-            background: var(--surface-color); border-radius: 16px; padding: 30px;
-            box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
-            transition: all 0.4s ease; display: flex; flex-direction: column;
-            align-items: center; text-align: center; cursor: pointer;
+        .youtube-btn {
+            background: var(--surface-color); color: #ff0000; padding: 12px 30px;
+            border-radius: 50px; font-weight: 700; box-shadow: var(--shadow-md);
+            display: flex; align-items: center; gap: 10px; transition: all 0.3s;
+            border: 2px solid white;
         }
-
-        .support-card:hover {
-            transform: translateY(-10px); box-shadow: var(--shadow-lg);
-            border-color: var(--primary-light);
-        }
-
-        .support-icon {
-            width: 80px; height: 80px; margin-bottom: 20px;
-            border-radius: 50%; background: rgba(94, 44, 165, 0.05);
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.4s;
-        }
-
-        .support-card:hover .support-icon {
-            background: var(--primary-color); transform: scale(1.1) rotate(10deg);
-        }
-
-        .support-icon img {
-            width: 45px; height: 45px; object-fit: contain;
-            transition: 0.4s;
-        }
-        .support-card:hover .support-icon img { filter: brightness(0) invert(1); }
-
-        .support-card h3 {
-            color: var(--text-primary); font-size: 1.4rem; margin-bottom: 10px;
-        }
-
-        .support-card p {
-            color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;
-        }
-
-        .support-btn {
-            margin-top: auto; background: var(--primary-color); color: white;
-            padding: 10px 30px; border-radius: 25px; font-weight: 700;
-            transition: 0.3s; display: inline-block;
-        }
-
-        .support-card:hover .support-btn {
-            background: var(--accent-color); color: #422006;
-        }
+        .youtube-btn:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); background: #ff0000; color: white; border-color: #ff0000; }
 
         /* Social */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
@@ -280,23 +275,27 @@
         .footer-links a:hover { color: var(--accent-color); }
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
-        /* Fixed Buttons */
+        /* Fixed Share Button */
         .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
         .share-fixed-btn:hover { transform: scale(1.1); }
         .share-fixed-btn img { width: 24px; filter: brightness(0); }
-
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
-        .back-to-top.visible { opacity: 1; pointer-events: all; }
-        .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
-
+        
         .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
         .copy-alert.show { opacity: 1; }
 
+        /* Animation */
+        .reveal-up { animation: fadeInUp 0.8s ease forwards; opacity: 0; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
         @media (max-width: 900px) {
             .hero-text h1 { font-size: 2rem; }
-            /* زيادة المسافة السفلية في الموبايل لتجنب التداخل */
+            /* زيادة المسافة السفلية للموبايل */
             .hero-section { padding: 100px 20px 160px; }
+            .about-card { padding: 30px 20px; margin-top: 0; } /* Reset margin for card */
             .share-fixed-btn { display: none; }
+            .about-text { text-align: center; }
+            .highlight-box { text-align: center; border-right: none; border-top: 4px solid var(--accent-color); }
+            .youtube-btn { width: 100%; justify-content: center; }
         }
 
         @media (max-width: 768px) {
@@ -314,11 +313,8 @@
 
     <nav>
         <div class="logo-container">
-            <a href="index.html">
-                <img src="images/logo.png" alt="شعار حسين الخليل" />
-            </a>
+            <a href="index.html"><img src="images/logo.png" alt="شعار حسين الخليل" /></a>
         </div>
-
         <div class="nav-links">
             <a href="index.html">الرئيسية</a>
             <a href="books.html">الكتب</a>
@@ -332,88 +328,81 @@
             <a href="inq.html">تساؤلات</a>
             <a href="manhaj.html">المنهج</a>
             <a href="favorites.html">المفضلة</a>
-            <a href="support.html" style="background: rgba(255,255,255,0.2);">دعم المحتوى</a>
-            <a href="about.html">من نحن</a>
+            <a href="support.html">دعم المحتوى</a>
+            <a href="about.html" style="background: rgba(255,255,255,0.2);">من نحن</a>
             <a href="#" onclick="window.print()" title="طباعة"><i class="fas fa-print"></i></a>
             <a href="#" onclick="handleMobileShare(); return false;" class="mobile-share-link" style="display: none;">مشاركة</a>
         </div>
-
         <div class="hamburger" onclick="toggleMobileMenu()">
             <i class="fas fa-bars"></i>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Header / Hero Section -->
     <header class="hero-section">
-        <!-- Background Layer -->
-        <div class="hero-layer-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg, var(--primary-color), var(--primary-dark)); border-radius:0 0 50px 50px; z-index:1;"></div>
-        
-        <!-- Content Layer -->
-        <div class="hero-content">
+        <div class="hero-content reveal-up">
+            <img src="images/about.JPG" alt="حسين أحمد الخليل" class="profile-img">
             <div class="hero-text">
-                <h1>دعم المحتوى</h1>
-                <p>مساهمتك تساعد في استمرار نشر المعرفة والتنوير</p>
+                <h1>من نحن</h1>
+                <p>قراءة عقلانية ونقد للتراث بمنهج معاصر</p>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Wrapper -->
+    <!-- Main Wrapper -->
     <div class="container main-wrapper">
         
         <!-- Global Search Box (Inside Main Wrapper) -->
-        <div class="universal-search">
+        <div class="universal-search reveal-up">
             <i class="fas fa-search search-icon-placeholder"></i>
             <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
             <div class="search-results" id="searchResults"></div>
         </div>
 
-        <div class="intro-card">
-            <h2 style="color:var(--primary-color); margin-bottom:15px;">لماذا ندعم المحتوى؟</h2>
-            <p>إن تقديم محتوى فكري وتنويري يتطلب جهداً ووقتاً وموارد مستمرة. دعمكم المادي والمعنوي هو الوقود الذي يضمن استمرارية هذا المشروع، ويسمح بتطوير الأدوات والوسائل للوصول إلى شريحة أوسع من الباحثين عن الحقيقة. كل مساهمة، مهما كانت بسيطة، تصنع فرقاً كبيراً في مسيرتنا.</p>
+        <div class="about-card reveal-up" style="animation-delay: 0.2s;">
+            <div class="about-text">
+                <p>
+                    حسين أحمد الخليل، من الجمهورية العربية السورية، ولد في مدينة الرقة عام 1983، إنسان عادي ذو خلفية سلفية، أبحث عن الحقيقة بعيدًا عن الآبائية والتلقين والتدجين. أؤمن أن العقل هو مناط التكليف.
+                </p>
+
+                <div class="highlight-box">
+                    <i class="fas fa-quote-right"></i>
+                    أؤمن بالقاعدة التي تقول: الجدال والنقاش مع المغيبين عن الواقع، مضيعة للوقت، قُل الفكرة واترك لهم حرية التفكير، إن كان لهم عقل يفكر.
+                </div>
+
+                <p>أشارك أفكاري وتأملاتي مع من يسعى للتفكُّر والبحث.</p>
+                <p>مشغول بطرح فكرتي، لا بإثباتها لمن لا يريد أن يفهمها.</p>
+                <p>وقتي أثمن من أن يُستهلك في الردود، فهدفي البناء لا الجدال.</p>
+                <p>لا ألتفت لمن ينتقدني "لمجرد النقد"، فتركيزي منصبّ على من يبحث لا على من يُهاجم.</p>
+                <p>أؤمن أن الفكرة الجادة تُطرح وتمضي، لا تنتظر إذًا ولا تدخل معارك جانبية.</p>
+
+                <div class="highlight-box" style="border-color: var(--primary-color); background: rgba(94, 44, 165, 0.05);">
+                    الدين والفكر وسائل، أما الغاية فهي الإنسان، لذلك أضع الإنسانية فوق كل انتماء.
+                </div>
+
+                <p style="text-align: center; font-weight: 800; color: var(--primary-color); font-size: 1.2rem; margin-top: 30px;">
+                    قد نختلف في الطريق، لكننا نلتقي في الإنسانية، فهي الأصل والمعنى. 💜
+                </p>
+
+                <div style="text-align: center;">
+                    <a href="mailto:info@husseinalkhalil.com" class="contact-btn">
+                        <i class="fas fa-envelope"></i> تواصل معنا
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <div class="section-title"><h2>طرق الدعم المتاحة</h2></div>
         
-        <div class="support-grid">
-            <!-- PayPal -->
-            <div class="support-card" onclick="window.open('https://www.paypal.com/paypalme/HusseinAlkhalil', '_blank')">
-                <div class="support-icon"><img src="images/paypal.png" alt="PayPal"></div>
-                <h3>PayPal</h3>
-                <p>دعم مباشر وسريع وآمن عبر منصة باي بال العالمية.</p>
-                <span class="support-btn">ادعم الآن</span>
-            </div>
-
-            <!-- Gumroad -->
-            <div class="support-card" onclick="window.open('https://husseinalkhalil.gumroad.com/l/book3', '_blank')">
-                <div class="support-icon"><img src="images/gumroad.png" alt="Gumroad"></div>
-                <h3>Gumroad</h3>
-                <p>ادعم المحتوى عبر شراء المنتجات الرقمية أو الدعم المباشر.</p>
-                <span class="support-btn">ادعم الآن</span>
-            </div>
-
-            <!-- Ko-fi -->
-            <div class="support-card" onclick="window.open('https://ko-fi.com/s/763cb54e0a', '_blank')">
-                <div class="support-icon"><img src="images/ko-fi.png" alt="Ko-fi"></div>
-                <h3>Ko-fi</h3>
-                <p>اشترِ لي قهوة! طريقة ودية وبسيطة لدعم صانع المحتوى.</p>
-                <span class="support-btn">ادعم الآن</span>
-            </div>
-
-            <!-- Buy Me A Coffee -->
-            <div class="support-card" onclick="window.open('https://buymeacoffee.com/husseinalkhalil/e/411365', '_blank')">
-                <div class="support-icon"><img src="images/buyme.png" alt="Buy Me A Coffee"></div>
-                <h3>Buy Me A Coffee</h3>
-                <p>منصة سهلة لدعم المبدعين ومشاركتهم التقدير.</p>
-                <span class="support-btn">ادعم الآن</span>
-            </div>
-
-            <!-- Payhip -->
-            <div class="support-card" onclick="window.open('https://payhip.com/b/qvP0F', '_blank')">
-                <div class="support-icon"><img src="images/payhip.png" alt="Payhip"></div>
-                <h3>Payhip</h3>
-                <p>ادعم عبر تحميل الكتب والملفات الرقمية مباشرة.</p>
-                <span class="support-btn">ادعم الآن</span>
-            </div>
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="https://www.youtube.com/@husseinalkhalil" class="youtube-btn" target="_blank">
+                <i class="fab fa-youtube"></i> القناة الرئيسية
+            </a>
+            <a href="https://www.youtube.com/@hussein.ch2" class="youtube-btn" target="_blank">
+                <i class="fab fa-youtube"></i> قناة التاريخ
+            </a>
+            <a href="support.html" class="youtube-btn" style="color:var(--primary-color);">
+                <i class="fas fa-heart"></i> دعم المحتوى
+            </a>
         </div>
 
         <!-- Social Media -->
@@ -444,16 +433,10 @@
         </div>
     </div>
 
-    <!-- Fixed Buttons -->
+    <!-- Fixed Share Button -->
     <div class="share-fixed-btn" onclick="handleMobileShare()">
         <img src="images/share.png" alt="مشاركة">
     </div>
-
-    <div class="back-to-top" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-
-    <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
 
     <footer>
         <div class="container">
@@ -468,6 +451,8 @@
             </div>
         </div>
     </footer>
+
+    <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
 
     <script>
         // Toggle Mobile Menu
@@ -487,11 +472,11 @@
             }
         }
 
-        // Share
+        // Share Functionality
         function handleMobileShare() {
-            const link = "https://www.husseinalkhalil.com/support.html";
+            const link = "https://www.husseinalkhalil.com/about.html";
             if (navigator.share) {
-                navigator.share({ title: 'دعم المحتوى - حسين الخليل', url: link }).catch(console.error);
+                navigator.share({ title: 'من نحن - حسين الخليل', url: link }).catch(console.error);
             } else {
                 navigator.clipboard.writeText(link).then(() => {
                     const alert = document.getElementById('copyAlert');
@@ -507,17 +492,7 @@
                 if(mobileShareLink) mobileShareLink.style.display = 'flex';
             }
         });
-
-        // Back to Top
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        window.addEventListener('scroll', () => {
-            const btn = document.querySelector('.back-to-top');
-            if (window.scrollY > 300) btn.classList.add('visible');
-            else btn.classList.remove('visible');
-        });
-
+        
         // ==================== Global Search Logic ====================
         let cachedPagesContent = null;
         let isSearchInitialized = false;
@@ -534,16 +509,11 @@
                 // Process each item
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
-                    
                     let manualContent = (typeof item === 'object' && item.content) ? item.content : null;
                     let manualTitle = (typeof item === 'object' && item.page) ? item.page : null;
 
                     if (manualContent) {
-                        return { 
-                            page: manualTitle || url, 
-                            url: url, 
-                            content: manualContent 
-                        };
+                        return { page: manualTitle || url, url: url, content: manualContent };
                     }
 
                     try {
@@ -552,7 +522,6 @@
                         const html = await pageResp.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
-                        
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                         const mainContent = doc.querySelector('.container, main, body') || doc.body;
 
@@ -655,7 +624,8 @@
                 return;
             }
             
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            // Dropdown results
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث في جميع المحتويات...</p></div>';
             resultsContainer.style.display = 'block';
 
             const data = await loadAllPagesContent();
