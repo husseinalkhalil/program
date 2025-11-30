@@ -41,13 +41,12 @@
             --accent-color: #ffd700;
             --bg-color: #f9f7f2;
             
-            /* تم تغيير لون البطاقات ليتناسب مع الهوية (أبيض بنفسجي خفيف جداً) */
+            /* اللون الجديد: ضباب اللافندر */
             --surface-color: #F8F5FD; 
             
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             
-            /* تم تحسين الظل ليكون بلمسة بنفسجية خفيفة */
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
             --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
             --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
@@ -70,6 +69,12 @@
             overflow-x: hidden;
         }
 
+        /* كلاس منع السكرول عند فتح القائمة */
+        body.no-scroll {
+            overflow: hidden !important;
+            height: 100vh;
+        }
+
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
         /* ==================== Animations ==================== */
@@ -90,7 +95,7 @@
         .nav-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6); /* زيادة التعتيم قليلاً للتركيز */
             backdrop-filter: blur(4px);
             z-index: 998;
             display: none;
@@ -163,13 +168,13 @@
                 top: 60px;
                 right: -280px;
                 width: 280px;
-                background: var(--surface-color);
+                background: var(--surface-color); /* استخدام اللون الجديد */
                 flex-direction: column;
                 padding: 20px;
                 height: calc(100vh - 60px);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1);
                 transition: right 0.3s ease;
-                overflow-y: auto;
+                overflow-y: auto; /* السماح بسكرول القائمة فقط */
                 flex-wrap: nowrap;
                 justify-content: flex-start;
                 gap: 10px;
@@ -184,9 +189,10 @@
                 border-radius: 8px;
                 font-size: 1rem;
                 justify-content: flex-start;
+                border-bottom: 1px solid rgba(0,0,0,0.03); /* فاصل خفيف */
             }
             .nav-links a:hover {
-                background: rgba(0,0,0,0.05);
+                background: rgba(94, 44, 165, 0.05);
                 color: var(--primary-color);
                 transform: none;
             }
@@ -281,7 +287,7 @@
             top: 110%;
             left: 0;
             right: 0;
-            background: #ffffff; /* جعل خلفية النتائج بيضاء لتباين أفضل */
+            background: #ffffff;
             border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2);
             max-height: 400px;
@@ -305,7 +311,6 @@
             border-radius: 4px;
         }
 
-        /* تنسيق عدد النتائج */
         .search-count {
             padding: 10px 20px;
             font-size: 0.9rem;
@@ -1208,12 +1213,16 @@
         function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
+            const body = document.body; // مرجع للجسم لإيقاف السكرول
+
             navLinks.classList.toggle('show');
             
             if(navLinks.classList.contains('show')) {
                 overlay.style.display = 'block';
+                body.classList.add('no-scroll'); // تجميد الصفحة
             } else {
                 overlay.style.display = 'none';
+                body.classList.remove('no-scroll'); // إعادة حركة الصفحة
             }
         }
 
