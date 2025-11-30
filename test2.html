@@ -194,14 +194,6 @@
             margin-bottom: 60px;
         }
 
-        /* Results Info */
-        .search-results-info {
-            text-align: center; margin-bottom: 20px; display: none;
-            color: #FFD200; font-weight: bold; font-size: 1.2rem;
-            background: rgba(0,0,0,0.5); padding: 10px; border-radius: 10px;
-            display: inline-block; width: 100%;
-        }
-
         /* Video Grid */
         .videos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
 
@@ -255,13 +247,13 @@
         .favorite-btn.active { background: var(--accent-color); color: #422006; border-color: var(--accent-color); }
 
         /* Social */
-        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); max-width: 1200px; margin-left: auto; margin-right: auto;}
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: 0.3s; }
-        .social-btn img { width: 24px; height: 24px; transition: 0.3s; }
+        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: all 0.3s; }
+        .social-btn img { width: 24px; height: 24px; transition: filter 0.3s; }
         .social-btn:hover { transform: translateY(-5px) scale(1.1); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
         .social-btn.facebook:hover { background: #1877F2; }
@@ -286,9 +278,12 @@
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
-        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: 0.3s; pointer-events: none; }
+        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
         .copy-alert.show { opacity: 1; }
+        
+        #message { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
+        /* Responsive */
         @media (max-width: 1200px) { .videos-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 900px) { 
             .videos-grid { grid-template-columns: repeat(2, 1fr); } 
@@ -355,15 +350,6 @@
             <i class="fas fa-search search-icon-placeholder"></i>
             <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
             <div class="search-results" id="searchResults"></div>
-        </div>
-
-        <div id="searchResultsInfo" class="search-results-info">
-            <span id="resultsCount">0</span> نتيجة بحث
-        </div>
-
-        <div id="noResultsMessage" style="display:none; text-align:center; padding:30px; color:var(--text-secondary); background:var(--surface-color); border-radius:var(--radius-lg); margin-bottom:20px;">
-            <i class="fas fa-search" style="font-size:2rem; margin-bottom:10px; color:var(--text-secondary); opacity:0.5;"></i><br>
-            لم يتم العثور على نتائج بحث تطابق الكلمات المدخلة.
         </div>
 
         <div class="videos-grid" id="videosGrid">
@@ -934,8 +920,17 @@
         function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
+            const body = document.body;
+
             navLinks.classList.toggle('show');
-            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
+            
+            if(navLinks.classList.contains('show')) {
+                overlay.style.display = 'block';
+                body.classList.add('no-scroll');
+            } else {
+                overlay.style.display = 'none';
+                body.classList.remove('no-scroll');
+            }
         }
 
         // Share
@@ -1138,8 +1133,6 @@
 
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
-            const listContainer = document.getElementById('videosGrid');
-            const noResultsMessage = document.getElementById('noResultsMessage');
 
             if (!query || query.length < 2) {
                 resultsContainer.style.display = 'none';
