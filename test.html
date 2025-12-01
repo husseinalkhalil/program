@@ -243,6 +243,30 @@
         details[open] summary { background: rgba(94, 44, 165, 0.05); border-bottom: 1px solid rgba(0,0,0,0.05); }
         details p { padding: 25px; margin: 0; color: var(--text-secondary); line-height: 1.8; font-size: 1rem; background: white; }
 
+        /* Font Controls (Fixed on Left/Bottom) */
+        .font-controls-fixed {
+            position: fixed; top: 120px; left: 30px;
+            display: flex; flex-direction: column; gap: 10px;
+            z-index: 990;
+        }
+        
+        .font-btn {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: white; border: 1px solid #e2e8f0;
+            color: var(--primary-color); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+        .font-btn:hover { background: var(--primary-color); color: white; transform: scale(1.1); }
+
+        @media (max-width: 1200px) {
+            .font-controls-fixed {
+                top: auto; bottom: 30px; left: 30px; 
+                flex-direction: row; /* Horizontal on mobile */
+            }
+        }
+
         /* Social */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
@@ -292,6 +316,12 @@
             .social-btn { width: 48px; height: 48px; flex-shrink: 0; }
             .social-btn img { width: 24px; height: 24px; }
         }
+        
+        /* Print Media */
+        @media print {
+            nav, .hero-section, .font-controls-fixed, .share-fixed-btn, footer, .back-to-top, .universal-search { display: none; }
+            .main-wrapper { margin: 0; max-width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -339,6 +369,13 @@
             </div>
         </div>
     </header>
+
+    <!-- Font Controls (Fixed) -->
+    <div class="font-controls-fixed">
+        <button class="font-btn" id="fontIncrease" title="تكبير الخط"><i class="fas fa-plus"></i></button>
+        <button class="font-btn" id="fontReset" title="إعادة تعيين"><i class="fas fa-redo"></i></button>
+        <button class="font-btn" id="fontDecrease" title="تصغير الخط"><i class="fas fa-minus"></i></button>
+    </div>
 
     <!-- Main Content Wrapper -->
     <div class="container main-wrapper">
@@ -738,6 +775,46 @@
                     document.getElementById('searchResults').style.display = 'none';
                 }
             });
+        });
+        
+        // ==================== Font Resizing Logic ====================
+        const contentWrapper = document.getElementById('manhajContent');
+        let fontScale = 1;
+
+        function renderFont() {
+            if (!contentWrapper) return;
+            
+            // Headers
+            contentWrapper.querySelectorAll('h2').forEach(el => el.style.fontSize = `${2 * fontScale}rem`);
+            contentWrapper.querySelectorAll('h3').forEach(el => el.style.fontSize = `${1.3 * fontScale}rem`);
+            
+            // Summaries
+            contentWrapper.querySelectorAll('summary').forEach(el => el.style.fontSize = `${1.1 * fontScale}rem`);
+            
+            // Intro/Conclusion Paragraphs (larger base)
+            contentWrapper.querySelectorAll('.intro-card p, .conclusion-card p').forEach(el => el.style.fontSize = `${1.15 * fontScale}rem`);
+            
+            // Standard Paragraphs (Principles, Accordion content)
+            contentWrapper.querySelectorAll('.principle-card p, details p').forEach(el => el.style.fontSize = `${1 * fontScale}rem`);
+        }
+
+        document.getElementById('fontIncrease').addEventListener('click', () => {
+            if (fontScale < 1.6) {
+                fontScale += 0.1;
+                renderFont();
+            }
+        });
+
+        document.getElementById('fontDecrease').addEventListener('click', () => {
+            if (fontScale > 0.7) {
+                fontScale -= 0.1;
+                renderFont();
+            }
+        });
+
+        document.getElementById('fontReset').addEventListener('click', () => {
+            fontScale = 1;
+            renderFont();
         });
     </script>
 </body>
