@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>تساؤلات - حسين الخليل</title>
+    <title>المنهج - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
@@ -155,13 +155,13 @@
             position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
             color: var(--primary-color); pointer-events: none;
         }
-
+        
         /* Search Results Dropdown */
         .search-results {
             position: absolute; top: 115%; left: 0; right: 0;
             background: #ffffff; border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px;
-            overflow-y: auto; z-index: 10000; text-align: right;
+            overflow-y: auto; z-index: 200; text-align: right;
             display: none; color: var(--text-primary);
             border: 1px solid rgba(0,0,0,0.05);
         }
@@ -191,50 +191,48 @@
             position: relative;
             z-index: 20; /* طبقة البطاقات */
             margin-top: -90px; /* سحب للأعلى */
-            max-width: 900px;
+            max-width: 1000px;
             margin-left: auto; margin-right: auto; margin-bottom: 60px;
         }
 
-        /* Font Controls (Fixed on Left/Bottom) */
-        .font-controls-fixed {
-            position: fixed; top: 120px; left: 30px;
-            display: flex; flex-direction: column; gap: 10px;
-            z-index: 990;
-        }
-        
-        .font-btn {
-            width: 45px; height: 45px; border-radius: 50%;
-            background: white; border: 1px solid #e2e8f0;
-            color: var(--primary-color); cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem; box-shadow: var(--shadow-sm);
-            transition: all 0.3s;
-        }
-        .font-btn:hover { background: var(--primary-color); color: white; transform: scale(1.1); }
-
-        @media (max-width: 1200px) {
-            .font-controls-fixed {
-                top: auto; bottom: 30px; left: 30px; 
-                flex-direction: row; /* Horizontal on mobile */
-            }
+        /* Manhaj Specific Styles */
+        .intro-card, .conclusion-card {
+            background: var(--surface-color); border-radius: var(--radius-xl);
+            padding: 40px; box-shadow: var(--shadow-sm); text-align: center;
+            margin-bottom: 50px; font-size: 1.1rem; line-height: 1.8;
+            color: var(--text-primary); border: 1px solid rgba(0,0,0,0.03);
         }
 
-        /* FAQ Styling */
-        #faqList { display: flex; flex-direction: column; gap: 20px; }
+        .principles-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px; margin-bottom: 50px;
+        }
 
+        .principle-card {
+            background: var(--surface-color); border-radius: 16px; padding: 25px;
+            box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
+            border-right: 5px solid var(--primary-color); transition: all 0.3s;
+            display: flex; flex-direction: column;
+        }
+        .principle-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .principle-card h3 { color: var(--primary-dark); margin-bottom: 15px; font-size: 1.2rem; font-weight: 800; }
+        .principle-card p { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin: 0; }
+
+        /* Accordion */
+        .accordion-wrapper { display: flex; flex-direction: column; gap: 15px; margin-bottom: 50px; }
         details {
             background: var(--surface-color); border-radius: 16px;
             box-shadow: var(--shadow-sm); overflow: hidden; transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.03); border-right: 5px solid var(--primary-color);
-            position: relative; z-index: 1; /* تجنب التداخل مع القوائم */
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative; z-index: 1;
         }
-        details:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        details[open] { box-shadow: var(--shadow-md); border-color: var(--primary-light); }
-
+        details:hover { box-shadow: var(--shadow-md); }
+        details[open] { border-color: rgba(94, 44, 165, 0.2); }
         summary {
             padding: 20px 25px; font-weight: 700; font-size: 1.1rem;
-            color: var(--text-primary); cursor: pointer; list-style: none;
+            color: var(--primary-dark); cursor: pointer; list-style: none;
             position: relative; display: flex; align-items: center; justify-content: space-between;
+            transition: background 0.3s;
         }
         summary::-webkit-details-marker { display: none; }
         summary::after {
@@ -242,21 +240,8 @@
             color: var(--primary-color); transition: transform 0.3s;
         }
         details[open] summary::after { transform: rotate(180deg); }
-        details[open] summary { border-bottom: 1px solid rgba(0,0,0,0.05); background: rgba(94, 44, 165, 0.03); color: var(--primary-dark); }
-
-        /* تم تعديل وحدة القياس إلى em لتستجيب لتغيير حجم الخط في الحاوية الأب */
-        details p {
-            padding: 20px 25px; margin: 0; color: var(--text-secondary);
-            line-height: 1.8; font-size: 1em; /* Changed from rem to em */
-            background: white;
-        }
-
-        /* Pagination */
-        #pagination-wrapper { background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); text-align: center; margin: 40px auto; border: 1px solid rgba(0,0,0,0.05); max-width: 500px; }
-        .pagination-btn { background: #f1f5f9; color: var(--text-primary); border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; margin: 0 5px; font-family: 'Tajawal'; font-weight: 600; transition: 0.3s; }
-        .pagination-btn:hover { background: var(--primary-color); color: white; transform: translateY(-2px); }
-        .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: #e2e8f0; color: #94a3b8; }
-        #firstPage { background: rgba(94, 44, 165, 0.1); color: var(--primary-color); }
+        details[open] summary { background: rgba(94, 44, 165, 0.05); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        details p { padding: 25px; margin: 0; color: var(--text-secondary); line-height: 1.8; font-size: 1rem; background: white; }
 
         /* Social */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
@@ -265,7 +250,7 @@
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
         .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: all 0.3s; }
-        .social-btn img { width: 24px; height: 24px; transition: filter 0.3s; }
+        .social-btn img { width: 24px; height: 24px; transition: 0.3s; }
         .social-btn:hover { transform: translateY(-5px) scale(1.1); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
         .social-btn.facebook:hover { background: #1877F2; }
@@ -284,28 +269,28 @@
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
         /* Fixed Buttons */
-        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
+        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: 0.3s; }
         .share-fixed-btn:hover { transform: scale(1.1); }
         .share-fixed-btn img { width: 24px; filter: brightness(0); }
-
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
-        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: 0.3s; pointer-events: none; }
         .copy-alert.show { opacity: 1; }
 
-        @media (max-width: 900px) { 
-            .hero-text h1 { font-size: 2rem; } 
-            /* زيادة المسافة السفلية في الموبايل لتجنب التداخل */
-            .hero-section { padding: 100px 20px 160px; }
-            .share-fixed-btn { display: none; } 
+        @media (max-width: 900px) {
+            .hero-text h1 { font-size: 2rem; }
+            .hero-section { padding: 100px 20px 160px; } /* مسافة إضافية للموبايل */
+            .share-fixed-btn { display: none; }
+            .principles-grid { grid-template-columns: 1fr; }
         }
-        @media (max-width: 768px) { .footer-links { gap: 12px; } .social-grid { gap: 5px; flex-wrap: nowrap; } .social-btn { width: 48px; height: 48px; flex-shrink: 0; } }
-        
-        /* Print Media */
-        @media print {
-            nav, .hero-section, .font-controls-fixed, .share-fixed-btn, footer, .back-to-top, .universal-search { display: none; }
-            .main-wrapper { margin: 0; max-width: 100%; }
+
+        @media (max-width: 768px) {
+            .footer-links { gap: 12px; flex-wrap: wrap; justify-content: center; }
+            .footer-links a { font-size: 0.9rem; white-space: nowrap; }
+            .social-grid { gap: 5px; flex-wrap: nowrap; justify-content: center; }
+            .social-btn { width: 48px; height: 48px; flex-shrink: 0; }
+            .social-btn img { width: 24px; height: 24px; }
         }
     </style>
 </head>
@@ -331,8 +316,8 @@
             <a href="podcast.html">البودكاست</a>
             <a href="ask.html">الأسئلة</a>
             <a href="hewar.html">حوارات</a>
-            <a href="inq.html" style="background: rgba(255,255,255,0.2);">تساؤلات</a>
-            <a href="manhaj.html">المنهج</a>
+            <a href="inq.html">تساؤلات</a>
+            <a href="manhaj.html" style="background: rgba(255,255,255,0.2);">المنهج</a>
             <a href="favorites.html">المفضلة</a>
             <a href="support.html">دعم المحتوى</a>
             <a href="about.html">من نحن</a>
@@ -349,18 +334,11 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>تساؤلات</h1>
-                <p>إطار نقدي لطرح الأسئلة وفحصها بميزان القرآن</p>
+                <h1>منهج فهم القرآن</h1>
+                <p>إطار منهجي مباشر وواضح لقراءة القرآن من داخله</p>
             </div>
         </div>
     </header>
-
-    <!-- Font Controls (Fixed on Left/Bottom) -->
-    <div class="font-controls-fixed">
-        <button class="font-btn" id="fontIncrease" title="تكبير الخط"><i class="fas fa-plus"></i></button>
-        <button class="font-btn" id="fontReset" title="إعادة تعيين"><i class="fas fa-redo"></i></button>
-        <button class="font-btn" id="fontDecrease" title="تصغير الخط"><i class="fas fa-minus"></i></button>
-    </div>
 
     <!-- Main Content Wrapper -->
     <div class="container main-wrapper">
@@ -372,83 +350,117 @@
             <div class="search-results" id="searchResults"></div>
         </div>
 
-        <div id="faqList">
-            <!-- FAQs -->
-            <details><summary>هل هناك وحي غير القرآن؟</summary><p>لا؛ الوحي واحد فقط وهو القرآن، إستناداً لقوله تعالى (وَأُوحِيَ إِلَيَّ هَٰذَا الْقُرْآنُ لِأُنذِرَكُم بِهِ)</p></details>
-            <details><summary>من صاحب مقولة: الوحي الثاني؟</summary><p>أول من أطلق هذه المقولة هو الإمام الشافعي، فقبل هذه  المقولة لا وجود لمصطلح الوحي الثاني.</p></details>
-            <details><summary> هل هناك عقوبة لتارك الصلاة أو المتهاون بها؟ </summary><p> لا يوجد في القرآن أي إشارة لعقوبة تارك او المتهاون بالصلاة الحركية. </p></details>
-            <details><summary> هل للصلاة في القرآن مفهوم واحد؟ </summary><p> لا، بل تنقسم إلى قسمين، الأول الصلاة الروحانية، أي الصلة بالله، والثاني الصلاة الحركية، التركيز كله والوعيد على الصلاة الروحانية وليس الحركية. </p></details>
-            <details><summary> هل يجوز للحائض أن تصوم وتصلي؟ </summary><p> نعم، إذا استطاعت ذلك فلها أن تصوم وتصلي لأن المنع جاء من التراث وليس القرآن، لكن إذا شق عليها ذلك، فعليها أن تتوقف وتأخذ حكم المريض. </p></details>
-            <details><summary> هل يجوز للحائض لمس القرآن والقراءة منه؟ </summary><p> نعم يجوز لها أن تتصفحه وتقرأ منه. </p></details>
-            <details><summary> هل الرجم تشريع في الدين؟ </summary><p> لا، القرآن لم يذكر الرجم كعقوبة، بل جاء به رجال الدين من التراث وليس من القرآن. </p></details>
-            <details><summary> هل طلاء الأظافر (المناكير) يبطل الوضوء أو الصلاة؟ </summary><p> لا، وهل الغلو في الدين جاء به رجال الدين وليس القرآن، فالمرأة لها أن تتوضأ وتصلي وهي تضع طلاء الأظافر. </p></details>
-            <details><summary> هل الختان واجب على الذكر؟ </summary><p> الختان جريمة بحق الإنسانية والإسلام بريء منه ولم يشرّعه الله بل رجال الدين. </p></details>
-            <details><summary> هل يجوز للمرأة أن تصلي بملابسها العادية داخل البيت دون أن تلبس ملابس الصلاة؟ </summary><p> نعم يجوز لها ذلك. </p></details>
-            <details><summary> صديقي مسيحي وقدم لي طعامًا، فهل يجوز أن آكله؟ </summary><p> نعم يجوز لك ذلك ﴿وَطَعامُ الَّذينَ أوتُوا الكِتابَ حِلٌّ لَكُم وَطَعامُكُم حِلٌّ لَهُم﴾ [المائدة: 5] </p></details>
-            <details><summary> أقوم بتربية كلب في بيتي وسمعت أن هذا محرم ويمنع دخول الملائكة البيت، فما حكم القرآن؟ </summary><p> هذا الكلام غير صحيح، القرآن لم يمنع تربية الكلب في البيت طالما أنها خالية من أي أمراض مضرة. </p></details>
-            <details><summary> هل يصل ثواب قراءة القرآن للميت؟ </summary><p> لا، لأن الإنسان محاسب على أفعاله هو. ﴿وَأَن لَيسَ لِلإِنسانِ إِلّا ما سَعى﴾ [النجم: 39] </p></details>
-            <details><summary> مسلم دفن في مقابر اليهود ويهودي دفن في مقابر المسلمين، هل يغير شيء من مصير الميت وهل الدفن جائز؟ </summary><p> دفن المسلم في مقابر غير المسلمين أو دفنه في البقيع أو موته ساجدًا أو يوم الجمعة أو في رمضان وغيره، لا يغير شيء من مصيره لأن الله سيحاسبه على عمله الذي فعله في حياته وليس على طريقة موته أو أين دفن، والقرآن لم يمنع دفن المسلم في مقابر غير المسلمين أو العكس، كل هذا إنما عادات مجتمعية لا أكثر لأن طريقة الدفن والمكان لا يؤثر شيئًا في مصير الميت. </p></details>
-            <details><summary> هل هناك عذاب في القبر؟ </summary><p> لا يوجد عذاب في القبر، والقرآن يعطي دلالات ينفي هذا الشيء، عذاب القبر جاء عن طريق التراث وليس القرآن. </p></details>
-            <details><summary> ما حقيقة الثعبان الأقرع؟ </summary><p> خرافة تراثية ما أنزل الله بها من سلطان. </p></details>
-            <details><summary> ما حقيقة ضغطة القبر؟ </summary><p> خرافة تراثية ما أنزل الله بها من سلطان. </p></details>
-            <details><summary> ما حقيقة منكر ونكير؟ </summary><p> خرافة تراثية ما أنزل الله بها من سلطان. </p></details>
-            <details><summary> كفّروني بعض رجال الدين لأني لم أؤمن بكتب التراث وقالوا أني خرجت عن الملة. </summary><p> تكفيرهم لك لا يقدم ولا يؤخر وليس له أي اعتبار عند الله لأنهم بشر مثلك لا يملكون من أمرهم شيء، الله سيحاسبك بناءًا على عملك وعلمه هو بك وليس بناءًا على تزكية البشر أو تكفيرهم لك. </p></details>
-            <details><summary> هل الموسيقى حرام؟ </summary><p> كلا، بل هي غذاء للروح، القرآن لم يحرمها. </p></details>
-            <details><summary>لماذا لا نؤمن بالروايات؟</summary><p>لأن القرآن لم يطلب مرجعًا فوقه، ولأن الروايات كُتبت بعد وفاة النبي بمئات السنين.</p></details>
-            <details><summary>هل يجب أن نلتزم بتفاسير الأولين وهل هي تفاسير توقيفية؟</summary><p>القرآن يفهم بحسب الزمان والمكان وبحسب الأدوات المعرفية، التفاسير السابقة صالحة لزمانها ومكانها وغير صالحة لهذا الزمان ولسنا مطالبين بها لأنها اجتهادات بشرية قابلة للنقد.</p></details>
-            <details><summary>هل نحن ملزمون بكتب الروايات واجماع الفقهاء؟</summary><p>لا، نحن ملزمون بالوحي الوحيد فقط، (القرآن)، وكل ما هو دون القرآن من كتب روايات وفقه واجماع واتفاق، إنما هي اجتهادات بشرية لا قداسة لها.</p></details>
-            <details><summary>ما هو أساس التفكير القرآني؟</summary><p>الأساس هو العقل والمنطق والفطرة السليمة، مع الاعتماد على النص القرآني كمصدر رئيسي أوحد.</p></details>
-            <details><summary>هل يمكن الجمع بين القرآن والتراث؟</summary><p>يمكن الاستفادة من التراث كخلفية تاريخية، لكن لا يمكن جعله مساوياً أو أعلى من النص القرآني.</p></details>
-            <details><summary>ما موقفكم من الأحاديث النبوية?</summary><p>نحترم الأحاديث النبوية ولكن نتعامل معها كروايات تاريخية تحتاج إلى تمحيص ولا نعتبرها مصدراً تشريعياً ملزماً.</p></details>
-            <details><summary>كيف نتعامل مع الاختلافات في التفسير؟</summary><p> الاختلاف سنة، ونحن نرى فيه ثراءً فكرياً ما دام محكوماً بضوابط المنهج القرآني.</p></details>
-            <details><summary>ما هي أهم مبادئ المنهج القرآني؟</summary><p>أهم المبادئ: العقلانية، الوضوح، الاتساق الداخلي، والانسجام مع الفطرة الإنسانية.</p></details>
-            <details><summary>هل هناك مرجعية بشرية في المنهج القرآني؟</summary><p>لا توجد مرجعية بشرية مطلقة، المرجعية الوحيدة هي للنص القرآني مع فهمه بالعقل والمنطق.</p></details>
-            <details><summary>كيف نثبت صحة المنهج القرآني؟</summary><p>بنتائجه العملية في حياة الإنسان، وبقدرته على تقديم إجابات مقنعة ومنطقية للتحديات المعاصرة.</p></details>
-            <details><summary>ما الفرق بين القرآن والتراث؟</summary><p>القرآن هو الوحي الإلهي الثابت، والتراث هو الفهم البشري المتغير عبر العصور.</p></details>
-            <details><summary>هل يمكن تطوير المنهج القرآني؟</summary><p>نعم، المنهج قابلاً للتطوير والمراجعة المستمرة مع تطور المعرفة الإنسانية.</p></details>
-            <details><summary>ما دور العقل في المنهج القرآني؟</summary><p>العقل هو الأداة الرئيسية لفهم النص القرآني وتطبيقه في الواقع المعاصر.</p></details>
-            <details><summary>كيف نتعامل مع النصوص التي تبدو متعارضة؟</summary><p>نبحث عن السياق والمقصد العام، ونتعامل مع النص ككل متكامل لا كمقاطع منفصلة.</p></details>
-            <details><summary>ما أهمية السياق في فهم النص القرآني؟</summary><p>السياق أساسي لفهم أي نص، وهو الذي يحدد المعنى الحقيقي والدلالة المقصودة.</p></details>
-            <details><summary>هل يمكن فهم القرآن دون معرفة باللسان العربي؟</summary><p>المعرفة باللسان العربي يساعد، لكن الفهم الجوهري ممكن عبر الترجمات والتفكر في المقاصد.</p></details>
-            <details><summary>ما موقف المنهج القرآني من العلوم الحديثة؟</summary><p>نرحب بالعلوم الحديثة ونتعامل معها كوسائل لفهم أعمق للكون والحياة، دون تعارض مع المبادئ القرآنية.</p></details>
-            <details><summary>كيف نوفق بين النص والعقل عندما يبدوان متعارضين؟</summary><p>لا تعارض حقيقي بين النص الصحيح والعقل السليم، وأي تعارض ظاهري يحتاج إلى إعادة نظر في الفهم.</p></details>
-            <details><summary>ما دور الأخلاق في المنهج القرآني؟</summary><p>الأخلاق هي الغاية الأساسية من التشريع، وكل فهم يخالف الأخلاق يحتاج إلى مراجعة.</p></details>
-            <details><summary>هل المنهج القرآني يصلح لكل زمان ومكان؟</summary><p>نعم، لأنه يعتمد على مبادئ ثابتة قابلة للتطبيق في مختلف الظروف والأزمنة.</p></details>
-            <details><summary>كيف نتعامل مع التراث الفقهي الإسلامي؟</summary><p>نتعامل معه كتراث فكري إنساني قابل للدراسة والنقد، وليس كنصوص مقدسة.</p></details>
-            <details><summary>ما الفرق بين الدين والتديّن؟</summary><p>الدين هو المبادئ الثابتة، والتديّن هو الممارسات البشرية المتغيرة التي قد تصيب وقد تخطئ.</p></details>
-            <details><summary>هل يمكن أن يتطور الفهم الديني؟</summary><p>نعم، الفهم الديني يتطور مع تطور المعرفة والإدراك الإنساني.</p></details>
-            <details><summary>ما معنى "لا إكراه في الدين" في التطبيق العملي؟</summary><p>يعني حرية الاعتقاد والضمير، ورفض أي شكل من أشكال الإجبار في الأمور الدينية.</p></details>
-            <details><summary>كيف نحدد ما هو أساسي وما هو ثانوي في الدين؟</summary><p>الأساسيات هي المبادئ الكبرى والأخلاق والقيم، والثانويات هي التفاصيل والشكليات.</p></details>
-            <details><summary>ما دور المرأة في المنهج القرآني؟</summary><p>المرأة شريكة كاملة في المسؤولية والحقوق، ولها مكانة متساوية مع الرجل في الكرامة الإنسانية.</p></details>
-            <details><summary>هل هناك قداسة للشخصيات الدينية؟</summary><p>لا قداسة لأي شخص، الجميع بشر يصيبون ويخطئون، والقداسة لله وحده.</p></details>
-            <details><summary>كيف نتعامل مع التنوع الديني والمذهبي؟</summary><p>بالاحترام والحوار، والاعتراف بحق الآخر في الاختلاف، مع التركيز على القواسم المشتركة.</p></details>
-            <details><summary>ما هو مفهوم الجهاد في المنهج القرآني؟</summary><p>الجهاد هو الكفاح من أجل الحق والعدل، وليس قتالاً من أجل الإكراه أو السيطرة.</p></details>
-            <details><summary>كيف نطبق المنهج القرآني في الحياة اليومية؟</summary><p>بجعل القيم القرآنية دليلًا في التعاملات، والتفكر في الآيات، والسعي للعدل والإحسان.</p></details>
-            <details><summary>ما موقف المنهج القرآني من الديمقراطية؟</summary><p>لا تعارض بين المبادئ القرآنية والديمقراطية، بل يمكن أن يتكاملَا في إطار القيم المشتركة.</p></details>
-            <details><summary>كيف نربي الأبناء على المنهج القرآني؟</summary><p>بغرس قيم التساؤل والتفكر، وتعليمهم احترام التنوع، وتنمية الضمير الأخلاقي.</p></details>
-            <details><summary>ما مفهوم الحرية في المنهج القرآني؟</summary><p>الحرية مسؤولية، وهي حق أساسي للإنسان في الفكر والاعتقاد والممارسة ما لم تضر بالآخرين.</p></details>
-            <details><summary>كيف نتعامل مع النصوص التي تبدو صعبة الفهم؟</summary><p>بالرجوع إلى السياق، والمقصد العام، واستشارة مختلف أهل المعرفة، والصبر في البحث.</p></details>
-            <details><summary>ما دور الفنون في المنهج القرآني؟</summary><p>الفنون تعبير عن الجمال والإبداع، وهي وسيلة للتعبير عن القيم والمشاعر الإنسانية النبيلة.</p></details>
-            <details><summary>هل يمكن التوفيق بين الدين والعلم؟</summary><p>نعم، لا تعارض بين الدين الحقيقي والعلم الصحيح، بل يتكاملان في البحث عن الحقيقة.</p></details>
-            <details><summary>ما مفهوم العدالة الاجتماعية في المنهج القرآني؟</summary><p>العدالة الاجتماعية هي تحقيق التوازن في توزيع الثروات والفرص، وحماية حقوق الضعفاء.</p></details>
-            <details><summary>كيف نطور فهمنا للقرآن؟</summary><p>بالدراسة المستمرة، والحوار مع الآخرين، والانفتاح على مختلف التفسيرات والآراء.</p></details>
-            <details><summary>ما موقف المنهج القرآني من حقوق الإنسان؟</summary><p>يؤكد على كرامة الإنسان وحقوقه الأساسية، ويعتبر العدل والحرية من القيم المركزية.</p></details>
-            <details><summary>كيف نتعامل مع التحديات المعاصرة؟</summary><p>باستلهام المبادئ القرآنية، والاجتهاد الجماعي، والانفتاح على الحكمة.</p></details>
-            <details><summary>ما هو مستقبل المنهج القرآني؟</summary><p>مستقبله مشرق لأنه يستجيب لحاجات العصر، ويقدم إجابات منطقية للتحديات المعاصرة.</p></details>
-        </div>
+        <div id="manhajContent">
+            <!-- Introduction -->
+            <div class="intro-card searchable-item">
+                <h2 style="color:var(--primary-color); margin-bottom:15px;">مقدمة</h2>
+                <p>الهدف من هذا المنهج هو تقديم إطار واضح يسمح بقراءة القرآن من داخله، بعيدًا عن سلطة الروايات والتقليد، ومن دون تبعية لمذهب أو مرجعية بشرية. المرجعية الأولى والأخيرة هي النص القرآني؛ وما عداه يُعامل كمادة تاريخية أو لغوية لا كسُلطة فوق النص ولا في موازاته أو جنبًا إلى جنب معه.</p>
+            </div>
 
-        <!-- Pagination -->
-        <div id="pagination-wrapper">
-            <span id="pageInfo">الصفحة 1 من 1</span>
-            <div style="margin-top: 15px;">
-                <button id="firstPage" class="pagination-btn">الأولى</button>
-                <button id="prevPage" class="pagination-btn">السابق</button>
-                <button id="nextPage" class="pagination-btn">التالي</button>
+            <!-- Principles -->
+            <div class="section-title"><h2>أساسيات المنهج</h2></div>
+            <div class="principles-grid">
+                <div class="principle-card searchable-item">
+                    <h3>1) مركزية النص القرآني</h3>
+                    <p>الفهم يبدأ من الآية نفسها ومن مجموع النص، لا من الشروح اللاحقة. لا تُقدّم الروايات أو التفاسير على القرآن، وأي فهم يصطدم بظاهر النص أو بمبادئه الكبرى يُعاد تقييمه.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>2) وحدة المفهوم القرآني</h3>
+                    <p>لا نستخلص المعنى من آية وحيدة، بل من مجموع استعمال الكلمة في القرآن: جذرها، اشتقاقاتها، سياقاتها ومواضع ورودها والمجال الدلالي الذي تتشكل منه.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>3) السياق البنيوي لا السياق الخارجي</h3>
+                    <p>القرآن يفسّر بعضه بعضًا داخل بنيته النصية: ترتيب الأفكار، العلاقات الحجاجية، والانتقال الدلالي داخل السورة. ما يرد من روايات يُعامل كمرجع تاريخي وليس كأداة تفسيرية ملزمة.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>4) الدقة اللغوية غير التراثية</h3>
+                    <p>نعتمد المعنى العربي الأصلي للكلمات قبل أن تتحملها المدارس الاصطلاحية اللاحقة. نفرّق بين المعنى اللغوي والأثر المذهبي.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>5) القراءة الأخلاقية للنص</h3>
+                    <p>الالتزام بمبادئ كبرى متكررة في القرآن: العدل، الرحمة، عدم الظلم، والمسؤولية الفردية. أي فهم ينتج عنه ظلم أو تبرير للإكراه يُعد فهمًا ناقصًا.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>6) نزع القداسة عن البشر</h3>
+                    <p>لا عصمة إلّا للوحي نفسه. الفقهاء جزء من التاريخ الفكري، يمكن الأخذ منهم أو الرد عليهم، لكن لا تُسلم لهم السلطة على النص، وكل ما يقولون، إنما هو اجتهادهم قابل للأخذ والرد ولا يمكن أن يمنح صفة القداسة ولا الحقيقة المطلقة.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>7) بناء الاستنتاج على منطق محكم</h3>
+                    <p>الاستنتاج يقوم على دليل لغوي، اتساق نصي، والالتزام بالمبادئ الأخلاقية. إذا اختل عنصر، يجب مراجعة الاستنتاج.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>8) ترتيل القرآن</h3>
+                    <p>الترتيل هنا ليس القراءة الصوتية، بل جمعُ الآيات التي تتناول الموضوع الواحد وترتيبُها في بنية متكاملة لفهم مراد النص. فلا تُفهم المسألة القرآنية من آية منفردة، بل من خلال ضمّ جميع الآيات المتعلقة بها وترتيبها وتنظيمها وفق سياقها ودلالاتها وجذرها اللغوي.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>9) قاعدة الارتكاز</h3>
+                    <p>القرآن هو المصدر الوحيد للتشريع الديني، ولا يُقدَّم عليه أي نص أو رواية أو تراث. هو القاعدة والميزان والمعيار الذي تُقاس به المفاهيم؛ فما وافقه قُبل، وما خالفه رُدّ.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>10) القراءة العقلانية</h3>
+                    <p>عند تدبر القرآن، ينبغي الدخول إلى النص من دون حمولات مسبقة أو مفاهيم ورثتها عبر المذاهب والفتاوى. لا تبحث عمّا لقّنوك إياه داخل القرآن؛ بل اقرأه كأنك تقرأه للمرة الأولى، بعقل مفتوح وقلب خالٍ من التوجّهات المسبقة.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>11) الإسقاطات</h3>
+                    <p>عند التعامل مع أي مفهوم موروث، اجعل القرآن هو المرجعية التي تُسقط عليها الفكرة، لا العكس. فإن وُجد لها أصل قرآني فهي مقبولة، وإن لم يوجد فهي إضافة بشرية لا حجّية لها.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>12) لا تُحمّل القرآن ما لا يقوله</h3>
+                    <p>عند تحليل أي قضية دينية، لا يجوز أن نأتي بمفاهيم أو أحكام من خارج القرآن ثم نبحث لها عن أصل داخله أو نحاول إسقاط القرآن عليها. المنهج الصحيح هو أن يبدأ الباحث من داخل القرآن لا من خارجه.</p>
+                </div>
+            </div>
+
+            <!-- Examples -->
+            <div class="section-title"><h2>أمثلة تطبيقية مختصرة</h2></div>
+            <div class="accordion-wrapper">
+                <details class="searchable-item">
+                    <summary>الذكر</summary>
+                    <p>يوضع جذر <code>ذ-ك-ر</code> موضع الدراسة، ويتم تتبع مواضع ورود الكلمة لفهم حقلها الدلالي: التذكير، البيان، التبليغ والوعي—لا مجرد نص محفوظ.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>الشيطان</summary>
+                    <p>يُنظر إليه في سياق القرآن كمفهوم يشمل النزعات والإغواء والسلوك الذي يصدّ عن الهدى، وليس كمجرد شخصية متجسدة بالضرورة.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>الدين</summary>
+                    <p>يُفهم كمنظومة قيم وسلوك لا كمؤسسة كهنوتية أو مجرد طقوس، وفق ما يظهر من استعمال الكلمة النصي، علينا أن نعي جيدًا أن الإيمان مسألة فردية.</p>
+                </details>
+            </div>
+
+            <!-- FAQs -->
+            <div class="section-title"><h2>اعتراضات وأسئلة شائعة</h2></div>
+            <div class="accordion-wrapper">
+                <details class="searchable-item">
+                    <summary>هل يلغي هذا التراث؟</summary>
+                    <p>لا؛ التراث يبقى مادة بشرية تُستخدم أو تُقوّم، لكن لا تُمنح سلطة فوق النص القرآني.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>من يضمن صحة الفهم؟</summary>
+                    <p>لا يوجد ضامن بشري. الضمان منهجي: وضوح خطوات التحليل يجعل النتيجة قابلة للنقد والمراجعة.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>لماذا لا نعتمد الروايات؟</summary>
+                    <p>لأن النص (القرآن) لم يطلب مرجعًا فوقه، ولأن الروايات تأتي بعد النص بزمن وتختلف في دقتها ودلالتها.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>هل المنهج مغلق؟</summary>
+                    <p>المنهج قابلاً للمراجعة، لكنه يستند إلى أسس ثابتة: النص، اللغة، الأخلاق، والمنطق.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>هل نحن ملزمون بكتب الروايات واجماع الفقهاء؟</summary>
+                    <p>لا، نحن ملزمون بالوحي الوحيد فقط، (القرآن)، وكل ما هو دون القرآن من كتب روايات وفقه واجماع واتفاق، إنما هي اجتهادات بشرية لا قداسة لها.</p>
+                </details>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="conclusion-card searchable-item">
+                <h2 style="color:var(--primary-color); margin-bottom:15px;">خاتمة</h2>
+                <p>المنهج هنا أداة لتحرير القراءة من القيود غير النصية؛ ليس مذهبًا جديدًا، بل إطارًا عمليًا لقراءةٍ منضبطة وقابلة للنقد. الهدف: الوصول إلى فهم أقرب للنص عبر خطوات واضحة ومفتوحة للمراجعة.</p>
             </div>
         </div>
 
         <!-- Social Media -->
-        <div class="social-section">
+        <div class="social-section" style="margin-top: 60px;">
             <div class="section-title">
                 <h2>تابعني على مواقع التواصل</h2>
             </div>
@@ -501,7 +513,7 @@
     </footer>
 
     <script>
-        // Toggle Mobile Menu with Scroll Lock
+        // Toggle Mobile Menu
         function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
@@ -520,9 +532,9 @@
 
         // Share
         function handleMobileShare() {
-            const link = "https://www.husseinalkhalil.com/inq.html";
+            const link = "https://www.husseinalkhalil.com/manhaj.html";
             if (navigator.share) {
-                navigator.share({ title: 'تساؤلات - حسين الخليل', url: link }).catch(console.error);
+                navigator.share({ title: 'منهج فهم القرآن - حسين الخليل', url: link }).catch(console.error);
             } else {
                 navigator.clipboard.writeText(link).then(() => {
                     const alert = document.getElementById('copyAlert');
@@ -538,53 +550,6 @@
                 if(mobileShareLink) mobileShareLink.style.display = 'flex';
             }
         });
-
-        // Pagination Logic
-        const faqsPerPage = 15;
-        let currentPage = 1;
-
-        function paginateFAQs() {
-            const faqs = Array.from(document.querySelectorAll('details'));
-            const isSearching = document.getElementById('globalSearch').value.trim() !== '';
-
-            const totalPages = Math.ceil(faqs.length / faqsPerPage);
-            const pageInfo = document.getElementById('pageInfo');
-            if (pageInfo) pageInfo.textContent = `الصفحة ${currentPage} من ${totalPages}`;
-
-            faqs.forEach((faq, index) => {
-                faq.open = false;
-                
-                const start = (currentPage - 1) * faqsPerPage;
-                const end = currentPage * faqsPerPage;
-                faq.style.display = (index >= start && index < end) ? 'block' : 'none';
-            });
-
-            document.getElementById('prevPage').disabled = currentPage === 1;
-            document.getElementById('nextPage').disabled = currentPage === totalPages;
-            document.getElementById('firstPage').disabled = currentPage === 1;
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        document.getElementById('nextPage').onclick = function() {
-            const totalPages = Math.ceil(document.querySelectorAll('details').length / faqsPerPage);
-            if (currentPage < totalPages) {
-                currentPage++;
-                paginateFAQs();
-            }
-        };
-
-        document.getElementById('prevPage').onclick = function() {
-            if (currentPage > 1) {
-                currentPage--;
-                paginateFAQs();
-            }
-        };
-
-        document.getElementById('firstPage').onclick = function() {
-            currentPage = 1;
-            paginateFAQs();
-        };
 
         // Back to Top
         function scrollToTop() {
@@ -604,12 +569,15 @@
             if (cachedPagesContent) return cachedPagesContent;
 
             try {
+                // Fetch site-map.json with cache busting
                 const response = await fetch('site-map.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error('Could not load site-map.json');
                 const pagesList = await response.json();
 
+                // Process each item
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
+                    
                     let manualContent = (typeof item === 'object' && item.content) ? item.content : null;
                     let manualTitle = (typeof item === 'object' && item.page) ? item.page : null;
 
@@ -685,6 +653,7 @@
                 return;
             }
             
+            // Add Count
             const countDiv = document.createElement('div');
             countDiv.className = 'search-count';
             countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
@@ -712,6 +681,7 @@
                 
                 const highlightedSnippet = snippet.replace(queryRegex, match => `<mark>${match}</mark>`);
 
+                // Pass query as parameter
                 const searchTerm = document.getElementById('globalSearch').value.trim();
                 div.innerHTML = `<h3>${highlightedTitle}</h3><p>${highlightedSnippet}</p>`;
                 div.onclick = () => window.location.href = item.url + "?highlight=" + encodeURIComponent(searchTerm);
@@ -728,7 +698,8 @@
                 return;
             }
             
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            // Dropdown results
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث في جميع المحتويات...</p></div>';
             resultsContainer.style.display = 'block';
 
             const data = await loadAllPagesContent();
@@ -745,10 +716,9 @@
             displayGlobalResults(results, searchRegex, resultsContainer);
         }
 
-        // Initialize Search
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            paginateFAQs();
-
+            // Setup Search Listener
             const searchInput = document.getElementById('globalSearch');
             let timer;
             if(searchInput) {
@@ -761,45 +731,13 @@
                 });
             }
 
+            // Close search on outside click
             document.addEventListener('click', (e) => {
                 const searchContainer = document.querySelector('.universal-search');
                 if(searchContainer && !searchContainer.contains(e.target)) {
                     document.getElementById('searchResults').style.display = 'none';
                 }
             });
-        });
-
-        // ==================== Font Resizing Logic (NEW) ====================
-        const faqContainer = document.getElementById('faqList');
-        // Default multiplier
-        let currentScale = 1;
-
-        function updateFontScale() {
-            // Apply scaling to details content
-            const summaries = faqContainer.querySelectorAll('summary');
-            const paragraphs = faqContainer.querySelectorAll('p');
-            
-            summaries.forEach(el => el.style.fontSize = `${1.1 * currentScale}rem`);
-            paragraphs.forEach(el => el.style.fontSize = `${1.0 * currentScale}rem`);
-        }
-
-        document.getElementById('fontIncrease').addEventListener('click', () => {
-            if (currentScale < 1.6) { // limit max size
-                currentScale += 0.1;
-                updateFontScale();
-            }
-        });
-
-        document.getElementById('fontDecrease').addEventListener('click', () => {
-            if (currentScale > 0.7) { // limit min size
-                currentScale -= 0.1;
-                updateFontScale();
-            }
-        });
-
-        document.getElementById('fontReset').addEventListener('click', () => {
-            currentScale = 1;
-            updateFontScale();
         });
     </script>
 </body>
