@@ -23,17 +23,13 @@
             --primary-light: #8a5bc7;
             --accent-color: #ffd700;
             --bg-color: #f9f7f2;
-            
-            /* اللون الجديد الموحد: ضباب اللافندر */
             --surface-color: #F8F5FD; 
-            
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             
-            /* متغير حجم الخط للتحكم بالتكبير والتصغير */
+            /* === متغير حجم الخط للتحكم بالتكبير والتصغير === */
             --content-font-size: 18px;
             
-            /* تحديث الظلال */
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
             --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
             --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
@@ -56,188 +52,69 @@
             overflow-x: hidden;
         }
 
-        /* منع السكرول عند فتح القائمة */
-        body.no-scroll {
-            overflow: hidden !important;
-            height: 100vh;
-        }
-
+        body.no-scroll { overflow: hidden !important; height: 100vh; }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* ==================== Navigation ==================== */
-        .nav-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
-            z-index: 998; display: none;
-        }
-
-        nav {
-            background: rgba(94, 44, 165, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 0.8rem 2%;
-            position: fixed; width: 100%; top: 0;
-            z-index: 1000;
-            display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
+        /* Navigation */
+        .nav-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 998; display: none; }
+        nav { background: rgba(94, 44, 165, 0.95); backdrop-filter: blur(10px); padding: 0.8rem 2%; position: fixed; width: 100%; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .logo-container img { height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
-
-        .nav-links {
-            display: flex; flex: 1; justify-content: space-evenly;
-            align-items: center; flex-wrap: wrap; margin: 0 20px;
-        }
-
-        .nav-links a {
-            color: white; font-weight: 700; font-size: 1.05rem;
-            padding: 8px 12px; border-radius: 20px;
-            display: flex; align-items: center; gap: 5px; white-space: nowrap;
-        }
-
+        .nav-links { display: flex; flex: 1; justify-content: space-evenly; align-items: center; flex-wrap: wrap; margin: 0 20px; }
+        .nav-links a { color: white; font-weight: 700; font-size: 1.05rem; padding: 8px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
-
         .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
 
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
-            .nav-links {
-                position: fixed; top: 60px; right: -280px; width: 280px;
-                background: var(--surface-color); /* استخدام اللون الجديد */
-                flex-direction: column;
-                padding: 20px; height: calc(100vh - 60px);
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
-                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
-                gap: 10px; margin: 0; flex: unset;
-            }
+            .nav-links { position: fixed; top: 60px; right: -280px; width: 280px; background: var(--surface-color); flex-direction: column; padding: 20px; height: calc(100vh - 60px); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start; gap: 10px; margin: 0; flex: unset; }
             .nav-links.show { right: 0; }
-            .nav-links a { 
-                color: var(--text-primary); width: 100%; padding: 12px; 
-                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
-                border-bottom: 1px solid rgba(0,0,0,0.03);
-            }
+            .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
             .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
             nav { padding: 0.8rem 5%; }
         }
 
         /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 120px 20px 140px; /* مسافة سفلية إضافية للتداخل */
-            text-align: center; color: white;
-            border-radius: 0 0 50px 50px; position: relative;
-            z-index: 1; /* الخلفية في الطبقة السفلية */
-        }
-
-        .hero-content {
-            max-width: 900px; margin: 0 auto;
-            display: flex; flex-direction: column; align-items: center; gap: 20px;
-        }
-
+        .hero-section { background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); padding: 120px 20px 140px; text-align: center; color: white; border-radius: 0 0 50px 50px; position: relative; z-index: 1; }
+        .hero-content { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
 
-        /* Global Search Box (Moved inside Main Wrapper) */
-        .universal-search { 
-            width: 100%; max-width: 600px; 
-            position: relative; 
-            z-index: 100; /* أعلى طبقة */
-            margin: 0 auto 40px auto; 
-        }
-        
-        #globalSearch {
-            width: 100%; padding: 18px 50px 18px 25px;
-            border-radius: 50px; border: none; font-size: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            font-family: 'Tajawal', sans-serif; outline: none; background: white;
-            transition: box-shadow 0.3s ease;
-        }
+        /* Search */
+        .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto 40px auto; }
+        #globalSearch { width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal', sans-serif; outline: none; background: white; transition: box-shadow 0.3s ease; }
         #globalSearch:focus { box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.4); }
-        
-        .search-icon-placeholder {
-            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
-            color: var(--primary-color); pointer-events: none;
-        }
-
-        /* Search Results Dropdown */
-        .search-results {
-            position: absolute; top: 110%; left: 0; right: 0;
-            background: #ffffff; border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px;
-            overflow-y: auto; z-index: 200; text-align: right;
-            display: none; color: var(--text-primary);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
+        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
+        .search-results { position: absolute; top: 110%; left: 0; right: 0; background: #ffffff; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 200; text-align: right; display: none; color: var(--text-primary); border: 1px solid rgba(0,0,0,0.05); }
         .search-results::-webkit-scrollbar { width: 8px; }
         .search-results::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 0 0 0 15px; }
         .search-results::-webkit-scrollbar-thumb { background: var(--primary-light); border-radius: 4px; }
-
-        .search-count {
-            padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color);
-            border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc;
-            border-radius: 15px 15px 0 0; font-weight: 700;
-        }
-
-        .search-item {
-            padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05);
-            cursor: pointer; transition: background 0.2s;
-        }
+        .search-count { padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; border-radius: 15px 15px 0 0; font-weight: 700; }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
         .search-item:last-child { border-bottom: none; }
         .search-item:hover { background: rgba(94, 44, 165, 0.05); }
         .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; font-weight: 700; }
         .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
         .search-item mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
-        /* Container Structure */
+        /* Container */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .main-wrapper {
-            position: relative;
-            z-index: 20; /* طبقة البطاقات */
-            margin-top: -90px; /* سحب للأعلى */
-            max-width: 900px;
-            margin-left: auto; margin-right: auto; margin-bottom: 60px;
-        }
+        .main-wrapper { position: relative; z-index: 20; margin-top: -90px; max-width: 900px; margin-left: auto; margin-right: auto; margin-bottom: 60px; }
 
-        /* Form Styling */
-        .ask-form-card {
-            background: var(--surface-color); border-radius: var(--radius-xl);
-            padding: 30px; box-shadow: var(--shadow-sm); margin-bottom: 40px;
-            border: 1px solid rgba(0,0,0,0.03);
-        }
-
+        /* Form */
+        .ask-form-card { background: var(--surface-color); border-radius: var(--radius-xl); padding: 30px; box-shadow: var(--shadow-sm); margin-bottom: 40px; border: 1px solid rgba(0,0,0,0.03); }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--primary-dark); }
-
-        textarea, input[type="text"] {
-            width: 100%; padding: 15px; border: 2px solid #e2e8f0;
-            border-radius: 12px; font-family: 'Tajawal', sans-serif; font-size: 1rem;
-            background: #f8fafc; transition: all 0.3s;
-        }
-
-        textarea:focus, input[type="text"]:focus {
-            outline: none; border-color: var(--primary-color);
-            background: white; box-shadow: 0 0 0 4px rgba(94, 44, 165, 0.1);
-        }
-
+        textarea, input[type="text"] { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: 'Tajawal', sans-serif; font-size: 1rem; background: #f8fafc; transition: all 0.3s; }
+        textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--primary-color); background: white; box-shadow: 0 0 0 4px rgba(94, 44, 165, 0.1); }
         .name-toggle { display: flex; align-items: center; gap: 12px; margin: 15px 0; }
         .switch { position: relative; display: inline-block; width: 50px; height: 28px; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #cbd5e1; transition: .4s; border-radius: 34px;
-        }
-        .slider:before {
-            position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px;
-            background-color: white; transition: .4s; border-radius: 50%;
-        }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
         input:checked + .slider { background-color: var(--primary-color); }
         input:checked + .slider:before { transform: translateX(22px); }
-
-        .submit-btn {
-            background: var(--primary-color); color: white; padding: 12px 30px;
-            border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700;
-            cursor: pointer; width: 100%; transition: all 0.3s; box-shadow: var(--shadow-md);
-        }
+        .submit-btn { background: var(--primary-color); color: white; padding: 12px 30px; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; width: 100%; transition: all 0.3s; box-shadow: var(--shadow-md); }
         .submit-btn:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
         .submit-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
 
@@ -245,7 +122,7 @@
         .section-header { text-align: center; margin-bottom: 20px; color: var(--primary-color); font-size: 1.5rem; position: relative; display: inline-block; width: 100%; }
         #questionsList { display: flex; flex-direction: column; gap: 20px; }
 
-        /* ====== تنسيق أزرار الخط (مشابه لصفحات الحوار) ====== */
+        /* === تنسيق أزرار الخط === */
         .font-controls {
             display: flex;
             justify-content: center;
@@ -255,7 +132,7 @@
         }
 
         .font-btn {
-            width: 45px; /* حجم مناسب */
+            width: 45px;
             height: 45px;
             border-radius: 50%;
             border: 2px solid var(--primary-color);
@@ -287,7 +164,7 @@
         .q-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; color: var(--text-secondary); }
         .q-name { font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 5px; }
         
-        /* تطبيق متغير الخط على نص السؤال */
+        /* تطبيق متغير الخط */
         .q-text { 
             font-size: var(--content-font-size); 
             color: var(--text-primary); 
@@ -306,7 +183,7 @@
             color: #422006; font-size: 0.8rem; padding: 2px 10px; border-radius: 10px; font-weight: 700;
         }
         
-        /* تطبيق متغير الخط على نص الإجابة */
+        /* تطبيق متغير الخط */
         .answer-text { 
             color: #422006; 
             font-size: var(--content-font-size); 
@@ -317,46 +194,32 @@
 
         /* Pagination */
         #pagination-container { display: flex; justify-content: center; gap: 5px; margin: 40px 0; }
-        .page-btn {
-            background: white; border: 1px solid #e2e8f0; width: 40px; height: 40px;
-            border-radius: 8px; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; color: var(--primary-color); font-weight: 700; transition: all 0.2s;
-        }
+        .page-btn { background: white; border: 1px solid #e2e8f0; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary-color); font-weight: 700; transition: all 0.2s; }
         .page-btn:hover:not(:disabled) { background: var(--primary-color); color: white; }
         .page-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
         .page-btn:disabled { background: #f1f5f9; color: #cbd5e1; cursor: not-allowed; }
         #paginationInfo { text-align: center; color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; }
 
         /* Alerts */
-        .alert {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            padding: 20px 40px; background: white; border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 10000;
-            text-align: center; display: none; min-width: 300px;
-        }
+        .alert { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px 40px; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 10000; text-align: center; display: none; min-width: 300px; }
         .alert.success { border-top: 5px solid #4CAF50; color: #2e7d32; }
         .alert.error { border-top: 5px solid #f44336; color: #c62828; }
-        .alert-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5); z-index: 9999; display: none;
-        }
+        .alert-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; display: none; }
 
-        /* Footer & Shared Components */
+        /* Footer & Shared */
         footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
         .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
         .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
         .footer-links a:hover { color: var(--accent-color); }
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
-
         .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: transform 0.3s; }
         .share-fixed-btn:hover { transform: scale(1.1); }
         .share-fixed-btn img { width: 24px; filter: brightness(0); }
-
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
-
-        /* Social Section */
+        
+        /* Social */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
@@ -376,11 +239,9 @@
 
         @media (max-width: 900px) {
             .hero-text h1 { font-size: 2rem; }
-            /* زيادة المسافة السفلية في الموبايل لتجنب التداخل */
             .hero-section { padding: 100px 20px 160px; }
             .share-fixed-btn { display: none; }
         }
-
         @media (max-width: 768px) {
             .footer-links { gap: 12px; flex-wrap: wrap; justify-content: center; }
             .footer-links a { font-size: 0.9rem; white-space: nowrap; }
@@ -442,7 +303,7 @@
     <!-- Main Content Wrapper -->
     <div class="container main-wrapper">
         
-        <!-- Global Site Search (Moved Here for Consistency) -->
+        <!-- Global Site Search -->
         <div class="universal-search">
             <i class="fas fa-search search-icon-placeholder"></i>
             <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
@@ -478,7 +339,7 @@
         <!-- Questions List -->
         <div class="section-header">أسئلة الزوّار</div>
         
-        <!-- === إضافة أزرار تكبير وتصغير الخط هنا === -->
+        <!-- === أزرار تكبير وتصغير الخط === -->
         <div class="font-controls">
             <button class="font-btn" onclick="resizeText('increase')" title="تكبير الخط">
                 <i class="fas fa-plus"></i>
@@ -558,7 +419,7 @@
 
     <script>
         // === كود تكبير وتصغير الخط ===
-        let currentFontSize = 18; // القيمة الافتراضية بالبكسل
+        let currentFontSize = 18; // القيمة الافتراضية
         const rootElement = document.documentElement;
 
         function resizeText(action) {
@@ -568,22 +429,19 @@
                 currentFontSize -= 2;
             }
 
-            // وضع حدود للتكبير والتصغير
+            // حدود الحجم
             if (currentFontSize < 14) currentFontSize = 14;
             if (currentFontSize > 34) currentFontSize = 34;
 
-            // تغيير متغير الـ CSS ليتم تطبيقه على جميع العناصر (حتى الجديدة)
             rootElement.style.setProperty('--content-font-size', currentFontSize + 'px');
         }
 
-        // Toggle Mobile Menu with Scroll Lock
+        // Toggle Mobile Menu
         function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
             const body = document.body;
-
             navLinks.classList.toggle('show');
-            
             if(navLinks.classList.contains('show')) {
                 overlay.style.display = 'block';
                 body.classList.add('no-scroll');
@@ -624,76 +482,49 @@
             else btn.classList.remove('visible');
         });
 
-        // ==================== Global Search Logic (Same as Articles Page) ====================
+        // ==================== Global Search ====================
         let cachedPagesContent = null;
         let isSearchInitialized = false;
         
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
-
             try {
-                // Fetch site-map.json with cache busting
                 const response = await fetch('site-map.json?v=' + new Date().getTime());
                 if (!response.ok) throw new Error('Could not load site-map.json');
                 const pagesList = await response.json();
-
-                // Process each item
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
-                    
                     let manualContent = (typeof item === 'object' && item.content) ? item.content : null;
                     let manualTitle = (typeof item === 'object' && item.page) ? item.page : null;
-
-                    if (manualContent) {
-                        return { 
-                            page: manualTitle || url, 
-                            url: url, 
-                            content: manualContent 
-                        };
-                    }
-
+                    if (manualContent) { return { page: manualTitle || url, url: url, content: manualContent }; }
                     try {
                         const pageResp = await fetch(url);
                         if (!pageResp.ok) return null;
                         const html = await pageResp.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
-                        
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                         const mainContent = doc.querySelector('.container, main, body') || doc.body;
-
-                        return {
-                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة',
-                            url: url,
-                            content: mainContent.textContent.replace(/\s+/g, ' ').trim()
-                        };
+                        return { page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', url: url, content: mainContent.textContent.replace(/\s+/g, ' ').trim() };
                     } catch (e) { return null; }
                 });
-
                 const results = await Promise.all(promises);
                 cachedPagesContent = results.filter(Boolean);
                 return cachedPagesContent;
-            } catch (error) {
-                console.error("Search Error:", error);
-                return [];
-            }
+            } catch (error) { console.error("Search Error:", error); return []; }
         }
 
         function normalizeArabic(text) {
             if (!text) return '';
             text = text.replace(/[\u064B-\u065F\u0670]/g, ''); 
-            text = text.replace(/[أإآ]/g, 'ا');
-            text = text.replace(/[ة]/g, 'ه');
-            text = text.replace(/[ى]/g, 'ي');
-            text = text.replace(/[ؤ]/g, 'و');
-            text = text.replace(/[ئ]/g, 'ي');
+            text = text.replace(/[أإآ]/g, 'ا'); text = text.replace(/[ة]/g, 'ه'); text = text.replace(/[ى]/g, 'ي');
+            text = text.replace(/[ؤ]/g, 'و'); text = text.replace(/[ئ]/g, 'ي');
             return text;
         }
 
         function getSafeRegex(searchTerm) {
             let regexStr = '';
             const cleanTerm = normalizeArabic(searchTerm);
-            
             for (let i = 0; i < cleanTerm.length; i++) {
                 const char = cleanTerm[i];
                 if (char === 'ا') regexStr += '[اأإآ]';
@@ -702,7 +533,6 @@
                 else if (char === 'و') regexStr += '[وؤ]';
                 else if (char.match(/[a-zA-Z]/)) regexStr += char;
                 else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                
                 regexStr += '[\\u064B-\\u065F\\u0670]*'; 
             }
             return new RegExp(regexStr, 'gi');
@@ -715,35 +545,25 @@
                 container.style.display = 'block';
                 return;
             }
-            
-            // Add Count
             const countDiv = document.createElement('div');
             countDiv.className = 'search-count';
             countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
             container.appendChild(countDiv);
-            
             results.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
-                
                 const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
-                
                 let snippet = '';
                 queryRegex.lastIndex = 0;
                 const match = queryRegex.exec(item.content);
-                
                 if (match) {
                     const start = Math.max(0, match.index - 60);
                     const end = Math.min(item.content.length, match.index + 100);
                     snippet = item.content.substring(start, end);
                     if (start > 0) snippet = '...' + snippet;
                     if (end < item.content.length) snippet = snippet + '...';
-                } else {
-                    snippet = item.content.substring(0, 150) + '...';
-                }
-                
+                } else { snippet = item.content.substring(0, 150) + '...'; }
                 const highlightedSnippet = snippet.replace(queryRegex, match => `<mark>${match}</mark>`);
-
                 div.innerHTML = `<h3>${highlightedTitle}</h3><p>${highlightedSnippet}</p>`;
                 div.onclick = () => window.location.href = item.url;
                 container.appendChild(div);
@@ -753,18 +573,11 @@
 
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
-
-            if (!query || query.length < 2) {
-                resultsContainer.style.display = 'none';
-                return;
-            }
-            
+            if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
             resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
             resultsContainer.style.display = 'block';
-
             const data = await loadAllPagesContent();
             const searchRegex = getSafeRegex(query);
-            
             const results = data.filter(item => {
                 searchRegex.lastIndex = 0;
                 const titleMatch = searchRegex.test(item.page);
@@ -772,34 +585,22 @@
                 const contentMatch = searchRegex.test(item.content);
                 return titleMatch || contentMatch;
             });
-
             displayGlobalResults(results, searchRegex, resultsContainer);
         }
 
-        // ==================== Firebase & Page Logic ====================
         document.addEventListener('DOMContentLoaded', function() {
-            
-            // --- Global Search Setup ---
             const searchInput = document.getElementById('globalSearch');
             let timer;
             if(searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    clearTimeout(timer);
-                    timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500);
-                });
-                searchInput.addEventListener('focus', () => {
-                    if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; }
-                });
+                searchInput.addEventListener('input', (e) => { clearTimeout(timer); timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500); });
+                searchInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
             }
-
             document.addEventListener('click', (e) => {
                 const searchContainer = document.querySelector('.universal-search');
-                if(searchContainer && !searchContainer.contains(e.target)) {
-                    document.getElementById('searchResults').style.display = 'none';
-                }
+                if(searchContainer && !searchContainer.contains(e.target)) { document.getElementById('searchResults').style.display = 'none'; }
             });
 
-            // --- Firebase Config & Logic ---
+            // Firebase Config
             const firebaseConfig = {
                 apiKey: "AIzaSyBS2bmHfbwGkYitxGQKKzzsX9wLgj0i8_Q",
                 authDomain: "question-755b8.firebaseapp.com",
@@ -815,12 +616,8 @@
             try {
                 const app = firebase.initializeApp(firebaseConfig);
                 db = firebase.database();
-            } catch (error) {
-                console.error("Firebase Error:", error);
-                showAlert("خطأ في الاتصال بالخادم", "error");
-            }
+            } catch (error) { console.error("Firebase Error:", error); showAlert("خطأ في الاتصال بالخادم", "error"); }
 
-            // Elements
             const questionForm = document.getElementById('questionForm');
             const showNameToggle = document.getElementById('showName');
             const nameField = document.getElementById('nameField');
@@ -829,83 +626,48 @@
             const paginationContainer = document.getElementById('pagination-container');
             const paginationInfo = document.getElementById('paginationInfo');
 
-            // State
             let allQuestions = [];
             const questionsPerPage = 10;
             let currentPage = 1;
 
-            // Toggle Name Field
             showNameToggle.addEventListener('change', function() {
                 nameField.style.display = this.checked ? 'block' : 'none';
             });
 
-            // Submit Question
             questionForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 const qText = document.getElementById('question').value.trim();
                 const qName = showNameToggle.checked ? document.getElementById('name').value.trim() : '';
-
-                if (!qText) {
-                    showAlert("الرجاء إدخال نص السؤال", "error");
-                    return;
-                }
-
+                if (!qText) { showAlert("الرجاء إدخال نص السؤال", "error"); return; }
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'جاري الإرسال...';
-
                 try {
                     await db.ref('questions').push().set({
-                        question: qText,
-                        name: qName,
-                        showName: showNameToggle.checked,
-                        answer: '',
-                        timestamp: firebase.database.ServerValue.TIMESTAMP,
-                        approved: false
+                        question: qText, name: qName, showName: showNameToggle.checked, answer: '', timestamp: firebase.database.ServerValue.TIMESTAMP, approved: false
                     });
                     showAlert("تم إرسال السؤال بنجاح، وسيظهر بعد الموافقة عليه", "success");
                     questionForm.reset();
-                } catch (error) {
-                    console.error(error);
-                    showAlert("فشل في إرسال السؤال", "error");
-                } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'إرسال السؤال';
-                }
+                } catch (error) { console.error(error); showAlert("فشل في إرسال السؤال", "error"); } 
+                finally { submitBtn.disabled = false; submitBtn.textContent = 'إرسال السؤال'; }
             });
 
-            // Load Questions (Without Local Search Filtering)
             function loadQuestions() {
                 if (!db) return;
-                
                 db.ref('questions').orderByChild('approved').equalTo(true).on('value', (snapshot) => {
                     const data = snapshot.val();
-                    if (!data) {
-                        allQuestions = [];
-                        displayQuestions();
-                        return;
-                    }
-
-                    allQuestions = Object.keys(data).map(key => ({
-                        id: key,
-                        ...data[key]
-                    })).sort((a, b) => b.timestamp - a.timestamp);
-
+                    if (!data) { allQuestions = []; displayQuestions(); return; }
+                    allQuestions = Object.keys(data).map(key => ({ id: key, ...data[key] })).sort((a, b) => b.timestamp - a.timestamp);
                     currentPage = 1;
                     displayQuestions();
                 });
             }
 
-            // Display Logic
             function displayQuestions() {
                 questionsList.innerHTML = '';
-                
                 if (allQuestions.length === 0) {
                     questionsList.innerHTML = '<p style="text-align:center; padding:20px;">لا توجد أسئلة لعرضها حالياً.</p>';
-                    paginationContainer.innerHTML = '';
-                    paginationInfo.textContent = '';
-                    return;
+                    paginationContainer.innerHTML = ''; paginationInfo.textContent = ''; return;
                 }
-
                 const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
                 const start = (currentPage - 1) * questionsPerPage;
                 const end = start + questionsPerPage;
@@ -914,13 +676,17 @@
                 pageQuestions.forEach(q => {
                     const card = document.createElement('div');
                     card.className = 'question-card';
-                    
                     const nameDisplay = (q.showName && q.name) ? q.name : 'مجهول';
-                    const dateDisplay = new Date(q.timestamp).toLocaleDateString('ar-SA');
+                    
+                    // === تعديل التاريخ ليظهر بالميلادي ===
+                    const dateDisplay = new Date(q.timestamp).toLocaleDateString('ar-SA', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        calendar: 'gregory' 
+                    });
 
-                    // Convert newlines to breaks
                     let questionText = q.question.replace(/\n/g, '<br>');
-
                     let html = `
                         <div class="q-header">
                             <span class="q-name"><i class="fas fa-user-circle"></i> ${nameDisplay}</span>
@@ -928,40 +694,26 @@
                         </div>
                         <div class="q-text">${questionText}</div>
                     `;
-
                     if (q.answer) {
                         let answerText = q.answer.replace(/\n/g, '<br>');
-                        html += `
-                            <div class="answer-box">
-                                <span class="answer-label">الإجابة</span>
-                                <div class="answer-text">${answerText}</div>
-                            </div>
-                        `;
+                        html += `<div class="answer-box"><span class="answer-label">الإجابة</span><div class="answer-text">${answerText}</div></div>`;
                     }
-
                     card.innerHTML = html;
                     questionsList.appendChild(card);
                 });
-
                 paginationInfo.textContent = `الصفحة ${currentPage} من ${totalPages}`;
                 setupPagination(totalPages);
             }
 
-            // Pagination UI
             function setupPagination(totalPages) {
                 paginationContainer.innerHTML = '';
-                
                 if (totalPages <= 1) return;
-
-                // Prev
                 const prevBtn = document.createElement('button');
                 prevBtn.className = 'page-btn';
                 prevBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
                 prevBtn.disabled = currentPage === 1;
                 prevBtn.onclick = () => { currentPage--; displayQuestions(); window.scrollTo({top: 400, behavior:'smooth'}); };
                 paginationContainer.appendChild(prevBtn);
-
-                // Numbers
                 for (let i = 1; i <= totalPages; i++) {
                     if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
                         const btn = document.createElement('button');
@@ -971,13 +723,10 @@
                         paginationContainer.appendChild(btn);
                     } else if (i === currentPage - 2 || i === currentPage + 2) {
                         const span = document.createElement('span');
-                        span.textContent = '...';
-                        span.style.padding = '0 5px';
+                        span.textContent = '...'; span.style.padding = '0 5px';
                         paginationContainer.appendChild(span);
                     }
                 }
-
-                // Next
                 const nextBtn = document.createElement('button');
                 nextBtn.className = 'page-btn';
                 nextBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
@@ -986,21 +735,13 @@
                 paginationContainer.appendChild(nextBtn);
             }
 
-            // Alert System
             function showAlert(msg, type) {
                 const alertBox = document.getElementById('alertMessage');
                 const overlay = document.getElementById('alertOverlay');
-                alertBox.textContent = msg;
-                alertBox.className = `alert ${type}`;
-                alertBox.style.display = 'block';
-                overlay.style.display = 'block';
-                
-                setTimeout(() => {
-                    alertBox.style.display = 'none';
-                    overlay.style.display = 'none';
-                }, 3000);
+                alertBox.textContent = msg; alertBox.className = `alert ${type}`;
+                alertBox.style.display = 'block'; overlay.style.display = 'block';
+                setTimeout(() => { alertBox.style.display = 'none'; overlay.style.display = 'none'; }, 3000);
             }
-
             loadQuestions();
         });
     </script>
