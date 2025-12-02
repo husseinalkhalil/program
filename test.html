@@ -30,9 +30,9 @@
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             
-            /* متغير حجم الخط الديناميكي */
+            /* متغير حجم الخط للتحكم بالتكبير والتصغير */
             --content-font-size: 18px;
-
+            
             /* تحديث الظلال */
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
             --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
@@ -245,7 +245,7 @@
         .section-header { text-align: center; margin-bottom: 20px; color: var(--primary-color); font-size: 1.5rem; position: relative; display: inline-block; width: 100%; }
         #questionsList { display: flex; flex-direction: column; gap: 20px; }
 
-        /* ===== تعديلات أزرار الخط ===== */
+        /* ====== تنسيق أزرار الخط (مشابه لصفحات الحوار) ====== */
         .font-controls {
             display: flex;
             justify-content: center;
@@ -255,25 +255,26 @@
         }
 
         .font-btn {
-            width: 40px;
-            height: 40px;
+            width: 45px; /* حجم مناسب */
+            height: 45px;
             border-radius: 50%;
             border: 2px solid var(--primary-color);
             background: white;
             color: var(--primary-color);
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .font-btn:hover {
             background: var(--primary-color);
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(94, 44, 165, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(94, 44, 165, 0.2);
         }
 
         .question-card {
@@ -286,14 +287,14 @@
         .q-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; color: var(--text-secondary); }
         .q-name { font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 5px; }
         
-        /* تطبيق المتغير على نصوص الأسئلة والأجوبة */
+        /* تطبيق متغير الخط على نص السؤال */
         .q-text { 
             font-size: var(--content-font-size); 
             color: var(--text-primary); 
             line-height: 1.7; 
             margin-bottom: 15px; 
             white-space: pre-line;
-            transition: font-size 0.2s ease; 
+            transition: font-size 0.2s ease;
         }
 
         .answer-box {
@@ -305,7 +306,7 @@
             color: #422006; font-size: 0.8rem; padding: 2px 10px; border-radius: 10px; font-weight: 700;
         }
         
-        /* تطبيق المتغير على نصوص الأسئلة والأجوبة */
+        /* تطبيق متغير الخط على نص الإجابة */
         .answer-text { 
             color: #422006; 
             font-size: var(--content-font-size); 
@@ -569,7 +570,7 @@
 
             // وضع حدود للتكبير والتصغير
             if (currentFontSize < 14) currentFontSize = 14;
-            if (currentFontSize > 32) currentFontSize = 32;
+            if (currentFontSize > 34) currentFontSize = 34;
 
             // تغيير متغير الـ CSS ليتم تطبيقه على جميع العناصر (حتى الجديدة)
             rootElement.style.setProperty('--content-font-size', currentFontSize + 'px');
