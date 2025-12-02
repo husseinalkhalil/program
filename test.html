@@ -27,7 +27,7 @@
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             
-            /* === متغير حجم الخط للتحكم بالتكبير والتصغير === */
+            /* متغير حجم الخط الافتراضي */
             --content-font-size: 18px;
             
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
@@ -38,11 +38,7 @@
             --radius-xl: 1.5rem;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Tajawal', sans-serif;
@@ -122,37 +118,22 @@
         .section-header { text-align: center; margin-bottom: 20px; color: var(--primary-color); font-size: 1.5rem; position: relative; display: inline-block; width: 100%; }
         #questionsList { display: flex; flex-direction: column; gap: 20px; }
 
-        /* === تنسيق أزرار الخط === */
-        .font-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
+        /* === تنسيق أزرار الخط العائمة (مطابق لصفحة الحوارات) === */
+        .font-controls-fixed {
+            position: fixed; top: 120px; left: 30px;
+            display: flex; flex-direction: column; gap: 10px;
+            z-index: 990;
         }
-
+        
         .font-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid var(--primary-color);
-            background: white;
-            color: var(--primary-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            width: 45px; height: 45px; border-radius: 50%;
+            background: white; border: 1px solid #e2e8f0;
+            color: var(--primary-color); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
         }
-
-        .font-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(94, 44, 165, 0.2);
-        }
+        .font-btn:hover { background: var(--primary-color); color: white; transform: scale(1.1); }
 
         .question-card {
             background: var(--surface-color); border-radius: 16px; padding: 25px;
@@ -242,6 +223,14 @@
             .hero-section { padding: 100px 20px 160px; }
             .share-fixed-btn { display: none; }
         }
+        
+        @media (max-width: 1200px) {
+            .font-controls-fixed {
+                top: auto; bottom: 30px; left: 30px; 
+                flex-direction: row; /* Horizontal on mobile */
+            }
+        }
+
         @media (max-width: 768px) {
             .footer-links { gap: 12px; flex-wrap: wrap; justify-content: center; }
             .footer-links a { font-size: 0.9rem; white-space: nowrap; }
@@ -299,6 +288,13 @@
             </div>
         </div>
     </header>
+    
+    <!-- Font Controls (Fixed on Left/Bottom) - مطابق لصفحة الحوارات -->
+    <div class="font-controls-fixed">
+        <button class="font-btn" id="fontIncrease" title="تكبير الخط"><i class="fas fa-plus"></i></button>
+        <button class="font-btn" id="fontReset" title="إعادة تعيين"><i class="fas fa-redo"></i></button>
+        <button class="font-btn" id="fontDecrease" title="تصغير الخط"><i class="fas fa-minus"></i></button>
+    </div>
 
     <!-- Main Content Wrapper -->
     <div class="container main-wrapper">
@@ -339,16 +335,6 @@
         <!-- Questions List -->
         <div class="section-header">أسئلة الزوّار</div>
         
-        <!-- === أزرار تكبير وتصغير الخط === -->
-        <div class="font-controls">
-            <button class="font-btn" onclick="resizeText('increase')" title="تكبير الخط">
-                <i class="fas fa-plus"></i>
-            </button>
-            <button class="font-btn" onclick="resizeText('decrease')" title="تصغير الخط">
-                <i class="fas fa-minus"></i>
-            </button>
-        </div>
-
         <div id="questionsList">
             <p style="text-align:center; color:#666;">جاري تحميل الأسئلة...</p>
         </div>
@@ -418,23 +404,33 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
 
     <script>
-        // === كود تكبير وتصغير الخط ===
-        let currentFontSize = 18; // القيمة الافتراضية
+        // === كود تكبير وتصغير الخط المتوافق مع المتغيرات ===
+        let defaultFontSize = 18;
+        let currentFontSize = defaultFontSize;
         const rootElement = document.documentElement;
 
-        function resizeText(action) {
-            if (action === 'increase') {
-                currentFontSize += 2;
-            } else {
-                currentFontSize -= 2;
-            }
-
-            // حدود الحجم
-            if (currentFontSize < 14) currentFontSize = 14;
-            if (currentFontSize > 34) currentFontSize = 34;
-
+        function updateFontVariable() {
             rootElement.style.setProperty('--content-font-size', currentFontSize + 'px');
         }
+
+        document.getElementById('fontIncrease').addEventListener('click', () => {
+            if (currentFontSize < 34) {
+                currentFontSize += 2;
+                updateFontVariable();
+            }
+        });
+
+        document.getElementById('fontDecrease').addEventListener('click', () => {
+            if (currentFontSize > 14) {
+                currentFontSize -= 2;
+                updateFontVariable();
+            }
+        });
+
+        document.getElementById('fontReset').addEventListener('click', () => {
+            currentFontSize = defaultFontSize;
+            updateFontVariable();
+        });
 
         // Toggle Mobile Menu
         function toggleMobileMenu() {
@@ -678,7 +674,6 @@
                     card.className = 'question-card';
                     const nameDisplay = (q.showName && q.name) ? q.name : 'مجهول';
                     
-                    // === تعديل التاريخ ليظهر بالميلادي ===
                     const dateDisplay = new Date(q.timestamp).toLocaleDateString('ar-SA', {
                         year: 'numeric',
                         month: 'long',
