@@ -93,9 +93,15 @@
         .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
         .search-item mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
-        /* Container */
+        /* Container & Wrapper - تم استعادة العرض الأصلي (1200 / 900) */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .main-wrapper { position: relative; z-index: 20; margin-top: -90px; max-width: 900px; margin-left: auto; margin-right: auto; margin-bottom: 60px; }
+        .main-wrapper {
+            position: relative;
+            z-index: 20;
+            margin-top: -90px;
+            max-width: 900px; /* العرض الأصلي للأسئلة */
+            margin-left: auto; margin-right: auto; margin-bottom: 60px;
+        }
 
         /* Form */
         .ask-form-card { background: var(--surface-color); border-radius: var(--radius-xl); padding: 30px; box-shadow: var(--shadow-sm); margin-bottom: 40px; border: 1px solid rgba(0,0,0,0.03); }
@@ -118,7 +124,7 @@
         .section-header { text-align: center; margin-bottom: 20px; color: var(--primary-color); font-size: 1.5rem; position: relative; display: inline-block; width: 100%; }
         #questionsList { display: flex; flex-direction: column; gap: 20px; }
 
-        /* === تنسيق أزرار الخط العائمة (مطابق لصفحة الحوارات) === */
+        /* === تنسيق أزرار الخط العائمة (Fixed) === */
         .font-controls-fixed {
             position: fixed; top: 120px; left: 30px;
             display: flex; flex-direction: column; gap: 10px;
@@ -289,7 +295,7 @@
         </div>
     </header>
     
-    <!-- Font Controls (Fixed on Left/Bottom) - مطابق لصفحة الحوارات -->
+    <!-- Font Controls (Fixed on Left/Bottom) -->
     <div class="font-controls-fixed">
         <button class="font-btn" id="fontIncrease" title="تكبير الخط"><i class="fas fa-plus"></i></button>
         <button class="font-btn" id="fontReset" title="إعادة تعيين"><i class="fas fa-redo"></i></button>
