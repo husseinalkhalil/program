@@ -120,7 +120,7 @@
             .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
         }
 
-        /* ==================== Featured Books Card (تعديل الاستدارة والإمالة) ==================== */
+        /* ==================== Featured Books Card ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             padding: 100px 0 40px;
@@ -160,7 +160,7 @@
 
         .book-item-link {
             display: block;
-            perspective: 1500px; /* زيادة العمق لتعزيز الاستدارة والميل */
+            perspective: 1500px; 
             position: relative;
             z-index: 1;
         }
@@ -169,20 +169,17 @@
             width: 130px;  
             height: 195px; 
             object-fit: cover; 
-            border-radius: 20px; /* زيادة استدارة الحواف كما طلبت */
+            border-radius: 20px; 
             box-shadow: 10px 10px 20px rgba(0,0,0,0.35);
             display: block;
             transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); 
-            
-            /* زيادة زاوية الإمالة (rotateY) لجعلها تبدو مستديرة في الفضاء 3D */
             transform: rotateY(-25deg) rotateX(4deg) rotateZ(-1deg);
         }
 
-        /* عند التمرير: عودة الكتاب لوضعه الطبيعي (الواجهة كاملة) */
         .book-item-link:hover .book-tilt-cover {
             transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.1); 
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border-radius: 12px; /* تقليل الاستدارة قليلاً عند التكبير لتبدو كالواجهة الحقيقية */
+            border-radius: 12px;
             z-index: 10;
         }
 
@@ -337,14 +334,40 @@
         .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: color 0.3s ease; }
         .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
 
+        /* ==================== التعديلات الخاصة بنسخة الجوال فقط ==================== */
         @media (max-width: 768px) {
             .unified-header { padding: 90px 0 35px; border-radius: 0 0 35px 35px; }
+            
             .featured-books-card { 
-                padding: 15px 5px; 
-                max-width: 95%; 
+                padding: 15px 2px; /* تقليل الحواف الجانبية للبطاقة لأقصى حد */
+                max-width: 98%; 
             }
-            .book-tilt-cover { width: 105px; height: 155px; border-radius: 15px; }
-            .books-display-flex { gap: 8px; }
+            
+            .books-display-flex { 
+                flex-wrap: nowrap !important; /* منع نزول الكتاب الرابع لسطر جديد */
+                justify-content: center;
+                gap: 0px; /* إلغاء الفراغات بين الكتب للسماح بالتداخل */
+                padding: 10px 0;
+            }
+
+            .book-item-link {
+                margin: 0 -12px; /* خلق تداخل بين الكتب ليتسع الصف الواحد للأربعة */
+            }
+
+            .book-tilt-cover { 
+                width: 105px; /* تصغير العرض قليلاً ليتناسب مع عرض شاشة الجوال */
+                height: 155px; 
+                border-radius: 15px;
+                /* زيادة الاستدارة (الميلان) في الجوال ليأخذ الكتاب حيزاً عرضياً أقل */
+                transform: rotateY(-35deg) rotateX(5deg) rotateZ(-2deg);
+            }
+
+            .book-item-link:hover .book-tilt-cover {
+                transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.2); /* يبرز الكتاب عند اللمس */
+                z-index: 100;
+                border-radius: 10px;
+            }
+
             .hero-text h1 { font-size: 1.7rem; }
             .book-tabs { grid-template-columns: 1fr; }
         }
@@ -377,7 +400,6 @@
     </nav>
 
     <div class="unified-header">
-        <!-- قسم الكتب الفكرية المعدل: استدارة أكثر وميل أعمق -->
         <section class="featured-books-card">
             <h2 class="featured-books-title">كتب فكرية</h2>
             <div class="books-display-flex">
