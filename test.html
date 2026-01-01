@@ -120,12 +120,12 @@
             .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
         }
 
-        /* ==================== Featured Books Card (البطاقة المعدلة) ==================== */
+        /* ==================== Featured Books Card (البطاقة المصغرة) ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 100px 0 40px;
+            padding: 90px 0 30px; /* قلصنا أكثر */
             border-radius: 0 0 50px 50px;
-            margin-bottom: 30px;
+            margin-bottom: 20px; /* قلصنا المسافة */
             width: 100%;
         }
 
@@ -133,11 +133,11 @@
             background: #f0ebff;
             border: 2px solid var(--accent-color);
             border-radius: var(--radius-lg);
-            padding: 18px 15px;
-            max-width: 850px; /* زيادة العرض لتقليل الفراغات */
-            width: 95%; /* زيادة النسبة لملء المساحة */
-            margin: 0 auto 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            padding: 15px 12px; /* قلصنا الحشوة الداخلية */
+            max-width: 700px; /* جعلناها أصغر */
+            width: 85%; /* قلصنا النسبة */
+            margin: 0 auto 20px; /* قلصنا الهامش الأسفل */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2); /* ظل أخف */
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -145,16 +145,16 @@
 
         .featured-books-title {
             color: var(--primary-dark);
-            font-size: 1.4rem;
+            font-size: 1.3rem; /* حجم أصغر للنص */
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* قلصنا المسافة */
         }
 
         .books-display-flex {
             display: flex;
-            justify-content: space-around; /* توزيع متساوٍ */
+            justify-content: center; /* توسيط العناصر */
             align-items: center;
-            gap: 15px; /* تقليل المسافة بين الكتب */
+            gap: 12px; /* قلصنا المسافة بين الكتب */
             flex-wrap: wrap;
         }
 
@@ -164,35 +164,31 @@
             position: relative;
             overflow: hidden;
             border-radius: 12px;
-            flex: 1;
-            min-width: 130px; /* تحديد حد أدنى للعرض */
-            max-width: 140px; /* تحديد حد أقصى للعرض */
-            text-align: center;
+            flex: 0 0 auto; /* عدم التمدد */
         }
 
         .book-tilt-cover {
-            width: 125px;
+            width: 125px; /* الحفاظ على حجم الصور */
             border-radius: 12px;
-            box-shadow: 8px 8px 20px rgba(0,0,0,0.25);
-            /* تعديل تأثير الإمالة ليكون متوازنًا */
-            transform: rotateY(-10deg) rotateX(3deg) rotateZ(-1deg);
+            box-shadow: 6px 6px 15px rgba(0,0,0,0.2); /* ظل أخف */
+            /* تعديل تأثير الإمالة لتقليل الميل الخارجي */
+            transform: rotateY(-5deg) rotateX(2deg) rotateZ(-0.5deg);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: block;
-            margin: 0 auto; /* توسيط الصورة */
         }
 
-        /* تأثير الإمالة المتوازن للكتب الأربعة */
+        /* تأثير الإمالة المتوازن للكتب الأربعة - تقليل الميل */
         .book-item-link:nth-child(1) .book-tilt-cover {
-            transform: rotateY(-8deg) rotateX(2deg) rotateZ(-1deg);
-        }
-        .book-item-link:nth-child(2) .book-tilt-cover {
             transform: rotateY(-4deg) rotateX(1deg) rotateZ(-0.5deg);
         }
+        .book-item-link:nth-child(2) .book-tilt-cover {
+            transform: rotateY(-2deg) rotateX(0.5deg) rotateZ(-0.25deg);
+        }
         .book-item-link:nth-child(3) .book-tilt-cover {
-            transform: rotateY(4deg) rotateX(1deg) rotateZ(0.5deg);
+            transform: rotateY(2deg) rotateX(0.5deg) rotateZ(0.25deg);
         }
         .book-item-link:nth-child(4) .book-tilt-cover {
-            transform: rotateY(8deg) rotateX(2deg) rotateZ(1deg);
+            transform: rotateY(4deg) rotateX(1deg) rotateZ(0.5deg);
         }
 
         /* تأثير اللمعان المتحرك فوق الكتب */
@@ -203,7 +199,7 @@
             left: -100%;
             width: 50%;
             height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
             transform: rotate(30deg);
             animation: shimmer-effect 4s infinite;
         }
@@ -215,9 +211,9 @@
         }
 
         .book-item-link:hover .book-tilt-cover {
-            transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.08);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-            border-radius: 16px;
+            transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.06); /* تكبير أقل */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            border-radius: 14px;
         }
 
         /* ==================== Hero & Profile ==================== */
@@ -297,7 +293,7 @@
             background: var(--primary-color); border-radius: 2px;
         }
 
-        .quick-actions { display: flex; justify-content: center; gap: 15px; margin-top: -20px; margin-bottom: 50px; position: relative; z-index: 100; flex-wrap: wrap; }
+        .quick-actions { display: flex; justify-content: center; gap: 15px; margin-top: -15px; margin-bottom: 50px; position: relative; z-index: 100; flex-wrap: wrap; }
         .youtube-btn { background: var(--surface-color); color: #ff0000; padding: 12px 25px; border-radius: 50px; font-weight: 700; box-shadow: var(--shadow-md); border: 2px solid white; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
         .youtube-btn:hover { transform: translateY(-5px); background: #ff0000; color: white; }
 
@@ -357,21 +353,22 @@
         .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
 
         @media (max-width: 768px) {
-            .unified-header { padding: 90px 0 35px; border-radius: 0 0 35px 35px; }
+            .unified-header { 
+                padding: 80px 0 25px; 
+                border-radius: 0 0 35px 35px; 
+            }
             .featured-books-card { 
-                padding: 15px 10px; 
-                margin-bottom: 20px; 
-                max-width: 95%; 
-                width: 95%;
+                padding: 12px 10px; 
+                margin-bottom: 15px; 
+                max-width: 90%; 
+                width: 90%;
             }
-            .book-tilt-cover { width: 100px; }
+            .book-tilt-cover { 
+                width: 100px; /* تصغير قليل في الجوال */
+            }
             .books-display-flex { 
-                gap: 10px; 
+                gap: 8px; 
                 justify-content: center;
-            }
-            .book-item-link {
-                min-width: 100px;
-                max-width: 105px;
             }
             .hero-text h1 { font-size: 1.7rem; }
             .book-tabs { grid-template-columns: 1fr; }
@@ -405,7 +402,7 @@
     </nav>
 
     <div class="unified-header">
-        <!-- قسم الكتب الفكرية المعدل -->
+        <!-- قسم الكتب الفكرية المصغر -->
         <section class="featured-books-card">
             <h2 class="featured-books-title">كتب فكرية</h2>
             <div class="books-display-flex">
