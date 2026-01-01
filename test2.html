@@ -120,7 +120,7 @@
             .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
         }
 
-        /* ==================== Featured Books Card (المعدل والموحد) ==================== */
+        /* ==================== Featured Books Card (تعديل الاستدارة والإمالة) ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             padding: 100px 0 40px;
@@ -133,8 +133,8 @@
             background: #f0ebff;
             border: 2px solid var(--accent-color);
             border-radius: var(--radius-lg);
-            padding: 15px 5px; /* تقليل الحشوة الداخلية لتقليل الفراغات */
-            max-width: 620px; /* تصغير عرض البطاقة لتقليل الفراغات الجانبية */
+            padding: 20px 5px; 
+            max-width: 630px; 
             width: 95%;
             margin: 0 auto 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
@@ -147,53 +147,53 @@
             color: var(--primary-dark);
             font-size: 1.4rem;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .books-display-flex {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px; /* تقريب المسافات بين الكتب */
+            gap: 12px; 
             flex-wrap: wrap;
         }
 
         .book-item-link {
             display: block;
-            perspective: 1200px; /* تعميق تأثير 3D */
+            perspective: 1500px; /* زيادة العمق لتعزيز الاستدارة والميل */
             position: relative;
             z-index: 1;
         }
 
         .book-tilt-cover {
-            width: 130px;  /* توحيد العرض لجميع الصور */
-            height: 190px; /* توحيد الطول لجميع الصور */
-            object-fit: cover; /* لضمان عدم تمدد الصور المختلفة في المقاس */
-            border-radius: 12px; /* جعل الكتب مستديرة الحواف */
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+            width: 130px;  
+            height: 195px; 
+            object-fit: cover; 
+            border-radius: 20px; /* زيادة استدارة الحواف كما طلبت */
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.35);
             display: block;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); /* حركة انسيابية جداً */
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); 
             
-            /* تأثير الإمالة الافتراضي ليعطي شكل المكتبة */
-            transform: rotateY(-15deg) rotateX(2deg);
+            /* زيادة زاوية الإمالة (rotateY) لجعلها تبدو مستديرة في الفضاء 3D */
+            transform: rotateY(-25deg) rotateX(4deg) rotateZ(-1deg);
         }
 
-        /* التمرير فوق الكتاب: جعل الواجهة كاملة ومستوية */
+        /* عند التمرير: عودة الكتاب لوضعه الطبيعي (الواجهة كاملة) */
         .book-item-link:hover .book-tilt-cover {
-            transform: rotateY(0deg) rotateX(0deg) scale(1.08); /* يختفي الميل ويكبر الكتاب */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.1); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-radius: 12px; /* تقليل الاستدارة قليلاً عند التكبير لتبدو كالواجهة الحقيقية */
             z-index: 10;
         }
 
-        /* لمسة لمعان متحركة عند مرور الماوس */
         .book-item-link::after {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
-            border-radius: 12px;
+            background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+            border-radius: 20px;
             opacity: 0;
-            transition: 0.5s;
+            transition: 0.6s;
             pointer-events: none;
         }
         .book-item-link:hover::after {
@@ -343,7 +343,7 @@
                 padding: 15px 5px; 
                 max-width: 95%; 
             }
-            .book-tilt-cover { width: 100px; height: 150px; }
+            .book-tilt-cover { width: 105px; height: 155px; border-radius: 15px; }
             .books-display-flex { gap: 8px; }
             .hero-text h1 { font-size: 1.7rem; }
             .book-tabs { grid-template-columns: 1fr; }
@@ -377,7 +377,7 @@
     </nav>
 
     <div class="unified-header">
-        <!-- قسم الكتب الفكرية المعدل: توحيد المقاسات وتقليل الفراغات -->
+        <!-- قسم الكتب الفكرية المعدل: استدارة أكثر وميل أعمق -->
         <section class="featured-books-card">
             <h2 class="featured-books-title">كتب فكرية</h2>
             <div class="books-display-flex">
@@ -428,7 +428,7 @@
         <div class="section-title"><h2>استكشف المحتوى</h2></div>
         <div class="cards-grid">
             <div class="feature-card" onclick="location.href='books.html'"><div class="card-icon-wrapper"><img src="icons/books.png" alt="B"></div><h3>الكتب</h3><p>مؤلفات وروايات فكرية نقدية.</p></div>
-            <div class="feature-card" onclick="location.href='articles.html'"><div class="card-icon-wrapper"><img src="icons/articles.png" alt="A"></div><h3>المقالات</h3><p>طروحات فكرية معاصر.</p></div>
+            <div class="feature-card" onclick="location.href='articles.html'"><div class="card-icon-wrapper"><img src="icons/articles.png" alt="A"></div><h3>المقالات</h3><p>طروحات فكرية معاصرة.</p></div>
             <div class="feature-card" onclick="location.href='videos.html'"><div class="card-icon-wrapper"><img src="icons/videos.png" alt="V"></div><h3>الفيديوهات</h3><p>شرح المنهج والمناقشات.</p></div>
             <div class="feature-card" onclick="location.href='manhaj.html'"><div class="card-icon-wrapper"><img src="icons/manhaj.png" alt="M"></div><h3>المنهج</h3><p>قواعد تدبر القرآن الكريم.</p></div>
             <div class="feature-card" onclick="location.href='khawatir.html'"><div class="card-icon-wrapper"><img src="icons/khawatir.png" alt="K"></div><h3>خواطر</h3><p>تأملات فكرية وإضاءات.</p></div>
