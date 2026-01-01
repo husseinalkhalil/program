@@ -120,7 +120,7 @@
             .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
         }
 
-        /* ==================== Featured Books Card (البطاقة المعدلة) ==================== */
+        /* ==================== Featured Books Card (تم التعديل هنا) ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             padding: 100px 0 40px;
@@ -133,9 +133,9 @@
             background: #f0ebff;
             border: 2px solid var(--accent-color);
             border-radius: var(--radius-lg);
-            padding: 18px 15px;
-            max-width: 850px; /* زيادة العرض لتقليل الفراغات */
-            width: 95%; /* زيادة النسبة لملء المساحة */
+            padding: 15px 10px;
+            max-width: 680px; /* تم تصغير العرض الأقصى للبطاقة */
+            width: 92%; /* جعلها متناسقة مع التصغير */
             margin: 0 auto 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
             text-align: center;
@@ -145,16 +145,16 @@
 
         .featured-books-title {
             color: var(--primary-dark);
-            font-size: 1.4rem;
+            font-size: 1.3rem; /* تصغير طفيف للعنوان ليتناسب مع الحجم الجديد */
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .books-display-flex {
             display: flex;
-            justify-content: space-around; /* توزيع متساوٍ */
+            justify-content: center; /* توسيط الكتب لتقليل الفراغات */
             align-items: center;
-            gap: 15px; /* تقليل المسافة بين الكتب */
+            gap: 12px; /* تقليل المسافة البينية لجعل البطاقة أصغر */
             flex-wrap: wrap;
         }
 
@@ -164,38 +164,27 @@
             position: relative;
             overflow: hidden;
             border-radius: 12px;
-            flex: 1;
-            min-width: 130px; /* تحديد حد أدنى للعرض */
-            max-width: 140px; /* تحديد حد أقصى للعرض */
+            flex: 0 0 auto; /* منع التمدد للحفاظ على الحجم */
+            width: 135px; /* عرض الحاوية يتناسب مع صورة الكتاب */
             text-align: center;
         }
 
         .book-tilt-cover {
-            width: 125px;
+            width: 125px; /* تم الإبقاء على حجم الصور كما هي */
             border-radius: 12px;
             box-shadow: 8px 8px 20px rgba(0,0,0,0.25);
-            /* تعديل تأثير الإمالة ليكون متوازنًا */
             transform: rotateY(-10deg) rotateX(3deg) rotateZ(-1deg);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: block;
-            margin: 0 auto; /* توسيط الصورة */
+            margin: 0 auto; 
         }
 
         /* تأثير الإمالة المتوازن للكتب الأربعة */
-        .book-item-link:nth-child(1) .book-tilt-cover {
-            transform: rotateY(-8deg) rotateX(2deg) rotateZ(-1deg);
-        }
-        .book-item-link:nth-child(2) .book-tilt-cover {
-            transform: rotateY(-4deg) rotateX(1deg) rotateZ(-0.5deg);
-        }
-        .book-item-link:nth-child(3) .book-tilt-cover {
-            transform: rotateY(4deg) rotateX(1deg) rotateZ(0.5deg);
-        }
-        .book-item-link:nth-child(4) .book-tilt-cover {
-            transform: rotateY(8deg) rotateX(2deg) rotateZ(1deg);
-        }
+        .book-item-link:nth-child(1) .book-tilt-cover { transform: rotateY(-8deg) rotateX(2deg) rotateZ(-1deg); }
+        .book-item-link:nth-child(2) .book-tilt-cover { transform: rotateY(-4deg) rotateX(1deg) rotateZ(-0.5deg); }
+        .book-item-link:nth-child(3) .book-tilt-cover { transform: rotateY(4deg) rotateX(1deg) rotateZ(0.5deg); }
+        .book-item-link:nth-child(4) .book-tilt-cover { transform: rotateY(8deg) rotateX(2deg) rotateZ(1deg); }
 
-        /* تأثير اللمعان المتحرك فوق الكتب */
         .book-item-link::after {
             content: "";
             position: absolute;
@@ -215,9 +204,8 @@
         }
 
         .book-item-link:hover .book-tilt-cover {
-            transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.08);
+            transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.05);
             box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-            border-radius: 16px;
         }
 
         /* ==================== Hero & Profile ==================== */
@@ -267,7 +255,7 @@
         .search-count { padding: 10px 20px; font-size: 0.85rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
         mark { background-color: #ffd700; color: #000; padding: 0 2px; border-radius: 2px; }
 
-        /* ==================== Updates Section (وميض باج التحديثات) ==================== */
+        /* ==================== Updates Section ==================== */
         .updates-section { margin-bottom: 60px; text-align: right; }
         .update-item { 
             display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid rgba(0,0,0,0.05); 
@@ -359,20 +347,12 @@
         @media (max-width: 768px) {
             .unified-header { padding: 90px 0 35px; border-radius: 0 0 35px 35px; }
             .featured-books-card { 
-                padding: 15px 10px; 
-                margin-bottom: 20px; 
+                padding: 15px 5px; 
                 max-width: 95%; 
-                width: 95%;
             }
-            .book-tilt-cover { width: 100px; }
-            .books-display-flex { 
-                gap: 10px; 
-                justify-content: center;
-            }
-            .book-item-link {
-                min-width: 100px;
-                max-width: 105px;
-            }
+            .book-tilt-cover { width: 100px; } /* تصغير الصور فقط في الجوال للحفاظ على الاستجابة */
+            .books-display-flex { gap: 8px; }
+            .book-item-link { width: 105px; }
             .hero-text h1 { font-size: 1.7rem; }
             .book-tabs { grid-template-columns: 1fr; }
         }
@@ -405,7 +385,7 @@
     </nav>
 
     <div class="unified-header">
-        <!-- قسم الكتب الفكرية المعدل -->
+        <!-- قسم الكتب الفكرية المعدل (تصغير البطاقة مع ثبات حجم الصور) -->
         <section class="featured-books-card">
             <h2 class="featured-books-title">كتب فكرية</h2>
             <div class="books-display-flex">
