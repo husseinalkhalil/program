@@ -120,7 +120,7 @@
             .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
         }
 
-        /* ==================== Featured Books Card (تم التعديل هنا) ==================== */
+        /* ==================== Featured Books Card (المعدل والموحد) ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             padding: 100px 0 40px;
@@ -133,9 +133,9 @@
             background: #f0ebff;
             border: 2px solid var(--accent-color);
             border-radius: var(--radius-lg);
-            padding: 15px 10px;
-            max-width: 680px; /* تم تصغير العرض الأقصى للبطاقة */
-            width: 92%; /* جعلها متناسقة مع التصغير */
+            padding: 15px 5px; /* تقليل الحشوة الداخلية لتقليل الفراغات */
+            max-width: 620px; /* تصغير عرض البطاقة لتقليل الفراغات الجانبية */
+            width: 95%;
             margin: 0 auto 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.25);
             text-align: center;
@@ -145,67 +145,60 @@
 
         .featured-books-title {
             color: var(--primary-dark);
-            font-size: 1.3rem; /* تصغير طفيف للعنوان ليتناسب مع الحجم الجديد */
+            font-size: 1.4rem;
             font-weight: 800;
             margin-bottom: 15px;
         }
 
         .books-display-flex {
             display: flex;
-            justify-content: center; /* توسيط الكتب لتقليل الفراغات */
+            justify-content: center;
             align-items: center;
-            gap: 12px; /* تقليل المسافة البينية لجعل البطاقة أصغر */
+            gap: 10px; /* تقريب المسافات بين الكتب */
             flex-wrap: wrap;
         }
 
         .book-item-link {
             display: block;
-            perspective: 1000px;
+            perspective: 1200px; /* تعميق تأثير 3D */
             position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            flex: 0 0 auto; /* منع التمدد للحفاظ على الحجم */
-            width: 135px; /* عرض الحاوية يتناسب مع صورة الكتاب */
-            text-align: center;
+            z-index: 1;
         }
 
         .book-tilt-cover {
-            width: 125px; /* تم الإبقاء على حجم الصور كما هي */
-            border-radius: 12px;
-            box-shadow: 8px 8px 20px rgba(0,0,0,0.25);
-            transform: rotateY(-10deg) rotateX(3deg) rotateZ(-1deg);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 130px;  /* توحيد العرض لجميع الصور */
+            height: 190px; /* توحيد الطول لجميع الصور */
+            object-fit: cover; /* لضمان عدم تمدد الصور المختلفة في المقاس */
+            border-radius: 12px; /* جعل الكتب مستديرة الحواف */
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
             display: block;
-            margin: 0 auto; 
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); /* حركة انسيابية جداً */
+            
+            /* تأثير الإمالة الافتراضي ليعطي شكل المكتبة */
+            transform: rotateY(-15deg) rotateX(2deg);
         }
 
-        /* تأثير الإمالة المتوازن للكتب الأربعة */
-        .book-item-link:nth-child(1) .book-tilt-cover { transform: rotateY(-8deg) rotateX(2deg) rotateZ(-1deg); }
-        .book-item-link:nth-child(2) .book-tilt-cover { transform: rotateY(-4deg) rotateX(1deg) rotateZ(-0.5deg); }
-        .book-item-link:nth-child(3) .book-tilt-cover { transform: rotateY(4deg) rotateX(1deg) rotateZ(0.5deg); }
-        .book-item-link:nth-child(4) .book-tilt-cover { transform: rotateY(8deg) rotateX(2deg) rotateZ(1deg); }
+        /* التمرير فوق الكتاب: جعل الواجهة كاملة ومستوية */
+        .book-item-link:hover .book-tilt-cover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.08); /* يختفي الميل ويكبر الكتاب */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
 
+        /* لمسة لمعان متحركة عند مرور الماوس */
         .book-item-link::after {
             content: "";
             position: absolute;
-            top: -50%;
-            left: -100%;
-            width: 50%;
-            height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
-            transform: rotate(30deg);
-            animation: shimmer-effect 4s infinite;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+            border-radius: 12px;
+            opacity: 0;
+            transition: 0.5s;
+            pointer-events: none;
         }
-
-        @keyframes shimmer-effect {
-            0% { left: -100%; }
-            15% { left: 150%; }
-            100% { left: 150%; }
-        }
-
-        .book-item-link:hover .book-tilt-cover {
-            transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.05);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        .book-item-link:hover::after {
+            opacity: 1;
+            transform: translateX(100%);
         }
 
         /* ==================== Hero & Profile ==================== */
@@ -350,9 +343,8 @@
                 padding: 15px 5px; 
                 max-width: 95%; 
             }
-            .book-tilt-cover { width: 100px; } /* تصغير الصور فقط في الجوال للحفاظ على الاستجابة */
+            .book-tilt-cover { width: 100px; height: 150px; }
             .books-display-flex { gap: 8px; }
-            .book-item-link { width: 105px; }
             .hero-text h1 { font-size: 1.7rem; }
             .book-tabs { grid-template-columns: 1fr; }
         }
@@ -385,7 +377,7 @@
     </nav>
 
     <div class="unified-header">
-        <!-- قسم الكتب الفكرية المعدل (تصغير البطاقة مع ثبات حجم الصور) -->
+        <!-- قسم الكتب الفكرية المعدل: توحيد المقاسات وتقليل الفراغات -->
         <section class="featured-books-card">
             <h2 class="featured-books-title">كتب فكرية</h2>
             <div class="books-display-flex">
@@ -436,7 +428,7 @@
         <div class="section-title"><h2>استكشف المحتوى</h2></div>
         <div class="cards-grid">
             <div class="feature-card" onclick="location.href='books.html'"><div class="card-icon-wrapper"><img src="icons/books.png" alt="B"></div><h3>الكتب</h3><p>مؤلفات وروايات فكرية نقدية.</p></div>
-            <div class="feature-card" onclick="location.href='articles.html'"><div class="card-icon-wrapper"><img src="icons/articles.png" alt="A"></div><h3>المقالات</h3><p>طروحات فكرية معاصرة.</p></div>
+            <div class="feature-card" onclick="location.href='articles.html'"><div class="card-icon-wrapper"><img src="icons/articles.png" alt="A"></div><h3>المقالات</h3><p>طروحات فكرية معاصر.</p></div>
             <div class="feature-card" onclick="location.href='videos.html'"><div class="card-icon-wrapper"><img src="icons/videos.png" alt="V"></div><h3>الفيديوهات</h3><p>شرح المنهج والمناقشات.</p></div>
             <div class="feature-card" onclick="location.href='manhaj.html'"><div class="card-icon-wrapper"><img src="icons/manhaj.png" alt="M"></div><h3>المنهج</h3><p>قواعد تدبر القرآن الكريم.</p></div>
             <div class="feature-card" onclick="location.href='khawatir.html'"><div class="card-icon-wrapper"><img src="icons/khawatir.png" alt="K"></div><h3>خواطر</h3><p>تأملات فكرية وإضاءات.</p></div>
