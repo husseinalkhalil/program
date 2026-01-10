@@ -130,7 +130,7 @@
             max-width: 100vw;
         }
 
-        /* شريط التنقل العلوي - محسّن للجوال */
+        /* شريط التنقل العلوي */
         .header {
             background: var(--bg-white);
             padding: 15px 20px;
@@ -211,7 +211,7 @@
             transform: scale(0.98);
         }
 
-        /* القائمة الجانبية - مصممة للجوال */
+        /* القائمة الجانبية */
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -403,7 +403,7 @@
             background: #2c3e50;
         }
 
-        /* شريط التحكم السفلي - مصمم للجوال */
+        /* شريط التحكم السفلي - تعديل خاص للجوال لضمان عدم القص */
         .controls-bar {
             background: rgba(0, 0, 0, 0.9);
             padding: 15px 20px;
@@ -414,6 +414,8 @@
             bottom: 0;
             z-index: 99;
             backdrop-filter: blur(10px);
+            /* إضافة مساحة للأجهزة الحديثة (safe area) */
+            padding-bottom: calc(15px + env(safe-area-inset-bottom, 0px));
         }
 
         .nav-controls {
@@ -446,11 +448,6 @@
         .control-btn:disabled {
             opacity: 0.4;
             cursor: not-allowed;
-        }
-
-        .control-btn:disabled:active {
-            transform: none;
-            background: rgba(255, 255, 255, 0.15);
         }
 
         .page-indicator {
@@ -506,130 +503,6 @@
             display: block;
             user-select: none;
             -webkit-user-select: none;
-            -webkit-user-drag: none;
-        }
-
-        .page-image.loading {
-            opacity: 0.7;
-            filter: blur(5px);
-        }
-
-        .page-image.high-quality {
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-        }
-
-        /* رسائل حالة الصفحة */
-        .page-status {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            padding: 20px;
-            max-width: 300px;
-        }
-
-        .status-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            opacity: 0.8;
-        }
-
-        .status-text {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
-        .status-subtext {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            line-height: 1.5;
-        }
-
-        /* شاشة الخطأ */
-        .error-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--bg-white);
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            padding: 20px;
-        }
-
-        .error-content {
-            text-align: center;
-            max-width: 400px;
-        }
-
-        .error-icon {
-            font-size: 3.5rem;
-            color: #e74c3c;
-            margin-bottom: 20px;
-        }
-
-        .error-title {
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .error-message {
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 30px;
-            font-size: 0.95rem;
-        }
-
-        .error-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .error-btn {
-            padding: 15px;
-            border-radius: 10px;
-            border: none;
-            font-family: 'Tajawal', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: var(--transition);
-            width: 100%;
-            min-height: 55px;
-        }
-
-        .error-btn.primary {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .error-btn.primary:active {
-            background: var(--primary-dark);
-        }
-
-        .error-btn.secondary {
-            background: var(--bg-light);
-            color: var(--text-dark);
-            border: 2px solid #e9ecef;
-        }
-
-        .error-btn.secondary:active {
-            background: #e9ecef;
         }
 
         /* شريط الإجراءات السفلي */
@@ -640,18 +513,6 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-        }
-
-        .action-text {
-            text-align: center;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            line-height: 1.5;
-        }
-
-        .action-highlight {
-            color: var(--primary-color);
-            font-weight: 800;
         }
 
         .action-button {
@@ -671,1015 +532,237 @@
             box-shadow: 0 4px 15px rgba(94, 44, 165, 0.2);
         }
 
-        .action-button:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 8px rgba(94, 44, 165, 0.2);
-        }
-
-        /* إشعارات الجوال */
-        .mobile-notification {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.85);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            z-index: 1000;
-            display: none;
-            animation: slideUp 0.3s ease;
-            backdrop-filter: blur(10px);
-            max-width: 90vw;
-            text-align: center;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translate(-50%, 100%);
-                opacity: 0;
-            }
-            to {
-                transform: translate(-50%, 0);
-                opacity: 1;
-            }
-        }
-
-        /* تحسينات للشاشات الصغيرة جداً */
-        @media (max-width: 360px) {
-            .header {
-                padding: 12px 15px;
-                height: 60px;
-            }
-            
-            .logo {
-                height: 30px;
-            }
-            
-            .control-btn {
-                width: 45px;
-                height: 45px;
-            }
-            
-            .page-indicator {
-                min-width: 80px;
-                font-size: 1rem;
-            }
-            
-            .action-bar {
-                padding: 15px;
-            }
-        }
-
-        /* تحسينات للشاشات المتوسطة والكبيرة */
-        @media (min-width: 768px) {
-            .header {
-                padding: 20px 30px;
-                height: 80px;
-            }
-            
-            .logo {
-                height: 40px;
-            }
-            
-            .header-title {
-                font-size: 1.3rem;
-            }
-            
-            .control-btn {
-                width: 55px;
-                height: 55px;
-                font-size: 1.3rem;
-            }
-            
-            .page-indicator {
-                font-size: 1.2rem;
-            }
-            
-            .image-container {
-                padding: 30px;
-            }
-            
-            .action-bar {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                padding: 25px 30px;
-            }
-            
-            .action-text {
-                text-align: right;
-                font-size: 1rem;
-                flex: 1;
-            }
-            
-            .action-button {
-                flex: 0 0 auto;
-                padding: 16px 35px;
-            }
-        }
-
-        /* تحسينات للوضع الأفقي في الجوال */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .header {
-                height: 60px;
-                padding: 10px 20px;
-            }
-            
+        /* تحسينات الجوال لمعالجة مشكلة القص */
+        @media (max-width: 480px) {
             .controls-bar {
-                padding: 10px 15px;
+                padding: 12px 10px; /* تقليل الحواف الجانبية */
+                padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+                gap: 5px;
             }
             
             .control-btn {
-                width: 40px;
-                height: 40px;
+                width: 42px; /* تصغير حجم الزر قليلاً ليناسب العرض */
+                height: 42px;
                 font-size: 1rem;
             }
             
-            .image-container {
-                padding: 15px;
+            .nav-controls {
+                gap: 8px; /* تقليل المسافات بين أزرار التنقل */
             }
             
-            .page-image {
-                margin-bottom: 15px;
+            .zoom-controls {
+                gap: 5px; /* تقليل المسافات بين أزرار التكبير */
+            }
+            
+            .page-indicator {
+                min-width: 70px;
+                font-size: 0.95rem;
+            }
+            
+            .zoom-display {
+                min-width: 55px;
+                padding: 4px 8px;
+                font-size: 0.85rem;
             }
         }
 
-        /* تحسينات للوضع الداكن */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-light: #1a1a1a;
-                --bg-white: #2d2d2d;
-                --text-dark: #ffffff;
-                --text-light: #b0b0b0;
-            }
-            
-            .image-viewer {
-                background: #121212;
-            }
-        }
-
-        /* إصلاحات خاصة لمتصفحات iOS */
-        @supports (-webkit-touch-callout: none) {
-            .image-viewer {
-                -webkit-overflow-scrolling: touch;
-            }
-            
+        /* تحسينات إضافية للشاشات الصغيرة جداً */
+        @media (max-width: 360px) {
             .control-btn {
-                cursor: pointer;
+                width: 38px;
+                height: 38px;
+            }
+            .page-indicator {
+                min-width: 60px;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- شاشة التحميل -->
 <div id="loading-screen">
     <div class="loader"></div>
     <div class="loading-text" id="loading-text">جاري تحميل الكتاب...</div>
-    <div class="loading-subtext">يتم تحويل الصفحات إلى صور عالية الجودة للقراءة السهلة</div>
+    <div class="loading-subtext">يتم تحويل الصفحات إلى صور عالية الجودة</div>
     <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
     </div>
 </div>
 
-<!-- شاشة الخطأ -->
-<div class="error-screen" id="error-screen">
-    <div class="error-content">
-        <div class="error-icon">
-            <i class="fas fa-exclamation-triangle"></i>
-        </div>
-        <h2 class="error-title" id="error-title">تعذر تحميل الكتاب</h2>
-        <p class="error-message" id="error-message"></p>
-        <div class="error-actions">
-            <button class="error-btn primary" onclick="retryLoading()">
-                <i class="fas fa-redo"></i> إعادة المحاولة
-            </button>
-            <button class="error-btn secondary" onclick="downloadPDF()">
-                <i class="fas fa-download"></i> تحميل الكتاب
-            </button>
-        </div>
-    </div>
+<div class="error-screen" id="error-screen" style="display: none; position: fixed; inset: 0; background: white; z-index: 10000; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center;">
+    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #e74c3c; margin-bottom: 20px;"></i>
+    <h2 id="error-title">عذراً، حدث خطأ</h2>
+    <p id="error-message" style="margin: 15px 0 30px;"></p>
+    <button onclick="location.reload()" style="background: var(--primary-color); color: white; border: none; padding: 12px 25px; border-radius: 8px; font-family: inherit;">إعادة المحاولة</button>
 </div>
 
-<!-- الهيكل الرئيسي -->
 <div class="app-container" id="app-container" style="display: none;">
-    
-    <!-- القائمة الجانبية -->
     <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <button class="sidebar-close" onclick="closeSidebar()">
                 <i class="fas fa-times"></i>
             </button>
-            <h3><i class="fas fa-book"></i> إعدادات المعاينة</h3>
+            <h3><i class="fas fa-book"></i> الإعدادات</h3>
         </div>
         <div class="sidebar-content">
-            
-            <!-- إعدادات سهولة القراءة -->
             <div class="accessibility-settings">
-                <div class="accessibility-title">
-                    <i class="fas fa-universal-access"></i> سهولة القراءة
-                </div>
+                <div class="accessibility-title"><i class="fas fa-universal-access"></i> سهولة القراءة</div>
                 <div class="accessibility-buttons">
-                    <button class="accessibility-btn" onclick="toggleHighContrast()" id="contrast-btn">
-                        <i class="fas fa-adjust"></i>
-                        <span>تباين عالي</span>
-                    </button>
-                    <button class="accessibility-btn" onclick="toggleLargeText()" id="text-btn">
-                        <i class="fas fa-text-height"></i>
-                        <span>نص كبير</span>
-                    </button>
-                    <button class="accessibility-btn" onclick="toggleBrightness()" id="brightness-btn">
-                        <i class="fas fa-sun"></i>
-                        <span>سطوع عالي</span>
-                    </button>
+                    <button class="accessibility-btn" onclick="toggleHighContrast()" id="contrast-btn"><i class="fas fa-adjust"></i><span>تباين عالي</span></button>
+                    <button class="accessibility-btn" onclick="toggleLargeText()" id="text-btn"><i class="fas fa-text-height"></i><span>نص كبير</span></button>
+                    <button class="accessibility-btn" onclick="toggleBrightness()" id="brightness-btn"><i class="fas fa-sun"></i><span>سطوع عالي</span></button>
                 </div>
             </div>
-            
-            <!-- قائمة الصفحات -->
             <div class="pages-section">
-                <div class="section-title">الصفحات</div>
-                <div class="page-grid" id="page-grid">
-                    <!-- سيتم ملؤها تلقائياً -->
-                </div>
+                <div class="section-title">فهرس الصفحات</div>
+                <div class="page-grid" id="page-grid"></div>
             </div>
-            
-            <!-- معلومات الكتاب -->
-            <div class="pages-section">
-                <div class="section-title">معلومات الكتاب</div>
-                <div style="background: var(--bg-light); padding: 15px; border-radius: var(--border-radius);">
-                    <p style="font-size: 0.9rem; color: var(--text-light); line-height: 1.6;">
-                        <i class="fas fa-info-circle" style="color: var(--primary-color); margin-left: 8px;"></i>
-                        هذه معاينة محدودة للكتاب. يمكنك تصفح الصفحات المتاحة واستخدام أدوات القراءة المساعدة.
-                    </p>
-                </div>
-            </div>
-            
         </div>
     </div>
     
-    <!-- الهيدر العلوي -->
     <header class="header">
         <div class="header-left">
-            <button class="menu-toggle" onclick="toggleSidebar()" aria-label="فتح القائمة">
-                <i class="fas fa-bars"></i>
-            </button>
-            <img src="images/logo.png" alt="شعار حسين الخليل" class="logo">
+            <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            <img src="images/logo.png" alt="Logo" class="logo">
             <div class="header-title">معاينة الكتاب</div>
         </div>
-        <a href="books.html" class="close-btn">
-            <i class="fas fa-times"></i> إغلاق
-        </a>
+        <a href="books.html" class="close-btn"><i class="fas fa-times"></i> إغلاق</a>
     </header>
     
-    <!-- منطقة العرض الرئيسية -->
     <main class="viewer-area">
-        
-        <!-- منطقة عرض الصور -->
         <div class="image-viewer" id="image-viewer">
-            <div class="image-container" id="image-container">
-                <!-- ستظهر الصور هنا -->
-            </div>
+            <div class="image-container" id="image-container"></div>
         </div>
         
-        <!-- شريط التحكم السفلي -->
         <div class="controls-bar">
-            <div class="nav-controls">
-                <button class="control-btn" id="prev-btn" onclick="goToPrevPage()" aria-label="الصفحة السابقة">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                <div class="page-indicator" id="page-indicator">1 / 0</div>
-                <button class="control-btn" id="next-btn" onclick="goToNextPage()" aria-label="الصفحة التالية">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
+            <div class="zoom-controls">
+                <!-- تم وضع زر التكبير هنا لضمان ظهوره بشكل بارز -->
+                <button class="control-btn" onclick="zoomIn()" aria-label="تكبير"><i class="fas fa-search-plus"></i></button>
+                <div class="zoom-display" id="zoom-display">100%</div>
+                <button class="control-btn" onclick="zoomOut()" aria-label="تصغير"><i class="fas fa-search-minus"></i></button>
             </div>
             
-            <div class="zoom-controls">
-                <button class="control-btn" onclick="zoomOut()" aria-label="تصغير">
-                    <i class="fas fa-search-minus"></i>
-                </button>
-                <div class="zoom-display" id="zoom-display">100%</div>
-                <button class="control-btn" onclick="zoomIn()" aria-label="تكبير">
-                    <i class="fas fa-search-plus"></i>
-                </button>
+            <div class="nav-controls">
+                <button class="control-btn" id="next-btn" onclick="goToNextPage()" aria-label="التالي"><i class="fas fa-chevron-right"></i></button>
+                <div class="page-indicator" id="page-indicator">1 / 0</div>
+                <button class="control-btn" id="prev-btn" onclick="goToPrevPage()" aria-label="السابق"><i class="fas fa-chevron-left"></i></button>
             </div>
         </div>
     </main>
     
-    <!-- شريط الإجراءات السفلي -->
     <div class="action-bar">
-        <div class="action-text">
-            <span class="action-highlight">هل استمتعت بالمعاينة؟</span> احصل على النسخة الكاملة للاستفادة الكاملة من المحتوى
-        </div>
-        <a href="رابط-الشراء" class="action-button">
-            <i class="fas fa-shopping-cart"></i> اشترِ الكتاب الكامل - 6.99$
-        </a>
+        <a href="#" class="action-button"><i class="fas fa-shopping-cart"></i> احصل على النسخة الكاملة</a>
     </div>
 </div>
 
-<!-- إشعار الجوال -->
-<div class="mobile-notification" id="mobile-notification"></div>
+<div class="mobile-notification" id="mobile-notification" style="position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 20px; z-index: 1000; display: none;"></div>
 
-<!-- مكتبة PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
 
 <script>
-    // ============ حالة التطبيق ============
     const AppState = {
         pdf: null,
         totalPages: 0,
         currentPage: 1,
         zoom: 1.0,
         images: {},
-        isLoading: false,
-        accessibility: {
-            highContrast: false,
-            largeText: false,
-            highBrightness: false
-        },
-        renderQuality: window.devicePixelRatio || 1
+        accessibility: { highContrast: false, largeText: false, highBrightness: false }
     };
 
-    // ============ عناصر DOM ============
     const DOM = {
-        // الشاشات
         loadingScreen: document.getElementById('loading-screen'),
-        errorScreen: document.getElementById('error-screen'),
         appContainer: document.getElementById('app-container'),
         sidebar: document.getElementById('sidebar'),
-        sidebarOverlay: document.getElementById('sidebar-overlay'),
-        
-        // عناصر التحكم
         pageGrid: document.getElementById('page-grid'),
         pageIndicator: document.getElementById('page-indicator'),
         zoomDisplay: document.getElementById('zoom-display'),
-        prevBtn: document.getElementById('prev-btn'),
-        nextBtn: document.getElementById('next-btn'),
         imageContainer: document.getElementById('image-container'),
         imageViewer: document.getElementById('image-viewer'),
-        
-        // عناصر التحميل
-        loadingText: document.getElementById('loading-text'),
-        progressBar: document.getElementById('progress-bar'),
-        
-        // عناصر الخطأ
-        errorTitle: document.getElementById('error-title'),
-        errorMessage: document.getElementById('error-message'),
-        
-        // إشعارات
-        mobileNotification: document.getElementById('mobile-notification'),
-        
-        // إعدادات سهولة القراءة
-        contrastBtn: document.getElementById('contrast-btn'),
-        textBtn: document.getElementById('text-btn'),
-        brightnessBtn: document.getElementById('brightness-btn')
+        progressBar: document.getElementById('progress-bar')
     };
 
-    // ============ دوال التحميل والعرض ============
     async function initializeApp() {
         try {
-            updateLoading('جاري تهيئة المعاينة...', 10);
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+            const loadingTask = pdfjsLib.getDocument('pdf/111.pdf');
             
-            // تعيين جودة العرض بناءً على جهاز المستخدم
-            AppState.renderQuality = Math.min(2, window.devicePixelRatio || 1);
-            
-            // تحميل ملف PDF
-            const pdfUrl = 'pdf/111.pdf';
-            
-            updateLoading('جاري تحميل الكتاب...', 30);
-            
-            // تحميل PDF باستخدام PDF.js
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 
-                'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-            
-            const loadingTask = pdfjsLib.getDocument({
-                url: pdfUrl,
-                cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/cmaps/',
-                cMapPacked: true,
-                disableFontFace: true
-            });
-            
+            loadingTask.onProgress = (p) => {
+                const percent = (p.loaded / p.total) * 100;
+                DOM.progressBar.style.width = percent + '%';
+            };
+
             AppState.pdf = await loadingTask.promise;
-            AppState.totalPages = Math.min(AppState.pdf.numPages, 50); // تحديد حد للمعاينة
+            AppState.totalPages = Math.min(AppState.pdf.numPages, 50);
             
-            updateLoading(`جاري تحضير ${AppState.totalPages} صفحة...`, 50);
-            
-            // إنشاء شبكة الصفحات
             createPageGrid();
-            
-            // تحميل الصفحة الأولى
             await loadPage(1);
             
-            // إخفاء شاشة التحميل
-            setTimeout(() => {
-                DOM.loadingScreen.style.opacity = '0';
-                setTimeout(() => {
-                    DOM.loadingScreen.style.display = 'none';
-                    DOM.appContainer.style.display = 'flex';
-                    
-                    // إضافة مستمعات الأحداث
-                    setupEventListeners();
-                    
-                    // تحديث واجهة المستخدم
-                    updateUI();
-                    
-                    showNotification('جاهز للقراءة! استخدم الأدوات لتحسين تجربتك');
-                    
-                    console.log('✅ التطبيق جاهز للاستخدام');
-                }, 300);
-            }, 500);
-            
-        } catch (error) {
-            console.error('❌ خطأ في التهيئة:', error);
-            showError('تعذر تحميل الكتاب', error.message);
+            DOM.loadingScreen.style.display = 'none';
+            DOM.appContainer.style.display = 'flex';
+        } catch (e) {
+            document.getElementById('error-screen').style.display = 'flex';
+            document.getElementById('error-message').textContent = e.message;
         }
     }
 
-    async function loadPage(pageNumber) {
-        try {
-            if (pageNumber < 1 || pageNumber > AppState.totalPages) return;
-            
-            // إظهار حالة التحميل
-            showPageLoading();
-            
-            // إذا كانت الصفحة محملة مسبقاً
-            if (AppState.images[pageNumber]) {
-                displayPage(pageNumber);
-                return;
-            }
-            
-            // تحميل الصفحة
-            const page = await AppState.pdf.getPage(pageNumber);
-            
-            // حساب الأبعاد مع مراعاة الجودة
-            const viewport = page.getViewport({ 
-                scale: AppState.zoom * AppState.renderQuality 
-            });
-            
-            // إنشاء Canvas
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d', { alpha: false });
-            
-            // ضبط جودة الرسم
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-            
-            // تحسين جودة الصورة للشاشات عالية الدقة
-            context.imageSmoothingEnabled = true;
-            context.imageSmoothingQuality = 'high';
-            
-            // إعدادات العرض
-            const renderContext = {
-                canvasContext: context,
-                viewport: viewport,
-                intent: 'display',
-                enableWebGL: false
-            };
-            
-            // عرض الصفحة على Canvas
-            await page.render(renderContext).promise;
-            
-            // تحويل إلى صورة عالية الجودة
-            const quality = AppState.renderQuality > 1 ? 0.95 : 0.85;
-            const imageData = canvas.toDataURL('image/jpeg', quality);
-            
-            // تخزين الصورة
-            AppState.images[pageNumber] = {
-                data: imageData,
-                width: viewport.width / AppState.renderQuality,
-                height: viewport.height / AppState.renderQuality
-            };
-            
-            // عرض الصفحة
-            displayPage(pageNumber);
-            
-            // تحميل الصفحات المجاورة مسبقاً
-            preloadAdjacentPages(pageNumber);
-            
-        } catch (error) {
-            console.error(`❌ خطأ في تحميل الصفحة ${pageNumber}:`, error);
-            showPageError(pageNumber, error.message);
-        }
-    }
-
-    function preloadAdjacentPages(currentPage) {
-        // تحميل الصفحات المجاورة مسبقاً
-        const pagesToPreload = [currentPage + 1, currentPage + 2];
-        
-        pagesToPreload.forEach(pageNum => {
-            if (pageNum <= AppState.totalPages && !AppState.images[pageNum]) {
-                setTimeout(() => {
-                    preloadPage(pageNum);
-                }, 500);
-            }
-        });
-    }
-
-    async function preloadPage(pageNumber) {
-        if (AppState.images[pageNumber] || pageNumber > AppState.totalPages) return;
-        
-        try {
-            const page = await AppState.pdf.getPage(pageNumber);
-            const viewport = page.getViewport({ 
-                scale: AppState.zoom * AppState.renderQuality 
-            });
-            
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d', { alpha: false });
-            
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-            
-            context.imageSmoothingEnabled = true;
-            context.imageSmoothingQuality = 'high';
-            
-            const renderContext = {
-                canvasContext: context,
-                viewport: viewport,
-                intent: 'display',
-                enableWebGL: false
-            };
-            
-            await page.render(renderContext).promise;
-            
-            const quality = AppState.renderQuality > 1 ? 0.95 : 0.85;
-            AppState.images[pageNumber] = {
-                data: canvas.toDataURL('image/jpeg', quality),
-                width: viewport.width / AppState.renderQuality,
-                height: viewport.height / AppState.renderQuality
-            };
-            
-        } catch (error) {
-            console.warn(`⚠️ تعذر تحميل الصفحة ${pageNumber} مسبقاً:`, error);
-        }
-    }
-
-    function displayPage(pageNumber) {
-        // تحديث الصفحة الحالية
-        AppState.currentPage = pageNumber;
-        
-        // مسح الحاوية الحالية
-        DOM.imageContainer.innerHTML = '';
-        
-        // الحصول على بيانات الصورة
-        const pageData = AppState.images[pageNumber];
-        
-        if (!pageData) {
-            // إذا لم تكن الصفحة محملة بعد
-            DOM.imageContainer.innerHTML = `
-                <div class="page-status">
-                    <div class="status-icon">
-                        <i class="fas fa-spinner fa-spin"></i>
-                    </div>
-                    <div class="status-text">جاري تحميل الصفحة...</div>
-                    <div class="status-subtext">يرجى الانتظار قليلاً</div>
-                </div>
-            `;
-            
-            // محاولة تحميل الصفحة
-            loadPage(pageNumber);
+    async function loadPage(num) {
+        if (AppState.images[num]) {
+            renderImage(num);
             return;
         }
-        
-        // إنشاء عنصر الصورة
-        const img = document.createElement('img');
-        img.className = 'page-image high-quality';
-        img.src = pageData.data;
-        img.alt = `صفحة ${pageNumber}`;
-        
-        // ضبط الأبعاد مع الحفاظ على التناسب
-        const maxWidth = window.innerWidth - 40;
-        const aspectRatio = pageData.width / pageData.height;
-        
-        if (pageData.width > maxWidth) {
-            img.style.width = `${maxWidth}px`;
-            img.style.height = `${maxWidth / aspectRatio}px`;
-        } else {
-            img.style.width = `${pageData.width}px`;
-            img.style.height = `${pageData.height}px`;
-        }
-        
-        // تطبيق إعدادات سهولة القراءة
-        applyAccessibilitySettings(img);
-        
-        // إضافة تأثير للصورة
-        img.style.opacity = '0';
-        img.style.transition = 'opacity 0.3s ease';
-        
-        img.onload = function() {
-            img.style.opacity = '1';
-            
-            // إضافة تأثيرات للتباين العالي
-            if (AppState.accessibility.highContrast) {
-                img.style.filter = 'contrast(1.3) brightness(1.1)';
-            }
-            
-            if (AppState.accessibility.highBrightness) {
-                img.style.filter = (img.style.filter || '') + ' brightness(1.3)';
-            }
-        };
-        
-        // إضافة الصورة إلى الحاوية
-        DOM.imageContainer.appendChild(img);
-        
-        // التمرير إلى الأعلى
+
+        const page = await AppState.pdf.getPage(num);
+        const viewport = page.getViewport({ scale: 2.0 * AppState.zoom });
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        await page.render({ canvasContext: ctx, viewport }).promise;
+        AppState.images[num] = canvas.toDataURL('image/jpeg', 0.8);
+        renderImage(num);
+    }
+
+    function renderImage(num) {
+        AppState.currentPage = num;
+        DOM.imageContainer.innerHTML = `<img src="${AppState.images[num]}" class="page-image" style="width: 100%; max-width: 800px;">`;
+        DOM.pageIndicator.textContent = `${num} / ${AppState.totalPages}`;
         DOM.imageViewer.scrollTop = 0;
-        
-        // تحديث واجهة المستخدم
-        updateUI();
-        
-        // تحديث الصفحة النشطة في الشبكة
-        updateActivePageInGrid();
+        updateActiveGrid();
     }
 
-    function applyAccessibilitySettings(img) {
-        if (AppState.accessibility.highContrast) {
-            img.classList.add('high-contrast');
-        }
-        
-        if (AppState.accessibility.highBrightness) {
-            img.style.filter = 'brightness(1.3)';
-        }
-    }
-
-    function showPageLoading() {
-        const img = document.querySelector('.page-image');
-        if (img) {
-            img.classList.add('loading');
-        }
-    }
-
-    function showPageError(pageNumber, message) {
-        DOM.imageContainer.innerHTML = `
-            <div class="page-status">
-                <div class="status-icon">
-                    <i class="fas fa-exclamation-circle"></i>
-                </div>
-                <div class="status-text">تعذر تحميل الصفحة ${pageNumber}</div>
-                <div class="status-subtext">${message || 'حدث خطأ غير متوقع'}</div>
-                <button class="error-btn secondary" onclick="retryLoadPage(${pageNumber})" style="margin-top: 20px; padding: 10px 20px;">
-                    <i class="fas fa-redo"></i> إعادة المحاولة
-                </button>
-            </div>
-        `;
-    }
-
-    // ============ واجهة المستخدم ============
     function createPageGrid() {
-        DOM.pageGrid.innerHTML = '';
-        
         for (let i = 1; i <= AppState.totalPages; i++) {
-            const button = document.createElement('button');
-            button.className = 'page-btn';
-            button.innerHTML = `
-                <div class="page-number">${i}</div>
-                <div class="page-label">صفحة</div>
-            `;
-            
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                goToPage(i);
-                closeSidebar();
-                showNotification(`تم الانتقال إلى الصفحة ${i}`);
-            });
-            
-            DOM.pageGrid.appendChild(button);
+            const btn = document.createElement('button');
+            btn.className = 'page-btn';
+            btn.innerHTML = `<div class="page-number">${i}</div>`;
+            btn.onclick = () => { goToPage(i); closeSidebar(); };
+            DOM.pageGrid.appendChild(btn);
         }
     }
 
-    function updateActivePageInGrid() {
-        const pageButtons = document.querySelectorAll('.page-btn');
-        pageButtons.forEach((btn, index) => {
-            if (index + 1 === AppState.currentPage) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
+    function updateActiveGrid() {
+        document.querySelectorAll('.page-btn').forEach((b, i) => {
+            b.classList.toggle('active', i + 1 === AppState.currentPage);
         });
     }
 
-    function updateUI() {
-        // تحديث مؤشر الصفحة
-        DOM.pageIndicator.textContent = `${AppState.currentPage} / ${AppState.totalPages}`;
-        
-        // تحديث قيمة التكبير
-        DOM.zoomDisplay.textContent = `${Math.round(AppState.zoom * 100)}%`;
-        
-        // تحديث حالة أزرار التنقل
-        DOM.prevBtn.disabled = AppState.currentPage <= 1;
-        DOM.nextBtn.disabled = AppState.currentPage >= AppState.totalPages;
-    }
+    function goToPage(n) { if (n >= 1 && n <= AppState.totalPages) loadPage(n); }
+    function goToNextPage() { goToPage(AppState.currentPage + 1); }
+    function goToPrevPage() { goToPage(AppState.currentPage - 1); }
+    
+    function zoomIn() { AppState.zoom += 0.2; AppState.images = {}; loadPage(AppState.currentPage); DOM.zoomDisplay.textContent = Math.round(AppState.zoom * 100) + '%'; }
+    function zoomOut() { if(AppState.zoom > 0.6) { AppState.zoom -= 0.2; AppState.images = {}; loadPage(AppState.currentPage); DOM.zoomDisplay.textContent = Math.round(AppState.zoom * 100) + '%'; } }
 
-    // ============ دوال التنقل ============
-    function goToPage(pageNumber) {
-        if (pageNumber < 1 || pageNumber > AppState.totalPages) return;
-        loadPage(pageNumber);
-    }
+    function toggleSidebar() { DOM.sidebar.classList.add('active'); document.getElementById('sidebar-overlay').style.display = 'block'; }
+    function closeSidebar() { DOM.sidebar.classList.remove('active'); document.getElementById('sidebar-overlay').style.display = 'none'; }
 
-    function goToPrevPage() {
-        if (AppState.currentPage > 1) {
-            goToPage(AppState.currentPage - 1);
-        }
-    }
+    function toggleHighContrast() { document.body.classList.toggle('high-contrast'); }
+    function toggleLargeText() { document.body.classList.toggle('large-text'); }
+    function toggleBrightness() { AppState.accessibility.highBrightness = !AppState.accessibility.highBrightness; DOM.imageViewer.style.filter = AppState.accessibility.highBrightness ? 'brightness(1.2)' : 'none'; }
 
-    function goToNextPage() {
-        if (AppState.currentPage < AppState.totalPages) {
-            goToPage(AppState.currentPage + 1);
-        }
-    }
-
-    // ============ دوال التكبير ============
-    function zoomIn() {
-        AppState.zoom = Math.min(3.0, AppState.zoom + 0.25);
-        
-        // مسح الصور المحملة لإعادة تحميلها بالحجم الجديد
-        AppState.images = {};
-        
-        // إعادة تحميل الصفحة الحالية
-        loadPage(AppState.currentPage);
-        
-        showNotification(`تم التكبير إلى ${Math.round(AppState.zoom * 100)}%`);
-    }
-
-    function zoomOut() {
-        AppState.zoom = Math.max(0.5, AppState.zoom - 0.25);
-        
-        // مسح الصور المحملة
-        AppState.images = {};
-        
-        // إعادة تحميل الصفحة الحالية
-        loadPage(AppState.currentPage);
-        
-        showNotification(`تم التصغير إلى ${Math.round(AppState.zoom * 100)}%`);
-    }
-
-    // ============ إعدادات سهولة القراءة ============
-    function toggleHighContrast() {
-        AppState.accessibility.highContrast = !AppState.accessibility.highContrast;
-        
-        if (AppState.accessibility.highContrast) {
-            document.body.classList.add('high-contrast');
-            DOM.contrastBtn.classList.add('active');
-            showNotification('تم تفعيل وضع التباين العالي');
-        } else {
-            document.body.classList.remove('high-contrast');
-            DOM.contrastBtn.classList.remove('active');
-            showNotification('تم إيقاف وضع التباين العالي');
-        }
-        
-        // إعادة تحميل الصفحة الحالية لتطبيق التغييرات
-        const img = document.querySelector('.page-image');
-        if (img) {
-            applyAccessibilitySettings(img);
-        }
-    }
-
-    function toggleLargeText() {
-        AppState.accessibility.largeText = !AppState.accessibility.largeText;
-        
-        if (AppState.accessibility.largeText) {
-            document.body.classList.add('large-text');
-            DOM.textBtn.classList.add('active');
-            showNotification('تم تفعيل النص الكبير');
-        } else {
-            document.body.classList.remove('large-text');
-            DOM.textBtn.classList.remove('active');
-            showNotification('تم إيقاف النص الكبير');
-        }
-    }
-
-    function toggleBrightness() {
-        AppState.accessibility.highBrightness = !AppState.accessibility.highBrightness;
-        
-        if (AppState.accessibility.highBrightness) {
-            DOM.imageViewer.style.backgroundColor = '#ffffff';
-            DOM.brightnessBtn.classList.add('active');
-            showNotification('تم تفعيل السطوع العالي');
-        } else {
-            DOM.imageViewer.style.backgroundColor = '#1a252f';
-            DOM.brightnessBtn.classList.remove('active');
-            showNotification('تم إيقاف السطوع العالي');
-        }
-        
-        // إعادة تحميل الصفحة الحالية
-        const img = document.querySelector('.page-image');
-        if (img) {
-            applyAccessibilitySettings(img);
-        }
-    }
-
-    // ============ دوال المساعدة ============
-    function updateLoading(text, percent) {
-        DOM.loadingText.textContent = text;
-        DOM.progressBar.style.width = `${percent}%`;
-    }
-
-    function showError(title, message) {
-        DOM.errorTitle.textContent = title;
-        DOM.errorMessage.textContent = message;
-        DOM.loadingScreen.style.display = 'none';
-        DOM.errorScreen.style.display = 'flex';
-    }
-
-    function retryLoading() {
-        DOM.errorScreen.style.display = 'none';
-        DOM.loadingScreen.style.display = 'flex';
-        DOM.loadingScreen.style.opacity = '1';
-        initializeApp();
-    }
-
-    async function retryLoadPage(pageNumber) {
-        delete AppState.images[pageNumber];
-        await loadPage(pageNumber);
-    }
-
-    function downloadPDF() {
-        const link = document.createElement('a');
-        link.href = 'pdf/111.pdf';
-        link.download = 'كتاب-معاينة-حسين-الخليل.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    function showNotification(message) {
-        DOM.mobileNotification.textContent = message;
-        DOM.mobileNotification.style.display = 'block';
-        
-        setTimeout(() => {
-            DOM.mobileNotification.style.display = 'none';
-        }, 3000);
-    }
-
-    function toggleSidebar() {
-        DOM.sidebar.classList.add('active');
-        DOM.sidebarOverlay.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeSidebar() {
-        DOM.sidebar.classList.remove('active');
-        setTimeout(() => {
-            DOM.sidebarOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 300);
-    }
-
-    // ============ إعداد مستمعات الأحداث ============
-    function setupEventListeners() {
-        // التنقل باستخدام لوحة المفاتيح (للسطح المكتب)
-        document.addEventListener('keydown', handleKeyPress);
-        
-        // معالجة اللمس والمسح
-        setupTouchGestures();
-        
-        // إغلاق القائمة الجانبية بالنقر خارجها
-        DOM.sidebarOverlay.addEventListener('click', closeSidebar);
-        
-        // إعادة تحميل عند تغيير حجم النافذة
-        let resizeTimer;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                // إعادة تحميل الصفحة الحالية لضبط الحجم
-                const currentPage = AppState.currentPage;
-                AppState.images = {};
-                loadPage(currentPage);
-            }, 250);
-        });
-    }
-
-    function setupTouchGestures() {
-        let startX, startY;
-        let isScrolling = false;
-        
-        DOM.imageViewer.addEventListener('touchstart', function(e) {
-            if (e.touches.length === 1) {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                isScrolling = false;
-            }
-        }, { passive: true });
-        
-        DOM.imageViewer.addEventListener('touchmove', function(e) {
-            if (e.touches.length === 1) {
-                const deltaX = Math.abs(e.touches[0].clientX - startX);
-                const deltaY = Math.abs(e.touches[0].clientY - startY);
-                
-                // إذا كانت الحركة أفقية أكثر من رأسية، فهذا مسح
-                if (deltaX > 20 && deltaX > deltaY) {
-                    e.preventDefault();
-                    isScrolling = true;
-                }
-            }
-        }, { passive: false });
-        
-        DOM.imageViewer.addEventListener('touchend', function(e) {
-            if (!isScrolling && e.changedTouches.length === 1) {
-                const endX = e.changedTouches[0].clientX;
-                const deltaX = endX - startX;
-                
-                // مسح لليسار - الصفحة التالية
-                if (deltaX < -50 && AppState.currentPage < AppState.totalPages) {
-                    goToNextPage();
-                    showNotification('الصفحة التالية');
-                }
-                // مسح لليمين - الصفحة السابقة
-                else if (deltaX > 50 && AppState.currentPage > 1) {
-                    goToPrevPage();
-                    showNotification('الصفحة السابقة');
-                }
-            }
-        });
-        
-        // التكبير باستخدام القرص
-        DOM.imageViewer.addEventListener('wheel', function(e) {
-            if (e.ctrlKey) {
-                e.preventDefault();
-                if (e.deltaY < 0) {
-                    zoomIn();
-                } else {
-                    zoomOut();
-                }
-            }
-        }, { passive: false });
-    }
-
-    function handleKeyPress(e) {
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-        
-        switch(e.key) {
-            case 'ArrowRight':
-            case 'ArrowUp':
-                e.preventDefault();
-                goToPrevPage();
-                break;
-                
-            case 'ArrowLeft':
-            case 'ArrowDown':
-                e.preventDefault();
-                goToNextPage();
-                break;
-                
-            case '+':
-                if (e.ctrlKey) {
-                    e.preventDefault();
-                    zoomIn();
-                }
-                break;
-                
-            case '-':
-                if (e.ctrlKey) {
-                    e.preventDefault();
-                    zoomOut();
-                }
-                break;
-                
-            case 'm':
-            case 'M':
-                if (e.ctrlKey) {
-                    e.preventDefault();
-                    toggleSidebar();
-                }
-                break;
-                
-            case 'Escape':
-                closeSidebar();
-                break;
-        }
-    }
-
-    // ============ تهيئة التطبيق ============
-    document.addEventListener('DOMContentLoaded', function() {
-        // بدء التحميل بعد تأخير قصير
-        setTimeout(() => {
-            initializeApp();
-        }, 100);
-        
-        // إضافة فئة للجوال
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            document.body.classList.add('mobile-device');
-        }
-    });
-
-    // جعل الدوال متاحة عالمياً
-    window.goToPage = goToPage;
-    window.goToPrevPage = goToPrevPage;
-    window.goToNextPage = goToNextPage;
-    window.zoomIn = zoomIn;
-    window.zoomOut = zoomOut;
-    window.retryLoading = retryLoading;
-    window.downloadPDF = downloadPDF;
-    window.toggleSidebar = toggleSidebar;
-    window.closeSidebar = closeSidebar;
-    window.toggleHighContrast = toggleHighContrast;
-    window.toggleLargeText = toggleLargeText;
-    window.toggleBrightness = toggleBrightness;
-    window.retryLoadPage = retryLoadPage;
+    document.addEventListener('DOMContentLoaded', initializeApp);
 </script>
 
 </body>
