@@ -3,8 +3,12 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-    <title>معاينة حسين الخليل</title>
+    <title>معاينة كتاب - حسين الخليل</title>
     
+    <!-- Meta Tags لخدمات البحث ومواقع التواصل -->
+    <meta name="description" content="معاينة حصرية لمؤلفات حسين الخليل - قراءة عقلانية ونقد للتراث.">
+    <link rel="icon" href="images/logo-small.png" type="image/png"/>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -21,7 +25,7 @@
             --viewer-gradient: radial-gradient(circle, #f0ebf8 0%, #e2d7f3 100%);
             --btn-nav-bg: #ffffff;
             --loader-bg: #f9f7f2;
-            --transition: all 0.3s ease;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body.dark-mode {
@@ -44,20 +48,19 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.4s ease;
         }
 
         /* --- الهيدر العلوي --- */
         .header {
             height: 65px;
             background: var(--primary-color);
-            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             position: fixed;
             top: 0; left: 0; right: 0;
         }
@@ -71,8 +74,7 @@
             display: flex; align-items: center; gap: 8px; transition: var(--transition);
             font-weight: 700; cursor: pointer;
         }
-        /* التأثير المطلوب: ذهبي عند التمرير */
-        .header-btn:hover { background: var(--accent-color); color: var(--primary-dark); border-color: var(--accent-color); }
+        .header-btn:hover { background: var(--accent-color); color: var(--primary-dark); border-color: var(--accent-color); transform: translateY(-2px); }
 
         /* --- منطقة عرض الكتاب --- */
         .viewer-container {
@@ -93,15 +95,18 @@
             width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
             will-change: transform;
+            transition: transform 0.1s ease-out;
         }
 
         #page-image {
             max-width: 100%; max-height: 100%;
             width: auto; height: auto;
             object-fit: contain;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            border-radius: 5px; background-color: white;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+            border-radius: 4px; background-color: white;
             pointer-events: none;
+            /* تأثير تلاشي عند تغيير الصفحة */
+            transition: opacity 0.3s ease-in-out;
         }
 
         /* --- شريط التحكم السفلي --- */
@@ -117,6 +122,7 @@
             gap: 12px;
             border-top: 1px solid rgba(94, 44, 165, 0.1);
             z-index: 950;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
         }
 
         .btn-nav {
@@ -127,7 +133,7 @@
             transition: var(--transition);
         }
         body.dark-mode .btn-nav { color: var(--text-primary); }
-        .btn-nav:hover { background: var(--primary-color); color: white; }
+        .btn-nav:hover { background: var(--primary-color); color: white; transform: scale(1.1); }
         
         .page-num { font-size: 0.95rem; font-weight: 800; min-width: 80px; text-align: center; }
         .divider { width: 2px; height: 25px; background: rgba(94, 44, 165, 0.1); margin: 0 5px; }
@@ -150,14 +156,12 @@
             display: flex; align-items: center; justify-content: center; gap: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: var(--transition);
-            border: 1px solid transparent;
         }
-        /* تطبيق نفس تأثير العودة للكتب هنا */
         .btn-buy:hover { 
             background: var(--accent-color); 
             color: var(--primary-dark); 
-            border-color: var(--accent-color);
             transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
         }
 
         /* لودر التحميل */
@@ -168,7 +172,6 @@
         .spinner { width: 50px; height: 50px; border: 4px solid rgba(94, 44, 165, 0.1); border-top-color: var(--primary-color); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* تعديلات الجوال */
         @media (max-width: 768px) {
             .viewer-container {
                 margin-top: 85px; 
@@ -180,6 +183,7 @@
             .bottom-controls-bar { gap: 8px; height: 60px; bottom: 80px; }
             .btn-nav { width: 36px; height: 36px; }
             .footer-buy-bar { height: 75px; }
+            .hide-mobile { display: none; }
         }
     </style>
 </head>
@@ -187,17 +191,20 @@
 
 <div id="loader">
     <div class="spinner"></div>
-    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary-color); font-weight: 700;">جاري تحميل الكتاب...</p>
+    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary-color); font-weight: 700;">جاري فتح المعاينة...</p>
 </div>
 
 <header class="header">
     <span class="header-title">معاينة: حسين الخليل</span>
     <div class="header-left">
+        <button class="header-btn" onclick="toggleFullscreen()" title="ملء الشاشة">
+            <i class="fas fa-expand"></i>
+        </button>
         <button class="header-btn" id="darkModeToggle" onclick="toggleDarkMode()" title="تبديل الوضع">
             <i class="fas fa-moon"></i>
         </button>
         <a href="books.html" class="header-btn">
-            <i class="fas fa-book-open"></i> العودة للكتب
+            <i class="fas fa-book-open"></i> <span class="hide-mobile">العودة للكتب</span>
         </a>
     </div>
 </header>
@@ -209,13 +216,15 @@
 </main>
 
 <div class="bottom-controls-bar">
-    <button class="btn-nav" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i></button>
-    <span class="page-num" id="page-info">1 / 50</span>
-    <button class="btn-nav" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="btn-nav" onclick="changePage(-1)" title="الصفحة السابقة"><i class="fas fa-chevron-right"></i></button>
+    <span class="page-num" id="page-info">... / ...</span>
+    <button class="btn-nav" onclick="changePage(1)" title="الصفحة التالية"><i class="fas fa-chevron-left"></i></button>
+    
     <div class="divider"></div>
-    <button class="btn-nav" onclick="adjustZoom(0.3)"><i class="fas fa-search-plus"></i></button>
-    <button class="btn-nav" onclick="resetZoom()"><i class="fas fa-sync-alt"></i></button>
-    <button class="btn-nav" onclick="adjustZoom(-0.3)"><i class="fas fa-search-minus"></i></button>
+
+    <button class="btn-nav" onclick="adjustZoom(0.3)" title="تكبير"><i class="fas fa-search-plus"></i></button>
+    <button class="btn-nav" onclick="resetZoom()" title="إعادة الضبط"><i class="fas fa-sync-alt"></i></button>
+    <button class="btn-nav" onclick="adjustZoom(-0.3)" title="تصغير"><i class="fas fa-search-minus"></i></button>
 </div>
 
 <div class="footer-buy-bar">
@@ -236,31 +245,45 @@
     let startX, startY;
     let translateX = 0, translateY = 0;
 
-    const viewer = document.getElementById('viewer');
     const wrapper = document.getElementById('book-wrapper');
     const imgEl = document.getElementById('page-image');
     const infoEl = document.getElementById('page-info');
     const loader = document.getElementById('loader');
 
+    // 1. تبديل الوضع الداكن
     function toggleDarkMode() {
         const body = document.body;
         const icon = document.querySelector('#darkModeToggle i');
         body.classList.toggle('dark-mode');
-        
-        if (body.classList.contains('dark-mode')) {
-            icon.classList.replace('fa-moon', 'fa-sun');
-            localStorage.setItem('theme', 'dark');
+        const isDark = body.classList.contains('dark-mode');
+        icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    // 2. وضع ملء الشاشة
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
         } else {
-            icon.classList.replace('fa-sun', 'fa-moon');
-            localStorage.setItem('theme', 'light');
+            if (document.exitFullscreen) document.exitFullscreen();
         }
     }
 
-    if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-mode');
-        document.querySelector('#darkModeToggle i').classList.replace('fa-moon', 'fa-sun');
-    }
+    // 3. التحكم بالأسهم
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') changePage(-1);
+        if (e.key === 'ArrowLeft') changePage(1);
+    });
 
+    // 4. التكبير بعجلة الماوس
+    window.addEventListener('wheel', (e) => {
+        if (e.ctrlKey) {
+            e.preventDefault();
+            adjustZoom(e.deltaY > 0 ? -0.2 : 0.2);
+        }
+    }, { passive: false });
+
+    // تحميل الـ PDF
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
     async function loadBook() {
@@ -268,18 +291,23 @@
             pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
             totalPages = Math.min(pdfDoc.numPages, 50); 
             renderPage(1);
-        } catch (e) { console.error(e); }
+        } catch (e) {
+            loader.innerHTML = '<p style="color:red">حدث خطأ أثناء تحميل الكتاب</p>';
+        }
     }
 
     async function renderPage(num) {
-        loader.style.display = 'flex';
+        imgEl.style.opacity = '0.5'; // تأثير بصري عند التغيير
         const page = await pdfDoc.getPage(num);
         const viewport = page.getViewport({ scale: 2.5 }); 
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         canvas.height = viewport.height; canvas.width = viewport.width;
         await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-        imgEl.src = canvas.toDataURL('image/jpeg', 0.85);
+        
+        imgEl.src = canvas.toDataURL('image/jpeg', 0.8);
+        imgEl.onload = () => imgEl.style.opacity = '1';
+        
         currPage = num;
         infoEl.textContent = `${num} / ${totalPages}`;
         resetZoom();
@@ -296,13 +324,14 @@
     }
 
     function adjustZoom(delta) {
-        zoomLevel = Math.max(1, Math.min(5, zoomLevel + delta));
+        zoomLevel = Math.max(1, Math.min(4, zoomLevel + delta));
         if (zoomLevel === 1) { translateX = 0; translateY = 0; }
         updateTransform();
     }
 
     function resetZoom() { zoomLevel = 1; translateX = 0; translateY = 0; updateTransform(); }
 
+    // السحب واللمس
     const startDrag = (x, y) => {
         if (zoomLevel <= 1) return;
         isDragging = true;
@@ -316,12 +345,19 @@
         updateTransform();
     };
 
+    const viewer = document.getElementById('viewer');
     viewer.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
     window.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
     window.addEventListener('mouseup', () => isDragging = false);
     viewer.addEventListener('touchstart', (e) => startDrag(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
     viewer.addEventListener('touchmove', (e) => doDrag(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
     viewer.addEventListener('touchend', () => isDragging = false);
+
+    // التحقق من الوضع المفضل
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.querySelector('#darkModeToggle i').classList.replace('fa-moon', 'fa-sun');
+    }
 
     loadBook();
 </script>
