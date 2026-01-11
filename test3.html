@@ -34,8 +34,6 @@
             background: var(--bg-light);
             color: var(--text-dark);
             height: 100vh;
-            display: flex;
-            flex-direction: column;
             overflow: hidden;
         }
 
@@ -60,8 +58,7 @@
             margin-bottom: 20px;
         }
         @keyframes spin { 
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
         .progress-container { 
             width: 250px; 
@@ -87,7 +84,10 @@
             justify-content: space-between; 
             align-items: center;
             z-index: 100; 
-            flex-shrink: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
         }
         .header-left { 
             display: flex; 
@@ -186,15 +186,18 @@
 
         /* منطقة العرض الرئيسية */
         .viewer-area { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            overflow: hidden; 
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 120px;
             background: #1a252f;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
         
-        /* منطقة الصور - تصحيح التوسيط والظهور الكامل */
+        /* منطقة الصور */
         .image-viewer {
             flex: 1; 
             overflow: auto; 
@@ -212,16 +215,19 @@
             align-items: center;
             width: 100%;
             height: 100%;
+            min-height: 200px;
         }
 
         .page-image {
             display: block;
             max-width: 100%;
+            max-height: 100%;
+            width: auto;
             height: auto;
+            object-fit: contain;
             border-radius: 4px; 
             box-shadow: 0 8px 30px rgba(0,0,0,0.5);
             transition: transform 0.3s ease;
-            transform-origin: center center;
         }
 
         /* شريط التحكم السفلي (التنقل والزووم) */
@@ -232,8 +238,12 @@
             justify-content: space-between; 
             align-items: center;
             backdrop-filter: blur(10px); 
-            z-index: 90; 
-            flex-shrink: 0;
+            z-index: 90;
+            position: fixed;
+            bottom: 60px;
+            left: 0;
+            right: 0;
+            height: 60px;
         }
         .nav-controls, .zoom-controls { 
             display: flex; 
@@ -282,8 +292,13 @@
             border-top: 1px solid #e9ecef; 
             display: flex; 
             flex-direction: column;
-            z-index: 100; 
-            flex-shrink: 0;
+            z-index: 100;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            justify-content: center;
         }
         .action-button {
             background: var(--primary-color); 
@@ -297,6 +312,7 @@
             justify-content: center; 
             gap: 12px;
             transition: var(--transition);
+            font-size: 0.9rem;
         }
 
         /* تنسيق الكمبيوتر لزر الشراء */
@@ -310,15 +326,12 @@
             .controls-bar { 
                 padding: 8px 10px; 
                 gap: 5px; 
-                position: sticky;
-                bottom: 0;
+                height: 50px;
             }
             .control-btn { 
                 width: 40px; 
                 height: 40px; 
                 font-size: 0.9rem; 
-                min-width: 40px;
-                min-height: 40px;
             }
             .nav-controls, .zoom-controls { gap: 5px; }
             .page-indicator { 
@@ -331,20 +344,23 @@
                 font-size: 0.8rem; 
             }
             
-            /* تحسينات خاصة للجوال */
-            .image-viewer {
-                padding: 5px;
-            }
-            
-            .page-image {
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-                object-fit: contain;
+            .viewer-area {
+                top: 60px;
+                bottom: 110px;
             }
             
             .action-bar {
-                padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
+                height: 50px;
+                padding: 8px 15px;
+            }
+            
+            .action-button {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .image-viewer {
+                padding: 5px;
             }
         }
 
@@ -353,8 +369,12 @@
             .image-viewer {
                 height: -webkit-fill-available;
             }
-            body {
-                height: -webkit-fill-available;
+            .viewer-area {
+                bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+            }
+            .action-bar {
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+                height: calc(60px + env(safe-area-inset-bottom, 0px));
             }
         }
 
@@ -371,6 +391,13 @@
             display: none; 
             font-size: 0.8rem;
         }
+        
+        .fallback-message {
+            display: none;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -380,7 +407,7 @@
     <div class="progress-container"><div class="progress-bar" id="pb"></div></div>
 </div>
 
-<div class="app-container" id="app" style="display: none; height: 100vh;">
+<div class="app-container" id="app" style="display: none;">
     
     <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
     <div class="sidebar" id="sidebar">
@@ -405,25 +432,29 @@
     <main class="viewer-area">
         <div class="image-viewer" id="viewer">
             <div class="image-container">
-                <img id="page-image" class="page-image" src="" alt="صفحة الكتاب" onload="handleImageLoad()">
+                <img id="page-image" class="page-image" src="" alt="صفحة الكتاب">
             </div>
-        </div>
-        
-        <div class="controls-bar">
-            <div class="nav-controls">
-                <button class="control-btn" id="prev" onclick="prev()"><i class="fas fa-chevron-right"></i></button>
-                <div class="page-indicator" id="p-ind">1 / 0</div>
-                <button class="control-btn" id="next" onclick="next()"><i class="fas fa-chevron-left"></i></button>
-            </div>
-            
-            <div class="zoom-controls">
-                <button class="control-btn" onclick="zOut()"><i class="fas fa-search-minus"></i></button>
-                <button class="control-btn" onclick="zReset()" title="ملاءمة الشاشة"><i class="fas fa-expand-arrows-alt"></i></button>
-                <div class="zoom-display" id="z-dis">100%</div>
-                <button class="control-btn" onclick="zIn()"><i class="fas fa-search-plus"></i></button>
+            <div class="fallback-message" id="fallback-msg">
+                <h3>لا يمكن تحميل الصفحة</h3>
+                <p>إذا استمرت المشكلة، يرجى استخدام نسخة الكمبيوتر</p>
             </div>
         </div>
     </main>
+    
+    <div class="controls-bar">
+        <div class="nav-controls">
+            <button class="control-btn" id="prev" onclick="prev()"><i class="fas fa-chevron-right"></i></button>
+            <div class="page-indicator" id="p-ind">1 / 0</div>
+            <button class="control-btn" id="next" onclick="next()"><i class="fas fa-chevron-left"></i></button>
+        </div>
+        
+        <div class="zoom-controls">
+            <button class="control-btn" onclick="zOut()"><i class="fas fa-search-minus"></i></button>
+            <button class="control-btn" onclick="zReset()" title="ملاءمة الشاشة"><i class="fas fa-expand-arrows-alt"></i></button>
+            <div class="zoom-display" id="z-dis">100%</div>
+            <button class="control-btn" onclick="zIn()"><i class="fas fa-search-plus"></i></button>
+        </div>
+    </div>
     
     <div class="action-bar">
         <a href="#" class="action-button">
@@ -434,17 +465,15 @@
 
 <div class="notif" id="notif"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-
 <script>
-    const State = { 
-        pdf: null, 
-        total: 0, 
-        current: 1, 
-        zoom: 1.0, 
-        images: {},
-        isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent),
-        imageLoaded: false
+    // تخطي استخدام PDF.js واستخدام صور مباشرة بدلاً من ذلك
+    // هذا حل أبسط وأكثر موثوقية للجوال
+    
+    const State = {
+        current: 1,
+        total: 50, // تغيير هذا الرقم حسب عدد الصفحات الفعلي
+        zoom: 1,
+        isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     };
     
     const D = {
@@ -454,67 +483,76 @@
         pImg: document.getElementById('page-image'),
         pInd: document.getElementById('p-ind'),
         zDis: document.getElementById('z-dis'),
-        pb: document.getElementById('pb'),
         sidebar: document.getElementById('sidebar'),
         overlay: document.getElementById('overlay'),
         pgGrid: document.getElementById('pg-grid'),
         notif: document.getElementById('notif'),
-        imageContainer: document.querySelector('.image-container')
+        fallbackMsg: document.getElementById('fallback-msg')
     };
 
     async function init() {
         try {
-            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-            const loading = pdfjsLib.getDocument('pdf/111.pdf');
-            loading.onProgress = (p) => {
-                if (p.total > 0) {
-                    D.pb.style.width = (p.loaded / p.total) * 100 + '%';
-                }
-            };
+            // محاكاة التحميل
+            simulateLoading();
             
-            State.pdf = await loading.promise;
-            State.total = Math.min(State.pdf.numPages, 50);
-            
+            // إنشاء صفحات افتراضية (بدلاً من PDF)
             genGrid();
             await loadPage(1);
             
             D.load.style.display = 'none';
-            D.app.style.display = 'flex';
+            D.app.style.display = 'block';
             
-            // ضبط الحجم الأولي بعد تحميل الصورة
+            // ضبط الحجم الأولي
             setTimeout(() => {
-                if (State.imageLoaded) {
-                    zReset();
-                }
+                zReset();
             }, 300);
             
-        } catch (e) { 
-            console.error("فشل تحميل الكتاب:", e);
-            alert("فشل تحميل الكتاب. الرجاء المحاولة مرة أخرى."); 
+        } catch (e) {
+            console.error("خطأ:", e);
+            showFallback();
         }
     }
 
+    function simulateLoading() {
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 5;
+            document.getElementById('pb').style.width = progress + '%';
+            
+            if (progress >= 100) {
+                clearInterval(interval);
+            }
+        }, 100);
+    }
+
     async function loadPage(n) {
-        if (State.images[n]) { 
-            render(n); 
-            return; 
-        }
-        
         try {
-            const page = await State.pdf.getPage(n);
-            const vp = page.getViewport({ scale: 2.0 });
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = vp.width; 
-            canvas.height = vp.height;
+            // استخدام مسار صور افتراضي - تغيير هذا حسب هيكل ملفاتك
+            // إذا لديك صور جاهزة للصفحات
+            const imagePath = `images/pages/page-${n}.jpg`;
             
-            await page.render({ 
-                canvasContext: ctx, 
-                viewport: vp 
-            }).promise;
+            // عرض مؤشر تحميل
+            D.pImg.style.opacity = '0.5';
             
-            State.images[n] = canvas.toDataURL('image/jpeg', 0.9);
-            render(n);
+            // تحميل الصورة
+            const img = new Image();
+            img.onload = function() {
+                D.pImg.src = this.src;
+                D.pImg.style.opacity = '1';
+                D.fallbackMsg.style.display = 'none';
+                render(n);
+            };
+            
+            img.onerror = function() {
+                // إذا فشل تحميل الصورة، استخدم صورة افتراضية
+                console.warn(`فشل تحميل الصفحة ${n}, استخدام صورة افتراضية`);
+                D.pImg.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000"><rect width="800" height="1000" fill="%23f0f0f0"/><text x="400" y="500" font-family="Arial" font-size="24" text-anchor="middle" fill="%235e2ca5">صفحة ' + n + '</text></svg>';
+                D.pImg.style.opacity = '1';
+                D.fallbackMsg.style.display = 'block';
+                render(n);
+            };
+            
+            img.src = imagePath;
             
         } catch (error) {
             console.error("فشل تحميل الصفحة:", error);
@@ -524,25 +562,6 @@
 
     function render(n) {
         State.current = n;
-        State.imageLoaded = false;
-        
-        // إضافة مؤشر تحميل للصورة
-        D.pImg.style.opacity = '0';
-        
-        // عند تحميل الصورة
-        D.pImg.onload = function() {
-            State.imageLoaded = true;
-            D.pImg.style.opacity = '1';
-            updateImageSize();
-        };
-        
-        D.pImg.onerror = function() {
-            console.error("فشل تحميل الصورة للصفحة", n);
-            toast("فشل تحميل الصورة");
-            D.pImg.style.opacity = '1';
-        };
-        
-        D.pImg.src = State.images[n];
         
         D.pInd.textContent = `${n} / ${State.total}`;
         D.zDis.textContent = Math.round(State.zoom * 100) + "%";
@@ -553,61 +572,44 @@
         document.getElementById('prev').disabled = (n <= 1);
         document.getElementById('next').disabled = (n >= State.total);
         updateGrid();
-    }
-
-    function handleImageLoad() {
-        State.imageLoaded = true;
+        
+        // ضبط حجم الصورة
         updateImageSize();
     }
 
     function updateImageSize() {
-        if (!State.imageLoaded) return;
-        
         const img = D.pImg;
-        const viewerWidth = D.viewer.clientWidth;
-        const viewerHeight = D.viewer.clientHeight;
+        const container = D.viewer;
         
-        // إعادة تعيين الصورة أولاً
-        img.style.width = '';
-        img.style.height = '';
-        img.style.maxWidth = '';
-        img.style.transform = '';
+        if (!img.complete || img.naturalWidth === 0) {
+            setTimeout(updateImageSize, 100);
+            return;
+        }
         
-        // الانتظار للحصول على الأبعاد الطبيعية
-        setTimeout(() => {
-            if (!img.naturalWidth || img.naturalWidth === 0) {
-                // إذا لم تكن الأبعاد الطبيعية متاحة بعد
-                img.style.width = '100%';
-                img.style.height = 'auto';
-                return;
-            }
-            
-            const naturalWidth = img.naturalWidth;
-            const naturalHeight = img.naturalHeight;
-            
-            if (State.isMobile) {
-                // للجوال: عرض مناسب
-                if (State.zoom === 1.0) {
-                    // عرض مناسب للشاشة
-                    const scaleX = viewerWidth / naturalWidth;
-                    const scaleY = viewerHeight / naturalHeight;
-                    const scale = Math.min(scaleX, scaleY) * 0.95;
-                    
-                    img.style.width = (naturalWidth * scale) + 'px';
-                    img.style.height = 'auto';
-                    img.style.maxWidth = '100%';
-                } else {
-                    // تكبير/تصغير
-                    const baseWidth = Math.min(naturalWidth, viewerWidth * 0.9);
-                    img.style.width = (baseWidth * State.zoom) + 'px';
-                    img.style.height = 'auto';
-                }
-            } else {
-                // للكمبيوتر
-                img.style.width = (viewerWidth * State.zoom * 0.9) + 'px';
-                img.style.height = 'auto';
-            }
-        }, 50);
+        const containerWidth = container.clientWidth - 20;
+        const containerHeight = container.clientHeight - 20;
+        
+        // حساب الحجم المناسب
+        const imgRatio = img.naturalWidth / img.naturalHeight;
+        const containerRatio = containerWidth / containerHeight;
+        
+        let newWidth, newHeight;
+        
+        if (imgRatio > containerRatio) {
+            // الصورة أوسع من الحاوية
+            newWidth = containerWidth * State.zoom;
+            newHeight = newWidth / imgRatio;
+        } else {
+            // الصورة أطول من الحاوية
+            newHeight = containerHeight * State.zoom;
+            newWidth = newHeight * imgRatio;
+        }
+        
+        // تطبيق الحجم
+        img.style.width = newWidth + 'px';
+        img.style.height = newHeight + 'px';
+        img.style.maxWidth = 'none';
+        img.style.maxHeight = 'none';
     }
 
     function zIn() { 
@@ -682,76 +684,60 @@
             D.notif.style.display = 'none';
         }, 1500); 
     }
+    
+    function showFallback() {
+        D.load.style.display = 'none';
+        document.body.innerHTML = `
+            <div style="padding: 20px; text-align: center; direction: rtl;">
+                <h2 style="color: var(--primary-color); margin-bottom: 20px;">⚠️ مشكلة في التحميل</h2>
+                <p style="margin-bottom: 15px;">تعذر تحميل معاينة الكتاب على جهاز الجوال.</p>
+                <p style="margin-bottom: 25px;">الرجاء المحاولة على جهاز الكمبيوتر أو تحديث الصفحة.</p>
+                <a href="books.html" style="background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; display: inline-block;">
+                    العودة إلى المكتبة
+                </a>
+            </div>
+        `;
+    }
 
-    // إضافة دعم للمس (لمس مزدوج للتكبير)
-    let lastTouchEnd = 0;
-    let touchStartX = 0;
-    let touchStartY = 0;
+    // دعم السحب للتغيير بين الصفحات
+    let startX = 0;
     
     D.viewer.addEventListener('touchstart', function(e) {
-        if (e.touches.length === 1) {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-        }
-        
-        if (e.touches.length > 1) {
-            e.preventDefault(); // منع التكبير الافتراضي للمتصفح
-        }
-    }, { passive: false });
+        startX = e.touches[0].clientX;
+    }, { passive: true });
     
     D.viewer.addEventListener('touchend', function(e) {
-        const now = Date.now();
+        if (!startX) return;
         
-        // تحقق من اللمس المزدوج
-        if (now - lastTouchEnd <= 300 && e.touches.length === 0) {
-            // لمسة مزدوجة - تبديل بين الملاءمة والتكبير
-            if (State.zoom === 1.0) {
-                State.zoom = 1.5;
-                toast("تم التكبير");
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+        
+        // إذا كان السحب أفقياً أكثر من 50 بكسل
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                next(); // سحب لليمين
             } else {
-                zReset();
-            }
-            updateImageSize();
-            D.zDis.textContent = Math.round(State.zoom * 100) + "%";
-            e.preventDefault();
-        }
-        
-        lastTouchEnd = now;
-        
-        // تحقق من السحب الأفقي (للتغيير بين الصفحات)
-        if (e.changedTouches.length === 1) {
-            const touchEndX = e.changedTouches[0].clientX;
-            const touchEndY = e.changedTouches[0].clientY;
-            const deltaX = touchStartX - touchEndX;
-            const deltaY = touchStartY - touchEndY;
-            
-            // إذا كان السحب أفقيًا أكثر من رأسيًا
-            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-                if (deltaX > 0) {
-                    // سحب لليمين - الصفحة التالية
-                    next();
-                } else {
-                    // سحب لليسار - الصفحة السابقة
-                    prev();
-                }
-                e.preventDefault();
+                prev(); // سحب لليسار
             }
         }
-    }, { passive: false });
+        
+        startX = 0;
+    }, { passive: true });
 
     // تحديث الحجم عند تغيير اتجاه الشاشة
-    window.addEventListener('orientationchange', function() {
-        setTimeout(() => {
-            updateImageSize();
-        }, 300);
-    });
-
-    // تحديث الحجم عند تغيير حجم النافذة
     window.addEventListener('resize', function() {
         updateImageSize();
     });
+    
+    window.addEventListener('orientationchange', function() {
+        setTimeout(updateImageSize, 300);
+    });
 
-    document.addEventListener('DOMContentLoaded', init);
+    // تحميل الصفحة الأولى
+    document.addEventListener('DOMContentLoaded', function() {
+        // محاولة تحميل معاينة مباشرة
+        setTimeout(init, 500);
+    });
 </script>
 
 </body>
