@@ -22,64 +22,167 @@
             --transition: all 0.3s ease;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+        }
 
         body {
             font-family: 'Tajawal', sans-serif;
             background: var(--bg-light);
             color: var(--text-dark);
-            overflow: hidden; 
             height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
         /* شاشة التحميل */
         #loading-screen {
-            position: fixed; inset: 0; background: var(--bg-white);
-            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999;
+            position: fixed; 
+            inset: 0; 
+            background: var(--bg-white);
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 9999;
         }
         .loader {
-            width: 60px; height: 60px; border: 5px solid var(--bg-light);
-            border-top: 5px solid var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite;
+            width: 60px; 
+            height: 60px; 
+            border: 5px solid var(--bg-light);
+            border-top: 5px solid var(--primary-color); 
+            border-radius: 50%; 
+            animation: spin 1s linear infinite;
             margin-bottom: 20px;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .progress-container { width: 250px; height: 6px; background: var(--bg-light); border-radius: 3px; overflow: hidden; }
-        .progress-bar { height: 100%; background: var(--primary-color); width: 0%; transition: width 0.4s ease; }
+        @keyframes spin { 
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .progress-container { 
+            width: 250px; 
+            height: 6px; 
+            background: var(--bg-light); 
+            border-radius: 3px; 
+            overflow: hidden; 
+        }
+        .progress-bar { 
+            height: 100%; 
+            background: var(--primary-color); 
+            width: 0%; 
+            transition: width 0.4s ease; 
+        }
 
         /* الهيدر العلوي */
         .header {
-            background: var(--bg-white); padding: 0 20px; height: 60px;
-            box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center;
-            z-index: 100; flex-shrink: 0;
+            background: var(--bg-white); 
+            padding: 0 20px; 
+            height: 60px;
+            box-shadow: var(--shadow); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            z-index: 100; 
+            flex-shrink: 0;
         }
-        .header-left { display: flex; align-items: center; gap: 15px; }
+        .header-left { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
         .menu-toggle {
-            background: none; border: none; color: var(--primary-color); font-size: 1.4rem;
-            cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+            background: none; 
+            border: none; 
+            color: var(--primary-color); 
+            font-size: 1.4rem;
+            cursor: pointer; 
+            width: 40px; 
+            height: 40px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
         }
-        .logo { height: 30px; object-fit: contain; }
-        .header-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); }
+        .logo { 
+            height: 30px; 
+            object-fit: contain; 
+        }
+        .header-title { 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: var(--primary-dark); 
+        }
         .close-btn {
-            background: var(--primary-color); color: white; padding: 6px 15px;
-            border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 0.85rem;
-            display: flex; align-items: center; gap: 6px;
+            background: var(--primary-color); 
+            color: white; 
+            padding: 6px 15px;
+            border-radius: 20px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 0.85rem;
+            display: flex; 
+            align-items: center; 
+            gap: 6px;
         }
 
         /* القائمة الجانبية */
-        .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; display: none; }
-        .sidebar {
-            position: fixed; top: 0; right: -320px; width: 300px; height: 100vh;
-            background: white; z-index: 999; transition: right 0.3s ease;
-            display: flex; flex-direction: column; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        .sidebar-overlay { 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0,0,0,0.5); 
+            z-index: 998; 
+            display: none; 
         }
-        .sidebar.active { right: 0; }
-        .sidebar-header { padding: 20px; background: var(--primary-color); color: white; display: flex; justify-content: space-between; align-items: center; }
-        .sidebar-content { flex: 1; padding: 20px; overflow-y: auto; }
-        .page-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
-        .pg-btn { background: var(--bg-light); border: none; padding: 12px 5px; border-radius: 8px; font-weight: 700; cursor: pointer; }
-        .pg-btn.active { background: var(--primary-color); color: white; }
+        .sidebar {
+            position: fixed; 
+            top: 0; 
+            right: -320px; 
+            width: 300px; 
+            height: 100vh;
+            background: white; 
+            z-index: 999; 
+            transition: right 0.3s ease;
+            display: flex; 
+            flex-direction: column; 
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+        .sidebar.active { 
+            right: 0; 
+        }
+        .sidebar-header { 
+            padding: 20px; 
+            background: var(--primary-color); 
+            color: white; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .sidebar-content { 
+            flex: 1; 
+            padding: 20px; 
+            overflow-y: auto; 
+        }
+        .page-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 10px; 
+            margin-top: 15px; 
+        }
+        .pg-btn { 
+            background: var(--bg-light); 
+            border: none; 
+            padding: 12px 5px; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            cursor: pointer; 
+        }
+        .pg-btn.active { 
+            background: var(--primary-color); 
+            color: white; 
+        }
 
         /* منطقة العرض الرئيسية */
         .viewer-area { 
@@ -98,52 +201,101 @@
             background: #1a252f;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* للسماح بالسكرول من الأعلى */
-            padding: 20px;
+            align-items: center;
+            padding: 10px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .image-container { 
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: min-content;
+            width: 100%;
+            height: 100%;
         }
 
         .page-image {
             display: block;
+            max-width: 100%;
             height: auto;
             border-radius: 4px; 
             box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-            transition: width 0.3s ease;
-            max-width: none; /* للسماح بالتكبير فوق 100% */
+            transition: transform 0.3s ease;
+            transform-origin: center center;
         }
 
         /* شريط التحكم السفلي (التنقل والزووم) */
         .controls-bar {
-            background: rgba(0, 0, 0, 0.9); padding: 10px 20px;
-            display: flex; justify-content: space-between; align-items: center;
-            backdrop-filter: blur(10px); z-index: 90; flex-shrink: 0;
+            background: rgba(0, 0, 0, 0.9); 
+            padding: 10px 20px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            backdrop-filter: blur(10px); 
+            z-index: 90; 
+            flex-shrink: 0;
         }
-        .nav-controls, .zoom-controls { display: flex; align-items: center; gap: 10px; }
+        .nav-controls, .zoom-controls { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
         .control-btn {
-            width: 44px; height: 44px; background: rgba(255,255,255,0.12); border: none;
-            border-radius: 50%; color: white; font-size: 1.1rem; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; transition: var(--transition);
+            width: 44px; 
+            height: 44px; 
+            background: rgba(255,255,255,0.12); 
+            border: none;
+            border-radius: 50%; 
+            color: white; 
+            font-size: 1.1rem; 
+            cursor: pointer;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: var(--transition);
         }
-        .control-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-        .page-indicator { color: white; font-size: 1rem; font-weight: 600; min-width: 80px; text-align: center; }
-        .zoom-display { color: white; font-size: 0.9rem; min-width: 60px; text-align: center; background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 20px; }
+        .control-btn:disabled { 
+            opacity: 0.3; 
+            cursor: not-allowed; 
+        }
+        .page-indicator { 
+            color: white; 
+            font-size: 1rem; 
+            font-weight: 600; 
+            min-width: 80px; 
+            text-align: center; 
+        }
+        .zoom-display { 
+            color: white; 
+            font-size: 0.9rem; 
+            min-width: 60px; 
+            text-align: center; 
+            background: rgba(255,255,255,0.1); 
+            padding: 5px 10px; 
+            border-radius: 20px; 
+        }
 
         /* شريط الإجراءات (زر الشراء بالأسفل) */
         .action-bar {
-            background: var(--bg-white); padding: 12px 20px;
-            border-top: 1px solid #e9ecef; display: flex; flex-direction: column;
-            z-index: 100; flex-shrink: 0;
+            background: var(--bg-white); 
+            padding: 12px 20px;
+            border-top: 1px solid #e9ecef; 
+            display: flex; 
+            flex-direction: column;
+            z-index: 100; 
+            flex-shrink: 0;
         }
         .action-button {
-            background: var(--primary-color); color: white; padding: 12px 20px;
-            border-radius: 10px; text-decoration: none; font-weight: 700;
-            display: flex; align-items: center; justify-content: center; gap: 12px;
+            background: var(--primary-color); 
+            color: white; 
+            padding: 12px 20px;
+            border-radius: 10px; 
+            text-decoration: none; 
+            font-weight: 700;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 12px;
             transition: var(--transition);
         }
 
@@ -155,50 +307,44 @@
 
         /* تنسيق الجوال */
         @media (max-width: 767px) {
-            .controls-bar { padding: 8px 10px; gap: 5px; }
-            .control-btn { width: 36px; height: 36px; font-size: 0.9rem; }
-            .nav-controls, .zoom-controls { gap: 5px; }
-            .page-indicator { min-width: 60px; font-size: 0.85rem; }
-            .zoom-display { min-width: 50px; padding: 4px 6px; font-size: 0.8rem; }
-            
-            /* تحسين منطقة العرض للجوال */
-            .image-viewer {
-                padding: 10px;
-                -webkit-overflow-scrolling: touch; /* سلاسة السكرول على iOS */
-                touch-action: pan-x pan-y; /* السماح بالتحريك باللمس */
-            }
-            
-            /* تحسين حجم الصورة للجوال */
-            .page-image {
-                max-width: 100% !important; /* إجبار العرض ليتناسب */
-                height: auto !important;
-                width: auto !important;
-                transform-origin: center center;
-                transition: transform 0.3s ease; /* استخدام transform للزووم */
-            }
-            
-            /* منع التكبير الزائد على الجوال */
-            .image-container {
-                max-width: 100%;
-                overflow: hidden;
-            }
-            
-            /* تحسين شريط التحكم */
-            .controls-bar {
+            .controls-bar { 
+                padding: 8px 10px; 
+                gap: 5px; 
                 position: sticky;
                 bottom: 0;
-                background: rgba(0, 0, 0, 0.95);
+            }
+            .control-btn { 
+                width: 40px; 
+                height: 40px; 
+                font-size: 0.9rem; 
+                min-width: 40px;
+                min-height: 40px;
+            }
+            .nav-controls, .zoom-controls { gap: 5px; }
+            .page-indicator { 
+                min-width: 60px; 
+                font-size: 0.85rem; 
+            }
+            .zoom-display { 
+                min-width: 50px; 
+                padding: 4px 6px; 
+                font-size: 0.8rem; 
             }
             
-            /* تحسين أزرار التحكم */
-            .control-btn {
-                min-width: 44px;
-                min-height: 44px; /* لمس أفضل */
+            /* تحسينات خاصة للجوال */
+            .image-viewer {
+                padding: 5px;
             }
             
-            /* إضافة مساحة للجزء السفلي على الأجهزة التي بها حواف منحنية */
+            .page-image {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto !important;
+                object-fit: contain;
+            }
+            
             .action-bar {
-                padding-bottom: max(12px, env(safe-area-inset-bottom));
+                padding-bottom: max(12px, env(safe-area-inset-bottom, 12px));
             }
         }
 
@@ -213,9 +359,17 @@
         }
 
         .notif {
-            position: fixed; bottom: 130px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.8); color: white; padding: 8px 16px;
-            border-radius: 20px; z-index: 2000; display: none; font-size: 0.8rem;
+            position: fixed; 
+            bottom: 130px; 
+            left: 50%; 
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8); 
+            color: white; 
+            padding: 8px 16px;
+            border-radius: 20px; 
+            z-index: 2000; 
+            display: none; 
+            font-size: 0.8rem;
         }
     </style>
 </head>
@@ -251,7 +405,7 @@
     <main class="viewer-area">
         <div class="image-viewer" id="viewer">
             <div class="image-container">
-                <img id="page-image" class="page-image" src="" alt="صفحة الكتاب">
+                <img id="page-image" class="page-image" src="" alt="صفحة الكتاب" onload="handleImageLoad()">
             </div>
         </div>
         
@@ -289,8 +443,10 @@
         current: 1, 
         zoom: 1.0, 
         images: {},
-        isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent),
+        imageLoaded: false
     };
+    
     const D = {
         load: document.getElementById('loading-screen'),
         app: document.getElementById('app'),
@@ -302,14 +458,19 @@
         sidebar: document.getElementById('sidebar'),
         overlay: document.getElementById('overlay'),
         pgGrid: document.getElementById('pg-grid'),
-        notif: document.getElementById('notif')
+        notif: document.getElementById('notif'),
+        imageContainer: document.querySelector('.image-container')
     };
 
     async function init() {
         try {
             pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
             const loading = pdfjsLib.getDocument('pdf/111.pdf');
-            loading.onProgress = (p) => D.pb.style.width = (p.loaded/p.total)*100 + '%';
+            loading.onProgress = (p) => {
+                if (p.total > 0) {
+                    D.pb.style.width = (p.loaded / p.total) * 100 + '%';
+                }
+            };
             
             State.pdf = await loading.promise;
             State.total = Math.min(State.pdf.numPages, 50);
@@ -320,8 +481,13 @@
             D.load.style.display = 'none';
             D.app.style.display = 'flex';
             
-            // ضبط الحجم الأولي بملاءمة الشاشة
-            setTimeout(zReset, 100);
+            // ضبط الحجم الأولي بعد تحميل الصورة
+            setTimeout(() => {
+                if (State.imageLoaded) {
+                    zReset();
+                }
+            }, 300);
+            
         } catch (e) { 
             console.error("فشل تحميل الكتاب:", e);
             alert("فشل تحميل الكتاب. الرجاء المحاولة مرة أخرى."); 
@@ -329,7 +495,11 @@
     }
 
     async function loadPage(n) {
-        if (State.images[n]) { render(n); return; }
+        if (State.images[n]) { 
+            render(n); 
+            return; 
+        }
+        
         try {
             const page = await State.pdf.getPage(n);
             const vp = page.getViewport({ scale: 2.0 });
@@ -337,9 +507,15 @@
             const ctx = canvas.getContext('2d');
             canvas.width = vp.width; 
             canvas.height = vp.height;
-            await page.render({ canvasContext: ctx, viewport: vp }).promise;
-            State.images[n] = canvas.toDataURL('image/jpeg', 0.85);
+            
+            await page.render({ 
+                canvasContext: ctx, 
+                viewport: vp 
+            }).promise;
+            
+            State.images[n] = canvas.toDataURL('image/jpeg', 0.9);
             render(n);
+            
         } catch (error) {
             console.error("فشل تحميل الصفحة:", error);
             toast("فشل تحميل الصفحة");
@@ -348,90 +524,107 @@
 
     function render(n) {
         State.current = n;
-        D.pImg.src = State.images[n];
+        State.imageLoaded = false;
         
-        // إصلاح العرض للجوال
-        updateImageSize();
+        // إضافة مؤشر تحميل للصورة
+        D.pImg.style.opacity = '0';
+        
+        // عند تحميل الصورة
+        D.pImg.onload = function() {
+            State.imageLoaded = true;
+            D.pImg.style.opacity = '1';
+            updateImageSize();
+        };
+        
+        D.pImg.onerror = function() {
+            console.error("فشل تحميل الصورة للصفحة", n);
+            toast("فشل تحميل الصورة");
+            D.pImg.style.opacity = '1';
+        };
+        
+        D.pImg.src = State.images[n];
         
         D.pInd.textContent = `${n} / ${State.total}`;
         D.zDis.textContent = Math.round(State.zoom * 100) + "%";
         
         // إعادة تعيين السكرول
-        D.viewer.scrollTop = 0;
-        D.viewer.scrollLeft = 0;
-
+        D.viewer.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        
         document.getElementById('prev').disabled = (n <= 1);
         document.getElementById('next').disabled = (n >= State.total);
         updateGrid();
     }
 
+    function handleImageLoad() {
+        State.imageLoaded = true;
+        updateImageSize();
+    }
+
     function updateImageSize() {
-        // طريقة محسنة لحساب الحجم للجوال
+        if (!State.imageLoaded) return;
+        
+        const img = D.pImg;
         const viewerWidth = D.viewer.clientWidth;
         const viewerHeight = D.viewer.clientHeight;
-        const img = D.pImg;
         
-        if (!State.isMobile) {
-            // للكمبيوتر: استخدم الطريقة القديمة
-            img.style.width = (viewerWidth * State.zoom) + "px";
-            img.style.height = "auto";
-            img.style.maxWidth = "none";
-            return;
-        }
+        // إعادة تعيين الصورة أولاً
+        img.style.width = '';
+        img.style.height = '';
+        img.style.maxWidth = '';
+        img.style.transform = '';
         
-        // للجوال: حساب أفضل
-        if (img.complete && img.naturalWidth > 0) {
+        // الانتظار للحصول على الأبعاد الطبيعية
+        setTimeout(() => {
+            if (!img.naturalWidth || img.naturalWidth === 0) {
+                // إذا لم تكن الأبعاد الطبيعية متاحة بعد
+                img.style.width = '100%';
+                img.style.height = 'auto';
+                return;
+            }
+            
             const naturalWidth = img.naturalWidth;
             const naturalHeight = img.naturalHeight;
             
-            // حساب النسبة للملاءمة
-            const widthRatio = viewerWidth / naturalWidth;
-            const heightRatio = viewerHeight / naturalHeight;
-            
-            // استخدام أصغر نسبة لرؤية الصفحة كاملة
-            const scaleRatio = Math.min(widthRatio, heightRatio) * 0.95;
-            
-            if (State.zoom === 1.0) {
-                // الملاءمة التلقائية
-                img.style.width = (naturalWidth * scaleRatio) + "px";
-                img.style.height = "auto";
-                img.style.transform = "none";
-                img.style.maxWidth = "100%";
+            if (State.isMobile) {
+                // للجوال: عرض مناسب
+                if (State.zoom === 1.0) {
+                    // عرض مناسب للشاشة
+                    const scaleX = viewerWidth / naturalWidth;
+                    const scaleY = viewerHeight / naturalHeight;
+                    const scale = Math.min(scaleX, scaleY) * 0.95;
+                    
+                    img.style.width = (naturalWidth * scale) + 'px';
+                    img.style.height = 'auto';
+                    img.style.maxWidth = '100%';
+                } else {
+                    // تكبير/تصغير
+                    const baseWidth = Math.min(naturalWidth, viewerWidth * 0.9);
+                    img.style.width = (baseWidth * State.zoom) + 'px';
+                    img.style.height = 'auto';
+                }
             } else {
-                // عند التكبير
-                const zoomedWidth = naturalWidth * scaleRatio * State.zoom;
-                img.style.width = zoomedWidth + "px";
-                img.style.height = "auto";
-                img.style.maxWidth = "none";
+                // للكمبيوتر
+                img.style.width = (viewerWidth * State.zoom * 0.9) + 'px';
+                img.style.height = 'auto';
             }
-            
-            // إعادة مركزة الصورة
-            img.style.display = 'block';
-            img.style.margin = '0 auto';
-        } else {
-            // إذا لم تحمل الصورة بعد، استخدم طريقة أبسط
-            img.style.width = (viewerWidth * State.zoom) + "px";
-            img.style.height = "auto";
-            img.style.maxWidth = State.zoom === 1.0 ? "100%" : "none";
-        }
+        }, 50);
     }
 
     function zIn() { 
-        State.zoom = Math.min(State.zoom + 0.2, 3.0); // حد أقصى 300%
+        State.zoom = Math.min(State.zoom + 0.2, 3.0);
         updateImageSize(); 
         D.zDis.textContent = Math.round(State.zoom * 100) + "%";
         if (State.zoom >= 3.0) toast("الحد الأقصى للتكبير");
     }
     
     function zOut() { 
-        State.zoom = Math.max(State.zoom - 0.2, 0.4); // حد أدنى 40%
+        State.zoom = Math.max(State.zoom - 0.2, 0.4);
         updateImageSize(); 
         D.zDis.textContent = Math.round(State.zoom * 100) + "%";
         if (State.zoom <= 0.4) toast("الحد الأدنى للتصغير");
     }
     
     function zReset() {
-        // ملاءمة الشاشة تلقائياً
         State.zoom = 1.0;
         updateImageSize();
         D.zDis.textContent = "ملاءمة";
@@ -439,12 +632,17 @@
         
         // إعادة تعيين السكرول
         setTimeout(() => {
-            D.viewer.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+            D.viewer.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
         }, 100);
     }
 
-    function next() { if(State.current < State.total) loadPage(State.current + 1); }
-    function prev() { if(State.current > 1) loadPage(State.current - 1); }
+    function next() { 
+        if(State.current < State.total) loadPage(State.current + 1); 
+    }
+    
+    function prev() { 
+        if(State.current > 1) loadPage(State.current - 1); 
+    }
 
     function toggleSidebar() { 
         D.sidebar.classList.add('active'); 
@@ -472,20 +670,40 @@
     
     function updateGrid() {
         const btns = D.pgGrid.querySelectorAll('.pg-btn');
-        btns.forEach((b, i) => b.classList.toggle('active', i + 1 === State.current));
+        btns.forEach((b, i) => {
+            b.classList.toggle('active', (i + 1) === State.current);
+        });
     }
 
     function toast(m) { 
         D.notif.textContent = m; 
         D.notif.style.display = 'block'; 
-        setTimeout(() => D.notif.style.display = 'none', 1500); 
+        setTimeout(() => {
+            D.notif.style.display = 'none';
+        }, 1500); 
     }
 
     // إضافة دعم للمس (لمس مزدوج للتكبير)
     let lastTouchEnd = 0;
-    D.viewer.addEventListener('touchend', function(event) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+    D.viewer.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 1) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }
+        
+        if (e.touches.length > 1) {
+            e.preventDefault(); // منع التكبير الافتراضي للمتصفح
+        }
+    }, { passive: false });
+    
+    D.viewer.addEventListener('touchend', function(e) {
         const now = Date.now();
-        if (now - lastTouchEnd <= 300 && event.touches.length === 0) {
+        
+        // تحقق من اللمس المزدوج
+        if (now - lastTouchEnd <= 300 && e.touches.length === 0) {
             // لمسة مزدوجة - تبديل بين الملاءمة والتكبير
             if (State.zoom === 1.0) {
                 State.zoom = 1.5;
@@ -495,32 +713,43 @@
             }
             updateImageSize();
             D.zDis.textContent = Math.round(State.zoom * 100) + "%";
-            event.preventDefault();
+            e.preventDefault();
         }
+        
         lastTouchEnd = now;
-    }, false);
-
-    // منع التكبير الافتراضي للمتصفح
-    D.viewer.addEventListener('touchstart', function(e) {
-        if (e.touches.length > 1) {
-            e.preventDefault(); // منع التكبير الافتراضي
+        
+        // تحقق من السحب الأفقي (للتغيير بين الصفحات)
+        if (e.changedTouches.length === 1) {
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const deltaX = touchStartX - touchEndX;
+            const deltaY = touchStartY - touchEndY;
+            
+            // إذا كان السحب أفقيًا أكثر من رأسيًا
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    // سحب لليمين - الصفحة التالية
+                    next();
+                } else {
+                    // سحب لليسار - الصفحة السابقة
+                    prev();
+                }
+                e.preventDefault();
+            }
         }
     }, { passive: false });
 
     // تحديث الحجم عند تغيير اتجاه الشاشة
     window.addEventListener('orientationchange', function() {
-        setTimeout(updateImageSize, 200);
+        setTimeout(() => {
+            updateImageSize();
+        }, 300);
     });
 
     // تحديث الحجم عند تغيير حجم النافذة
     window.addEventListener('resize', function() {
         updateImageSize();
     });
-
-    // ضمان تحميل الصورة بشكل صحيح
-    D.pImg.onload = function() {
-        updateImageSize();
-    };
 
     document.addEventListener('DOMContentLoaded', init);
 </script>
