@@ -25,27 +25,31 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Tajawal', sans-serif; background: var(--bg-light); color: var(--text-dark); overflow-x: hidden; }
 
-        /* إعدادات سهولة القراءة (Accessibility Classes) */
-        .high-contrast { filter: contrast(1.25) brightness(1.1); }
-        .large-text .page-indicator, .large-text .header-title { font-size: 1.3rem !important; }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
 
         /* شاشة التحميل */
         #loading-screen {
-            position: fixed; inset: 0; background: white;
+            position: fixed; inset: 0; background: var(--bg-white);
             display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999;
         }
         .loader {
-            width: 60px; height: 60px; border: 5px solid var(--bg-light);
-            border-top-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            width: 70px; height: 70px; border: 5px solid var(--bg-light);
+            border-top: 5px solid var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite;
+            margin-bottom: 25px;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
+        .progress-container { width: 280px; height: 6px; background: var(--bg-light); border-radius: 3px; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--primary-color); width: 0%; transition: width 0.4s ease; }
 
         /* الهيدر العلوي */
         .header {
-            background: white; padding: 10px 20px; position: sticky; top: 0; z-index: 100;
+            background: var(--bg-white); padding: 15px 20px; position: sticky; top: 0; z-index: 100;
             box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; height: 70px;
         }
         .header-left { display: flex; align-items: center; gap: 15px; }
@@ -53,42 +57,43 @@
             background: none; border: none; color: var(--primary-color); font-size: 1.5rem;
             cursor: pointer; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
         }
-        .logo { height: 35px; object-fit: contain; }
+        .logo { height: 35px; max-width: 120px; object-fit: contain; }
+        .header-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); }
         .close-btn {
-            background: var(--primary-color); color: white; padding: 8px 18px; border-radius: 25px;
-            text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 8px; font-size: 0.9rem;
+            background: var(--primary-color); color: var(--bg-white); border: none; padding: 10px 20px;
+            border-radius: 25px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 0.95rem;
         }
 
-        /* القائمة الجانبية (Hamburger Menu) */
-        .sidebar-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; display: none;
-        }
+        /* القائمة الجانبية */
+        .sidebar-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 998; display: none; }
         .sidebar {
             position: fixed; top: 0; right: -320px; width: 300px; height: 100vh;
-            background: white; z-index: 999; transition: right 0.3s ease;
-            display: flex; flex-direction: column; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            background: var(--bg-white); z-index: 999; transition: right 0.3s ease;
+            display: flex; flex-direction: column; box-shadow: 2px 0 20px rgba(0,0,0,0.15);
         }
         .sidebar.active { right: 0; }
-        .sidebar-header { padding: 20px; background: var(--primary-color); color: white; display: flex; justify-content: space-between; align-items: center; }
+        .sidebar-header { padding: 25px 20px 15px; background: var(--primary-color); color: white; display: flex; justify-content: space-between; align-items: center; }
         .sidebar-content { flex: 1; padding: 20px; overflow-y: auto; }
         
-        .section-title { font-weight: 700; margin-bottom: 15px; color: var(--text-dark); border-bottom: 2px solid var(--bg-light); padding-bottom: 5px; }
-        .access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
-        .access-btn { 
-            background: var(--bg-light); border: 1px solid #ddd; padding: 10px; border-radius: 8px; 
-            font-size: 0.8rem; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px;
+        .section-title { font-size: 1rem; font-weight: 700; margin-bottom: 15px; border-bottom: 2px solid var(--primary-color); padding-bottom: 8px; }
+        .accessibility-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+        .accessibility-btn {
+            background: var(--bg-light); border: 2px solid #eee; border-radius: 8px; padding: 12px;
+            cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.85rem;
         }
-        .access-btn.active { background: var(--primary-light); color: white; border-color: var(--primary-color); }
-        
-        .page-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-        .pg-btn { background: #eee; border: none; padding: 10px 5px; border-radius: 5px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
-        .pg-btn.active { background: var(--primary-color); color: white; }
+        .accessibility-btn.active { border-color: var(--primary-color); background: rgba(94, 44, 165, 0.05); }
+
+        .page-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .page-btn { background: var(--bg-light); border: none; padding: 10px 5px; border-radius: 8px; cursor: pointer; font-weight: 700; }
+        .page-btn.active { background: var(--primary-color); color: white; }
 
         /* منطقة العرض */
         .viewer-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #2c3e50; }
-        .image-viewer { flex: 1; overflow: auto; background: #1a252f; text-align: center; display: block; }
+        .image-viewer {
+            flex: 1; overflow: auto; background: #1a252f; text-align: center; display: block;
+        }
         .image-container { display: inline-block; min-width: 100%; padding: 20px; vertical-align: top; }
-        .page-image { display: block; margin: 0 auto; height: auto; border-radius: 4px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); transition: width 0.3s ease; }
+        .page-image { display: block; margin: 0 auto; height: auto; border-radius: 4px; box-shadow: 0 8px 30px rgba(0,0,0,0.4); transition: width 0.3s ease; }
 
         /* شريط التحكم السفلي */
         .controls-bar {
@@ -98,70 +103,66 @@
         }
         .nav-controls, .zoom-controls { display: flex; align-items: center; gap: 12px; }
         .control-btn {
-            width: 46px; height: 46px; background: rgba(255,255,255,0.12); border: none;
+            width: 46px; height: 46px; background: rgba(255, 255, 255, 0.12); border: none;
             border-radius: 50%; color: white; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
+        .control-btn:disabled { opacity: 0.3; }
         .page-indicator { color: white; font-size: 1rem; min-width: 90px; text-align: center; font-weight: 600; }
-        .zoom-display { color: white; font-size: 0.9rem; min-width: 60px; text-align: center; background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 20px; }
+        .zoom-display { color: white; font-size: 0.9rem; min-width: 65px; text-align: center; background: rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 20px; }
 
-        /* شريط الإجراءات (زر الشراء) */
-        .action-bar { background: white; padding: 15px 20px; border-top: 1px solid #ddd; display: flex; flex-direction: column; }
+        /* شريط الإجراءات */
+        .action-bar { background: var(--bg-white); padding: 15px 20px; border-top: 1px solid #e9ecef; display: flex; flex-direction: column; }
         .action-button {
             background: var(--primary-color); color: white; padding: 14px 20px; border-radius: 12px;
-            text-decoration: none; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px;
+            text-decoration: none; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px;
         }
 
-        /* تنسيق الكمبيوتر لزر الشراء */
+        /* تحسين الكمبيوتر لزر الشراء */
         @media (min-width: 768px) {
             .action-bar { align-items: center; }
-            .action-button { width: 100%; max-width: 400px; }
+            .action-button { width: 100%; max-width: 400px; box-shadow: 0 4px 15px rgba(94, 44, 165, 0.2); }
         }
 
-        /* تنسيق الجوال لشريط الأدوات */
+        /* تحسين الجوال لمنع القص */
         @media (max-width: 767px) {
             .controls-bar { padding: 8px 10px; gap: 5px; padding-bottom: calc(8px + env(safe-area-inset-bottom, 5px)); }
             .control-btn { width: 38px; height: 38px; font-size: 0.95rem; }
             .nav-controls, .zoom-controls { gap: 6px; }
             .page-indicator { min-width: 70px; font-size: 0.85rem; }
-            .zoom-display { min-width: 50px; padding: 4px 6px; font-size: 0.75rem; }
+            .zoom-display { min-width: 50px; font-size: 0.8rem; padding: 4px 8px; }
             .header-title { display: none; }
         }
 
-        .notif {
+        .mobile-notification {
             position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.8); color: white; padding: 8px 20px; border-radius: 20px; z-index: 2000; display: none;
+            background: rgba(0, 0, 0, 0.85); color: white; padding: 8px 20px; border-radius: 20px; z-index: 2000; display: none;
         }
+
     </style>
 </head>
 <body>
 
 <div id="loading-screen">
     <div class="loader"></div>
-    <div style="width: 250px; height: 6px; background: #eee; border-radius: 3px; overflow: hidden;">
-        <div id="pb" style="width: 0%; height: 100%; background: var(--primary-color);"></div>
-    </div>
+    <div class="progress-container"><div class="progress-bar" id="progress-bar"></div></div>
 </div>
 
-<div class="app-container" id="app" style="display: none;">
+<div class="app-container" id="app-container" style="display: none;">
     
-    <!-- القائمة الجانبية -->
-    <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <span>إعدادات العرض</span>
+            <h3><i class="fas fa-book"></i> الإعدادات</h3>
             <i class="fas fa-times" onclick="closeSidebar()" style="cursor: pointer;"></i>
         </div>
         <div class="sidebar-content">
-            <div class="section-title">تحسين الرؤية</div>
-            <div class="access-grid">
-                <button class="access-btn" onclick="toggleContrast()" id="btn-contrast"><i class="fas fa-adjust"></i> تباين عالي</button>
-                <button class="access-btn" onclick="toggleText()" id="btn-text"><i class="fas fa-text-height"></i> نص كبير</button>
-                <button class="access-btn" onclick="toggleDark()" id="btn-dark"><i class="fas fa-moon"></i> وضع ليلي</button>
-                <button class="access-btn" onclick="resetAllAccess()"><i class="fas fa-undo"></i> إعادة ضبط</button>
+            <div class="section-title">خيارات العرض</div>
+            <div class="accessibility-buttons">
+                <button class="accessibility-btn" onclick="toggleBrightness()" id="brightness-btn"><i class="fas fa-sun"></i><span>وضع الإنارة</span></button>
+                <button class="accessibility-btn" onclick="resetAll()"><i class="fas fa-undo"></i><span>إعادة ضبط</span></button>
             </div>
-            
-            <div class="section-title">فهرس الصفحات</div>
-            <div class="page-grid" id="pg-grid"></div>
+            <div class="section-title">الفهرس</div>
+            <div class="page-grid" id="page-grid"></div>
         </div>
     </div>
 
@@ -169,146 +170,140 @@
         <div class="header-left">
             <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
             <img src="images/logo.png" alt="Logo" class="logo">
-            <span class="header-title">معاينة الكتاب</span>
+            <div class="header-title">معاينة الكتاب</div>
         </div>
         <a href="books.html" class="close-btn"><i class="fas fa-times"></i> إغلاق</a>
     </header>
     
     <main class="viewer-area">
-        <div class="image-viewer" id="viewer">
-            <div class="image-container" id="container"></div>
+        <div class="image-viewer" id="image-viewer">
+            <div class="image-container" id="image-container"></div>
         </div>
         
         <div class="controls-bar">
             <div class="nav-controls">
-                <button class="control-btn" id="prev" onclick="prev()"><i class="fas fa-chevron-right"></i></button>
-                <div class="page-indicator" id="p-ind">1 / 0</div>
-                <button class="control-btn" id="next" onclick="next()"><i class="fas fa-chevron-left"></i></button>
+                <button class="control-btn" id="prev-btn" onclick="goToPrevPage()"><i class="fas fa-chevron-right"></i></button>
+                <div class="page-indicator" id="page-indicator">1 / 0</div>
+                <button class="control-btn" id="next-btn" onclick="goToNextPage()"><i class="fas fa-chevron-left"></i></button>
             </div>
             
             <div class="zoom-controls">
-                <button class="control-btn" onclick="zOut()"><i class="fas fa-search-minus"></i></button>
-                <button class="control-btn" onclick="zReset()"><i class="fas fa-expand-arrows-alt"></i></button>
-                <div class="zoom-display" id="z-dis">100%</div>
-                <button class="control-btn" onclick="zIn()"><i class="fas fa-search-plus"></i></button>
+                <button class="control-btn" onclick="zoomOut()"><i class="fas fa-search-minus"></i></button>
+                <button class="control-btn" onclick="resetZoom()"><i class="fas fa-expand-arrows-alt"></i></button>
+                <div class="zoom-display" id="zoom-display">100%</div>
+                <button class="control-btn" onclick="zoomIn()"><i class="fas fa-search-plus"></i></button>
             </div>
         </div>
     </main>
     
     <div class="action-bar">
-        <a href="#" class="action-button"><i class="fas fa-shopping-cart"></i> اشتَرِ النسخة الكاملة</a>
+        <a href="#" class="action-button"><i class="fas fa-shopping-cart"></i> اشترِ الكتاب الكامل</a>
     </div>
 </div>
 
-<div class="notif" id="notif"></div>
+<div class="mobile-notification" id="mobile-notification"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
 <script>
-    const State = { pdf: null, total: 0, current: 1, zoom: 1.0, images: {} };
-    const D = {
-        load: document.getElementById('loading-screen'),
-        app: document.getElementById('app'),
-        viewer: document.getElementById('viewer'),
-        container: document.getElementById('container'),
-        pInd: document.getElementById('p-ind'),
-        zDis: document.getElementById('z-dis'),
-        pb: document.getElementById('pb'),
+    const AppState = { pdf: null, totalPages: 0, currentPage: 1, zoom: 1.0, images: {} };
+    const DOM = {
+        loading: document.getElementById('loading-screen'),
+        app: document.getElementById('app-container'),
+        imageContainer: document.getElementById('image-container'),
+        imageViewer: document.getElementById('image-viewer'),
+        pageIndicator: document.getElementById('page-indicator'),
+        zoomDisplay: document.getElementById('zoom-display'),
+        progressBar: document.getElementById('progress-bar'),
         sidebar: document.getElementById('sidebar'),
-        overlay: document.getElementById('overlay'),
-        pgGrid: document.getElementById('pg-grid'),
-        notif: document.getElementById('notif')
+        overlay: document.getElementById('sidebar-overlay'),
+        pageGrid: document.getElementById('page-grid'),
+        notif: document.getElementById('mobile-notification')
     };
 
-    async function init() {
+    async function initializeApp() {
         try {
             pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-            const loading = pdfjsLib.getDocument('pdf/111.pdf');
-            loading.onProgress = (p) => D.pb.style.width = (p.loaded/p.total)*100 + '%';
+            const loadingTask = pdfjsLib.getDocument('pdf/111.pdf');
+            loadingTask.onProgress = (p) => DOM.progressBar.style.width = (p.loaded/p.total)*100 + '%';
             
-            State.pdf = await loading.promise;
-            State.total = Math.min(State.pdf.numPages, 50);
+            AppState.pdf = await loadingTask.promise;
+            AppState.totalPages = Math.min(AppState.pdf.numPages, 50);
             
-            genGrid();
-            await load(1);
+            createPageGrid();
+            await loadPage(1);
             
-            D.load.style.display = 'none';
-            D.app.style.display = 'flex';
-        } catch (e) { alert("فشل تحميل المعاينة."); }
+            DOM.loading.style.display = 'none';
+            DOM.app.style.display = 'flex';
+        } catch (e) { alert("فشل التحميل."); }
     }
 
-    async function load(n) {
-        if (State.images[n]) { render(n); return; }
-        const page = await State.pdf.getPage(n);
+    async function loadPage(num) {
+        if (AppState.images[num]) { displayPage(num); return; }
+        const page = await AppState.pdf.getPage(num);
         const vp = page.getViewport({ scale: 2.0 });
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = vp.width; canvas.height = vp.height;
         await page.render({ canvasContext: ctx, viewport: vp }).promise;
-        State.images[n] = canvas.toDataURL('image/jpeg', 0.8);
-        render(n);
+        AppState.images[num] = canvas.toDataURL('image/jpeg', 0.85);
+        displayPage(num);
     }
 
-    function render(n) {
-        State.current = n;
-        D.container.innerHTML = '';
+    function displayPage(num) {
+        AppState.currentPage = num;
+        DOM.imageContainer.innerHTML = '';
         const img = document.createElement('img');
         img.className = 'page-image';
-        img.src = State.images[n];
-        img.style.width = ((D.viewer.clientWidth - 40) * State.zoom) + "px";
-        D.container.appendChild(img);
+        img.src = AppState.images[num];
         
-        D.pInd.textContent = `${n} / ${State.total}`;
-        D.zDis.textContent = Math.round(State.zoom * 100) + "%";
-        D.viewer.scrollLeft = 0; // لضمان بقاء جهة اليمين ظاهرة في RTL
+        // حساب العرض بناءً على التكبير
+        const viewerWidth = DOM.imageViewer.clientWidth - 40;
+        img.style.width = (viewerWidth * AppState.zoom) + "px";
         
-        document.getElementById('prev').disabled = (n <= 1);
-        document.getElementById('next').disabled = (n >= State.total);
-        updateGrid();
+        DOM.imageContainer.appendChild(img);
+        DOM.pageIndicator.textContent = `${num} / ${AppState.totalPages}`;
+        DOM.zoomDisplay.textContent = Math.round(AppState.zoom * 100) + "%";
+        DOM.imageViewer.scrollLeft = 0; // الحفاظ على اتجاه RTL عند التكبير
+
+        document.getElementById('prev-btn').disabled = (num <= 1);
+        document.getElementById('next-btn').disabled = (num >= AppState.totalPages);
+        updateGridActive();
     }
 
-    function zIn() { State.zoom = Math.min(3, State.zoom + 0.25); render(State.current); toast(`تكبير: ${Math.round(State.zoom*100)}%`); }
-    function zOut() { State.zoom = Math.max(0.5, State.zoom - 0.25); render(State.current); toast(`تصغير: ${Math.round(State.zoom*100)}%`); }
-    function zReset() { State.zoom = 1.0; render(State.current); toast("الحجم الأصلي"); }
+    function zoomIn() { AppState.zoom = Math.min(3, AppState.zoom + 0.25); displayPage(AppState.currentPage); showNotif(`تكبير: ${Math.round(AppState.zoom*100)}%`); }
+    function zoomOut() { AppState.zoom = Math.max(0.5, AppState.zoom - 0.25); displayPage(AppState.currentPage); showNotif(`تصغير: ${Math.round(AppState.zoom*100)}%`); }
+    function resetZoom() { AppState.zoom = 1.0; displayPage(AppState.currentPage); showNotif("الحجم الأصلي"); }
 
-    function next() { if(State.current < State.total) load(State.current + 1); }
-    function prev() { if(State.current > 1) load(State.current - 1); }
+    function goToNextPage() { if (AppState.currentPage < AppState.totalPages) loadPage(AppState.currentPage + 1); }
+    function goToPrevPage() { if (AppState.currentPage > 1) loadPage(AppState.currentPage - 1); }
 
-    function toggleSidebar() { D.sidebar.classList.add('active'); D.overlay.style.display = 'block'; }
-    function closeSidebar() { D.sidebar.classList.remove('active'); D.overlay.style.display = 'none'; }
+    function toggleSidebar() { DOM.sidebar.classList.add('active'); DOM.overlay.style.display = 'block'; }
+    function closeSidebar() { DOM.sidebar.classList.remove('active'); DOM.overlay.style.display = 'none'; }
 
-    function genGrid() {
-        D.pgGrid.innerHTML = '';
-        for(let i=1; i<=State.total; i++){
-            const b = document.createElement('button');
-            b.className = 'pg-btn'; b.textContent = i;
-            b.onclick = () => { load(i); closeSidebar(); };
-            D.pgGrid.appendChild(b);
+    function createPageGrid() {
+        DOM.pageGrid.innerHTML = '';
+        for (let i = 1; i <= AppState.totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.className = 'page-btn'; btn.textContent = i;
+            btn.onclick = () => { loadPage(i); closeSidebar(); };
+            DOM.pageGrid.appendChild(btn);
         }
     }
-    function updateGrid() {
-        const btns = D.pgGrid.querySelectorAll('.pg-btn');
-        btns.forEach((b, i) => b.classList.toggle('active', i+1 === State.current));
+    function updateGridActive() {
+        document.querySelectorAll('.page-btn').forEach((b, i) => b.classList.toggle('active', i+1 === AppState.currentPage));
     }
 
-    function toast(m) { D.notif.textContent = m; D.notif.style.display = 'block'; setTimeout(() => D.notif.style.display='none', 1200); }
+    function showNotif(m) { DOM.notif.textContent = m; DOM.notif.style.display = 'block'; setTimeout(() => DOM.notif.style.display = 'none', 1500); }
 
-    // إعدادات سهولة القراءة
-    function toggleContrast() { document.body.classList.toggle('high-contrast'); document.getElementById('btn-contrast').classList.toggle('active'); }
-    function toggleText() { document.body.classList.toggle('large-text'); document.getElementById('btn-text').classList.toggle('active'); }
-    function toggleDark() { 
-        const isDark = D.viewer.style.backgroundColor === 'rgb(10, 10, 10)';
-        D.viewer.style.backgroundColor = isDark ? '#1a252f' : '#0a0a0a';
-        document.getElementById('btn-dark').classList.toggle('active');
+    function toggleBrightness() {
+        const isWhite = DOM.imageViewer.style.backgroundColor === 'rgb(255, 255, 255)';
+        DOM.imageViewer.style.backgroundColor = isWhite ? '#1a252f' : '#ffffff';
+        document.getElementById('brightness-btn').classList.toggle('active');
     }
-    function resetAllAccess() {
-        document.body.className = '';
-        D.viewer.style.backgroundColor = '#1a252f';
-        document.querySelectorAll('.access-btn').forEach(b => b.classList.remove('active'));
-        toast("تمت إعادة الضبط");
-    }
+    function resetAll() { resetZoom(); DOM.imageViewer.style.backgroundColor = '#1a252f'; document.getElementById('brightness-btn').classList.remove('active'); closeSidebar(); }
 
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', initializeApp);
 </script>
 
 </body>
