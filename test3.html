@@ -341,7 +341,7 @@
             font-size: 0.9rem;
         }
 
-        /* تنسيق الجوال */
+        /* تنسيق الجوال (تم التعديل هنا) */
         @media (max-width: 767px) {
             .controls-bar { 
                 padding: 8px 10px; 
@@ -369,14 +369,18 @@
                 bottom: 110px;
             }
             
+            /* تعديل شريط الشراء للجوال */
             .action-bar {
-                height: 50px;
-                padding: 8px 15px;
+                height: 55px;
+                padding: 5px 15px;
             }
             
+            /* تصغير حجم الخط ومنع القص */
             .action-button {
-                padding: 10px 15px;
-                font-size: 0.85rem;
+                padding: 8px 12px;
+                font-size: 0.78rem; /* تصغير الخط ليتناسب مع الجوال */
+                gap: 8px;
+                line-height: 1.2; /* لضمان عدم قص الأحرف من الأسفل */
             }
             
             .image-viewer {
@@ -533,7 +537,6 @@
 <div class="notif" id="notif"></div>
 
 <script>
-    // تهيئة المتغيرات العامة
     const State = {
         pdf: null,
         totalPages: 0,
@@ -545,8 +548,6 @@
         pagesCache: {},
         isLoading: false,
         renderQuality: 1.0,
-        
-        // متغيرات للتحريك المتقدم
         isPanning: false,
         isDragging: false,
         startPanPoint: { x: 0, y: 0 },
@@ -554,16 +555,7 @@
         lastPanPoint: { x: 0, y: 0 },
         panVelocity: { x: 0, y: 0 },
         panTimestamp: 0,
-        
-        // حدود الحركة
-        panBounds: {
-            minX: 0,
-            maxX: 0,
-            minY: 0,
-            maxY: 0
-        },
-        
-        // تسريع الرسوم المتحركة
+        panBounds: { minX: 0, maxX: 0, minY: 0, maxY: 0 },
         animationId: null,
         deceleration: 0.95,
         minVelocity: 0.1
@@ -588,43 +580,29 @@
         dragIndicator: document.getElementById('drag-indicator')
     };
 
-    // دالة التهيئة الرئيسية
     async function init() {
         try {
             D.loadingText.textContent = "جاري تحميل الكتاب...";
             await loadPDFJS();
             await loadPDFFile();
-            
             D.load.style.display = 'none';
             D.app.style.display = 'block';
-            
             State.baseScale = State.isMobile ? 1.5 : 2.0;
-            
-            // إعداد نظام التحريك المتقدم
             setupAdvancedPanning();
-            
-            setTimeout(() => {
-                zoomReset();
-            }, 100);
-            
+            setTimeout(() => { zoomReset(); }, 100);
         } catch (error) {
             console.error("خطأ في التهيئة:", error);
             showFallback("فشل تحميل الكتاب. الرجاء المحاولة مرة أخرى.");
         }
     }
 
-    // إعداد نظام التحريك المتقدم
     function setupAdvancedPanning() {
-        // إعداد الكمبيوتر (ماوس + تاتشباد)
         setupMousePanning();
         setupTouchPanning();
         setupTrackpadPanning();
-        
-        // إلغاء السلوك الافتراضي
         preventDefaultBehaviors();
     }
 
-    // إعداد التحريك بالفأرة
     function setupMousePanning() {
         D.viewer.addEventListener('mousedown', startMousePan);
         document.addEventListener('mousemove', handleMousePan);
@@ -632,7 +610,6 @@
         document.addEventListener('mouseleave', cancelPan);
     }
 
-    // إعداد التحريك باللمس
     function setupTouchPanning() {
         D.viewer.addEventListener('touchstart', handleTouchStart, { passive: false });
         D.viewer.addEventListener('touchmove', handleTouchMove, { passive: false });
@@ -640,374 +617,170 @@
         D.viewer.addEventListener('touchcancel', cancelPan);
     }
 
-    // إعداد التحريك بالتاتشباد (خاصة لماك)
     function setupTrackpadPanning() {
-        // تاتشباد لماك
         D.viewer.addEventListener('wheel', handleWheel, { passive: false });
-        
-        // للكمبيوتر العادي
         D.viewer.addEventListener('wheel', handleMouseWheel, { passive: false });
     }
 
-    // منع السلوك الافتراضي
     function preventDefaultBehaviors() {
         D.viewer.addEventListener('contextmenu', (e) => e.preventDefault());
         D.viewer.addEventListener('dragstart', (e) => e.preventDefault());
         D.imageContainer.addEventListener('dragstart', (e) => e.preventDefault());
-        
-        // لمنع التكبير الافتراضي على الجوال
         document.addEventListener('gesturestart', (e) => e.preventDefault());
         document.addEventListener('gesturechange', (e) => e.preventDefault());
         document.addEventListener('gestureend', (e) => e.preventDefault());
     }
 
-    // بدء التحريك بالفأرة
     function startMousePan(e) {
         if (State.zoom <= 1.0) return;
-        
-        e.preventDefault();
-        e.stopPropagation();
-        
-        State.isPanning = true;
-        State.isDragging = true;
-        
-        State.startPanPoint = {
-            x: e.clientX - State.currentPanPoint.x,
-            y: e.clientY - State.currentPanPoint.y
-        };
-        
+        e.preventDefault(); e.stopPropagation();
+        State.isPanning = true; State.isDragging = true;
+        State.startPanPoint = { x: e.clientX - State.currentPanPoint.x, y: e.clientY - State.currentPanPoint.y };
         State.lastPanPoint = { x: e.clientX, y: e.clientY };
-        State.panTimestamp = Date.now();
-        State.panVelocity = { x: 0, y: 0 };
-        
-        D.viewerArea.classList.add('grabbing');
-        showDragIndicator();
-        
-        // إلغاء أي رسوم متحركة سابقة
+        State.panTimestamp = Date.now(); State.panVelocity = { x: 0, y: 0 };
+        D.viewerArea.classList.add('grabbing'); showDragIndicator();
         cancelAnimationFrame(State.animationId);
     }
 
-    // معالجة التحريك بالفأرة
     function handleMousePan(e) {
         if (!State.isPanning) return;
-        
-        e.preventDefault();
-        e.stopPropagation();
-        
-        const now = Date.now();
-        const deltaTime = now - State.panTimestamp;
-        
-        // حساب السرعة
+        e.preventDefault(); e.stopPropagation();
+        const now = Date.now(); const deltaTime = now - State.panTimestamp;
         if (deltaTime > 0) {
-            const deltaX = e.clientX - State.lastPanPoint.x;
-            const deltaY = e.clientY - State.lastPanPoint.y;
-            
-            State.panVelocity = {
-                x: deltaX / deltaTime * 16,
-                y: deltaY / deltaTime * 16
-            };
+            const deltaX = e.clientX - State.lastPanPoint.x; const deltaY = e.clientY - State.lastPanPoint.y;
+            State.panVelocity = { x: deltaX / deltaTime * 16, y: deltaY / deltaTime * 16 };
         }
-        
-        // تحديث الموضع
-        const newX = e.clientX - State.startPanPoint.x;
-        const newY = e.clientY - State.startPanPoint.y;
-        
+        const newX = e.clientX - State.startPanPoint.x; const newY = e.clientY - State.startPanPoint.y;
         updatePanPosition(newX, newY);
-        
-        State.lastPanPoint = { x: e.clientX, y: e.clientY };
-        State.panTimestamp = now;
+        State.lastPanPoint = { x: e.clientX, y: e.clientY }; State.panTimestamp = now;
     }
 
-    // إنهاء التحريك بالفأرة
     function endMousePan(e) {
         if (!State.isPanning) return;
-        
-        State.isPanning = false;
-        State.isDragging = false;
-        
-        D.viewerArea.classList.remove('grabbing');
-        hideDragIndicator();
-        
-        // تطبيق القصور الذاتي
+        State.isPanning = false; State.isDragging = false;
+        D.viewerArea.classList.remove('grabbing'); hideDragIndicator();
         applyInertia();
-        
-        // إعادة تعيين السرعة إذا كانت صغيرة جداً
-        if (Math.abs(State.panVelocity.x) < 1 && Math.abs(State.panVelocity.y) < 1) {
-            State.panVelocity = { x: 0, y: 0 };
-        }
     }
 
-    // بدء التحريك باللمس
     function handleTouchStart(e) {
         if (e.touches.length !== 1) return;
-        
         if (State.zoom <= 1.0) {
-            // للتنقل بين الصفحات عند الزووم الطبيعي
-            State.touchStart = {
-                x: e.touches[0].clientX,
-                y: e.touches[0].clientY,
-                time: Date.now()
-            };
-            e.preventDefault();
-            return;
+            State.touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY, time: Date.now() };
+            e.preventDefault(); return;
         }
-        
-        // للتحريك عند التكبير
-        State.isPanning = true;
-        State.isDragging = true;
-        
+        State.isPanning = true; State.isDragging = true;
         const touch = e.touches[0];
-        State.startPanPoint = {
-            x: touch.clientX - State.currentPanPoint.x,
-            y: touch.clientY - State.currentPanPoint.y
-        };
-        
+        State.startPanPoint = { x: touch.clientX - State.currentPanPoint.x, y: touch.clientY - State.currentPanPoint.y };
         State.lastPanPoint = { x: touch.clientX, y: touch.clientY };
-        State.panTimestamp = Date.now();
-        State.panVelocity = { x: 0, y: 0 };
-        
-        D.viewerArea.classList.add('grabbing');
-        showDragIndicator();
-        
-        cancelAnimationFrame(State.animationId);
-        e.preventDefault();
+        State.panTimestamp = Date.now(); State.panVelocity = { x: 0, y: 0 };
+        D.viewerArea.classList.add('grabbing'); showDragIndicator();
+        cancelAnimationFrame(State.animationId); e.preventDefault();
     }
 
-    // معالجة التحريك باللمس
     function handleTouchMove(e) {
         if (!State.isPanning || e.touches.length !== 1) return;
-        
-        const touch = e.touches[0];
-        const now = Date.now();
-        const deltaTime = now - State.panTimestamp;
-        
-        // حساب السرعة
+        const touch = e.touches[0]; const now = Date.now(); const deltaTime = now - State.panTimestamp;
         if (deltaTime > 0) {
-            const deltaX = touch.clientX - State.lastPanPoint.x;
-            const deltaY = touch.clientY - State.lastPanPoint.y;
-            
-            State.panVelocity = {
-                x: deltaX / deltaTime * 16,
-                y: deltaY / deltaTime * 16
-            };
+            const deltaX = touch.clientX - State.lastPanPoint.x; const deltaY = touch.clientY - State.lastPanPoint.y;
+            State.panVelocity = { x: deltaX / deltaTime * 16, y: deltaY / deltaTime * 16 };
         }
-        
-        // تحديث الموضع
-        const newX = touch.clientX - State.startPanPoint.x;
-        const newY = touch.clientY - State.startPanPoint.y;
-        
+        const newX = touch.clientX - State.startPanPoint.x; const newY = touch.clientY - State.startPanPoint.y;
         updatePanPosition(newX, newY);
-        
-        State.lastPanPoint = { x: touch.clientX, y: touch.clientY };
-        State.panTimestamp = now;
-        
+        State.lastPanPoint = { x: touch.clientX, y: touch.clientY }; State.panTimestamp = now;
         e.preventDefault();
     }
 
-    // إنهاء التحريك باللمس
     function handleTouchEnd(e) {
         if (State.isPanning) {
-            State.isPanning = false;
-            State.isDragging = false;
-            
-            D.viewerArea.classList.remove('grabbing');
-            hideDragIndicator();
-            
-            applyInertia();
-            
-            if (Math.abs(State.panVelocity.x) < 1 && Math.abs(State.panVelocity.y) < 1) {
-                State.panVelocity = { x: 0, y: 0 };
-            }
-            
-            e.preventDefault();
-            return;
+            State.isPanning = false; State.isDragging = false;
+            D.viewerArea.classList.remove('grabbing'); hideDragIndicator();
+            applyInertia(); e.preventDefault(); return;
         }
-        
-        // تحقق من السحب للتنقل بين الصفحات
         if (State.touchStart && State.zoom <= 1.0) {
             const touchEnd = e.changedTouches[0];
             const deltaX = State.touchStart.x - touchEnd.clientX;
             const deltaTime = Date.now() - State.touchStart.time;
-            
             if (Math.abs(deltaX) > 50 && deltaTime < 300) {
-                if (deltaX > 0) {
-                    nextPage();
-                } else {
-                    prevPage();
-                }
+                if (deltaX > 0) nextPage(); else prevPage();
             }
             State.touchStart = null;
         }
     }
 
-    // معالجة عجلة الفأرة (للتاتشباد)
     function handleWheel(e) {
         if (State.zoom <= 1.0) return;
-        
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // لضبط السرعة بناءً على نوع الجهاز
+        e.preventDefault(); e.stopPropagation();
         const speedFactor = State.isMac ? 0.5 : 1;
-        
-        // استخدام deltaX و deltaY للتحريك الأفقي والعمودي
-        const deltaX = e.deltaX * speedFactor;
-        const deltaY = e.deltaY * speedFactor;
-        
-        // تحديث الموضع
-        const newX = State.currentPanPoint.x - deltaX;
-        const newY = State.currentPanPoint.y - deltaY;
-        
-        updatePanPosition(newX, newY);
-        
-        // إظهار مؤشر التحريك مؤقتاً
-        showDragIndicator();
-        setTimeout(hideDragIndicator, 1000);
+        const deltaX = e.deltaX * speedFactor; const deltaY = e.deltaY * speedFactor;
+        updatePanPosition(State.currentPanPoint.x - deltaX, State.currentPanPoint.y - deltaY);
+        showDragIndicator(); setTimeout(hideDragIndicator, 1000);
     }
 
-    // معالجة عجلة الفأرة العادية
     function handleMouseWheel(e) {
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && State.zoom > 1.0) {
-            // إذا كانت الحركة أفقية (تاتشباد)
-            handleWheel(e);
-        }
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && State.zoom > 1.0) handleWheel(e);
     }
 
-    // تحديث موضع التحريك
     function updatePanPosition(x, y) {
-        // تطبيق الحدود
         const boundedX = Math.max(State.panBounds.minX, Math.min(State.panBounds.maxX, x));
         const boundedY = Math.max(State.panBounds.minY, Math.min(State.panBounds.maxY, y));
-        
         State.currentPanPoint = { x: boundedX, y: boundedY };
-        
-        // تطبيق التحويل مع انتقال سلس
         D.imageContainer.style.transform = `translate(${State.currentPanPoint.x}px, ${State.currentPanPoint.y}px)`;
-        
-        // إظهار مؤشر التحريك إذا كنا نسحب
-        if (State.isDragging) {
-            showDragIndicator();
-        }
+        if (State.isDragging) showDragIndicator();
     }
 
-    // تطبيق القصور الذاتي
     function applyInertia() {
-        if (Math.abs(State.panVelocity.x) < State.minVelocity && 
-            Math.abs(State.panVelocity.y) < State.minVelocity) {
-            return;
-        }
-        
+        if (Math.abs(State.panVelocity.x) < State.minVelocity && Math.abs(State.panVelocity.y) < State.minVelocity) return;
         let lastTime = Date.now();
-        
         const animateInertia = () => {
-            const currentTime = Date.now();
-            const deltaTime = currentTime - lastTime;
-            
-            if (deltaTime === 0) {
-                State.animationId = requestAnimationFrame(animateInertia);
-                return;
-            }
-            
-            // تقليل السرعة بالاحتكاك
+            const currentTime = Date.now(); const deltaTime = currentTime - lastTime;
+            if (deltaTime === 0) { State.animationId = requestAnimationFrame(animateInertia); return; }
             State.panVelocity.x *= Math.pow(State.deceleration, deltaTime / 16);
             State.panVelocity.y *= Math.pow(State.deceleration, deltaTime / 16);
-            
-            // التوقف إذا كانت السرعة صغيرة جداً
-            if (Math.abs(State.panVelocity.x) < State.minVelocity && 
-                Math.abs(State.panVelocity.y) < State.minVelocity) {
-                State.panVelocity = { x: 0, y: 0 };
-                cancelAnimationFrame(State.animationId);
-                return;
+            if (Math.abs(State.panVelocity.x) < State.minVelocity && Math.abs(State.panVelocity.y) < State.minVelocity) {
+                State.panVelocity = { x: 0, y: 0 }; cancelAnimationFrame(State.animationId); return;
             }
-            
-            // تحديث الموضع
-            const newX = State.currentPanPoint.x + State.panVelocity.x;
-            const newY = State.currentPanPoint.y + State.panVelocity.y;
-            
-            updatePanPosition(newX, newY);
-            
-            lastTime = currentTime;
-            State.animationId = requestAnimationFrame(animateInertia);
+            updatePanPosition(State.currentPanPoint.x + State.panVelocity.x, State.currentPanPoint.y + State.panVelocity.y);
+            lastTime = currentTime; State.animationId = requestAnimationFrame(animateInertia);
         };
-        
         State.animationId = requestAnimationFrame(animateInertia);
     }
 
-    // إلغاء التحريك
     function cancelPan() {
-        State.isPanning = false;
-        State.isDragging = false;
-        State.panVelocity = { x: 0, y: 0 };
-        
-        D.viewerArea.classList.remove('grabbing');
-        hideDragIndicator();
-        
+        State.isPanning = false; State.isDragging = false; State.panVelocity = { x: 0, y: 0 };
+        D.viewerArea.classList.remove('grabbing'); hideDragIndicator();
         cancelAnimationFrame(State.animationId);
     }
 
-    // إظهار مؤشر التحريك
     function showDragIndicator() {
         if (State.zoom <= 1.0) return;
-        
         D.dragIndicator.style.display = 'block';
-        setTimeout(() => {
-            D.dragIndicator.style.opacity = '1';
-        }, 10);
+        setTimeout(() => { D.dragIndicator.style.opacity = '1'; }, 10);
     }
 
-    // إخفاء مؤشر التحريك
     function hideDragIndicator() {
         D.dragIndicator.style.opacity = '0';
-        setTimeout(() => {
-            D.dragIndicator.style.display = 'none';
-        }, 300);
+        setTimeout(() => { D.dragIndicator.style.display = 'none'; }, 300);
     }
 
-    // حساب حدود الحركة
     function calculatePanBounds() {
-        if (!D.pImg.complete || D.pImg.naturalWidth === 0) {
-            setTimeout(calculatePanBounds, 100);
-            return;
-        }
-        
-        const containerWidth = D.viewer.clientWidth;
-        const containerHeight = D.viewer.clientHeight;
-        const imgWidth = D.pImg.offsetWidth;
-        const imgHeight = D.pImg.offsetHeight;
-        
+        if (!D.pImg.complete || D.pImg.naturalWidth === 0) { setTimeout(calculatePanBounds, 100); return; }
+        const containerWidth = D.viewer.clientWidth; const containerHeight = D.viewer.clientHeight;
+        const imgWidth = D.pImg.offsetWidth; const imgHeight = D.pImg.offsetHeight;
         if (imgWidth <= containerWidth && imgHeight <= containerHeight) {
-            State.panBounds = { minX: 0, maxX: 0, minY: 0, maxY: 0 };
-            return;
+            State.panBounds = { minX: 0, maxX: 0, minY: 0, maxY: 0 }; return;
         }
-        
-        const extraWidth = Math.max(0, imgWidth - containerWidth);
-        const extraHeight = Math.max(0, imgHeight - containerHeight);
-        
-        State.panBounds = {
-            minX: -extraWidth / 2,
-            maxX: extraWidth / 2,
-            minY: -extraHeight / 2,
-            maxY: extraHeight / 2
-        };
-        
+        const extraWidth = Math.max(0, imgWidth - containerWidth); const extraHeight = Math.max(0, imgHeight - containerHeight);
+        State.panBounds = { minX: -extraWidth / 2, maxX: extraWidth / 2, minY: -extraHeight / 2, maxY: extraHeight / 2 };
         updatePanPosition(State.currentPanPoint.x, State.currentPanPoint.y);
     }
 
-    // تحميل مكتبة PDF.js
     async function loadPDFJS() {
         return new Promise((resolve, reject) => {
-            if (window.pdfjsLib) {
-                resolve();
-                return;
-            }
-            
-            D.loadingText.textContent = "جاري تحميل مكتبة القراءة...";
-            
+            if (window.pdfjsLib) { resolve(); return; }
             const script = document.createElement('script');
             script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js';
             script.onload = () => {
-                pdfjsLib.GlobalWorkerOptions.workerSrc = 
-                    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
                 resolve();
             };
             script.onerror = () => reject(new Error("فشل تحميل مكتبة PDF.js"));
@@ -1015,291 +788,102 @@
         });
     }
 
-    // تحميل ملف PDF
     async function loadPDFFile() {
         return new Promise((resolve, reject) => {
-            D.loadingText.textContent = "جاري تحميل ملف الكتاب...";
-            
-            const loadingTask = pdfjsLib.getDocument({
-                url: 'pdf/111.pdf',
-                cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/cmaps/',
-                cMapPacked: true
-            });
-            
+            const loadingTask = pdfjsLib.getDocument({ url: 'pdf/111.pdf', cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/cmaps/', cMapPacked: true });
             loadingTask.onProgress = (progressData) => {
                 const percent = Math.round((progressData.loaded / progressData.total) * 100);
-                D.pb.style.width = percent + '%';
-                D.loadingText.textContent = `جاري تحميل الكتاب... ${percent}%`;
+                D.pb.style.width = percent + '%'; D.loadingText.textContent = `جاري تحميل الكتاب... ${percent}%`;
             };
-            
             loadingTask.promise.then(pdf => {
-                State.pdf = pdf;
-                State.totalPages = Math.min(pdf.numPages, 50);
-                
-                genGrid();
-                loadPage(1).then(() => resolve()).catch(reject);
-                
+                State.pdf = pdf; State.totalPages = Math.min(pdf.numPages, 50);
+                genGrid(); loadPage(1).then(() => resolve()).catch(reject);
             }).catch(reject);
         });
     }
 
-    // تحميل صفحة محددة
     async function loadPage(pageNum, forceReload = false) {
         if (State.isLoading && !forceReload) return;
-        
         try {
-            State.isLoading = true;
-            State.currentPage = pageNum;
-            
-            // إعادة تعيين التحريك
-            State.currentPanPoint = { x: 0, y: 0 };
-            State.panVelocity = { x: 0, y: 0 };
+            State.isLoading = true; State.currentPage = pageNum;
+            State.currentPanPoint = { x: 0, y: 0 }; State.panVelocity = { x: 0, y: 0 };
             D.imageContainer.style.transform = 'translate(0px, 0px)';
-            
             const renderScale = State.baseScale * State.zoom;
             const cacheKey = `${pageNum}_${Math.round(renderScale * 10) / 10}`;
-            
-            if (!forceReload && State.pagesCache[cacheKey]) {
-                renderPage(State.pagesCache[cacheKey]);
-                State.isLoading = false;
-                return;
-            }
-            
+            if (!forceReload && State.pagesCache[cacheKey]) { renderPage(State.pagesCache[cacheKey]); State.isLoading = false; return; }
             const page = await State.pdf.getPage(pageNum);
             const viewport = page.getViewport({ scale: renderScale * State.renderQuality });
-            
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-            
-            if (State.zoom > 1.5) {
-                canvas.style.imageRendering = 'crisp-edges';
-            }
-            
-            const renderContext = { canvasContext: context, viewport: viewport };
-            await page.render(renderContext).promise;
-            
-            const imageQuality = State.zoom > 2.0 ? 0.95 : 0.85;
-            const imageData = canvas.toDataURL('image/jpeg', imageQuality);
-            
-            State.pagesCache[cacheKey] = imageData;
-            renderPage(imageData);
-            
+            const canvas = document.createElement('canvas'); const context = canvas.getContext('2d');
+            canvas.width = viewport.width; canvas.height = viewport.height;
+            await page.render({ canvasContext: context, viewport: viewport }).promise;
+            const imageData = canvas.toDataURL('image/jpeg', 0.85);
+            State.pagesCache[cacheKey] = imageData; renderPage(imageData);
             State.isLoading = false;
-            
-        } catch (error) {
-            console.error(`فشل تحميل الصفحة ${pageNum}:`, error);
-            showPageError();
-            State.isLoading = false;
-        }
+        } catch (error) { console.error(error); showPageError(); State.isLoading = false; }
     }
 
-    // عرض الصفحة
     function renderPage(imageData) {
-        D.pImg.src = imageData;
-        D.pInd.textContent = `${State.currentPage} / ${State.totalPages}`;
+        D.pImg.src = imageData; D.pInd.textContent = `${State.currentPage} / ${State.totalPages}`;
         D.zDis.textContent = Math.round(State.zoom * 100) + "%";
-        
         D.fallbackMsg.style.display = 'none';
         document.getElementById('prev').disabled = (State.currentPage <= 1);
         document.getElementById('next').disabled = (State.currentPage >= State.totalPages);
-        
         updateGrid();
-        
-        D.pImg.onload = function() {
-            updateImageDisplay();
-            centerImage();
-            D.pImg.style.opacity = '1';
-        };
-        
-        D.pImg.onerror = function() {
-            console.error("فشل تحميل صورة الصفحة");
-            showPageError();
-        };
-        
+        D.pImg.onload = function() { updateImageDisplay(); centerImage(); D.pImg.style.opacity = '1'; };
         D.pImg.style.opacity = '0.7';
     }
 
-    // تحديث عرض الصورة
     function updateImageDisplay() {
-        if (!D.pImg.complete || D.pImg.naturalWidth === 0) {
-            setTimeout(updateImageDisplay, 100);
-            return;
-        }
-        
-        const viewerWidth = D.viewer.clientWidth;
-        const viewerHeight = D.viewer.clientHeight;
-        const imgWidth = D.pImg.naturalWidth;
-        const imgHeight = D.pImg.naturalHeight;
-        
-        const widthRatio = viewerWidth / imgWidth;
-        const heightRatio = viewerHeight / imgHeight;
-        const baseScale = Math.min(widthRatio, heightRatio);
+        if (!D.pImg.complete || D.pImg.naturalWidth === 0) { setTimeout(updateImageDisplay, 100); return; }
+        const viewerWidth = D.viewer.clientWidth; const viewerHeight = D.viewer.clientHeight;
+        const imgWidth = D.pImg.naturalWidth; const imgHeight = D.pImg.naturalHeight;
+        const baseScale = Math.min(viewerWidth / imgWidth, viewerHeight / imgHeight);
         const displayScale = baseScale * State.zoom;
-        
-        D.pImg.style.width = (imgWidth * displayScale) + 'px';
-        D.pImg.style.height = (imgHeight * displayScale) + 'px';
-        D.pImg.style.maxWidth = 'none';
-        D.pImg.style.maxHeight = 'none';
-        
+        D.pImg.style.width = (imgWidth * displayScale) + 'px'; D.pImg.style.height = (imgHeight * displayScale) + 'px';
         setTimeout(calculatePanBounds, 50);
     }
 
-    // مركزة الصورة
-    function centerImage() {
-        if (State.zoom <= 1.0) {
-            State.currentPanPoint = { x: 0, y: 0 };
-            D.imageContainer.style.transform = 'translate(0px, 0px)';
-        }
-    }
+    function centerImage() { if (State.zoom <= 1.0) { State.currentPanPoint = { x: 0, y: 0 }; D.imageContainer.style.transform = 'translate(0px, 0px)'; } }
 
-    // دوال التكبير/التصغير
-    function zoomIn() {
-        if (State.zoom >= 3.0) {
-            toast("الحد الأقصى للتكبير");
-            return;
-        }
-        
-        const oldZoom = State.zoom;
-        State.zoom = Math.min(State.zoom + 0.25, 3.0);
-        
-        if (State.zoom > 1.5 && oldZoom <= 1.5) {
-            State.renderQuality = 1.5;
-            loadPage(State.currentPage, true);
-        } else {
-            updateImageDisplay();
-            D.zDis.textContent = Math.round(State.zoom * 100) + "%";
-        }
-        
-        if (State.zoom >= 3.0) toast("الحد الأقصى للتكبير");
-    }
-    
-    function zoomOut() {
-        if (State.zoom <= 0.5) {
-            toast("الحد الأدنى للتصغير");
-            return;
-        }
-        
-        State.zoom = Math.max(State.zoom - 0.25, 0.5);
-        
-        if (State.zoom <= 1.5 && State.renderQuality > 1.0) {
-            State.renderQuality = 1.0;
-            loadPage(State.currentPage, true);
-        } else {
-            updateImageDisplay();
-            D.zDis.textContent = Math.round(State.zoom * 100) + "%";
-            
-            if (State.zoom <= 1.0) {
-                centerImage();
-            }
-        }
-        
-        if (State.zoom <= 0.5) toast("الحد الأدنى للتصغير");
-    }
-    
-    function zoomReset() {
-        State.zoom = 1.0;
-        State.renderQuality = 1.0;
-        loadPage(State.currentPage, true);
-        D.zDis.textContent = "ملاءمة";
-        toast("تم ملاءمة الصفحة للشاشة");
-    }
+    function zoomIn() { if (State.zoom >= 3.0) return; State.zoom = Math.min(State.zoom + 0.25, 3.0); updateImageDisplay(); D.zDis.textContent = Math.round(State.zoom * 100) + "%"; }
+    function zoomOut() { if (State.zoom <= 0.5) return; State.zoom = Math.max(State.zoom - 0.25, 0.5); updateImageDisplay(); D.zDis.textContent = Math.round(State.zoom * 100) + "%"; if (State.zoom <= 1.0) centerImage(); }
+    function zoomReset() { State.zoom = 1.0; State.renderQuality = 1.0; loadPage(State.currentPage, true); D.zDis.textContent = "ملاءمة"; }
 
-    // التنقل بين الصفحات
-    function nextPage() {
-        if (State.currentPage < State.totalPages) {
-            loadPage(State.currentPage + 1);
-        }
-    }
-    
-    function prevPage() {
-        if (State.currentPage > 1) {
-            loadPage(State.currentPage - 1);
-        }
-    }
+    function nextPage() { if (State.currentPage < State.totalPages) loadPage(State.currentPage + 1); }
+    function prevPage() { if (State.currentPage > 1) loadPage(State.currentPage - 1); }
 
-    // إدارة القائمة الجانبية
-    function toggleSidebar() {
-        D.sidebar.classList.add('active');
-        D.overlay.style.display = 'block';
-    }
-    
-    function closeSidebar() {
-        D.sidebar.classList.remove('active');
-        D.overlay.style.display = 'none';
-    }
+    function toggleSidebar() { D.sidebar.classList.add('active'); D.overlay.style.display = 'block'; }
+    function closeSidebar() { D.sidebar.classList.remove('active'); D.overlay.style.display = 'none'; }
 
-    // إنشاء فهرس الصفحات
     function genGrid() {
         D.pgGrid.innerHTML = '';
         for (let i = 1; i <= State.totalPages; i++) {
-            const button = document.createElement('button');
-            button.className = 'pg-btn';
-            button.textContent = i;
-            button.onclick = () => {
-                loadPage(i);
-                closeSidebar();
-            };
-            D.pgGrid.appendChild(button);
+            const btn = document.createElement('button'); btn.className = 'pg-btn'; btn.textContent = i;
+            btn.onclick = () => { loadPage(i); closeSidebar(); };
+            D.pgGrid.appendChild(btn);
         }
     }
     
     function updateGrid() {
         const buttons = D.pgGrid.querySelectorAll('.pg-btn');
-        buttons.forEach((btn, index) => {
-            btn.classList.toggle('active', (index + 1) === State.currentPage);
-        });
+        buttons.forEach((btn, index) => { btn.classList.toggle('active', (index + 1) === State.currentPage); });
     }
 
-    // عرض رسائل للمستخدم
     function toast(message) {
-        D.notif.textContent = message;
-        D.notif.style.display = 'block';
-        setTimeout(() => {
-            D.notif.style.display = 'none';
-        }, 1500);
+        D.notif.textContent = message; D.notif.style.display = 'block';
+        setTimeout(() => { D.notif.style.display = 'none'; }, 1500);
     }
     
-    function showPageError() {
-        D.fallbackMsg.style.display = 'block';
-        toast("فشل تحميل الصفحة");
-    }
+    function showPageError() { D.fallbackMsg.style.display = 'block'; toast("فشل تحميل الصفحة"); }
     
     function showFallback(message) {
         D.load.style.display = 'none';
-        document.body.innerHTML = `
-            <div style="padding: 40px 20px; text-align: center; direction: rtl; background: var(--bg-white); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <div style="color: var(--primary-color); font-size: 3rem; margin-bottom: 20px;">⚠️</div>
-                <h2 style="color: var(--primary-color); margin-bottom: 20px;">عذراً، حدث خطأ</h2>
-                <p style="margin-bottom: 15px; color: var(--text-dark); font-size: 1.1rem;">${message}</p>
-                <p style="margin-bottom: 25px; color: #666;">الرجاء المحاولة على جهاز الكمبيوتر أو تحديث الصفحة</p>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
-                    <button onclick="location.reload()" style="background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; border: none; font-size: 1rem; cursor: pointer; font-family: 'Tajawal', sans-serif;">
-                        تحديث الصفحة
-                    </button>
-                    <a href="books.html" style="background: #f0f0f0; color: var(--text-dark); padding: 12px 25px; border-radius: 10px; text-decoration: none; display: inline-block; font-size: 1rem;">
-                        العودة إلى المكتبة
-                    </a>
-                </div>
-            </div>
-        `;
+        document.body.innerHTML = `<div style="padding:40px 20px;text-align:center;direction:rtl;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;"><h2 style="color:var(--primary-color)">عذراً، حدث خطأ</h2><p>${message}</p><button onclick="location.reload()" style="background:var(--primary-color);color:white;padding:12px 25px;border-radius:10px;margin-top:20px;border:none;cursor:pointer;">تحديث الصفحة</button></div>`;
     }
 
-    // تحديث الحجم عند تغيير اتجاه الشاشة
-    window.addEventListener('resize', function() {
-        updateImageDisplay();
-        calculatePanBounds();
-    });
-    
-    window.addEventListener('orientationchange', function() {
-        setTimeout(() => {
-            updateImageDisplay();
-            calculatePanBounds();
-        }, 300);
-    });
+    window.addEventListener('resize', () => { updateImageDisplay(); calculatePanBounds(); });
+    window.addEventListener('orientationchange', () => { setTimeout(() => { updateImageDisplay(); calculatePanBounds(); }, 300); });
 
-    // بدء التحميل
     document.addEventListener('DOMContentLoaded', init);
 </script>
 
