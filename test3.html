@@ -5,26 +5,33 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     <title>معاينة حسين الخليل</title>
     
+    <!-- Fonts - نسخ الخط من الكود الأول -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* دمج متغيرات الألوان من الكود الأول */
         :root {
-            --main-bg: #0f172a;
-            --glass-bg: rgba(30, 41, 59, 0.95);
-            --accent-color: #6366f1;
-            --text-light: #f8fafc;
+            --primary-color: #5e2ca5;
+            --primary-dark: #451b7a; 
+            --primary-light: #8a5bc7;
+            --accent-color: #ffd700;
+            --bg-color: #f9f7f2;
+            --surface-color: #F8F5FD; 
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
             --transition: all 0.3s ease;
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--main-bg);
-            color: var(--text-light);
+            background-color: var(--bg-color); /* استخدام خلفية الكود الأول */
+            color: var(--text-primary);
             height: 100vh;
             width: 100vw;
             overflow: hidden;
@@ -32,28 +39,29 @@
             flex-direction: column;
         }
 
-        /* --- الهيدر العلوي (ثابت في الأعلى دائماً) --- */
+        /* --- الهيدر العلوي (نمط الكود الأول) --- */
         .header {
-            height: 60px;
-            background: var(--glass-bg);
+            height: 65px;
+            background: rgba(94, 44, 165, 0.98); /* لون النافبار من الكود الأول */
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             position: fixed;
             top: 0; left: 0; right: 0;
         }
-        .header-title { font-weight: 700; font-size: 1.1rem; color: var(--text-light); }
+        .header-title { font-weight: 800; font-size: 1.1rem; color: white; }
         .btn-exit {
-            background: rgba(239, 68, 68, 0.1); color: #ef4444;
-            padding: 8px 15px; border-radius: 10px; text-decoration: none;
-            font-size: 0.9rem; border: 1px solid rgba(239, 68, 68, 0.2);
+            background: rgba(255, 255, 255, 0.15); color: white;
+            padding: 8px 18px; border-radius: 20px; text-decoration: none;
+            font-size: 0.9rem; border: 1px solid rgba(255, 255, 255, 0.3);
             display: flex; align-items: center; gap: 8px; transition: var(--transition);
+            font-weight: 700;
         }
-        .btn-exit:hover { background: #ef4444; color: white; }
+        .btn-exit:hover { background: var(--accent-color); color: var(--primary-dark); border-color: var(--accent-color); }
 
         /* --- منطقة عرض الكتاب --- */
         .viewer-container {
@@ -63,10 +71,11 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            margin-top: 60px; /* مساحة للهيدر العلوي */
-            margin-bottom: 140px; /* مساحة لشريط التحكم وزر الشراء السفلي */
+            margin-top: 65px; 
+            margin-bottom: 140px; 
             overflow: hidden;
-            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+            /* تدرج لوني مستوحى من ألوان الهوية */
+            background: radial-gradient(circle, #f0ebf8 0%, #e2d7f3 100%);
             touch-action: none;
         }
 
@@ -80,96 +89,97 @@
             max-width: 100%; max-height: 100%;
             width: auto; height: auto;
             object-fit: contain;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            border-radius: 4px; background-color: white;
+            box-shadow: 0 10px 40px rgba(94, 44, 165, 0.2);
+            border-radius: 5px; background-color: white;
             pointer-events: none;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* --- شريط التحكم السفلي (فوق زر الشراء) --- */
+        /* --- شريط التحكم السفلي (نمط متناسق) --- */
         .bottom-controls-bar {
             position: fixed;
             bottom: 80px; 
             left: 0; right: 0;
-            height: 60px;
-            background: var(--glass-bg);
+            height: 65px;
+            background: var(--surface-color);
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 12px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(94, 44, 165, 0.1);
             z-index: 950;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.03);
         }
 
         .btn-nav {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;
-            width: 38px; height: 38px; border-radius: 10px;
+            background: white; border: 1px solid rgba(94, 44, 165, 0.2); color: var(--primary-color);
+            width: 42px; height: 42px; border-radius: 12px;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem; transition: var(--transition);
+            font-size: 1rem; transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        .btn-nav:hover { background: var(--accent-color); border-color: var(--accent-color); }
-        .page-num { font-size: 0.9rem; font-weight: bold; min-width: 70px; text-align: center; color: var(--text-light); }
-        .divider { width: 1px; height: 20px; background: rgba(255,255,255,0.15); margin: 0 5px; }
+        .btn-nav:hover { background: var(--primary-color); border-color: var(--primary-color); color: white; transform: translateY(-2px); }
+        .page-num { font-size: 0.95rem; font-weight: 800; min-width: 80px; text-align: center; color: var(--primary-dark); }
+        .divider { width: 2px; height: 25px; background: rgba(94, 44, 165, 0.1); margin: 0 5px; }
 
-        /* --- شريط الشراء السفلي --- */
+        /* --- شريط الشراء السفلي (نمط الإعلان في الكود الأول) --- */
         .footer-buy-bar {
             position: fixed;
             bottom: 0; left: 0; right: 0;
             height: 80px;
-            background: var(--main-bg);
+            background: white;
             display: flex; align-items: center; justify-content: center;
-            padding: 0 20px; border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 0 20px; border-top: 2px solid var(--accent-color);
             z-index: 1000;
         }
         .btn-buy {
-            background: var(--accent-color); color: white;
-            width: 100%; max-width: 450px; padding: 14px;
-            border-radius: 14px; text-decoration: none;
-            font-weight: 700; font-size: 1rem;
+            background: var(--primary-color); color: white;
+            width: 100%; max-width: 500px; padding: 15px;
+            border-radius: 15px; text-decoration: none;
+            font-weight: 800; font-size: 1.1rem;
             display: flex; align-items: center; justify-content: center; gap: 12px;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 15px rgba(94, 44, 165, 0.3);
+            transition: var(--transition);
         }
+        .btn-buy:hover { background: var(--primary-dark); transform: scale(1.02); }
+        .btn-buy i { color: var(--accent-color); }
 
-        /* لودر التحميل */
+        /* لودر التحميل الأرجواني */
         #loader {
-            position: fixed; inset: 0; background: var(--main-bg);
+            position: fixed; inset: 0; background: var(--bg-color);
             display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 2000;
         }
-        .spinner { width: 45px; height: 45px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--accent-color); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        .spinner { width: 50px; height: 50px; border: 4px solid rgba(94, 44, 165, 0.1); border-top-color: var(--primary-color); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* =========================================== */
-        /* تعديلات خاصة بنسخة الجوال فقط */
-        /* =========================================== */
         @media (max-width: 768px) {
             .viewer-container {
-                /* إنزال ملف الصفحات للأسفل لتجنب القص من الأعلى */
-                margin-top: 80px; 
-                padding-top: 40px; 
-                /* محاذاة الصفحة للأعلى لضمان رؤية الهامش العلوي */
+                margin-top: 65px; 
+                padding-top: 30px; 
                 align-items: flex-start; 
             }
-            .header-title { font-size: 0.95rem; }
-            .btn-exit { padding: 6px 12px; font-size: 0.8rem; }
-            .bottom-controls-bar { gap: 8px; }
-            .btn-nav { width: 34px; height: 34px; }
+            .header-title { font-size: 1rem; }
+            .btn-exit { padding: 6px 12px; font-size: 0.85rem; }
+            .bottom-controls-bar { gap: 8px; height: 60px; bottom: 80px; }
+            .btn-nav { width: 36px; height: 36px; }
+            .footer-buy-bar { height: 75px; }
+            .btn-buy { font-size: 1rem; }
         }
-        /* =========================================== */
-
     </style>
 </head>
 <body>
 
 <div id="loader">
     <div class="spinner"></div>
-    <p style="margin-top: 15px; font-size: 0.85rem; color: #94a3b8;">جاري تحميل الكتاب...</p>
+    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary-color); font-weight: 700;">جاري تحميل الكتاب...</p>
 </div>
 
-<!-- الهيدر العلوي: العنوان + زر الخروج -->
+<!-- الهيدر العلوي -->
 <header class="header">
     <span class="header-title">معاينة: حسين الخليل</span>
     <a href="books.html" class="btn-exit">
-        خروج <i class="fas fa-sign-out-alt"></i>
+        <i class="fas fa-arrow-right"></i> عودة للكتب
     </a>
 </header>
 
@@ -180,7 +190,7 @@
     </div>
 </main>
 
-<!-- شريط التحكم السفلي: التكبير والتنقل -->
+<!-- شريط التحكم السفلي -->
 <div class="bottom-controls-bar">
     <button class="btn-nav" id="prev-btn" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i></button>
     <span class="page-num" id="page-info">1 / 50</span>
@@ -193,14 +203,15 @@
     <button class="btn-nav" onclick="adjustZoom(-0.3)"><i class="fas fa-search-minus"></i></button>
 </div>
 
-<!-- شريط الشراء الثابت في الأسفل تماماً -->
+<!-- شريط الشراء الثابت -->
 <div class="footer-buy-bar">
-    <a href="#" class="btn-buy">
+    <a href="support.html" class="btn-buy">
         <i class="fas fa-shopping-cart"></i>
         اشتَرِ النسخة الكاملة الآن
     </a>
 </div>
 
+<!-- Scripts (نفس وظائف الكود الثاني) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 <script>
     const pdfUrl = 'pdf/111.pdf'; 
@@ -225,7 +236,10 @@
             pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
             totalPages = Math.min(pdfDoc.numPages, 50); 
             renderPage(1);
-        } catch (e) { console.error("Error loading PDF:", e); }
+        } catch (e) { 
+            console.error("Error loading PDF:", e);
+            loader.innerHTML = '<p style="color:red">عذراً، تعذر تحميل الملف</p>';
+        }
     }
 
     async function renderPage(num) {
@@ -260,7 +274,6 @@
 
     function resetZoom() { zoomLevel = 1; translateX = 0; translateY = 0; updateTransform(); }
 
-    // التحكم بالسحب واللمس
     const startDrag = (x, y) => {
         if (zoomLevel <= 1) return;
         isDragging = true;
