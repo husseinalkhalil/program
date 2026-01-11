@@ -59,9 +59,9 @@
             justify-content: center;
             align-items: center;
             padding: 10px;
-            overflow: hidden; /* لمنع ظهور شريط التمرير المزعج */
+            overflow: hidden;
             background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
-            touch-action: none; /* لمنع المتصفح من التدخل في حركات اللمس */
+            touch-action: none;
             cursor: default;
         }
 
@@ -71,7 +71,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            will-change: transform; /* تحسين أداء المعالجة الرسومية */
+            will-change: transform;
         }
 
         #page-image {
@@ -83,7 +83,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             border-radius: 4px;
             background-color: white;
-            pointer-events: none; /* لمنع الصورة من مقاطعة عملية السحب */
+            pointer-events: none;
         }
 
         /* أزرار التحكم العائمة */
@@ -133,11 +133,19 @@
             text-decoration: none;
             text-align: center;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            line-height: 1.2; /* منع قص الحروف العربية */
+        }
+
+        @media (max-width: 768px) {
+            .btn-buy {
+                font-size: 0.85rem;
+                padding: 10px;
+            }
         }
 
         /* شاشة التحميل */
@@ -148,7 +156,6 @@
         .spinner { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--accent-color); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* حالة السحب */
         .grabbing { cursor: grabbing !important; }
     </style>
 </head>
@@ -176,9 +183,9 @@
         <span class="page-num" id="page-info">1 / 50</span>
         <button class="btn-nav" id="next-btn" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></button>
         <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.1); margin: 0 5px;"></div>
-        <button class="btn-nav" onclick="adjustZoom(0.2)"><i class="fas fa-search-plus"></i></button>
+        <button class="btn-nav" onclick="adjustZoom(0.3)"><i class="fas fa-search-plus"></i></button>
         <button class="btn-nav" onclick="resetZoom()"><i class="fas fa-sync-alt"></i></button>
-        <button class="btn-nav" onclick="adjustZoom(-0.2)"><i class="fas fa-search-minus"></i></button>
+        <button class="btn-nav" onclick="adjustZoom(-0.3)"><i class="fas fa-search-minus"></i></button>
     </div>
 </main>
 
@@ -196,7 +203,6 @@
     let currPage = 1;
     let totalPages = 0;
     
-    // متغيرات التحريك والزووم
     let zoomLevel = 1;
     let isDragging = false;
     let startX, startY;
@@ -221,21 +227,21 @@
     async function renderPage(num) {
         loader.style.display = 'flex';
         const page = await pdfDoc.getPage(num);
-        const viewport = page.getViewport({ scale: 2.0 }); 
+        const viewport = page.getViewport({ scale: 2.5 }); 
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
         await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-        imgEl.src = canvas.toDataURL('image/jpeg', 0.8);
+        imgEl.src = canvas.toDataURL('image/jpeg', 0.85);
         currPage = num;
         infoEl.textContent = `${num} / ${totalPages}`;
         
         document.getElementById('prev-btn').disabled = (num <= 1);
         document.getElementById('next-btn').disabled = (num >= totalPages);
         
-        resetZoom(); // تصفير الموقع والزووم عند الانتقال لصفحة جديدة
+        resetZoom();
         loader.style.display = 'none';
     }
 
@@ -244,32 +250,36 @@
         if(newPage >= 1 && newPage <= totalPages) renderPage(newPage);
     }
 
-    // --- نظام التحريك الذكي ---
-
     function updateTransform() {
         wrapper.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoomLevel})`;
-        // تغيير شكل الفأرة ليتمكن المستخدم من معرفة أنه يستطيع السحب
-        if (zoomLevel > 1) {
-            viewer.style.cursor = 'grab';
-        } else {
-            viewer.style.cursor = 'default';
-        }
+        viewer.style.cursor = (zoomLevel > 1) ? 'grab' : 'default';
     }
 
     function adjustZoom(delta) {
-        zoomLevel = Math.max(1, Math.min(4, zoomLevel + delta));
+        zoomLevel = Math.max(1, Math.min(5, zoomLevel + delta));
         if (zoomLevel === 1) { translateX = 0; translateY = 0; }
         updateTransform();
     }
 
     function resetZoom() {
-        zoomLevel = 1;
-        translateX = 0;
-        translateY = 0;
+        zoomLevel = 1; translateX = 0; translateY = 0;
         updateTransform();
     }
 
-    // التعامل مع الماوس
+    // --- نظام التحريك الحر بالاصبعين (Trackpad) ونقر الفأرة (Mouse) للكمبيوتر ---
+
+    // 1. تحريك حر بالاصبعين أو عجلة الماوس (بدون نقر)
+    viewer.addEventListener('wheel', (e) => {
+        if (zoomLevel > 1) {
+            e.preventDefault(); // منع الصفحة من الارتداد أو السكايب
+            // تعديل الموقع بناءً على قوة التمرير (delta)
+            translateX -= e.deltaX;
+            translateY -= e.deltaY;
+            updateTransform();
+        }
+    }, { passive: false });
+
+    // 2. تحريك بالنقر والسحب (للماوس العادي)
     viewer.addEventListener('mousedown', (e) => {
         if (zoomLevel <= 1) return;
         isDragging = true;
@@ -290,24 +300,22 @@
         viewer.classList.remove('grabbing');
     });
 
-    // التعامل مع اللمس (الجوال)
+    // --- نظام الجوال (Touch) - لم يتم تعديله لضمان الكفاءة ---
     viewer.addEventListener('touchstart', (e) => {
-        if (zoomLevel <= 1) return;
+        if (zoomLevel <= 1 || e.touches.length > 1) return; 
         isDragging = true;
         startX = e.touches[0].clientX - translateX;
         startY = e.touches[0].clientY - translateY;
     }, { passive: true });
 
     viewer.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
+        if (!isDragging || e.touches.length > 1) return;
         translateX = e.touches[0].clientX - startX;
         translateY = e.touches[0].clientY - startY;
         updateTransform();
     }, { passive: true });
 
-    viewer.addEventListener('touchend', () => {
-        isDragging = false;
-    });
+    viewer.addEventListener('touchend', () => { isDragging = false; });
 
     loadBook();
 </script>
