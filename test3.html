@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-    <title>معاينة كتاب - حسين الخليل</title>
+    <title>معاينة حسين الخليل</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,7 @@
             flex-direction: column;
         }
 
-        /* --- الهيدر (نسخة الكمبيوتر في الأعلى) --- */
+        /* --- الهيدر العلوي (ثابت في الأعلى) --- */
         .header {
             height: 60px;
             background: var(--glass-bg);
@@ -41,18 +41,19 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
-            z-index: 100;
+            z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: fixed; top: 0; left: 0; right: 0;
+            position: fixed;
+            top: 0; left: 0; right: 0;
         }
-        .header-title { font-weight: 700; font-size: 1rem; color: var(--text-light); }
-        .btn-close {
+        .header-title { font-weight: 700; font-size: 1.1rem; color: var(--text-light); }
+        .btn-exit {
             background: rgba(239, 68, 68, 0.1); color: #ef4444;
             padding: 8px 15px; border-radius: 10px; text-decoration: none;
-            font-size: 0.85rem; border: 1px solid rgba(239, 68, 68, 0.2);
+            font-size: 0.9rem; border: 1px solid rgba(239, 68, 68, 0.2);
             display: flex; align-items: center; gap: 8px; transition: var(--transition);
         }
-        .btn-close:hover { background: #ef4444; color: white; }
+        .btn-exit:hover { background: #ef4444; color: white; }
 
         /* --- منطقة عرض الكتاب --- */
         .viewer-container {
@@ -62,7 +63,8 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            margin-top: 60px; /* للكمبيوتر فقط */
+            margin-top: 60px; /* مساحة للهيدر العلوي */
+            margin-bottom: 140px; /* مساحة لشريط التحكم وزر الشراء السفلي */
             overflow: hidden;
             background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
             touch-action: none;
@@ -83,39 +85,42 @@
             pointer-events: none;
         }
 
-        /* --- شريط التحكم (التكبير والتنقل) --- */
-        .controls-overlay {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(15, 23, 42, 0.85);
+        /* --- شريط التحكم (في القسم السفلي) --- */
+        .bottom-controls-bar {
+            position: fixed;
+            bottom: 80px; /* فوق زر الشراء */
+            left: 0; right: 0;
+            height: 60px;
+            background: var(--glass-bg);
             backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 40px;
             display: flex;
+            justify-content: center;
             align-items: center;
             gap: 15px;
-            border: 1px solid rgba(255,255,255,0.1);
-            z-index: 95;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            z-index: 950;
         }
+
         .btn-nav {
-            background: none; border: none; color: white;
-            width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;
+            width: 40px; height: 40px; border-radius: 10px;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
             font-size: 1rem; transition: var(--transition);
         }
-        .btn-nav:hover { background: var(--accent-color); }
-        .page-num { font-size: 0.9rem; font-weight: bold; min-width: 60px; text-align: center; }
+        .btn-nav:hover { background: var(--accent-color); border-color: var(--accent-color); }
+        .page-num { font-size: 0.95rem; font-weight: bold; min-width: 80px; text-align: center; color: var(--text-light); }
+
+        .divider { width: 1px; height: 25px; background: rgba(255,255,255,0.15); margin: 0 5px; }
 
         /* --- شريط الشراء السفلي --- */
-        .footer-bar {
+        .footer-buy-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
             height: 80px;
             background: var(--main-bg);
             display: flex; align-items: center; justify-content: center;
             padding: 0 20px; border-top: 1px solid rgba(255,255,255,0.1);
-            z-index: 100;
+            z-index: 1000;
         }
         .btn-buy {
             background: var(--accent-color); color: white;
@@ -126,59 +131,19 @@
             box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
-        /* =========================================== */
-        /* تعديلات نسخة الجوال فقط (إصلاح التخريب) */
-        /* =========================================== */
-        @media (max-width: 768px) {
-            /* نقل شريط العنوان والوزن للأسفل بشكل منظم */
-            .header {
-                top: auto;
-                bottom: 80px; /* فوق زر الشراء مباشرة */
-                height: 65px; /* زيادة الطول قليلاً */
-                background: rgba(15, 23, 42, 0.98);
-                border-bottom: none;
-                border-top: 1px solid rgba(255,255,255,0.1);
-                padding: 0 20px;
-                display: flex;
-                align-items: center; /* توسيط النص رأسياً لضمان عدم القص */
-            }
-
-            .header-title {
-                font-size: 0.95rem;
-                padding-bottom: 2px; /* إنزال بسيط جداً للنص */
-            }
-
-            .viewer-container {
-                margin-top: 0; /* إلغاء المساحة العلوية */
-                margin-bottom: 145px; /* ترك مساحة كافية للعناصر بالأسفل */
-            }
-
-            /* إعادة شريط التحكم لمكانه الطبيعي */
-            .controls-overlay {
-                bottom: 160px; /* رفعه فوق الهيدر الجديد */
-                padding: 8px 16px;
-                gap: 10px;
-            }
-
-            .btn-nav {
-                width: 36px; height: 36px;
-                font-size: 0.9rem;
-            }
-
-            .btn-close {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-                gap: 6px;
-            }
-        }
-        /* =========================================== */
-
+        /* لوادر التحميل */
         #loader {
             position: fixed; inset: 0; background: var(--main-bg);
             display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 2000;
         }
         .spinner { width: 45px; height: 45px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--accent-color); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 480px) {
+            .header-title { font-size: 0.9rem; }
+            .btn-nav { width: 35px; height: 35px; }
+            .page-num { font-size: 0.8rem; min-width: 60px; }
+        }
     </style>
 </head>
 <body>
@@ -188,32 +153,38 @@
     <p style="margin-top: 15px; font-size: 0.85rem; color: #94a3b8;">جاري تحميل صفحات الكتاب...</p>
 </div>
 
-<!-- الهيدر: ينتقل للأسفل في الجوال ويبقى بالأعلى في الكمبيوتر -->
-<div class="header">
+<!-- الهيدر العلوي -->
+<header class="header">
     <span class="header-title">معاينة: حسين الخليل</span>
-    <a href="books.html" class="btn-close">
-        خروج <i class="fas fa-sign-out-alt"></i> <!-- أيقونة الباب والسهم -->
+    <a href="books.html" class="btn-exit">
+        خروج <i class="fas fa-sign-out-alt"></i>
     </a>
-</div>
+</header>
 
+<!-- منطقة العرض -->
 <main class="viewer-container" id="viewer">
     <div class="book-wrapper" id="book-wrapper">
         <img id="page-image" src="" alt="صفحة الكتاب">
     </div>
-
-    <!-- شريط التحكم (التكبير والتنقل) -->
-    <div class="controls-overlay">
-        <button class="btn-nav" id="prev-btn" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i></button>
-        <span class="page-num" id="page-info">1 / 50</span>
-        <button class="btn-nav" id="next-btn" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></button>
-        <div style="width: 1px; height: 25px; background: rgba(255,255,255,0.15); margin: 0 5px;"></div>
-        <button class="btn-nav" onclick="adjustZoom(0.3)"><i class="fas fa-search-plus"></i></button>
-        <button class="btn-nav" onclick="resetZoom()"><i class="fas fa-sync-alt"></i></button>
-        <button class="btn-nav" onclick="adjustZoom(-0.3)"><i class="fas fa-search-minus"></i></button>
-    </div>
 </main>
 
-<div class="footer-bar">
+<!-- شريط التحكم السفلي -->
+<div class="bottom-controls-bar">
+    <!-- أزرار التنقل -->
+    <button class="btn-nav" id="prev-btn" onclick="changePage(-1)" title="الصفحة السابقة"><i class="fas fa-chevron-right"></i></button>
+    <span class="page-num" id="page-info">1 / 50</span>
+    <button class="btn-nav" id="next-btn" onclick="changePage(1)" title="الصفحة التالية"><i class="fas fa-chevron-left"></i></button>
+    
+    <div class="divider"></div>
+
+    <!-- أزرار التكبير والتصغير -->
+    <button class="btn-nav" onclick="adjustZoom(0.3)" title="تكبير"><i class="fas fa-search-plus"></i></button>
+    <button class="btn-nav" onclick="resetZoom()" title="إعادة ضبط"><i class="fas fa-sync-alt"></i></button>
+    <button class="btn-nav" onclick="adjustZoom(-0.3)" title="تصغير"><i class="fas fa-search-minus"></i></button>
+</div>
+
+<!-- شريط الشراء الثابت -->
+<div class="footer-buy-bar">
     <a href="#" class="btn-buy">
         <i class="fas fa-shopping-cart"></i>
         اشتَرِ النسخة الكاملة الآن
@@ -279,7 +250,6 @@
 
     function resetZoom() { zoomLevel = 1; translateX = 0; translateY = 0; updateTransform(); }
 
-    // تحريك حر للكمبيوتر
     viewer.addEventListener('wheel', (e) => {
         if (zoomLevel > 1) {
             e.preventDefault();
@@ -289,7 +259,6 @@
         }
     }, { passive: false });
 
-    // سحب بالماوس واللمس
     const startDrag = (x, y) => {
         if (zoomLevel <= 1) return;
         isDragging = true;
