@@ -39,7 +39,7 @@
             font-family: 'Tajawal', sans-serif;
             background: var(--bg-light);
             color: var(--text-dark);
-            touch-action: none; /* تعطيل التكبير الافتراضي للمتصفح */
+            touch-action: none;
         }
 
         /* شاشة التحميل */
@@ -203,21 +203,27 @@
             cursor: grab;
         }
         
-        .viewer-area.dragging {
+        .viewer-area.grabbing {
             cursor: grabbing;
+        }
+        
+        .viewer-area.panning {
+            cursor: move;
         }
         
         /* منطقة الصور */
         .image-viewer {
             flex: 1; 
-            overflow: hidden; /* تغيير من auto إلى hidden للتحكم بالسحب */
+            overflow: hidden;
             background: #1a252f;
             display: flex;
             justify-content: center;
             align-items: center;
-            -webkit-overflow-scrolling: touch;
             position: relative;
-            user-select: none; /* منع تحديد النص */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         .image-container { 
@@ -229,8 +235,8 @@
             min-height: 200px;
             position: relative;
             transform-origin: center center;
-            transition: transform 0.1s ease-out;
-            will-change: transform; /* تحسين الأداء للتحريك */
+            transition: transform 0.15s cubic-bezier(0.1, 0.57, 0.1, 1);
+            will-change: transform;
         }
 
         .page-image {
@@ -242,8 +248,12 @@
             object-fit: contain;
             border-radius: 4px; 
             box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-            pointer-events: none; /* السماح بالسحب من خلال الصورة */
+            pointer-events: none;
             user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
         }
 
         /* شريط التحكم السفلي (التنقل والزووم) */
@@ -378,6 +388,25 @@
             }
         }
 
+        /* تنسيق الكمبيوتر */
+        @media (min-width: 768px) {
+            .action-bar { align-items: center; }
+            .action-button { width: 100%; max-width: 350px; }
+            
+            .image-viewer {
+                padding: 20px;
+            }
+            
+            /* تحسين التحريك على الكمبيوتر */
+            .viewer-area {
+                cursor: grab;
+            }
+            
+            .viewer-area:hover {
+                cursor: grab;
+            }
+        }
+
         /* إصلاح مشاكل اللمس على iOS */
         @supports (-webkit-touch-callout: none) {
             .image-viewer {
@@ -419,14 +448,20 @@
             margin: 0 auto;
         }
         
-        /* تنسيق الكمبيوتر لزر الشراء */
-        @media (min-width: 768px) {
-            .action-bar { align-items: center; }
-            .action-button { width: 100%; max-width: 350px; }
-            
-            .image-viewer {
-                padding: 20px;
-            }
+        /* مؤشر التحميل عند السحب */
+        .drag-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 100;
+            display: none;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -469,6 +504,7 @@
                 <h3>لا يمكن تحميل الصفحة</h3>
                 <p>إذا استمرت المشكلة، يرجى استخدام نسخة الكمبيوتر</p>
             </div>
+            <div class="drag-indicator" id="drag-indicator">اسحب للتحريك</div>
         </div>
     </main>
     
@@ -505,25 +541,32 @@
         zoom: 1,
         baseScale: 1.5,
         isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent),
+        isMac: /Mac/i.test(navigator.platform),
         pagesCache: {},
         isLoading: false,
         renderQuality: 1.0,
         
-        // متغيرات للتحريك (panning)
+        // متغيرات للتحريك المتقدم
+        isPanning: false,
         isDragging: false,
-        dragStart: { x: 0, y: 0 },
-        currentPosition: { x: 0, y: 0 },
-        lastPosition: { x: 0, y: 0 },
-        velocity: { x: 0, y: 0 },
-        lastMoveTime: 0,
+        startPanPoint: { x: 0, y: 0 },
+        currentPanPoint: { x: 0, y: 0 },
+        lastPanPoint: { x: 0, y: 0 },
+        panVelocity: { x: 0, y: 0 },
+        panTimestamp: 0,
         
         // حدود الحركة
-        bounds: {
+        panBounds: {
             minX: 0,
             maxX: 0,
             minY: 0,
             maxY: 0
-        }
+        },
+        
+        // تسريع الرسوم المتحركة
+        animationId: null,
+        deceleration: 0.95,
+        minVelocity: 0.1
     };
     
     const D = {
@@ -541,7 +584,8 @@
         pgGrid: document.getElementById('pg-grid'),
         notif: document.getElementById('notif'),
         fallbackMsg: document.getElementById('fallback-msg'),
-        loadingText: document.getElementById('loading-text')
+        loadingText: document.getElementById('loading-text'),
+        dragIndicator: document.getElementById('drag-indicator')
     };
 
     // دالة التهيئة الرئيسية
@@ -556,8 +600,8 @@
             
             State.baseScale = State.isMobile ? 1.5 : 2.0;
             
-            // إضافة مستمعي الأحداث للتحريك
-            setupPanning();
+            // إعداد نظام التحريك المتقدم
+            setupAdvancedPanning();
             
             setTimeout(() => {
                 zoomReset();
@@ -569,75 +613,136 @@
         }
     }
 
-    // إعداد التحريك (panning)
-    function setupPanning() {
-        // للفأرة (كمبيوتر)
-        D.viewer.addEventListener('mousedown', startDrag);
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('mouseup', endDrag);
+    // إعداد نظام التحريك المتقدم
+    function setupAdvancedPanning() {
+        // إعداد الكمبيوتر (ماوس + تاتشباد)
+        setupMousePanning();
+        setupTouchPanning();
+        setupTrackpadPanning();
         
-        // للمس (جوال)
+        // إلغاء السلوك الافتراضي
+        preventDefaultBehaviors();
+    }
+
+    // إعداد التحريك بالفأرة
+    function setupMousePanning() {
+        D.viewer.addEventListener('mousedown', startMousePan);
+        document.addEventListener('mousemove', handleMousePan);
+        document.addEventListener('mouseup', endMousePan);
+        document.addEventListener('mouseleave', cancelPan);
+    }
+
+    // إعداد التحريك باللمس
+    function setupTouchPanning() {
         D.viewer.addEventListener('touchstart', handleTouchStart, { passive: false });
         D.viewer.addEventListener('touchmove', handleTouchMove, { passive: false });
         D.viewer.addEventListener('touchend', handleTouchEnd);
+        D.viewer.addEventListener('touchcancel', cancelPan);
+    }
+
+    // إعداد التحريك بالتاتشباد (خاصة لماك)
+    function setupTrackpadPanning() {
+        // تاتشباد لماك
+        D.viewer.addEventListener('wheel', handleWheel, { passive: false });
         
-        // لمنع سلوك السحب الافتراضي
+        // للكمبيوتر العادي
+        D.viewer.addEventListener('wheel', handleMouseWheel, { passive: false });
+    }
+
+    // منع السلوك الافتراضي
+    function preventDefaultBehaviors() {
+        D.viewer.addEventListener('contextmenu', (e) => e.preventDefault());
         D.viewer.addEventListener('dragstart', (e) => e.preventDefault());
         D.imageContainer.addEventListener('dragstart', (e) => e.preventDefault());
+        
+        // لمنع التكبير الافتراضي على الجوال
+        document.addEventListener('gesturestart', (e) => e.preventDefault());
+        document.addEventListener('gesturechange', (e) => e.preventDefault());
+        document.addEventListener('gestureend', (e) => e.preventDefault());
     }
 
-    // بدء السحب (للماوس)
-    function startDrag(e) {
-        if (State.zoom <= 1.0) return; // لا تسمح بالسحب إلا عند التكبير
+    // بدء التحريك بالفأرة
+    function startMousePan(e) {
+        if (State.zoom <= 1.0) return;
         
-        State.isDragging = true;
-        State.dragStart = {
-            x: e.clientX - State.currentPosition.x,
-            y: e.clientY - State.currentPosition.y
-        };
-        D.viewerArea.classList.add('dragging');
         e.preventDefault();
+        e.stopPropagation();
+        
+        State.isPanning = true;
+        State.isDragging = true;
+        
+        State.startPanPoint = {
+            x: e.clientX - State.currentPanPoint.x,
+            y: e.clientY - State.currentPanPoint.y
+        };
+        
+        State.lastPanPoint = { x: e.clientX, y: e.clientY };
+        State.panTimestamp = Date.now();
+        State.panVelocity = { x: 0, y: 0 };
+        
+        D.viewerArea.classList.add('grabbing');
+        showDragIndicator();
+        
+        // إلغاء أي رسوم متحركة سابقة
+        cancelAnimationFrame(State.animationId);
     }
 
-    // السحب (للماوس)
-    function drag(e) {
-        if (!State.isDragging) return;
+    // معالجة التحريك بالفأرة
+    function handleMousePan(e) {
+        if (!State.isPanning) return;
         
-        const newX = e.clientX - State.dragStart.x;
-        const newY = e.clientY - State.dragStart.y;
+        e.preventDefault();
+        e.stopPropagation();
         
-        // حساب السرعة للحركة بالقصور الذاتي
         const now = Date.now();
-        const deltaTime = now - State.lastMoveTime;
+        const deltaTime = now - State.panTimestamp;
         
+        // حساب السرعة
         if (deltaTime > 0) {
-            State.velocity = {
-                x: (newX - State.currentPosition.x) / deltaTime * 16,
-                y: (newY - State.currentPosition.y) / deltaTime * 16
+            const deltaX = e.clientX - State.lastPanPoint.x;
+            const deltaY = e.clientY - State.lastPanPoint.y;
+            
+            State.panVelocity = {
+                x: deltaX / deltaTime * 16,
+                y: deltaY / deltaTime * 16
             };
         }
         
-        updatePosition(newX, newY);
-        State.lastMoveTime = now;
+        // تحديث الموضع
+        const newX = e.clientX - State.startPanPoint.x;
+        const newY = e.clientY - State.startPanPoint.y;
+        
+        updatePanPosition(newX, newY);
+        
+        State.lastPanPoint = { x: e.clientX, y: e.clientY };
+        State.panTimestamp = now;
     }
 
-    // إنهاء السحب (للماوس)
-    function endDrag() {
-        if (!State.isDragging) return;
+    // إنهاء التحريك بالفأرة
+    function endMousePan(e) {
+        if (!State.isPanning) return;
         
+        State.isPanning = false;
         State.isDragging = false;
-        D.viewerArea.classList.remove('dragging');
+        
+        D.viewerArea.classList.remove('grabbing');
+        hideDragIndicator();
         
         // تطبيق القصور الذاتي
         applyInertia();
+        
+        // إعادة تعيين السرعة إذا كانت صغيرة جداً
+        if (Math.abs(State.panVelocity.x) < 1 && Math.abs(State.panVelocity.y) < 1) {
+            State.panVelocity = { x: 0, y: 0 };
+        }
     }
 
-    // بدء اللمس (للجوال)
+    // بدء التحريك باللمس
     function handleTouchStart(e) {
         if (e.touches.length !== 1) return;
         
         if (State.zoom <= 1.0) {
-            // عند الزووم الطبيعي، السماح بسحب الصفحات فقط
+            // للتنقل بين الصفحات عند الزووم الطبيعي
             State.touchStart = {
                 x: e.touches[0].clientX,
                 y: e.touches[0].clientY,
@@ -647,56 +752,78 @@
             return;
         }
         
-        // عند التكبير، السماح بالتحريك
+        // للتحريك عند التكبير
+        State.isPanning = true;
         State.isDragging = true;
-        State.dragStart = {
-            x: e.touches[0].clientX - State.currentPosition.x,
-            y: e.touches[0].clientY - State.currentPosition.y
+        
+        const touch = e.touches[0];
+        State.startPanPoint = {
+            x: touch.clientX - State.currentPanPoint.x,
+            y: touch.clientY - State.currentPanPoint.y
         };
-        D.viewerArea.classList.add('dragging');
         
-        // إعادة تعيين السرعة
-        State.velocity = { x: 0, y: 0 };
-        State.lastMoveTime = Date.now();
+        State.lastPanPoint = { x: touch.clientX, y: touch.clientY };
+        State.panTimestamp = Date.now();
+        State.panVelocity = { x: 0, y: 0 };
         
+        D.viewerArea.classList.add('grabbing');
+        showDragIndicator();
+        
+        cancelAnimationFrame(State.animationId);
         e.preventDefault();
     }
 
-    // تحريك اللمس (للجوال)
+    // معالجة التحريك باللمس
     function handleTouchMove(e) {
-        if (!State.isDragging || e.touches.length !== 1) return;
+        if (!State.isPanning || e.touches.length !== 1) return;
         
-        const newX = e.touches[0].clientX - State.dragStart.x;
-        const newY = e.touches[0].clientY - State.dragStart.y;
+        const touch = e.touches[0];
+        const now = Date.now();
+        const deltaTime = now - State.panTimestamp;
         
         // حساب السرعة
-        const now = Date.now();
-        const deltaTime = now - State.lastMoveTime;
-        
         if (deltaTime > 0) {
-            State.velocity = {
-                x: (newX - State.currentPosition.x) / deltaTime * 16,
-                y: (newY - State.currentPosition.y) / deltaTime * 16
+            const deltaX = touch.clientX - State.lastPanPoint.x;
+            const deltaY = touch.clientY - State.lastPanPoint.y;
+            
+            State.panVelocity = {
+                x: deltaX / deltaTime * 16,
+                y: deltaY / deltaTime * 16
             };
         }
         
-        updatePosition(newX, newY);
-        State.lastMoveTime = now;
+        // تحديث الموضع
+        const newX = touch.clientX - State.startPanPoint.x;
+        const newY = touch.clientY - State.startPanPoint.y;
+        
+        updatePanPosition(newX, newY);
+        
+        State.lastPanPoint = { x: touch.clientX, y: touch.clientY };
+        State.panTimestamp = now;
         
         e.preventDefault();
     }
 
-    // إنهاء اللمس (للجوال)
+    // إنهاء التحريك باللمس
     function handleTouchEnd(e) {
-        if (State.isDragging) {
+        if (State.isPanning) {
+            State.isPanning = false;
             State.isDragging = false;
-            D.viewerArea.classList.remove('dragging');
+            
+            D.viewerArea.classList.remove('grabbing');
+            hideDragIndicator();
+            
             applyInertia();
+            
+            if (Math.abs(State.panVelocity.x) < 1 && Math.abs(State.panVelocity.y) < 1) {
+                State.panVelocity = { x: 0, y: 0 };
+            }
+            
             e.preventDefault();
             return;
         }
         
-        // تحقق من السحب للتنقل بين الصفحات (عند الزووم الطبيعي)
+        // تحقق من السحب للتنقل بين الصفحات
         if (State.touchStart && State.zoom <= 1.0) {
             const touchEnd = e.changedTouches[0];
             const deltaX = State.touchStart.x - touchEnd.clientX;
@@ -704,65 +831,142 @@
             
             if (Math.abs(deltaX) > 50 && deltaTime < 300) {
                 if (deltaX > 0) {
-                    nextPage(); // سحب لليمين
+                    nextPage();
                 } else {
-                    prevPage(); // سحب لليسار
+                    prevPage();
                 }
             }
             State.touchStart = null;
         }
     }
 
-    // تحديث موضع الصورة
-    function updatePosition(x, y) {
-        // حفظ الموضع الأخير
-        State.lastPosition = { ...State.currentPosition };
+    // معالجة عجلة الفأرة (للتاتشباد)
+    function handleWheel(e) {
+        if (State.zoom <= 1.0) return;
         
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // لضبط السرعة بناءً على نوع الجهاز
+        const speedFactor = State.isMac ? 0.5 : 1;
+        
+        // استخدام deltaX و deltaY للتحريك الأفقي والعمودي
+        const deltaX = e.deltaX * speedFactor;
+        const deltaY = e.deltaY * speedFactor;
+        
+        // تحديث الموضع
+        const newX = State.currentPanPoint.x - deltaX;
+        const newY = State.currentPanPoint.y - deltaY;
+        
+        updatePanPosition(newX, newY);
+        
+        // إظهار مؤشر التحريك مؤقتاً
+        showDragIndicator();
+        setTimeout(hideDragIndicator, 1000);
+    }
+
+    // معالجة عجلة الفأرة العادية
+    function handleMouseWheel(e) {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && State.zoom > 1.0) {
+            // إذا كانت الحركة أفقية (تاتشباد)
+            handleWheel(e);
+        }
+    }
+
+    // تحديث موضع التحريك
+    function updatePanPosition(x, y) {
         // تطبيق الحدود
-        const boundedX = Math.max(State.bounds.minX, Math.min(State.bounds.maxX, x));
-        const boundedY = Math.max(State.bounds.minY, Math.min(State.bounds.maxY, y));
+        const boundedX = Math.max(State.panBounds.minX, Math.min(State.panBounds.maxX, x));
+        const boundedY = Math.max(State.panBounds.minY, Math.min(State.panBounds.maxY, y));
         
-        State.currentPosition = { x: boundedX, y: boundedY };
+        State.currentPanPoint = { x: boundedX, y: boundedY };
         
-        // تطبيق التحويل
-        D.imageContainer.style.transform = `translate(${State.currentPosition.x}px, ${State.currentPosition.y}px)`;
+        // تطبيق التحويل مع انتقال سلس
+        D.imageContainer.style.transform = `translate(${State.currentPanPoint.x}px, ${State.currentPanPoint.y}px)`;
+        
+        // إظهار مؤشر التحريك إذا كنا نسحب
+        if (State.isDragging) {
+            showDragIndicator();
+        }
     }
 
     // تطبيق القصور الذاتي
     function applyInertia() {
-        if (Math.abs(State.velocity.x) < 0.1 && Math.abs(State.velocity.y) < 0.1) return;
-        
-        let inertiaActive = true;
-        const friction = 0.95;
-        
-        function animateInertia() {
-            if (!inertiaActive) return;
-            
-            // تقليل السرعة بالاحتكاك
-            State.velocity.x *= friction;
-            State.velocity.y *= friction;
-            
-            // تحديث الموضع
-            const newX = State.currentPosition.x + State.velocity.x;
-            const newY = State.currentPosition.y + State.velocity.y;
-            
-            updatePosition(newX, newY);
-            
-            // التوقف عندما تكون السرعة صغيرة جداً
-            if (Math.abs(State.velocity.x) < 0.1 && Math.abs(State.velocity.y) < 0.1) {
-                inertiaActive = false;
-            } else {
-                requestAnimationFrame(animateInertia);
-            }
+        if (Math.abs(State.panVelocity.x) < State.minVelocity && 
+            Math.abs(State.panVelocity.y) < State.minVelocity) {
+            return;
         }
         
-        animateInertia();
+        let lastTime = Date.now();
+        
+        const animateInertia = () => {
+            const currentTime = Date.now();
+            const deltaTime = currentTime - lastTime;
+            
+            if (deltaTime === 0) {
+                State.animationId = requestAnimationFrame(animateInertia);
+                return;
+            }
+            
+            // تقليل السرعة بالاحتكاك
+            State.panVelocity.x *= Math.pow(State.deceleration, deltaTime / 16);
+            State.panVelocity.y *= Math.pow(State.deceleration, deltaTime / 16);
+            
+            // التوقف إذا كانت السرعة صغيرة جداً
+            if (Math.abs(State.panVelocity.x) < State.minVelocity && 
+                Math.abs(State.panVelocity.y) < State.minVelocity) {
+                State.panVelocity = { x: 0, y: 0 };
+                cancelAnimationFrame(State.animationId);
+                return;
+            }
+            
+            // تحديث الموضع
+            const newX = State.currentPanPoint.x + State.panVelocity.x;
+            const newY = State.currentPanPoint.y + State.panVelocity.y;
+            
+            updatePanPosition(newX, newY);
+            
+            lastTime = currentTime;
+            State.animationId = requestAnimationFrame(animateInertia);
+        };
+        
+        State.animationId = requestAnimationFrame(animateInertia);
+    }
+
+    // إلغاء التحريك
+    function cancelPan() {
+        State.isPanning = false;
+        State.isDragging = false;
+        State.panVelocity = { x: 0, y: 0 };
+        
+        D.viewerArea.classList.remove('grabbing');
+        hideDragIndicator();
+        
+        cancelAnimationFrame(State.animationId);
+    }
+
+    // إظهار مؤشر التحريك
+    function showDragIndicator() {
+        if (State.zoom <= 1.0) return;
+        
+        D.dragIndicator.style.display = 'block';
+        setTimeout(() => {
+            D.dragIndicator.style.opacity = '1';
+        }, 10);
+    }
+
+    // إخفاء مؤشر التحريك
+    function hideDragIndicator() {
+        D.dragIndicator.style.opacity = '0';
+        setTimeout(() => {
+            D.dragIndicator.style.display = 'none';
+        }, 300);
     }
 
     // حساب حدود الحركة
-    function calculateBounds() {
+    function calculatePanBounds() {
         if (!D.pImg.complete || D.pImg.naturalWidth === 0) {
-            setTimeout(calculateBounds, 100);
+            setTimeout(calculatePanBounds, 100);
             return;
         }
         
@@ -771,28 +975,25 @@
         const imgWidth = D.pImg.offsetWidth;
         const imgHeight = D.pImg.offsetHeight;
         
-        // إذا كانت الصورة أصغر من الحاوية، لا تسمح بالحركة
         if (imgWidth <= containerWidth && imgHeight <= containerHeight) {
-            State.bounds = { minX: 0, maxX: 0, minY: 0, maxY: 0 };
+            State.panBounds = { minX: 0, maxX: 0, minY: 0, maxY: 0 };
             return;
         }
         
-        // حساب الحدود بناءً على حجم الصورة والحاوية
         const extraWidth = Math.max(0, imgWidth - containerWidth);
         const extraHeight = Math.max(0, imgHeight - containerHeight);
         
-        State.bounds = {
+        State.panBounds = {
             minX: -extraWidth / 2,
             maxX: extraWidth / 2,
             minY: -extraHeight / 2,
             maxY: extraHeight / 2
         };
         
-        // تأكد أن الموضع الحالي ضمن الحدود
-        updatePosition(State.currentPosition.x, State.currentPosition.y);
+        updatePanPosition(State.currentPanPoint.x, State.currentPanPoint.y);
     }
 
-    // تحميل مكتبة PDF.js ديناميكيًا
+    // تحميل مكتبة PDF.js
     async function loadPDFJS() {
         return new Promise((resolve, reject) => {
             if (window.pdfjsLib) {
@@ -842,15 +1043,6 @@
         });
     }
 
-    // الحصول على مفتاح ذاكرة التخزين المؤقت
-    function getCacheKey(pageNum, zoomLevel) {
-        const zoomLevels = [0.5, 0.75, 1.0, 1.5, 2.0, 3.0];
-        const closestZoom = zoomLevels.reduce((prev, curr) => {
-            return Math.abs(curr - zoomLevel) < Math.abs(prev - zoomLevel) ? curr : prev;
-        });
-        return `${pageNum}_${closestZoom.toFixed(2)}`;
-    }
-
     // تحميل صفحة محددة
     async function loadPage(pageNum, forceReload = false) {
         if (State.isLoading && !forceReload) return;
@@ -859,14 +1051,13 @@
             State.isLoading = true;
             State.currentPage = pageNum;
             
-            // إعادة تعيين موضع التحريك
-            State.currentPosition = { x: 0, y: 0 };
-            State.lastPosition = { x: 0, y: 0 };
-            State.velocity = { x: 0, y: 0 };
+            // إعادة تعيين التحريك
+            State.currentPanPoint = { x: 0, y: 0 };
+            State.panVelocity = { x: 0, y: 0 };
             D.imageContainer.style.transform = 'translate(0px, 0px)';
             
             const renderScale = State.baseScale * State.zoom;
-            const cacheKey = getCacheKey(pageNum, renderScale);
+            const cacheKey = `${pageNum}_${Math.round(renderScale * 10) / 10}`;
             
             if (!forceReload && State.pagesCache[cacheKey]) {
                 renderPage(State.pagesCache[cacheKey]);
@@ -952,15 +1143,13 @@
         D.pImg.style.maxWidth = 'none';
         D.pImg.style.maxHeight = 'none';
         
-        // إعادة حساب الحدود بعد تحديث الحجم
-        setTimeout(calculateBounds, 50);
+        setTimeout(calculatePanBounds, 50);
     }
 
     // مركزة الصورة
     function centerImage() {
-        // عند الزووم الطبيعي، تأكد من أن الصورة في المركز
         if (State.zoom <= 1.0) {
-            State.currentPosition = { x: 0, y: 0 };
+            State.currentPanPoint = { x: 0, y: 0 };
             D.imageContainer.style.transform = 'translate(0px, 0px)';
         }
     }
@@ -975,23 +1164,12 @@
         const oldZoom = State.zoom;
         State.zoom = Math.min(State.zoom + 0.25, 3.0);
         
-        // حفظ المركز النسبي قبل التكبير
-        const viewerCenterX = D.viewer.clientWidth / 2;
-        const viewerCenterY = D.viewer.clientHeight / 2;
-        const relativeX = (viewerCenterX - State.currentPosition.x) / (oldZoom * 100);
-        const relativeY = (viewerCenterY - State.currentPosition.y) / (oldZoom * 100);
-        
         if (State.zoom > 1.5 && oldZoom <= 1.5) {
             State.renderQuality = 1.5;
             loadPage(State.currentPage, true);
         } else {
             updateImageDisplay();
             D.zDis.textContent = Math.round(State.zoom * 100) + "%";
-            
-            // تعديل الموضع للحفاظ على المركز النسبي
-            const newX = viewerCenterX - (relativeX * State.zoom * 100);
-            const newY = viewerCenterY - (relativeY * State.zoom * 100);
-            updatePosition(newX, newY);
         }
         
         if (State.zoom >= 3.0) toast("الحد الأقصى للتكبير");
@@ -1012,7 +1190,6 @@
             updateImageDisplay();
             D.zDis.textContent = Math.round(State.zoom * 100) + "%";
             
-            // عند التصغير، إعادة المركزة
             if (State.zoom <= 1.0) {
                 centerImage();
             }
@@ -1112,13 +1289,13 @@
     // تحديث الحجم عند تغيير اتجاه الشاشة
     window.addEventListener('resize', function() {
         updateImageDisplay();
-        calculateBounds();
+        calculatePanBounds();
     });
     
     window.addEventListener('orientationchange', function() {
         setTimeout(() => {
             updateImageDisplay();
-            calculateBounds();
+            calculatePanBounds();
         }, 300);
     });
 
