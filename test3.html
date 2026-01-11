@@ -39,7 +39,7 @@
             font-family: 'Tajawal', sans-serif;
             background: var(--bg-light);
             color: var(--text-dark);
-            touch-action: pan-x pan-y; /* لمنع التكبير الافتراضي */
+            touch-action: none; /* تعطيل التكبير الافتراضي للمتصفح */
         }
 
         /* شاشة التحميل */
@@ -200,19 +200,24 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            cursor: grab;
+        }
+        
+        .viewer-area.dragging {
+            cursor: grabbing;
         }
         
         /* منطقة الصور */
         .image-viewer {
             flex: 1; 
-            overflow: auto; 
+            overflow: hidden; /* تغيير من auto إلى hidden للتحكم بالسحب */
             background: #1a252f;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px;
             -webkit-overflow-scrolling: touch;
-            touch-action: pan-x pan-y; /* للسماح بالسحب */
+            position: relative;
+            user-select: none; /* منع تحديد النص */
         }
 
         .image-container { 
@@ -223,21 +228,22 @@
             height: 100%;
             min-height: 200px;
             position: relative;
+            transform-origin: center center;
+            transition: transform 0.1s ease-out;
+            will-change: transform; /* تحسين الأداء للتحريك */
         }
 
         .page-image {
             display: block;
             width: auto;
             height: auto;
-            max-width: none; /* مهم: إزالة max-width للسماح بالتكبير */
-            max-height: none; /* مهم: إزالة max-height للسماح بالتكبير */
+            max-width: none;
+            max-height: none;
             object-fit: contain;
             border-radius: 4px; 
             box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
-            transform-origin: center center; /* يجعل التكبير من المركز */
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
+            pointer-events: none; /* السماح بالسحب من خلال الصورة */
+            user-select: none;
         }
 
         /* شريط التحكم السفلي (التنقل والزووم) */
@@ -364,15 +370,11 @@
             }
             
             .image-viewer {
-                padding: 5px;
+                padding: 0;
             }
             
             .sidebar {
                 width: 280px;
-            }
-            
-            .page-image {
-                transform-origin: center center; /* للتكبير من المركز على الجوال */
             }
         }
 
@@ -421,6 +423,10 @@
         @media (min-width: 768px) {
             .action-bar { align-items: center; }
             .action-button { width: 100%; max-width: 350px; }
+            
+            .image-viewer {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -454,9 +460,9 @@
         <a href="books.html" class="close-btn"><i class="fas fa-times"></i> إغلاق</a>
     </header>
     
-    <main class="viewer-area">
+    <main class="viewer-area" id="viewer-area">
         <div class="image-viewer" id="viewer">
-            <div class="image-container">
+            <div class="image-container" id="image-container">
                 <img id="page-image" class="page-image" src="" alt="صفحة الكتاب">
             </div>
             <div class="fallback-message" id="fallback-msg">
@@ -497,17 +503,35 @@
         totalPages: 0,
         currentPage: 1,
         zoom: 1,
-        baseScale: 1.5, // المقياس الأساسي لتحميل الصفحة
+        baseScale: 1.5,
         isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent),
-        pagesCache: {}, // تخزين مؤقت للصفحات بمقاييس مختلفة
+        pagesCache: {},
         isLoading: false,
-        renderQuality: 1.0 // جودة التصيير (1.0 = عادية)
+        renderQuality: 1.0,
+        
+        // متغيرات للتحريك (panning)
+        isDragging: false,
+        dragStart: { x: 0, y: 0 },
+        currentPosition: { x: 0, y: 0 },
+        lastPosition: { x: 0, y: 0 },
+        velocity: { x: 0, y: 0 },
+        lastMoveTime: 0,
+        
+        // حدود الحركة
+        bounds: {
+            minX: 0,
+            maxX: 0,
+            minY: 0,
+            maxY: 0
+        }
     };
     
     const D = {
         load: document.getElementById('loading-screen'),
         app: document.getElementById('app'),
         viewer: document.getElementById('viewer'),
+        viewerArea: document.getElementById('viewer-area'),
+        imageContainer: document.getElementById('image-container'),
         pImg: document.getElementById('page-image'),
         pInd: document.getElementById('p-ind'),
         zDis: document.getElementById('z-dis'),
@@ -523,23 +547,18 @@
     // دالة التهيئة الرئيسية
     async function init() {
         try {
-            // تحديث نص التحميل
             D.loadingText.textContent = "جاري تحميل الكتاب...";
-            
-            // إضافة مكتبة PDF.js ديناميكيًا
             await loadPDFJS();
-            
-            // تحميل ملف PDF
             await loadPDFFile();
             
-            // إخفاء شاشة التحميل وإظهار التطبيق
             D.load.style.display = 'none';
             D.app.style.display = 'block';
             
-            // ضبط المقياس الأولي بناءً على نوع الجهاز
             State.baseScale = State.isMobile ? 1.5 : 2.0;
             
-            // ضبط الحجم الأولي
+            // إضافة مستمعي الأحداث للتحريك
+            setupPanning();
+            
             setTimeout(() => {
                 zoomReset();
             }, 100);
@@ -550,10 +569,232 @@
         }
     }
 
+    // إعداد التحريك (panning)
+    function setupPanning() {
+        // للفأرة (كمبيوتر)
+        D.viewer.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', endDrag);
+        
+        // للمس (جوال)
+        D.viewer.addEventListener('touchstart', handleTouchStart, { passive: false });
+        D.viewer.addEventListener('touchmove', handleTouchMove, { passive: false });
+        D.viewer.addEventListener('touchend', handleTouchEnd);
+        
+        // لمنع سلوك السحب الافتراضي
+        D.viewer.addEventListener('dragstart', (e) => e.preventDefault());
+        D.imageContainer.addEventListener('dragstart', (e) => e.preventDefault());
+    }
+
+    // بدء السحب (للماوس)
+    function startDrag(e) {
+        if (State.zoom <= 1.0) return; // لا تسمح بالسحب إلا عند التكبير
+        
+        State.isDragging = true;
+        State.dragStart = {
+            x: e.clientX - State.currentPosition.x,
+            y: e.clientY - State.currentPosition.y
+        };
+        D.viewerArea.classList.add('dragging');
+        e.preventDefault();
+    }
+
+    // السحب (للماوس)
+    function drag(e) {
+        if (!State.isDragging) return;
+        
+        const newX = e.clientX - State.dragStart.x;
+        const newY = e.clientY - State.dragStart.y;
+        
+        // حساب السرعة للحركة بالقصور الذاتي
+        const now = Date.now();
+        const deltaTime = now - State.lastMoveTime;
+        
+        if (deltaTime > 0) {
+            State.velocity = {
+                x: (newX - State.currentPosition.x) / deltaTime * 16,
+                y: (newY - State.currentPosition.y) / deltaTime * 16
+            };
+        }
+        
+        updatePosition(newX, newY);
+        State.lastMoveTime = now;
+    }
+
+    // إنهاء السحب (للماوس)
+    function endDrag() {
+        if (!State.isDragging) return;
+        
+        State.isDragging = false;
+        D.viewerArea.classList.remove('dragging');
+        
+        // تطبيق القصور الذاتي
+        applyInertia();
+    }
+
+    // بدء اللمس (للجوال)
+    function handleTouchStart(e) {
+        if (e.touches.length !== 1) return;
+        
+        if (State.zoom <= 1.0) {
+            // عند الزووم الطبيعي، السماح بسحب الصفحات فقط
+            State.touchStart = {
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY,
+                time: Date.now()
+            };
+            e.preventDefault();
+            return;
+        }
+        
+        // عند التكبير، السماح بالتحريك
+        State.isDragging = true;
+        State.dragStart = {
+            x: e.touches[0].clientX - State.currentPosition.x,
+            y: e.touches[0].clientY - State.currentPosition.y
+        };
+        D.viewerArea.classList.add('dragging');
+        
+        // إعادة تعيين السرعة
+        State.velocity = { x: 0, y: 0 };
+        State.lastMoveTime = Date.now();
+        
+        e.preventDefault();
+    }
+
+    // تحريك اللمس (للجوال)
+    function handleTouchMove(e) {
+        if (!State.isDragging || e.touches.length !== 1) return;
+        
+        const newX = e.touches[0].clientX - State.dragStart.x;
+        const newY = e.touches[0].clientY - State.dragStart.y;
+        
+        // حساب السرعة
+        const now = Date.now();
+        const deltaTime = now - State.lastMoveTime;
+        
+        if (deltaTime > 0) {
+            State.velocity = {
+                x: (newX - State.currentPosition.x) / deltaTime * 16,
+                y: (newY - State.currentPosition.y) / deltaTime * 16
+            };
+        }
+        
+        updatePosition(newX, newY);
+        State.lastMoveTime = now;
+        
+        e.preventDefault();
+    }
+
+    // إنهاء اللمس (للجوال)
+    function handleTouchEnd(e) {
+        if (State.isDragging) {
+            State.isDragging = false;
+            D.viewerArea.classList.remove('dragging');
+            applyInertia();
+            e.preventDefault();
+            return;
+        }
+        
+        // تحقق من السحب للتنقل بين الصفحات (عند الزووم الطبيعي)
+        if (State.touchStart && State.zoom <= 1.0) {
+            const touchEnd = e.changedTouches[0];
+            const deltaX = State.touchStart.x - touchEnd.clientX;
+            const deltaTime = Date.now() - State.touchStart.time;
+            
+            if (Math.abs(deltaX) > 50 && deltaTime < 300) {
+                if (deltaX > 0) {
+                    nextPage(); // سحب لليمين
+                } else {
+                    prevPage(); // سحب لليسار
+                }
+            }
+            State.touchStart = null;
+        }
+    }
+
+    // تحديث موضع الصورة
+    function updatePosition(x, y) {
+        // حفظ الموضع الأخير
+        State.lastPosition = { ...State.currentPosition };
+        
+        // تطبيق الحدود
+        const boundedX = Math.max(State.bounds.minX, Math.min(State.bounds.maxX, x));
+        const boundedY = Math.max(State.bounds.minY, Math.min(State.bounds.maxY, y));
+        
+        State.currentPosition = { x: boundedX, y: boundedY };
+        
+        // تطبيق التحويل
+        D.imageContainer.style.transform = `translate(${State.currentPosition.x}px, ${State.currentPosition.y}px)`;
+    }
+
+    // تطبيق القصور الذاتي
+    function applyInertia() {
+        if (Math.abs(State.velocity.x) < 0.1 && Math.abs(State.velocity.y) < 0.1) return;
+        
+        let inertiaActive = true;
+        const friction = 0.95;
+        
+        function animateInertia() {
+            if (!inertiaActive) return;
+            
+            // تقليل السرعة بالاحتكاك
+            State.velocity.x *= friction;
+            State.velocity.y *= friction;
+            
+            // تحديث الموضع
+            const newX = State.currentPosition.x + State.velocity.x;
+            const newY = State.currentPosition.y + State.velocity.y;
+            
+            updatePosition(newX, newY);
+            
+            // التوقف عندما تكون السرعة صغيرة جداً
+            if (Math.abs(State.velocity.x) < 0.1 && Math.abs(State.velocity.y) < 0.1) {
+                inertiaActive = false;
+            } else {
+                requestAnimationFrame(animateInertia);
+            }
+        }
+        
+        animateInertia();
+    }
+
+    // حساب حدود الحركة
+    function calculateBounds() {
+        if (!D.pImg.complete || D.pImg.naturalWidth === 0) {
+            setTimeout(calculateBounds, 100);
+            return;
+        }
+        
+        const containerWidth = D.viewer.clientWidth;
+        const containerHeight = D.viewer.clientHeight;
+        const imgWidth = D.pImg.offsetWidth;
+        const imgHeight = D.pImg.offsetHeight;
+        
+        // إذا كانت الصورة أصغر من الحاوية، لا تسمح بالحركة
+        if (imgWidth <= containerWidth && imgHeight <= containerHeight) {
+            State.bounds = { minX: 0, maxX: 0, minY: 0, maxY: 0 };
+            return;
+        }
+        
+        // حساب الحدود بناءً على حجم الصورة والحاوية
+        const extraWidth = Math.max(0, imgWidth - containerWidth);
+        const extraHeight = Math.max(0, imgHeight - containerHeight);
+        
+        State.bounds = {
+            minX: -extraWidth / 2,
+            maxX: extraWidth / 2,
+            minY: -extraHeight / 2,
+            maxY: extraHeight / 2
+        };
+        
+        // تأكد أن الموضع الحالي ضمن الحدود
+        updatePosition(State.currentPosition.x, State.currentPosition.y);
+    }
+
     // تحميل مكتبة PDF.js ديناميكيًا
     async function loadPDFJS() {
         return new Promise((resolve, reject) => {
-            // التحقق إذا كانت المكتبة محملة مسبقًا
             if (window.pdfjsLib) {
                 resolve();
                 return;
@@ -564,7 +805,6 @@
             const script = document.createElement('script');
             script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js';
             script.onload = () => {
-                // تحميل worker
                 pdfjsLib.GlobalWorkerOptions.workerSrc = 
                     'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
                 resolve();
@@ -593,28 +833,21 @@
             
             loadingTask.promise.then(pdf => {
                 State.pdf = pdf;
-                State.totalPages = Math.min(pdf.numPages, 50); // الحد الأقصى 50 صفحة للمعاينة
+                State.totalPages = Math.min(pdf.numPages, 50);
                 
-                // إنشاء فهرس الصفحات
                 genGrid();
-                
-                // تحميل الصفحة الأولى
-                loadPage(1).then(() => {
-                    resolve();
-                }).catch(reject);
+                loadPage(1).then(() => resolve()).catch(reject);
                 
             }).catch(reject);
         });
     }
 
-    // الحصول على مفتاح ذاكرة التخزين المؤقت بناءً على الصفحة والزووم
+    // الحصول على مفتاح ذاكرة التخزين المؤقت
     function getCacheKey(pageNum, zoomLevel) {
-        // نستخدم مستويات زووم محددة للذاكرة المؤقتة
         const zoomLevels = [0.5, 0.75, 1.0, 1.5, 2.0, 3.0];
         const closestZoom = zoomLevels.reduce((prev, curr) => {
             return Math.abs(curr - zoomLevel) < Math.abs(prev - zoomLevel) ? curr : prev;
         });
-        
         return `${pageNum}_${closestZoom.toFixed(2)}`;
     }
 
@@ -626,55 +859,40 @@
             State.isLoading = true;
             State.currentPage = pageNum;
             
-            // حساب المقياس الفعلي للتصيير
-            const renderScale = State.baseScale * State.zoom;
+            // إعادة تعيين موضع التحريك
+            State.currentPosition = { x: 0, y: 0 };
+            State.lastPosition = { x: 0, y: 0 };
+            State.velocity = { x: 0, y: 0 };
+            D.imageContainer.style.transform = 'translate(0px, 0px)';
             
-            // مفتاح الذاكرة المؤقتة
+            const renderScale = State.baseScale * State.zoom;
             const cacheKey = getCacheKey(pageNum, renderScale);
             
-            // التحقق من وجود الصفحة في الذاكرة المؤقتة
             if (!forceReload && State.pagesCache[cacheKey]) {
                 renderPage(State.pagesCache[cacheKey]);
                 State.isLoading = false;
                 return;
             }
             
-            // تحميل الصفحة من PDF
             const page = await State.pdf.getPage(pageNum);
-            
-            // حساب مقياس العرض بناءً على مستوى الزووم
             const viewport = page.getViewport({ scale: renderScale * State.renderQuality });
             
-            // إنشاء canvas لعرض الصفحة
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
-            
-            // ضبط أبعاد canvas
             canvas.width = viewport.width;
             canvas.height = viewport.height;
             
-            // تحسين الجودة للزووم العالي
             if (State.zoom > 1.5) {
                 canvas.style.imageRendering = 'crisp-edges';
-                canvas.style.imageRendering = '-webkit-optimize-contrast';
             }
             
-            // عرض الصفحة على canvas
-            const renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
-            
+            const renderContext = { canvasContext: context, viewport: viewport };
             await page.render(renderContext).promise;
             
-            // تحويل canvas إلى صورة
             const imageQuality = State.zoom > 2.0 ? 0.95 : 0.85;
             const imageData = canvas.toDataURL('image/jpeg', imageQuality);
             
-            // حفظ في الذاكرة المؤقتة
             State.pagesCache[cacheKey] = imageData;
-            
-            // عرض الصفحة
             renderPage(imageData);
             
             State.isLoading = false;
@@ -688,46 +906,19 @@
 
     // عرض الصفحة
     function renderPage(imageData) {
-        // حفظ الموضع الحالي للسكرول للنعومة
-        const currentScroll = {
-            top: D.viewer.scrollTop,
-            left: D.viewer.scrollLeft
-        };
-        
-        // تحميل الصورة
         D.pImg.src = imageData;
-        
-        // تحديث المعلومات
         D.pInd.textContent = `${State.currentPage} / ${State.totalPages}`;
         D.zDis.textContent = Math.round(State.zoom * 100) + "%";
         
-        // إخفاء رسالة الخطأ
         D.fallbackMsg.style.display = 'none';
-        
-        // تحديث حالة الأزرار
         document.getElementById('prev').disabled = (State.currentPage <= 1);
         document.getElementById('next').disabled = (State.currentPage >= State.totalPages);
         
-        // تحديث الفهرس
         updateGrid();
         
-        // عندما يتم تحميل الصورة
         D.pImg.onload = function() {
-            // حساب الحجم المناسب للعرض
             updateImageDisplay();
-            
-            // إعادة وضع السكرول للحفاظ على المركز النسبي
-            setTimeout(() => {
-                if (currentScroll.top > 0 || currentScroll.left > 0) {
-                    D.viewer.scrollTop = currentScroll.top;
-                    D.viewer.scrollLeft = currentScroll.left;
-                } else {
-                    // مركزة الصورة
-                    centerImage();
-                }
-            }, 50);
-            
-            // تأثير ظهور ناعم
+            centerImage();
             D.pImg.style.opacity = '1';
         };
         
@@ -736,11 +927,10 @@
             showPageError();
         };
         
-        // تأثير تحميل
         D.pImg.style.opacity = '0.7';
     }
 
-    // حساب وعرض حجم الصورة المناسب
+    // تحديث عرض الصورة
     function updateImageDisplay() {
         if (!D.pImg.complete || D.pImg.naturalWidth === 0) {
             setTimeout(updateImageDisplay, 100);
@@ -752,40 +942,27 @@
         const imgWidth = D.pImg.naturalWidth;
         const imgHeight = D.pImg.naturalHeight;
         
-        // حساب النسب
         const widthRatio = viewerWidth / imgWidth;
         const heightRatio = viewerHeight / imgHeight;
-        
-        // استخدام أصغر نسبة لضمان عرض الصورة كاملة
         const baseScale = Math.min(widthRatio, heightRatio);
-        
-        // الحجم المعروض فعلياً (مع الزووم)
         const displayScale = baseScale * State.zoom;
         
-        // تطبيق الحجم على الصورة
         D.pImg.style.width = (imgWidth * displayScale) + 'px';
         D.pImg.style.height = (imgHeight * displayScale) + 'px';
         D.pImg.style.maxWidth = 'none';
         D.pImg.style.maxHeight = 'none';
         
-        // التأكد من أن الصورة في المركز
-        centerImage();
+        // إعادة حساب الحدود بعد تحديث الحجم
+        setTimeout(calculateBounds, 50);
     }
 
-    // مركزة الصورة في المشاهد
+    // مركزة الصورة
     function centerImage() {
-        const container = D.viewer;
-        const img = D.pImg;
-        
-        // حساب المساحات الفارغة
-        const emptySpaceX = Math.max(0, (container.clientWidth - img.offsetWidth) / 2);
-        const emptySpaceY = Math.max(0, (container.clientHeight - img.offsetHeight) / 2);
-        
-        // تطبيق padding لمركزة الصورة
-        img.style.marginLeft = emptySpaceX + 'px';
-        img.style.marginRight = emptySpaceX + 'px';
-        img.style.marginTop = emptySpaceY + 'px';
-        img.style.marginBottom = emptySpaceY + 'px';
+        // عند الزووم الطبيعي، تأكد من أن الصورة في المركز
+        if (State.zoom <= 1.0) {
+            State.currentPosition = { x: 0, y: 0 };
+            D.imageContainer.style.transform = 'translate(0px, 0px)';
+        }
     }
 
     // دوال التكبير/التصغير
@@ -798,13 +975,23 @@
         const oldZoom = State.zoom;
         State.zoom = Math.min(State.zoom + 0.25, 3.0);
         
-        // إذا تجاوز الزووم 1.5، نعيد تحميل الصفحة بجودة أعلى
+        // حفظ المركز النسبي قبل التكبير
+        const viewerCenterX = D.viewer.clientWidth / 2;
+        const viewerCenterY = D.viewer.clientHeight / 2;
+        const relativeX = (viewerCenterX - State.currentPosition.x) / (oldZoom * 100);
+        const relativeY = (viewerCenterY - State.currentPosition.y) / (oldZoom * 100);
+        
         if (State.zoom > 1.5 && oldZoom <= 1.5) {
             State.renderQuality = 1.5;
             loadPage(State.currentPage, true);
         } else {
             updateImageDisplay();
             D.zDis.textContent = Math.round(State.zoom * 100) + "%";
+            
+            // تعديل الموضع للحفاظ على المركز النسبي
+            const newX = viewerCenterX - (relativeX * State.zoom * 100);
+            const newY = viewerCenterY - (relativeY * State.zoom * 100);
+            updatePosition(newX, newY);
         }
         
         if (State.zoom >= 3.0) toast("الحد الأقصى للتكبير");
@@ -818,13 +1005,17 @@
         
         State.zoom = Math.max(State.zoom - 0.25, 0.5);
         
-        // إذا كان الزووم أقل من 1.5، نرجع الجودة للوضع العادي
         if (State.zoom <= 1.5 && State.renderQuality > 1.0) {
             State.renderQuality = 1.0;
             loadPage(State.currentPage, true);
         } else {
             updateImageDisplay();
             D.zDis.textContent = Math.round(State.zoom * 100) + "%";
+            
+            // عند التصغير، إعادة المركزة
+            if (State.zoom <= 1.0) {
+                centerImage();
+            }
         }
         
         if (State.zoom <= 0.5) toast("الحد الأدنى للتصغير");
@@ -833,8 +1024,6 @@
     function zoomReset() {
         State.zoom = 1.0;
         State.renderQuality = 1.0;
-        
-        // إعادة تحميل الصفحة بالحجم الطبيعي
         loadPage(State.currentPage, true);
         D.zDis.textContent = "ملاءمة";
         toast("تم ملاءمة الصفحة للشاشة");
@@ -920,97 +1109,20 @@
         `;
     }
 
-    // دعم السحب على الشاشة
-    let touchStart = { x: 0, y: 0, time: 0 };
-    let isDragging = false;
-    let lastTap = 0;
-    
-    D.viewer.addEventListener('touchstart', function(e) {
-        if (e.touches.length === 1) {
-            touchStart = {
-                x: e.touches[0].clientX,
-                y: e.touches[0].clientY,
-                time: Date.now()
-            };
-            isDragging = false;
-        }
-        
-        // منع التكبير الافتراضي للمتصفح
-        if (e.touches.length > 1) {
-            e.preventDefault();
-        }
-    }, { passive: false });
-    
-    D.viewer.addEventListener('touchmove', function(e) {
-        if (e.touches.length === 1 && touchStart.x !== 0) {
-            const deltaX = Math.abs(e.touches[0].clientX - touchStart.x);
-            const deltaY = Math.abs(e.touches[0].clientY - touchStart.y);
-            
-            // إذا كان الحركة أفقية أكثر من رأسية، نعتبرها سحبًا
-            if (deltaX > 10 && deltaX > deltaY) {
-                isDragging = true;
-                e.preventDefault(); // منع السكرول الافتراضي
-            }
-        }
-    }, { passive: false });
-    
-    D.viewer.addEventListener('touchend', function(e) {
-        if (touchStart.x === 0) return;
-        
-        const touchEnd = {
-            x: e.changedTouches[0].clientX,
-            y: e.changedTouches[0].clientY,
-            time: Date.now()
-        };
-        
-        const deltaX = touchStart.x - touchEnd.x;
-        const deltaTime = touchEnd.time - touchStart.time;
-        
-        // تحقق من اللمس المزدوج
-        const currentTime = Date.now();
-        const timeDiff = currentTime - lastTap;
-        
-        if (timeDiff < 300 && timeDiff > 0) {
-            // لمسة مزدوجة - تبديل بين الزووم
-            if (State.zoom === 1.0) {
-                State.zoom = 2.0;
-                State.renderQuality = 1.5;
-                loadPage(State.currentPage, true);
-                toast("تم التكبير");
-            } else {
-                zoomReset();
-            }
-            lastTap = 0;
-        } else {
-            lastTap = currentTime;
-        }
-        
-        // تحقق من السحب السريع (سويب) للتنقل بين الصفحات
-        if (!isDragging && Math.abs(deltaX) > 50 && deltaTime < 300) {
-            if (deltaX > 0) {
-                nextPage(); // سحب لليمين - الصفحة التالية
-            } else {
-                prevPage(); // سحب لليسار - الصفحة السابقة
-            }
-        }
-        
-        // إعادة تعيين
-        touchStart = { x: 0, y: 0, time: 0 };
-        isDragging = false;
-    }, { passive: false });
-
     // تحديث الحجم عند تغيير اتجاه الشاشة
     window.addEventListener('resize', function() {
         updateImageDisplay();
+        calculateBounds();
     });
     
     window.addEventListener('orientationchange', function() {
         setTimeout(() => {
             updateImageDisplay();
+            calculateBounds();
         }, 300);
     });
 
-    // بدء التحميل عند تحميل الصفحة
+    // بدء التحميل
     document.addEventListener('DOMContentLoaded', init);
 </script>
 
