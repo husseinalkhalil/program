@@ -97,14 +97,6 @@
             text-align: center;
         }
 
-        .loading-subtext {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            text-align: center;
-            max-width: 300px;
-            line-height: 1.5;
-        }
-
         .progress-container {
             width: 280px;
             height: 6px;
@@ -165,10 +157,6 @@
             transition: var(--transition);
         }
 
-        .menu-toggle:active {
-            background: rgba(94, 44, 165, 0.1);
-        }
-
         .logo {
             height: 35px;
             max-width: 120px;
@@ -206,11 +194,6 @@
             min-height: 44px;
         }
 
-        .close-btn:active {
-            background: var(--primary-dark);
-            transform: scale(0.98);
-        }
-
         /* القائمة الجانبية */
         .sidebar-overlay {
             position: fixed;
@@ -222,11 +205,6 @@
             z-index: 998;
             display: none;
             animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .sidebar {
@@ -285,79 +263,12 @@
             overflow-y: auto;
         }
 
-        /* إعدادات سهولة القراءة */
-        .accessibility-settings {
-            background: var(--bg-light);
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-bottom: 20px;
-        }
-
-        .accessibility-title {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .accessibility-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .accessibility-btn {
-            flex: 1;
-            min-width: 120px;
-            background: var(--bg-white);
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .accessibility-btn.active {
-            border-color: var(--primary-color);
-            background: rgba(94, 44, 165, 0.05);
-        }
-
-        .accessibility-btn i {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .accessibility-btn span {
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
         /* قائمة الصفحات */
-        .pages-section {
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--primary-color);
-        }
-
         .page-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
             gap: 10px;
+            margin-top: 15px;
         }
 
         .page-btn {
@@ -371,27 +282,11 @@
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
-            padding: 5px;
-        }
-
-        .page-btn:hover, .page-btn:active {
-            background: #e9ecef;
         }
 
         .page-btn.active {
             background: var(--primary-color);
             color: white;
-            border-color: var(--primary-color);
-        }
-
-        .page-number {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .page-label {
-            font-size: 0.75rem;
-            margin-top: 3px;
         }
 
         /* منطقة العرض الرئيسية */
@@ -435,12 +330,6 @@
             align-items: center;
             justify-content: center;
             transition: var(--transition);
-            -webkit-tap-highlight-color: rgba(255,255,255,0.1);
-        }
-
-        .control-btn:active {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(0.95);
         }
 
         .control-btn:disabled {
@@ -472,48 +361,33 @@
             border-radius: 20px;
         }
 
-        /* منطقة عرض الصورة */
+        /* منطقة عرض الصورة - تعديل طريقة التوسيط لمنع الاختفاء اليمنى */
         .image-viewer {
             flex: 1;
-            overflow: auto; /* يسمح بالتمرير عند التكبير */
+            overflow: auto; /* يسمح بالتمرير الأفقي والرأسي */
             -webkit-overflow-scrolling: touch;
             position: relative;
             background: #1a252f;
+            display: block; /* تغيير من flex لمنع قص الجهة اليمنى في RTL */
+            text-align: center; /* لتوسيط العناصر داخله */
         }
 
         .image-container {
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: inline-block; /* لكي يأخذ حاوية الصورة حجم الصورة الفعلي */
+            min-width: 100%;
             padding: 20px;
-            touch-action: pan-x pan-y pinch-zoom;
+            vertical-align: top;
         }
 
         .page-image {
-            /* تمت إزالة max-width: 100% للسماح بالتكبير الحقيقي */
+            display: block;
+            margin: 0 auto; /* هذا يضمن التوسيط عندما تكون الصورة أصغر من الشاشة، والالتصاق باليمين عندما تكبر */
             height: auto;
             margin-bottom: 25px;
             border-radius: 4px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-            opacity: 1;
-            transition: opacity 0.3s ease, width 0.3s ease; /* إضافة انيميشن للعرض */
-            display: block;
+            transition: width 0.3s ease;
             user-select: none;
-            -webkit-user-select: none;
-            -webkit-user-drag: none;
-        }
-
-        /* رسائل حالة الصفحة */
-        .page-status {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            padding: 20px;
-            max-width: 300px;
         }
 
         /* شريط الإجراءات السفلي */
@@ -538,35 +412,27 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            transition: var(--transition);
             min-height: 55px;
-            box-shadow: 0 4px 15px rgba(94, 44, 165, 0.2);
         }
 
         /* =========================================
-           تعديلات خاصة لنسخة الجوال فقط
+           تعديلات الجوال فقط (إصلاح القص)
         ========================================= */
         @media (max-width: 767px) {
             .controls-bar {
-                padding: 10px 8px; /* تقليل الحشو */
+                padding: 10px 8px;
                 gap: 5px;
-                /* إضافة مساحة للأجهزة الحديثة لمنع انقصاص الشريط */
                 padding-bottom: calc(10px + env(safe-area-inset-bottom, 5px));
             }
 
             .control-btn {
-                width: 42px; /* تصغير الأزرار قليلاً لتناسب العرض */
+                width: 42px;
                 height: 42px;
                 font-size: 1rem;
             }
 
-            .nav-controls {
-                gap: 8px;
-            }
-
-            .zoom-controls {
-                gap: 5px;
-            }
+            .nav-controls { gap: 8px; }
+            .zoom-controls { gap: 5px; }
 
             .page-indicator {
                 min-width: 75px;
@@ -578,46 +444,27 @@
                 padding: 4px 8px;
                 font-size: 0.85rem;
             }
-
-            .header {
-                height: 60px;
-                padding: 10px 15px;
-            }
-
-            .logo {
-                height: 30px;
-            }
-
-            .close-btn {
-                padding: 8px 15px;
-                font-size: 0.85rem;
-                min-height: 38px;
-            }
         }
 
         /* إشعارات الجوال */
         .mobile-notification {
             position: fixed;
-            bottom: 100px;
+            bottom: 110px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.85);
             color: white;
-            padding: 12px 20px;
+            padding: 10px 20px;
             border-radius: 25px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             z-index: 1000;
             display: none;
-            backdrop-filter: blur(10px);
-            max-width: 90vw;
-            text-align: center;
         }
 
     </style>
 </head>
 <body>
 
-<!-- شاشة التحميل -->
 <div id="loading-screen">
     <div class="loader"></div>
     <div class="loading-text" id="loading-text">جاري تحميل الكتاب...</div>
@@ -626,30 +473,19 @@
     </div>
 </div>
 
-<!-- الهيكل الرئيسي -->
 <div class="app-container" id="app-container" style="display: none;">
     
     <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <button class="sidebar-close" onclick="closeSidebar()">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="sidebar-close" onclick="closeSidebar()"><i class="fas fa-times"></i></button>
             <h3><i class="fas fa-book"></i> الإعدادات</h3>
         </div>
         <div class="sidebar-content">
             <div class="accessibility-settings">
-                <div class="accessibility-title"><i class="fas fa-universal-access"></i> سهولة القراءة</div>
-                <div class="accessibility-buttons">
-                    <button class="accessibility-btn" onclick="toggleHighContrast()" id="contrast-btn"><i class="fas fa-adjust"></i><span>تباين عالي</span></button>
-                    <button class="accessibility-btn" onclick="toggleLargeText()" id="text-btn"><i class="fas fa-text-height"></i><span>نص كبير</span></button>
-                    <button class="accessibility-btn" onclick="toggleBrightness()" id="brightness-btn"><i class="fas fa-sun"></i><span>سطوع عالي</span></button>
-                </div>
+                <button class="accessibility-btn" onclick="toggleBrightness()" id="brightness-btn"><i class="fas fa-sun"></i><span>سطوع عالي</span></button>
             </div>
-            <div class="pages-section">
-                <div class="section-title">الصفحات</div>
-                <div class="page-grid" id="page-grid"></div>
-            </div>
+            <div class="page-grid" id="page-grid"></div>
         </div>
     </div>
     
@@ -698,8 +534,6 @@
         currentPage: 1,
         zoom: 1.0,
         images: {},
-        accessibility: { highContrast: false, largeText: false, highBrightness: false },
-        renderQuality: window.devicePixelRatio || 1
     };
 
     const DOM = {
@@ -733,90 +567,72 @@
             
             DOM.loadingScreen.style.display = 'none';
             DOM.appContainer.style.display = 'flex';
-            setupEventListeners();
         } catch (e) {
-            console.error(e);
-            alert("خطأ في تحميل الملف: " + e.message);
+            alert("حدث خطأ أثناء تحميل الكتاب.");
         }
     }
 
-    async function loadPage(pageNumber) {
-        if (AppState.images[pageNumber]) {
-            displayPage(pageNumber);
-            return;
-        }
+    async function loadPage(num) {
+        if (AppState.images[num]) { displayPage(num); return; }
 
-        const page = await AppState.pdf.getPage(pageNumber);
-        // نستخدم دائماً جودة عالية في الرندر 2.0، ونتحكم في العرض الفعلي عبر CSS
+        const page = await AppState.pdf.getPage(num);
         const viewport = page.getViewport({ scale: 2.0 });
-        
         const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d', { alpha: false });
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+        const ctx = canvas.getContext('2d');
+        canvas.width = viewport.width; canvas.height = viewport.height;
         
-        await page.render({ canvasContext: context, viewport: viewport }).promise;
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
         
-        AppState.images[pageNumber] = {
-            data: canvas.toDataURL('image/jpeg', 0.85),
-            width: viewport.width,
-            height: viewport.height
-        };
-        
-        displayPage(pageNumber);
+        AppState.images[num] = { data: canvas.toDataURL('image/jpeg', 0.85) };
+        displayPage(num);
     }
 
-    function displayPage(pageNumber) {
-        AppState.currentPage = pageNumber;
+    function displayPage(num) {
+        AppState.currentPage = num;
         DOM.imageContainer.innerHTML = '';
-        const pageData = AppState.images[pageNumber];
         
         const img = document.createElement('img');
         img.className = 'page-image';
-        img.src = pageData.data;
+        img.src = AppState.images[num].data;
 
-        // --- تعديل منطق الحجم لإصلاح مشكلة التكبير ---
-        // العرض الأساسي هو عرض الشاشة مطروحاً منه الهوامش
-        const baseWidth = window.innerWidth - 40;
-        // نضرب العرض الأساسي في معامل الزووم
-        const calculatedWidth = baseWidth * AppState.zoom;
-        
-        img.style.width = `${calculatedWidth}px`;
-        // -------------------------------------------
+        // حساب العرض بناءً على عرض نافذة العرض لتجنب التشويه
+        const viewerWidth = DOM.imageViewer.clientWidth - 40;
+        img.style.width = (viewerWidth * AppState.zoom) + "px";
 
         DOM.imageContainer.appendChild(img);
-        DOM.pageIndicator.textContent = `${pageNumber} / ${AppState.totalPages}`;
-        DOM.zoomDisplay.textContent = `${Math.round(AppState.zoom * 100)}%`;
+        DOM.pageIndicator.textContent = `${num} / ${AppState.totalPages}`;
+        DOM.zoomDisplay.textContent = Math.round(AppState.zoom * 100) + "%";
         
-        updateActivePageInGrid();
+        // إعادة التمرير لليمين دائماً عند تغيير الصفحة أو الزووم في نظام RTL
+        DOM.imageViewer.scrollLeft = 0;
+
+        updateActiveGrid();
     }
 
     function zoomIn() {
         AppState.zoom = Math.min(3.0, AppState.zoom + 0.25);
-        displayPage(AppState.currentPage); // إعادة العرض بالعرض الجديد
-        showNotification(`التكبير: ${Math.round(AppState.zoom * 100)}%`);
+        displayPage(AppState.currentPage);
+        showNotification(`تكبير: ${Math.round(AppState.zoom * 100)}%`);
     }
 
     function zoomOut() {
         AppState.zoom = Math.max(0.5, AppState.zoom - 0.25);
         displayPage(AppState.currentPage);
-        showNotification(`التصغير: ${Math.round(AppState.zoom * 100)}%`);
+        showNotification(`تصغير: ${Math.round(AppState.zoom * 100)}%`);
     }
 
     function createPageGrid() {
         for (let i = 1; i <= AppState.totalPages; i++) {
             const btn = document.createElement('button');
             btn.className = 'page-btn';
-            btn.innerHTML = `<div class="page-number">${i}</div>`;
+            btn.innerHTML = i;
             btn.onclick = () => { loadPage(i); closeSidebar(); };
             DOM.pageGrid.appendChild(btn);
         }
     }
 
-    function updateActivePageInGrid() {
-        document.querySelectorAll('.page-btn').forEach((btn, idx) => {
-            btn.classList.toggle('active', idx + 1 === AppState.currentPage);
-        });
+    function updateActiveGrid() {
+        document.querySelectorAll('.page-btn').forEach((b, i) => b.classList.toggle('active', i+1 === AppState.currentPage));
     }
 
     function goToNextPage() { if (AppState.currentPage < AppState.totalPages) loadPage(AppState.currentPage + 1); }
@@ -828,21 +644,12 @@
     function showNotification(msg) {
         DOM.mobileNotification.textContent = msg;
         DOM.mobileNotification.style.display = 'block';
-        setTimeout(() => DOM.mobileNotification.style.display = 'none', 2000);
+        setTimeout(() => DOM.mobileNotification.style.display = 'none', 1500);
     }
 
-    function toggleHighContrast() { document.body.classList.toggle('high-contrast'); }
-    function toggleLargeText() { document.body.classList.toggle('large-text'); }
     function toggleBrightness() { 
-        AppState.accessibility.highBrightness = !AppState.accessibility.highBrightness;
-        DOM.imageViewer.style.backgroundColor = AppState.accessibility.highBrightness ? '#ffffff' : '#1a252f';
-    }
-
-    function setupEventListeners() {
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') goToNextPage();
-            if (e.key === 'ArrowRight') goToPrevPage();
-        });
+        const isBright = DOM.imageViewer.style.backgroundColor === 'rgb(255, 255, 255)';
+        DOM.imageViewer.style.backgroundColor = isBright ? '#1a252f' : '#ffffff';
     }
 
     document.addEventListener('DOMContentLoaded', initializeApp);
