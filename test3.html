@@ -28,8 +28,10 @@
             font-family: 'Tajawal', sans-serif;
             background: var(--bg-light);
             color: var(--text-dark);
-            overflow: hidden; /* لمنع سكرول المتصفح الخارجي */
+            overflow: hidden; 
             height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* شاشة التحميل */
@@ -46,31 +48,23 @@
         .progress-container { width: 250px; height: 6px; background: var(--bg-light); border-radius: 3px; overflow: hidden; }
         .progress-bar { height: 100%; background: var(--primary-color); width: 0%; transition: width 0.4s ease; }
 
-        /* الهيكل الرئيسي */
-        .app-container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            width: 100vw;
-        }
-
         /* الهيدر العلوي */
         .header {
-            background: var(--bg-white); padding: 0 20px; height: 70px;
+            background: var(--bg-white); padding: 0 20px; height: 60px;
             box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center;
-            z-index: 100;
+            z-index: 100; flex-shrink: 0;
         }
         .header-left { display: flex; align-items: center; gap: 15px; }
         .menu-toggle {
             background: none; border: none; color: var(--primary-color); font-size: 1.4rem;
-            cursor: pointer; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
         }
-        .logo { height: 35px; object-fit: contain; }
+        .logo { height: 30px; object-fit: contain; }
         .header-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); }
         .close-btn {
-            background: var(--primary-color); color: white; padding: 8px 18px;
-            border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 0.9rem;
-            display: flex; align-items: center; gap: 8px;
+            background: var(--primary-color); color: white; padding: 6px 15px;
+            border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 0.85rem;
+            display: flex; align-items: center; gap: 6px;
         }
 
         /* القائمة الجانبية */
@@ -88,85 +82,102 @@
         .pg-btn.active { background: var(--primary-color); color: white; }
 
         /* منطقة العرض الرئيسية */
-        .viewer-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #2c3e50; }
-        
-        /* حل مشكلة اختفاء الجهة اليمنى عند التكبير */
-        .image-viewer {
-            flex: 1; overflow: auto; background: #1a252f;
-            text-align: center; display: block;
+        .viewer-area { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+            background: #1a252f;
+            position: relative;
         }
-        .image-container { display: inline-block; min-width: 100%; padding: 20px; vertical-align: top; }
+        
+        /* منطقة الصور - تصحيح التوسيط والظهور الكامل */
+        .image-viewer {
+            flex: 1; 
+            overflow: auto; 
+            background: #1a252f;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* للسماح بالسكرول من الأعلى */
+            padding: 20px;
+        }
+
+        .image-container { 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: min-content;
+        }
+
         .page-image {
-            display: block; margin: 0 auto; height: auto;
-            border-radius: 4px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            display: block;
+            height: auto;
+            border-radius: 4px; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
             transition: width 0.3s ease;
+            max-width: none; /* للسماح بالتكبير فوق 100% */
         }
 
         /* شريط التحكم السفلي (التنقل والزووم) */
         .controls-bar {
-            background: rgba(0, 0, 0, 0.92); padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.9); padding: 10px 20px;
             display: flex; justify-content: space-between; align-items: center;
-            backdrop-filter: blur(10px); z-index: 90;
+            backdrop-filter: blur(10px); z-index: 90; flex-shrink: 0;
         }
-        .nav-controls, .zoom-controls { display: flex; align-items: center; gap: 12px; }
+        .nav-controls, .zoom-controls { display: flex; align-items: center; gap: 10px; }
         .control-btn {
-            width: 46px; height: 46px; background: rgba(255,255,255,0.12); border: none;
+            width: 44px; height: 44px; background: rgba(255,255,255,0.12); border: none;
             border-radius: 50%; color: white; font-size: 1.1rem; cursor: pointer;
             display: flex; align-items: center; justify-content: center; transition: var(--transition);
         }
         .control-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-        .page-indicator { color: white; font-size: 1rem; font-weight: 600; min-width: 90px; text-align: center; }
-        .zoom-display { color: white; font-size: 0.9rem; min-width: 65px; text-align: center; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 20px; }
+        .page-indicator { color: white; font-size: 1rem; font-weight: 600; min-width: 80px; text-align: center; }
+        .zoom-display { color: white; font-size: 0.9rem; min-width: 60px; text-align: center; background: rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 20px; }
 
         /* شريط الإجراءات (زر الشراء بالأسفل) */
         .action-bar {
-            background: var(--bg-white); padding: 15px 20px;
+            background: var(--bg-white); padding: 12px 20px;
             border-top: 1px solid #e9ecef; display: flex; flex-direction: column;
-            z-index: 100;
+            z-index: 100; flex-shrink: 0;
         }
         .action-button {
-            background: var(--primary-color); color: white; padding: 14px 20px;
-            border-radius: 12px; text-decoration: none; font-weight: 700;
+            background: var(--primary-color); color: white; padding: 12px 20px;
+            border-radius: 10px; text-decoration: none; font-weight: 700;
             display: flex; align-items: center; justify-content: center; gap: 12px;
             transition: var(--transition);
         }
-        .action-button:hover { background: var(--primary-dark); }
 
         /* تنسيق الكمبيوتر لزر الشراء */
         @media (min-width: 768px) {
             .action-bar { align-items: center; }
-            .action-button { width: 100%; max-width: 400px; box-shadow: 0 4px 15px rgba(94, 44, 165, 0.2); }
+            .action-button { width: 100%; max-width: 350px; }
         }
 
-        /* تنسيق الجوال لشريط الأدوات */
+        /* تنسيق الجوال */
         @media (max-width: 767px) {
-            .header { height: 60px; padding: 0 15px; }
-            .controls-bar { padding: 8px 10px; gap: 5px; padding-bottom: calc(8px + env(safe-area-inset-bottom, 5px)); }
-            .control-btn { width: 38px; height: 38px; font-size: 0.95rem; }
-            .nav-controls, .zoom-controls { gap: 6px; }
-            .page-indicator { min-width: 70px; font-size: 0.85rem; }
-            .zoom-display { min-width: 50px; padding: 4px 8px; font-size: 0.8rem; }
-            .header-title { font-size: 0.95rem; }
+            .controls-bar { padding: 8px 10px; gap: 5px; }
+            .control-btn { width: 36px; height: 36px; font-size: 0.9rem; }
+            .nav-controls, .zoom-controls { gap: 5px; }
+            .page-indicator { min-width: 60px; font-size: 0.85rem; }
+            .zoom-display { min-width: 50px; padding: 4px 6px; font-size: 0.8rem; }
         }
 
         .notif {
             position: fixed; bottom: 130px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.8); color: white; padding: 10px 20px;
-            border-radius: 25px; z-index: 2000; display: none; font-size: 0.85rem;
+            background: rgba(0,0,0,0.8); color: white; padding: 8px 16px;
+            border-radius: 20px; z-index: 2000; display: none; font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
-<!-- شاشة التحميل -->
 <div id="loading-screen">
     <div class="loader"></div>
     <div class="progress-container"><div class="progress-bar" id="pb"></div></div>
 </div>
 
-<div class="app-container" id="app" style="display: none;">
+<div class="app-container" id="app" style="display: none; height: 100vh;">
     
-    <!-- القائمة الجانبية -->
     <div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -174,12 +185,10 @@
             <i class="fas fa-times" onclick="closeSidebar()" style="cursor: pointer;"></i>
         </div>
         <div class="sidebar-content">
-            <p style="font-weight: 700; margin-bottom: 10px;">اختر صفحة:</p>
             <div class="page-grid" id="pg-grid"></div>
         </div>
     </div>
 
-    <!-- الهيدر -->
     <header class="header">
         <div class="header-left">
             <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
@@ -189,13 +198,13 @@
         <a href="books.html" class="close-btn"><i class="fas fa-times"></i> إغلاق</a>
     </header>
     
-    <!-- منطقة العرض -->
     <main class="viewer-area">
         <div class="image-viewer" id="viewer">
-            <div class="image-container" id="container"></div>
+            <div class="image-container">
+                <img id="page-image" class="page-image" src="" alt="صفحة الكتاب">
+            </div>
         </div>
         
-        <!-- شريط التحكم السفلي -->
         <div class="controls-bar">
             <div class="nav-controls">
                 <button class="control-btn" id="prev" onclick="prev()"><i class="fas fa-chevron-right"></i></button>
@@ -205,14 +214,13 @@
             
             <div class="zoom-controls">
                 <button class="control-btn" onclick="zOut()"><i class="fas fa-search-minus"></i></button>
-                <button class="control-btn" onclick="zReset()" title="الحجم الأصلي"><i class="fas fa-expand-arrows-alt"></i></button>
+                <button class="control-btn" onclick="zReset()" title="ملاءمة الشاشة"><i class="fas fa-expand-arrows-alt"></i></button>
                 <div class="zoom-display" id="z-dis">100%</div>
                 <button class="control-btn" onclick="zIn()"><i class="fas fa-search-plus"></i></button>
             </div>
         </div>
     </main>
     
-    <!-- شريط الشراء بالأسفل -->
     <div class="action-bar">
         <a href="#" class="action-button">
             <i class="fas fa-shopping-cart"></i> اشتَرِ الكتاب الكامل الآن
@@ -230,7 +238,7 @@
         load: document.getElementById('loading-screen'),
         app: document.getElementById('app'),
         viewer: document.getElementById('viewer'),
-        container: document.getElementById('container'),
+        pImg: document.getElementById('page-image'),
         pInd: document.getElementById('p-ind'),
         zDis: document.getElementById('z-dis'),
         pb: document.getElementById('pb'),
@@ -254,7 +262,10 @@
             
             D.load.style.display = 'none';
             D.app.style.display = 'flex';
-        } catch (e) { console.error(e); alert("فشل تحميل الكتاب."); }
+            
+            // ضبط الحجم الأولي بملاءمة الشاشة
+            setTimeout(zReset, 100);
+        } catch (e) { alert("فشل تحميل الكتاب."); }
     }
 
     async function loadPage(n) {
@@ -271,20 +282,15 @@
 
     function render(n) {
         State.current = n;
-        D.container.innerHTML = '';
-        const img = document.createElement('img');
-        img.className = 'page-image';
-        img.src = State.images[n];
+        D.pImg.src = State.images[n];
         
-        // حساب العرض البرمجي لتمكين التكبير
-        const baseWidth = D.viewer.clientWidth - 40;
-        img.style.width = (baseWidth * State.zoom) + "px";
+        // حساب العرض للملاءمة
+        updateImageSize();
         
-        D.container.appendChild(img);
         D.pInd.textContent = `${n} / ${State.total}`;
         D.zDis.textContent = Math.round(State.zoom * 100) + "%";
         
-        // العودة لليمين دائماً عند تغيير الصفحة أو الزووم
+        D.viewer.scrollTop = 0;
         D.viewer.scrollLeft = 0;
 
         document.getElementById('prev').disabled = (n <= 1);
@@ -292,9 +298,26 @@
         updateGrid();
     }
 
-    function zIn() { State.zoom = Math.min(3, State.zoom + 0.25); render(State.current); toast(`تكبير: ${Math.round(State.zoom*100)}%`); }
-    function zOut() { State.zoom = Math.max(0.5, State.zoom - 0.25); render(State.current); toast(`تصغير: ${Math.round(State.zoom*100)}%`); }
-    function zReset() { State.zoom = 1.0; render(State.current); toast("الحجم الأصلي"); }
+    function updateImageSize() {
+        // حساب العرض المثالي (ملاءمة الشاشة)
+        const viewerWidth = D.viewer.clientWidth - 40;
+        const viewerHeight = D.viewer.clientHeight - 40;
+        
+        // إذا كان الزووم 1.0، سنجعل الصورة تملأ الشاشة عرضاً كحد أقصى أو طولاً كحد أقصى
+        // لكن ليكون النص واضحاً سنعتمد على عرض المشاهد كمرجع
+        D.pImg.style.width = (viewerWidth * State.zoom) + "px";
+    }
+
+    function zIn() { State.zoom += 0.2; updateImageSize(); D.zDis.textContent = Math.round(State.zoom * 100) + "%"; }
+    function zOut() { if(State.zoom > 0.4) State.zoom -= 0.2; updateImageSize(); D.zDis.textContent = Math.round(State.zoom * 100) + "%"; }
+    
+    function zReset() {
+        // ملاءمة الشاشة تلقائياً
+        State.zoom = 0.9; // عرض مريح لرؤية الصفحة كاملة
+        updateImageSize();
+        D.zDis.textContent = "ملاءمة";
+        toast("تم ملاءمة الصفحة");
+    }
 
     function next() { if(State.current < State.total) loadPage(State.current + 1); }
     function prev() { if(State.current > 1) loadPage(State.current - 1); }
@@ -318,6 +341,7 @@
 
     function toast(m) { D.notif.textContent = m; D.notif.style.display = 'block'; setTimeout(() => D.notif.style.display='none', 1500); }
 
+    window.onresize = updateImageSize;
     document.addEventListener('DOMContentLoaded', init);
 </script>
 
