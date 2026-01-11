@@ -2,276 +2,156 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>معاينة الكتاب - حسين الخليل</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معاينة كتاب - حسين الخليل</title>
     <style>
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
+            background: white;
+            color: black;
+            line-height: 1.5;
         }
         
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.7;
+        .page-container {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
             overflow-x: hidden;
         }
         
-        .mobile-container {
-            width: 100%;
-            max-width: 100vw;
-            min-height: 100vh;
-            margin: 0 auto;
-            background-color: white;
-            position: relative;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05);
-        }
-        
-        /* شريط العنوان العلوي */
-        .mobile-header {
-            padding: 15px 15px 10px;
-            background: linear-gradient(to bottom, #f5f5f5, #f0f0f0);
-            border-bottom: 1px solid #ddd;
+        /* محاكاة شريط الحالة العلوي للجوال */
+        .status-bar {
+            padding: 5px 15px;
+            font-size: 12px;
+            color: #666;
+            border-bottom: 1px solid #eee;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
         
-        .header-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-            margin-bottom: 8px;
+        .page-number {
+            font-weight: bold;
         }
         
-        .page-info {
-            background-color: #e9e9e9;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
+        /* محتوى الصفحة كما في الصورة */
+        .content {
+            padding: 20px 15px 80px 15px;
+            text-align: right;
+            font-size: 16px;
         }
         
-        .time {
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .book-preview-title {
+        .book-title {
             font-size: 18px;
-            margin: 5px 0;
-            width: 100%;
+            font-weight: bold;
             text-align: center;
-            color: #222;
-            font-weight: 700;
+            margin: 10px 0 20px 0;
         }
         
         .close-btn {
-            background-color: #e74c3c;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            background: #e74c3c;
             color: white;
             border: none;
-            padding: 8px 18px;
-            border-radius: 6px;
-            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
             cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s;
         }
         
-        .close-btn:hover {
-            background-color: #c0392b;
-        }
-        
-        /* محتوى النص الرئيسي */
-        .mobile-content {
-            padding: 25px 18px;
-            padding-bottom: 140px; /* مساحة للشريط السفلي */
-            text-align: justify;
-        }
-        
-        .text-content {
-            font-size: 16px;
-            color: #444;
-        }
-        
-        .text-content p {
+        .arabic-text {
+            text-align: right;
             margin-bottom: 20px;
-            text-align: justify;
         }
         
-        .text-content .highlight {
-            background-color: #fff9e6;
-            padding: 15px;
-            border-right: 3px solid #f1c40f;
-            border-radius: 0 8px 8px 0;
-            margin: 20px 0;
+        .arabic-text p {
+            margin: 8px 0;
+        }
+        
+        .hadith-text {
+            background: #f8f8f8;
+            padding: 12px;
+            border-right: 3px solid #ccc;
+            margin: 15px 0;
             font-style: italic;
         }
         
-        .reference {
-            background-color: #f0f8ff;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-right: 3px solid #3498db;
+        .reference-box {
+            background: #f0f0f0;
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 14px;
         }
         
-        .reference .title {
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 8px;
-            display: block;
-        }
-        
-        .reference .detail {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        
-        .analysis {
-            background-color: #f9f9f9;
-            padding: 18px;
-            border-radius: 8px;
-            margin: 25px 0;
-            border: 1px solid #eee;
-        }
-        
-        .analysis h3 {
-            color: #27ae60;
-            margin-bottom: 10px;
-            font-size: 17px;
-        }
-        
-        /* شريط سفلي محسن */
-        .mobile-footer {
+        /* الشريط السفلي المفقود */
+        .bottom-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             background: white;
             border-top: 1px solid #ddd;
-            padding: 15px;
-            box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
-            z-index: 200;
+            padding: 10px 15px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
         
-        .progress-info {
+        .progress-container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            justify-content: space-between;
+            margin-bottom: 8px;
         }
         
         .progress-text {
-            font-size: 15px;
-            font-weight: 600;
-            color: #333;
+            font-size: 13px;
+            color: #666;
         }
         
         .progress-bar {
             width: 60%;
-            height: 8px;
-            background-color: #eee;
-            border-radius: 4px;
+            height: 4px;
+            background: #eee;
+            border-radius: 2px;
             overflow: hidden;
         }
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(to right, #2ecc71, #1abc9c);
-            border-radius: 4px;
+            background: #3498db;
+            width: 100%;
         }
         
-        .footer-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .cta-button {
-            background: linear-gradient(to right, #3498db, #2980b9);
+        .purchase-button {
+            width: 100%;
+            background: #2c3e50;
             color: white;
             border: none;
-            padding: 16px;
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             text-align: center;
-            transition: all 0.3s;
-            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
-        }
-        
-        .cta-button:hover {
-            background: linear-gradient(to right, #2980b9, #1f639b);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
         }
         
         .website-link {
+            display: block;
             text-align: center;
-            color: #7f8c8d;
-            font-size: 14px;
+            margin-top: 5px;
+            font-size: 12px;
+            color: #666;
             text-decoration: none;
-            transition: color 0.3s;
         }
         
-        .website-link:hover {
-            color: #3498db;
-            text-decoration: underline;
-        }
-        
-        /* تحسين التجاوب للشاشات الصغيرة */
+        /* التأكد من أن النص لا يتجاوز الشاشة */
         @media (max-width: 480px) {
-            .mobile-header {
-                padding: 12px 12px 8px;
-            }
-            
-            .mobile-content {
-                padding: 20px 12px;
-                padding-bottom: 150px;
+            .content {
                 font-size: 15px;
-            }
-            
-            .text-content {
-                font-size: 15px;
-            }
-            
-            .cta-button {
-                padding: 14px;
-                font-size: 15px;
-            }
-            
-            .progress-bar {
-                width: 55%;
-            }
-            
-            .close-btn {
-                padding: 7px 15px;
-                font-size: 13px;
-            }
-        }
-        
-        @media (max-width: 360px) {
-            .mobile-content {
-                padding: 15px 10px;
-                padding-bottom: 160px;
-            }
-            
-            .text-content {
-                font-size: 14px;
-            }
-            
-            .book-preview-title {
-                font-size: 16px;
+                padding: 15px 12px 70px 12px;
             }
             
             .progress-bar {
@@ -279,111 +159,83 @@
             }
         }
         
-        /* تحسينات للعرض على الشاشات الكبيرة (اختياري) */
-        @media (min-width: 768px) {
-            .mobile-container {
-                max-width: 500px;
-                margin: 20px auto;
-                min-height: 90vh;
-                border-radius: 15px;
-                overflow: hidden;
+        @media (max-width: 360px) {
+            .content {
+                font-size: 14px;
             }
             
-            .mobile-footer {
-                border-radius: 0 0 15px 15px;
+            .purchase-button {
+                padding: 10px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="mobile-container">
-        <!-- شريط العنوان العلوي -->
-        <header class="mobile-header">
-            <div class="header-info">
-                <span class="page-info">38</span>
-                <span class="time">3:46</span>
-            </div>
-            <h1 class="book-preview-title">معاينة الكتاب</h1>
-            <button class="close-btn">إغلق</button>
-        </header>
-
-        <!-- محتوى النص الرئيسي -->
-        <main class="mobile-content">
-            <div class="text-content">
-                <p><strong>رابطه:</strong> أيضًا من التطبيق البنيوي بين مرويات البنكاري وبين القراب المهودي رواية "سوود الشمس".</p>
+    <div class="page-container">
+        <!-- شريط الحالة العلوي -->
+        <div class="status-bar">
+            <span class="page-number">38</span>
+            <span class="time">3:46</span>
+        </div>
+        
+        <!-- زر الإغلاق -->
+        <button class="close-btn">إغلق</button>
+        
+        <!-- العنوان الرئيسي -->
+        <div class="book-title">معاينة الكتاب</div>
+        
+        <!-- المحتوى الرئيسي -->
+        <div class="content">
+            <div class="arabic-text">
+                <p><strong>رابطه:</strong></p>
+                <p>أيضًا من التطبيق البنيوي بين مرويات البنكاري وبين القراب المهودي رواية "سوود الشمس":</p>
                 
-                <div class="highlight">
+                <div class="hadith-text">
                     نص للرواية: نص صعبة سلفة. قال النبي صلى الله عليه وسلم حين غربت الشمس: "أين تذهب؟ فقال: الله ورسوله أعلم. قال: فإنها تذهب فتسجد تحت العرش، فتستأذن. فيؤذن لها، ويلبث أن تسجد فلا يقبل منها، وتستأذن فلا يؤذن لها. فيقال لها: ارجعي من حيث جئت، فتطلع من مغربها، فذلك قوله تعالى: ﴿وَالشَّمْسُ تَجْرِي لِمُسْتَقَرٍّ لَّهَا﴾". 
                 </div>
                 
-                <div class="reference">
-                    <span class="title">معلومات الرواية:</span>
-                    <span class="detail"><strong>الراوي:</strong> أبو ذر الغفاري</span>
-                    <span class="detail"><strong>المحدث:</strong> البخاري</span>
-                    <span class="detail"><strong>المصنف:</strong> صحيح البخاري</span>
-                    <span class="detail"><strong>الصفحة أو الرقم:</strong> 319</span>
+                <div class="reference-box">
+                    <strong>الراوي:</strong> أبو ذر الغفاري<br>
+                    <strong>المحدث:</strong> البخاري<br>
+                    <strong>المصنف:</strong> صحيح البخاري<br>
+                    <strong>الصفحة أو الرقم:</strong> 319
                 </div>
                 
                 <p>تجد هذه الفكرة مشابهة في الأدبيات التفسيرية اليهودية المعروفة بـ "الميدراش". وتحديدًا في الميدراش على المزمور 19 (Midrash Tehillim)، وهي السفر لديهم - (Enoch) في الروايات المتعلقة بحركة النجوم.</p>
                 
                 <p>تصف النصوص اليهودية القديمة الشمس والقمر كخدّام، ويعبران بأيد طائشة أمام العرش الإلهي، فيؤذن لها بالطلوع محدودًا لكل يوم. هذه النصوص تعكس الرؤية الكونية التي كانت سائدة في بيئة أهل الكتاب، حيث كان الاعتقاد أنّ الكون محدود - "أوامر زمنية ميكانيكية" وليس بـ "قوانين فيزيائية ثابتة".</p>
                 
-                <div class="analysis">
-                    <h3>تحليل النص:</h3>
-                    <p>إنّ انتقال هذه التفاصيل (سجود الشمس واستئذانها) بحذافيرها من "الميدراش" إلى حديث البخاري، تثبتُ أنّ الرواة الذين كانت لهم معرفة بنفايات أهل الكتاب (مثل كعب الأحبار) قد نقلوا هذه الخوارق الأسطورية وحوّروها لتتكسب صيغة القداسة الإسلامية.</p>
-                </div>
+                <p>إنّ انتقال هذه التفاصيل (سجود الشمس واستئذانها) بحذافيرها من "الميدراش" إلى حديث البخاري، تثبتُ أنّ الرواة الذين كانت لهم معرفة بنفايات أهل الكتاب (مثل كعب الأحبار) قد نقلوا هذه الخوارق الأسطورية وحوّروها لتتكسب صيغة القداسة الإسلامية.</p>
             </div>
-        </main>
-
-        <!-- شريط سفلي محسن -->
-        <footer class="mobile-footer">
-            <div class="progress-info">
+        </div>
+        
+        <!-- الشريط السفلي الذي كان مفقودًا -->
+        <div class="bottom-bar">
+            <div class="progress-container">
                 <span class="progress-text">8 / 6</span>
                 <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%"></div>
+                    <div class="progress-fill"></div>
                 </div>
             </div>
-            <div class="footer-actions">
-                <button class="cta-button">اشتر الكتاب الكامل الآن</button>
-                <a href="https://seinalkhalil.github.io" target="_blank" class="website-link">seinalkhalil.github.io</a>
-            </div>
-        </footer>
+            
+            <button class="purchase-button">اشتر الكتاب الكامل الآن</button>
+            <a href="https://seinalkhalil.github.io" class="website-link">seinalkhalil.github.io</a>
+        </div>
     </div>
-
+    
     <script>
-        // إضافة بعض التفاعلية
-        document.addEventListener('DOMContentLoaded', function() {
-            // زر الإغلاق
-            const closeBtn = document.querySelector('.close-btn');
-            closeBtn.addEventListener('click', function() {
-                alert('سيتم إغلاق معاينة الكتاب');
-                // في التطبيق الفعلي: window.close() أو إرجاع للصفحة السابقة
-            });
-            
-            // زر الشراء
-            const ctaButton = document.querySelector('.cta-button');
-            ctaButton.addEventListener('click', function() {
-                alert('جاري تحويلك إلى صفحة الشراء...');
-                // في التطبيق الفعلي: window.location.href = 'رابط_الشراء';
-            });
-            
-            // رابط الموقع
-            const websiteLink = document.querySelector('.website-link');
-            websiteLink.addEventListener('click', function(e) {
-                // في التطبيق الفعلي، سيفتح الرابط تلقائياً
-                console.log('فتح موقع المؤلف');
-            });
-            
-            // محاكاة التقدم في القراءة عند التمرير
-            window.addEventListener('scroll', function() {
-                const contentHeight = document.querySelector('.mobile-content').offsetHeight;
-                const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-                const scrollPercentage = Math.min(100, Math.round((scrollPosition / contentHeight) * 100));
-                
-                // تحديث شريط التقدم (اختياري)
-                // document.querySelector('.progress-fill').style.width = scrollPercentage + '%';
-                // document.querySelector('.progress-text').textContent = Math.round(scrollPercentage/10) + ' / 10';
-            });
+        // إضافة التفاعل الأساسي للأزرار
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            if (confirm('هل تريد إغلاق معاينة الكتاب؟')) {
+                // في التطبيق الحقيقي، سيتم إغلاق النافذة أو العودة للخلف
+                console.log('إغلاق معاينة الكتاب');
+            }
+        });
+        
+        document.querySelector('.purchase-button').addEventListener('click', function() {
+            alert('جاري التوجيه إلى صفحة الشراء...');
+            // في التطبيق الحقيقي: window.location.href = 'رابط_الشراء';
         });
     </script>
 </body>
