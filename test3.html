@@ -71,6 +71,7 @@
             display: flex; align-items: center; gap: 8px; transition: var(--transition);
             font-weight: 700; cursor: pointer;
         }
+        /* التأثير المطلوب: ذهبي عند التمرير */
         .header-btn:hover { background: var(--accent-color); color: var(--primary-dark); border-color: var(--accent-color); }
 
         /* --- منطقة عرض الكتاب --- */
@@ -138,7 +139,7 @@
             height: 80px;
             background: var(--surface-color);
             display: flex; align-items: center; justify-content: center;
-            padding: 0 20px; border-top: 2px solid var(--accent-color);
+            padding: 0 20px; border-top: 1px solid rgba(94, 44, 165, 0.1);
             z-index: 1000;
         }
         .btn-buy {
@@ -148,6 +149,15 @@
             font-weight: 800; font-size: 1.1rem;
             display: flex; align-items: center; justify-content: center; gap: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        /* تطبيق نفس تأثير العودة للكتب هنا */
+        .btn-buy:hover { 
+            background: var(--accent-color); 
+            color: var(--primary-dark); 
+            border-color: var(--accent-color);
+            transform: scale(1.02);
         }
 
         /* لودر التحميل */
@@ -183,11 +193,9 @@
 <header class="header">
     <span class="header-title">معاينة: حسين الخليل</span>
     <div class="header-left">
-        <!-- زر الوضع الداكن -->
         <button class="header-btn" id="darkModeToggle" onclick="toggleDarkMode()" title="تبديل الوضع">
             <i class="fas fa-moon"></i>
         </button>
-        <!-- زر العودة للكتب -->
         <a href="books.html" class="header-btn">
             <i class="fas fa-book-open"></i> العودة للكتب
         </a>
@@ -204,9 +212,7 @@
     <button class="btn-nav" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i></button>
     <span class="page-num" id="page-info">1 / 50</span>
     <button class="btn-nav" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></button>
-    
     <div class="divider"></div>
-
     <button class="btn-nav" onclick="adjustZoom(0.3)"><i class="fas fa-search-plus"></i></button>
     <button class="btn-nav" onclick="resetZoom()"><i class="fas fa-sync-alt"></i></button>
     <button class="btn-nav" onclick="adjustZoom(-0.3)"><i class="fas fa-search-minus"></i></button>
