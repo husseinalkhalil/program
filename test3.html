@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-    <title>معاينة كتاب - حسين الخليل</title>
+    <title>معاينة - حسين الخليل</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,28 +46,30 @@
 
         /* --- الهيدر العلوي --- */
         .header {
-            height: 65px;
+            height: 60px;
             background: var(--primary-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             position: fixed;
             top: 0; left: 0; right: 0;
             transition: transform 0.4s ease;
         }
-        .header-title { font-weight: 800; font-size: 1.1rem; color: white; }
+        .header-preview-icon { font-size: 1.4rem; color: white; opacity: 0.9; }
 
+        /* زر الخروج/العودة بالهيدر */
         .header-btn {
             background: rgba(255, 255, 255, 0.15); color: white;
-            padding: 8px 18px; border-radius: 20px; text-decoration: none;
-            font-size: 0.9rem; border: 1px solid rgba(255, 255, 255, 0.3);
-            display: flex; align-items: center; gap: 8px; transition: var(--transition);
-            font-weight: 700; cursor: pointer;
+            width: 40px; height: 40px; border-radius: 50%;
+            text-decoration: none; display: flex; align-items: center; 
+            justify-content: center; font-size: 1.1rem; 
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: var(--transition); cursor: pointer;
         }
-        .header-btn:hover { background: var(--accent-color); color: var(--primary-dark); }
+        .header-btn:hover { background: var(--accent-color); color: var(--primary-dark); border-color: var(--accent-color); }
 
         /* --- منطقة عرض الكتاب --- */
         .viewer-container {
@@ -76,8 +78,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
-            margin-top: 65px; 
+            padding: 10px;
+            margin-top: 60px; 
             margin-bottom: 140px; 
             overflow: hidden;
             background: var(--viewer-gradient);
@@ -95,19 +97,19 @@
             max-width: 100%; max-height: 100%;
             width: auto; height: auto;
             object-fit: contain;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
             border-radius: 4px; background-color: white;
             transition: opacity 0.3s ease;
         }
 
-        /* --- شريط التحكم السفلي (الأدوات) --- */
+        /* --- شريط التحكم السفلي الموحد --- */
         .bottom-controls-bar {
             position: fixed;
             bottom: 80px; left: 0; right: 0;
             height: 65px;
             background: var(--surface-color);
             display: flex; justify-content: center; align-items: center;
-            gap: 8px;
+            gap: 10px;
             border-top: 1px solid rgba(94, 44, 165, 0.1);
             z-index: 1100;
             transition: all 0.4s ease;
@@ -117,14 +119,14 @@
         .btn-nav {
             background: var(--btn-nav-bg); border: 1px solid rgba(94, 44, 165, 0.2); 
             color: var(--primary-color);
-            width: 40px; height: 40px; border-radius: 10px;
+            width: 40px; height: 40px; border-radius: 12px;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
             transition: var(--transition);
         }
         body.dark-mode .btn-nav { color: var(--text-primary); border-color: rgba(255,255,255,0.1); }
         .btn-nav:hover { background: var(--primary-color); color: white; transform: scale(1.05); }
 
-        .page-num { font-size: 0.9rem; font-weight: 800; min-width: 75px; text-align: center; }
+        .page-num { font-size: 0.9rem; font-weight: 800; min-width: 70px; text-align: center; }
         .divider { width: 1px; height: 20px; background: rgba(94, 44, 165, 0.1); }
 
         /* --- شريط الشراء السفلي --- */
@@ -140,35 +142,37 @@
         }
         .btn-buy {
             background: var(--primary-color); color: white;
-            width: 100%; max-width: 500px; padding: 15px;
+            width: 100%; max-width: 450px; padding: 14px;
             border-radius: 15px; text-decoration: none;
             font-weight: 800; font-size: 1.1rem;
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
             transition: 0.3s;
         }
         .btn-buy:hover { background: var(--accent-color); color: var(--primary-dark); }
 
-        /* --- وضع ملء الشاشة (Reading Mode) --- */
-        body.is-reading .header { transform: translateY(-100%); }
-        body.is-reading .footer-buy-bar { transform: translateY(100%); }
+        /* زر الخروج العائم من وضع القراءة */
+        .exit-reading-mode {
+            position: fixed; top: 15px; left: 15px; z-index: 2001;
+            background: var(--primary-color); color: white;
+            width: 42px; height: 42px; border-radius: 50%;
+            display: none; align-items: center; justify-content: center;
+            border: 2px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- حالات وضع القراءة --- */
+        body.is-reading .header { transform: translateY(-110%); }
+        body.is-reading .footer-buy-bar { transform: translateY(110%); }
         
         body.is-reading .bottom-controls-bar {
-            bottom: 15px;
-            left: 10px;
-            right: 10px;
-            border-radius: 20px;
-            border: 1px solid var(--primary-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            background: var(--surface-color);
+            bottom: 15px; left: 10px; right: 10px;
+            border-radius: 20px; border: 1px solid var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
         }
 
         body.is-reading .viewer-container {
-            margin-top: 0;
-            margin-bottom: 0;
-            height: 100dvh;
-            padding: 5px;
+            margin: 0 !important; height: 100dvh; padding: 5px;
         }
+        body.is-reading .exit-reading-mode { display: flex; }
 
         /* لودر التحميل */
         #loader {
@@ -179,30 +183,34 @@
         @keyframes spin { to { transform: rotate(360deg); } }
 
         @media (max-width: 768px) {
-            .header-title { font-size: 0.9rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-            .viewer-container { align-items: flex-start; padding-top: 25px; }
+            .viewer-container { align-items: flex-start; padding-top: 20px; }
             .btn-nav { width: 34px; height: 34px; font-size: 0.85rem; }
-            .page-num { min-width: 60px; font-size: 0.75rem; }
-            .bottom-controls-bar { gap: 5px; height: 60px; }
-            .hide-mobile { display: none; }
+            .page-num { min-width: 55px; font-size: 0.75rem; }
+            .bottom-controls-bar { gap: 6px; height: 60px; }
         }
     </style>
 </head>
 <body>
 
+<!-- اللودر -->
 <div id="loader">
     <div class="spinner"></div>
     <p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary-color); font-weight: bold;">جاري التحميل...</p>
 </div>
 
+<!-- زر الخروج العائم (عند ملء الشاشة) -->
+<button class="exit-reading-mode" onclick="toggleReadingMode()" id="exitBtn">
+    <i class="fas fa-compress"></i>
+</button>
+
 <!-- الهيدر -->
 <header class="header">
-    <span class="header-title">معاينة: حسين الخليل</span>
-    <div class="header-left">
-        <a href="books.html" class="header-btn">
-            <i class="fas fa-book-open"></i> <span class="hide-mobile">العودة للكتب</span>
-        </a>
+    <div class="header-preview-icon">
+        <i class="fas fa-eye"></i> <!-- أيقونة المعاينة بدل النص -->
     </div>
+    <a href="books.html" class="header-btn" title="خروج">
+        <i class="fas fa-sign-out-alt"></i> <!-- أيقونة الباب والسهم بدل النص -->
+    </a>
 </header>
 
 <!-- العرض -->
@@ -212,23 +220,23 @@
     </div>
 </main>
 
-<!-- شريط الأدوات الموحد -->
+<!-- شريط الأدوات -->
 <div class="bottom-controls-bar">
     <!-- التنقل -->
-    <button class="btn-nav" onclick="changePage(-1)" title="السابق"><i class="fas fa-chevron-right"></i></button>
+    <button class="btn-nav" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i></button>
     <span class="page-num" id="page-info">... / ...</span>
-    <button class="btn-nav" onclick="changePage(1)" title="التالي"><i class="fas fa-chevron-left"></i></button>
+    <button class="btn-nav" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></button>
     
     <div class="divider"></div>
 
     <!-- الزوم -->
-    <button class="btn-nav" onclick="adjustZoom(0.3)" title="تكبير"><i class="fas fa-search-plus"></i></button>
-    <button class="btn-nav" onclick="resetZoom()" title="ضبط"><i class="fas fa-sync-alt"></i></button>
-    <button class="btn-nav" onclick="adjustZoom(-0.3)" title="تصغير"><i class="fas fa-search-minus"></i></button>
+    <button class="btn-nav" onclick="adjustZoom(0.3)"><i class="fas fa-search-plus"></i></button>
+    <button class="btn-nav" onclick="resetZoom()"><i class="fas fa-sync-alt"></i></button>
+    <button class="btn-nav" onclick="adjustZoom(-0.3)"><i class="fas fa-search-minus"></i></button>
 
     <div class="divider"></div>
 
-    <!-- الإعدادات (ليلي + ملء شاشة) -->
+    <!-- الإعدادات -->
     <button class="btn-nav" onclick="toggleDarkMode()" title="وضع ليلي">
         <i class="fas fa-moon" id="darkIcon"></i>
     </button>
@@ -257,11 +265,9 @@
     const infoEl = document.getElementById('page-info');
     const loader = document.getElementById('loader');
 
-    // وضع القراءة
     function toggleReadingMode() {
         document.body.classList.toggle('is-reading');
         const icon = document.getElementById('fsIcon');
-        
         if(document.body.classList.contains('is-reading')) {
             icon.classList.replace('fa-expand', 'fa-compress');
         } else {
@@ -270,7 +276,6 @@
         }
     }
 
-    // الوضع الليلي
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
         const icon = document.getElementById('darkIcon');
@@ -279,7 +284,6 @@
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
     }
 
-    // التنقل بالأسهم
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight') changePage(-1);
         if (e.key === 'ArrowLeft') changePage(1);
@@ -294,7 +298,7 @@
             totalPages = Math.min(pdfDoc.numPages, 50); 
             renderPage(1);
         } catch (e) {
-            loader.innerHTML = '<p style="color:red">فشل تحميل الكتاب</p>';
+            loader.innerHTML = '<p style="color:red">فشل تحميل الملف</p>';
         }
     }
 
