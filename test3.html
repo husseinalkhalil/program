@@ -64,7 +64,7 @@
             border-radius: 25px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 0.95rem;
         }
 
-        /* القائمة الجانبية */
+        /* القائمة الجانبية (مخفية افتراضياً) */
         .sidebar-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 998; display: none; }
         .sidebar {
             position: fixed; top: 0; right: -320px; width: 300px; height: 100vh;
@@ -76,22 +76,13 @@
         .sidebar-content { flex: 1; padding: 20px; overflow-y: auto; }
         
         .section-title { font-size: 1rem; font-weight: 700; margin-bottom: 15px; border-bottom: 2px solid var(--primary-color); padding-bottom: 8px; }
-        .accessibility-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
-        .accessibility-btn {
-            background: var(--bg-light); border: 2px solid #eee; border-radius: 8px; padding: 12px;
-            cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.85rem;
-        }
-        .accessibility-btn.active { border-color: var(--primary-color); background: rgba(94, 44, 165, 0.05); }
-
         .page-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
         .page-btn { background: var(--bg-light); border: none; padding: 10px 5px; border-radius: 8px; cursor: pointer; font-weight: 700; }
         .page-btn.active { background: var(--primary-color); color: white; }
 
         /* منطقة العرض */
         .viewer-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #2c3e50; }
-        .image-viewer {
-            flex: 1; overflow: auto; background: #1a252f; text-align: center; display: block;
-        }
+        .image-viewer { flex: 1; overflow: auto; background: #1a252f; text-align: center; display: block; }
         .image-container { display: inline-block; min-width: 100%; padding: 20px; vertical-align: top; }
         .page-image { display: block; margin: 0 auto; height: auto; border-radius: 4px; box-shadow: 0 8px 30px rgba(0,0,0,0.4); transition: width 0.3s ease; }
 
@@ -106,24 +97,23 @@
             width: 46px; height: 46px; background: rgba(255, 255, 255, 0.12); border: none;
             border-radius: 50%; color: white; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
-        .control-btn:disabled { opacity: 0.3; }
         .page-indicator { color: white; font-size: 1rem; min-width: 90px; text-align: center; font-weight: 600; }
         .zoom-display { color: white; font-size: 0.9rem; min-width: 65px; text-align: center; background: rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 20px; }
 
-        /* شريط الإجراءات */
+        /* شريط الإجراءات (زر الشراء المنسق) */
         .action-bar { background: var(--bg-white); padding: 15px 20px; border-top: 1px solid #e9ecef; display: flex; flex-direction: column; }
         .action-button {
             background: var(--primary-color); color: white; padding: 14px 20px; border-radius: 12px;
             text-decoration: none; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 12px;
         }
 
-        /* تحسين الكمبيوتر لزر الشراء */
+        /* تنسيق الكمبيوتر (توسيط الزر وتحديد عرضه) */
         @media (min-width: 768px) {
             .action-bar { align-items: center; }
             .action-button { width: 100%; max-width: 400px; box-shadow: 0 4px 15px rgba(94, 44, 165, 0.2); }
         }
 
-        /* تحسين الجوال لمنع القص */
+        /* تحسين الجوال لمنع القص وضمان ظهور زر التكبير */
         @media (max-width: 767px) {
             .controls-bar { padding: 8px 10px; gap: 5px; padding-bottom: calc(8px + env(safe-area-inset-bottom, 5px)); }
             .control-btn { width: 38px; height: 38px; font-size: 0.95rem; }
@@ -133,11 +123,10 @@
             .header-title { display: none; }
         }
 
-        .mobile-notification {
+        .notif {
             position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.85); color: white; padding: 8px 20px; border-radius: 20px; z-index: 2000; display: none;
+            background: rgba(0, 0, 0, 0.85); color: white; padding: 8px 20px; border-radius: 20px; z-index: 2000; display: none; font-size: 0.85rem;
         }
-
     </style>
 </head>
 <body>
@@ -149,25 +138,22 @@
 
 <div class="app-container" id="app-container" style="display: none;">
     
+    <!-- القائمة الجانبية والمحتوى (لا تظهر إلا عند النقر) -->
     <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h3><i class="fas fa-book"></i> الإعدادات</h3>
+            <h3><i class="fas fa-list-ul"></i> فهرس الصفحات</h3>
             <i class="fas fa-times" onclick="closeSidebar()" style="cursor: pointer;"></i>
         </div>
         <div class="sidebar-content">
-            <div class="section-title">خيارات العرض</div>
-            <div class="accessibility-buttons">
-                <button class="accessibility-btn" onclick="toggleBrightness()" id="brightness-btn"><i class="fas fa-sun"></i><span>وضع الإنارة</span></button>
-                <button class="accessibility-btn" onclick="resetAll()"><i class="fas fa-undo"></i><span>إعادة ضبط</span></button>
-            </div>
-            <div class="section-title">الفهرس</div>
+            <div class="section-title">انتقل إلى صفحة</div>
             <div class="page-grid" id="page-grid"></div>
         </div>
     </div>
 
     <header class="header">
         <div class="header-left">
+            <!-- زر الهمبرغر في الزاوية -->
             <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
             <img src="images/logo.png" alt="Logo" class="logo">
             <div class="header-title">معاينة الكتاب</div>
@@ -189,7 +175,7 @@
             
             <div class="zoom-controls">
                 <button class="control-btn" onclick="zoomOut()"><i class="fas fa-search-minus"></i></button>
-                <button class="control-btn" onclick="resetZoom()"><i class="fas fa-expand-arrows-alt"></i></button>
+                <button class="control-btn" onclick="resetZoom()" title="الحجم الأصلي"><i class="fas fa-expand-arrows-alt"></i></button>
                 <div class="zoom-display" id="zoom-display">100%</div>
                 <button class="control-btn" onclick="zoomIn()"><i class="fas fa-search-plus"></i></button>
             </div>
@@ -201,7 +187,7 @@
     </div>
 </div>
 
-<div class="mobile-notification" id="mobile-notification"></div>
+<div class="notif" id="notif"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
@@ -218,7 +204,7 @@
         sidebar: document.getElementById('sidebar'),
         overlay: document.getElementById('sidebar-overlay'),
         pageGrid: document.getElementById('page-grid'),
-        notif: document.getElementById('mobile-notification')
+        notif: document.getElementById('notif')
     };
 
     async function initializeApp() {
@@ -235,7 +221,7 @@
             
             DOM.loading.style.display = 'none';
             DOM.app.style.display = 'flex';
-        } catch (e) { alert("فشل التحميل."); }
+        } catch (e) { alert("فشل تحميل المعاينة."); }
     }
 
     async function loadPage(num) {
@@ -257,14 +243,13 @@
         img.className = 'page-image';
         img.src = AppState.images[num];
         
-        // حساب العرض بناءً على التكبير
         const viewerWidth = DOM.imageViewer.clientWidth - 40;
         img.style.width = (viewerWidth * AppState.zoom) + "px";
         
         DOM.imageContainer.appendChild(img);
         DOM.pageIndicator.textContent = `${num} / ${AppState.totalPages}`;
         DOM.zoomDisplay.textContent = Math.round(AppState.zoom * 100) + "%";
-        DOM.imageViewer.scrollLeft = 0; // الحفاظ على اتجاه RTL عند التكبير
+        DOM.imageViewer.scrollLeft = 0; // إصلاح: الحفاظ على بداية الكلام يميناً في RTL
 
         document.getElementById('prev-btn').disabled = (num <= 1);
         document.getElementById('next-btn').disabled = (num >= AppState.totalPages);
@@ -294,14 +279,7 @@
         document.querySelectorAll('.page-btn').forEach((b, i) => b.classList.toggle('active', i+1 === AppState.currentPage));
     }
 
-    function showNotif(m) { DOM.notif.textContent = m; DOM.notif.style.display = 'block'; setTimeout(() => DOM.notif.style.display = 'none', 1500); }
-
-    function toggleBrightness() {
-        const isWhite = DOM.imageViewer.style.backgroundColor === 'rgb(255, 255, 255)';
-        DOM.imageViewer.style.backgroundColor = isWhite ? '#1a252f' : '#ffffff';
-        document.getElementById('brightness-btn').classList.toggle('active');
-    }
-    function resetAll() { resetZoom(); DOM.imageViewer.style.backgroundColor = '#1a252f'; document.getElementById('brightness-btn').classList.remove('active'); closeSidebar(); }
+    function showNotif(m) { DOM.notif.textContent = m; DOM.notif.style.display = 'block'; setTimeout(() => DOM.notif.style.display = 'none', 1200); }
 
     document.addEventListener('DOMContentLoaded', initializeApp);
 </script>
