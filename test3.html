@@ -403,7 +403,7 @@
             background: #2c3e50;
         }
 
-        /* شريط التحكم السفلي - تعديل خاص للجوال لضمان عدم القص */
+        /* شريط التحكم السفلي */
         .controls-bar {
             background: rgba(0, 0, 0, 0.9);
             padding: 15px 20px;
@@ -414,8 +414,6 @@
             bottom: 0;
             z-index: 99;
             backdrop-filter: blur(10px);
-            /* إضافة مساحة للأجهزة الحديثة (safe area) */
-            padding-bottom: calc(15px + env(safe-area-inset-bottom, 0px));
         }
 
         .nav-controls {
@@ -477,7 +475,7 @@
         /* منطقة عرض الصورة */
         .image-viewer {
             flex: 1;
-            overflow: auto;
+            overflow: auto; /* يسمح بالتمرير عند التكبير */
             -webkit-overflow-scrolling: touch;
             position: relative;
             background: #1a252f;
@@ -493,16 +491,29 @@
         }
 
         .page-image {
-            max-width: 100%;
+            /* تمت إزالة max-width: 100% للسماح بالتكبير الحقيقي */
             height: auto;
             margin-bottom: 25px;
             border-radius: 4px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.4);
             opacity: 1;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, width 0.3s ease; /* إضافة انيميشن للعرض */
             display: block;
             user-select: none;
             -webkit-user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* رسائل حالة الصفحة */
+        .page-status {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            padding: 20px;
+            max-width: 300px;
         }
 
         /* شريط الإجراءات السفلي */
@@ -532,71 +543,92 @@
             box-shadow: 0 4px 15px rgba(94, 44, 165, 0.2);
         }
 
-        /* تحسينات الجوال لمعالجة مشكلة القص */
-        @media (max-width: 480px) {
+        /* =========================================
+           تعديلات خاصة لنسخة الجوال فقط
+        ========================================= */
+        @media (max-width: 767px) {
             .controls-bar {
-                padding: 12px 10px; /* تقليل الحواف الجانبية */
-                padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+                padding: 10px 8px; /* تقليل الحشو */
                 gap: 5px;
+                /* إضافة مساحة للأجهزة الحديثة لمنع انقصاص الشريط */
+                padding-bottom: calc(10px + env(safe-area-inset-bottom, 5px));
             }
-            
+
             .control-btn {
-                width: 42px; /* تصغير حجم الزر قليلاً ليناسب العرض */
+                width: 42px; /* تصغير الأزرار قليلاً لتناسب العرض */
                 height: 42px;
                 font-size: 1rem;
             }
-            
+
             .nav-controls {
-                gap: 8px; /* تقليل المسافات بين أزرار التنقل */
+                gap: 8px;
             }
-            
+
             .zoom-controls {
-                gap: 5px; /* تقليل المسافات بين أزرار التكبير */
+                gap: 5px;
             }
-            
+
             .page-indicator {
-                min-width: 70px;
-                font-size: 0.95rem;
+                min-width: 75px;
+                font-size: 0.9rem;
             }
-            
+
             .zoom-display {
                 min-width: 55px;
                 padding: 4px 8px;
                 font-size: 0.85rem;
             }
+
+            .header {
+                height: 60px;
+                padding: 10px 15px;
+            }
+
+            .logo {
+                height: 30px;
+            }
+
+            .close-btn {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+                min-height: 38px;
+            }
         }
 
-        /* تحسينات إضافية للشاشات الصغيرة جداً */
-        @media (max-width: 360px) {
-            .control-btn {
-                width: 38px;
-                height: 38px;
-            }
-            .page-indicator {
-                min-width: 60px;
-            }
+        /* إشعارات الجوال */
+        .mobile-notification {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            display: none;
+            backdrop-filter: blur(10px);
+            max-width: 90vw;
+            text-align: center;
         }
+
     </style>
 </head>
 <body>
 
+<!-- شاشة التحميل -->
 <div id="loading-screen">
     <div class="loader"></div>
     <div class="loading-text" id="loading-text">جاري تحميل الكتاب...</div>
-    <div class="loading-subtext">يتم تحويل الصفحات إلى صور عالية الجودة</div>
     <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
     </div>
 </div>
 
-<div class="error-screen" id="error-screen" style="display: none; position: fixed; inset: 0; background: white; z-index: 10000; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center;">
-    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #e74c3c; margin-bottom: 20px;"></i>
-    <h2 id="error-title">عذراً، حدث خطأ</h2>
-    <p id="error-message" style="margin: 15px 0 30px;"></p>
-    <button onclick="location.reload()" style="background: var(--primary-color); color: white; border: none; padding: 12px 25px; border-radius: 8px; font-family: inherit;">إعادة المحاولة</button>
-</div>
-
+<!-- الهيكل الرئيسي -->
 <div class="app-container" id="app-container" style="display: none;">
+    
     <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -615,7 +647,7 @@
                 </div>
             </div>
             <div class="pages-section">
-                <div class="section-title">فهرس الصفحات</div>
+                <div class="section-title">الصفحات</div>
                 <div class="page-grid" id="page-grid"></div>
             </div>
         </div>
@@ -636,27 +668,26 @@
         </div>
         
         <div class="controls-bar">
-            <div class="zoom-controls">
-                <!-- تم وضع زر التكبير هنا لضمان ظهوره بشكل بارز -->
-                <button class="control-btn" onclick="zoomIn()" aria-label="تكبير"><i class="fas fa-search-plus"></i></button>
-                <div class="zoom-display" id="zoom-display">100%</div>
-                <button class="control-btn" onclick="zoomOut()" aria-label="تصغير"><i class="fas fa-search-minus"></i></button>
+            <div class="nav-controls">
+                <button class="control-btn" id="prev-btn" onclick="goToPrevPage()"><i class="fas fa-chevron-right"></i></button>
+                <div class="page-indicator" id="page-indicator">1 / 0</div>
+                <button class="control-btn" id="next-btn" onclick="goToNextPage()"><i class="fas fa-chevron-left"></i></button>
             </div>
             
-            <div class="nav-controls">
-                <button class="control-btn" id="next-btn" onclick="goToNextPage()" aria-label="التالي"><i class="fas fa-chevron-right"></i></button>
-                <div class="page-indicator" id="page-indicator">1 / 0</div>
-                <button class="control-btn" id="prev-btn" onclick="goToPrevPage()" aria-label="السابق"><i class="fas fa-chevron-left"></i></button>
+            <div class="zoom-controls">
+                <button class="control-btn" onclick="zoomOut()"><i class="fas fa-search-minus"></i></button>
+                <div class="zoom-display" id="zoom-display">100%</div>
+                <button class="control-btn" onclick="zoomIn()"><i class="fas fa-search-plus"></i></button>
             </div>
         </div>
     </main>
     
     <div class="action-bar">
-        <a href="#" class="action-button"><i class="fas fa-shopping-cart"></i> احصل على النسخة الكاملة</a>
+        <a href="#" class="action-button"><i class="fas fa-shopping-cart"></i> اشترِ الكتاب الكامل</a>
     </div>
 </div>
 
-<div class="mobile-notification" id="mobile-notification" style="position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 20px; z-index: 1000; display: none;"></div>
+<div class="mobile-notification" id="mobile-notification"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
@@ -667,7 +698,8 @@
         currentPage: 1,
         zoom: 1.0,
         images: {},
-        accessibility: { highContrast: false, largeText: false, highBrightness: false }
+        accessibility: { highContrast: false, largeText: false, highBrightness: false },
+        renderQuality: window.devicePixelRatio || 1
     };
 
     const DOM = {
@@ -679,7 +711,8 @@
         zoomDisplay: document.getElementById('zoom-display'),
         imageContainer: document.getElementById('image-container'),
         imageViewer: document.getElementById('image-viewer'),
-        progressBar: document.getElementById('progress-bar')
+        progressBar: document.getElementById('progress-bar'),
+        mobileNotification: document.getElementById('mobile-notification')
     };
 
     async function initializeApp() {
@@ -700,36 +733,74 @@
             
             DOM.loadingScreen.style.display = 'none';
             DOM.appContainer.style.display = 'flex';
+            setupEventListeners();
         } catch (e) {
-            document.getElementById('error-screen').style.display = 'flex';
-            document.getElementById('error-message').textContent = e.message;
+            console.error(e);
+            alert("خطأ في تحميل الملف: " + e.message);
         }
     }
 
-    async function loadPage(num) {
-        if (AppState.images[num]) {
-            renderImage(num);
+    async function loadPage(pageNumber) {
+        if (AppState.images[pageNumber]) {
+            displayPage(pageNumber);
             return;
         }
 
-        const page = await AppState.pdf.getPage(num);
-        const viewport = page.getViewport({ scale: 2.0 * AppState.zoom });
+        const page = await AppState.pdf.getPage(pageNumber);
+        // نستخدم دائماً جودة عالية في الرندر 2.0، ونتحكم في العرض الفعلي عبر CSS
+        const viewport = page.getViewport({ scale: 2.0 });
+        
         const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.height = viewport.height;
+        const context = canvas.getContext('2d', { alpha: false });
         canvas.width = viewport.width;
-
-        await page.render({ canvasContext: ctx, viewport }).promise;
-        AppState.images[num] = canvas.toDataURL('image/jpeg', 0.8);
-        renderImage(num);
+        canvas.height = viewport.height;
+        
+        await page.render({ canvasContext: context, viewport: viewport }).promise;
+        
+        AppState.images[pageNumber] = {
+            data: canvas.toDataURL('image/jpeg', 0.85),
+            width: viewport.width,
+            height: viewport.height
+        };
+        
+        displayPage(pageNumber);
     }
 
-    function renderImage(num) {
-        AppState.currentPage = num;
-        DOM.imageContainer.innerHTML = `<img src="${AppState.images[num]}" class="page-image" style="width: 100%; max-width: 800px;">`;
-        DOM.pageIndicator.textContent = `${num} / ${AppState.totalPages}`;
-        DOM.imageViewer.scrollTop = 0;
-        updateActiveGrid();
+    function displayPage(pageNumber) {
+        AppState.currentPage = pageNumber;
+        DOM.imageContainer.innerHTML = '';
+        const pageData = AppState.images[pageNumber];
+        
+        const img = document.createElement('img');
+        img.className = 'page-image';
+        img.src = pageData.data;
+
+        // --- تعديل منطق الحجم لإصلاح مشكلة التكبير ---
+        // العرض الأساسي هو عرض الشاشة مطروحاً منه الهوامش
+        const baseWidth = window.innerWidth - 40;
+        // نضرب العرض الأساسي في معامل الزووم
+        const calculatedWidth = baseWidth * AppState.zoom;
+        
+        img.style.width = `${calculatedWidth}px`;
+        // -------------------------------------------
+
+        DOM.imageContainer.appendChild(img);
+        DOM.pageIndicator.textContent = `${pageNumber} / ${AppState.totalPages}`;
+        DOM.zoomDisplay.textContent = `${Math.round(AppState.zoom * 100)}%`;
+        
+        updateActivePageInGrid();
+    }
+
+    function zoomIn() {
+        AppState.zoom = Math.min(3.0, AppState.zoom + 0.25);
+        displayPage(AppState.currentPage); // إعادة العرض بالعرض الجديد
+        showNotification(`التكبير: ${Math.round(AppState.zoom * 100)}%`);
+    }
+
+    function zoomOut() {
+        AppState.zoom = Math.max(0.5, AppState.zoom - 0.25);
+        displayPage(AppState.currentPage);
+        showNotification(`التصغير: ${Math.round(AppState.zoom * 100)}%`);
     }
 
     function createPageGrid() {
@@ -737,30 +808,42 @@
             const btn = document.createElement('button');
             btn.className = 'page-btn';
             btn.innerHTML = `<div class="page-number">${i}</div>`;
-            btn.onclick = () => { goToPage(i); closeSidebar(); };
+            btn.onclick = () => { loadPage(i); closeSidebar(); };
             DOM.pageGrid.appendChild(btn);
         }
     }
 
-    function updateActiveGrid() {
-        document.querySelectorAll('.page-btn').forEach((b, i) => {
-            b.classList.toggle('active', i + 1 === AppState.currentPage);
+    function updateActivePageInGrid() {
+        document.querySelectorAll('.page-btn').forEach((btn, idx) => {
+            btn.classList.toggle('active', idx + 1 === AppState.currentPage);
         });
     }
 
-    function goToPage(n) { if (n >= 1 && n <= AppState.totalPages) loadPage(n); }
-    function goToNextPage() { goToPage(AppState.currentPage + 1); }
-    function goToPrevPage() { goToPage(AppState.currentPage - 1); }
-    
-    function zoomIn() { AppState.zoom += 0.2; AppState.images = {}; loadPage(AppState.currentPage); DOM.zoomDisplay.textContent = Math.round(AppState.zoom * 100) + '%'; }
-    function zoomOut() { if(AppState.zoom > 0.6) { AppState.zoom -= 0.2; AppState.images = {}; loadPage(AppState.currentPage); DOM.zoomDisplay.textContent = Math.round(AppState.zoom * 100) + '%'; } }
+    function goToNextPage() { if (AppState.currentPage < AppState.totalPages) loadPage(AppState.currentPage + 1); }
+    function goToPrevPage() { if (AppState.currentPage > 1) loadPage(AppState.currentPage - 1); }
 
     function toggleSidebar() { DOM.sidebar.classList.add('active'); document.getElementById('sidebar-overlay').style.display = 'block'; }
     function closeSidebar() { DOM.sidebar.classList.remove('active'); document.getElementById('sidebar-overlay').style.display = 'none'; }
+    
+    function showNotification(msg) {
+        DOM.mobileNotification.textContent = msg;
+        DOM.mobileNotification.style.display = 'block';
+        setTimeout(() => DOM.mobileNotification.style.display = 'none', 2000);
+    }
 
     function toggleHighContrast() { document.body.classList.toggle('high-contrast'); }
     function toggleLargeText() { document.body.classList.toggle('large-text'); }
-    function toggleBrightness() { AppState.accessibility.highBrightness = !AppState.accessibility.highBrightness; DOM.imageViewer.style.filter = AppState.accessibility.highBrightness ? 'brightness(1.2)' : 'none'; }
+    function toggleBrightness() { 
+        AppState.accessibility.highBrightness = !AppState.accessibility.highBrightness;
+        DOM.imageViewer.style.backgroundColor = AppState.accessibility.highBrightness ? '#ffffff' : '#1a252f';
+    }
+
+    function setupEventListeners() {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') goToNextPage();
+            if (e.key === 'ArrowRight') goToPrevPage();
+        });
+    }
 
     document.addEventListener('DOMContentLoaded', initializeApp);
 </script>
