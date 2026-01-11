@@ -32,7 +32,7 @@
             flex-direction: column;
         }
 
-        /* --- الهيدر العلوي (ثابت في الأعلى) --- */
+        /* --- الهيدر العلوي (ثابت في الأعلى دائماً) --- */
         .header {
             height: 60px;
             background: var(--glass-bg);
@@ -85,10 +85,10 @@
             pointer-events: none;
         }
 
-        /* --- شريط التحكم (في القسم السفلي) --- */
+        /* --- شريط التحكم السفلي (فوق زر الشراء) --- */
         .bottom-controls-bar {
             position: fixed;
-            bottom: 80px; /* فوق زر الشراء */
+            bottom: 80px; 
             left: 0; right: 0;
             height: 60px;
             background: var(--glass-bg);
@@ -96,21 +96,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             border-top: 1px solid rgba(255,255,255,0.1);
             z-index: 950;
         }
 
         .btn-nav {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;
-            width: 40px; height: 40px; border-radius: 10px;
+            width: 38px; height: 38px; border-radius: 10px;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 1rem; transition: var(--transition);
+            font-size: 0.9rem; transition: var(--transition);
         }
         .btn-nav:hover { background: var(--accent-color); border-color: var(--accent-color); }
-        .page-num { font-size: 0.95rem; font-weight: bold; min-width: 80px; text-align: center; color: var(--text-light); }
-
-        .divider { width: 1px; height: 25px; background: rgba(255,255,255,0.15); margin: 0 5px; }
+        .page-num { font-size: 0.9rem; font-weight: bold; min-width: 70px; text-align: center; color: var(--text-light); }
+        .divider { width: 1px; height: 20px; background: rgba(255,255,255,0.15); margin: 0 5px; }
 
         /* --- شريط الشراء السفلي --- */
         .footer-buy-bar {
@@ -131,7 +130,7 @@
             box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
-        /* لوادر التحميل */
+        /* لودر التحميل */
         #loader {
             position: fixed; inset: 0; background: var(--main-bg);
             display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 2000;
@@ -139,21 +138,34 @@
         .spinner { width: 45px; height: 45px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--accent-color); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        @media (max-width: 480px) {
-            .header-title { font-size: 0.9rem; }
-            .btn-nav { width: 35px; height: 35px; }
-            .page-num { font-size: 0.8rem; min-width: 60px; }
+        /* =========================================== */
+        /* تعديلات خاصة بنسخة الجوال فقط */
+        /* =========================================== */
+        @media (max-width: 768px) {
+            .viewer-container {
+                /* إنزال ملف الصفحات للأسفل لتجنب القص من الأعلى */
+                margin-top: 80px; 
+                padding-top: 40px; 
+                /* محاذاة الصفحة للأعلى لضمان رؤية الهامش العلوي */
+                align-items: flex-start; 
+            }
+            .header-title { font-size: 0.95rem; }
+            .btn-exit { padding: 6px 12px; font-size: 0.8rem; }
+            .bottom-controls-bar { gap: 8px; }
+            .btn-nav { width: 34px; height: 34px; }
         }
+        /* =========================================== */
+
     </style>
 </head>
 <body>
 
 <div id="loader">
     <div class="spinner"></div>
-    <p style="margin-top: 15px; font-size: 0.85rem; color: #94a3b8;">جاري تحميل صفحات الكتاب...</p>
+    <p style="margin-top: 15px; font-size: 0.85rem; color: #94a3b8;">جاري تحميل الكتاب...</p>
 </div>
 
-<!-- الهيدر العلوي -->
+<!-- الهيدر العلوي: العنوان + زر الخروج -->
 <header class="header">
     <span class="header-title">معاينة: حسين الخليل</span>
     <a href="books.html" class="btn-exit">
@@ -161,29 +173,27 @@
     </a>
 </header>
 
-<!-- منطقة العرض -->
+<!-- منطقة العرض المركزية -->
 <main class="viewer-container" id="viewer">
     <div class="book-wrapper" id="book-wrapper">
         <img id="page-image" src="" alt="صفحة الكتاب">
     </div>
 </main>
 
-<!-- شريط التحكم السفلي -->
+<!-- شريط التحكم السفلي: التكبير والتنقل -->
 <div class="bottom-controls-bar">
-    <!-- أزرار التنقل -->
-    <button class="btn-nav" id="prev-btn" onclick="changePage(-1)" title="الصفحة السابقة"><i class="fas fa-chevron-right"></i></button>
+    <button class="btn-nav" id="prev-btn" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i></button>
     <span class="page-num" id="page-info">1 / 50</span>
-    <button class="btn-nav" id="next-btn" onclick="changePage(1)" title="الصفحة التالية"><i class="fas fa-chevron-left"></i></button>
+    <button class="btn-nav" id="next-btn" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></button>
     
     <div class="divider"></div>
 
-    <!-- أزرار التكبير والتصغير -->
-    <button class="btn-nav" onclick="adjustZoom(0.3)" title="تكبير"><i class="fas fa-search-plus"></i></button>
-    <button class="btn-nav" onclick="resetZoom()" title="إعادة ضبط"><i class="fas fa-sync-alt"></i></button>
-    <button class="btn-nav" onclick="adjustZoom(-0.3)" title="تصغير"><i class="fas fa-search-minus"></i></button>
+    <button class="btn-nav" onclick="adjustZoom(0.3)"><i class="fas fa-search-plus"></i></button>
+    <button class="btn-nav" onclick="resetZoom()"><i class="fas fa-sync-alt"></i></button>
+    <button class="btn-nav" onclick="adjustZoom(-0.3)"><i class="fas fa-search-minus"></i></button>
 </div>
 
-<!-- شريط الشراء الثابت -->
+<!-- شريط الشراء الثابت في الأسفل تماماً -->
 <div class="footer-buy-bar">
     <a href="#" class="btn-buy">
         <i class="fas fa-shopping-cart"></i>
@@ -215,7 +225,7 @@
             pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
             totalPages = Math.min(pdfDoc.numPages, 50); 
             renderPage(1);
-        } catch (e) { console.error(e); }
+        } catch (e) { console.error("Error loading PDF:", e); }
     }
 
     async function renderPage(num) {
@@ -250,22 +260,13 @@
 
     function resetZoom() { zoomLevel = 1; translateX = 0; translateY = 0; updateTransform(); }
 
-    viewer.addEventListener('wheel', (e) => {
-        if (zoomLevel > 1) {
-            e.preventDefault();
-            translateX -= e.deltaX;
-            translateY -= e.deltaY;
-            updateTransform();
-        }
-    }, { passive: false });
-
+    // التحكم بالسحب واللمس
     const startDrag = (x, y) => {
         if (zoomLevel <= 1) return;
         isDragging = true;
         startX = x - translateX;
         startY = y - translateY;
     };
-
     const doDrag = (x, y) => {
         if (!isDragging) return;
         translateX = x - startX;
@@ -276,7 +277,6 @@
     viewer.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
     window.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
     window.addEventListener('mouseup', () => isDragging = false);
-
     viewer.addEventListener('touchstart', (e) => startDrag(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
     viewer.addEventListener('touchmove', (e) => doDrag(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
     viewer.addEventListener('touchend', () => isDragging = false);
