@@ -29,12 +29,16 @@
             -webkit-tap-highlight-color: transparent; 
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Tajawal', sans-serif;
             background: var(--bg-light);
             color: var(--text-dark);
-            height: 100vh;
-            overflow: hidden;
         }
 
         /* شاشة التحميل */
@@ -315,12 +319,6 @@
             font-size: 0.9rem;
         }
 
-        /* تنسيق الكمبيوتر لزر الشراء */
-        @media (min-width: 768px) {
-            .action-bar { align-items: center; }
-            .action-button { width: 100%; max-width: 350px; }
-        }
-
         /* تنسيق الجوال */
         @media (max-width: 767px) {
             .controls-bar { 
@@ -362,6 +360,10 @@
             .image-viewer {
                 padding: 5px;
             }
+            
+            .sidebar {
+                width: 280px;
+            }
         }
 
         /* إصلاح مشاكل اللمس على iOS */
@@ -397,6 +399,14 @@
             color: white;
             text-align: center;
             padding: 20px;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        
+        /* تنسيق الكمبيوتر لزر الشراء */
+        @media (min-width: 768px) {
+            .action-bar { align-items: center; }
+            .action-button { width: 100%; max-width: 350px; }
         }
     </style>
 </head>
@@ -405,6 +415,7 @@
 <div id="loading-screen">
     <div class="loader"></div>
     <div class="progress-container"><div class="progress-bar" id="pb"></div></div>
+    <div id="loading-text" style="margin-top: 15px; color: var(--primary-color); font-weight: 600;">جاري تحميل الكتاب...</div>
 </div>
 
 <div class="app-container" id="app" style="display: none;">
@@ -443,16 +454,16 @@
     
     <div class="controls-bar">
         <div class="nav-controls">
-            <button class="control-btn" id="prev" onclick="prev()"><i class="fas fa-chevron-right"></i></button>
+            <button class="control-btn" id="prev" onclick="prevPage()"><i class="fas fa-chevron-right"></i></button>
             <div class="page-indicator" id="p-ind">1 / 0</div>
-            <button class="control-btn" id="next" onclick="next()"><i class="fas fa-chevron-left"></i></button>
+            <button class="control-btn" id="next" onclick="nextPage()"><i class="fas fa-chevron-left"></i></button>
         </div>
         
         <div class="zoom-controls">
-            <button class="control-btn" onclick="zOut()"><i class="fas fa-search-minus"></i></button>
-            <button class="control-btn" onclick="zReset()" title="ملاءمة الشاشة"><i class="fas fa-expand-arrows-alt"></i></button>
+            <button class="control-btn" onclick="zoomOut()"><i class="fas fa-search-minus"></i></button>
+            <button class="control-btn" onclick="zoomReset()" title="ملاءمة الشاشة"><i class="fas fa-expand-arrows-alt"></i></button>
             <div class="zoom-display" id="z-dis">100%</div>
-            <button class="control-btn" onclick="zIn()"><i class="fas fa-search-plus"></i></button>
+            <button class="control-btn" onclick="zoomIn()"><i class="fas fa-search-plus"></i></button>
         </div>
     </div>
     
@@ -466,14 +477,15 @@
 <div class="notif" id="notif"></div>
 
 <script>
-    // تخطي استخدام PDF.js واستخدام صور مباشرة بدلاً من ذلك
-    // هذا حل أبسط وأكثر موثوقية للجوال
-    
+    // تهيئة المتغيرات العامة
     const State = {
-        current: 1,
-        total: 50, // تغيير هذا الرقم حسب عدد الصفحات الفعلي
+        pdf: null,
+        totalPages: 0,
+        currentPage: 1,
         zoom: 1,
-        isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent),
+        pagesCache: {},
+        isLoading: false
     };
     
     const D = {
@@ -483,245 +495,355 @@
         pImg: document.getElementById('page-image'),
         pInd: document.getElementById('p-ind'),
         zDis: document.getElementById('z-dis'),
+        pb: document.getElementById('pb'),
         sidebar: document.getElementById('sidebar'),
         overlay: document.getElementById('overlay'),
         pgGrid: document.getElementById('pg-grid'),
         notif: document.getElementById('notif'),
-        fallbackMsg: document.getElementById('fallback-msg')
+        fallbackMsg: document.getElementById('fallback-msg'),
+        loadingText: document.getElementById('loading-text')
     };
 
+    // دالة التهيئة الرئيسية
     async function init() {
         try {
-            // محاكاة التحميل
-            simulateLoading();
+            // تحديث نص التحميل
+            D.loadingText.textContent = "جاري تحميل الكتاب...";
             
-            // إنشاء صفحات افتراضية (بدلاً من PDF)
-            genGrid();
-            await loadPage(1);
+            // إضافة مكتبة PDF.js ديناميكيًا
+            await loadPDFJS();
             
+            // تحميل ملف PDF
+            await loadPDFFile();
+            
+            // إخفاء شاشة التحميل وإظهار التطبيق
             D.load.style.display = 'none';
             D.app.style.display = 'block';
             
             // ضبط الحجم الأولي
-            setTimeout(() => {
-                zReset();
-            }, 300);
-            
-        } catch (e) {
-            console.error("خطأ:", e);
-            showFallback();
-        }
-    }
-
-    function simulateLoading() {
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += 5;
-            document.getElementById('pb').style.width = progress + '%';
-            
-            if (progress >= 100) {
-                clearInterval(interval);
-            }
-        }, 100);
-    }
-
-    async function loadPage(n) {
-        try {
-            // استخدام مسار صور افتراضي - تغيير هذا حسب هيكل ملفاتك
-            // إذا لديك صور جاهزة للصفحات
-            const imagePath = `images/pages/page-${n}.jpg`;
-            
-            // عرض مؤشر تحميل
-            D.pImg.style.opacity = '0.5';
-            
-            // تحميل الصورة
-            const img = new Image();
-            img.onload = function() {
-                D.pImg.src = this.src;
-                D.pImg.style.opacity = '1';
-                D.fallbackMsg.style.display = 'none';
-                render(n);
-            };
-            
-            img.onerror = function() {
-                // إذا فشل تحميل الصورة، استخدم صورة افتراضية
-                console.warn(`فشل تحميل الصفحة ${n}, استخدام صورة افتراضية`);
-                D.pImg.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000"><rect width="800" height="1000" fill="%23f0f0f0"/><text x="400" y="500" font-family="Arial" font-size="24" text-anchor="middle" fill="%235e2ca5">صفحة ' + n + '</text></svg>';
-                D.pImg.style.opacity = '1';
-                D.fallbackMsg.style.display = 'block';
-                render(n);
-            };
-            
-            img.src = imagePath;
+            setTimeout(zoomReset, 100);
             
         } catch (error) {
-            console.error("فشل تحميل الصفحة:", error);
-            toast("فشل تحميل الصفحة");
+            console.error("خطأ في التهيئة:", error);
+            showFallback("فشل تحميل الكتاب. الرجاء المحاولة مرة أخرى.");
         }
     }
 
-    function render(n) {
-        State.current = n;
-        
-        D.pInd.textContent = `${n} / ${State.total}`;
-        D.zDis.textContent = Math.round(State.zoom * 100) + "%";
-        
-        // إعادة تعيين السكرول
-        D.viewer.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        
-        document.getElementById('prev').disabled = (n <= 1);
-        document.getElementById('next').disabled = (n >= State.total);
-        updateGrid();
-        
-        // ضبط حجم الصورة
-        updateImageSize();
+    // تحميل مكتبة PDF.js ديناميكيًا
+    async function loadPDFJS() {
+        return new Promise((resolve, reject) => {
+            // التحقق إذا كانت المكتبة محملة مسبقًا
+            if (window.pdfjsLib) {
+                resolve();
+                return;
+            }
+            
+            D.loadingText.textContent = "جاري تحميل مكتبة القراءة...";
+            
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js';
+            script.onload = () => {
+                // تحميل worker
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 
+                    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+                resolve();
+            };
+            script.onerror = () => reject(new Error("فشل تحميل مكتبة PDF.js"));
+            document.head.appendChild(script);
+        });
     }
 
-    function updateImageSize() {
-        const img = D.pImg;
-        const container = D.viewer;
+    // تحميل ملف PDF
+    async function loadPDFFile() {
+        return new Promise((resolve, reject) => {
+            D.loadingText.textContent = "جاري تحميل ملف الكتاب...";
+            
+            const loadingTask = pdfjsLib.getDocument({
+                url: 'pdf/111.pdf',
+                cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/cmaps/',
+                cMapPacked: true
+            });
+            
+            loadingTask.onProgress = (progressData) => {
+                const percent = Math.round((progressData.loaded / progressData.total) * 100);
+                D.pb.style.width = percent + '%';
+                D.loadingText.textContent = `جاري تحميل الكتاب... ${percent}%`;
+            };
+            
+            loadingTask.promise.then(pdf => {
+                State.pdf = pdf;
+                State.totalPages = Math.min(pdf.numPages, 50); // الحد الأقصى 50 صفحة للمعاينة
+                
+                // إنشاء فهرس الصفحات
+                genGrid();
+                
+                // تحميل الصفحة الأولى
+                loadPage(1).then(() => {
+                    resolve();
+                }).catch(reject);
+                
+            }).catch(reject);
+        });
+    }
+
+    // تحميل صفحة محددة
+    async function loadPage(pageNum) {
+        if (State.isLoading) return;
         
-        if (!img.complete || img.naturalWidth === 0) {
+        try {
+            State.isLoading = true;
+            State.currentPage = pageNum;
+            
+            // التحقق من وجود الصفحة في الذاكرة المؤقتة
+            if (State.pagesCache[pageNum]) {
+                renderPage(State.pagesCache[pageNum]);
+                State.isLoading = false;
+                return;
+            }
+            
+            // تحميل الصفحة من PDF
+            const page = await State.pdf.getPage(pageNum);
+            
+            // حساب مقياس العرض المناسب للجوال
+            const viewport = page.getViewport({ scale: State.isMobile ? 1.5 : 2.0 });
+            
+            // إنشاء canvas لعرض الصفحة
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            
+            // ضبط أبعاد canvas
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            
+            // عرض الصفحة على canvas
+            const renderContext = {
+                canvasContext: context,
+                viewport: viewport
+            };
+            
+            await page.render(renderContext).promise;
+            
+            // تحويل canvas إلى صورة
+            const imageData = canvas.toDataURL('image/jpeg', 0.9);
+            
+            // حفظ في الذاكرة المؤقتة
+            State.pagesCache[pageNum] = imageData;
+            
+            // عرض الصفحة
+            renderPage(imageData);
+            
+            State.isLoading = false;
+            
+        } catch (error) {
+            console.error(`فشل تحميل الصفحة ${pageNum}:`, error);
+            showPageError();
+            State.isLoading = false;
+        }
+    }
+
+    // عرض الصفحة
+    function renderPage(imageData) {
+        D.pImg.src = imageData;
+        D.pInd.textContent = `${State.currentPage} / ${State.totalPages}`;
+        D.zDis.textContent = Math.round(State.zoom * 100) + "%";
+        
+        // إخفاء رسالة الخطأ
+        D.fallbackMsg.style.display = 'none';
+        
+        // تحديث حالة الأزرار
+        document.getElementById('prev').disabled = (State.currentPage <= 1);
+        document.getElementById('next').disabled = (State.currentPage >= State.totalPages);
+        
+        // تحديث الفهرس
+        updateGrid();
+        
+        // إعادة تعيين السكرول
+        D.viewer.scrollTop = 0;
+        D.viewer.scrollLeft = 0;
+        
+        // ضبط حجم الصورة بعد تحميلها
+        D.pImg.onload = function() {
+            updateImageSize();
+            D.pImg.style.opacity = '1';
+        };
+        
+        D.pImg.style.opacity = '0.7';
+    }
+
+    // ضبط حجم الصورة
+    function updateImageSize() {
+        if (!D.pImg.complete || D.pImg.naturalWidth === 0) {
             setTimeout(updateImageSize, 100);
             return;
         }
         
-        const containerWidth = container.clientWidth - 20;
-        const containerHeight = container.clientHeight - 20;
+        const viewerWidth = D.viewer.clientWidth - 20;
+        const viewerHeight = D.viewer.clientHeight - 20;
+        const imgWidth = D.pImg.naturalWidth;
+        const imgHeight = D.pImg.naturalHeight;
         
-        // حساب الحجم المناسب
-        const imgRatio = img.naturalWidth / img.naturalHeight;
-        const containerRatio = containerWidth / containerHeight;
+        // حساب النسب
+        const widthRatio = viewerWidth / imgWidth;
+        const heightRatio = viewerHeight / imgHeight;
         
-        let newWidth, newHeight;
+        // استخدام أصغر نسبة لضمان عرض الصورة كاملة
+        const baseScale = Math.min(widthRatio, heightRatio);
         
-        if (imgRatio > containerRatio) {
-            // الصورة أوسع من الحاوية
-            newWidth = containerWidth * State.zoom;
-            newHeight = newWidth / imgRatio;
-        } else {
-            // الصورة أطول من الحاوية
-            newHeight = containerHeight * State.zoom;
-            newWidth = newHeight * imgRatio;
-        }
+        // تطبيق التكبير/التصغير
+        const scale = baseScale * State.zoom;
         
-        // تطبيق الحجم
-        img.style.width = newWidth + 'px';
-        img.style.height = newHeight + 'px';
-        img.style.maxWidth = 'none';
-        img.style.maxHeight = 'none';
+        // تطبيق الحجم على الصورة
+        D.pImg.style.width = (imgWidth * scale) + 'px';
+        D.pImg.style.height = 'auto';
     }
 
-    function zIn() { 
+    // دوال التكبير/التصغير
+    function zoomIn() {
         State.zoom = Math.min(State.zoom + 0.2, 3.0);
-        updateImageSize(); 
+        updateImageSize();
         D.zDis.textContent = Math.round(State.zoom * 100) + "%";
         if (State.zoom >= 3.0) toast("الحد الأقصى للتكبير");
     }
     
-    function zOut() { 
+    function zoomOut() {
         State.zoom = Math.max(State.zoom - 0.2, 0.4);
-        updateImageSize(); 
+        updateImageSize();
         D.zDis.textContent = Math.round(State.zoom * 100) + "%";
         if (State.zoom <= 0.4) toast("الحد الأدنى للتصغير");
     }
     
-    function zReset() {
+    function zoomReset() {
         State.zoom = 1.0;
         updateImageSize();
         D.zDis.textContent = "ملاءمة";
         toast("تم ملاءمة الصفحة للشاشة");
-        
-        // إعادة تعيين السكرول
-        setTimeout(() => {
-            D.viewer.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-        }, 100);
     }
 
-    function next() { 
-        if(State.current < State.total) loadPage(State.current + 1); 
+    // التنقل بين الصفحات
+    function nextPage() {
+        if (State.currentPage < State.totalPages) {
+            loadPage(State.currentPage + 1);
+        }
     }
     
-    function prev() { 
-        if(State.current > 1) loadPage(State.current - 1); 
+    function prevPage() {
+        if (State.currentPage > 1) {
+            loadPage(State.currentPage - 1);
+        }
     }
 
-    function toggleSidebar() { 
-        D.sidebar.classList.add('active'); 
-        D.overlay.style.display = 'block'; 
+    // إدارة القائمة الجانبية
+    function toggleSidebar() {
+        D.sidebar.classList.add('active');
+        D.overlay.style.display = 'block';
     }
     
-    function closeSidebar() { 
-        D.sidebar.classList.remove('active'); 
-        D.overlay.style.display = 'none'; 
+    function closeSidebar() {
+        D.sidebar.classList.remove('active');
+        D.overlay.style.display = 'none';
     }
 
+    // إنشاء فهرس الصفحات
     function genGrid() {
         D.pgGrid.innerHTML = '';
-        for(let i = 1; i <= State.total; i++) {
-            const b = document.createElement('button');
-            b.className = 'pg-btn'; 
-            b.textContent = i;
-            b.onclick = () => { 
-                loadPage(i); 
-                closeSidebar(); 
+        for (let i = 1; i <= State.totalPages; i++) {
+            const button = document.createElement('button');
+            button.className = 'pg-btn';
+            button.textContent = i;
+            button.onclick = () => {
+                loadPage(i);
+                closeSidebar();
             };
-            D.pgGrid.appendChild(b);
+            D.pgGrid.appendChild(button);
         }
     }
     
     function updateGrid() {
-        const btns = D.pgGrid.querySelectorAll('.pg-btn');
-        btns.forEach((b, i) => {
-            b.classList.toggle('active', (i + 1) === State.current);
+        const buttons = D.pgGrid.querySelectorAll('.pg-btn');
+        buttons.forEach((btn, index) => {
+            btn.classList.toggle('active', (index + 1) === State.currentPage);
         });
     }
 
-    function toast(m) { 
-        D.notif.textContent = m; 
-        D.notif.style.display = 'block'; 
+    // عرض رسائل للمستخدم
+    function toast(message) {
+        D.notif.textContent = message;
+        D.notif.style.display = 'block';
         setTimeout(() => {
             D.notif.style.display = 'none';
-        }, 1500); 
+        }, 1500);
     }
     
-    function showFallback() {
+    function showPageError() {
+        D.fallbackMsg.style.display = 'block';
+        toast("فشل تحميل الصفحة");
+    }
+    
+    function showFallback(message) {
         D.load.style.display = 'none';
         document.body.innerHTML = `
-            <div style="padding: 20px; text-align: center; direction: rtl;">
-                <h2 style="color: var(--primary-color); margin-bottom: 20px;">⚠️ مشكلة في التحميل</h2>
-                <p style="margin-bottom: 15px;">تعذر تحميل معاينة الكتاب على جهاز الجوال.</p>
-                <p style="margin-bottom: 25px;">الرجاء المحاولة على جهاز الكمبيوتر أو تحديث الصفحة.</p>
-                <a href="books.html" style="background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; display: inline-block;">
-                    العودة إلى المكتبة
-                </a>
+            <div style="padding: 40px 20px; text-align: center; direction: rtl; background: var(--bg-white); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <div style="color: var(--primary-color); font-size: 3rem; margin-bottom: 20px;">⚠️</div>
+                <h2 style="color: var(--primary-color); margin-bottom: 20px;">عذراً، حدث خطأ</h2>
+                <p style="margin-bottom: 15px; color: var(--text-dark); font-size: 1.1rem;">${message}</p>
+                <p style="margin-bottom: 25px; color: #666;">الرجاء المحاولة على جهاز الكمبيوتر أو تحديث الصفحة</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                    <button onclick="location.reload()" style="background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; border: none; font-size: 1rem; cursor: pointer; font-family: 'Tajawal', sans-serif;">
+                        تحديث الصفحة
+                    </button>
+                    <a href="books.html" style="background: #f0f0f0; color: var(--text-dark); padding: 12px 25px; border-radius: 10px; text-decoration: none; display: inline-block; font-size: 1rem;">
+                        العودة إلى المكتبة
+                    </a>
+                </div>
             </div>
         `;
     }
 
-    // دعم السحب للتغيير بين الصفحات
-    let startX = 0;
+    // إضافة دعم السحب على الجوال
+    let touchStartX = 0;
     
     D.viewer.addEventListener('touchstart', function(e) {
-        startX = e.touches[0].clientX;
+        touchStartX = e.touches[0].clientX;
     }, { passive: true });
     
     D.viewer.addEventListener('touchend', function(e) {
-        if (!startX) return;
+        if (!touchStartX) return;
         
-        const endX = e.changedTouches[0].clientX;
-        const diffX = startX - endX;
+        const touchEndX = e.changedTouches[0].clientX;
+        const diffX = touchStartX - touchEndX;
         
         // إذا كان السحب أفقياً أكثر من 50 بكسل
         if (Math.abs(diffX) > 50) {
             if (diffX > 0) {
-                next(); // سحب لليمين
+                nextPage(); // سحب لليمين - الصفحة التالية
             } else {
-                prev(); // سحب لليسار
+                prevPage(); // سحب لليسار - الصفحة السابقة
             }
         }
         
-        startX = 0;
+        touchStartX = 0;
+    }, { passive: true });
+
+    // إضافة دعم اللمس المزدوج للتكبير/التصغير
+    let lastTouchTime = 0;
+    
+    D.viewer.addEventListener('touchend', function(e) {
+        const currentTime = new Date().getTime();
+        const timeDiff = currentTime - lastTouchTime;
+        
+        if (timeDiff < 300 && timeDiff > 0) {
+            // لمسة مزدوجة
+            if (State.zoom === 1.0) {
+                State.zoom = 2.0;
+                toast("تم التكبير");
+            } else {
+                zoomReset();
+            }
+            updateImageSize();
+            D.zDis.textContent = Math.round(State.zoom * 100) + "%";
+        }
+        
+        lastTouchTime = currentTime;
     }, { passive: true });
 
     // تحديث الحجم عند تغيير اتجاه الشاشة
@@ -733,11 +855,8 @@
         setTimeout(updateImageSize, 300);
     });
 
-    // تحميل الصفحة الأولى
-    document.addEventListener('DOMContentLoaded', function() {
-        // محاولة تحميل معاينة مباشرة
-        setTimeout(init, 500);
-    });
+    // بدء التحميل عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', init);
 </script>
 
 </body>
