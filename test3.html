@@ -7,277 +7,241 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --main-bg: #0f172a; /* Slate 900 */
-            --glass-bg: rgba(30, 41, 59, 0.8);
-            --accent-color: #6366f1; /* Indigo 500 */
-            --accent-hover: #818cf8;
+            --main-bg: #0f172a;
+            --glass-bg: rgba(30, 41, 59, 0.9);
+            --accent-color: #6366f1;
             --text-light: #f8fafc;
-            --text-muted: #94a3b8;
-            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.3s ease;
         }
 
-        * { 
-            margin: 0; padding: 0; box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Tajawal', sans-serif;
             background-color: var(--main-bg);
             color: var(--text-light);
             height: 100vh;
+            width: 100vw;
             overflow: hidden;
-            user-select: none;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* شاشة التحميل المطورة */
-        #loading-screen {
-            position: fixed; inset: 0; background: var(--main-bg);
-            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999;
-        }
-        .loader-ring {
-            width: 80px; height: 80px; border: 4px solid rgba(99, 102, 241, 0.1);
-            border-top: 4px solid var(--accent-color); border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* الهيدر الأنيق */
+        /* الهيدر */
         .header {
-            position: fixed; top: 0; left: 0; right: 0; height: 65px;
-            background: var(--glass-bg); backdrop-filter: blur(12px);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 20px; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05);
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .logo-area { display: flex; align-items: center; gap: 12px; }
-        .logo-area img { height: 35px; border-radius: 8px; }
-        .header-title { font-weight: 700; font-size: 1rem; color: var(--text-light); }
-
+        .header-title { font-weight: 700; font-size: 0.9rem; }
         .btn-close {
-            background: rgba(255,255,255,0.05); color: var(--text-light);
-            padding: 8px 16px; border-radius: 12px; text-decoration: none;
-            font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1); transition: var(--transition);
+            background: rgba(239, 68, 68, 0.1); color: #ef4444;
+            padding: 6px 12px; border-radius: 8px; text-decoration: none;
+            font-size: 0.8rem; border: 1px solid rgba(239, 68, 68, 0.2);
         }
-        .btn-close:hover { background: rgba(239, 68, 68, 0.2); border-color: #ef4444; }
 
-        /* منطقة القراءة الإبداعية */
-        .main-container {
-            position: absolute; inset: 65px 0 140px 0;
-            display: flex; justify-content: center; align-items: center;
-            padding: 20px; overflow: hidden;
+        /* منطقة عرض الكتاب - التعديل الجوهري هنا */
+        .viewer-container {
+            flex: 1; /* تأخذ كل المساحة المتبقية */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            overflow: hidden;
+            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
         }
+
         .book-wrapper {
-            position: relative; max-width: 100%; max-height: 100%;
-            transition: transform 0.2s ease-out;
-            filter: drop-shadow(var(--card-shadow));
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease;
         }
+
         #page-image {
-            max-width: 100%; max-height: 100%; object-fit: contain;
-            border-radius: 4px; display: block;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain; /* تضمن ظهور الصورة كاملة دون قص */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border-radius: 4px;
+            background-color: white; /* لخلفية الورقة */
         }
 
-        /* القائمة الجانبية المودرن */
-        .sidebar {
-            position: fixed; top: 0; right: -300px; width: 300px; height: 100vh;
-            background: #1e293b; z-index: 1000; transition: var(--transition);
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        /* أزرار التحكم العائمة - جعلناها أصغر وأكثر شفافية */
+        .controls-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 8px 15px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 90;
         }
-        .sidebar.active { right: 0; }
-        .sidebar-header {
-            padding: 25px 20px; border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex; justify-content: space-between; align-items: center;
+        .btn-nav {
+            background: none; border: none; color: white;
+            width: 35px; height: 35px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: var(--transition);
         }
-        .sidebar-content { padding: 20px; height: calc(100vh - 80px); overflow-y: auto; }
-        .page-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-        .pg-item {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
-            color: var(--text-muted); padding: 15px 5px; border-radius: 10px; cursor: pointer;
-            font-weight: bold; text-align: center; transition: var(--transition);
-        }
-        .pg-item.active { background: var(--accent-color); color: white; transform: scale(1.05); }
+        .btn-nav:hover { background: var(--accent-color); }
+        .btn-nav:disabled { opacity: 0.2; }
+        .page-num { font-size: 0.85rem; font-weight: bold; min-width: 50px; text-align: center; }
 
-        /* أدوات التحكم العائمة */
-        .controls-wrapper {
-            position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-            background: var(--glass-bg); backdrop-filter: blur(15px);
-            padding: 10px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
-            display: flex; align-items: center; gap: 20px; z-index: 90; box-shadow: var(--card-shadow);
-        }
-        .nav-btns { display: flex; align-items: center; gap: 15px; }
-        .btn-icon {
-            width: 40px; height: 40px; border-radius: 50%; border: none;
-            background: rgba(255,255,255,0.05); color: white; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; transition: var(--transition);
-        }
-        .btn-icon:hover:not(:disabled) { background: var(--accent-color); }
-        .btn-icon:disabled { opacity: 0.2; cursor: not-allowed; }
-        
-        .page-info { font-weight: bold; font-size: 0.9rem; min-width: 60px; text-align: center; color: var(--text-light); }
-
-        /* شريط الشراء السفلي - التصميم الجديد المانع للقص */
-        .purchase-bar {
-            position: fixed; bottom: 0; left: 0; right: 0; height: 80px;
-            background: #0f172a; padding: 12px 20px;
-            display: flex; align-items: center; justify-content: center;
-            z-index: 100; border-top: 1px solid rgba(255,255,255,0.05);
+        /* شريط الشراء السفلي */
+        .footer-bar {
+            height: 75px;
+            background: var(--glass-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
         .btn-buy {
-            background: var(--accent-color); color: white; width: 100%; max-width: 500px;
-            text-decoration: none; border-radius: 16px; font-weight: 700;
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            transition: var(--transition); position: relative; overflow: hidden;
-            /* منع القص بالجوال */
-            padding: 14px 20px;
-            font-size: 1rem;
-            line-height: 1.4;
-        }
-        .btn-buy:active { transform: scale(0.97); }
-        .btn-buy i { font-size: 1.2rem; }
-
-        /* تحسينات الجوال */
-        @media (max-width: 768px) {
-            .header { height: 60px; padding: 0 15px; }
-            .header-title { font-size: 0.9rem; }
-            .btn-close { padding: 6px 12px; font-size: 0.75rem; }
-            
-            .main-container { inset: 60px 0 150px 0; padding: 10px; }
-            
-            .controls-wrapper { 
-                bottom: 85px; width: 90%; justify-content: space-between; 
-                padding: 8px 15px; gap: 10px;
-            }
-            .btn-icon { width: 36px; height: 36px; }
-            .zoom-tools { display: none; } /* إخفاء الزووم المعقد في الجوال لتبسيط الواجهة */
-
-            .purchase-bar { height: 85px; padding: 15px; }
-            .btn-buy { 
-                font-size: 0.9rem; /* تصغير طفيف للخط */
-                padding: 12px 15px;
-                border-radius: 12px;
-            }
+            background: var(--accent-color);
+            color: white;
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            border-radius: 12px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
-        .overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-            display: none; z-index: 999; backdrop-filter: blur(4px);
+        /* القائمة الجانبية */
+        .sidebar {
+            position: fixed; top: 0; right: -280px; width: 280px; height: 100%;
+            background: #1e293b; z-index: 1000; transition: 0.3s;
+            padding: 20px;
         }
-        .overlay.active { display: block; }
+        .sidebar.active { right: 0; }
+        .page-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+        .grid-item { 
+            background: rgba(255,255,255,0.05); padding: 10px; text-align: center; 
+            border-radius: 8px; cursor: pointer; font-size: 0.8rem;
+        }
+        .grid-item.active { background: var(--accent-color); }
+
+        .overlay-bg {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+            display: none; z-index: 999;
+        }
+        .overlay-bg.active { display: block; }
+
+        /* شاشة التحميل */
+        #loader {
+            position: fixed; inset: 0; background: var(--main-bg);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 2000;
+        }
+        .spinner { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--accent-color); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<!-- شاشة التحميل -->
-<div id="loading-screen">
-    <div class="loader-ring"></div>
-    <p style="margin-top: 20px; color: var(--text-muted); font-size: 0.9rem;">جاري تهيئة تجربة القراءة...</p>
+<div id="loader">
+    <div class="spinner"></div>
+    <p style="margin-top: 15px; font-size: 0.8rem; color: #94a3b8;">جاري تحميل صفحات الكتاب...</p>
 </div>
 
-<!-- الواجهة الرئيسية -->
 <div class="header">
-    <div class="logo-area">
-        <button class="btn-icon" onclick="toggleSidebar()"><i class="fas fa-th-large"></i></button>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <button class="btn-nav" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
         <span class="header-title">معاينة: حسين الخليل</span>
     </div>
-    <a href="books.html" class="btn-close">خروج <i class="fas fa-sign-out-alt"></i></a>
+    <a href="books.html" class="btn-close">خروج <i class="fas fa-times"></i></a>
 </div>
 
-<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
+<div class="overlay-bg" id="overlay" onclick="toggleSidebar()"></div>
 <div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <span style="font-weight: bold;">فهرس الصفحات</span>
-        <button class="btn-icon" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="sidebar-content">
-        <div class="page-grid" id="page-grid"></div>
-    </div>
+    <h3 style="font-size: 1rem;">فهرس الصفحات</h3>
+    <div class="page-grid" id="page-grid"></div>
 </div>
 
-<main class="main-container">
-    <div class="book-wrapper" id="book-wrapper">
+<main class="viewer-container">
+    <div class="book-wrapper" id="zoom-wrapper">
         <img id="page-image" src="" alt="صفحة الكتاب">
+    </div>
+
+    <!-- أزرار تحكم مصغرة -->
+    <div class="controls-overlay">
+        <button class="btn-nav" id="prev-btn" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i></button>
+        <span class="page-num" id="page-info">1 / 50</span>
+        <button class="btn-nav" id="next-btn" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></button>
+        <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.1); margin: 0 5px;"></div>
+        <button class="btn-nav" onclick="adjustZoom(0.1)"><i class="fas fa-search-plus"></i></button>
+        <button class="btn-nav" onclick="adjustZoom(-0.1)"><i class="fas fa-search-minus"></i></button>
     </div>
 </main>
 
-<div class="controls-wrapper">
-    <div class="nav-btns">
-        <button class="btn-icon" id="btn-next" onclick="changePage(1)"><i class="fas fa-chevron-right"></i></button>
-        <div class="page-info" id="page-info">0 / 0</div>
-        <button class="btn-icon" id="btn-prev" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i></button>
-    </div>
-    <div class="zoom-tools">
-        <button class="btn-icon" onclick="handleZoom(0.1)"><i class="fas fa-plus"></i></button>
-        <button class="btn-icon" onclick="resetZoom()"><i class="fas fa-expand"></i></button>
-        <button class="btn-icon" onclick="handleZoom(-0.1)"><i class="fas fa-minus"></i></button>
-    </div>
-</div>
-
-<div class="purchase-bar">
-    <a href="https://wa.me/XXXXXXXXXX" class="btn-buy">
-        <i class="fas fa-shopping-bag"></i>
-        <span>اشتَرِ النسخة الكاملة الآن</span>
+<div class="footer-bar">
+    <a href="#" class="btn-buy">
+        <i class="fas fa-shopping-cart"></i>
+        اشتَرِ النسخة الكاملة الآن
     </a>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 <script>
-    // الإعدادات والحالة
-    const state = {
-        pdf: null,
-        currentPage: 1,
-        totalPages: 0,
-        zoom: 1,
-        isMobile: window.innerWidth < 768
-    };
+    const pdfUrl = 'pdf/111.pdf'; 
+    let pdfDoc = null;
+    let currPage = 1;
+    let totalPages = 0;
+    let zoomLevel = 1;
 
-    // عناصر DOM
-    const elements = {
-        loading: document.getElementById('loading-screen'),
-        img: document.getElementById('page-image'),
-        pageInfo: document.getElementById('page-info'),
-        grid: document.getElementById('page-grid'),
-        sidebar: document.getElementById('sidebar'),
-        overlay: document.getElementById('overlay'),
-        wrapper: document.getElementById('book-wrapper')
-    };
+    const imgEl = document.getElementById('page-image');
+    const infoEl = document.getElementById('page-info');
+    const loader = document.getElementById('loader');
 
-    // تحميل مكتبة PDF.js
-    async function init() {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    async function loadBook() {
         try {
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js';
-            script.onload = async () => {
-                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-                await loadDocument();
-            };
-            document.head.appendChild(script);
-        } catch (err) {
-            alert("حدث خطأ أثناء تحميل الكتاب.");
+            pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+            totalPages = Math.min(pdfDoc.numPages, 50); 
+            infoEl.textContent = `1 / ${totalPages}`;
+            renderPage(1);
+            generateGrid();
+        } catch (e) {
+            alert("خطأ في تحميل ملف PDF");
         }
     }
 
-    async function loadDocument() {
-        const loadingTask = pdfjsLib.getDocument('pdf/111.pdf'); // تأكد من مسار الملف
-        state.pdf = await loadingTask.promise;
-        state.totalPages = Math.min(state.pdf.numPages, 50); // معاينة أول 50 صفحة
-        
-        generateThumbnails();
-        await renderPage(1);
-        
-        elements.loading.style.display = 'none';
-    }
-
     async function renderPage(num) {
-        state.currentPage = num;
-        const page = await state.pdf.getPage(num);
+        loader.style.display = 'flex';
+        const page = await pdfDoc.getPage(num);
         
-        // جودة عالية للرسم
-        const viewport = page.getViewport({ scale: state.isMobile ? 1.5 : 2.5 });
+        // استخدام مقياس عالي لضمان الوضوح عند التكبير
+        const viewport = page.getViewport({ scale: 2.0 }); 
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         canvas.height = viewport.height;
@@ -285,65 +249,47 @@
 
         await page.render({ canvasContext: ctx, viewport: viewport }).promise;
         
-        elements.img.src = canvas.toDataURL('image/jpeg', 0.9);
-        elements.pageInfo.textContent = `${num} / ${state.totalPages}`;
+        imgEl.src = canvas.toDataURL('image/jpeg', 0.8);
+        currPage = num;
+        infoEl.textContent = `${num} / ${totalPages}`;
         
-        // تحديث الفهرس
-        document.querySelectorAll('.pg-item').forEach((el, idx) => {
-            el.classList.toggle('active', (idx + 1) === num);
-        });
-
-        // تعطيل الأزرار في البداية والنهاية
-        document.getElementById('btn-prev').disabled = num === 1;
-        document.getElementById('btn-next').disabled = num === state.totalPages;
+        document.getElementById('prev-btn').disabled = (num <= 1);
+        document.getElementById('next-btn').disabled = (num >= totalPages);
+        
+        loader.style.display = 'none';
+        
+        // إعادة تعيين الزووم عند تغيير الصفحة
+        zoomLevel = 1;
+        document.getElementById('zoom-wrapper').style.transform = `scale(1)`;
     }
 
-    function changePage(delta) {
-        const newPage = state.currentPage + delta;
-        if (newPage >= 1 && newPage <= state.totalPages) {
-            renderPage(newPage);
-            resetZoom();
-        }
+    function changePage(step) {
+        let newPage = currPage + step;
+        if(newPage >= 1 && newPage <= totalPages) renderPage(newPage);
     }
 
-    function generateThumbnails() {
-        for (let i = 1; i <= state.totalPages; i++) {
-            const item = document.createElement('div');
-            item.className = 'pg-item';
-            item.textContent = i;
-            item.onclick = () => {
-                renderPage(i);
-                toggleSidebar();
-            };
-            elements.grid.appendChild(item);
-        }
+    function adjustZoom(delta) {
+        zoomLevel = Math.max(0.5, Math.min(3, zoomLevel + delta));
+        document.getElementById('zoom-wrapper').style.transform = `scale(${zoomLevel})`;
     }
 
     function toggleSidebar() {
-        elements.sidebar.classList.toggle('active');
-        elements.overlay.classList.toggle('active');
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
     }
 
-    function handleZoom(amount) {
-        state.zoom = Math.min(Math.max(state.zoom + amount, 0.5), 3);
-        elements.wrapper.style.transform = `scale(${state.zoom})`;
+    function generateGrid() {
+        const grid = document.getElementById('page-grid');
+        for(let i=1; i<=totalPages; i++) {
+            const div = document.createElement('div');
+            div.className = 'grid-item';
+            div.textContent = `ص ${i}`;
+            div.onclick = () => { renderPage(i); toggleSidebar(); };
+            grid.appendChild(div);
+        }
     }
 
-    function resetZoom() {
-        state.zoom = 1;
-        elements.wrapper.style.transform = `scale(1)`;
-    }
-
-    // دعم السحب (Swipe) للجوال
-    let touchStartX = 0;
-    elements.wrapper.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
-    elements.wrapper.addEventListener('touchend', e => {
-        const touchEndX = e.changedTouches[0].clientX;
-        if (touchStartX - touchEndX > 50) changePage(1); // سحب لليسار -> الصفحة التالية
-        if (touchEndX - touchStartX > 50) changePage(-1); // سحب لليمين -> الصفحة السابقة
-    });
-
-    init();
+    loadBook();
 </script>
 
 </body>
