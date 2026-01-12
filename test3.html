@@ -3,390 +3,332 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-    <title>معاينة الكتاب</title>
+    <title>الروايات (الوحي الثاني) - حسين الخليل</title>
     
+    <!-- Favicon -->
+    <link href="images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <style>
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a; 
+            --primary-light: #8a5bc7;
             --accent-color: #ffd700;
             --bg-color: #f9f7f2;
             --surface-color: #F8F5FD; 
             --text-primary: #1e293b;
-            --viewer-gradient: radial-gradient(circle, #f0ebf8 0%, #e2d7f3 100%);
-            --btn-nav-bg: #ffffff;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --text-secondary: #64748b;
+            --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
+            --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
         }
 
-        body.dark-mode {
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --text-primary: #f8fafc;
-            --viewer-gradient: radial-gradient(circle, #1e293b 0%, #080c14 100%);
-            --btn-nav-bg: #334155;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Tajawal', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-primary);
-            height: 100dvh;
-            width: 100vw;
-            overflow: hidden;
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body.no-scroll {
+            overflow: hidden !important;
+            height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* ==================== Navigation (Copied from Source) ==================== */
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+            z-index: 998; display: none;
+        }
+
+        nav {
+            background: rgba(94, 44, 165, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 0 5%;
+            position: fixed;
+            width: 100%; top: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            height: 75px;
+        }
+
+        .logo-container { order: 1; } 
+        .logo-container img { 
+            height: 45px; 
+            width: auto; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-links {
+            display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2;
+        }
+
+        .nav-links a {
+            color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap;
+            display: flex; align-items: center; gap: 5px;
+        }
+
+        .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
+
+        @media (max-width: 1200px) {
+            .hamburger { display: block; order: 1; }
+            .logo-container { order: 2; }
+            .nav-links {
+                position: fixed; top: 75px; right: -280px; width: 280px;
+                background: var(--surface-color);
+                flex-direction: column; padding: 20px; height: calc(100vh - 75px);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
+                gap: 10px; margin: 0; flex: unset; z-index: 1000;
+                order: unset; transform: none; display: flex !important;
+            }
+            .nav-links.show { right: 0; }
+            .nav-links a { 
+                color: var(--text-primary); width: 100%; padding: 12px; 
+                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
+                border-bottom: 1px solid rgba(0,0,0,0.03);
+            }
+            .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
+        }
+
+        /* ==================== Hadith Hero & Intro ==================== */
+        .hadith-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            padding: 130px 20px 60px;
+            text-align: center;
+            color: white;
+            border-radius: 0 0 50px 50px;
+            width: 100%;
+        }
+        .hadith-hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; }
+        
+        .intro-text {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-weight: 500;
+        }
+        .intro-text span {
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+
+        /* ==================== Grid Layout ==================== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        
+        .hadith-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .hadith-card {
+            background: var(--surface-color);
+            border-radius: var(--radius-xl);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
             display: flex;
             flex-direction: column;
-        }
-
-        /* --- الهيدر العلوي --- */
-        .header {
-            height: 60px;
-            background: var(--primary-color);
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            transition: transform 0.4s ease;
         }
 
-        .header-preview-icon { font-size: 1.4rem; color: white; opacity: 0.9; }
-
-        .header-btn {
-            background: rgba(255, 255, 255, 0.15); color: white;
-            width: 40px; height: 40px; border-radius: 50%;
-            text-decoration: none; display: flex; align-items: center; 
-            justify-content: center; font-size: 1.1rem; 
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: var(--transition); cursor: pointer;
-        }
-        .header-btn:hover { background: var(--accent-color); color: var(--primary-dark); border-color: var(--accent-color); }
-
-        /* --- منطقة عرض الكتاب --- */
-        .viewer-container {
-            flex: 1;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            margin-top: 60px; 
-            margin-bottom: 140px; 
-            overflow: hidden;
-            background: var(--viewer-gradient);
-            touch-action: none;
-            transition: all 0.4s ease;
+        .hadith-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
         }
 
-        .book-wrapper {
-            width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center;
-            will-change: transform;
-        }
-
-        #page-image {
-            max-width: 100%; max-height: 100%;
-            width: auto; height: auto;
-            object-fit: contain;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
-            border-radius: 4px; background-color: white;
-            transition: opacity 0.3s ease;
-        }
-
-        /* --- شريط التحكم السفلي --- */
-        .bottom-controls-bar {
-            position: fixed;
-            bottom: 80px; left: 0; right: 0;
-            height: 65px;
-            background: var(--surface-color);
-            display: flex; justify-content: center; align-items: center;
-            gap: 10px;
-            border-top: 1px solid rgba(94, 44, 165, 0.1);
-            z-index: 1100;
-            transition: all 0.4s ease;
-            padding: 0 10px;
-        }
-
-        .btn-nav {
-            background: var(--btn-nav-bg); border: 1px solid rgba(94, 44, 165, 0.2); 
-            color: var(--primary-color);
-            width: 40px; height: 40px; border-radius: 12px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: var(--transition);
-        }
-        body.dark-mode .btn-nav { color: var(--text-primary); border-color: rgba(255,255,255,0.1); }
-        .btn-nav:hover { background: var(--primary-color); color: white; transform: scale(1.05); }
-
-        .page-num { font-size: 0.9rem; font-weight: 800; min-width: 70px; text-align: center; }
-        .divider { width: 1px; height: 20px; background: rgba(94, 44, 165, 0.1); }
-
-        /* --- شريط الشراء السفلي --- */
-        .footer-buy-bar {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            height: 80px;
-            background: var(--bg-color);
+        .icon-wrapper {
+            width: 80px; height: 80px;
+            background: white;
+            border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            padding: 0 20px; border-top: 1px solid rgba(94, 44, 165, 0.1);
-            z-index: 1000;
-            transition: transform 0.4s ease;
-        }
-        .btn-buy {
-            background: var(--primary-color); color: white;
-            width: 100%; max-width: 450px; padding: 14px;
-            border-radius: 15px; cursor: pointer; border: 1px solid transparent;
-            font-weight: 800; font-size: 1.1rem;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            box-shadow: 0 8px 15px rgba(94, 44, 165, 0.1);
             transition: 0.3s;
         }
-        .btn-buy:hover { background: var(--accent-color); color: var(--primary-dark); border-color: var(--accent-color); }
 
-        /* --- نافذة اختيار منصة الشراء (Modal) --- */
-        .buy-modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-            display: none; justify-content: center; align-items: center;
-            z-index: 3000; backdrop-filter: blur(5px);
-        }
-        .buy-modal {
-            background: var(--bg-color); width: 90%; max-width: 400px;
-            border-radius: 20px; padding: 25px; text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            animation: modalSlide 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-        }
-        @keyframes modalSlide { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        
-        .modal-title { margin-bottom: 20px; font-weight: 800; color: var(--primary-color); }
-        .platform-list { display: flex; flex-direction: column; gap: 12px; }
-        .platform-link {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 15px 20px; border-radius: 12px; background: white;
-            border: 1px solid rgba(0,0,0,0.05); text-decoration: none;
-            color: var(--text-primary); font-weight: 700; transition: 0.3s;
-        }
-        .platform-link:hover { transform: translateX(-5px); border-color: var(--primary-color); background: var(--surface-color); }
-        .platform-link i { color: var(--primary-color); font-size: 1.2rem; }
-        
-        .close-modal { margin-top: 20px; color: var(--text-secondary); cursor: pointer; font-weight: 600; display: inline-block; }
-
-        /* زر الخروج العائم من وضع القراءة */
-        .exit-reading-mode {
-            position: fixed; top: 15px; left: 15px; z-index: 2001;
-            background: var(--primary-color); color: white;
-            width: 42px; height: 42px; border-radius: 50%;
-            display: none; align-items: center; justify-content: center;
-            border: 2px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        .hadith-card:hover .icon-wrapper {
+            background: var(--primary-color);
+            color: white;
         }
 
-        /* حالات وضع القراءة */
-        body.is-reading .header { transform: translateY(-110%); }
-        body.is-reading .footer-buy-bar { transform: translateY(110%); }
-        body.is-reading .bottom-controls-bar {
-            bottom: 15px; left: 10px; right: 10px;
-            border-radius: 20px; border: 1px solid var(--primary-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-        }
-        body.is-reading .viewer-container { margin: 0 !important; height: 100dvh; padding: 5px; }
-        body.is-reading .exit-reading-mode { display: flex; }
+        .hadith-card h3 { font-size: 1.4rem; color: var(--primary-dark); margin-bottom: 12px; font-weight: 800; }
+        .hadith-card p { color: var(--text-secondary); font-size: 0.95rem; }
 
-        /* لودر التحميل */
-        #loader {
-            position: fixed; inset: 0; background: var(--bg-color);
-            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 2000;
-        }
-        .spinner { width: 40px; height: 40px; border: 3px solid rgba(94, 44, 165, 0.1); border-top-color: var(--primary-color); border-radius: 50%; animation: spin 0.8s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        /* ==================== Social Section (Copied from Source) ==================== */
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
+        .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
+        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .social-btn img { width: 26px; transition: 0.3s; }
+        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .social-btn:hover img { filter: brightness(0) invert(1); }
+        .social-yt:hover { background: #FF0000; }
+        .social-fb:hover { background: #1877F2; }
+        .social-ins:hover { background: #E4405F; }
+        .social-tg:hover { background: #0088CC; }
+        .social-tk:hover { background: #000000; }
+        .social-sc:hover { background: #FFFC00; } .social-sc:hover img { filter: none; }
+
+        /* ==================== Footer (Copied from Source) ==================== */
+        footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
+        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent-color); }
+        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; } 
+        .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
 
         @media (max-width: 768px) {
-            .viewer-container { align-items: flex-start; padding-top: 20px; }
-            .btn-nav { width: 34px; height: 34px; font-size: 0.85rem; }
-            .page-num { min-width: 55px; font-size: 0.75rem; }
-            .bottom-controls-bar { gap: 6px; height: 60px; }
+            .hadith-hero { padding: 110px 15px 50px; border-radius: 0 0 35px 35px; }
+            .hadith-hero h1 { font-size: 1.8rem; }
+            .intro-text { font-size: 1.1rem; }
+            .hadith-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<!-- نافذة اختيار المنصة -->
-<div class="buy-modal-overlay" id="buyModal">
-    <div class="buy-modal">
-        <h3 class="modal-title">اختر منصة الشراء المفضلة</h3>
-        <div class="platform-list">
-            <!-- ضع روابطك هنا -->
-            <a href="رابط_جوم_رود_هنا" target="_blank" class="platform-link">
-                <span>جوم رود (Gumroad)</span>
-                <i class="fas fa-external-link-alt"></i>
-            </a>
-            <a href="رابط_باي_هيب_هنا" target="_blank" class="platform-link">
-                <span>باي هيب (Payhip)</span>
-                <i class="fas fa-external-link-alt"></i>
-            </a>
-            <a href="رابط_كو_في_هنا" target="_blank" class="platform-link">
-                <span>كو في (Ko-fi)</span>
-                <i class="fas fa-external-link-alt"></i>
-            </a>
+    <div class="nav-overlay" id="navOverlay" onclick="toggleMobileMenu()"></div>
+
+    <nav>
+        <div class="logo-container">
+            <a href="index.html"><img src="images/logo.png" alt="logo" /></a>
         </div>
-        <span class="close-modal" onclick="closeBuyModal()">إلغاء</span>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">الرئيسية</a>
+            <a href="books.html">الكتب</a>
+            <a href="articles.html">المقالات</a>
+            <a href="khawatir.html">خواطر</a>
+            <a href="videos.html">الفيديوهات</a>
+            <a href="history.html">التاريخ</a>
+            <a href="podcast.html">البودكاست</a>
+            <a href="ask.html">الأسئلة</a>
+            <a href="hewar.html">حوارات</a>
+            <a href="inq.html">تساؤلات</a>
+            <a href="manhaj.html">المنهج</a>
+            <a href="favorites.html">المفضلة</a>
+            <a href="support.html">دعم المحتوى</a>
+            <a href="about.html">من نحن</a>
+        </div>
+        <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <header class="hadith-hero">
+        <h1>قسم الروايات (الوحي الثاني)</h1>
+        <p>نقد المرويات التراثية في ميزان القرآن الكريم</p>
+    </header>
+
+    <div class="container">
+        <div class="intro-text">
+            تعد قضية <span>الروايات</span> أو ما يُصطلح عليه بالوحي الثاني واحدة من أكثر القضايا تأثيراً في تشكيل العقل المسلم عبر القرون. في هذا القسم، نضع هذه المرويات تحت مجهر النقد العلمي، لنبين ما اعتراها من تضارب، وما خالف صريح النص القرآني، أو أساء للمنطق السليم والقيم الإنسانية، بهدف الوصول إلى فهم أنقى للدين بعيداً عن الدخيل والمكذوب.
+        </div>
+
+        <div class="hadith-grid">
+            <!-- 1 -->
+            <div class="hadith-card" onclick="location.href='#'">
+                <div class="icon-wrapper"><i class="fas fa-sync"></i></div>
+                <h3>تضارب الروايات</h3>
+                <p>استعراض المرويات التي ينفي بعضها بعضاً وتتناقض في متونها رغم وجودها في كتب الصحاح.</p>
+            </div>
+            <!-- 2 -->
+            <div class="hadith-card" onclick="location.href='#'">
+                <div class="icon-wrapper"><i class="fas fa-book-quran"></i></div>
+                <h3>تناقض القرآن</h3>
+                <p>بحث في الروايات التي صدمت نصوص القرآن القطعية وخالفت أحكامه وقيمه العليا.</p>
+            </div>
+            <!-- 3 -->
+            <div class="hadith-card" onclick="location.href='#'">
+                <div class="icon-wrapper"><i class="fas fa-brain"></i></div>
+                <h3>محاكمة العقل</h3>
+                <p>روايات تخالف بديهيات المنطق السليم، أو تتعارض مع الحقائق الكونية والعلمية الثابتة.</p>
+            </div>
+            <!-- 4 -->
+            <div class="hadith-card" onclick="location.href='hadith.html'">
+                <div class="icon-wrapper"><i class="fas fa-user-shield"></i></div>
+                <h3>إساءة للنبي</h3>
+                <p>مرويات نسبت للنبي ﷺ أقوالاً وأفعالاً تتنافى مع مقام النبوة وعظمة الخُلُق النبوي.</p>
+            </div>
+            <!-- 5 -->
+            <div class="hadith-card" onclick="location.href='#'">
+                <div class="icon-wrapper"><i class="fas fa-venus-mars"></i></div>
+                <h3>إساءة للمرأة</h3>
+                <p>نقد الموروث الروائي الذي انتقص من كرامة المرأة الإنسانية وقيد حقوقها المكفولة قرآنياً.</p>
+            </div>
+            <!-- 6 -->
+            <div class="hadith-card" onclick="location.href='#'">
+                <div class="icon-wrapper"><i class="fas fa-scroll"></i></div>
+                <h3>العهود السابقة</h3>
+                <p>تتبع الروايات المنسوخة من كتب العهود السابقة (الإسرائيليات) والديانات القديمة كالزرادشتية.</p>
+            </div>
+        </div>
+
+        <!-- قسم تابعنا -->
+        <div class="social-section">
+            <h2 style="margin-bottom: 10px; font-weight: 800; color: var(--primary-dark);">تابعنا على منصات التواصل</h2>
+            <div class="social-grid">
+                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="icons/yot-soc.png" alt="yt"></a>
+                <a href="https://facebook.com/husseinalkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="icons/fac-soc.png" alt="fb"></a>
+                <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="إنستغرام"><img src="icons/ins-soc.png" alt="in"></a>
+                <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="تلغرام"><img src="icons/tel-soc.png" alt="tg"></a>
+                <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="تيك توك"><img src="icons/tik-soc.png" alt="tk"></a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="سناب شات"><img src="icons/snap.png" alt="sc"></a>
+            </div>
+        </div>
     </div>
-</div>
 
-<div id="loader">
-    <div class="spinner"></div>
-    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--primary-color); font-weight: bold;">جاري التحميل...</p>
-</div>
+    <footer>
+        <div class="footer-links">
+            <a href="terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
+            <a href="privacy.html">سياسة الخصوصية</a> <span class="footer-divider">|</span>
+            <a href="contact.html">اتصل بنا</a> <span class="footer-divider">|</span>
+            <a href="feedback.html">شاركنا رأيك</a>
+        </div>
+        <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
+    </footer>
 
-<button class="exit-reading-mode" onclick="toggleReadingMode()" id="exitBtn">
-    <i class="fas fa-compress"></i>
-</button>
-
-<header class="header">
-    <div class="header-preview-icon"><i class="fas fa-eye"></i></div>
-    <a href="books.html" class="header-btn" title="خروج"><i class="fas fa-sign-out-alt"></i></a>
-</header>
-
-<main class="viewer-container" id="viewer">
-    <div class="book-wrapper" id="book-wrapper">
-        <img id="page-image" src="" alt="صفحة الكتاب">
-    </div>
-</main>
-
-<div class="bottom-controls-bar">
-    <button class="btn-nav" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i></button>
-    <span class="page-num" id="page-info">... / ...</span>
-    <button class="btn-nav" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></button>
-    <div class="divider"></div>
-    <button class="btn-nav" onclick="adjustZoom(0.3)"><i class="fas fa-search-plus"></i></button>
-    <button class="btn-nav" onclick="resetZoom()"><i class="fas fa-sync-alt"></i></button>
-    <button class="btn-nav" onclick="adjustZoom(-0.3)"><i class="fas fa-search-minus"></i></button>
-    <div class="divider"></div>
-    <button class="btn-nav" onclick="toggleDarkMode()"><i class="fas fa-moon" id="darkIcon"></i></button>
-    <button class="btn-nav" onclick="toggleReadingMode()"><i class="fas fa-expand" id="fsIcon"></i></button>
-</div>
-
-<div class="footer-buy-bar">
-    <!-- الزر الآن يفتح النافذة بدل الانتقال المباشر -->
-    <button class="btn-buy" onclick="openBuyModal()">
-        <i class="fas fa-shopping-cart"></i> اشتَرِ النسخة الكاملة الآن
-    </button>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-<script>
-    const pdfUrl = 'pdf/111.pdf'; 
-    let pdfDoc = null, currPage = 1, totalPages = 0, zoomLevel = 1;
-    let isDragging = false, startX, startY, translateX = 0, translateY = 0;
-
-    const wrapper = document.getElementById('book-wrapper');
-    const imgEl = document.getElementById('page-image');
-    const infoEl = document.getElementById('page-info');
-    const loader = document.getElementById('loader');
-
-    // وظائف النافذة المنبثقة
-    function openBuyModal() {
-        document.getElementById('buyModal').style.display = 'flex';
-    }
-    function closeBuyModal() {
-        document.getElementById('buyModal').style.display = 'none';
-    }
-    // إغلاق النافذة عند الضغط خارجها
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('buyModal')) closeBuyModal();
-    }
-
-    function toggleReadingMode() {
-        document.body.classList.toggle('is-reading');
-        const icon = document.getElementById('fsIcon');
-        if(document.body.classList.contains('is-reading')) {
-            icon.classList.replace('fa-expand', 'fa-compress');
-        } else {
-            icon.classList.replace('fa-compress', 'fa-expand');
-            resetZoom();
+    <script>
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const overlay = document.getElementById('navOverlay');
+            const body = document.body;
+            navLinks.classList.toggle('show');
+            if(navLinks.classList.contains('show')) {
+                overlay.style.display = 'block';
+                body.classList.add('no-scroll');
+            } else {
+                overlay.style.display = 'none';
+                body.classList.remove('no-scroll');
+            }
         }
-    }
-
-    function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-        const icon = document.getElementById('darkIcon');
-        const isDark = document.body.classList.contains('dark-mode');
-        icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    }
-
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-
-    async function loadBook() {
-        try {
-            pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
-            totalPages = pdfDoc.numPages; 
-            renderPage(1);
-        } catch (e) {
-            loader.innerHTML = '<p style="color:red">فشل تحميل الملف</p>';
-        }
-    }
-
-    async function renderPage(num) {
-        loader.style.display = 'flex';
-        const page = await pdfDoc.getPage(num);
-        const viewport = page.getViewport({ scale: 2.5 }); 
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.height = viewport.height; canvas.width = viewport.width;
-        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-        imgEl.src = canvas.toDataURL('image/jpeg', 0.8);
-        currPage = num;
-        infoEl.textContent = `${num} / ${totalPages}`;
-        resetZoom();
-        loader.style.display = 'none';
-    }
-
-    function changePage(step) {
-        let newPage = currPage + step;
-        if(newPage >= 1 && newPage <= totalPages) renderPage(newPage);
-    }
-
-    function updateTransform() {
-        wrapper.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoomLevel})`;
-    }
-
-    function adjustZoom(delta) {
-        zoomLevel = Math.max(1, Math.min(4, zoomLevel + delta));
-        if (zoomLevel === 1) { translateX = 0; translateY = 0; }
-        updateTransform();
-    }
-
-    function resetZoom() { zoomLevel = 1; translateX = 0; translateY = 0; updateTransform(); }
-
-    const startDrag = (x, y) => {
-        if (zoomLevel <= 1) return;
-        isDragging = true;
-        startX = x - translateX; startY = y - translateY;
-    };
-    const doDrag = (x, y) => {
-        if (!isDragging) return;
-        translateX = x - startX; translateY = y - startY;
-        updateTransform();
-    };
-
-    const viewer = document.getElementById('viewer');
-    viewer.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
-    window.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
-    window.addEventListener('mouseup', () => isDragging = false);
-    viewer.addEventListener('touchstart', (e) => startDrag(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
-    viewer.addEventListener('touchmove', (e) => doDrag(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
-    viewer.addEventListener('touchend', () => isDragging = false);
-
-    if (localStorage.getItem('theme') === 'dark') toggleDarkMode();
-
-    loadBook();
-</script>
+    </script>
 </body>
 </html>
