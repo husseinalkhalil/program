@@ -5,6 +5,10 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     <title>روايات أساءت للنبي - حسين الخليل</title>
     
+    <!-- Favicon -->
+    <link href="images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,31 +25,67 @@
             --surface-color: #F8F5FD; 
             --text-primary: #1e293b;
             --text-secondary: #64748b;
-            --radius-xl: 1.5rem;
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
             --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
             --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
         }
 
-        /* منع التزحزح الأفقي */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { overflow-x: hidden; width: 100%; font-family: 'Tajawal', sans-serif; background-color: var(--bg-color); color: var(--text-primary); line-height: 1.6; }
-        body.no-scroll { overflow: hidden !important; height: 100vh; position: fixed; width: 100%; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body.no-scroll {
+            overflow: hidden !important;
+            height: 100vh;
+        }
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* ==================== Navigation (مطابق للرئيسية) ==================== */
-        .nav-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 998; display: none; }
-        nav {
-            background: rgba(94, 44, 165, 0.98); backdrop-filter: blur(10px);
-            padding: 0 5%; position: fixed; width: 100%; top: 0; z-index: 1000;
-            display: flex; align-items: center; justify-content: space-between;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1); height: 75px;
+        /* ==================== Navigation (Copied from Source) ==================== */
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+            z-index: 998; display: none;
         }
-        .logo-container img { height: 45px; width: auto; transition: 0.4s; }
-        .nav-links { display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2; }
-        .nav-links a { color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap; }
-        .nav-links a:hover { background: rgba(255,255,255,0.15); }
+
+        nav {
+            background: rgba(94, 44, 165, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 0 5%;
+            position: fixed;
+            width: 100%; top: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            height: 75px;
+        }
+
+        .logo-container { order: 1; } 
+        .logo-container img { 
+            height: 45px; 
+            width: auto; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-links {
+            display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2;
+        }
+
+        .nav-links a {
+            color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap;
+            display: flex; align-items: center; gap: 5px;
+        }
+
+        .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
         .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
 
         @media (max-width: 1200px) {
@@ -53,54 +93,67 @@
             .logo-container { order: 2; }
             .nav-links {
                 position: fixed; top: 75px; right: -280px; width: 280px;
-                background: var(--surface-color); flex-direction: column; padding: 20px;
-                height: calc(100vh - 75px); box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: right 0.3s ease; z-index: 1000; overflow-y: auto; display: flex !important;
+                background: var(--surface-color);
+                flex-direction: column; padding: 20px; height: calc(100vh - 75px);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
+                gap: 10px; margin: 0; flex: unset; z-index: 1000;
+                order: unset; transform: none; display: flex !important;
             }
             .nav-links.show { right: 0; }
-            .nav-links a { color: var(--text-primary); width: 100%; border-bottom: 1px solid rgba(0,0,0,0.03); justify-content: flex-start; padding: 12px; }
+            .nav-links a { 
+                color: var(--text-primary); width: 100%; padding: 12px; 
+                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
+                border-bottom: 1px solid rgba(0,0,0,0.03);
+            }
+            .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
         }
 
         /* ==================== Header Section ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 120px 20px 60px;
+            padding: 110px 0 60px;
             border-radius: 0 0 50px 50px;
             text-align: center;
             color: white;
             width: 100%;
         }
-        .page-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 15px; }
+        .page-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 15px; padding: 0 20px; }
+        .page-subtitle { color: #e2e8f0; font-size: 1.1rem; padding: 0 20px; }
 
         /* ==================== Content Container ==================== */
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; width: 100%; }
 
-        .search-wrapper { margin: -35px auto 40px; position: relative; z-index: 10; width: 100%; }
+        .search-wrapper { margin: -35px auto 40px; position: relative; z-index: 10; width: 90%; max-width: 600px; }
         #hadithSearch {
-            width: 100%; padding: 20px 60px 20px 25px; border-radius: 50px; border: none;
-            box-shadow: var(--shadow-md); font-family: 'Tajawal'; font-size: 1.1rem; outline: none;
+            width: 100%; padding: 18px 55px 18px 25px; border-radius: 50px; border: none;
+            box-shadow: var(--shadow-lg); font-family: 'Tajawal'; font-size: 1rem; outline: none;
+            text-align: right;
         }
-        .search-icon { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: var(--primary-color); }
+        .search-icon { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); font-size: 1.2rem; }
 
         /* Hadith Card Style */
         .hadith-card {
-            background: white; border-radius: var(--radius-xl); margin-bottom: 20px;
+            background: var(--surface-color); border-radius: var(--radius-xl); margin-bottom: 20px;
             box-shadow: var(--shadow-sm); border-right: 6px solid var(--primary-color);
             overflow: hidden; transition: 0.3s; width: 100%;
+            border-left: 1px solid rgba(0,0,0,0.05);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         .hadith-summary { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-        .hadith-summary h3 { font-size: 1.2rem; color: var(--primary-dark); font-weight: 700; flex: 1; }
-        .source-tag { background: #f1f5f9; padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; color: var(--text-secondary); }
+        .hadith-summary h3 { font-size: 1.2rem; color: var(--primary-dark); font-weight: 700; flex: 1; text-align: right; }
+        .source-tag { background: white; padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; color: var(--primary-color); border: 1px solid rgba(94, 44, 165, 0.1); }
 
-        .hadith-details { max-height: 0; overflow: hidden; transition: all 0.5s ease-in-out; background: #fcfaff; }
-        .hadith-details.open { max-height: 2000px; padding: 0 25px 30px; border-top: 1px solid rgba(0,0,0,0.05); }
+        .hadith-details { max-height: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0, 1, 0, 1); background: #fff; }
+        .hadith-details.open { max-height: 2000px; padding: 0 25px 30px; border-top: 1px solid rgba(0,0,0,0.05); transition: all 0.5s cubic-bezier(1, 0, 1, 0); }
 
-        .detail-section { margin-top: 25px; }
+        .detail-section { margin-top: 25px; text-align: right; }
         .detail-label { display: inline-block; font-weight: 800; color: var(--primary-color); margin-bottom: 10px; font-size: 0.9rem; border-bottom: 2px solid var(--accent-color); }
-        .quote-text { background: white; padding: 15px; border-radius: 12px; border: 1px dashed #cbd5e1; font-style: italic; color: #334155; }
+        .quote-text { background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px dashed #cbd5e1; font-style: italic; color: #334155; }
         .mizan-text { background: rgba(94, 44, 165, 0.05); padding: 20px; border-radius: 12px; border-right: 4px solid var(--accent-color); }
 
-        /* ==================== Social Section (مطابق للرئيسية) ==================== */
+        /* ==================== Social Section (Copied from Source) ==================== */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); margin-top: 50px; }
         .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
         .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -114,21 +167,22 @@
         .social-tk:hover { background: #000000; }
         .social-sc:hover { background: #FFFC00; } .social-sc:hover img { filter: none; }
 
-        /* ==================== Footer Section (مطابق للرئيسية) ==================== */
+        /* ==================== Footer Section (Copied from Source) ==================== */
         footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; }
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
-        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
+        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: color 0.3s ease; }
         .footer-links a:hover { color: var(--accent-color); }
-        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; }
+        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; } 
         .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
 
         /* التوافق مع الجوال */
         @media (max-width: 768px) {
-            .unified-header { padding: 110px 15px 50px; border-radius: 0 0 35px 35px; }
+            .unified-header { padding: 90px 15px 40px; border-radius: 0 0 35px 35px; }
             .page-title { font-size: 1.7rem; }
             .hadith-summary h3 { font-size: 1rem; }
             .container { padding: 0 15px; }
             .social-section { padding: 30px 15px; }
+            .search-wrapper { margin: -30px auto 30px; width: 95%; }
         }
     </style>
 </head>
@@ -144,10 +198,16 @@
         <a href="index.html">الرئيسية</a>
         <a href="books.html">الكتب</a>
         <a href="articles.html">المقالات</a>
-        <a href="hadith.html">الروايات</a>
+        <a href="khawatir.html">خواطر</a>
         <a href="videos.html">الفيديوهات</a>
         <a href="history.html">التاريخ</a>
         <a href="podcast.html">البودكاست</a>
+        <a href="ask.html">الأسئلة</a>
+        <a href="hewar.html">حوارات</a>
+        <a href="inq.html">تساؤلات</a>
+        <a href="manhaj.html">المنهج</a>
+        <a href="favorites.html">المفضلة</a>
+        <a href="support.html">دعم المحتوى</a>
         <a href="about.html">من نحن</a>
     </div>
     <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
@@ -155,7 +215,7 @@
 
 <header class="unified-header">
     <h1 class="page-title">روايات أساءت للمقام النبوي</h1>
-    <p>فحص نقدي للمرويات التي تعارضت مع الكمال والعصمة النبوية</p>
+    <p class="page-subtitle">فحص نقدي للمرويات التي تعارضت مع الكمال والعصمة النبوية</p>
 </header>
 
 <div class="container">
@@ -196,13 +256,13 @@
             </div>
         </div>
 
-        <!-- أضف باقي الروايات (30 رواية) هنا بنفس التنسيق أعلاه -->
+        <!-- أضف باقي الروايات هنا بنفس التنسيق أعلاه -->
 
     </div>
 
-    <!-- قسم تابعنا (كامل كما في الرئيسية) -->
+    <!-- قسم تابعنا -->
     <div class="social-section">
-        <h2 style="font-weight: 800; color: var(--primary-dark);">تابعنا على منصات التواصل</h2>
+        <h2 style="font-weight: 800; color: var(--primary-dark); margin-bottom: 10px;">تابعنا على منصات التواصل</h2>
         <div class="social-grid">
             <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="icons/yot-soc.png" alt="yt"></a>
             <a href="https://facebook.com/husseinalkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="icons/fac-soc.png" alt="fb"></a>
@@ -214,7 +274,6 @@
     </div>
 </div>
 
-<!-- الفوتر الكامل (كما في الرئيسية) -->
 <footer>
     <div class="footer-links">
         <a href="terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
@@ -226,17 +285,18 @@
 </footer>
 
 <script>
-    // وظيفة القائمة المنسدلة
+    // وظيفة القائمة المنسدلة (Copied from Source)
     function toggleMobileMenu() {
         const navLinks = document.getElementById('navLinks');
         const overlay = document.getElementById('navOverlay');
+        const body = document.body;
         navLinks.classList.toggle('show');
         if(navLinks.classList.contains('show')) {
             overlay.style.display = 'block';
-            document.body.classList.add('no-scroll');
+            body.classList.add('no-scroll');
         } else {
             overlay.style.display = 'none';
-            document.body.classList.remove('no-scroll');
+            body.classList.remove('no-scroll');
         }
     }
 
@@ -257,6 +317,15 @@
             cards[i].style.display = text.includes(input) ? "" : "none";
         }
     }
+
+    // إغلاق القائمة عند النقر خارجها
+    document.addEventListener('click', (e) => {
+        const navLinks = document.getElementById('navLinks');
+        const hamburger = document.querySelector('.hamburger');
+        if (navLinks.classList.contains('show') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+            toggleMobileMenu();
+        }
+    });
 </script>
 
 </body>
