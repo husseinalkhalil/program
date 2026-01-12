@@ -5,6 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     <title>روايات أساءت للنبي - حسين الخليل</title>
     
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -14,6 +15,7 @@
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a; 
+            --primary-light: #8a5bc7;
             --accent-color: #ffd700;
             --bg-color: #f9f7f2;
             --surface-color: #F8F5FD; 
@@ -21,42 +23,30 @@
             --text-secondary: #64748b;
             --radius-xl: 1.5rem;
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
+            --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
             --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
         }
 
+        /* منع التزحزح الأفقي */
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { overflow-x: hidden; width: 100%; font-family: 'Tajawal', sans-serif; background-color: var(--bg-color); color: var(--text-primary); line-height: 1.6; }
+        body.no-scroll { overflow: hidden !important; height: 100vh; position: fixed; width: 100%; }
 
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        body.no-scroll { overflow: hidden; height: 100vh; position: fixed; width: 100%; }
-
-        a { text-decoration: none; color: inherit; }
-
-        /* ==================== Navigation ==================== */
-        .nav-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
-            z-index: 998; display: none;
-        }
-
+        /* ==================== Navigation (مطابق للرئيسية) ==================== */
+        .nav-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 998; display: none; }
         nav {
             background: rgba(94, 44, 165, 0.98); backdrop-filter: blur(10px);
             padding: 0 5%; position: fixed; width: 100%; top: 0; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
-            height: 75px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1); height: 75px;
         }
-
-        .logo-container img { height: 45px; width: auto; }
-        .nav-links { display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; }
+        .logo-container img { height: 45px; width: auto; transition: 0.4s; }
+        .nav-links { display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2; }
         .nav-links a { color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap; }
-        .hamburger { color: white; font-size: 1.5rem; cursor: pointer; display: none; }
+        .nav-links a:hover { background: rgba(255,255,255,0.15); }
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
 
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
@@ -68,10 +58,10 @@
                 transition: right 0.3s ease; z-index: 1000; overflow-y: auto; display: flex !important;
             }
             .nav-links.show { right: 0; }
-            .nav-links a { color: var(--text-primary); width: 100%; border-bottom: 1px solid rgba(0,0,0,0.03); justify-content: flex-start; }
+            .nav-links a { color: var(--text-primary); width: 100%; border-bottom: 1px solid rgba(0,0,0,0.03); justify-content: flex-start; padding: 12px; }
         }
 
-        /* ==================== Header ==================== */
+        /* ==================== Header Section ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             padding: 120px 20px 60px;
@@ -80,102 +70,71 @@
             color: white;
             width: 100%;
         }
+        .page-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 15px; }
 
-        .page-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
-
-        /* ==================== Search & Content ==================== */
+        /* ==================== Content Container ==================== */
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; width: 100%; }
 
-        .search-wrapper {
-            margin: -35px auto 40px;
-            position: relative;
-            z-index: 10;
-        }
-
+        .search-wrapper { margin: -35px auto 40px; position: relative; z-index: 10; width: 100%; }
         #hadithSearch {
-            width: 100%;
-            padding: 20px 60px 20px 25px;
-            border-radius: 50px;
-            border: none;
-            box-shadow: var(--shadow-md);
-            font-family: 'Tajawal';
-            font-size: 1.1rem;
-            outline: none;
+            width: 100%; padding: 20px 60px 20px 25px; border-radius: 50px; border: none;
+            box-shadow: var(--shadow-md); font-family: 'Tajawal'; font-size: 1.1rem; outline: none;
         }
+        .search-icon { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: var(--primary-color); }
 
-        .search-icon {
-            position: absolute; right: 25px; top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
-        /* Hadith Card (Accordion) */
+        /* Hadith Card Style */
         .hadith-card {
-            background: white;
-            border-radius: var(--radius-xl);
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-sm);
-            border-right: 6px solid var(--primary-color);
-            overflow: hidden;
-            transition: 0.3s;
+            background: white; border-radius: var(--radius-xl); margin-bottom: 20px;
+            box-shadow: var(--shadow-sm); border-right: 6px solid var(--primary-color);
+            overflow: hidden; transition: 0.3s; width: 100%;
         }
-
-        .hadith-summary {
-            padding: 25px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
-
+        .hadith-summary { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
         .hadith-summary h3 { font-size: 1.2rem; color: var(--primary-dark); font-weight: 700; flex: 1; }
-        .source-tag { background: #f1f5f9; padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; color: var(--text-secondary); white-space: nowrap; }
+        .source-tag { background: #f1f5f9; padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; color: var(--text-secondary); }
 
-        .hadith-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0, 1, 0, 1);
-            background: #fcfaff;
-        }
-
-        .hadith-details.open {
-            max-height: 2000px;
-            transition: all 0.5s cubic-bezier(1, 0, 1, 0);
-            padding: 0 25px 30px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-        }
+        .hadith-details { max-height: 0; overflow: hidden; transition: all 0.5s ease-in-out; background: #fcfaff; }
+        .hadith-details.open { max-height: 2000px; padding: 0 25px 30px; border-top: 1px solid rgba(0,0,0,0.05); }
 
         .detail-section { margin-top: 25px; }
-        .detail-label { display: block; font-weight: 800; color: var(--primary-color); margin-bottom: 10px; font-size: 0.9rem; border-bottom: 2px solid var(--accent-color); display: inline-block; }
-        
+        .detail-label { display: inline-block; font-weight: 800; color: var(--primary-color); margin-bottom: 10px; font-size: 0.9rem; border-bottom: 2px solid var(--accent-color); }
         .quote-text { background: white; padding: 15px; border-radius: 12px; border: 1px dashed #cbd5e1; font-style: italic; color: #334155; }
-        .mizan-text { background: rgba(94, 44, 165, 0.05); padding: 20px; border-radius: 12px; border-right: 4px solid var(--accent-color); font-weight: 500; }
+        .mizan-text { background: rgba(94, 44, 165, 0.05); padding: 20px; border-radius: 12px; border-right: 4px solid var(--accent-color); }
 
-        /* ==================== Social & Footer ==================== */
-        .social-section { text-align: center; margin: 60px 0; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); }
-        .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 25px; }
-        .social-btn { width: 50px; height: 50px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); transition: 0.3s; }
-        .social-btn img { width: 24px; }
-        .social-btn:hover { transform: translateY(-5px); }
+        /* ==================== Social Section (مطابق للرئيسية) ==================== */
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); margin-top: 50px; }
+        .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
+        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .social-btn img { width: 26px; transition: 0.3s; }
+        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .social-btn:hover img { filter: brightness(0) invert(1); }
+        .social-yt:hover { background: #FF0000; }
+        .social-fb:hover { background: #1877F2; }
+        .social-ins:hover { background: #E4405F; }
+        .social-tg:hover { background: #0088CC; }
+        .social-tk:hover { background: #000000; }
+        .social-sc:hover { background: #FFFC00; } .social-sc:hover img { filter: none; }
 
-        footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; }
-        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-        .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; }
+        /* ==================== Footer Section (مطابق للرئيسية) ==================== */
+        footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
+        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent-color); }
+        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; }
+        .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
 
+        /* التوافق مع الجوال */
         @media (max-width: 768px) {
             .unified-header { padding: 110px 15px 50px; border-radius: 0 0 35px 35px; }
             .page-title { font-size: 1.7rem; }
             .hadith-summary h3 { font-size: 1rem; }
-            .source-tag { font-size: 0.7rem; }
-            #hadithSearch { padding: 15px 50px 15px 20px; font-size: 1rem; }
+            .container { padding: 0 15px; }
+            .social-section { padding: 30px 15px; }
         }
     </style>
 </head>
 <body>
 
-<div class="nav-overlay" id="navOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="nav-overlay" id="navOverlay" onclick="toggleMobileMenu()"></div>
 
 <nav>
     <div class="logo-container">
@@ -196,25 +155,26 @@
 
 <header class="unified-header">
     <h1 class="page-title">روايات أساءت للمقام النبوي</h1>
-    <p>مراجعة نقدية للمرويات التي تعارضت مع الكمال والعصمة النبوية</p>
+    <p>فحص نقدي للمرويات التي تعارضت مع الكمال والعصمة النبوية</p>
 </header>
 
 <div class="container">
     
-    <!-- محرك البحث الذكي -->
+    <!-- محرك البحث -->
     <div class="search-wrapper">
         <i class="fas fa-search search-icon"></i>
-        <input type="text" id="hadithSearch" placeholder="ابحث عن رواية أو موضوع نقد..." onkeyup="filterHadiths()">
+        <input type="text" id="hadithSearch" placeholder="ابحث عن موضوع أو نص رواية..." onkeyup="filterHadiths()">
     </div>
 
+    <!-- قائمة الروايات -->
     <div id="hadithContainer">
         
-        <!-- البطاقة 1 -->
+        <!-- الرواية 1 -->
         <div class="hadith-card">
             <div class="hadith-summary" onclick="toggleHadith(this)">
                 <h3>رواية سحر النبي ﷺ</h3>
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <span class="source-tag">صحيح البخاري</span>
+                    <span class="source-tag">البخاري</span>
                     <i class="fas fa-chevron-down toggle-icon"></i>
                 </div>
             </div>
@@ -225,105 +185,77 @@
                 </div>
                 <div class="detail-section">
                     <span class="detail-label">وجه الإساءة:</span>
-                    <p>تُصور الرواية النبي ﷺ في حالة من فقدان الإدراك والسيطرة على تصرفاته، وهو ما يقدح في تمام وعيه اللازم للبلاغ عن الله.</p>
+                    <p>نسبة العجز والوهم وتخيل أشياء لم تحدث للنبي ﷺ، وهو ما يهدم الثقة التامة في وعيه أثناء البلاغ.</p>
                 </div>
                 <div class="detail-section">
                     <div class="mizan-text">
                         <span class="detail-label">الميزان (الرد القرآني):</span><br>
-                        قال تعالى: {وَقَالَ الظَّالِمُونَ إِن تَتَّبِعُونَ إِلَّا رَجُلًا مَّسْحُورًا * انظُرْ كَيْفَ ضَرَبُوا لَكَ الْأَمْثَالَ فَضَلُّوا فَلَا يَسْتَطِيعُونَ سَبِيلًا} [الفرقان: 8-9]. القرآن صريح في جعل وصف النبي بالمسحور من أقوال الظالمين الضالين.
+                        قال تعالى: {وَقَالَ الظَّالِمُونَ إِن تَتَّبِعُونَ إِلَّا رَجُلًا مَّسْحُورًا * انظُرْ كَيْفَ ضَرَبُوا لَكَ الْأَمْثَالَ فَضَلُّوا...} [الفرقان]. القرآن جعل وصف النبي بالمسحور تهمة من الظالمين.
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- البطاقة 2 -->
-        <div class="hadith-card">
-            <div class="hadith-summary" onclick="toggleHadith(this)">
-                <h3>رواية الغرانيق (إلقاء الشيطان في وحيه)</h3>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span class="source-tag">تاريخ الطبري</span>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-            </div>
-            <div class="hadith-details">
-                <div class="detail-section">
-                    <span class="detail-label">نص الرواية:</span>
-                    <p class="quote-text">"...تلك الغرانيق العلى وإن شفاعتهن لترتجى..." (نسبة هذا القول للنبي ﷺ في سورة النجم).</p>
-                </div>
-                <div class="detail-section">
-                    <span class="detail-label">وجه الإساءة:</span>
-                    <p>الادعاء بأن الشيطان استطاع التدخل في كلام الوحي وأن النبي نطق بالثناء على الأصنام، وهو هدم لأصل التوحيد والعصمة.</p>
-                </div>
-                <div class="detail-section">
-                    <div class="mizan-text">
-                        <span class="detail-label">الميزان (الرد القرآني):</span><br>
-                        قال تعالى: {وَمَا يَنطِقُ عَنِ الْهَوَىٰ * إِنْ هُوَ إِلَّا وَحْيٌ يُوحَىٰ}. النص القرآني يؤكد أن كل نطق نبوي في مقام الرسالة هو وحي محفوظ لا يأتيه الباطل.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- أضف المزيد من البطاقات هنا بنفس التنسيق -->
+        <!-- أضف باقي الروايات (30 رواية) هنا بنفس التنسيق أعلاه -->
 
     </div>
 
-    <!-- قسم التواصل الاجتماعي -->
+    <!-- قسم تابعنا (كامل كما في الرئيسية) -->
     <div class="social-section">
-        <h2 style="font-weight: 800; color: var(--primary-dark);">تابعنا للمزيد من التحليلات</h2>
+        <h2 style="font-weight: 800; color: var(--primary-dark);">تابعنا على منصات التواصل</h2>
         <div class="social-grid">
-            <a href="#" class="social-btn"><img src="icons/yot-soc.png" alt="yt"></a>
-            <a href="#" class="social-btn"><img src="icons/fac-soc.png" alt="fb"></a>
-            <a href="#" class="social-btn"><img src="icons/tel-soc.png" alt="tg"></a>
-            <a href="#" class="social-btn"><img src="icons/ins-soc.png" alt="ins"></a>
+            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="icons/yot-soc.png" alt="yt"></a>
+            <a href="https://facebook.com/husseinalkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="icons/fac-soc.png" alt="fb"></a>
+            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="إنستغرام"><img src="icons/ins-soc.png" alt="in"></a>
+            <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="تلغرام"><img src="icons/tel-soc.png" alt="tg"></a>
+            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="تيك توك"><img src="icons/tik-soc.png" alt="tk"></a>
+            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="سناب شات"><img src="icons/snap.png" alt="sc"></a>
         </div>
     </div>
 </div>
 
+<!-- الفوتر الكامل (كما في الرئيسية) -->
 <footer>
     <div class="footer-links">
-        <a href="terms.html">الشروط</a> | <a href="privacy.html">الخصوصية</a> | <a href="contact.html">اتصل بنا</a>
+        <a href="terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
+        <a href="privacy.html">سياسة الخصوصية</a> <span class="footer-divider">|</span>
+        <a href="contact.html">اتصل بنا</a> <span class="footer-divider">|</span>
+        <a href="feedback.html">شاركنا رأيك</a>
     </div>
     <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
 </footer>
 
 <script>
-    // وظيفة فتح وإغلاق البطاقات
-    function toggleHadith(element) {
-        const details = element.nextElementSibling;
-        const icon = element.querySelector('.toggle-icon');
-        
-        details.classList.toggle('open');
-        
-        if (details.classList.contains('open')) {
-            icon.style.transform = 'rotate(180deg)';
-        } else {
-            icon.style.transform = 'rotate(0deg)';
-        }
-    }
-
-    // وظيفة البحث الحي داخل الصفحة
-    function filterHadiths() {
-        let input = document.getElementById('hadithSearch').value.toLowerCase();
-        let cards = document.getElementsByClassName('hadith-card');
-        
-        for (let i = 0; i < cards.length; i++) {
-            let title = cards[i].querySelector('h3').innerText.toLowerCase();
-            let content = cards[i].innerText.toLowerCase();
-            if (title.includes(input) || content.includes(input)) {
-                cards[i].style.display = "";
-            } else {
-                cards[i].style.display = "none";
-            }
-        }
-    }
-
-    // القائمة المنسدلة للجوال
+    // وظيفة القائمة المنسدلة
     function toggleMobileMenu() {
         const navLinks = document.getElementById('navLinks');
         const overlay = document.getElementById('navOverlay');
         navLinks.classList.toggle('show');
-        overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
-        document.body.classList.toggle('no-scroll');
+        if(navLinks.classList.contains('show')) {
+            overlay.style.display = 'block';
+            document.body.classList.add('no-scroll');
+        } else {
+            overlay.style.display = 'none';
+            document.body.classList.remove('no-scroll');
+        }
+    }
+
+    // وظيفة فتح وإغلاق الرواية
+    function toggleHadith(element) {
+        const details = element.nextElementSibling;
+        const icon = element.querySelector('.toggle-icon');
+        details.classList.toggle('open');
+        icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
+    // وظيفة البحث الحي
+    function filterHadiths() {
+        let input = document.getElementById('hadithSearch').value.toLowerCase();
+        let cards = document.getElementsByClassName('hadith-card');
+        for (let i = 0; i < cards.length; i++) {
+            let text = cards[i].innerText.toLowerCase();
+            cards[i].style.display = text.includes(input) ? "" : "none";
+        }
     }
 </script>
 
