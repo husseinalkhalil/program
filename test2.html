@@ -142,7 +142,22 @@
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         .hadith-summary { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-        .hadith-summary h3 { font-size: 1.2rem; color: var(--primary-dark); font-weight: 700; flex: 1; text-align: right; }
+        
+        /* التعديل المطلوب على العنوان عند التمرير */
+        .hadith-summary h3 { 
+            font-size: 1.2rem; 
+            color: var(--primary-dark); 
+            font-weight: 700; 
+            flex: 1; 
+            text-align: right;
+            transition: all 0.3s ease; /* تأثير انسيابي */
+        }
+        
+        .hadith-summary:hover h3 {
+            color: #FFC600; /* تغيير اللون المطلوب */
+            transform: translateX(-5px); /* تأثير حركة بسيط جهة اليسار */
+        }
+
         .source-tag { background: white; padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; color: var(--primary-color); border: 1px solid rgba(94, 44, 165, 0.1); }
 
         .hadith-details { max-height: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0, 1, 0, 1); background: #fff; }
