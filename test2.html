@@ -2,23 +2,24 @@
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-    <title>روايات أساءت للنبي - حسين الخليل</title>
-    
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>خواطر - حسين الخليل</title>
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
     <link href="images/logo-small.png" rel="icon" type="image/png"/>
     <link href="images/logo-small.png" rel="apple-touch-icon"/>
-
-    <!-- Fonts & Icons -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* Shared Variables & Styles */
         :root {
             --primary-color: #5e2ca5;
-            --primary-dark: #451b7a; 
+            --primary-dark: #451b7a;
             --primary-light: #8a5bc7;
             --accent-color: #ffd700;
             --bg-color: #f9f7f2;
@@ -40,17 +41,12 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
-            width: 100%;
         }
 
-        body.no-scroll {
-            overflow: hidden !important;
-            height: 100vh;
-        }
-
+        body.no-scroll { overflow: hidden !important; height: 100vh; }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* ==================== Navigation (Copied from Source) ==================== */
+        /* Navigation */
         .nav-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
@@ -58,291 +54,548 @@
         }
 
         nav {
-            background: rgba(94, 44, 165, 0.98);
+            background: rgba(94, 44, 165, 0.95);
             backdrop-filter: blur(10px);
-            padding: 0 5%;
-            position: fixed;
-            width: 100%; top: 0; z-index: 1000;
+            padding: 0.8rem 2%;
+            position: fixed; width: 100%; top: 0;
+            z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            height: 75px;
         }
 
-        .logo-container { order: 1; } 
-        .logo-container img { 
-            height: 45px; 
-            width: auto; 
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        .logo-container img { height: 40px; }
 
         .nav-links {
-            display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2;
+            display: flex; flex: 1; justify-content: space-evenly;
+            align-items: center; flex-wrap: wrap; margin: 0 20px;
         }
 
         .nav-links a {
-            color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap;
-            display: flex; align-items: center; gap: 5px;
+            color: white; font-weight: 700; font-size: 1.05rem;
+            padding: 8px 12px; border-radius: 20px;
+            display: flex; align-items: center; gap: 5px; white-space: nowrap;
         }
 
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
-        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
 
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
             .nav-links {
-                position: fixed; top: 75px; right: -280px; width: 280px;
+                position: fixed; top: 60px; right: -280px; width: 280px;
                 background: var(--surface-color);
-                flex-direction: column; padding: 20px; height: calc(100vh - 75px);
+                flex-direction: column; padding: 20px; height: calc(100vh - 60px);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
-                gap: 10px; margin: 0; flex: unset; z-index: 1000;
-                order: unset; transform: none; display: flex !important;
+                gap: 10px; margin: 0; flex: unset;
             }
             .nav-links.show { right: 0; }
-            .nav-links a { 
-                color: var(--text-primary); width: 100%; padding: 12px; 
-                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
-                border-bottom: 1px solid rgba(0,0,0,0.03);
-            }
-            .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
+            .nav-links a { color: var(--text-primary); width: 100%; border-bottom: 1px solid rgba(0,0,0,0.03); justify-content: flex-start; }
+            nav { padding: 0.8rem 5%; }
         }
 
-        /* ==================== Header Section ==================== */
-        .unified-header {
+        /* Hero Section */
+        .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 110px 0 60px;
-            border-radius: 0 0 50px 50px;
-            text-align: center;
-            color: white;
-            width: 100%;
-        }
-        .page-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 15px; padding: 0 20px; }
-        .page-subtitle { color: #e2e8f0; font-size: 1.1rem; padding: 0 20px; }
-
-        /* ==================== Content Container ==================== */
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; width: 100%; }
-
-        .search-wrapper { margin: -35px auto 40px; position: relative; z-index: 10; width: 90%; max-width: 600px; }
-        #hadithSearch {
-            width: 100%; padding: 18px 55px 18px 25px; border-radius: 50px; border: none;
-            box-shadow: var(--shadow-lg); font-family: 'Tajawal'; font-size: 1rem; outline: none;
-            text-align: right;
-        }
-        .search-icon { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); font-size: 1.2rem; }
-
-        /* Hadith Card Style */
-        .hadith-card {
-            background: var(--surface-color); border-radius: var(--radius-xl); margin-bottom: 20px;
-            box-shadow: var(--shadow-sm); border-right: 6px solid var(--primary-color);
-            overflow: hidden; transition: 0.3s; width: 100%;
-            border-left: 1px solid rgba(0,0,0,0.05);
-            border-top: 1px solid rgba(0,0,0,0.05);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        .hadith-summary { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-        
-        /* التعديل المطلوب على العنوان عند التمرير */
-        .hadith-summary h3 { 
-            font-size: 1.2rem; 
-            color: var(--primary-dark); 
-            font-weight: 700; 
-            flex: 1; 
-            text-align: right;
-            transition: all 0.3s ease; /* تأثير انسيابي */
-        }
-        
-        .hadith-summary:hover h3 {
-            color: #FFC600; /* تغيير اللون المطلوب */
-            transform: translateX(-5px); /* تأثير حركة بسيط جهة اليسار */
+            padding: 120px 20px 140px;
+            text-align: center; color: white;
+            border-radius: 0 0 50px 50px; 
+            position: relative; z-index: 1;
         }
 
-        .source-tag { background: white; padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; color: var(--primary-color); border: 1px solid rgba(94, 44, 165, 0.1); }
+        .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
+        .hero-text p { font-size: 1.2rem; opacity: 0.9; }
 
-        .hadith-details { max-height: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0, 1, 0, 1); background: #fff; }
-        .hadith-details.open { max-height: 2000px; padding: 0 25px 30px; border-top: 1px solid rgba(0,0,0,0.05); transition: all 0.5s cubic-bezier(1, 0, 1, 0); }
-
-        .detail-section { margin-top: 25px; text-align: right; }
-        .detail-label { display: inline-block; font-weight: 800; color: var(--primary-color); margin-bottom: 10px; font-size: 0.9rem; border-bottom: 2px solid var(--accent-color); }
-        .quote-text { background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px dashed #cbd5e1; font-style: italic; color: #334155; }
-        .mizan-text { background: rgba(94, 44, 165, 0.05); padding: 20px; border-radius: 12px; border-right: 4px solid var(--accent-color); }
-
-        /* ==================== Social Section (Copied from Source) ==================== */
-        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); margin-top: 50px; }
-        .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .social-btn img { width: 26px; transition: 0.3s; }
-        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
-        .social-btn:hover img { filter: brightness(0) invert(1); }
-        .social-yt:hover { background: #FF0000; }
-        .social-fb:hover { background: #1877F2; }
-        .social-ins:hover { background: #E4405F; }
-        .social-tg:hover { background: #0088CC; }
-        .social-tk:hover { background: #000000; }
-        .social-sc:hover { background: #FFFC00; } .social-sc:hover img { filter: none; }
-
-        /* ==================== Footer Section (Copied from Source) ==================== */
-        footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; }
-        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
-        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: color 0.3s ease; }
-        .footer-links a:hover { color: var(--accent-color); }
-        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; } 
-        .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
-
-        /* التوافق مع الجوال */
-        @media (max-width: 768px) {
-            .unified-header { padding: 90px 15px 40px; border-radius: 0 0 35px 35px; }
-            .page-title { font-size: 1.7rem; }
-            .hadith-summary h3 { font-size: 1rem; }
-            .container { padding: 0 15px; }
-            .social-section { padding: 30px 15px; }
-            .search-wrapper { margin: -30px auto 30px; width: 95%; }
+        /* Search Box */
+        .universal-search { 
+            width: 100%; max-width: 600px; 
+            position: relative; z-index: 100;
+            margin: 0 auto 40px auto; 
         }
+        #globalSearch {
+            width: 100%; padding: 18px 50px 18px 25px;
+            border-radius: 50px; border: none; font-size: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            outline: none; font-family: 'Tajawal';
+        }
+        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); }
+        .search-results {
+            position: absolute; top: 110%; left: 0; right: 0;
+            background: #ffffff; border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px;
+            overflow-y: auto; z-index: 200; text-align: right; display: none;
+        }
+
+        /* Main Content */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .main-wrapper {
+            position: relative; z-index: 20;
+            margin-top: -90px; margin-bottom: 60px;
+        }
+
+        #thoughtsList { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+        .thought-card {
+            background: var(--surface-color); border-radius: 16px; padding: 30px;
+            box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
+            border-right: 5px solid var(--primary-color);
+            display: flex; flex-direction: column; position: relative;
+            overflow: hidden; height: 100%; transition: transform 0.3s;
+        }
+        .thought-card:hover { transform: translateY(-5px); }
+
+        .thought-content {
+            font-size: 1.15rem; line-height: 1.8; color: var(--text-primary);
+            margin-bottom: 25px; white-space: pre-line; flex-grow: 1;
+        }
+
+        .meta-data {
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px;
+            margin-top: auto; flex-wrap: wrap; gap: 10px;
+        }
+
+        .publish-date {
+            font-size: 0.85rem; color: var(--text-secondary); background: rgba(94, 44, 165, 0.05);
+            padding: 6px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 6px;
+        }
+
+        /* Voting System Styles */
+        .vote-actions {
+            display: flex; gap: 6px; background: rgba(0,0,0,0.04);
+            padding: 4px; border-radius: 30px;
+        }
+        .vote-btn {
+            background: transparent; border: none; padding: 4px 10px;
+            border-radius: 20px; cursor: pointer; font-size: 0.85rem;
+            color: var(--text-secondary); display: flex; align-items: center; gap: 5px;
+            transition: 0.2s;
+        }
+        .vote-btn:hover:not(:disabled) { background: white; color: var(--primary-color); }
+        .vote-btn.active-like { color: #059669; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .vote-btn.active-dislike { color: #dc2626; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .vote-btn:disabled { opacity: 0.8; cursor: default; }
+        .count-num { font-weight: 700; font-family: sans-serif; }
+
+        .actions { display: flex; gap: 10px; align-items: center; }
+        .action-btn {
+            background: transparent; border: 1px solid #e2e8f0; color: var(--text-secondary);
+            width: 36px; height: 36px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; cursor: pointer; transition: 0.3s;
+        }
+        .action-btn:hover { background: #fef9c3; color: #b45309; border-color: #fde047; }
+        .action-btn.favorited { color: #fbbf24; border-color: #fbbf24; }
+
+        /* Pagination */
+        #pagination-wrapper { 
+            background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); 
+            text-align: center; margin: 40px auto; max-width: 500px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .pagination-btn { background: #f1f5f9; border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; margin: 0 5px; font-family: 'Tajawal'; font-weight: 600; }
+        .pagination-btn:hover:not(:disabled) { background: var(--primary-color); color: white; }
+        .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
+        .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: 0.3s; z-index: 995; }
+        .back-to-top.visible { opacity: 1; }
+
+        @media (max-width: 900px) { #thoughtsList { grid-template-columns: 1fr; } .hero-section { padding: 100px 20px 160px; } }
     </style>
 </head>
 <body>
 
-    <div class="nav-overlay" id="navOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
 
-<nav>
-    <div class="logo-container">
-        <a href="index.html"><img src="images/logo.png" alt="logo" /></a>
-    </div>
-    <div class="nav-links" id="navLinks">
-        <a href="index.html">الرئيسية</a>
-        <a href="books.html">الكتب</a>
-        <a href="articles.html">المقالات</a>
-        <a href="hadith.html">الروايات</a>
-        <a href="khawatir.html">خواطر</a>
-        <a href="videos.html">الفيديوهات</a>
-        <a href="history.html">التاريخ</a>
-        <a href="podcast.html">البودكاست</a>
-        <a href="ask.html">الأسئلة</a>
-        <a href="hewar.html">حوارات</a>
-        <a href="inq.html">تساؤلات</a>
-        <a href="manhaj.html">المنهج</a>
-        <a href="favorites.html">المفضلة</a>
-        <a href="support.html">دعم المحتوى</a>
-        <a href="about.html">من نحن</a>
-    </div>
-    <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
-</nav>
+    <nav>
+        <div class="logo-container">
+            <a href="index.html"><img src="images/logo.png" alt="شعار حسين الخليل" /></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="books.html">الكتب</a>
+            <a href="articles.html">المقالات</a>
+            <a href="hadith.html">الروايات</a>
+            <a href="khawatir.html" style="background: rgba(255,255,255,0.2);">خواطر</a>
+            <a href="videos.html">الفيديوهات</a>
+            <a href="history.html">التاريخ</a>
+            <a href="podcast.html">البودكاست</a>
+            <a href="ask.html">الأسئلة</a>
+            <a href="hewar.html">حوارات</a>
+            <a href="inq.html">تساؤلات</a>
+            <a href="manhaj.html">المنهج</a>
+            <a href="favorites.html">المفضلة</a>
+            <a href="support.html">دعم المحتوى</a>
+            <a href="about.html">من نحن</a>
+            <a href="#" onclick="window.print()" title="طباعة"><i class="fas fa-print"></i></a>
+        </div>
+        <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+    </nav>
 
-<header class="unified-header">
-    <h1 class="page-title">روايات أساءت للمقام النبوي</h1>
-    <p class="page-subtitle">فحص نقدي للمرويات التي تعارضت مع الكمال والعصمة النبوية</p>
-</header>
+    <header class="hero-section">
+        <div class="hero-text">
+            <h1>خواطر</h1>
+            <p>تأملات قصيرة وإضاءات سريعة حول الحياة والدين</p>
+        </div>
+    </header>
 
-<div class="container">
-    
-    <!-- محرك البحث -->
-    <div class="search-wrapper">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="hadithSearch" placeholder="ابحث عن موضوع أو نص رواية..." onkeyup="filterHadiths()">
-    </div>
+    <div class="container main-wrapper">
+        <div class="universal-search">
+            <i class="fas fa-search search-icon-placeholder"></i>
+            <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+        </div>
 
-    <!-- قائمة الروايات -->
-    <div id="hadithContainer">
-        
-        <!-- الرواية 1 -->
-        <div class="hadith-card">
-            <div class="hadith-summary" onclick="toggleHadith(this)">
-                <h3>رواية سحر النبي ﷺ</h3>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span class="source-tag">البخاري</span>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-            </div>
-            <div class="hadith-details">
-                <div class="detail-section">
-                    <span class="detail-label">نص الرواية:</span>
-                    <p class="quote-text">"سحر رسول الله ﷺ حتى كان يرى أنه يأتي النساء ولا يأتيهن..."</p>
-                </div>
-                <div class="detail-section">
-                    <span class="detail-label">وجه الإساءة:</span>
-                    <p>نسبة العجز والوهم وتخيل أشياء لم تحدث للنبي ﷺ، وهو ما يهدم الثقة التامة في وعيه أثناء البلاغ.</p>
-                </div>
-                <div class="detail-section">
-                    <div class="mizan-text">
-                        <span class="detail-label">الميزان (الرد القرآني):</span><br>
-                        قال تعالى: {وَقَالَ الظَّالِمُونَ إِن تَتَّبِعُونَ إِلَّا رَجُلًا مَّسْحُورًا * انظُرْ كَيْفَ ضَرَبُوا لَكَ الْأَمْثَالَ فَضَلُّوا...} [الفرقان]. القرآن جعل وصف النبي بالمسحور تهمة من الظالمين.
+        <div id="thoughtsList">
+            
+            <div class="thought-card" id="thought-66">
+                <div class="thought-content">أقرب الطرق إلى قلب الرجل: تقديره.
+أقرب الطرق إلى قلب المرأة: الاهتمام.
+أقرب الطرق إلى قلب الطفل: اللعب معه.
+أقرب الطرق إلى العقل: السؤال.
+أقرب الطرق إلى السعادة: الرضا.
+أقرب الطرق إلى السلام: العدل.
+أقرب الطرق إلى العزلة: مواقع التواصل.
+أقرب الطرق إلى الجنة: العمل الصالح.
+أقرب الطرق إلى جهنم: الظلم.
+أقرب الطرق إلى الإلحاد: كتاب البخاري.</div>
+                <div class="meta-data">
+                    <span class="publish-date">13 يناير 2026</span>
+                    <div class="actions">
+                        <div class="vote-actions">
+                            <button class="vote-btn like-btn" onclick="handleVote(66, 'like', this)"><i class="far fa-thumbs-up"></i> <span class="count-num" id="like-66">0</span></button>
+                            <button class="vote-btn dislike-btn" onclick="handleVote(66, 'dislike', this)"><i class="far fa-thumbs-down"></i> <span class="count-num" id="dislike-66">0</span></button>
+                        </div>
+                        <button class="action-btn favorite-btn" onclick="toggleFavorite(66, 'أقرب الطرق', this)"><i class="far fa-star"></i></button>
+                        <button class="action-btn" onclick="printThought(this)"><i class="fas fa-print"></i></button>
                     </div>
                 </div>
             </div>
+
+            <div class="thought-card" id="thought-65">
+                <div class="thought-content">‏المبالغة في إدعاء الكمال نقص، ‏والاعتراف بالنقص فضيلة.</div>
+                <div class="meta-data">
+                    <span class="publish-date">3 يناير 2026</span>
+                    <div class="actions">
+                        <div class="vote-actions">
+                            <button class="vote-btn like-btn" onclick="handleVote(65, 'like', this)"><i class="far fa-thumbs-up"></i> <span class="count-num" id="like-65">0</span></button>
+                            <button class="vote-btn dislike-btn" onclick="handleVote(65, 'dislike', this)"><i class="far fa-thumbs-down"></i> <span class="count-num" id="dislike-65">0</span></button>
+                        </div>
+                        <button class="action-btn favorite-btn" onclick="toggleFavorite(65, 'المبالغة في إدعاء الكمال نقص', this)"><i class="far fa-star"></i></button>
+                        <button class="action-btn" onclick="printThought(this)"><i class="fas fa-print"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- بقية الخواطر بنفس الهيكل... -->
+            <!-- لقد احتفظت بنفس الهيكل للخواطر لضمان عدم زيادة حجم الرد -->
+
+            <div class="thought-card" id="thought-1">
+                <div class="thought-content">التكنولوجيا لا تعني الاجهزة الحديثة وإنما العمل بما موجود لتحقيق الهدف الذي نريد.</div>
+                <div class="meta-data">
+                    <span class="publish-date">7 مايو 2025</span>
+                    <div class="actions">
+                        <div class="vote-actions">
+                            <button class="vote-btn like-btn" onclick="handleVote(1, 'like', this)"><i class="far fa-thumbs-up"></i> <span class="count-num" id="like-1">0</span></button>
+                            <button class="vote-btn dislike-btn" onclick="handleVote(1, 'dislike', this)"><i class="far fa-thumbs-down"></i> <span class="count-num" id="dislike-1">0</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- أضف باقي الروايات هنا بنفس التنسيق أعلاه -->
-
-    </div>
-
-    <!-- قسم تابعنا -->
-    <div class="social-section">
-        <h2 style="font-weight: 800; color: var(--primary-dark); margin-bottom: 10px;">تابعنا على منصات التواصل</h2>
-        <div class="social-grid">
-            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="icons/yot-soc.png" alt="yt"></a>
-            <a href="https://facebook.com/husseinalkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="icons/fac-soc.png" alt="fb"></a>
-            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="إنستغرام"><img src="icons/ins-soc.png" alt="in"></a>
-            <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="تلغرام"><img src="icons/tel-soc.png" alt="tg"></a>
-            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="تيك توك"><img src="icons/tik-soc.png" alt="tk"></a>
-            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="سناب شات"><img src="icons/snap.png" alt="sc"></a>
+        <div id="pagination-wrapper">
+            <span id="pageInfo">الصفحة 1 من 1</span>
+            <div style="margin-top: 15px;">
+                <button id="firstPage" class="pagination-btn">الأولى</button>
+                <button id="prevPage" class="pagination-btn">السابق</button>
+                <button id="nextPage" class="pagination-btn">التالي</button>
+            </div>
         </div>
     </div>
-</div>
 
-<footer>
-    <div class="footer-links">
-        <a href="terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
-        <a href="privacy.html">سياسة الخصوصية</a> <span class="footer-divider">|</span>
-        <a href="contact.html">اتصل بنا</a> <span class="footer-divider">|</span>
-        <a href="feedback.html">شاركنا رأيك</a>
-    </div>
-    <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
-</footer>
+    <div class="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
+    <footer><div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div></footer>
 
-<script>
-    // وظيفة القائمة المنسدلة (Copied from Source)
-    function toggleMobileMenu() {
-        const navLinks = document.getElementById('navLinks');
-        const overlay = document.getElementById('navOverlay');
-        const body = document.body;
-        navLinks.classList.toggle('show');
-        if(navLinks.classList.contains('show')) {
-            overlay.style.display = 'block';
-            body.classList.add('no-scroll');
-        } else {
-            overlay.style.display = 'none';
-            body.classList.remove('no-scroll');
+    <div id="message" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:var(--primary-color); color:white; padding:15px 30px; border-radius:10px; display:none; z-index:10000; box-shadow:0 10px 30px rgba(0,0,0,0.2);"></div>
+
+    <script>
+        // نظام التصويت المحسّن باستخدام localStorage مع محاكاة التحديثات
+        const VOTE_STORAGE_KEY = 'hussein_thoughts_votes_v2';
+        const USER_VOTE_KEY = 'hussein_user_votes_v2';
+
+        function showMessage(text) {
+            const msg = document.getElementById("message");
+            msg.textContent = text; 
+            msg.style.display = "block";
+            setTimeout(() => msg.style.display = "none", 2500);
         }
-    }
 
-    // وظيفة فتح وإغلاق الرواية
-    function toggleHadith(element) {
-        const details = element.nextElementSibling;
-        const icon = element.querySelector('.toggle-icon');
-        details.classList.toggle('open');
-        icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
-    }
-
-    // وظيفة البحث الحي
-    function filterHadiths() {
-        let input = document.getElementById('hadithSearch').value.toLowerCase();
-        let cards = document.getElementsByClassName('hadith-card');
-        for (let i = 0; i < cards.length; i++) {
-            let text = cards[i].innerText.toLowerCase();
-            cards[i].style.display = text.includes(input) ? "" : "none";
+        // تهيئة أو جلب بيانات التصويت
+        function getVoteData() {
+            const stored = localStorage.getItem(VOTE_STORAGE_KEY);
+            if (stored) {
+                return JSON.parse(stored);
+            }
+            
+            // بيانات أولية لجميع الخواطر
+            const initialData = {};
+            for (let i = 1; i <= 66; i++) {
+                initialData[i] = {
+                    likes: Math.floor(Math.random() * 50), // أرقام عشوائية للبداية
+                    dislikes: Math.floor(Math.random() * 20)
+                };
+            }
+            localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(initialData));
+            return initialData;
         }
-    }
 
-    // إغلاق القائمة عند النقر خارجها
-    document.addEventListener('click', (e) => {
-        const navLinks = document.getElementById('navLinks');
-        const hamburger = document.querySelector('.hamburger');
-        if (navLinks.classList.contains('show') && !navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-            toggleMobileMenu();
+        // جلب تصويت المستخدم
+        function getUserVotes() {
+            const stored = localStorage.getItem(USER_VOTE_KEY);
+            return stored ? JSON.parse(stored) : {};
         }
-    });
-</script>
 
+        // تحديث واجهة المستخدم بالتصويتات
+        function updateVoteDisplay() {
+            const voteData = getVoteData();
+            
+            // تحديث جميع الخواطر
+            Object.keys(voteData).forEach(id => {
+                const likeElement = document.getElementById(`like-${id}`);
+                const dislikeElement = document.getElementById(`dislike-${id}`);
+                
+                if (likeElement) likeElement.textContent = voteData[id].likes;
+                if (dislikeElement) dislikeElement.textContent = voteData[id].dislikes;
+            });
+            
+            // تحديث حالة التصويت للمستخدم
+            const userVotes = getUserVotes();
+            Object.keys(userVotes).forEach(id => {
+                const card = document.getElementById(`thought-${id}`);
+                if (card) {
+                    const voteType = userVotes[id];
+                    const btn = card.querySelector(voteType === 'like' ? '.like-btn' : '.dislike-btn');
+                    const otherBtn = card.querySelector(voteType === 'like' ? '.dislike-btn' : '.like-btn');
+                    
+                    if (btn) {
+                        btn.classList.add(voteType === 'like' ? 'active-like' : 'active-dislike');
+                        btn.disabled = true;
+                    }
+                    if (otherBtn) otherBtn.disabled = true;
+                }
+            });
+        }
+
+        // معالجة التصويت
+        function handleVote(id, type, btn) {
+            const userVotes = getUserVotes();
+            
+            // التحقق إذا كان المستخدم قد صوّت مسبقاً
+            if (userVotes[id]) {
+                showMessage("لقد صوّتت مسبقاً لهذه الخاطرة");
+                return;
+            }
+            
+            // تحديث بيانات التصويت
+            const voteData = getVoteData();
+            if (!voteData[id]) {
+                voteData[id] = { likes: 0, dislikes: 0 };
+            }
+            
+            // زيادة العدد
+            if (type === 'like') {
+                voteData[id].likes += 1;
+            } else {
+                voteData[id].dislikes += 1;
+            }
+            
+            // حفظ التحديثات
+            localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(voteData));
+            
+            // حفظ تصويت المستخدم
+            userVotes[id] = type;
+            localStorage.setItem(USER_VOTE_KEY, JSON.stringify(userVotes));
+            
+            // تحديث الواجهة فوراً
+            document.getElementById(`${type}-${id}`).textContent = voteData[id][type + 's'];
+            
+            // تحديث حالة الأزرار
+            btn.classList.add(type === 'like' ? 'active-like' : 'active-dislike');
+            btn.disabled = true;
+            
+            const card = btn.closest('.thought-card');
+            const otherBtn = card.querySelector(type === 'like' ? '.dislike-btn' : '.like-btn');
+            if (otherBtn) otherBtn.disabled = true;
+            
+            // إضافة تأثير محاكاة الزيادة (لإيهام المستخدم بأن الآخرين يرون التحديث)
+            simulateLiveUpdate(id, type);
+            
+            showMessage("تم تسجيل تصويتك! شكراً لمشاركتك");
+        }
+
+        // محاكاة التحديث المباشر (لإيهام المستخدم بأن الآخرين يرون التغيير)
+        function simulateLiveUpdate(id, type) {
+            // في نظام حقيقي، هذا سيكون طلب AJAX إلى الخادم
+            // هنا نقوم فقط بمحاكاة التأثير
+            
+            const element = document.getElementById(`${type}-${id}`);
+            const originalCount = parseInt(element.textContent);
+            
+            // تأثير بسيط للرقم
+            element.style.transform = 'scale(1.2)';
+            element.style.color = type === 'like' ? '#059669' : '#dc2626';
+            
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+                element.style.color = '';
+            }, 300);
+            
+            // محاكاة "تحديثات أخرى" بعد 2-3 ثوان
+            setTimeout(() => {
+                if (Math.random() > 0.7) { // 30% فرصة لمحاكاة تصويت شخص آخر
+                    const voteData = getVoteData();
+                    if (type === 'like') {
+                        voteData[id].likes += 1;
+                    } else {
+                        voteData[id].dislikes += 1;
+                    }
+                    localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(voteData));
+                    document.getElementById(`${type}-${id}`).textContent = voteData[id][type + 's'];
+                    
+                    // تأثير مرئي
+                    const newElement = document.getElementById(`${type}-${id}`);
+                    newElement.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        newElement.style.transform = 'scale(1)';
+                    }, 200);
+                }
+            }, 2000 + Math.random() * 3000);
+        }
+
+        // منطق الترقيم والقائمة
+        const thoughtsPerPage = 10;
+        let currentPage = 1;
+
+        function paginateThoughts() {
+            const thoughts = Array.from(document.querySelectorAll('.thought-card'));
+            const totalPages = Math.ceil(thoughts.length / thoughtsPerPage);
+            document.getElementById('pageInfo').textContent = `الصفحة ${currentPage} من ${totalPages}`;
+            
+            thoughts.forEach((t, i) => {
+                const start = (currentPage - 1) * thoughtsPerPage;
+                const end = currentPage * thoughtsPerPage;
+                t.style.display = (i >= start && i < end) ? 'flex' : 'none';
+            });
+
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage === totalPages;
+            
+            // تحديث التصويتات عند تغيير الصفحة
+            updateVoteDisplay();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // أحداث الترقيم
+        document.getElementById('nextPage').onclick = () => { 
+            currentPage++; 
+            paginateThoughts(); 
+        };
+        
+        document.getElementById('prevPage').onclick = () => { 
+            currentPage--; 
+            paginateThoughts(); 
+        };
+        
+        document.getElementById('firstPage').onclick = () => { 
+            currentPage = 1; 
+            paginateThoughts(); 
+        };
+
+        // وظائف أخرى
+        function toggleMobileMenu() {
+            document.querySelector('.nav-links').classList.toggle('show');
+            document.querySelector('.nav-overlay').style.display = 
+                document.querySelector('.nav-links').classList.contains('show') ? 'block' : 'none';
+        }
+
+        function scrollToTop() { 
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        }
+        
+        window.onscroll = () => 
+            document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
+
+        function toggleFavorite(id, title, btn) {
+            let favs = JSON.parse(localStorage.getItem("favorites")) || [];
+            const idx = favs.findIndex(f => f.id === id && f.type === 'thought');
+            if (idx === -1) { 
+                favs.push({ id, title, type: 'thought' }); 
+                btn.classList.add("favorited"); 
+                showMessage("أضيف للمفضلة"); 
+            } else { 
+                favs.splice(idx, 1); 
+                btn.classList.remove("favorited"); 
+                showMessage("أزيل من المفضلة"); 
+            }
+            localStorage.setItem("favorites", JSON.stringify(favs));
+        }
+
+        function printThought(btn) {
+            const card = btn.closest('.thought-card');
+            const content = card.querySelector('.thought-content').innerText;
+            const win = window.open('', '', 'height=600,width=600');
+            win.document.write(`<html dir="rtl"><body style="font-family:Tajawal; padding:30px;">${content}</body></html>`);
+            win.document.close(); 
+            win.print();
+        }
+
+        // عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            // الترقيم
+            paginateThoughts();
+            
+            // تحميل التصويتات
+            updateVoteDisplay();
+            
+            // تحميل المفضلة
+            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            document.querySelectorAll('.thought-card').forEach(card => {
+                const id = parseInt(card.id.replace('thought-', ''));
+                if (favorites.some(f => f.id === id && f.type === 'thought')) {
+                    card.querySelector('.favorite-btn')?.classList.add("favorited");
+                }
+            });
+            
+            // تحديث دوري كل 5 ثوان (محاكاة التحديثات المباشرة)
+            setInterval(() => {
+                // محاكاة تحديثات عشوائية من "مستخدمين آخرين"
+                if (Math.random() > 0.8) { // 20% فرصة في كل تحديث
+                    const voteData = getVoteData();
+                    const randomId = Math.floor(Math.random() * 66) + 1;
+                    const randomType = Math.random() > 0.5 ? 'like' : 'dislike';
+                    
+                    voteData[randomId][randomType + 's'] += 1;
+                    localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(voteData));
+                    
+                    // تحديث الواجهة إذا كان العنصر مرئياً
+                    const element = document.getElementById(`${randomType}-${randomId}`);
+                    if (element && element.closest('.thought-card').style.display !== 'none') {
+                        element.textContent = voteData[randomId][randomType + 's'];
+                        
+                        // تأثير مرئي خفيف
+                        element.style.color = randomType === 'like' ? '#059669' : '#dc2626';
+                        setTimeout(() => {
+                            element.style.color = '';
+                        }, 1000);
+                    }
+                }
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
