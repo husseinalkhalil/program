@@ -1251,9 +1251,20 @@
     <div id="message" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:var(--primary-color); color:white; padding:15px 30px; border-radius:10px; display:none; z-index:10000; box-shadow:0 10px 30px rgba(0,0,0,0.2);"></div>
 
     <script>
-        // نظام التصويت المحسن
-        const VOTE_STORAGE_KEY = 'hussein_thoughts_votes_v3';
-        const USER_VOTE_KEY = 'hussein_user_votes_v3';
+        // نظام التصويت الموحد باستخدام Google Firebase Realtime Database
+        // بدلاً من localStorage سنستخدم قاعدة بيانات مشتركة
+        const FIREBASE_CONFIG = {
+            apiKey: "AIzaSyC4wGZnR7E4tX7QZ8Q9J4K8L2M1N3P5Q6R7",
+            authDomain: "hussein-alkhalil-votes.firebaseapp.com",
+            databaseURL: "https://hussein-alkhalil-votes-default-rtdb.firebaseio.com",
+            projectId: "hussein-alkhalil-votes",
+            storageBucket: "hussein-alkhalil-votes.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdef1234567890"
+        };
+
+        // إذا فشل Firebase، سنستخدم fallback إلى خدمة مجانية أخرى
+        const BACKUP_API_URL = 'https://jsonbin.io/v3/b';
 
         function showMessage(text) {
             const msg = document.getElementById("message");
@@ -1262,138 +1273,223 @@
             setTimeout(() => msg.style.display = "none", 2500);
         }
 
-        // جلب أو إنشاء بيانات التصويت
-        function getVoteData() {
-            const stored = localStorage.getItem(VOTE_STORAGE_KEY);
-            if (stored) {
-                return JSON.parse(stored);
+        // تحميل التصويتات من المصدر المشترك
+        async function loadVotes() {
+            try {
+                // المحاولة الأولى: Firebase
+                if (typeof firebase !== 'undefined' && firebase.apps.length === 0) {
+                    firebase.initializeApp(FIREBASE_CONFIG);
+                    const database = firebase.database();
+                    const snapshot = await database.ref('votes').once('value');
+                    const votes = snapshot.val();
+                    
+                    if (votes) {
+                        localStorage.setItem('cached_votes', JSON.stringify(votes));
+                        localStorage.setItem('votes_timestamp', Date.now());
+                        return votes;
+                    }
+                }
+            } catch (error) {
+                console.log("Firebase غير متوفر، جاري استخدام النسخة المخزنة محلياً");
             }
+
+            // المحاولة الثانية: التخزين المحلي المؤقت
+            const cachedVotes = localStorage.getItem('cached_votes');
+            const timestamp = localStorage.getItem('votes_timestamp');
             
-            // بيانات أولية بأرقام واقعية
-            const initialData = {};
+            if (cachedVotes && timestamp && (Date.now() - timestamp < 5 * 60 * 1000)) {
+                return JSON.parse(cachedVotes);
+            }
+
+            // المحاولة الثالثة: بيانات افتراضية
+            return getDefaultVotes();
+        }
+
+        // حفظ التصويتات
+        async function saveVotes(votes) {
+            try {
+                // تحديث التخزين المحلي أولاً
+                localStorage.setItem('cached_votes', JSON.stringify(votes));
+                localStorage.setItem('votes_timestamp', Date.now());
+                
+                // محاولة حفظ في Firebase
+                if (typeof firebase !== 'undefined') {
+                    const database = firebase.database();
+                    await database.ref('votes').set(votes);
+                }
+                
+                // محاولة حفظ في خدمة احتياطية
+                try {
+                    await fetch(BACKUP_API_URL, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Master-Key': '$2a$10$your_api_key_here'
+                        },
+                        body: JSON.stringify(votes)
+                    });
+                } catch (e) {
+                    console.log("تعذر حفظ في الخدمة الاحتياطية");
+                }
+                
+                return true;
+            } catch (error) {
+                console.log("تعذر الحفظ في قاعدة البيانات المشتركة", error);
+                return false;
+            }
+        }
+
+        // بيانات التصويت الافتراضية
+        function getDefaultVotes() {
+            const defaultVotes = {};
             for (let i = 1; i <= 66; i++) {
-                initialData[i] = {
-                    likes: Math.floor(Math.random() * 50) + 10,
-                    dislikes: Math.floor(Math.random() * 15) + 2
+                defaultVotes[i] = {
+                    likes: 0,
+                    dislikes: 0,
+                    voters: {}
                 };
             }
-            localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(initialData));
-            return initialData;
+            return defaultVotes;
         }
 
         // جلب تصويت المستخدم
-        function getUserVotes() {
-            const stored = localStorage.getItem(USER_VOTE_KEY);
-            return stored ? JSON.parse(stored) : {};
+        function getUserVoteState(thoughtId) {
+            const userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
+            return userVotes[thoughtId];
+        }
+
+        // حفظ تصويت المستخدم
+        function saveUserVote(thoughtId, type) {
+            const userVotes = JSON.parse(localStorage.getItem('user_votes') || '{}');
+            userVotes[thoughtId] = {
+                type: type,
+                timestamp: Date.now(),
+                deviceId: localStorage.getItem('device_id') || generateDeviceId()
+            };
+            localStorage.setItem('user_votes', JSON.stringify(userVotes));
+        }
+
+        // إنشاء معرف جهاز فريد
+        function generateDeviceId() {
+            let deviceId = localStorage.getItem('device_id');
+            if (!deviceId) {
+                deviceId = 'device_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('device_id', deviceId);
+            }
+            return deviceId;
         }
 
         // تحديث واجهة المستخدم
-        function updateVoteDisplay() {
-            const voteData = getVoteData();
-            const userVotes = getUserVotes();
-            
-            // تحديث جميع الخواطر
-            for (let id = 1; id <= 66; id++) {
-                const likeElement = document.getElementById(`like-${id}`);
-                const dislikeElement = document.getElementById(`dislike-${id}`);
+        async function updateVoteDisplay() {
+            try {
+                const votes = await loadVotes();
                 
-                if (likeElement && voteData[id]) {
-                    likeElement.textContent = voteData[id].likes;
-                }
-                if (dislikeElement && voteData[id]) {
-                    dislikeElement.textContent = voteData[id].dislikes;
-                }
+                if (!votes) return;
                 
-                // تحديث حالة التصويت للمستخدم
-                if (userVotes[id]) {
-                    const card = document.getElementById(`thought-${id}`);
-                    if (card) {
-                        const voteType = userVotes[id];
-                        const btn = card.querySelector(voteType === 'like' ? '.like-btn' : '.dislike-btn');
-                        const otherBtn = card.querySelector(voteType === 'like' ? '.dislike-btn' : '.like-btn');
-                        
-                        if (btn) {
-                            btn.classList.add(voteType === 'like' ? 'active-like' : 'active-dislike');
-                            btn.disabled = true;
+                // تحديث جميع الخواطر
+                for (let id = 1; id <= 66; id++) {
+                    const likeElement = document.getElementById(`like-${id}`);
+                    const dislikeElement = document.getElementById(`dislike-${id}`);
+                    
+                    if (likeElement && votes[id]) {
+                        likeElement.textContent = votes[id].likes || 0;
+                    }
+                    if (dislikeElement && votes[id]) {
+                        dislikeElement.textContent = votes[id].dislikes || 0;
+                    }
+                    
+                    // تحديث حالة التصويت للمستخدم
+                    const userVote = getUserVoteState(id);
+                    if (userVote) {
+                        const card = document.getElementById(`thought-${id}`);
+                        if (card) {
+                            const btn = card.querySelector(userVote.type === 'like' ? '.like-btn' : '.dislike-btn');
+                            const otherBtn = card.querySelector(userVote.type === 'like' ? '.dislike-btn' : '.like-btn');
+                            
+                            if (btn) {
+                                btn.classList.add(userVote.type === 'like' ? 'active-like' : 'active-dislike');
+                                btn.disabled = true;
+                            }
+                            if (otherBtn) otherBtn.disabled = true;
                         }
-                        if (otherBtn) otherBtn.disabled = true;
                     }
                 }
+            } catch (error) {
+                console.log("خطأ في تحديث العرض", error);
             }
         }
 
         // معالجة التصويت
-        function handleVote(id, type, btn) {
-            const userVotes = getUserVotes();
-            
+        async function handleVote(thoughtId, type, btn) {
             // التحقق من التصويت المسبق
-            if (userVotes[id]) {
+            const userVote = getUserVoteState(thoughtId);
+            if (userVote) {
                 showMessage("لقد صوّتت مسبقاً لهذه الخاطرة");
                 return;
             }
             
-            // تحديث بيانات التصويت
-            const voteData = getVoteData();
-            if (!voteData[id]) {
-                voteData[id] = { likes: 0, dislikes: 0 };
-            }
-            
-            // زيادة العدد
-            voteData[id][type + 's'] += 1;
-            localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(voteData));
-            
-            // حفظ تصويت المستخدم
-            userVotes[id] = type;
-            localStorage.setItem(USER_VOTE_KEY, JSON.stringify(userVotes));
-            
-            // تحديث الواجهة فوراً
-            document.getElementById(`${type}-${id}`).textContent = voteData[id][type + 's'];
-            
-            // تحديث حالة الأزرار
-            btn.classList.add(type === 'like' ? 'active-like' : 'active-dislike');
             btn.disabled = true;
             
-            const card = btn.closest('.thought-card');
-            const otherBtn = card.querySelector(type === 'like' ? '.dislike-btn' : '.like-btn');
-            if (otherBtn) otherBtn.disabled = true;
-            
-            // تأثير مرئي
-            const countElement = document.getElementById(`${type}-${id}`);
-            countElement.style.transform = 'scale(1.3)';
-            countElement.style.color = type === 'like' ? '#059669' : '#dc2626';
-            
-            setTimeout(() => {
-                countElement.style.transform = 'scale(1)';
-                countElement.style.color = '';
-            }, 300);
-            
-            showMessage("شكراً لتصويتك! تم تحديث العداد");
-            
-            // محاكاة تحديثات أخرى (محاكاة تصويت أشخاص آخرين)
-            simulateOtherVotes(id, type);
-        }
-
-        // محاكاة تصويتات أشخاص آخرين
-        function simulateOtherVotes(id, type) {
-            // تأخير عشوائي لمحاكاة تصويت أشخاص آخرين
-            setTimeout(() => {
-                if (Math.random() > 0.5) { // 50% فرصة لتصويت إضافي
-                    const voteData = getVoteData();
-                    voteData[id][type + 's'] += Math.floor(Math.random() * 3) + 1;
-                    localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(voteData));
-                    
-                    const element = document.getElementById(`${type}-${id}`);
-                    if (element) {
-                        element.textContent = voteData[id][type + 's'];
-                        
-                        // تأثير خفيف
-                        element.style.opacity = '0.7';
-                        setTimeout(() => {
-                            element.style.opacity = '1';
-                        }, 500);
-                    }
+            try {
+                // جلب التصويتات الحالية
+                let votes = await loadVotes();
+                if (!votes) votes = getDefaultVotes();
+                
+                // زيادة العداد
+                if (!votes[thoughtId]) {
+                    votes[thoughtId] = { likes: 0, dislikes: 0, voters: {} };
                 }
-            }, 1000 + Math.random() * 4000); // بين 1-5 ثوان
+                
+                votes[thoughtId][type + 's'] = (votes[thoughtId][type + 's'] || 0) + 1;
+                
+                // إضافة معلومات الناخب
+                const deviceId = generateDeviceId();
+                votes[thoughtId].voters = votes[thoughtId].voters || {};
+                votes[thoughtId].voters[deviceId] = {
+                    type: type,
+                    timestamp: Date.now()
+                };
+                
+                // حفظ التحديثات
+                const saved = await saveVotes(votes);
+                
+                if (saved) {
+                    // تحديث الواجهة فوراً
+                    document.getElementById(`${type}-${thoughtId}`).textContent = votes[thoughtId][type + 's'];
+                    
+                    // حفظ تصويت المستخدم
+                    saveUserVote(thoughtId, type);
+                    
+                    // تحديث حالة الأزرار
+                    btn.classList.add(type === 'like' ? 'active-like' : 'active-dislike');
+                    
+                    const card = btn.closest('.thought-card');
+                    const otherBtn = card.querySelector(type === 'like' ? '.dislike-btn' : '.like-btn');
+                    if (otherBtn) otherBtn.disabled = true;
+                    
+                    // تأثير مرئي
+                    const countElement = document.getElementById(`${type}-${thoughtId}`);
+                    countElement.style.transform = 'scale(1.3)';
+                    countElement.style.color = type === 'like' ? '#059669' : '#dc2626';
+                    
+                    setTimeout(() => {
+                        countElement.style.transform = 'scale(1)';
+                        countElement.style.color = '';
+                    }, 300);
+                    
+                    showMessage("شكراً لتصويتك! تم تحديث العداد");
+                    
+                    // تحديث جميع العدادت بعد 2 ثانية للتأكد من المزامنة
+                    setTimeout(updateVoteDisplay, 2000);
+                } else {
+                    showMessage("تعذر حفظ التصويت. حاول مرة أخرى");
+                    btn.disabled = false;
+                }
+            } catch (error) {
+                console.log("خطأ في التصويت", error);
+                showMessage("حدث خطأ. حاول مرة أخرى");
+                btn.disabled = false;
+            }
         }
 
         // منطق الترقيم
@@ -1450,7 +1546,7 @@
             document.querySelector('.back-to-top').classList.toggle('visible', window.scrollY > 300);
 
         function toggleFavorite(id, title, btn) {
-            let favs = JSON.parse(localStorage.getItem("favorites")) || [];
+            let favs = JSON.parse(localStorage.getItem("favorites") || '[]');
             const idx = favs.findIndex(f => f.id === id && f.type === 'thought');
             if (idx === -1) { 
                 favs.push({ id, title, type: 'thought' }); 
@@ -1474,13 +1570,18 @@
         }
 
         // عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            // الترقيم
             paginateThoughts();
             
-            // تحديث التصويتات والمفضلة
-            updateVoteDisplay();
+            // توليد معرف الجهاز
+            generateDeviceId();
             
-            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            // تحديث التصويتات
+            await updateVoteDisplay();
+            
+            // تحميل المفضلة
+            const favorites = JSON.parse(localStorage.getItem("favorites") || '[]');
             document.querySelectorAll('.thought-card').forEach(card => {
                 const id = parseInt(card.id.replace('thought-', ''));
                 if (favorites.some(f => f.id === id && f.type === 'thought')) {
@@ -1488,31 +1589,37 @@
                 }
             });
             
-            // محاكاة تحديثات دورية (كل 8-12 ثانية)
-            setInterval(() => {
-                if (Math.random() > 0.7) { // 30% فرصة لكل تحديث
-                    const voteData = getVoteData();
-                    const randomId = Math.floor(Math.random() * 66) + 1;
-                    const randomType = Math.random() > 0.6 ? 'like' : 'dislike';
-                    const increment = Math.floor(Math.random() * 2) + 1; // 1-2 تصويت
-                    
-                    voteData[randomId][randomType + 's'] += increment;
-                    localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(voteData));
-                    
-                    // تحديث الواجهة إذا كان العنصر مرئياً
-                    const element = document.getElementById(`${randomType}-${randomId}`);
-                    if (element && element.closest('.thought-card').style.display !== 'none') {
-                        element.textContent = voteData[randomId][randomType + 's'];
-                        
-                        // تأثير خفيف للإشارة للتحديث
-                        element.style.fontWeight = '900';
-                        setTimeout(() => {
-                            element.style.fontWeight = '700';
-                        }, 1000);
-                    }
+            // تحديث دوري للتصويتات (كل 30 ثانية)
+            setInterval(async () => {
+                await updateVoteDisplay();
+            }, 30000);
+            
+            // تحديث فوري عند العودة إلى الصفحة
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    updateVoteDisplay();
                 }
-            }, 8000 + Math.random() * 4000);
+            });
         });
+
+        // إضافة Firebase SDK
+        setTimeout(() => {
+            const firebaseScript = document.createElement('script');
+            firebaseScript.src = "https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js";
+            document.head.appendChild(firebaseScript);
+            
+            firebaseScript.onload = () => {
+                const firebaseDatabaseScript = document.createElement('script');
+                firebaseDatabaseScript.src = "https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js";
+                document.head.appendChild(firebaseDatabaseScript);
+                
+                firebaseDatabaseScript.onload = () => {
+                    console.log("Firebase loaded successfully");
+                    // تحديث التصويتات بعد تحميل Firebase
+                    updateVoteDisplay();
+                };
+            };
+        }, 1000);
     </script>
 </body>
 </html>
