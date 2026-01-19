@@ -2,35 +2,32 @@
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>بيان الوحي الإلهي في مواجهة التدوين البشري - حسين الخليل</title>
-    <!-- AdSense -->
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>الروايات</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
     <link href="images/logo-small.png" rel="icon" type="image/png"/>
     <link href="images/logo-small.png" rel="apple-touch-icon"/>
-    <!-- Fonts -->
+
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    
     <style>
-        /* ==================== Shared Styles ==================== */
         :root {
             --primary-color: #5e2ca5;
-            --primary-dark: #451b7a;
+            --primary-dark: #451b7a; 
             --primary-light: #8a5bc7;
             --accent-color: #ffd700;
             --bg-color: #f9f7f2;
-            --surface-color: #ffffff;
+            --surface-color: #F8F5FD; 
             --text-primary: #1e293b;
             --text-secondary: #64748b;
-            
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-            --shadow-md: 0 6px 12px rgba(0,0,0,0.08);
-            --shadow-lg: 0 15px 25px rgba(0,0,0,0.1);
-            
+            --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
+            --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
         }
@@ -41,257 +38,482 @@
             font-family: 'Tajawal', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-primary);
-            line-height: 1.8;
+            line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
+        }
+
+        body.no-scroll {
+            overflow: hidden !important;
+            height: 100vh;
         }
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* Navigation */
+        /* ==================== Navigation ==================== */
         .nav-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
             z-index: 998; display: none;
         }
 
         nav {
-            background: rgba(94, 44, 165, 0.95);
+            background: rgba(94, 44, 165, 0.98);
             backdrop-filter: blur(10px);
-            padding: 0.8rem 2%;
-            position: fixed; width: 100%; top: 0;
-            z-index: 1000;
+            padding: 0 5%;
+            position: fixed;
+            width: 100%; top: 0; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            height: 75px;
         }
 
-        .logo-container img { height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+        .logo-container { order: 1; } 
+        .logo-container img { 
+            height: 45px; 
+            width: auto; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
         .nav-links {
-            display: flex; flex: 1; justify-content: space-evenly; align-items: center;
-            flex-wrap: wrap; margin: 0 10px;
+            display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2;
         }
 
         .nav-links a {
-            color: white; font-weight: 700; font-size: 0.95rem;
-            padding: 6px 10px; border-radius: 20px;
-            display: flex; align-items: center; gap: 5px; white-space: nowrap;
+            color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap;
+            display: flex; align-items: center; gap: 5px;
         }
 
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
-        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
-
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 130px 20px 100px;
-            text-align: center; color: white;
-            border-radius: 0 0 50px 50px;
-            position: relative; z-index: 10;
+        .nav-links a.active {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
         }
 
-        .hero-content { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .hero-text h1 { font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; line-height: 1.4; }
-        .hero-text p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; }
-
-        /* Search Box */
-        .universal-search { width: 100%; max-width: 600px; position: relative; margin-top: 20px; }
-        #globalSearch {
-            width: 100%; padding: 18px 50px 18px 25px;
-            border-radius: 50px; border: none; font-size: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            font-family: 'Tajawal', sans-serif; outline: none;
-        }
-
-        /* Container & Main Layout */
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
-        .main-wrapper {
-            position: relative; z-index: 20; margin-top: -50px;
-            max-width: 1100px; margin-left: auto; margin-right: auto; margin-bottom: 60px;
-        }
-
-        .article-content-container {
-            background: var(--surface-color);
-            border-radius: var(--radius-xl);
-            padding: 50px;
-            box-shadow: var(--shadow-md);
-        }
-
-        .article-meta {
-            display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;
-            padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05);
-            color: var(--text-secondary); font-size: 0.95rem;
-        }
-
-        .article-body { font-size: 1.25rem; color: var(--text-primary); text-align: justify; line-height: 2; }
-        .article-body p { margin-bottom: 20px; }
-        .article-body h3 {
-            color: var(--primary-color); margin: 40px 0 20px;
-            padding-right: 15px; border-right: 5px solid var(--accent-color);
-            font-weight: 800;
-        }
-        .quran-verse { color: #5e2ca5; font-weight: bold; }
-
-        /* Controls */
-        .font-controls-fixed { position: fixed; top: 150px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
-        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); }
-        .highlight-text { background-color: var(--accent-color); color: #000; padding: 2px 0; border-radius: 2px; }
-
-        footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
-        .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
-        .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
 
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
             .nav-links {
-                position: fixed; top: 60px; right: -280px; width: 280px;
-                background: var(--surface-color); flex-direction: column;
-                padding: 20px; height: calc(100vh - 60px);
+                position: fixed; top: 75px; right: -280px; width: 280px;
+                background: var(--surface-color);
+                flex-direction: column; padding: 20px; height: calc(100vh - 75px);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
-                gap: 10px; margin: 0; flex: unset;
+                gap: 10px; margin: 0; flex: unset; z-index: 1000;
+                order: unset; transform: none; display: flex !important;
             }
             .nav-links.show { right: 0; }
-            .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; }
+            .nav-links a { 
+                color: var(--text-primary); width: 100%; padding: 12px; 
+                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
+                border-bottom: 1px solid rgba(0,0,0,0.03);
+            }
+            .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
+            .nav-links a.active {
+                background: rgba(94, 44, 165, 0.05);
+                color: var(--primary-color);
+            }
+
+            /* تعديل: إخفاء مربع البحث عند فتح القائمة الجانبية في الجوال */
+            body.no-scroll .universal-search {
+                display: none !important;
+            }
+        }
+
+        /* ==================== Search Styles (Copied from Source) ==================== */
+        .universal-search { width: 100%; max-width: 600px; margin: 35px auto 0; position: relative; z-index: 1002; }
+        #globalSearch { 
+            width: 100%; padding: 18px 25px; border-radius: 50px; border: none; font-size: 1rem; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); outline: none; text-align: right;
+            font-family: 'Tajawal', sans-serif;
+        }
+        .search-results {
+            position: absolute; top: 110%; left: 0; right: 0; 
+            background: white; border-radius: 15px; max-height: 400px; 
+            overflow-y: auto; display: none; z-index: 1002; color: #333; 
+            text-align: right; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05);
+        }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
+        .search-item:hover { background: rgba(94, 44, 165, 0.05); }
+        .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; font-weight: 700; }
+        .search-count { padding: 10px 20px; font-size: 0.85rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
+        mark { background-color: #ffd700; color: #000; padding: 0 2px; border-radius: 2px; }
+
+        /* ==================== Hadith Hero & Intro ==================== */
+        .hadith-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            padding: 130px 20px 60px;
+            text-align: center;
+            color: white;
+            border-radius: 0 0 50px 50px;
+            width: 100%;
+        }
+        .hadith-hero h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; }
+        
+        .intro-text {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-weight: 500;
+        }
+        .intro-text span {
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+
+        /* ==================== Development Notice Style ==================== */
+        .dev-notice {
+            background: #fff9e6;
+            border: 2px dashed #ff4d4d;
+            padding: 25px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin: 0 auto 50px;
+            max-width: 900px;
+            box-shadow: var(--shadow-sm);
+        }
+        .dev-notice h2 {
+            color: #e63946; /* اللون الأحمر المطلوب */
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        @media (max-width: 768px) {
+            .dev-notice h2 { font-size: 1.3rem; }
+        }
+
+        /* ==================== Grid Layout ==================== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        
+        .hadith-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .hadith-card {
+            background: var(--surface-color);
+            border-radius: var(--radius-xl);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hadith-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .icon-wrapper {
+            width: 80px; height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            box-shadow: 0 8px 15px rgba(94, 44, 165, 0.1);
+            transition: 0.3s;
+        }
+
+        .hadith-card:hover .icon-wrapper {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .hadith-card h3 { font-size: 1.4rem; color: var(--primary-dark); margin-bottom: 12px; font-weight: 800; }
+        .hadith-card p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* ==================== Social Section ==================== */
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
+        .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
+        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .social-btn img { width: 26px; transition: 0.3s; }
+        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .social-btn:hover img { filter: brightness(0) invert(1); }
+        .social-yt:hover { background: #FF0000; }
+        .social-fb:hover { background: #1877F2; }
+        .social-ins:hover { background: #E4405F; }
+        .social-tg:hover { background: #0088CC; }
+        .social-tk:hover { background: #000000; }
+        .social-sc:hover { background: #FFFC00; } .social-sc:hover img { filter: none; }
+
+        /* ==================== Footer ==================== */
+        footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
+        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent-color); }
+        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; } 
+        .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
+
+        @media (max-width: 768px) {
+            .hadith-hero { padding: 110px 15px 50px; border-radius: 0 0 35px 35px; }
+            .hadith-hero h1 { font-size: 1.8rem; }
+            .intro-text { font-size: 1.1rem; }
+            .hadith-grid { grid-template-columns: 1fr; }
+            .universal-search { margin-top: 25px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
+    <div class="nav-overlay" id="navOverlay" onclick="toggleMobileMenu()"></div>
 
     <nav>
         <div class="logo-container">
-            <a href="/index.html"><img src="/images/logo.png" alt="شعار حسين الخليل" /></a>
+            <a href="index.html"><img src="images/logo.png" alt="logo" /></a>
         </div>
-
-        <div class="nav-links">
-            <a href="/index.html">الرئيسية</a>
-            <a href="/books.html">الكتب</a>
-            <a href="/articles.html" style="background: rgba(255,255,255,0.2);">المقالات</a>
-            <a href="/khawatir.html">خواطر</a>
-            <a href="/videos.html">الفيديوهات</a>
-            <a href="/history.html">التاريخ</a>
-            <a href="/podcast.html">البودكاست</a>
-            <a href="/ask.html">الأسئلة</a>
-            <a href="/hewar.html">حوارات</a>
-            <a href="/inq.html">تساؤلات</a>
-            <a href="/manhaj.html">المنهج</a>
-            <a href="/favorites.html">المفضلة</a>
-            <a href="/support.html">دعم المحتوى</a>
-            <a href="/about.html">من نحن</a>
-            <a href="/en/article/47.html" style="color: #ffd700 !important; font-weight: 800;"><i class="fas fa-globe"></i>En</a>
-            <a href="#" onclick="window.print()" title="طباعة"><i class="fas fa-print"></i></a>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">الرئيسية</a>
+            <a href="books.html">الكتب</a>
+            <a href="articles.html">المقالات</a>
+            <a href="hadith.html" class="active">الروايات</a>
+            <a href="khawatir.html">خواطر</a>
+            <a href="videos.html">الفيديوهات</a>
+            <a href="history.html">التاريخ</a>
+            <a href="podcast.html">البودكاست</a>
+            <a href="ask.html">الأسئلة</a>
+            <a href="hewar.html">حوارات</a>
+            <a href="inq.html">تساؤلات</a>
+            <a href="manhaj.html">المنهج</a>
+            <a href="favorites.html">المفضلة</a>
+            <a href="support.html">دعم المحتوى</a>
+            <a href="about.html">من نحن</a>
+            <a href="/en/hadith.html" style="color: #ffd700 !important; font-weight: 800; font-size: 1rem; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 8px 16px; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; line-height: 1; font-family: sans-serif; height: auto;">En<i class="fas fa-globe" style="font-size: 1rem; line-height: 1;"></i></a>
         </div>
-
         <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
     </nav>
 
-    <header class="hero-section">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>بيان الوحي الإلهي في مواجهة التدوين البشري</h1>
-                <p>تفكيك مغالطة "الوحي الثاني" واسترداد قدسية القرآن من هيمنة المرويات البشرية</p>
-            </div>
-            <div class="universal-search">
-                <input type="text" id="globalSearch" placeholder="ابحث عن كلمة داخل المقال..." />
-            </div>
+    <header class="hadith-hero">
+        <h1>قسم الروايات</h1>
+        <p>نقد المرويات التراثية في ميزان القرآن الكريم</p>
+        
+        <!-- مربع البحث المنسوخ من الكود الأول -->
+        <div class="universal-search">
+            <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+            <div class="search-results" id="searchResults"></div>
         </div>
     </header>
 
-    <div class="font-controls-fixed">
-        <button class="font-btn" id="fontIncrease"><i class="fas fa-plus"></i></button>
-        <button class="font-btn" id="fontReset"><i class="fas fa-redo"></i></button>
-        <button class="font-btn" id="fontDecrease"><i class="fas fa-minus"></i></button>
-    </div>
+    <div class="container">
+        <div class="intro-text">
+            تُعد قضية <span>الروايات</span> أو ما يُصطلح عليه بالوحي الثاني واحدة من أكثر القضايا تأثيراً في تشكيل العقل المسلم عبر القرون. في هذا القسم، نضع هذه المرويات تحت مجهر النقد العلمي، لنبين ما اعتراها من تضارب، وما خالف صريح النص القرآني، أو أساء للمنطق السليم والقيم الإنسانية، بهدف الوصول إلى فهم أنقى للدين بعيداً عن الدخيل والمكذوب.
+        </div>
 
-    <div class="container main-wrapper">
-        <div class="article-content-container">
-            <div class="article-meta">
-                <span><i class="far fa-calendar-alt"></i> 19 يناير 2026</span>
-                <span><i class="far fa-folder"></i> مقالات فكرية</span>
+        <!-- الجملة المطلوبة باللون الأحمر والتصميم المميز -->
+        <div class="dev-notice">
+            <h2><i class="fas fa-tools"></i> هذا القسم قيد التحديث والتطوير، وسيتم إطلاقه قريبًا بإذن الله</h2>
+        </div>
+
+        <div class="hadith-grid">
+            <!-- 1 -->
+            <div class="hadith-card" onclick="location.href='#'">
+                <div class="icon-wrapper"><i class="fas fa-sync"></i></div>
+                <h3>روايات تناقض بعضها</h3>
+                <p>استعراض المرويات التي ينفي بعضها بعضاً وتتناقض في متونها رغم وجودها في كتب الصحاح.</p>
             </div>
-
-            <div class="article-body" id="articleBody">
-                <p>في خضم مسيرة التطوير والتحديث لهذا الموقع، كان لزاماً علينا أن نفتح الملف الأكثر حساسية في تاريخ الفكر الإسلامي؛ ملف "الروايات" أو ما يُصطلح عليه زوراً بـ "الوحي الثاني". إن هذا القسم ليس مجرد سرد لاختلافات فقهية، بل هو معركة لاسترداد قدسية القرآن من هيمنة المرويات البشرية التي كُتبت بأيدي الناس ثم قيل عنها "هذا من عند الله".</p>
-
-                <h3>أولاً: كذبة "الوحي الثاني" في ميزان القرآن</h3>
-                <p>إن الزعم بأن للنبي ﷺ وحياً تشريعياً خارج القرآن هو ادعاء يبطله القرآن نفسه. فالله سبحانه يخاطب نبيه قائلاً: <span class="quran-verse">{فَاسْتَمْسِكْ بِالَّذِي أُوحِيَ إِلَيْكَ}</span>، ثم يحدد ماهية هذا الوحي في قوله: <span class="quran-verse">{وَأُوحِيَ إِلَيَّ هَٰذَا الْقُرْآنُ لِأُنذِرَكُم بِهِ}</span>. لم يقل الله "أوحي إلي هذا القرآن والأحاديث"، بل حدد المصدر بـ "هذا القرآن" (بصيغة الحصر).</p>
-                <p>إن القرآن الكريم يحذرنا في آيات قطعية من اتباع أي حديث بعده: <span class="quran-verse">{تِلْكَ آيَاتُ اللَّهِ نَتْلُوهَا عَلَيْكَ بِالْحَقِّ ۖ فَبِأَيِّ حَدِيثٍ بَعْدَ اللَّهِ وَآيَاتِهِ يُؤْمِنُونَ}</span>. فهل الأحاديث المنسوبة للبخاري ومسلم والكافي هي من آيات الله؟ الجواب القاطع: لا. هي كتب تُنسب لأصحابها (محمد بن إسماعيل، ومسلم بن الحجاج، والكليني.. إلخ)، وشتان ما بين كلام رب العالمين وكلام البشر الظني.</p>
-
-                <h3>ثانياً: تفكيك حجة "من نقلوا القرآن هم من نقلوا الروايات"</h3>
-                <p>هذه هي الحجة التي يظن "كهنة الموروث" أنها دامغة، والرد عليها ينسفها من جذورها عبر مستويين:</p>
-                <p><strong>1. الجواب العقلي والمنطقي (التواتر مقابل الآحاد):</strong><br>
-                القرآن لم يصلنا عبر "أفراد"، بل وصل عبر "تواتر أمة عن أمة". لقد كان القرآن مشاعاً لدى الجميع، يُتلى في الصلوات، ويُحفظ في الصدور، ويُكتب في الصحف منذ اللحظة الأولى للوحي. القرآن وصل إلينا عبر ملايين المسلمين بمختلف طوائفهم (سنة، شيعة، إباضية، معتزلة)؛ كلهم اتفقوا على نفس المصحف حرفاً بحرف. أما الروايات، فهي "آحاد"؛ نقلها شخص عن شخص. فمثلاً، نجد أن أبا هريرة وابن عباس وعائشة يمتلكون وحدهم أكثر من 60% من حجم الروايات المزعومة! فهل يُعقل أن يربط الله مصير دينه بذاكرة ثلاثة أو أربعة أشخاص، بينما لو ماتوا قبل أن يحدّثوا لضاعت ثلثي الشريعة؟ القرآن لا سند له لأنه فوق السند، هو كالشمس يراها الجميع، أما الحديث فيحتاج لـ "حدثنا وأخبرنا" لأنه غائب ومشكوك فيه.</p>
-                <p><strong>2. الجواب من "مبدأ الناقلين":</strong><br>
-                إذا كان الناقلون للقرآن هم أنفسهم من نقلوا الروايات، فلماذا نجد في الروايات "الصحيح والضعيف والمكذوب والموضوع"، بينما لا نجد آية واحدة "ضعيفة"؟ إذا كان الرواة بشراً غير معصومين، وقد ثبت كذب بعضهم وتدليس بعضهم وتضارب مروياتهم، فبأي منطق نربط صحة القرآن (المحفوظ إلهياً) بصحة مروياتهم (المتروكة بشرياً)؟ إن الادعاء بأن رفض الروايات يستلزم رفض القرآن هو طعن مبطن في القرآن؛ لأنكم تجعلون القرآن تحت رحمة "تزكية البشر" لبعضهم البعض، بينما الله يقول: <span class="quran-verse">{إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ}</span>. الله تعهد بحفظ الذكر (القرآن) ولم يتعهد بحفظ مرويات البخاري أو الكليني.</p>
-
-                <h3>ثالثاً: التناقض كدليل على البشرية</h3>
-                <p>يقول تعالى: <span class="quran-verse">{أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ ۚ وَلَوْ كَانَ مِنْ عِندِ غَيْرِ اللَّهِ لَوَجَدُوا فِيهِ اخْتِلَافًا كَثِيرًا}</span>. وبالفعل، الاختلاف "الكثير" هو السمة البارزة في الروايات:</p>
-                <p>• <strong>تناقض مع العلم والعقل:</strong> روايات تتحدث عن "شخير النبي" أو "كلمات بذيئة" تُنسب له، أو الله يضع قدمه في النار، أو الدجال أعور العين اليمنى في البخاري وأعور اليسرى في مسلم!<br>
-                • <strong>تناقض مع الفطرة:</strong> تصوير رب العالمين بأنه يُدخل الناس النار لمجرد طول ثيابهم (ما تحت الكعبين)، أو أن النبي كان يحاول الانتحار بالتردي من الجبال!<br>
-                • <strong>تناقض مع القرآن:</strong> الروايات تأمر بالقتل (حد الردة: من بدل دينه فاقتلوه)، بينما القرآن يقول: <span class="quran-verse">{فَمَن شَاءَ فَلْيُؤْمِن وَمَن شَاءَ فَلْيَكْفُرْ}</span>. الروايات تبيح رجم الزاني، والقرآن حدد العقوبة بالجلد فقط. الروايات تحرم الوصية للوارث، والقرآن يكتبها فرضاً.</p>
-                <p>هذا التضارب يثبت يقيناً أن هذه الكتب ليست وحياً، بل هي تدوين بشري يعكس صراعات العصور الماضية.</p>
-
-                <h3>رابعاً: التوقيت والجغرافيا.. لمن كُتبت هذه الأحاديث؟</h3>
-                <p>من المثير للريبة أن أصحاب "الصحاح" (البخاري، مسلم، الترمذي، النسائي، ابن ماجه، أبو داود) وأصحاب كتب الشيعة (الكليني، الطوسي، الصدوق) كلهم من منطقة جغرافية واحدة (إيران وما حولها - شرق آسيا)، ودونوا كتبهم بعد وفاة النبي بقرابة 200 إلى 300 عام! لماذا لم يُدوّن العرب والتابعون في الجزيرة العربية -وهم الأقرب والأعلم- هذه الأحاديث؟ لماذا انتظر "الوحي الثاني" قرنين من الزمان ليظهر بلغة لا يتحدث بها أصحابها الأصليون؟ الحقيقة أن هذه الروايات دُوّنت لأغراض سياسية وتجارية ومذهبية. لقد احتاج السلاطين لتشريعات تبرر حروبهم (الفتوحات) وقتل معارضيهم، فصنع لهم الكهنوت الديني أحاديث تُفسر القرآن وتنسخه وتقيده بما يشتهي السلطان.</p>
-
-                <h3>خامساً: عبث "التصحيح والتضعيف"</h3>
-                <p>في "الوحي الثاني"، يتحكم البشر في الدين؛ فيأتي "إمام مجدد" مثل الألباني (المتوفى عام 1999) ليضعف أحاديث بقيت صحيحة لـ 1400 سنة، أو يصحح ما كان مكذوباً. هل يُعقل أن يكون دين الله "تطبيقاً (App)" يحتاج لتحديث وتصحيح كل مئة عام؟ القرآن لا يخضع لهذا العبث؛ فلا توجد آية "صححها فلان"، لأن الله هو من حفظها. أما الروايات، فهي قائمة على "علم الجرح والتعديل" القائم بدوره على الغيبة والنميمة وتزكية الأنفس، وهو ما نهى عنه القرآن: <span class="quran-verse">{فَلَا تُزَكُّوا أَنفُسَكُمْ ۖ هُوَ أَعْلَمُ بِمَنِ اتَّقَىٰ}</span>.</p>
-
-                <h3>سادساً: حكاية "المعزة وآية الرجم" (إدانة الموروث)</h3>
-                <p>يزعمون أن هناك آيات (مثل آية الرجم) أكلتها "الداجن" (المعزة) تحت سرير عائشة لانشغال الصحابة بوفاة النبي وتنازعهم في السقيفة! هذه الرواية وحدها كافية لإسقاط قدسية الروايات؛ فهي تعترف ضمناً أن البشر انشغلوا بالسياسة والمحاصصة عن حفظ الوحي. ولكن الحقيقة هي أن القرآن المحفوظ إلهياً استعصى عليهم؛ لم يستطيعوا إضافة حرف واحد إليه، فلجأوا لتأليف قصص عن "آيات منسوخة التلاوة" ليبرروا أحكامهم البربرية (كالرجم) التي لم يجدوا لها مكاناً في كتاب الله.</p>
-
-                <h3>سابعاً: من الذي أوصل لنا القرآن فعلياً؟</h3>
-                <p>حجة "من أوصل لك القرآن" تسقط أمام حقيقة أن القرآن موجود لدى الطوائف المتناحرة بنفس النص. السنة لا يثقون برواة الشيعة، والشيعة يكفرون رواة السنة.. فإذا كان القرآن قد مر عبر هؤلاء "الكفار" (بمنظوركم المتبادل) وبقي سليماً، فهذا دليل على أن الله هو من حفظه رغم أنوفهم، وليس لأنهم ثقات. الله استخدم جثة فرعون (وهو طاغية) لتكون آية، وحفظها عبر آلاف السنين بمشركين وملحدين ومسلمين؛ فهل نقول إن الله "استعان" بهم؟ لا، بل هو قهر الأسباب لحفظ آيته. والقرآن وصل إلينا عبر "الأمم" لا عبر "الأفراد".</p>
-
-                <p><strong>الخلاصة:</strong><br>
-                نحن نتمسك بالقرآن لأنه المصدر الوحيد الذي لا يأتيه الباطل من بين يديه ولا من خلفه. أما الروايات، فهي تاريخ بشري يُؤخذ منه ما وافق القرآن، ويُطرح منه كل ما خالفه. إن دعوى "الوحي الثاني" هي محاولة للالتفاف على هيمنة القرآن، وجعل قول "فلان عن فلان" حاكماً على قول "رب العالمين".</p>
-                <p>نحن هنا لننتصر للقرآن، ونعيد الاعتبار للنبي ﷺ بتنزيهه عن مرويات الغدر والقتل والسحر والتردي من الجبال. القرآن هو الحجة، والقرآن هو الميزان.. وما دونه ظن، <span class="quran-verse">{وَإِنَّ الظَّنَّ لَا يُغْنِي مِنَ الْحَقِّ شَيْئًا}</span>.</p>
+            <!-- 2 -->
+            <div class="hadith-card" onclick="location.href='#'">
+                <div class="icon-wrapper"><i class="fas fa-book-quran"></i></div>
+                <h3>روايات تناقض القرآن</h3>
+                <p>بحث في الروايات التي صدمت نصوص القرآن القطعية وخالفت أحكامه وقيمه العليا.</p>
             </div>
+            <!-- 3 -->
+            <div class="hadith-card" onclick="location.href='#'">
+                <div class="icon-wrapper"><i class="fas fa-brain"></i></div>
+                <h3>روايات تناقض العقل</h3>
+                <p>روايات تخالف بديهيات المنطق السليم، أو تتعارض مع الحقائق الكونية والعلمية الثابتة.</p>
+            </div>
+            <!-- 4 -->
+            <div class="hadith-card" onclick="location.href='hadith.html'">
+                <div class="icon-wrapper"><i class="fas fa-user-shield"></i></div>
+                <h3>روايات أساءت للنبي</h3>
+                <p>مرويات نسبت للنبي أقوالاً وأفعالاً تتنافى مع مقام النبوة وعظمة الخُلُق النبوي.</p>
+            </div>
+            <!-- 5 -->
+            <div class="hadith-card" onclick="location.href='#'">
+                <div class="icon-wrapper"><i class="fas fa-venus-mars"></i></div>
+                <h3>روايات أساءت للمرأة</h3>
+                <p>نقد الموروث الروائي الذي انتقص من كرامة المرأة الإنسانية وقيد حقوقها المكفولة قرآنياً.</p>
+            </div>
+            <!-- 6 -->
+            <div class="hadith-card" onclick="location.href='#'">
+                <div class="icon-wrapper"><i class="fas fa-scroll"></i></div>
+                <h3>تقارب الروايات مع العهود السابقة</h3>
+                <p>تتبع الروايات المنسوخة من كتب العهود السابقة والديانات القديمة كالزرادشتية.</p>
+            </div>
+        </div>
 
-            <div class="article-actions">
-                <button class="action-btn-pill" onclick="window.print()"><i class="fas fa-print"></i> طباعة المقال</button>
-                <button class="action-btn-pill" onclick="copyLink()"><i class="fas fa-link"></i> نسخ الرابط</button>
+        <!-- قسم تابعنا -->
+        <div class="social-section">
+            <h2 style="margin-bottom: 10px; font-weight: 800; color: var(--primary-dark);">تابعنا على منصات التواصل</h2>
+            <div class="social-grid">
+                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="icons/yot-soc.png" alt="yt"></a>
+                <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="icons/fac-soc.png" alt="fb"></a>
+                <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="إنستغرام"><img src="icons/ins-soc.png" alt="in"></a>
+                <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="تلغرام"><img src="icons/tel-soc.png" alt="tg"></a>
+                <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="تيك توك"><img src="icons/tik-soc.png" alt="tk"></a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="سناب شات"><img src="icons/snap.png" alt="sc"></a>
             </div>
         </div>
     </div>
 
     <footer>
         <div class="footer-links">
-            <a href="/terms.html">الشروط والأحكام</a>
-            <a href="/privacy.html">سياسة الخصوصية</a>
-            <a href="/contact.html">اتصل بنا</a>
+            <a href="terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
+            <a href="privacy.html">سياسة الخصوصية</a> <span class="footer-divider">|</span>
+            <a href="contact.html">اتصل بنا</a> <span class="footer-divider">|</span>
+            <a href="feedback.html">شاركنا رأيك</a>
         </div>
         <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
     </footer>
 
     <script>
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const overlay = document.querySelector('.nav-overlay');
-            navLinks.classList.toggle('show');
-            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
+        /* ==================== Logic for Search (Copied from Source) ==================== */
+        let cachedPagesContent = null;
+        let isSearchInitialized = false;
+
+        async function loadAllPagesContent() {
+            if (cachedPagesContent) return cachedPagesContent;
+            try {
+                const response = await fetch('site-map.json?v=' + new Date().getTime());
+                const pagesList = await response.json();
+                const promises = pagesList.map(async (item) => {
+                    let url = typeof item === 'string' ? item : item.url;
+                    try {
+                        const pageResp = await fetch(url);
+                        const html = await pageResp.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                        const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                        return { 
+                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                            url: url, 
+                            content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
+                        };
+                    } catch (e) { return null; }
+                });
+                cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
+                return cachedPagesContent;
+            } catch (error) { return []; }
         }
 
-        const articleBody = document.getElementById('articleBody');
-        let currentFontSize = 1.25;
+        function normalizeArabic(text) {
+            if (!text) return '';
+            text = text.replace(/[\u064B-\u065F\u0670]/g, '');
+            text = text.replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+            return text;
+        }
 
-        document.getElementById('fontIncrease').onclick = () => { currentFontSize += 0.1; articleBody.style.fontSize = currentFontSize + 'rem'; };
-        document.getElementById('fontDecrease').onclick = () => { if(currentFontSize > 0.9) currentFontSize -= 0.1; articleBody.style.fontSize = currentFontSize + 'rem'; };
-        document.getElementById('fontReset').onclick = () => { currentFontSize = 1.25; articleBody.style.fontSize = '1.25rem'; };
+        function getSafeRegex(searchTerm) {
+            let regexStr = '';
+            const cleanTerm = normalizeArabic(searchTerm);
+            for (let char of cleanTerm) {
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                regexStr += '[\\u064B-\u065F\u0670]*';
+            }
+            return new RegExp(regexStr, 'gi');
+        }
 
-        const searchInput = document.getElementById('globalSearch');
-        const originalHTML = articleBody.innerHTML;
-        searchInput.oninput = function() {
-            const val = this.value.trim();
-            if(!val) { articleBody.innerHTML = originalHTML; return; }
-            const regex = new RegExp(`(${val})`, 'gi');
-            articleBody.innerHTML = originalHTML.replace(regex, `<span class="highlight-text">$1</span>`);
-        };
+        function displayResults(results, queryRegex, container) {
+            container.innerHTML = '';
+            if (results.length === 0) {
+                container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+                container.style.display = 'block';
+                return;
+            }
+            const countDiv = document.createElement('div');
+            countDiv.className = 'search-count';
+            countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
+            container.appendChild(countDiv);
 
-        function copyLink() { navigator.clipboard.writeText(window.location.href).then(() => alert("تم نسخ الرابط بنجاح ✅")); }
+            results.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-item';
+                const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
+                queryRegex.lastIndex = 0;
+                const match = queryRegex.exec(item.content);
+                let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 140));
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
+                div.onclick = () => window.location.href = item.url;
+                container.appendChild(div);
+            });
+            container.style.display = 'block';
+        }
+
+        async function performSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            resultsContainer.style.display = 'block';
+            const data = await loadAllPagesContent();
+            const searchRegex = getSafeRegex(query);
+            const results = data.filter(item => {
+                searchRegex.lastIndex = 0;
+                const titleMatch = searchRegex.test(item.page);
+                searchRegex.lastIndex = 0;
+                const contentMatch = searchRegex.test(item.content);
+                return titleMatch || contentMatch;
+            });
+            displayResults(results, searchRegex, resultsContainer);
+        }
+
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const overlay = document.getElementById('navOverlay');
+            const body = document.body;
+            navLinks.classList.toggle('show');
+            if(navLinks.classList.contains('show')) {
+                overlay.style.display = 'block';
+                body.classList.add('no-scroll');
+            } else {
+                overlay.style.display = 'none';
+                body.classList.remove('no-scroll');
+            }
+        }
+
+        /* ==================== Event Listeners ==================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            const sInput = document.getElementById('globalSearch');
+            if (sInput) {
+                let sTimer;
+                sInput.addEventListener('input', (e) => {
+                    clearTimeout(sTimer);
+                    sTimer = setTimeout(() => performSearch(e.target.value.trim()), 500);
+                });
+                sInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
+            }
+
+            document.addEventListener('click', (e) => {
+                const results = document.getElementById('searchResults');
+                if(results && !document.querySelector('.universal-search').contains(e.target)) {
+                    results.style.display = 'none';
+                }
+            });
+        });
     </script>
 </body>
 </html>
