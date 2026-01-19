@@ -197,7 +197,7 @@
         }
         .hadith-details.open { max-height: 2000px; opacity: 1; padding: 10px 30px 40px; border-top: 1px solid rgba(0,0,0,0.05); }
 
-        /* تعديل الأقسام لتصبح محتوى مدمج وليس بطاقات */
+        /* تعديل الأقسام لتصبح محتوى مدمج وبدون حدود جانبية */
         .detail-section { margin-top: 25px; background: transparent; border: none; }
         .section-header { 
             padding-bottom: 8px; margin-bottom: 10px; font-weight: 800; font-size: 1.1rem; 
@@ -205,13 +205,12 @@
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         .section-content { 
-            padding: 5px 15px; line-height: 1.8; font-size: 1.15rem; color: #334155; 
-            border-right: 4px solid #ddd;
+            padding: 5px 0; /* النص يبدأ من البداية */
+            line-height: 1.8; 
+            font-size: 1.15rem; 
+            color: #334155; 
+            border-right: none; /* إزالة الخطوط العمودية */
         }
-        
-        .type-quote .section-content { border-right-color: var(--primary-light); }
-        .type-offense .section-content { border-right-color: #e11d48; }
-        .type-mizan .section-content { border-right-color: #059669; }
 
         .hadith-actions { display: flex; align-items: center; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px dashed #e2e8f0; }
         .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; text-decoration: none !important; }
@@ -231,22 +230,20 @@
             .unified-header { padding: 90px 15px 40px; border-radius: 0 0 35px 35px; }
             .page-title { font-size: 1.7rem; }
             
-            /* تعديل موضع الرقم في الجوال */
             .hadith-row { 
-                flex-direction: row; /* الرقم بجانب البطاقة عند الإغلاق */
+                flex-direction: row; 
                 align-items: flex-start;
                 gap: 10px;
             }
             
-            /* إذا فُتحت البطاقة (يتم إضافة Class برمجياً عبر toggleHadith) */
             .hadith-row.is-open {
-                flex-direction: column; /* الرقم يصبح بالأعلى عند الفتح */
+                flex-direction: column; 
             }
 
             .hadith-row.is-open .hadith-number-circle {
                 margin-top: 0;
                 margin-bottom: 5px;
-                align-self: flex-start; /* الرقم يمين بالأعلى */
+                align-self: flex-start; 
             }
 
             .hadith-number-circle { width: 38px; height: 38px; font-size: 1rem; margin-top: 25px; }
@@ -261,7 +258,7 @@
             .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
         }
 
-        /* ==================== Report Modal & Success Toast ==================== */
+        /* ==================== Report Modal & Toast ==================== */
         .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
         .report-modal.show { display: flex; }
         .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; box-shadow: var(--shadow-lg); animation: slideIn 0.3s ease; }
@@ -278,7 +275,6 @@
         .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .social-btn img { width: 26px; }
         .social-btn:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
-        .social-yt:hover { background: #FF0000; } .social-fb:hover { background: #1877F2; } .social-ins:hover { background: #E4405F; } .social-tg:hover { background: #0088CC; } .social-tk:hover { background: #000000; } .social-sc:hover { background: #FFFC00; }
 
         /* ==================== Footer ==================== */
         footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; }
@@ -348,7 +344,8 @@
                 <div class="hadith-details">
                     <div class="detail-section type-quote">
                         <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
-                        <p>"سحر رسول الله ﷺ حتى كان يرى أنه يأتي النساء ولا يأتيهن..."</p>
+                        <div class="section-content">
+                            "سحر رسول الله ﷺ حتى كان يرى أنه يأتي النساء ولا يأتيهن..."
                             <div class="hadith-actions">
                                 <a href="https://dorar.net/h/6I006G0G" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
                                 <div class="action-btn btn-report" onclick="openReportModal('رواية سحر النبي', '1')"><i class="fas fa-flag"></i> إبلاغ</div>
@@ -356,7 +353,8 @@
                         </div>
                     </div>
                     <div class="detail-section type-offense">
-                        <div>نسبة العجز والوهم وتخيل أشياء لم تحدث للنبي ﷺ، وهو ما يهدم الثقة التامة في وعيه أثناء البلاغ.</div>
+                        <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
+                        <div class="section-content">نسبة العجز والوهم وتخيل أشياء لم تحدث للنبي ﷺ، وهو ما يهدم الثقة التامة في وعيه أثناء البلاغ.</div>
                     </div>
                     <div class="detail-section type-mizan">
                         <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (الرد القرآني)</div>
@@ -626,7 +624,7 @@
         const row = element.closest('.hadith-row');
         const icon = element.querySelector('.toggle-icon');
         details.classList.toggle('open');
-        row.classList.toggle('is-open'); // تعديل موضع الرقم في الجوال
+        row.classList.toggle('is-open'); 
         if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
     }
 
