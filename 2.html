@@ -33,8 +33,10 @@
             --radius-xl: 1.5rem;
             --number-border: #8E13BB; 
             --matte-purple: #7c5295; 
-            /* لون البيج المريح للقراءة */
             --reading-beige: #FCF9F1; 
+            /* ألوان زر العودة للأعلى */
+            --btt-bg: #8E13BB;
+            --btt-accent: #FFC600;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -116,6 +118,37 @@
             .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
         }
 
+        /* ==================== Back to Top Button ==================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--btt-bg);
+            border: 3px solid var(--btt-accent);
+            color: var(--btt-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.4s ease;
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.05);
+            background-color: var(--primary-dark);
+        }
+
         /* ==================== Font Controls ==================== */
         .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
         .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: var(--shadow-sm); transition: 0.3s; }
@@ -195,7 +228,7 @@
         .hadith-details { 
             max-height: 0; opacity: 0; overflow: hidden; 
             transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out; 
-            background: var(--reading-beige); /* تغيير الخلفية للبيج المريح */
+            background: var(--reading-beige); 
         }
         .hadith-details.open { max-height: 2000px; opacity: 1; padding: 10px 30px 40px; border-top: 1px solid rgba(0,0,0,0.05); }
 
@@ -257,6 +290,7 @@
             
             .hadith-actions { flex-direction: column; align-items: stretch; gap: 10px; }
             .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
+            .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
         }
 
         /* ==================== Report Modal & Toast ==================== */
@@ -316,6 +350,8 @@
     <button class="font-btn" id="fontReset" title="إعادة"><i class="fas fa-redo"></i></button>
     <button class="font-btn" id="fontDecrease" title="تصغير"><i class="fas fa-minus"></i></button>
 </div>
+
+<button class="back-to-top" id="backToTop" title="العودة للأعلى"><i class="fas fa-chevron-up"></i></button>
 
 <header class="unified-header">
     <h1 class="page-title">روايات أساءت للمقام النبوي</h1>
@@ -456,6 +492,19 @@
 </footer>
 
 <script>
+    /* ==================== Back to Top Functionality ==================== */
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
     /* ==================== AJAX Form Submission ==================== */
     document.getElementById("reportForm").addEventListener("submit", function(e) {
         e.preventDefault();
