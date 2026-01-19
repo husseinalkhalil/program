@@ -33,6 +33,10 @@
             
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
+
+            /* ألوان المفضلة المطلوبة */
+            --fav-purple: #8E13BB;
+            --fav-yellow: #FFC600;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -133,35 +137,59 @@
             position: relative;
         }
 
-        /* تنسيق زر المفضلة الجديد */
+        /* تنسيق زر المفضلة المطلوب */
         .article-favorite-btn {
             position: absolute;
             top: 30px;
             left: 30px;
-            background: #f1f5f9;
-            width: 45px;
-            height: 45px;
+            background: #f8faff;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            border: none;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
+            border: 1px solid #edf2f7;
+            color: var(--fav-purple); /* اللون البنفسجي المطلوب */
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: var(--shadow-sm);
+            z-index: 5;
         }
         .article-favorite-btn:hover {
-            transform: scale(1.1);
-            background: #e2e8f0;
+            transform: scale(1.15);
+            box-shadow: var(--shadow-md);
         }
         .article-favorite-btn.active {
-            color: #eab308;
-            background: #fefce8;
+            color: var(--fav-yellow); /* اللون الأصفر المطلوب عند التفعيل */
+            background: #fffdf0;
+            border-color: #fffae5;
         }
         .article-favorite-btn i {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
         }
+
+        /* نظام التنبيه المخصص (Toast) */
+        #customToast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(94, 44, 165, 0.3);
+            z-index: 10001;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            font-weight: 600;
+            border: 2px solid var(--accent-color);
+        }
+        #customToast.show { transform: translateX(-50%) translateY(0); }
+        #customToast i { color: var(--accent-color); font-size: 1.2rem; }
 
         .article-meta {
             display: flex; justify-content: center; gap: 15px;
@@ -296,11 +324,18 @@
             .article-content-container { padding: 25px; }
             .footer-links { gap: 12px; }
             .main-wrapper { max-width: 100%; }
-            .article-favorite-btn { top: 15px; left: 15px; width: 40px; height: 40px; }
+            .article-favorite-btn { top: 15px; left: 15px; width: 42px; height: 42px; }
+            .article-favorite-btn i { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- التنبيه المخصص (Toast) -->
+    <div id="customToast">
+        <i class="fas fa-info-circle"></i>
+        <span id="toastMessage">تمت الإضافة للمفضلة</span>
+    </div>
 
     <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
 
@@ -397,7 +432,7 @@
                 <p> إن الادعاء بأن رفض الروايات يستلزم رفض القرآن هو طعن مبطن في القرآن؛ لأنكم تجعلون القرآن تحت رحمة "تزكية البشر" لبعضهم البعض، بينما الله يقول: <span style="color: #5e2ca5; font-weight: bold;"> {إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ} </span> <span style="color: #888; font-size: 0.85em;">[الحجر: 9]</span> الله تعهد بحفظ الذكر (القرآن) ولم يتعهد بحفظ مرويات البخاري أو الكليني. <span style="color: #5e2ca5; font-weight: bold;"></span> <span style="color: #888; font-size: 0.85em;"></span></p>
                 <h3 class="section-title">ثالثاً: التناقض كدليل على البشرية:</h3>
                 <p> يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;"> {أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ ۚ وَلَوْ كَانَ مِنْ عِندِ غَيْرِ اللَّهِ لَوَجَدُوا فِيهِ اخْتِلَافًا كَثِيرًا} </span> <span style="color: #888; font-size: 0.85em;">[النساء: 83]</span> <span style="color: #5e2ca5; font-weight: bold;"></span> <span style="color: #888; font-size: 0.85em;"></span></p>
-                <p>وبالفعل، الاختلاف "الكثير" هو السمة البارزة في الروايات, فعلى سبيل المثال لا الحصر: </p>
+                <p>وبالفعل، الاختلاف "الكثير" هو السمة البارزة في الروايات، فعلى سبيل المثال لا الحصر: </p>
                 <p><strong>تناقض مع العلم والعقل ومسيئة للنبي: </strong>روايات تتحدث عن "شخير النبي" أو "كلمات بذيئة" تُنسب له، أو الله يضع قدمه في النار، أو الدجال أعور العين اليمنى في البخاري وأعور اليسرى في مسلم!</p>
                 <p><strong>تناقض مع الفطرة:</strong> تصوير رب العالمين بأنه يُدخل الناس النار لمجرد طول ثيابهم (ما تحت الكعبين)، أو أن النبي كان يحاول الانتحار بالتردي من الجبال!</p>
                 <p><strong>تناقض مع القرآن: </strong> الروايات تأمر بالقتل (حد الردة: من بدل دينه فاقتلوه)، بينما القرآن يقول: <span style="color: #5e2ca5; font-weight: bold;"> {فَمَن شَاءَ فَلْيُؤْمِن وَمَن شَاءَ فَلْيَكْفُرْ} </span> <span style="color: #888; font-size: 0.85em;">[الكهف: 29]</span> <span style="color: #5e2ca5; font-weight: bold;"></span> <span style="color: #888; font-size: 0.85em;"></span> الروايات تبيح رجم الزاني، والقرآن حدد العقوبة بالجلد فقط. الروايات تحرم الوصية للوارث، والقرآن يكتبها فرضاً. (يوجد تفصيل كامل في الأقسام الأخرى)</p>
@@ -466,7 +501,23 @@
             overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
         }
 
-        // Logic لزر المفضلة
+        // دالة عرض التنبيه المخصص (Toast)
+        function showToast(message, iconClass = "fa-check-circle") {
+            const toast = document.getElementById('customToast');
+            const toastMsg = document.getElementById('toastMessage');
+            const toastIcon = toast.querySelector('i');
+            
+            toastMsg.textContent = message;
+            toastIcon.className = `fas ${iconClass}`;
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // دالة زر المفضلة بالألوان المطلوبة
         function toggleFavorite() {
             const btn = document.getElementById('addToFavorites');
             const icon = document.getElementById('favIcon');
@@ -474,13 +525,10 @@
             
             if (isFavorite) {
                 icon.classList.replace('far', 'fas');
-                // هنا يمكن إضافة كود حفظ في localStorage إذا أردت
-                // localStorage.setItem('fav_article_1', 'true');
-                alert("تمت إضافة المقال إلى المفضلة");
+                showToast("تمت إضافة المقال إلى المفضلة بنجاح", "fa-heart");
             } else {
                 icon.classList.replace('fas', 'far');
-                // localStorage.removeItem('fav_article_1');
-                alert("تمت إزالة المقال من المفضلة");
+                showToast("تمت إزالة المقال من المفضلة", "fa-trash-alt");
             }
         }
 
@@ -577,7 +625,7 @@
 
         function copyLink() {
             navigator.clipboard.writeText(window.location.href).then(() => {
-                alert("تم نسخ رابط المقال بنجاح ✅");
+                showToast("تم نسخ رابط المقال بنجاح", "fa-link");
             });
         }
 
