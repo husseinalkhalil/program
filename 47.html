@@ -114,12 +114,10 @@
         }
 
         /* Container & Main Layout */
-        /* التعديل المطلوب: زيادة العرض */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
         .main-wrapper {
             position: relative; z-index: 20; margin-top: -50px;
-            /* التعديل المطلوب: زيادة عرض المقالة */
             max-width: 1100px; 
             margin-left: auto; margin-right: auto;
             margin-bottom: 60px;
@@ -133,6 +131,36 @@
             box-shadow: var(--shadow-md);
             border: 1px solid rgba(0,0,0,0.03);
             position: relative;
+        }
+
+        /* تنسيق زر المفضلة الجديد */
+        .article-favorite-btn {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: #f1f5f9;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+        .article-favorite-btn:hover {
+            transform: scale(1.1);
+            background: #e2e8f0;
+        }
+        .article-favorite-btn.active {
+            color: #eab308;
+            background: #fefce8;
+        }
+        .article-favorite-btn i {
+            font-size: 1.3rem;
         }
 
         .article-meta {
@@ -234,7 +262,7 @@
 
         /* Print Media */
         @media print {
-            nav, .hero-section, .font-controls-fixed, .article-actions, footer, .back-to-top, .universal-search { display: none; }
+            nav, .hero-section, .font-controls-fixed, .article-actions, footer, .back-to-top, .universal-search, .article-favorite-btn { display: none; }
             .main-wrapper { margin: 0; max-width: 100%; }
             .article-content-container { box-shadow: none; border: none; }
             body { background: white; color: black; }
@@ -259,7 +287,7 @@
             
             .font-controls-fixed {
                 top: auto; bottom: 30px; left: 30px; 
-                flex-direction: row; /* Horizontal on mobile */
+                flex-direction: row;
             }
         }
 
@@ -268,6 +296,7 @@
             .article-content-container { padding: 25px; }
             .footer-links { gap: 12px; }
             .main-wrapper { max-width: 100%; }
+            .article-favorite-btn { top: 15px; left: 15px; width: 40px; height: 40px; }
         }
     </style>
 </head>
@@ -338,6 +367,12 @@
     <!-- Main Content Wrapper -->
     <div class="container main-wrapper">
         <div class="article-content-container">
+            
+            <!-- زر الحفظ في المفضلة -->
+            <button class="article-favorite-btn" id="addToFavorites" title="حفظ في المفضلة" onclick="toggleFavorite()">
+                <i class="far fa-bookmark" id="favIcon"></i>
+            </button>
+
             <div class="article-meta">
                 <span><i class="far fa-calendar-alt"></i> 19 يناير 2026</span>
                 <span><i class="far fa-folder"></i> الروايات - إشكالية الوحي الموازي</span>
@@ -362,7 +397,7 @@
                 <p> إن الادعاء بأن رفض الروايات يستلزم رفض القرآن هو طعن مبطن في القرآن؛ لأنكم تجعلون القرآن تحت رحمة "تزكية البشر" لبعضهم البعض، بينما الله يقول: <span style="color: #5e2ca5; font-weight: bold;"> {إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ} </span> <span style="color: #888; font-size: 0.85em;">[الحجر: 9]</span> الله تعهد بحفظ الذكر (القرآن) ولم يتعهد بحفظ مرويات البخاري أو الكليني. <span style="color: #5e2ca5; font-weight: bold;"></span> <span style="color: #888; font-size: 0.85em;"></span></p>
                 <h3 class="section-title">ثالثاً: التناقض كدليل على البشرية:</h3>
                 <p> يقول تعالى: <span style="color: #5e2ca5; font-weight: bold;"> {أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ ۚ وَلَوْ كَانَ مِنْ عِندِ غَيْرِ اللَّهِ لَوَجَدُوا فِيهِ اخْتِلَافًا كَثِيرًا} </span> <span style="color: #888; font-size: 0.85em;">[النساء: 83]</span> <span style="color: #5e2ca5; font-weight: bold;"></span> <span style="color: #888; font-size: 0.85em;"></span></p>
-                <p>وبالفعل، الاختلاف "الكثير" هو السمة البارزة في الروايات، فعلى سبيل المثال لا الحصر: </p>
+                <p>وبالفعل، الاختلاف "الكثير" هو السمة البارزة في الروايات, فعلى سبيل المثال لا الحصر: </p>
                 <p><strong>تناقض مع العلم والعقل ومسيئة للنبي: </strong>روايات تتحدث عن "شخير النبي" أو "كلمات بذيئة" تُنسب له، أو الله يضع قدمه في النار، أو الدجال أعور العين اليمنى في البخاري وأعور اليسرى في مسلم!</p>
                 <p><strong>تناقض مع الفطرة:</strong> تصوير رب العالمين بأنه يُدخل الناس النار لمجرد طول ثيابهم (ما تحت الكعبين)، أو أن النبي كان يحاول الانتحار بالتردي من الجبال!</p>
                 <p><strong>تناقض مع القرآن: </strong> الروايات تأمر بالقتل (حد الردة: من بدل دينه فاقتلوه)، بينما القرآن يقول: <span style="color: #5e2ca5; font-weight: bold;"> {فَمَن شَاءَ فَلْيُؤْمِن وَمَن شَاءَ فَلْيَكْفُرْ} </span> <span style="color: #888; font-size: 0.85em;">[الكهف: 29]</span> <span style="color: #5e2ca5; font-weight: bold;"></span> <span style="color: #888; font-size: 0.85em;"></span> الروايات تبيح رجم الزاني، والقرآن حدد العقوبة بالجلد فقط. الروايات تحرم الوصية للوارث، والقرآن يكتبها فرضاً. (يوجد تفصيل كامل في الأقسام الأخرى)</p>
@@ -431,9 +466,27 @@
             overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
         }
 
+        // Logic لزر المفضلة
+        function toggleFavorite() {
+            const btn = document.getElementById('addToFavorites');
+            const icon = document.getElementById('favIcon');
+            const isFavorite = btn.classList.toggle('active');
+            
+            if (isFavorite) {
+                icon.classList.replace('far', 'fas');
+                // هنا يمكن إضافة كود حفظ في localStorage إذا أردت
+                // localStorage.setItem('fav_article_1', 'true');
+                alert("تمت إضافة المقال إلى المفضلة");
+            } else {
+                icon.classList.replace('fas', 'far');
+                // localStorage.removeItem('fav_article_1');
+                alert("تمت إزالة المقال من المفضلة");
+            }
+        }
+
         // Font Resizing Logic
         const articleBody = document.getElementById('articleBody');
-        const defaultFontSize = 1.2; // rem (updated default)
+        const defaultFontSize = 1.2;
         let currentFontSize = defaultFontSize;
 
         document.getElementById('fontIncrease').addEventListener('click', () => {
@@ -457,45 +510,36 @@
 
         // Search and Highlight Logic
         const searchInput = document.getElementById('globalSearch');
-        const originalContent = articleBody.innerHTML; // Keep a clean copy
+        const originalContent = articleBody.innerHTML;
 
         searchInput.addEventListener('input', function() {
             const searchTerm = this.value.trim();
             const alertBox = document.getElementById('searchAlert');
             const matchCountSpan = document.getElementById('matchCount');
 
-            // Reset if empty
             if (searchTerm === '') {
                 articleBody.innerHTML = originalContent;
                 alertBox.style.display = 'none';
                 return;
             }
 
-            // Create regex for search (case insensitive, global)
-            // Special handling to avoid breaking HTML tags
             const regex = new RegExp(`(${searchTerm})`, 'gi');
-            
-            // Temporary container to parse HTML
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = originalContent;
 
-            // Helper function to traverse text nodes
             let matchCount = 0;
             function highlightNodes(node) {
-                if (node.nodeType === 3) { // Text node
+                if (node.nodeType === 3) {
                     const text = node.nodeValue;
                     if (regex.test(text)) {
                         const newHtml = text.replace(regex, `<span class="highlight-text">$1</span>`);
                         const span = document.createElement('span');
                         span.innerHTML = newHtml;
                         node.parentNode.replaceChild(span, node);
-                        
-                        // Count occurrences (approximate)
                         const matches = text.match(regex);
                         if(matches) matchCount += matches.length;
                     }
                 } else if (node.nodeType === 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
-                    // Element node, recurse
                     for (let i = 0; i < node.childNodes.length; i++) {
                         highlightNodes(node.childNodes[i]);
                     }
@@ -508,8 +552,6 @@
                 articleBody.innerHTML = tempDiv.innerHTML;
                 matchCountSpan.textContent = matchCount;
                 alertBox.style.display = 'block';
-                
-                // Scroll to first match
                 const firstMatch = document.querySelector('.highlight-text');
                 if(firstMatch) {
                     firstMatch.scrollIntoView({behavior: 'smooth', block: 'center'});
