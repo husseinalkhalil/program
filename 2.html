@@ -23,12 +23,10 @@
             --primary-light: #8a5bc7;
             --accent-color: #ffd700;
             --bg-color: #f9f7f2;
-            --surface-color: #F8F5FD; 
+            --surface-color: #ffffff; 
             --text-primary: #1e293b;
             --text-secondary: #64748b;
-            --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
-            --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
-            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            --shadow-3d: 0 10px 20px rgba(94, 44, 165, 0.05), 0 6px 6px rgba(0, 0, 0, 0.05), inset 0 -4px 0 rgba(94, 44, 165, 0.1);
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
             --number-border: #8E13BB; 
@@ -98,7 +96,7 @@
             .logo-container { order: 2; }
             .nav-links {
                 position: fixed; top: 75px; right: -280px; width: 280px;
-                background: var(--surface-color);
+                background: #F8F5FD;
                 flex-direction: column; padding: 20px; height: calc(100vh - 75px);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
@@ -116,7 +114,7 @@
 
         /* ==================== Font Controls ==================== */
         .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
-        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: var(--shadow-sm); transition: 0.3s; }
+        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
         .font-btn:hover { background: var(--primary-color); color: white; transform: scale(1.1); }
 
         /* ==================== Header & Search ==================== */
@@ -147,7 +145,7 @@
             position: absolute; top: 110%; left: 0; right: 0; 
             background: white; border-radius: 15px; max-height: 400px; 
             overflow-y: auto; display: none; z-index: 1002; color: #333; 
-            text-align: right; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05);
+            text-align: right; box-shadow: 0 15px 30px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05);
         }
         .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
         .search-item:hover { background: rgba(94, 44, 165, 0.05); }
@@ -155,108 +153,191 @@
         .search-count { padding: 10px 20px; font-size: 0.85rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
         mark { background-color: #ffd700; color: #000; padding: 0 2px; border-radius: 2px; }
 
-        /* ==================== Hadith Card Styling ==================== */
+        /* ==================== Unified Content Display (No More Toggle) ==================== */
         .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; width: 100%; }
-        .hadith-row { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; width: 100%; }
-        .hadith-number-circle { width: 44px; height: 44px; background-color: #FFC600; border: 2.5px solid #8E13BB; color: #8E13BB; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; flex-shrink: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 12px; padding-top: 4px; }
+        
+        .hadith-row { 
+            display: flex; 
+            align-items: flex-start; 
+            gap: 20px; 
+            margin-bottom: 40px; 
+            width: 100%; 
+        }
+
+        .hadith-number-circle { 
+            width: 48px; 
+            height: 48px; 
+            background-color: #FFC600; 
+            border: 3px solid #8E13BB; 
+            color: #8E13BB; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 800; 
+            font-size: 1.4rem; 
+            flex-shrink: 0; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1); 
+            margin-top: 10px;
+            position: sticky;
+            top: 90px;
+        }
         
         .hadith-card { 
             background: var(--surface-color); 
             border-radius: var(--radius-xl); 
-            box-shadow: var(--shadow-sm); 
-            border-right: 6px solid var(--primary-color); 
+            box-shadow: var(--shadow-3d); 
+            border-right: 8px solid var(--primary-color); 
             overflow: hidden; 
-            transition: 0.3s; 
             flex: 1; 
             border: 1px solid rgba(0,0,0,0.05);
             position: relative; 
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hadith-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(94, 44, 165, 0.1);
         }
         
-        /* ضبط الحواف لإفساح مجال للأيقونة جهة اليسار */
-        .hadith-summary { padding: 25px 25px 25px 45px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-        .hadith-summary h3 { font-size: 1.2rem; color: var(--primary-dark); font-weight: 700; flex: 1; text-align: right; transition: all 0.3s ease; }
-        .hadith-summary:hover h3 { color: #7c3aed; transform: translateX(-5px); }
-        .source-tag { background: #FFC600; padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; color: var(--primary-color); }
-        
-        /* Favorite Icon - تم نقله لليسار وتكبيره */
-        .fav-header-icon { 
+        .hadith-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+            margin-bottom: 25px; 
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
+            padding-left: 40px; /* مجال للأيقونة */
+        }
+
+        .hadith-header h3 { 
             font-size: 1.6rem; 
-            color: var(--matte-purple); 
+            color: var(--primary-dark); 
+            font-weight: 800; 
+            line-height: 1.3;
+        }
+
+        .source-tag { 
+            background: #FFC600; 
+            padding: 6px 15px; 
+            border-radius: 10px; 
+            font-size: 0.9rem; 
+            font-weight: 800; 
+            color: var(--primary-color); 
+            white-space: nowrap;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .fav-header-icon { 
+            font-size: 1.8rem; 
+            color: #ddd; 
             transition: all 0.3s ease; 
             cursor: pointer; 
             position: absolute; 
-            top: 0; 
-            left: 0; /* الطرف الأيسر */
-            padding: 10px 15px;
+            top: 25px; 
+            left: 25px;
             z-index: 10;
         }
-        .fav-header-icon:hover { transform: scale(1.15); color: var(--primary-color); }
         .fav-header-icon.active { color: var(--primary-color); }
 
-        .hadith-details { 
-            max-height: 0; opacity: 0; overflow: hidden; 
-            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out; 
-            background: #fff; 
+        .detail-section { 
+            margin-bottom: 20px; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            background: #fdfdff;
+            border: 1px solid rgba(94, 44, 165, 0.05);
         }
-        .hadith-details.open { max-height: 1500px; opacity: 1; padding: 10px 20px 25px; border-top: 1px solid rgba(0,0,0,0.05); }
+        
+        .section-header { 
+            padding: 12px 20px; 
+            font-weight: 800; 
+            font-size: 1rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            background: #f8fafc;
+            color: var(--primary-dark);
+        }
+        
+        .section-content { 
+            padding: 20px; 
+            line-height: 1.8; 
+            font-size: 1.1rem; 
+            color: #334155; 
+            text-align: justify;
+        }
 
-        .detail-section { margin-top: 15px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.06); background: #fff; }
-        .section-header { padding: 10px 15px; font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; background: #f8fafc; }
-        .section-content { padding: 15px; line-height: 1.7; font-size: 1rem; color: #334155; }
         .type-quote { border-right: 5px solid var(--primary-light); }
         .type-offense { border-right: 5px solid #e11d48; }
         .type-mizan { border-right: 5px solid #059669; }
 
-        .hadith-actions { display: flex; align-items: center; gap: 15px; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #e2e8f0; }
-        .action-btn { font-size: 0.8rem; font-weight: 700; padding: 8px 14px; border-radius: 8px; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; text-decoration: none !important; }
-        .btn-source { background: rgba(94, 44, 165, 0.1); color: var(--primary-color); border: 1px solid rgba(94, 44, 165, 0.2); }
-        .btn-source:hover { background: var(--primary-color); color: white; }
-        .btn-report { background: rgba(225, 29, 72, 0.08); color: #e11d48; border: 1px solid rgba(225, 29, 72, 0.1); }
+        .hadith-actions { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin-top: 25px; 
+            padding-top: 20px; 
+            border-top: 2px dashed #e2e8f0; 
+        }
+
+        .action-btn { 
+            font-size: 0.9rem; 
+            font-weight: 700; 
+            padding: 10px 20px; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            transition: 0.3s; 
+            cursor: pointer; 
+        }
+        .btn-source { background: var(--primary-color); color: white; }
+        .btn-source:hover { background: var(--primary-dark); transform: scale(1.05); }
+        .btn-report { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; }
         .btn-report:hover { background: #e11d48; color: white; }
 
         /* ==================== Pagination ==================== */
-        #pagination-wrapper { background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); text-align: center; margin: 40px auto; border: 1px solid rgba(0,0,0,0.05); max-width: 500px; }
+        #pagination-wrapper { background: white; padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-3d); text-align: center; margin: 40px auto; max-width: 500px; }
         .pagination-btn { background: #f1f5f9; color: var(--text-primary); border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; margin: 0 5px; font-family: 'Tajawal'; font-weight: 600; transition: 0.3s; }
-        .pagination-btn:hover { background: var(--primary-color); color: white; transform: translateY(-2px); }
-        .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: #e2e8f0; color: #94a3b8; }
-        #firstPage { background: rgba(94, 44, 165, 0.1); color: var(--primary-color); }
+        .pagination-btn:hover:not(:disabled) { background: var(--primary-color); color: white; }
+        .pagination-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-        /* ==================== Report Modal & Toast ==================== */
+        /* ==================== Modals & Toasts ==================== */
         .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
         .report-modal.show { display: flex; }
-        .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; box-shadow: var(--shadow-lg); animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .report-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 12px; cursor: pointer; transition: 0.25s ease; }
-        .report-option:hover { background: #f8fafc; border-color: var(--primary-light); transform: translateX(-5px); }
-        .btn-send { flex: 2; background: var(--primary-color); color: white; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; font-weight: 700; cursor: pointer; }
-        .btn-cancel { flex: 1; background: #f1f5f9; color: #475569; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; cursor: pointer; }
-        .success-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: white; padding: 14px 35px; border-radius: 50px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 3000; transition: 0.5s; opacity: 0; display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+        .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; }
+        .report-option { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 10px; cursor: pointer; }
+        .success-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: white; padding: 14px 35px; border-radius: 50px; font-weight: 700; z-index: 3000; transition: 0.5s; opacity: 0; }
         .success-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-        /* ==================== Social Section ==================== */
-        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); margin-top: 50px; }
+        /* ==================== Social & Footer ==================== */
+        .social-section { text-align: center; margin-bottom: 60px; background: white; padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-3d); margin-top: 50px; }
         .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .social-btn img { width: 26px; transition: 0.3s; }
-        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #f8fafc; transition: 0.3s; }
+        .social-btn img { width: 26px; }
+        .social-btn:hover { transform: translateY(-5px); background: var(--primary-color); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
-        .social-yt:hover { background: #FF0000; } .social-fb:hover { background: #1877F2; } .social-ins:hover { background: #E4405F; } .social-tg:hover { background: #0088CC; } .social-tk:hover { background: #000000; } .social-sc:hover { background: #FFFC00; }
 
-        /* ==================== Footer ==================== */
         footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; }
-        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
-        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: color 0.3s ease; }
-        .footer-links a:hover { color: var(--accent-color); }
-        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; } 
+        .footer-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+        .footer-links a { color: #cbd5e1; font-size: 0.9rem; }
         .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
 
         @media (max-width: 768px) {
-            .unified-header { padding: 90px 15px 40px; border-radius: 0 0 35px 35px; }
-            .page-title { font-size: 1.7rem; }
-            .hadith-number-circle { width: 36px; height: 36px; font-size: 1.1rem; }
-            .hadith-actions { flex-direction: column; align-items: stretch; gap: 10px; }
-            .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
-            .hadith-summary { padding-left: 40px; }
+            .unified-header { padding: 90px 15px 40px; border-radius: 0 0 30px 30px; }
+            .page-title { font-size: 1.8rem; }
+            .hadith-row { flex-direction: column; gap: 10px; }
+            .hadith-number-circle { position: relative; top: 0; margin-bottom: -25px; z-index: 5; margin-right: 20px; }
+            .hadith-card { padding: 30px 20px 20px; border-right: none; border-top: 6px solid var(--primary-color); }
+            .hadith-header { flex-direction: column; padding-left: 0; }
+            .fav-header-icon { top: 15px; left: 15px; font-size: 1.5rem; }
+            .hadith-header h3 { font-size: 1.3rem; margin-top: 10px; }
+            .section-content { font-size: 1rem; padding: 15px; }
+            .hadith-actions { flex-direction: column; }
+            .action-btn { width: 100%; justify-content: center; }
+            .font-controls-fixed { left: 15px; bottom: 20px; top: auto; flex-direction: row; }
         }
     </style>
 </head>
@@ -311,32 +392,31 @@
             <div class="hadith-number-circle">1</div>
             <div class="hadith-card" id="card-h1">
                 <i class="far fa-bookmark fav-header-icon" title="أضف للمفضلة" onclick="toggleFavorite(event, 'h1')"></i>
-                <div class="hadith-summary" onclick="toggleHadith(this)">
+                <div class="hadith-header">
                     <h3>رواية سحر النبي ﷺ</h3>
-                    <div style="display:flex; align-items:center; gap:12px;">
-                        <span class="source-tag">البخاري</span>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    <span class="source-tag">صحيح البخاري</span>
+                </div>
+                
+                <div class="detail-section type-quote">
+                    <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
+                    <div class="section-content">
+                        "سحر رسول الله ﷺ حتى كان يرى أنه يأتي النساء ولا يأتيهن..."
                     </div>
                 </div>
-                <div class="hadith-details">
-                    <div class="detail-section type-quote">
-                        <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
-                        <div class="section-content">
-                            "سحر رسول الله ﷺ حتى كان يرى أنه يأتي النساء ولا يأتيهن..."
-                            <div class="hadith-actions">
-                                <a href="https://dorar.net/h/6I006G0G" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
-                                <div class="action-btn btn-report" onclick="openReportModal('رواية سحر النبي', '1')"><i class="fas fa-flag"></i> إبلاغ</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-section type-offense">
-                        <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
-                        <div class="section-content">نسبة العجز والوهم وتخيل أشياء لم تحدث للنبي ﷺ، وهو ما يهدم الثقة التامة في وعيه أثناء البلاغ.</div>
-                    </div>
-                    <div class="detail-section type-mizan">
-                        <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (الرد القرآني)</div>
-                        <div class="section-content">قال تعالى: {وَقَالَ الظَّالِمُونَ إِن تَتَّبِعُونَ إِلَّا رَجُلًا مَّسْحُورًا} [الفرقان]. القرآن جعل وصف النبي بالمسحور تهمة من الظالمين.</div>
-                    </div>
+                
+                <div class="detail-section type-offense">
+                    <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
+                    <div class="section-content">نسبة العجز والوهم وتخيل أشياء لم تحدث للنبي ﷺ، وهو ما يهدم الثقة التامة في وعيه أثناء البلاغ وما يترتب عليه من قدح في العصمة.</div>
+                </div>
+                
+                <div class="detail-section type-mizan">
+                    <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (الرد القرآني)</div>
+                    <div class="section-content">قال تعالى: {وَقَالَ الظَّالِمُونَ إِن تَتَّبِعُونَ إِلَّا رَجُلًا مَّسْحُورًا} [الفرقان]. القرآن الكريم جعل وصف النبي بالمسحور تهمة باطلة أطلقها الظالمون، فكيف نثبتها نحن في مروياتنا؟</div>
+                </div>
+
+                <div class="hadith-actions">
+                    <a href="https://dorar.net/h/6I006G0G" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
+                    <div class="action-btn btn-report" onclick="openReportModal('رواية سحر النبي', '1')"><i class="fas fa-flag"></i> إبلاغ</div>
                 </div>
             </div>
         </div>
@@ -346,32 +426,31 @@
             <div class="hadith-number-circle">2</div>
             <div class="hadith-card" id="card-h2">
                 <i class="far fa-bookmark fav-header-icon" title="أضف للمفضلة" onclick="toggleFavorite(event, 'h2')"></i>
-                <div class="hadith-summary" onclick="toggleHadith(this)">
+                <div class="hadith-header">
                     <h3>رواية محاولة الانتحار (التردي من الجبال)</h3>
-                    <div style="display:flex; align-items:center; gap:12px;">
-                        <span class="source-tag">البخاري</span>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    <span class="source-tag">صحيح البخاري</span>
+                </div>
+                
+                <div class="detail-section type-quote">
+                    <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
+                    <div class="section-content">
+                        "... حزن النبي ﷺ حزناً غدا منه مراراً كي يتردى من رءوس شواهق الجبال..."
                     </div>
                 </div>
-                <div class="hadith-details">
-                    <div class="detail-section type-quote">
-                        <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
-                        <div class="section-content">
-                            "... حزن النبي ﷺ حزناً غدا منه مراراً كي يتردى من رءوس شواهق الجبال..."
-                            <div class="hadith-actions">
-                                <a href="https://dorar.net/h/7XW2L8M8" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
-                                <div class="action-btn btn-report" onclick="openReportModal('رواية محاولة الانتحار', '2')"><i class="fas fa-flag"></i> إبلاغ</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-section type-offense">
-                        <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
-                        <div class="section-content">نسبة اليأس والقنوط والاضطراب النفسي للنبي ﷺ لدرجة التفكير في إنهاء حياته.</div>
-                    </div>
-                    <div class="detail-section type-mizan">
-                        <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (الرد القرآني)</div>
-                        <div class="section-content">قال تعالى: {مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ} [الضحى]. إن تثبيت الله لقلب النبي وعصمته حقيقة قرآنية قطعية.</div>
-                    </div>
+                
+                <div class="detail-section type-offense">
+                    <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
+                    <div class="section-content">نسبة اليأس والقنوط والاضطراب النفسي للنبي ﷺ لدرجة التفكير في إنهاء حياته، وهذا يتنافى مع الصبر الجميل والثبات واليقين الذي يجب أن يتحلى به الأنبياء.</div>
+                </div>
+                
+                <div class="detail-section type-mizan">
+                    <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (الرد القرآني)</div>
+                    <div class="section-content">قال تعالى: {مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ} [الضحى]. إن تثبيت الله لقلب النبي وعصمته حقيقة قرآنية قطعية ترفض تصويره في حالة ضعف نفسي تؤدي للانتحار.</div>
+                </div>
+
+                <div class="hadith-actions">
+                    <a href="https://dorar.net/h/7XW2L8M8" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
+                    <div class="action-btn btn-report" onclick="openReportModal('رواية محاولة الانتحار', '2')"><i class="fas fa-flag"></i> إبلاغ</div>
                 </div>
             </div>
         </div>
@@ -381,32 +460,31 @@
             <div class="hadith-number-circle">3</div>
             <div class="hadith-card" id="card-h3">
                 <i class="far fa-bookmark fav-header-icon" title="أضف للمفضلة" onclick="toggleFavorite(event, 'h3')"></i>
-                <div class="hadith-summary" onclick="toggleHadith(this)">
+                <div class="hadith-header">
                     <h3>رواية نسيان الوحي</h3>
-                    <div style="display:flex; align-items:center; gap:12px;">
-                        <span class="source-tag">مسلم</span>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    <span class="source-tag">صحيح مسلم</span>
+                </div>
+                
+                <div class="detail-section type-quote">
+                    <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
+                    <div class="section-content">
+                        "يرحمه الله، لقد أذكرني كذا وكذا آية كنت أُنسيتها من سورة كذا وكذا."
                     </div>
                 </div>
-                <div class="hadith-details">
-                    <div class="detail-section type-quote">
-                        <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
-                        <div class="section-content">
-                            "يرحمه الله، لقد أذكرني كذا وكذا آية كنت أُنسيتها من سورة كذا وكذا."
-                            <div class="hadith-actions">
-                                <a href="https://dorar.net/h/5P9N6C4M" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
-                                <div class="action-btn btn-report" onclick="openReportModal('رواية نسيان الوحي', '3')"><i class="fas fa-flag"></i> إبلاغ</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-section type-offense">
-                        <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
-                        <div class="section-content">فتح باب الاحتمال بضياع أجزاء من الوحي لولا تذكير البشر للنبي.</div>
-                    </div>
-                    <div class="detail-section type-mizan">
-                        <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (الرد القرآني)</div>
-                        <div class="section-content">قال تعالى: {سَنُقْرِئُكَ فَلَا تَنسَىٰ * إِلَّا مَا شَاءَ اللَّهُ} [الأعلى].</div>
-                    </div>
+                
+                <div class="detail-section type-offense">
+                    <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
+                    <div class="section-content">فتح باب الاحتمال بضياع أجزاء من الوحي لولا تذكير البشر للنبي، وهو ما يمس بمبدأ الحفظ الإلهي المطلق لصدر النبي أثناء التبليغ.</div>
+                </div>
+                
+                <div class="detail-section type-mizan">
+                    <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (الرد القرآني)</div>
+                    <div class="section-content">قال تعالى: {سَنُقْرِئُكَ فَلَا تَنسَىٰ * إِلَّا مَا شَاءَ اللَّهُ} [الأعلى]. الضمان الإلهي بعدم النسيان هو الأصل في تلقي الوحي وتبليغه.</div>
+                </div>
+
+                <div class="hadith-actions">
+                    <a href="https://dorar.net/h/5P9N6C4M" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
+                    <div class="action-btn btn-report" onclick="openReportModal('رواية نسيان الوحي', '3')"><i class="fas fa-flag"></i> إبلاغ</div>
                 </div>
             </div>
         </div>
@@ -416,32 +494,31 @@
             <div class="hadith-number-circle">4</div>
             <div class="hadith-card" id="card-h4">
                 <i class="far fa-bookmark fav-header-icon" title="أضف للمفضلة" onclick="toggleFavorite(event, 'h4')"></i>
-                <div class="hadith-summary" onclick="toggleHadith(this)">
+                <div class="hadith-header">
                     <h3>رواية البول قائماً</h3>
-                    <div style="display:flex; align-items:center; gap:12px;">
-                        <span class="source-tag">البخاري ومسلم</span>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    <span class="source-tag">البخاري ومسلم</span>
+                </div>
+                
+                <div class="detail-section type-quote">
+                    <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
+                    <div class="section-content">
+                        "أن النبي ﷺ أتى سُباطة قوم فبال قائماً..."
                     </div>
                 </div>
-                <div class="hadith-details">
-                    <div class="detail-section type-quote">
-                        <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
-                        <div class="section-content">
-                            "أن النبي ﷺ أتى سُباطة قوم فبال قائماً..."
-                            <div class="hadith-actions">
-                                <a href="https://dorar.net/h/1L9N0M4R" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
-                                <div class="action-btn btn-report" onclick="openReportModal('رواية البول قائماً', '4')"><i class="fas fa-flag"></i> إبلاغ</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-section type-offense">
-                        <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
-                        <div class="section-content">نسبة سلوك يتنافى مع كمال المروءة والستر الذي كان عليه النبي.</div>
-                    </div>
-                    <div class="detail-section type-mizan">
-                        <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (المعارضة)</div>
-                        <div class="section-content">عن عائشة: "من حدثكم أن رسول الله صلى الله عليه وسلم بال قائماً فلا تصدقوه، ما كان يبول إلا جالساً".</div>
-                    </div>
+                
+                <div class="detail-section type-offense">
+                    <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
+                    <div class="section-content">نسبة سلوك يتنافى مع كمال المروءة والحياء والستر الذي كان عليه النبي ﷺ في أدق تفاصيل حياته.</div>
+                </div>
+                
+                <div class="detail-section type-mizan">
+                    <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (المعارضة)</div>
+                    <div class="section-content">عن عائشة رضي الله عنها: "من حدثكم أن رسول الله صلى الله عليه وسلم بال قائماً فلا تصدقوه، ما كان يبول إلا جالساً". وهذا يوضح تعارض المرويات في هذا الشأن.</div>
+                </div>
+
+                <div class="hadith-actions">
+                    <a href="https://dorar.net/h/1L9N0M4R" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
+                    <div class="action-btn btn-report" onclick="openReportModal('رواية البول قائماً', '4')"><i class="fas fa-flag"></i> إبلاغ</div>
                 </div>
             </div>
         </div>
@@ -474,29 +551,29 @@
 
 <div class="report-modal" id="reportModal">
     <div class="modal-box">
-        <h2>إبلاغ عن محتوى</h2>
-        <p id="modalHadithInfo">أنت تبلغ عن: جاري التحديد...</p>
+        <h2 style="margin-bottom:15px; color:var(--primary-dark)">إبلاغ عن محتوى</h2>
+        <p id="modalHadithInfo" style="margin-bottom:20px; font-size:0.9rem; color:var(--text-secondary)">أنت تبلغ عن: جاري التحديد...</p>
         <form name="hadith-reports" id="reportForm" method="POST" data-netlify="true">
             <input type="hidden" name="hadith_name" id="hiddenHadithName">
             <input type="hidden" name="hadith_number" id="hiddenHadithNumber">
             <label class="report-option"><input type="radio" name="issue_type" value="الرابط لا يعمل" required> <span>الرابط لا يعمل</span></label>
             <label class="report-option"><input type="radio" name="issue_type" value="الحديث غير مطابق"> <span>الحديث غير مطابق</span></label>
             <label class="report-option"><input type="radio" name="issue_type" value="رقم الحديث غير مطابق"> <span>رقم الحديث غير مطابق</span></label>
-            <div class="modal-footer">
-                <button type="submit" class="btn-send">إرسال البلاغ</button>
-                <button type="button" class="btn-cancel" onclick="closeReportModal()">إلغاء</button>
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button type="submit" class="pagination-btn" style="background:var(--primary-color); color:white; flex:2">إرسال البلاغ</button>
+                <button type="button" class="pagination-btn" onclick="closeReportModal()" style="flex:1">إلغاء</button>
             </div>
         </form>
     </div>
 </div>
 
-<div class="success-toast" id="successToast"><i class="fas fa-check-circle"></i> <span>شكراً لمساهمتك في تحسين المحتوى</span></div>
+<div class="success-toast" id="successToast">شكراً لمساهمتك في تحسين المحتوى</div>
 
 <footer>
     <div class="footer-links">
-        <a href="terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
-        <a href="privacy.html">سياسة الخصوصية</a> <span class="footer-divider">|</span>
-        <a href="contact.html">اتصل بنا</a> <span class="footer-divider">|</span>
+        <a href="terms.html">الشروط والأحكام</a>
+        <a href="privacy.html">سياسة الخصوصية</a>
+        <a href="contact.html">اتصل بنا</a>
         <a href="feedback.html">شاركنا رأيك</a>
     </div>
     <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
@@ -612,7 +689,7 @@
     function openReportModal(name, number) {
         document.getElementById('hiddenHadithName').value = name;
         document.getElementById('hiddenHadithNumber').value = number;
-        document.getElementById('modalHadithInfo').textContent = "أنت تبلغ عن: " + name + " (بطاقة رقم " + number + ")";
+        document.getElementById('modalHadithInfo').textContent = "أنت تبلغ عن: " + name + " (رقم " + number + ")";
         document.getElementById('reportModal').classList.add('show');
         document.body.classList.add('no-scroll');
     }
@@ -634,15 +711,13 @@
         const index = favorites.findIndex(item => item.id === hadithId);
         
         const toast = document.getElementById('successToast');
-        const toastText = toast.querySelector('span');
         
         if (index > -1) {
             favorites.splice(index, 1);
             icon.classList.remove('fas', 'active');
             icon.classList.add('far');
-            toastText.textContent = "تمت الإزالة من المفضلة";
+            toast.textContent = "تمت الإزالة من المفضلة";
         } else {
-            // حفظ الرابط مع الـ Anchor للعودة لنفس المكان
             const currentUrl = window.location.pathname.split('/').pop() || 'hadith.html';
             favorites.push({
                 id: hadithId,
@@ -653,7 +728,7 @@
             });
             icon.classList.remove('far');
             icon.classList.add('fas', 'active');
-            toastText.textContent = "تمت الإضافة إلى المفضلة";
+            toast.textContent = "تمت الإضافة إلى المفضلة";
         }
         
         localStorage.setItem('myFavorites', JSON.stringify(favorites));
@@ -688,15 +763,8 @@
         }
     }
 
-    function toggleHadith(element) {
-        const details = element.nextElementSibling;
-        const icon = element.querySelector('.toggle-icon');
-        details.classList.toggle('open');
-        if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
-    }
-
     /* ==================== Pagination Logic ==================== */
-    const hadithsPerPage = 15;
+    const hadithsPerPage = 10;
     let currentPage = 1;
 
     function paginateHadiths() {
@@ -710,11 +778,6 @@
             const start = (currentPage - 1) * hadithsPerPage;
             const end = currentPage * hadithsPerPage;
             row.style.display = (index >= start && index < end) ? 'flex' : 'none';
-            
-            const details = row.querySelector('.hadith-details');
-            const icon = row.querySelector('.toggle-icon');
-            if (details) details.classList.remove('open');
-            if (icon) icon.style.transform = 'rotate(0deg)';
         });
 
         document.getElementById('prevPage').disabled = currentPage === 1;
@@ -726,33 +789,25 @@
 
     document.getElementById('nextPage').onclick = function() {
         const totalPages = Math.ceil(document.querySelectorAll('.hadith-row').length / hadithsPerPage);
-        if (currentPage < totalPages) {
-            currentPage++;
-            paginateHadiths();
-        }
+        if (currentPage < totalPages) { currentPage++; paginateHadiths(); }
     };
 
     document.getElementById('prevPage').onclick = function() {
-        if (currentPage > 1) {
-            currentPage--;
-            paginateHadiths();
-        }
+        if (currentPage > 1) { currentPage--; paginateHadiths(); }
     };
 
     document.getElementById('firstPage').onclick = function() {
-        currentPage = 1;
-        paginateHadiths();
+        currentPage = 1; paginateHadiths();
     };
 
     /* ==================== Font Controls ==================== */
     let currentScale = 1;
     function updateFontScale() {
-        document.querySelectorAll('.hadith-summary h3').forEach(el => el.style.fontSize = (1.2 * currentScale) + 'rem');
-        document.querySelectorAll('.section-content').forEach(el => el.style.fontSize = (1 * currentScale) + 'rem');
-        document.querySelectorAll('.section-header').forEach(el => el.style.fontSize = (0.95 * currentScale) + 'rem');
+        document.querySelectorAll('.hadith-header h3').forEach(el => el.style.fontSize = (1.6 * currentScale) + 'rem');
+        document.querySelectorAll('.section-content').forEach(el => el.style.fontSize = (1.1 * currentScale) + 'rem');
     }
-    document.getElementById('fontIncrease').onclick = () => { if(currentScale < 1.5) { currentScale += 0.1; updateFontScale(); } };
-    document.getElementById('fontDecrease').onclick = () => { if(currentScale > 0.8) { currentScale -= 0.1; updateFontScale(); } };
+    document.getElementById('fontIncrease').onclick = () => { if(currentScale < 1.4) { currentScale += 0.05; updateFontScale(); } };
+    document.getElementById('fontDecrease').onclick = () => { if(currentScale > 0.9) { currentScale -= 0.05; updateFontScale(); } };
     document.getElementById('fontReset').onclick = () => { currentScale = 1; updateFontScale(); };
 
     /* ==================== Initialization ==================== */
