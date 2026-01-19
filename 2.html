@@ -34,7 +34,6 @@
             --number-border: #8E13BB; 
             --matte-purple: #7c5295; 
             --reading-beige: #FCF9F1; 
-            /* ألوان زر العودة للأعلى */
             --btt-bg: #8E13BB;
             --btt-accent: #FFC600;
         }
@@ -120,34 +119,15 @@
 
         /* ==================== Back to Top Button ==================== */
         .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background-color: var(--btt-bg);
-            border: 3px solid var(--btt-accent);
-            color: var(--btt-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 1001;
-            transition: all 0.4s ease;
-            opacity: 0;
-            visibility: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            background-color: var(--btt-bg); border: 3px solid var(--btt-accent);
+            color: var(--btt-accent); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 1.2rem;
+            cursor: pointer; z-index: 1001; transition: all 0.4s ease;
+            opacity: 0; visibility: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .back-to-top:hover {
-            transform: translateY(-5px) scale(1.05);
-            background-color: var(--primary-dark);
-        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover { transform: translateY(-5px) scale(1.05); background-color: var(--primary-dark); }
 
         /* ==================== Font Controls ==================== */
         .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
@@ -157,22 +137,13 @@
         /* ==================== Header & Search ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 100px 0 40px; 
-            border-radius: 0 0 50px 50px;
-            margin-bottom: 30px;
-            width: 100%;
-            text-align: center;
-            color: white;
-            position: relative;
-            z-index: 1;
+            padding: 100px 0 40px; border-radius: 0 0 50px 50px; margin-bottom: 30px;
+            width: 100%; text-align: center; color: white; position: relative; z-index: 1;
         }
         .page-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
         .page-subtitle { color: #e2e8f0; font-size: 1.1rem; max-width: 800px; margin: 0 auto; padding: 0 20px; }
 
-        .universal-search { 
-            width: 100%; max-width: 600px; margin: 35px auto 0; position: relative; 
-            z-index: 5;
-        }
+        .universal-search { width: 100%; max-width: 600px; margin: 35px auto 0; position: relative; z-index: 5; }
         #globalSearch { 
             width: 100%; padding: 18px 25px; border-radius: 50px; border: none; font-size: 1rem; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.2); outline: none; text-align: right;
@@ -186,8 +157,6 @@
         }
         .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
         .search-item:hover { background: rgba(94, 44, 165, 0.05); }
-        .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; font-weight: 700; }
-        .search-count { padding: 10px 20px; font-size: 0.85rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
         mark { background-color: #ffd700; color: #000; padding: 0 2px; border-radius: 2px; }
 
         /* ==================== Hadith Card Styling ==================== */
@@ -202,14 +171,9 @@
         }
         
         .hadith-card { 
-            background: var(--surface-color); 
-            border-radius: var(--radius-xl); 
-            box-shadow: var(--shadow-sm); 
-            border-right: 6px solid var(--primary-color); 
-            overflow: hidden; 
-            transition: 0.3s; 
-            flex: 1; 
-            border: 1px solid rgba(0,0,0,0.05);
+            background: var(--surface-color); border-radius: var(--radius-xl); 
+            box-shadow: var(--shadow-sm); border-right: 6px solid var(--primary-color); 
+            overflow: hidden; transition: 0.3s; flex: 1; border: 1px solid rgba(0,0,0,0.05);
             position: relative; 
         }
         
@@ -238,13 +202,7 @@
             display: flex; align-items: center; gap: 10px; color: var(--primary-dark);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        .section-content { 
-            padding: 5px 0;
-            line-height: 1.8; 
-            font-size: 1.15rem; 
-            color: #334155; 
-            border-right: none; 
-        }
+        .section-content { padding: 5px 0; line-height: 1.8; font-size: 1.15rem; color: #334155; }
 
         .hadith-actions { display: flex; align-items: center; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(0,0,0,0.08); }
         .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; text-decoration: none !important; }
@@ -259,36 +217,38 @@
         .pagination-btn:hover { background: var(--primary-color); color: white; transform: translateY(-2px); }
         .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: #e2e8f0; color: #94a3b8; }
 
-        /* ==================== Responsive (Mobile) ==================== */
+        /* ==================== Social Media (Original Style) ==================== */
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); margin-top: 50px; }
+        .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
+        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .social-btn img { width: 26px; transition: 0.3s; }
+        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .social-btn:hover img { filter: brightness(0) invert(1); }
+        .social-yt:hover { background: #FF0000; } 
+        .social-fb:hover { background: #1877F2; } 
+        .social-ins:hover { background: #E4405F; } 
+        .social-tg:hover { background: #0088CC; } 
+        .social-tk:hover { background: #000000; } 
+        .social-sc:hover { background: #FFFC00; }
+
+        /* ==================== Footer (Original Style) ==================== */
+        footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
+        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent-color); }
+        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; } 
+        .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
+
+        /* ==================== Responsive ==================== */
         @media (max-width: 768px) {
             .unified-header { padding: 90px 15px 40px; border-radius: 0 0 35px 35px; }
             .page-title { font-size: 1.7rem; }
-            
-            .hadith-row { 
-                flex-direction: row; 
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .hadith-row.is-open {
-                flex-direction: column; 
-            }
-
-            .hadith-row.is-open .hadith-number-circle {
-                margin-top: 0;
-                margin-bottom: 5px;
-                align-self: flex-start; 
-            }
-
+            .hadith-row { flex-direction: row; align-items: flex-start; gap: 10px; }
+            .hadith-row.is-open { flex-direction: column; }
+            .hadith-row.is-open .hadith-number-circle { margin-top: 0; margin-bottom: 5px; align-self: flex-start; }
             .hadith-number-circle { width: 38px; height: 38px; font-size: 1rem; margin-top: 25px; }
-            
             .hadith-card { width: 100%; }
-            .hadith-summary { padding: 20px 15px 20px 40px; }
-            .hadith-summary h3 { font-size: 1.15rem; }
             .hadith-details.open { padding: 15px 15px 30px; }
-            .section-content { font-size: 1.05rem; }
-            
-            .hadith-actions { flex-direction: column; align-items: stretch; gap: 10px; }
             .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
             .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
         }
@@ -303,20 +263,6 @@
         .btn-cancel { flex: 1; background: #f1f5f9; color: #475569; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; cursor: pointer; }
         .success-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: white; padding: 14px 35px; border-radius: 50px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 3000; transition: 0.5s; opacity: 0; display: flex; align-items: center; gap: 12px; }
         .success-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-
-        /* ==================== Social Section ==================== */
-        .social-section { text-align: center; margin: 50px 0 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
-        .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .social-btn img { width: 26px; }
-        .social-btn:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
-
-        /* ==================== Footer ==================== */
-        footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; }
-        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
-        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
-        .footer-divider { color: #475569; font-size: 0.8rem; } 
-        .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
     </style>
 </head>
 <body>
@@ -365,7 +311,6 @@
 
 <div class="container">
     <div id="hadithContainer">
-        
         <!-- الرواية 1 -->
         <div class="hadith-row">
             <div class="hadith-number-circle">1</div>
@@ -379,21 +324,19 @@
                     </div>
                 </div>
                 <div class="hadith-details">
-                    <div class="detail-section type-quote">
+                    <div class="detail-section">
                         <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
-                        <div class="section-content">
-                            "سحر رسول الله ﷺ حتى كان يرى أنه يأتي النساء ولا يأتيهن..."
-                            <div class="hadith-actions">
-                                <a href="https://dorar.net/h/6I006G0G" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
-                                <div class="action-btn btn-report" onclick="openReportModal('رواية سحر النبي', '1')"><i class="fas fa-flag"></i> إبلاغ</div>
-                            </div>
+                        <div class="section-content">"سحر رسول الله ﷺ حتى كان يرى أنه يأتي النساء ولا يأتيهن..."</div>
+                        <div class="hadith-actions">
+                            <a href="https://dorar.net/h/6I006G0G" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
+                            <div class="action-btn btn-report" onclick="openReportModal('رواية سحر النبي', '1')"><i class="fas fa-flag"></i> إبلاغ</div>
                         </div>
                     </div>
-                    <div class="detail-section type-offense">
+                    <div class="detail-section">
                         <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
                         <div class="section-content">نسبة العجز والوهم وتخيل أشياء لم تحدث للنبي ﷺ، وهو ما يهدم الثقة التامة في وعيه أثناء البلاغ.</div>
                     </div>
-                    <div class="detail-section type-mizan">
+                    <div class="detail-section">
                         <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (الرد القرآني)</div>
                         <div class="section-content">قال تعالى: {وَقَالَ الظَّالِمُونَ إِن تَتَّبِعُونَ إِلَّا رَجُلًا مَّسْحُورًا} [الفرقان]. القرآن جعل وصف النبي بالمسحور تهمة من الظالمين.</div>
                     </div>
@@ -414,28 +357,25 @@
                     </div>
                 </div>
                 <div class="hadith-details">
-                    <div class="detail-section type-quote">
+                    <div class="detail-section">
                         <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
-                        <div class="section-content">
-                            "... حزن النبي ﷺ حزناً غدا منه مراراً كي يتردى من رءوس شواهق الجبال..."
-                            <div class="hadith-actions">
-                                <a href="https://dorar.net/h/7XW2L8M8" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
-                                <div class="action-btn btn-report" onclick="openReportModal('رواية محاولة الانتحار', '2')"><i class="fas fa-flag"></i> إبلاغ</div>
-                            </div>
+                        <div class="section-content">"... حزن النبي ﷺ حزناً غدا منه مراراً كي يتردى من رءوس شواهق الجبال..."</div>
+                        <div class="hadith-actions">
+                            <a href="https://dorar.net/h/7XW2L8M8" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
+                            <div class="action-btn btn-report" onclick="openReportModal('رواية محاولة الانتحار', '2')"><i class="fas fa-flag"></i> إبلاغ</div>
                         </div>
                     </div>
-                    <div class="detail-section type-offense">
+                    <div class="detail-section">
                         <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه الإساءة</div>
                         <div class="section-content">نسبة اليأس والقنوط والاضطراب النفسي للنبي ﷺ لدرجة التفكير في إنهاء حياته.</div>
                     </div>
-                    <div class="detail-section type-mizan">
+                    <div class="detail-section">
                         <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (الرد القرآني)</div>
                         <div class="section-content">قال تعالى: {مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ} [الضحى]. إن تثبيت الله لقلب النبي وعصمته حقيقة قرآنية قطعية.</div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Pagination -->
@@ -448,16 +388,16 @@
         </div>
     </div>
 
-    <!-- قسم تابعنا -->
+    <!-- قسم تابعنا (Original Section) -->
     <div class="social-section">
         <h2 style="font-weight: 800; color: var(--primary-dark); margin-bottom: 10px;">تابعنا على منصات التواصل</h2>
         <div class="social-grid">
-            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt"><img src="icons/yot-soc.png" alt="yt"></a>
-            <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb"><img src="icons/fac-soc.png" alt="fb"></a>
-            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins"><img src="icons/ins-soc.png" alt="in"></a>
-            <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg"><img src="icons/tel-soc.png" alt="tg"></a>
-            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk"><img src="icons/tik-soc.png" alt="tk"></a>
-            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc"><img src="icons/snap.png" alt="sc"></a>
+            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="icons/yot-soc.png" alt="yt"></a>
+            <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="icons/fac-soc.png" alt="fb"></a>
+            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="إنستغرام"><img src="icons/ins-soc.png" alt="in"></a>
+            <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="تلغرام"><img src="icons/tel-soc.png" alt="tg"></a>
+            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="تيك توك"><img src="icons/tik-soc.png" alt="tk"></a>
+            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="سناب شات"><img src="icons/snap.png" alt="sc"></a>
         </div>
     </div>
 </div>
@@ -472,7 +412,7 @@
             <label class="report-option"><input type="radio" name="issue_type" value="الرابط لا يعمل" required> <span>الرابط لا يعمل</span></label>
             <label class="report-option"><input type="radio" name="issue_type" value="الحديث غير مطابق"> <span>الحديث غير مطابق</span></label>
             <label class="report-option"><input type="radio" name="issue_type" value="رقم الحديث غير مطابق"> <span>رقم الحديث غير مطابق</span></label>
-            <div class="modal-footer">
+            <div class="modal-footer" style="display:flex; gap:10px; margin-top:20px;">
                 <button type="submit" class="btn-send">إرسال البلاغ</button>
                 <button type="button" class="btn-cancel" onclick="closeReportModal()">إلغاء</button>
             </div>
@@ -486,26 +426,22 @@
     <div class="footer-links">
         <a href="terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
         <a href="privacy.html">سياسة الخصوصية</a> <span class="footer-divider">|</span>
-        <a href="contact.html">اتصل بنا</a>
+        <a href="contact.html">اتصل بنا</a> <span class="footer-divider">|</span>
+        <a href="feedback.html">شاركنا رأيك</a>
     </div>
     <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
 </footer>
 
 <script>
-    /* ==================== Back to Top Functionality ==================== */
-    const backToTopBtn = document.getElementById('backToTop');
+    /* ==================== Back to Top ==================== */
+    const btt = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 400) {
-            backToTopBtn.classList.add('show');
-        } else {
-            backToTopBtn.classList.remove('show');
-        }
+        if (window.scrollY > 400) btt.classList.add('show');
+        else btt.classList.remove('show');
     });
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    /* ==================== AJAX Form Submission ==================== */
+    /* ==================== Report Logic ==================== */
     document.getElementById("reportForm").addEventListener("submit", function(e) {
         e.preventDefault();
         const formData = new FormData(this);
@@ -522,211 +458,125 @@
         });
     });
 
-    /* ==================== Universal Search ==================== */
+    /* ==================== Search Logic ==================== */
     let cachedPagesContent = null;
     let isSearchInitialized = false;
 
     async function loadAllPagesContent() {
         if (cachedPagesContent) return cachedPagesContent;
         try {
-            const response = await fetch('site-map.json?v=' + new Date().getTime());
-            const pagesList = await response.json();
-            const promises = pagesList.map(async (item) => {
+            const resp = await fetch('site-map.json?v=' + new Date().getTime());
+            const list = await resp.json();
+            const promises = list.map(async (item) => {
                 let url = typeof item === 'string' ? item : item.url;
                 try {
-                    const pageResp = await fetch(url);
-                    const html = await pageResp.text();
+                    const pResp = await fetch(url);
+                    const html = await pResp.text();
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
-                    doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
-                    const mainContent = doc.querySelector('.container, main, body') || doc.body;
-                    return { page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', url: url, content: mainContent.textContent.replace(/\s+/g, ' ').trim() };
+                    doc.querySelectorAll('script, style, nav, footer').forEach(el => el.remove());
+                    return { page: doc.title.replace('حسين الخليل - ', '').trim(), url, content: doc.body.textContent.replace(/\s+/g, ' ').trim() };
                 } catch (e) { return null; }
             });
             cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
             return cachedPagesContent;
-        } catch (error) { return []; }
-    }
-
-    function normalizeArabic(text) {
-        if (!text) return '';
-        text = text.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
-        return text;
-    }
-
-    function getSafeRegex(searchTerm) {
-        let regexStr = '';
-        const cleanTerm = normalizeArabic(searchTerm);
-        for (let char of cleanTerm) {
-            if (char === 'ا') regexStr += '[اأإآ]';
-            else if (char === 'ه') regexStr += '[هة]';
-            else if (char === 'ي') regexStr += '[يىئ]';
-            else if (char === 'و') regexStr += '[وؤ]';
-            else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            regexStr += '[\\u064B-\u065F\u0670]*';
-        }
-        return new RegExp(regexStr, 'gi');
-    }
-
-    function displayResults(results, queryRegex, container) {
-        container.innerHTML = '';
-        if (results.length === 0) {
-            container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
-            container.style.display = 'block';
-            return;
-        }
-        const countDiv = document.createElement('div');
-        countDiv.className = 'search-count';
-        countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
-        container.appendChild(countDiv);
-        results.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'search-item';
-            const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
-            queryRegex.lastIndex = 0;
-            const match = queryRegex.exec(item.content);
-            let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 140));
-            div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
-            div.onclick = () => window.location.href = item.url;
-            container.appendChild(div);
-        });
-        container.style.display = 'block';
+        } catch (e) { return []; }
     }
 
     async function performSearch(query) {
-        const resultsContainer = document.getElementById('searchResults');
-        if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
-        resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
-        resultsContainer.style.display = 'block';
+        const container = document.getElementById('searchResults');
+        if (!query || query.length < 2) { container.style.display = 'none'; return; }
+        container.innerHTML = '<div class="search-item">جاري البحث...</div>';
+        container.style.display = 'block';
         const data = await loadAllPagesContent();
-        const searchRegex = getSafeRegex(query);
-        const results = data.filter(item => {
-            searchRegex.lastIndex = 0;
-            const titleMatch = searchRegex.test(item.page);
-            searchRegex.lastIndex = 0;
-            const contentMatch = searchRegex.test(item.content);
-            return titleMatch || contentMatch;
+        const results = data.filter(i => i.page.includes(query) || i.content.includes(query));
+        
+        container.innerHTML = results.length ? '' : '<div class="search-item">لم يتم العثور على نتائج</div>';
+        results.forEach(r => {
+            const div = document.createElement('div');
+            div.className = 'search-item';
+            div.innerHTML = `<h3>${r.page}</h3><p>${r.content.substring(0, 100)}...</p>`;
+            div.onclick = () => window.location.href = r.url;
+            container.appendChild(div);
         });
-        displayResults(results, searchRegex, resultsContainer);
     }
 
-    /* ==================== UI & Logic ==================== */
-    function openReportModal(name, number) {
+    /* ==================== UI Controls ==================== */
+    function openReportModal(name, num) {
         document.getElementById('hiddenHadithName').value = name;
-        document.getElementById('hiddenHadithNumber').value = number;
-        document.getElementById('modalHadithInfo').textContent = "أنت تبلغ عن: " + name + " (بطاقة رقم " + number + ")";
+        document.getElementById('hiddenHadithNumber').value = num;
+        document.getElementById('modalHadithInfo').textContent = `أنت تبلغ عن: ${name} (بطاقة رقم ${num})`;
         document.getElementById('reportModal').classList.add('show');
         document.body.classList.add('no-scroll');
     }
-
     function closeReportModal() {
         document.getElementById('reportModal').classList.remove('show');
         document.body.classList.remove('no-scroll');
     }
-
-    function toggleFavorite(event, hadithId) {
-        event.stopPropagation();
-        const card = document.getElementById('card-' + hadithId);
-        const icon = card.querySelector('.fav-header-icon');
-        const title = card.querySelector('h3').textContent;
-        const source = card.querySelector('.source-tag').textContent;
-        let favorites = JSON.parse(localStorage.getItem('myFavorites')) || [];
-        const index = favorites.findIndex(item => item.id === hadithId);
-        const toast = document.getElementById('successToast');
-        const toastText = toast.querySelector('span');
-        
-        if (index > -1) {
-            favorites.splice(index, 1);
-            icon.classList.remove('fas', 'active'); icon.classList.add('far');
-            toastText.textContent = "تمت الإزالة من المفضلة";
-        } else {
-            const currentUrl = window.location.pathname.split('/').pop() || 'hadith.html';
-            favorites.push({ id: hadithId, title: title, source: source, url: currentUrl + '#card-' + hadithId, type: 'رواية' });
-            icon.classList.remove('far'); icon.classList.add('fas', 'active');
-            toastText.textContent = "تمت الإضافة إلى المفضلة";
-        }
-        localStorage.setItem('myFavorites', JSON.stringify(favorites));
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
-    }
-
-    function syncFavorites() {
-        const favorites = JSON.parse(localStorage.getItem('myFavorites')) || [];
-        document.querySelectorAll('.hadith-card').forEach(card => {
-            const id = card.id.replace('card-', '');
-            const icon = card.querySelector('.fav-header-icon');
-            if (favorites.some(item => item.id === id)) {
-                icon.classList.remove('far'); icon.classList.add('fas', 'active');
-            }
-        });
-    }
-
-    function toggleMobileMenu() {
-        const navLinks = document.getElementById('navLinks');
-        const overlay = document.getElementById('navOverlay');
-        navLinks.classList.toggle('show');
-        overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
-        document.body.classList.toggle('no-scroll', navLinks.classList.contains('show'));
-    }
-
-    function toggleHadith(element) {
-        const details = element.nextElementSibling;
-        const row = element.closest('.hadith-row');
-        const icon = element.querySelector('.toggle-icon');
+    function toggleHadith(el) {
+        const details = el.nextElementSibling;
+        const row = el.closest('.hadith-row');
         details.classList.toggle('open');
-        row.classList.toggle('is-open'); 
+        row.classList.toggle('is-open');
+        const icon = el.querySelector('.toggle-icon');
         if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+    function toggleMobileMenu() {
+        const links = document.getElementById('navLinks');
+        const overlay = document.getElementById('navOverlay');
+        links.classList.toggle('show');
+        overlay.style.display = links.classList.contains('show') ? 'block' : 'none';
+        document.body.classList.toggle('no-scroll', links.classList.contains('show'));
     }
 
     /* ==================== Pagination & Font ==================== */
-    const hadithsPerPage = 15;
-    let currentPage = 1;
-
-    function paginateHadiths() {
-        const hadiths = Array.from(document.querySelectorAll('.hadith-row'));
-        const totalPages = Math.ceil(hadiths.length / hadithsPerPage);
-        const pageInfo = document.getElementById('pageInfo');
-        if (pageInfo) pageInfo.textContent = `الصفحة ${currentPage} من ${totalPages}`;
-
-        hadiths.forEach((row, index) => {
-            const start = (currentPage - 1) * hadithsPerPage;
-            const end = currentPage * hadithsPerPage;
-            row.style.display = (index >= start && index < end) ? 'flex' : 'none';
-        });
-
-        document.getElementById('prevPage').disabled = currentPage === 1;
-        document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
+    const perPage = 15; let current = 1;
+    function paginate() {
+        const rows = Array.from(document.querySelectorAll('.hadith-row'));
+        const total = Math.ceil(rows.length / perPage);
+        document.getElementById('pageInfo').textContent = `الصفحة ${current} من ${total}`;
+        rows.forEach((r, i) => r.style.display = (i >= (current-1)*perPage && i < current*perPage) ? 'flex' : 'none');
+        document.getElementById('prevPage').disabled = current === 1;
+        document.getElementById('nextPage').disabled = current === total || total === 0;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    document.getElementById('nextPage').onclick = () => { current++; paginate(); };
+    document.getElementById('prevPage').onclick = () => { current--; paginate(); };
+    document.getElementById('firstPage').onclick = () => { current = 1; paginate(); };
 
-    document.getElementById('nextPage').onclick = () => { if (currentPage < Math.ceil(document.querySelectorAll('.hadith-row').length / hadithsPerPage)) { currentPage++; paginateHadiths(); } };
-    document.getElementById('prevPage').onclick = () => { if (currentPage > 1) { currentPage--; paginateHadiths(); } };
-    document.getElementById('firstPage').onclick = () => { currentPage = 1; paginateHadiths(); };
-
-    let currentScale = 1;
-    function updateFontScale() {
-        document.querySelectorAll('.hadith-summary h3').forEach(el => el.style.fontSize = (1.3 * currentScale) + 'rem');
-        document.querySelectorAll('.section-content').forEach(el => el.style.fontSize = (1.15 * currentScale) + 'rem');
-        document.querySelectorAll('.section-header').forEach(el => el.style.fontSize = (1.1 * currentScale) + 'rem');
+    let scale = 1;
+    function updateScale() {
+        document.querySelectorAll('.hadith-summary h3').forEach(e => e.style.fontSize = (1.3 * scale) + 'rem');
+        document.querySelectorAll('.section-content').forEach(e => e.style.fontSize = (1.15 * scale) + 'rem');
     }
-    document.getElementById('fontIncrease').onclick = () => { if(currentScale < 1.5) { currentScale += 0.1; updateFontScale(); } };
-    document.getElementById('fontDecrease').onclick = () => { if(currentScale > 0.8) { currentScale -= 0.1; updateFontScale(); } };
-    document.getElementById('fontReset').onclick = () => { currentScale = 1; updateFontScale(); };
+    document.getElementById('fontIncrease').onclick = () => { if(scale < 1.5) { scale += 0.1; updateScale(); } };
+    document.getElementById('fontDecrease').onclick = () => { if(scale > 0.8) { scale -= 0.1; updateScale(); } };
+    document.getElementById('fontReset').onclick = () => { scale = 1; updateScale(); };
+
+    function toggleFavorite(e, id) {
+        e.stopPropagation();
+        const card = document.getElementById('card-' + id);
+        const icon = card.querySelector('.fav-header-icon');
+        let favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
+        const idx = favs.findIndex(f => f.id === id);
+        if(idx > -1) {
+            favs.splice(idx, 1);
+            icon.classList.replace('fas', 'far');
+        } else {
+            favs.push({ id, title: card.querySelector('h3').textContent, type: 'رواية' });
+            icon.classList.replace('far', 'fas');
+        }
+        localStorage.setItem('myFavorites', JSON.stringify(favs));
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
-        paginateHadiths(); syncFavorites();
+        paginate();
         const sInput = document.getElementById('globalSearch');
-        if (sInput) {
-            let sTimer;
-            sInput.addEventListener('input', (e) => { clearTimeout(sTimer); sTimer = setTimeout(() => performSearch(e.target.value.trim()), 500); });
-            sInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
+        if(sInput) {
+            let timer;
+            sInput.addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => performSearch(e.target.value.trim()), 500); });
         }
-        document.addEventListener('click', (e) => {
-            const res = document.getElementById('searchResults');
-            if(res && !document.querySelector('.universal-search').contains(e.target)) res.style.display = 'none';
-        });
     });
 </script>
-
 </body>
 </html>
