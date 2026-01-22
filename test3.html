@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* ==================== المغيرات الأساسية (نفس الكود الأول) ==================== */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a; 
@@ -53,7 +54,7 @@
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* ==================== Navigation (From Code 1) ==================== */
+        /* ==================== القائمة والنافار (نفس الكود الأول تماماً) ==================== */
         .nav-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
@@ -72,7 +73,7 @@
         }
 
         .logo-container { order: 1; } 
-        .logo-container img { height: 45px; width: auto; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease; }
+        .logo-container img { height: 45px; width: auto; transition: transform 0.4s ease; }
 
         .nav-links { display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2; }
         .nav-links a { color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap; display: flex; align-items: center; gap: 5px; }
@@ -86,14 +87,14 @@
                 position: fixed; top: 75px; right: -280px; width: 280px;
                 background: var(--surface-color); flex-direction: column; padding: 20px;
                 height: calc(100vh - 75px); box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: right 0.3s ease; overflow-y: auto; z-index: 1000; order: unset; display: flex !important;
+                transition: right 0.3s ease; overflow-y: auto; z-index: 1000; display: flex !important;
             }
             .nav-links.show { right: 0; }
             .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-bottom: 1px solid rgba(0,0,0,0.03); justify-content: flex-start; }
-            .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
+            .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); }
         }
 
-        /* ==================== Header & Search (From Code 1) ==================== */
+        /* ==================== الهيدر والبحث (نفس الكود الأول) ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             padding: 100px 0 40px; border-radius: 0 0 50px 50px; margin-bottom: 30px;
@@ -101,7 +102,7 @@
         }
         .page-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
         .page-subtitle { color: #e2e8f0; font-size: 1.1rem; max-width: 800px; margin: 0 auto; padding: 0 20px; }
-        
+
         .universal-search { width: 100%; max-width: 600px; margin: 35px auto 0; position: relative; z-index: 5; }
         #globalSearch { 
             width: 100%; padding: 18px 25px; border-radius: 50px; border: none; font-size: 1rem; 
@@ -114,14 +115,17 @@
             overflow-y: auto; display: none; z-index: 1002; color: #333; 
             text-align: right; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05);
         }
-        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
-        .search-item:hover { background: rgba(94, 44, 165, 0.05); }
-        mark { background-color: #ffd700; color: #000; padding: 0 2px; border-radius: 2px; }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
+        mark { background-color: #ffd700; color: #000; }
 
-        /* ==================== Hadith Row & Card ==================== */
+        /* ==================== الكروت وتصميمها المنظم (نفس الكود الأول) ==================== */
         .container { max-width: 1150px; margin: 0 auto; padding: 0 20px; width: 100%; }
-        .hadith-row { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px; transition: 0.3s; }
-        .hadith-number-circle { width: 46px; height: 46px; background-color: #FFC600; border: 2.5px solid #8E13BB; color: #8E13BB; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; flex-shrink: 0; margin-top: 15px; padding-top: 4px; z-index: 5; }
+        .hadith-row { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px; transition: all 0.3s ease; }
+        .hadith-number-circle { 
+            width: 46px; height: 46px; background-color: #FFC600; border: 2.5px solid #8E13BB; 
+            color: #8E13BB; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-weight: 800; font-size: 1.3rem; flex-shrink: 0; margin-top: 15px; padding-top: 4px; z-index: 5;
+        }
         
         .hadith-card { background: var(--surface-color); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); border-right: 6px solid var(--primary-color); flex: 1; border: 1px solid rgba(0,0,0,0.05); position: relative; overflow: hidden; }
         .hadith-summary { padding: 25px 25px 25px 45px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
@@ -132,56 +136,54 @@
         .hadith-details { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s; background: var(--reading-beige); }
         .hadith-details.open { max-height: 6000px; opacity: 1; padding: 10px 30px 40px; border-top: 1px solid rgba(0,0,0,0.05); }
 
-        .detail-section { margin-top: 45px; } 
+        .detail-section { margin-top: 25px; } 
         .section-header { padding-bottom: 8px; margin-bottom: 10px; font-weight: 800; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; color: var(--primary-dark); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .section-content { padding: 5px 0; line-height: 1.8; font-size: 1.15rem; color: #334155; }
         .hadith-actions { display: flex; align-items: center; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(0,0,0,0.08); }
-        .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none !important; }
+        .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; text-decoration: none !important; }
         .btn-source { background: rgba(94, 44, 165, 0.1); color: var(--primary-color); border: 1px solid rgba(94, 44, 165, 0.2); }
         .btn-report { background: rgba(225, 29, 72, 0.08); color: #e11d48; border: 1px solid rgba(225, 29, 72, 0.1); }
 
-        /* ==================== Pagination & Font Controls ==================== */
-        #pagination-wrapper { background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); text-align: center; margin: 40px auto; max-width: 500px; border: 1px solid #eee; }
-        .pagination-btn { background: #f1f5f9; color: var(--text-primary); border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; margin: 0 5px; font-weight: 600; font-family: 'Tajawal'; transition: 0.3s; }
-        .pagination-btn:hover:not(:disabled) { background: var(--primary-color); color: white; transform: translateY(-2px); }
-        .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        /* ==================== استجابة الجوال المذهلة (نفس الكود الأول) ==================== */
+        @media (max-width: 768px) {
+            .unified-header { padding: 90px 15px 40px; border-radius: 0 0 35px 35px; }
+            .page-title { font-size: 1.7rem; }
+            .hadith-row { flex-direction: row; align-items: flex-start; gap: 10px; }
+            .hadith-row.is-open { flex-direction: column; }
+            .hadith-row.is-open .hadith-number-circle { margin-top: 0; margin-bottom: 5px; align-self: flex-start; }
+            .hadith-number-circle { width: 38px; height: 38px; font-size: 1rem; margin-top: 25px; }
+            .hadith-card { width: 100%; }
+            .hadith-details.open { padding: 15px 15px 30px; }
+            .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
+            .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
+            .hadith-summary h3 { font-size: 1.1rem !important; }
+        }
 
+        /* ==================== الفوتر والتحكم العائم (نفس الكود الأول) ==================== */
+        .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
+        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); }
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background-color: var(--btt-bg); border: 3px solid var(--btt-accent); color: var(--btt-accent); border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; z-index: 1001; transition: 0.4s; }
         .back-to-top.show { display: flex; }
 
-        .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
-        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-        .font-btn:hover { background: var(--primary-color); color: white; transform: scale(1.1); }
-
-        /* ==================== Footer (From Code 1) ==================== */
         footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; margin-top: 50px; }
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
-        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: color 0.3s ease; }
-        .footer-links a:hover { color: var(--accent-color); }
-        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; } 
+        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
+        .footer-divider { color: #475569; font-size: 0.8rem; }
         .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
-
-        /* ==================== Report Modal ==================== */
-        .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 5000; padding: 20px; }
-        .report-modal.show { display: flex; }
-        .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; }
-
-        /* ==================== Social Grid ==================== */
+        
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); margin-top: 50px; }
         .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
         .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .social-btn img { width: 26px; }
         .social-btn:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
 
-        @media (max-width: 768px) {
-            .unified-header { padding: 90px 15px 40px; border-radius: 0 0 35px 35px; }
-            .page-title { font-size: 1.7rem; }
-            .hadith-row { flex-direction: row; align-items: flex-start; gap: 10px; }
-            .hadith-row.is-open { flex-direction: column; }
-            .hadith-number-circle { width: 38px; height: 38px; font-size: 1rem; margin-top: 25px; }
-            .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
-            .hadith-summary h3 { font-size: 1.1rem !important; }
-        }
+        #pagination-wrapper { background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); text-align: center; margin: 40px auto; max-width: 500px; border: 1px solid #eee; }
+        .pagination-btn { background: #f1f5f9; color: var(--text-primary); border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; margin: 0 5px; font-weight: 600; font-family: 'Tajawal'; }
+        .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 5000; padding: 20px; }
+        .report-modal.show { display: flex; }
+        .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; }
     </style>
 </head>
 <body>
@@ -279,7 +281,7 @@
 </footer>
 
 <script>
-    // ==================== 1. البيانات الكاملة (20 رواية) ====================
+    // ==================== بيانات الروايات الكاملة (20 رواية) ====================
     const novelsData = [
         {
             id: 1, title: "رواية قتل المرتد", source: "البخاري", sourceUrl: "https://dorar.net/h/77qg1XUt",
@@ -308,142 +310,142 @@
         {
             id: 4, title: "رواية أمرت أن أقاتل الناس", source: "البخاري ومسلم", sourceUrl: "https://dorar.net/h/kKNtMyTu",
             text: "أُمِرْتُ أنْ أُقَاتِلَ النَّاسَ حتَّى يقولوا لا إلَهَ إلَّا اللَّهُ...", num: "392",
-            reason: "تؤسس هذه الرواية لمبدأ 'الحرب الشاملة' لفرض العقيدة...",
+            reason: "تؤسس هذه الرواية لمبدأ 'الحرب الشاملة' لفرض العقيدة بالقوة...",
             proofs: [
-                { label: "نفي السيطرة:", verse: "لَسْتَ عَلَيْهِمْ بِمُصَيْطِرٍ", ref: "الغاشية: 22", comment: "الآية صريحة في نفي السيطرة." }
+                { label: "ضوابط القتال:", verse: "وَقَاتِلُوا فِي سَبِيلِ اللَّهِ الَّذِينَ يُقَاتِلُونَكُمْ", ref: "البقرة: 190", comment: "القرآن حصر القتال في رد العدوان." }
             ]
         },
         {
             id: 5, title: "رواية لا وصية لوارث", source: "صحيح أبي داوود", sourceUrl: "https://dorar.net/h/HimxSGJw",
             text: "إنَّ اللَّهَ قد أعطَى كلَّ ذي حقٍّ حقَّهُ فلا وصيَّةَ لوارثٍ", num: "2870",
-            reason: "تأتي هذه الرواية لـ 'تنسخ' وتلغي حكماً قرآنيّاً قطعياً...",
+            reason: "تأتي هذه الرواية لتعطل حكماً قرآنياً قطعياً أوجب الوصية...",
             proofs: [
-                { label: "فرضية الوصية:", verse: "الْوصِيَّةُ لِلْوَالِدَيْنِ وَالْأَقْرَبِينَ", ref: "البقرة: 180", comment: "القرآن أوجب الوصية للوالدين." }
+                { label: "الوصية:", verse: "الْوصِيَّةُ لِلْوَالِدَيْنِ وَالْأَقْرَبِينَ", ref: "البقرة: 180", comment: "القرآن جعلها حقاً ثابتاً." }
             ]
         },
         {
             id: 6, title: "رواية أوتيت الكتاب ومثله معه", source: "صحيح أبي داود", sourceUrl: "https://dorar.net/h/EkoaTaCa",
             text: "ألا إنِّي أوتيتُ الكتابَ ومثلَهُ معهُ...", num: "4604",
-            reason: "تؤسس هذه الرواية لمبدأ 'ازدواجية المصدر' في التشريع...",
+            reason: "تؤسس لمبدأ 'ازدواجية المصدر' مما يفتح باباً لتعطيل أحكام القرآن...",
             proofs: [
-                { label: "تفصيل كل شيء:", verse: "تِبْيَانًا لِّكُلِّ شَيْءٍ", ref: "النحل: 89", comment: "إذا كان القرآن تبياناً لكل شيء فما الحاجة لمثله؟" }
+                { label: "التبيان:", verse: "وَنَزَّلْنَا عَلَيْكَ الْكِتَابَ تِبْيَانًا لِّكُلِّ شَيْءٍ", ref: "النحل: 89", comment: "القرآن كافٍ ومفصل." }
             ]
         },
         {
             id: 7, title: "رواية فتح مدينة هرقل", source: "السلسلة الصحيحة", sourceUrl: "https://dorar.net/h/Kwp2ylqd",
-            text: "أيُّ المدينتيْنِ تُفتحُ أولًا القسطنطينيةُ أو روميَّةُ ؟", num: "4",
-            reason: "تؤسس هذه الرواية لمفهوم 'الغزو التوسعي'...",
+            text: "سُئِلَ رسولُ اللهِ : أيُّ المدينتيْنِ تُفتحُ أولًا القسطنطينيةُ أو روميَّةُ ؟", num: "4",
+            reason: "تؤسس لمفهوم الغزو التوسعي وهو ما يتناقض مع حروب الدفاع القرآنية...",
             proofs: [
-                { label: "حصر القتال:", verse: "وَقَاتِلُوا فِي سَبِيلِ اللَّهِ الَّذِينَ يُقَاتِلُونَكُمْ", ref: "البقرة: 190", comment: "القتال لرد العدوان فقط." }
+                { label: "السلم:", verse: "وَإِن جَنَحُوا لِلسَّلْمِ فَاجْنَحْ لَهَا", ref: "الأنفال: 61", comment: "الأصل هو السلم لا التوسع العسكري." }
             ]
         },
         {
             id: 8, title: "رواية نبع الماء وتسبيح الطعام", source: "البخاري", sourceUrl: "https://dorar.net/h/3Cdm6sOt",
             text: "رَأَيْتُ المَاءَ يَنْبُعُ مِن بَيْنِ أصَابِعِ رَسولِ اللَّهِ...", num: "3579",
-            reason: "تنسب للنبي معجزات حسية خارقة تتناقض مع منطق القرآن...",
+            reason: "تنسب للنبي خوارق حسية رفض القرآن إعطاءها له...",
             proofs: [
-                { label: "استحالة فقه التسبيح:", verse: "وَلَٰكِن لَّا تَفْقَهُونَ تَسْبِيحَهُمْ", ref: "الإسراء: 44", comment: "القرآن ينفي قدرتنا على سماع تسبيح الجماد." }
+                { label: "رفض الآيات:", verse: "وَمَا مَنَعَنَا أَن نُّرْسِلَ بِالْآيَاتِ إِلَّا أَن كَذَّبَ بِهَا الْأَوَّلُونَ", ref: "الإسراء: 59", comment: "الله منع الخوارق الحسية لمقصد تربوي." }
             ]
         },
         {
             id: 9, title: "رواية المباشرة فوق الإزار أثناء الحيض", source: "البخاري", sourceUrl: "https://dorar.net/h/iJhqtZQd",
             text: "كانَ النبيُّ صَلَّى اللهُ عليه وسلَّمَ يُبَاشِرُهَا أمَرَهَا أنْ تَتَّزِرَ...", num: "302",
-            reason: "تأتي هذه الرواية لتضع استثناءات للأمر القرآني بـ 'الاعتزال'...",
+            reason: "تخفف من حدة الأمر القرآني الصريح بـ 'الاعتزال' التام...",
             proofs: [
-                { label: "الأمر بالاعتزال:", verse: "فَاعْتَزِلُوا النِّسَاءَ فِي الْمَحِيضِ", ref: "البقرة: 222", comment: "الاعتزال يعني التنحي والابتعاد." }
+                { label: "الاعتزال:", verse: "وَلَا تَقْرَبُوهُنَّ حَتَّىٰ يَطْطهُرْنَ", ref: "البقرة: 222", comment: "النهي عن القرب أبلغ من النهي عن الفعل." }
             ]
         },
         {
             id: 10, title: "رواية وضع القَدَم في النار", source: "البخاري", sourceUrl: "https://dorar.net/h/IAvxiGpQ",
             text: "فَيَضَعُ الرَّبُّ تَبارَكَ وتَعالَى قَدَمَهُ عليها، فَتَقُولُ: قَطْ قَطْ.", num: "4849",
-            reason: "تنسب لله 'القَدَم' وهذا يقع في فخ التشبيه والتجسيم...",
+            reason: "تجسد الخالق وتنسب له جارحة مادية وهذا يضرب جوهر التوحيد...",
             proofs: [
-                { label: "نفي المماثلة:", verse: "لَيْسَ كَمِثْلِهِ شَيْءٌ", ref: "الشورى: 11", comment: "الله منزه عن الجوارح المادية." }
+                { label: "التنزيه:", verse: "لَيْسَ كَمِثْلِهِ شَيْءٌ", ref: "الشورى: 11", comment: "قاعدة ذهبية في تنزيه الله عن التشبيه." }
             ]
         },
         {
             id: 11, title: "رواية كشف الساق", source: "البخاري", sourceUrl: "https://dorar.net/h/jiy0dYyK",
             text: "يَكْشِفُ رَبُّنا عن ساقِهِ، فَيَسْجُدُ له كُلُّ مُؤْمِنٍ...", num: "4919",
-            reason: "تقوم هذه الرواية بـ 'تجسيم' الذات الإلهية...",
+            reason: "تحول تعبيراً مجازياً قرآنياً (يوم يُكشف عن ساق) إلى وصف حسي...",
             proofs: [
-                { label: "المجاز القرآني:", verse: "يَوْمَ يُكْشَفُ عَن سَاقٍ", ref: "القلم: 42", comment: "ساق نكرة تعني شدة الكرب." }
+                { label: "المجاز:", verse: "يَوْمَ يُكْشَفُ عَن سَاقٍ", ref: "القلم: 42", comment: "الساق تعني الشدة عند العرب." }
             ]
         },
         {
             id: 12, title: "رواية سحر النبي", source: "البخاري", sourceUrl: "https://dorar.net/h/ZnETYqVd",
             text: "سَحَرَ رَسولَ اللَّهِ... حتَّى كانَ يُخَيَّلُ إلَيْهِ أنَّه كانَ يَفْعَلُ الشَّيْءَ وما فَعَلَهُ.", num: "5763",
-            reason: "تضرب هذه الرواية مفهوم 'العصمة' في مقتل...",
+            reason: "تضرب عصمة النبي وتجعله ضحية للسحر، وهو ما نفاه القرآن...",
             proofs: [
-                { label: "وصف الظالمين:", verse: "إِن تَتَّبِعُونَ إِلَّا رَجُلًا مَّسْحُورًا", ref: "الفرقان: 8", comment: "القرآن جعل هذا القول من سمات الظالمين." }
+                { label: "العصمة:", verse: "وَاللَّهُ يَعْصِمُكَ مِنَ النَّاسِ", ref: "المائدة: 67", comment: "عصمة شاملة للعقل والوعي." }
             ]
         },
         {
             id: 13, title: "رواية تحريم خاتم وأواني الذهب", source: "البخاري", sourceUrl: "https://dorar.net/h/q8V86YHI",
             text: "نَهَى عن خاتَمِ الذَّهَبِ... لا تَشْرَبُوا في آنِيَةِ الذَّهَبِ...", num: "5864 / 5633",
-            reason: "تضع قيوداً على زينة أباحها القرآن الكريم...",
+            reason: "تحرم زينة ومتاعاً أباحه الله في كتابه كقاعدة أصلية...",
             proofs: [
-                { label: "الإنكار:", verse: "مَنْ حَرَّمَ زِينَةَ اللَّهِ الَّتِي أَخْرَجَ لِعِبَادِهِ", ref: "الأعراف: 32", comment: "استفهام استنكاري لمن يحرم الزينة." }
+                { label: "الطيبات:", verse: "قُلْ مَنْ حَرَّمَ زِينَةَ اللَّهِ الَّتِي أَخْرَجَ لِعِبَادِهِ", ref: "الأعراف: 32", comment: "إنكار شديد على من يحرم زينة الله." }
             ]
         },
         {
             id: 14, title: "رواية الصلاة بعد النوم دون وضوء", source: "البخاري", sourceUrl: "https://dorar.net/h/LQvV0rNt",
             text: "نَامَ حتَّى نَفَخَ... ثُمَّ قَامَ فَصَلَّى ولَمْ يَتَوضَّأْ.", num: "698",
-            reason: "تخالف الأمر القرآني الذي جعل الوضوء شرطاً للصلاة...",
+            reason: "تستثني النبي من تشريع الوضوء العام لكل المؤمنين عند القيام للصلاة...",
             proofs: [
-                { label: "وجوب الوضوء:", verse: "إِذَا قُمْتُمْ إِلَى الصَّلَاةِ فَاغْسِلُوا وُجُوهَكُمْ", ref: "المائدة: 6", comment: "الآية عامة لكل المؤمنين." }
+                { label: "البشرية:", verse: "قُلْ إِنَّمَا أَنَا بَشَرٌ مِّثْلُكُمْ", ref: "الكهف: 110", comment: "ما ينطبق على البشر ينطبق على النبي في الطهارة." }
             ]
         },
         {
             id: 15, title: "رواية تعجيل الفطر", source: "البخاري", sourceUrl: "https://dorar.net/h/dvXWPa7D",
             text: "لا يَزَالُ النَّاسُ بخَيْرٍ ما عَجَّلُوا الفِطْرَ.", num: "1957",
-            reason: "تتصادم مع النص القرآني الذي حدد نهاية الصيام بـ 'الليل'...",
+            reason: "تحرض على الإفطار بمجرد الغروب بينما الحد القرآني هو الليل...",
             proofs: [
-                { label: "الغاية:", verse: "ثُمَّ أَتِمُّوا الصِّيَامَ إِلَى اللَّيْلِ", ref: "البقرة: 187", comment: "الليل يبدأ بعد الغروب بانتهاء الضياء." }
+                { label: "إتمام الصيام:", verse: "ثُمَّ أَتِمُّوا الصِّيَامَ إِلَى اللَّيْلِ", ref: "البقرة: 187", comment: "الليل في القرآن هو غسق الظلمة." }
             ]
         },
         {
             id: 16, title: "غزو بني المصطلق والسبي", source: "البخاري", sourceUrl: "https://dorar.net/h/1OxIDSwI",
             text: "أغَارَ علَى بَنِي المُصْطَلِقِ وهُمْ غَارُّونَ... وسَبَى ذَرَارِيَّهُمْ.", num: "2541",
-            reason: "تُصور النبي كقائد يشن هجوماً غادراً على آمنين...",
+            reason: "تصور النبي كمعتدٍ ومسترق للنساء وهو ما يتنافى مع تشريع الأسرى...",
             proofs: [
-                { label: "مصير الأسرى:", verse: "فَإِمَّا مَنًّا بَعْدُ وَإِمَّا فِدَاءً", ref: "محمد: 4", comment: "لا يوجد خيار للسبي في القرآن." }
+                { label: "لا سبي:", verse: "فَإِمَّا مَنًّا بَعْدُ وَإِمَّا فِدَاءً", ref: "محمد: 4", comment: "القرآن حصر مصير الأسرى في المن أو الفداء." }
             ]
         },
         {
             id: 17, title: "قصة المعراج والمفاوضات", source: "البخاري", sourceUrl: "https://dorar.net/h/6969Uato",
-            text: "رواية تردد النبي بين الله وموسى لطلب تخفيف الصلاة...", num: "7517",
-            reason: "تُصور الله كأنه لم يعلم طاقة البشر وموسى كان أعلم منه...",
+            text: "رواية تردد النبي بين الله وموسى لطلب تخفيف الصلاة من 50 إلى 5...", num: "7517",
+            reason: "تطعن في كمال العلم الإلهي وتصور التشريع كعملية مساومة...",
             proofs: [
-                { label: "العلم المطلق:", verse: "أَلَا يَعْلَمُ مَنْ خَلَقَ", ref: "الملك: 14", comment: "الله لا يحتاج لمشورة لتخفيف الفروض." }
+                { label: "علم الله:", verse: "أَلَا يَعْلَمُ مَنْ خَلَقَ", ref: "الملك: 14", comment: "الله يعلم طاقة البشر قبل خلقهم." }
             ]
         },
         {
             id: 18, title: "نسيان النبي لآيات من القرآن", source: "البخاري", sourceUrl: "https://dorar.net/h/uKlKWYyA",
             text: "لقَدْ أذْكَرَنِي كَذَا وكَذَا، آيَةً كُنْتُ أُنْسِيتُهَا...", num: "5038",
-            reason: "تضرب مبدأ اليقين في اكتمال النص القرآني...",
+            reason: "تفتح باب الشك في اكتمال النص وتصادم الوعد الإلهي بالحفظ...",
             proofs: [
-                { label: "الوعد الإلهي:", verse: "سَنُقْرِئُكَ فَلَا تَنسَىٰ", ref: "الأعلى: 6", comment: "وعد قاطع بعدم النسيان." }
+                { label: "عدم النسيان:", verse: "سَنُقْرِئُكَ فَلَا تَنسَىٰ", ref: "الأعلى: 6", comment: "وعد إلهي صريح بحفظ القرآن في صدره." }
             ]
         },
         {
             id: 19, title: "تغيير المنكر باليد", source: "مسلم", sourceUrl: "https://dorar.net/h/kw7k6w7U",
             text: "مَن رَأَى مِنكُم مُنْكَرًا فَلْيُغَيِّرْهُ بيَدِهِ...", num: "49",
-            reason: "تؤدي للفوضى المجتمعية وتحول الأفراد لقضاة ومنفذين...",
+            reason: "تعطي الحق للأفراد في استخدام القوة وهو ما يؤدي لفتن وفوضى...",
             proofs: [
-                { label: "المسؤولية:", verse: "عَلَيْكُمْ أَنفُسَكُمْ", ref: "المائدة: 105", comment: "أولوية المؤمن إصلاح نفسه." }
+                { label: "المسؤولية:", verse: "عَلَيْكُمْ أَنفُسَكُمْ", ref: "المائدة: 105", comment: "الإصلاح يبدأ من النفس لا القهر." }
             ]
         },
         {
             id: 20, title: "التضييق على أهل الكتاب في الطريق", source: "مسلم", sourceUrl: "https://dorar.net/h/jHqx8PPb",
-            text: "فإذا لَقِيتُمْ أحَدَهُمْ في طَرِيقٍ، فاضْطَرُّوهُ إلى أضْيَقِهِ.", num: "2167",
-            reason: "تأمر بممارسة التنمر والإذلال لمجرد اختلاف المعتقد...",
+            text: "فاضْطَرُّوهُ إلى أضْيَقِهِ.", num: "2167",
+            reason: "تحرض على سوء الخلق والتنمر ضد المختلفين في الدين...",
             proofs: [
-                { label: "التعارف:", verse: "وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا", ref: "الحجرات: 13", comment: "الغاية هي التعارف لا التضييق." }
+                { label: "القول الحسن:", verse: "وَقُولُوا لِلنَّاسِ حُسْنًا", ref: "البقرة: 83", comment: "الأمر الإلهي عام لكل الناس." }
             ]
         }
     ];
 
-    // ==================== 2. محرك العرض والبحث (دمج المنطقين) ====================
+    // ==================== محرك العرض والتحكم (نفس الكود الأول) ====================
     let currentPage = 1;
     const perPage = 15;
     let filteredNovels = [...novelsData];
@@ -513,7 +515,7 @@
         syncFavIcons();
     }
 
-    // --- نظام البحث (مثل الكود 1) ---
+    // --- نظام البحث الفوري ---
     function handleGlobalSearch() {
         const query = document.getElementById('globalSearch').value.toLowerCase();
         const resultsBox = document.getElementById('searchResults');
@@ -525,7 +527,7 @@
             return;
         }
 
-        const hits = novelsData.filter(n => n.title.includes(query) || n.text.includes(query));
+        const hits = novelsData.filter(n => n.title.toLowerCase().includes(query) || n.text.toLowerCase().includes(query));
         
         resultsBox.innerHTML = "";
         if (hits.length > 0) {
@@ -539,7 +541,7 @@
                     filteredNovels = [h];
                     currentPage = 1;
                     renderNovels();
-                    // فتح الكارد تلقائياً عند الضغط من البحث
+                    // فتح الكارد تلقائياً
                     setTimeout(() => {
                         const sum = document.querySelector(`#card-h${h.id} .hadith-summary`);
                         if(sum) toggleHadith(sum);
@@ -552,13 +554,12 @@
             resultsBox.style.display = 'none';
         }
         
-        // تحديث القائمة الرئيسية أيضاً بناءً على البحث
         filteredNovels = hits;
         currentPage = 1;
         renderNovels();
     }
 
-    // --- الوظائف الأساسية ---
+    // --- تحسينات الجوال والقائمة المنسدلة ---
     function toggleMobileMenu() {
         const links = document.getElementById('navLinks');
         const overlay = document.getElementById('navOverlay');
@@ -572,7 +573,7 @@
         const details = el.nextElementSibling;
         const row = el.closest('.hadith-row');
         details.classList.toggle('open');
-        row.classList.toggle('is-open');
+        row.classList.toggle('is-open'); // مهم لشاشة الجوال لرفع الدائرة
         const icon = el.querySelector('.toggle-icon');
         if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
     }
@@ -628,13 +629,6 @@
     });
 
     document.addEventListener('DOMContentLoaded', renderNovels);
-    
-    // إغلاق نتائج البحث عند الضغط في أي مكان آخر
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.universal-search')) {
-            document.getElementById('searchResults').style.display = 'none';
-        }
-    });
 </script>
 </body>
 </html>
