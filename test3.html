@@ -36,6 +36,8 @@
             --reading-beige: #FCF9F1; 
             --btt-bg: #8E13BB;
             --btt-accent: #FFC600;
+            
+            /* متغير التحكم بحجم الخط للمحتوى */
             --dynamic-content-size: 1.15rem;
         }
 
@@ -60,6 +62,12 @@
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
         /* ==================== Navigation ==================== */
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+            z-index: 998; display: none;
+        }
+
         nav {
             background: rgba(94, 44, 165, 0.98);
             backdrop-filter: blur(10px);
@@ -73,10 +81,14 @@
 
         .logo-container img { height: 45px; width: auto; }
 
-        .nav-links { display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; }
+        .nav-links {
+            display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px;
+        }
+
         .nav-links a {
             color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap;
         }
+
         .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.15); }
 
         .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
@@ -88,11 +100,26 @@
                 position: fixed; top: 75px; right: -280px; width: 280px;
                 background: var(--surface-color);
                 flex-direction: column; padding: 20px; height: calc(100vh - 75px);
-                transition: right 0.3s ease; display: flex !important;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                overflow-y: auto; display: flex !important;
             }
             .nav-links.show { right: 0; }
-            .nav-links a { color: var(--text-primary); width: 100%; border-bottom: 1px solid rgba(0,0,0,0.03); }
+            .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-bottom: 1px solid rgba(0,0,0,0.03); }
         }
+
+        /* ==================== Back to Top & Font Controls ==================== */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            background-color: var(--btt-bg); border: 3px solid var(--btt-accent);
+            color: var(--btt-accent); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 1.2rem;
+            cursor: pointer; z-index: 1001; transition: all 0.4s ease;
+            opacity: 0; visibility: hidden;
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+
+        .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
+        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); }
 
         /* ==================== Header & Search ==================== */
         .unified-header {
@@ -105,8 +132,7 @@
         .universal-search { width: 100%; max-width: 600px; margin: 35px auto 0; position: relative; z-index: 1100; }
         #globalSearch { 
             width: 100%; padding: 18px 25px; border-radius: 50px; border: none; font-size: 1rem; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); outline: none; text-align: right;
-            font-family: 'Tajawal', sans-serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); outline: none; text-align: right; font-family: 'Tajawal';
         }
         .search-results {
             position: absolute; top: 110%; left: 0; right: 0; 
@@ -120,18 +146,23 @@
         /* ==================== Hadith Card Styling ==================== */
         .container { max-width: 1150px; margin: 0 auto; padding: 0 20px 60px; width: 100%; }
         .hadith-row { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px; }
+        
         .hadith-number-circle { 
             width: 46px; height: 46px; background-color: #FFC600; border: 2.5px solid #8E13BB; 
             color: #8E13BB; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
             font-weight: 800; font-size: 1.3rem; flex-shrink: 0; margin-top: 15px;
         }
+        
         .hadith-card { 
             background: var(--surface-color); border-radius: var(--radius-xl); 
             box-shadow: var(--shadow-sm); border-right: 6px solid var(--primary-color); 
-            overflow: hidden; transition: 0.3s; flex: 1; position: relative; 
+            overflow: hidden; transition: 0.3s; flex: 1; border: 1px solid rgba(0,0,0,0.05);
+            position: relative; 
         }
-        .hadith-summary { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .hadith-summary h3 { font-size: 1.3rem !important; color: var(--primary-dark); font-weight: 800; }
+        
+        .hadith-summary { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+        .hadith-summary h3 { font-size: 1.3rem !important; color: var(--primary-dark); font-weight: 800; flex: 1; text-align: right; }
+        .source-tag { background: #FFC600; padding: 5px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 800; color: var(--primary-color); }
         
         .hadith-details { 
             max-height: 0; opacity: 0; overflow: hidden; 
@@ -140,37 +171,56 @@
         }
         .hadith-details.open { max-height: 5000px; opacity: 1; padding: 10px 30px 50px; border-top: 1px solid rgba(0,0,0,0.05); }
 
-        .section-header { font-weight: 800; margin-bottom: 10px; color: var(--primary-dark); display: flex; align-items: center; gap: 10px; }
-        .section-content { padding: 5px 0 15px; line-height: 1.8; font-size: var(--dynamic-content-size); color: #334155; }
+        .detail-section { margin-top: 25px; }
+        .section-header { 
+            padding-bottom: 8px; margin-bottom: 10px; font-weight: 800; font-size: 1.1rem; 
+            display: flex; align-items: center; gap: 10px; color: var(--primary-dark);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .section-content { 
+            padding: 5px 0 10px; line-height: 1.8; 
+            font-size: var(--dynamic-content-size); 
+            color: #334155; 
+        }
 
-        .source-tag { background: #FFC600; padding: 5px 12px; border-radius: 8px; font-size: 0.85rem; color: var(--primary-color); font-weight: 800; }
-
-        /* ==================== Font & Buttons ==================== */
-        .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
-        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--btt-bg); color: var(--btt-accent); border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; border: 3px solid var(--btt-accent); }
-        .back-to-top.show { display: flex; }
+        .hadith-actions { display: flex; align-items: center; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(0,0,0,0.08); }
+        .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .btn-source { background: rgba(94, 44, 165, 0.1); color: var(--primary-color); border: 1px solid rgba(94, 44, 165, 0.2); }
+        .btn-report { background: rgba(225, 29, 72, 0.08); color: #e11d48; border: 1px solid rgba(225, 29, 72, 0.1); }
 
         /* ==================== Pagination ==================== */
-        #pagination-wrapper { text-align: center; margin: 40px 0; }
+        #pagination-wrapper { background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); text-align: center; margin: 40px auto; max-width: 500px; border: 1px solid rgba(0,0,0,0.05); }
         .pagination-btn { background: #f1f5f9; border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; margin: 0 5px; font-family: 'Tajawal'; font-weight: 600; }
         .pagination-btn:hover { background: var(--primary-color); color: white; }
         .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+        /* ==================== Footer ==================== */
+        footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; margin-top: 50px; }
+        .footer-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+        .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
+
+        /* ==================== Responsive ==================== */
         @media (max-width: 768px) {
+            /* تصغير عنوان البطاقة للجوال حصراً */
             .hadith-summary h3 { font-size: 1.05rem !important; }
-            .hadith-row { flex-direction: row; align-items: flex-start; }
-            .font-controls-fixed { left: 15px; bottom: 20px; top: auto; flex-direction: row; }
+            
+            .unified-header { padding: 90px 15px 40px; }
+            .page-title { font-size: 1.7rem; }
+            .hadith-row { gap: 10px; }
+            .hadith-number-circle { width: 38px; height: 38px; font-size: 1rem; }
+            .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
         }
 
-        /* ==================== Report Modal ==================== */
-        .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 2000; }
+        /* Report Modal */
+        .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
         .report-modal.show { display: flex; }
-        .modal-box { background: white; width: 90%; max-width: 400px; padding: 30px; border-radius: 20px; }
-        .success-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #059669; color: white; padding: 12px 25px; border-radius: 50px; display: none; z-index: 3000; }
+        .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; }
+        .success-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #059669; color: white; padding: 14px 35px; border-radius: 50px; z-index: 3000; display: none; }
     </style>
 </head>
 <body>
+
+<div class="nav-overlay" id="navOverlay" onclick="toggleMobileMenu()"></div>
 
 <nav>
     <div class="logo-container"><a href="/index.html"><img src="/images/logo.png" alt="logo" /></a></div>
@@ -195,34 +245,59 @@
 </nav>
 
 <div class="font-controls-fixed">
-    <button class="font-btn" id="fontIncrease"><i class="fas fa-plus"></i></button>
-    <button class="font-btn" id="fontReset"><i class="fas fa-redo"></i></button>
-    <button class="font-btn" id="fontDecrease"><i class="fas fa-minus"></i></button>
+    <button class="font-btn" id="fontIncrease" title="تكبير"><i class="fas fa-plus"></i></button>
+    <button class="font-btn" id="fontReset" title="إعادة"><i class="fas fa-redo"></i></button>
+    <button class="font-btn" id="fontDecrease" title="تصغير"><i class="fas fa-minus"></i></button>
 </div>
 
-<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+<button class="back-to-top" id="backToTop" title="للأعلى"><i class="fas fa-chevron-up"></i></button>
 
 <header class="unified-header">
     <h1 class="page-title">روايات تتناقض مع القرآن</h1>
     <p>فحص نقدي للمرويات التي تعارضت مع النص القرآني</p>
     <div class="universal-search">
-        <input type="text" id="globalSearch" placeholder="ابحث في العنوان أو النص (بدون تشكيل)..." />
+        <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
         <div class="search-results" id="searchResults"></div>
     </div>
 </header>
 
 <div class="container">
     <div id="hadithContainer"></div>
+
     <div id="pagination-wrapper">
-        <span id="pageInfo">الصفحة 1 من 1</span><br><br>
-        <button id="firstPage" class="pagination-btn">الأولى</button>
-        <button id="prevPage" class="pagination-btn">السابق</button>
-        <button id="nextPage" class="pagination-btn">التالي</button>
+        <span id="pageInfo">الصفحة 1 من 1</span>
+        <div style="margin-top: 15px;">
+            <button id="firstPage" class="pagination-btn">الأولى</button>
+            <button id="prevPage" class="pagination-btn">السابق</button>
+            <button id="nextPage" class="pagination-btn">التالي</button>
+        </div>
     </div>
 </div>
 
+<div class="report-modal" id="reportModal">
+    <div class="modal-box">
+        <h2>إبلاغ عن محتوى</h2>
+        <p id="modalHadithInfo"></p>
+        <div style="display:flex; gap:10px; margin-top:20px;">
+            <button class="pagination-btn" style="flex:1; background:var(--primary-color); color:white;" onclick="closeReportModal()">إرسال</button>
+            <button class="pagination-btn" style="flex:1;" onclick="closeReportModal()">إلغاء</button>
+        </div>
+    </div>
+</div>
+
+<div class="success-toast" id="successToast">تمت العملية بنجاح</div>
+
+<footer>
+    <div class="footer-links">
+        <a href="/terms.html">الشروط والأحكام</a>
+        <a href="/privacy.html">سياسة الخصوصية</a>
+        <a href="/contact.html">اتصل بنا</a>
+    </div>
+    <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
+</footer>
+
 <script>
-    // ==================== بيانات الروايات ====================
+    // ==================== البيانات الكاملة ====================
     const novelsData = [
         {
             id: 1, title: "رواية قتل المرتد", source: "البخاري", sourceUrl: "https://dorar.net/h/77qg1XUt",
@@ -251,7 +326,7 @@
             text: "عن ابن عمر قال: قال رسول الله ﷺ: بُعثت بالسيف بين يدي الساعة حتى يُعبد الله وحده لا شريك له، وجُعل رزقي تحت ظل رمحي، وجُعل الذل والصغار على من خالف أمري.", num: "5/109",
             reason: "تُصور هذه الرواية الإسلام كدين 'ارتزاق من الحرب'، حيث تربط بين 'رزق النبي' وبين 'الرمح' (الغنائم والسلب)، وهذا يطعن في نزاهة النبوة ويجعلها غاية لتحصيل الأموال والقهر. كما تصف المخالفين بـ 'الذل والصغار' بينما القرآن الكريم يعترف بالاختلاف البشري ويأمر بالبر والقسط مع غير المسلمين المسالمين. فالمهمة النبوية هي 'الهداية' وليست 'الجباية' أو 'الإذلال'.",
             proofs: [
-                { label: "الاستغناء عن أجر الناس:", verse: "وَمَا أَسْأَلُكُمْ عَلَيْهِ مِنْ أَجْرٍ ۖ إِنْ أَجْرِيَ إِلَّا عَلَىٰ رَبِّ الْعَالَمِينَ", ref: "الشعراء: 109", comment: "فكيف يكون رزقه تحت ظل رمحه وهو لا يطلب أجراً من الأصل؟" },
+                { label: "الاستغناء عن أجر الناس:", verse: "وَمَا أَسْأَلُكُمْ عَلَيْهِ مِنْ أَجْرٍ ۖ إِنْ أَجْرِيَ إِلَّا عَلَىٰ رَبِّ الْعَالَمِينَ", ref: "الشعراء: 109", comment: "فكيه يكون رزقه تحت ظل رمحه وهو لا يطلب أجراً من الأصل؟" },
                 { label: "وظيفة الرسول:", verse: "إِنَّمَا أَنْتَ مُنَذِرٌ / وَمَا أَرْسَلْنَاكَ إِلَّا مُبَشِّرًا وَنَذِيرًا", ref: "الرعد: 7 / الفرقان: 56", comment: "لم يقل القرآن 'أرسلناك محارباً لترتزق من السيوف'." },
                 { label: "الكرامة الإنسانية:", verse: "وَلَقَدْ كَرَّمْنَا بَنِي آدَمَ", ref: "الإسراء: 70", comment: "الرواية تقول بجعل 'الذل والصغار' على من خالف، بينما القرآن يقرر الكرامة لكل بني آدم." },
                 { label: "الرزق من الله:", verse: "نَحْنُ نَرْزُقُكَ ۗ وَالْعَاقِبَةُ لِلتَّقْوَىٰ", ref: "طه: 132", comment: "الرزق النبوي مكفول بضمان الله وتوفيقه، وليس مرهوناً بحد السيف والدم." }
@@ -335,7 +410,7 @@
         },
         {
             id: 12, title: "رواية سحر النبي", source: "البخاري", sourceUrl: "https://dorar.net/h/ZnETYqVd",
-            text: "سَحَرَ رَسولَ اللَّهِ صلَّى اللهُ عليه وسلَّم رَجُلٌ مِن بَنِي زُرَيْقٍ، يُقَالُ له: لَبِيدُ بنُ الأعْصَمِ، حتَّى كانَ رَسولُ اللَّهِ صَلَّى اللهُ عليه وسلَّم يُخَيَّلُ إلَيْهِ أنَّه كانَ يَفْعَلُ الشَّيْءَ وما فَعَلَهُ.", num: "5763",
+            text: "سَحَرَ رَسولَ اللَّهِ صلَّى اللهُ عليه وسلَّم رَجُلٌ مِن بَنِي زُرَيْقٍ، يُقَالُ له: لَبِيدُ بنُ الأعْصَمِ، حتَّى كانَ رَسولَ اللَّهِ صَلَّى اللهُ عليه وسلَّم يُخَيَّلُ إلَيْهِ أنَّه كانَ يَفْعَلُ الشَّيْءَ وما فَعَلَهُ.", num: "5763",
             reason: "تضرب هذه الرواية مفهوم 'العصمة' في مقتل؛ فادعاء أن النبي قد سُحر لدرجة أنه أصبح يتخيل أشياء لا تحدث (وهو نوع من الهلوسة أو فقدان الوعي بالواقع)، يفتح باباً خطيراً للتشكيك في كل ما صدر عنه في تلك الفترة. فمن يضمن أن هذا 'الوهم' أو 'التخيل' لم يمتد إلى أمور الدين أو تبليغ الوحي؟ إن نسبة السحر والاضطراب العقلي للنبي هي في الحقيقة 'فرية' قرشية سجلها القرآن وذمّ قائلها، فكيف تتحول هذه الفرية إلى حقيقة تاريخية في الروايات؟ بالإضافة إلى ذلك، فإن السحر هو تسليط شيطاني، والقرآن أكد أن الشيطان لا سلطان له على عباد الله المخلصين.",
             proofs: [
                 { label: "وصف الظالمين:", verse: "وَقَالَ الظَّالِمُونَ إِن تَتَّبِعُونَ إِلَّا رَجُلًا مَّسْحُورًا", ref: "الفرقان: 8", comment: "القرآن جعل وصف النبي بأنه 'مسحور' علامة على 'الظلم' والضلال." },
@@ -378,7 +453,7 @@
                 { label: "النهي المطلق عن الاعتداء:", verse: "وَقَاتِلُوا فِي سَبِيلِ اللَّهِ الَّذِينَ يُقَاتِلُونَكُمْ وَلَا تَعْتَدُوا ۚ إِنَّ اللَّهَ لَا يُحِبُّ الْمُعْتَدِينَ", ref: "البقرة: 190", comment: "الإغارة على الغافلين هي قمة 'الاعتداء' الذي يصرح الله بأنه لا يحب فاعليه." },
                 { label: "تشريع التعامل مع الأسرى:", verse: "فَإِذَا لَقِيتُمُ الَّذِينَ كَفَرُوا فَضَرْبَ الرِّقَابِ حَتَّىٰ إِذَا أَثْخَنتُمُوهُمْ فَشُدُّوا الْوَثَاقَ فَإِمَّا مَنًّا بَعْدُ وَإِمَّا فِدَاءً", ref: "محمد: 4", comment: "القرآن حصر مصير الأسرى في (المنّ) أي إطلاق سراحهم بلا مقابل، أو (الفداء) بمقابل، ولم يذكر خياراً ثالثاً اسمه 'السبي' أو 'الاسترقاق'، مما يجعل الرواية مخالفة للتشريع القرآني في الحرب." },
                 { label: "الوفاء بالعهود ونبذ الغدر:", verse: "وَإِمَّا تَخَافَنَّ مِن قَوْمٍ خِيَانَةً فَانبِذْ إِلَيْهِمْ عَلَىٰ سَواءٍ ۚ إِنَّ اللَّهَ لَا يُحِبُّ الْخَائِنِينَ", ref: "الأنفال: 58", comment: "حتى في حالة خوف الخيانة، أمر الله بـ 'الإعلان' عن نبذ العهد ليكون الطرفان 'على سواء'، أما الهجوم المباغت فهو نوع من الغدر الذي لا يليق بمقام النبوة." },
-                { label: "العدل حتى مع الأعداء:", verse: "وَلَا يَجْرِمَنَّكُمْ شَنَآنُ قَوْمٍ عَلَىٰ أَلَّا تَعْدِلُوا ۚ اعْدِلُوا هُوَ أَقْرَبُ لِلتَّقْوَىٰ", ref: "المائدة: 8", comment: "ليس من العدل قتل الرجال وسبي النساء لمجرد أنهم في حالة غفلة." }
+                { label: "العدل حتى مع الأعداء:", verse: "وَلَا يَجْرِمَنَّكُمْ شَنَآنُ قَوْمٍ عَلَىٰ أَلَّا تَعْدِلُوا ۚ اعْدِلُوا هُوَ أَقربُ لِلتَّقْوَىٰ", ref: "المائدة: 8", comment: "ليس من العدل قتل الرجال وسبي النساء لمجرد أنهم في حالة غفلة." }
             ]
         },
         {
@@ -386,7 +461,7 @@
             text: "رواية طويلة وردت في البخاري وفيها: أن النبي ركب البراق (دابة مجنحة) إلى بيت المقدس فصلى بالأنبياء إماماً، ثم عُرج به إلى السماوات، والتقى فيها بالأنبياء، ثم فُرضت الصلاة خمسين، فكان يتردد بين الله وبين موسى ليطلب التخفيف (بمشورة موسى) حتى صارت خمساً، وتنتهي الرواية بقوله: (فاهبط باسم الله، قال: واستيقظ وهو في المسجد الحرام)", num: "7517",
             reason: "تتعدد أوجه التناقض في هذه الرواية على عدة مستويات: <br>1- مكانياً: تذكر الرواية أن النبي أمّ الأنبياء في الأقصى، لكنها في ختامها تقول إنه هبط من السماء واستيقظ في 'المسجد الحرام'، فمتى وكيف صلى بالأنبياء إذا كان الهبوط في مكة مباشرة؟ <br>2- تشريعياً: كيف يصلي النبي بالأنبياء إماماً في الأقصى 'قبل' أن تُفرض الصلاة أصلاً في السماء؟ (وهي الصلاة التي ذهب ليتلقى فرضيتها في الرحلة ذاتها). <br>3- منطقياً (معجزة البراق): تروي عائشة في حديث آخر (حديث اللعب/الدمى) أن النبي تعجب حين رأى دمية 'فرس له جناحان' وسأل باستنكار: (فرس له جناحان؟)، فكيف يتعجب ممن ركب البراق المجنح وصعد به للسماء؟ وهل يُعقل أن تذكره عائشة بخيل سليمان ولا تذكره بالبراق الذي هو صلب معجزته؟ (مصدر الرواية: <a href='https://dorar.net/h/Im0xONEp' target='_blank' style='color:blue; text-decoration:underline;'>فرس له جناحان</a>). <br>4- عقائدياً (المفاوضات): تُصور الرواية الله عز وجل (حاشاه) وكأنه لم يكن يعلم طاقة البشر ففرض خمسين صلاة، وأن موسى كان أعلم بحال أمة محمد من خالقها، مما جعل التشريع خاضعاً لـ 'مساومة' بشرية، وهذا يضرب كمال الحكمة الإلهية. <br>5- مبدأ الإمامة: القرآن جعل إبراهيم عليه السلام (إماماً للناس)، بينما الرواية تجعل نبينا إماماً لإبراهيم، فهل يُعقل أن يُخلف الله وعده لإبراهيم في كتاب يقرأه الناس؟",
             proofs: [
-                { label: "رغض الرقي الحسي:", verse: "أَوْ تَرْقَىٰ فِي السَّمَاءِ وَلَن نُّؤْمِنَ لِرُقِيِّكَ حَّتَىٰ تُنَزِّلَ عَلَيْنَا كِتَابًا نَّقْرَؤُهُ ۗ قُلْ سُبْحَانَ رَبِّي هَل| كُنتُ إِلَّا بَشَرًا رَّسُولًا", ref: "الإسراء: 93", comment: "عندما طلب الكفار من النبي الصعود للسماء كمعجزة، أمره الله أن يرد بأنه 'بشر رسول' لا يملك خرق السنن، فكيف يفعل سراً ليلاً ما رفض الله فعله علناً كحجة؟" },
+                { label: "رفض الرقي الحسي:", verse: "أَوْ تَرْقَىٰ فِي السَّمَاءِ وَلَن نُّؤْمِنَ لِرُقِيِّكَ حَّتَىٰ تُنَزِّلَ عَلَيْنَا كِتَابًا نَّقْرَؤُهُ ۗ قُلْ سُبْحَانَ رَبِّي هَل| كُنتُ إِلَّا بَشَرًا رَّسُولًا", ref: "الإسراء: 93", comment: "عندما طلب الكفار من النبي الصعود للسماء كمعجزة، أمره الله أن يرد بأنه 'بشر رسول' لا يملك خرق السنن، فكيف يفعل سراً ليلاً ما رفض الله فعله علناً كحجة؟" },
                 { label: "إمامة إبراهيم:", verse: "قَالَ إِنِّي جَاعِلُكَ لِلنَّاسِ إِمَامًا", ref: "البقرة: 124", comment: "هذا نص محكم يقرر إمامة إبراهيم، ولا ينسخه حديث آحاد مضطرب." },
                 { label: "إتمام التشريع بعلم الله:", verse: "أَلَا يَعْلَمُ مَنْ خَلَقَ وَهو اللَّطِيفُ الْخَبِيرُ", ref: "الملك: 14", comment: "الله لا يحتاج لمشورة موسى ليخفف الصلاة عن عباده، فتقديره للفرائض مبني على علمه المطلق بطاقتهم قبل أن يخلقهم." }
             ]
@@ -417,7 +492,7 @@
         {
             id: 20, title: "التضييق على أهل الكتاب في الطريق", source: "مسلم", sourceUrl: "https://dorar.net/h/jHqx8PPb",
             text: "لا تَبْدَؤُوا اليَهُودَ ولا النَّصارَى بالسَّلامِ، فإذا لَقِيتُمْ أحَدَهُمْ في طَرِيقٍ، فاضْطَرُّوهُ إلى أضْيَقِهِ.", num: "2167",
-            reason: "تأمر هذه الرواية بممارسة 'التنمر' و'الإذلال' المادي والمعنوي ضد الآخرين (اليهود والنصارى) لمجرد اختلاف معتقدهم. فمنع إلقاء السلام، وتعمد التضييق عليهم في الطرقات لإشعارهم بالدونية، هو سلوك يتنافى مع 'الخلق العظيم' الذي بُعث النبي ليتممه. هذه الرواية تُصور النبي وكأنه يدعو لعدوانية مجانية وسوء أدب في الطرقات، وهو ما يهدم جسور 'التعارف' التي وضعها القرآن كهدف للتنوع البشري، ويجعل من المسلم شخصاً فظاً ومنفراً، بينما الإسلام يدعو إلى البر والقسط مع المسالمين من كل الملل.",
+            reason: "تأمر هذه الرواية بممارسة 'التنمر' و'إلإذلال' المادي والمعنوي ضد الآخرين (اليهود والنصارى) لمجرد اختلاف معتقدهم. فمنع إلقاء السلام، وتعمد التضييق عليهم في الطرقات لإشعارهم بالدونية، هو سلوك يتنافى مع 'الخلق العظيم' الذي بُعث النبي ليتممه. هذه الرواية تُصور النبي وكأنه يدعو لعدوانية مجانية وسوء أدب في الطرقات، وهو ما يهدم جسور 'التعارف' التي وضعها القرآن كهدف للتنوع البشري، ويجعل من المسلم شخصاً فظاً ومنفراً، بينما الإسلام يدعو إلى البر والقسط مع المسالمين من كل الملل.",
             proofs: [
                 { label: "عالمية الإنسانية والتعارف:", verse: "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا", ref: "الحجرات: 13", comment: "الخطاب هنا لـ 'الناس' أجمعين، والغاية هي 'التعارف' الذي يقتضي السلام والمودة والتعايش، وليس التضييق والإذلال الذي تذكره الرواية." },
                 { label: "الأمر بالقول الحسن للجميع:", verse: "وَقُولُوا لِلنَّاسِ حُسْنًا", ref: "البقرة: 83", comment: "لم يقل القرآن 'قولوا للمسلمين فقط حسناً'، بل أمر بالحُسن في القول مع كل 'الناس'، السلام هو رأس القول الحسن، فكيف يُنهى عن بدئه؟" },
@@ -454,13 +529,13 @@
             id: 23, title: "سنة الخلفاء والتحذير من الاكتفاء بالقرآن", source: "صحيح الجامع", sourceUrl: "https://dorar.net/h/SplSLsb4",
             text: "فإنَّهُ مَنْ يَعِشْ مِنكمْ بَعدِي فسَيَرَى اخْتلافًا كثيرًا ، فعليكُمْ بِسُنَّتِي وسنَّةِ الخُلفاءِ المهديِّينَ الرَّاشِدينَ ، تَمسَّكُوا بِها ، وعَضُّوا عليْها بالنَّواجِذِ ، وإيّاكُمْ ومُحدثاتِ الأُمورِ ؛ فإنَّ كلَّ مُحدَثةٍ بِدعةٌ ، وكلَّ بِدعةٍ ضلالَةٌ <br><b style='font-weight: bold;'>رقم الرواية: 2549</b> <br><br> <b>وفي رواية أخرى:</b> ألَا هلْ عسى رجلٌ يبلغُه الحديثُ عنِّي وهوَ مُتَّكئٌ على أريكتِهِ، فيقولُ: بيْنَنا وبينَكم كتابُ اللهِ، فما وجَدْنا فيهِ مِن حلالٍ استَحْلَلْناه، وما وجدنا فيه حرامًا حرَّمْناه، وإنَّ ما حرَّمَ رسولُ اللهِ صلى اللهُ عليهِ وسلمَ كمَّا حرَّمَ اللهُ <br>(مصدر الرواية الثانية: <a href='https://dorar.net/h/KQwxJ9W9' target='_blank' style='color:blue; text-decoration:underline;'>من هنا</a>)", 
             num: "2167",
-            reason: "تؤسس هذه الروايات لمبدأ 'ازدواجية المصدر'، بل وتذهب بعيداً بجعل 'سنة البشر' (الخلفاء) ملزمة كالوحي، وتدعي أن للنبي سلطة تحريم مستقلة عن القرآن (ما حرّم الرسول كما حرّم الله). هذا يتناقض مع جوهر التوحيد الذي يحصر حق 'التشريع والتحريم' لله وحده في كتابه. إن وصف المتمسك بالقرآن وحده بأنه 'شبعان متكئ على أريكته' هو تسفيه لمنهج الاكتفاء بالوحي المعصوم. كما أن شكوى الرسول في القرآن كانت من 'هجر القرآن'، ولو كانت الروايات جزءاً من الدين لكانت الشكوى من هجر 'القرآن والروايات'، لكن النص القرآني حصر القضية في الكتاب وحده.",
+            reason: "تؤسس هذه الروايات لمبدأ 'ازدواجية المصدر'، بل وتذهب بعيداً بجعل 'سنة البشر' (الخلفاء) ملزمة كالوحي، وتدعي أن للنبي سلطة تحريم مستقلة عن القرآن (ما حرّم الرسول كما حرّم الله). هذا يتناقض مع جوهر التوحيد الذي يحصر حق 'التشريع والتحريم' لله وحده في كتابه. إن وصف المتمسك بالقرآن وحده بأنه 'شبعان متكئ على أريكته' هو تسفيه لمنهج الاكتفاء بالوحي المعصوم. كما أن شكوى الرسول في القرآن كانت من 'هجر القرآن' ، ولو كانت الروايات جزءاً من الدين لكانت الشكوى من هجر 'القرآن والروايات'، لكن النص القرآني حصر القضية في الكتاب وحده.",
             proofs: [
                 { label: "حصر الاتباع في المُنزّل:", verse: "اتَّبِعُوا مَا أُنزِلَ إِلَيْكُم مِّن رَّبِّكُمْ وَلَا تَتَّبِعُوا مِن دُونِهِ أَوْلِيَاءَ", ref: "الأعراف: 3", comment: "الآية تأمر باتباع 'ما أُنزِل' (القرآن)، وتنهى عن اتباع غيره من الأولياء (سواء كانوا خلفاء أو رواة)، والرواية تأمر بعكس ذلك تماماً." },
                 { label: "كفاية الحديث الإلهي:", verse: "فَبِأَيِّ حَدِيثٍ بَعْدَ اللَّهِ وَآيَاتِهِ يُؤْمِنُونَ", ref: "الجاثية: 6", comment: "هذا تساؤل استنكاري صريح يرفض الإيمان بأي 'حديث' تشريعي خارج إطار آيات الله، بينما الرواية تفرض أحاديث أخرى وتجعلها 'مثل' القرآن." },
                 { label: "الشكوى من هجر القرآن:", verse: "وَقَالَ الرَّسُولُ يَا رَبِّ إِنَّ قَوْمِي اتَّخَذُوا هَٰذَا الْقُرْآنَ مَهْجُورًا", ref: "الفرقان: 30", comment: "حدد الرسول 'القرآن' فقط كمنهج مهجور، ولم يذكر السنة أو الروايات أو فعل الصحابة، مما يدل على أن 'الذكر' المحفوظ والملزم هو القرآن وحده." },
                 { label: "المصدر الوحيد للرسول:", verse: "إِنْ أَتَّبِعُ إِلَّا مَا يُوحَىٰ إِلَيَّ", ref: "الأعراف: 203", comment: "فإذا كان النبي لا يتبع إلّا ما يُوحى إليه (القرآن)، فكيف يُنسب إليه أنه شرع اتباع 'سنة الخلفاء' وهي ليست وحياً؟" },
-                { label: "انفراد الله بالتحريم:", verse: "وَلَا تَقُولُوا لِمَا تَصِفُ أَلْسِنَتُكُمُ الْكَذِبَ هَٰذَا حلالٌ وَهَٰذَا حَرَامٌ لِّتَفْتَرُوا عَلَى اللَّهِ الْكَذِبَ", ref: "النحل: 116", comment: "التحريم حق إلهي خالص ورد في القرآن، والقول بأن 'ما حرم الرسول كما حرم الله' بغير نص قرآني هو افتئات على سلطة الخالق التشريعية." }
+                { label: "انفراد الله بالتحريم:", verse: "وَلَا تَقُولُوا لِمَا تَصِفُ أَلْسَنَتُكُمُ الْكَذِبَ هَٰذَا حلالٌ وَهَٰذَا حَرَامٌ لِّتَفْتَرُوا عَلَى اللَّهِ الْكَذِبَ", ref: "النحل: 116", comment: "التحريم حق إلهي خالص ورد في القرآن، والقول بأن 'ما حرم الرسول كما حرم الله' بغير نص قرآني هو افتئات على سلطة الخالق التشريعية." }
             ]
         },
         {
@@ -534,7 +609,7 @@
         {
             id: 30, title: "اتخاذ النبي خليلاً كإبراهيم", source: "مسلم", sourceUrl: "https://dorar.net/h/poqToSpR",
             text: "سَمِعْتُ النبيَّ صَلَّى اللَّهُ عليه وسلَّمَ قَبْلَ أنْ يَمُوتَ بخَمْسٍ، وهو يقولُ: إنِّي أبْرَأُ إلى اللهِ أنْ يَكونَ لي مِنكُم خَلِيلٌ، فإنَّ اللهِ تَعَالَى قَدِ اتَّخَذَنِي خَلِيلًا، كما اتَّخَذَ إبْرَاهِيمَ خَلِيلًا، ولو كُنْتُ مُتَّخِذًا مِن أُمَّتي خَلِيلًا لَاتَّخَذْتُ أبَا بَكْرٍ خَلِيلًا، ألَا وإنَّ مَن كانَ قَبْلَكُمْ كَانُوا يَتَّخِذُونَ قُبُورَ أنْبِيَائِهِمْ وصَالِحِيهِمْ مَسَاجِدَ، ألَا فلا تَتَّخِذُوا القُبُورَ مَسَاجِدَ، إنِّي أنْهَاكُمْ عن ذلكَ.", num: "532",
-            reason: "تحاول هذه الرواية إضفاء لقب 'الخليل' على النبي محمد كمساواة له مع النبي إبراهيم، وهذا يتناقض مع الدقة القرآنية في توزيع المقامات. فالقرآن خص كل نبي بصفة تميزه؛ فموسى 'كليم الله'، وإبراهيم 'خليل الله'. ولم يذكر القرآن قط أن محمداً 'خليل'، بل شرفه بلقب 'رسول الله' و'رحمة للعالمين'. إن محاولة الرواة 'استنساخ' ألقاب الأنبياء السابقين تعكس رغبة بشرية في المفاخرة، بينما القرآن واضح في تخصيص هذا مقام لإبراهيم وحده.",
+            reason: "تحاول هذه الرواية إضفاء لقب 'الخليل' على النبي محمد كمساواة له مع النبي إبراهيم، وهذا يتناقض مع الدقة القرآنية في توزيع المقامات. فالقرآن خص كل نبي بصفة تميزه؛ فموسى 'كليم الله'، وإبراهيم 'خليل الله'. ولم يذكر القرآن قط أن محمداً 'خليل'، بل شرفه بلقب 'رسول الله' و'رحمة للعالمين'. إن محاولة الرواة 'استنساخ' ألقاب الأنبياء السابقين تعكس رغبة بشرية في المفاخرة، بينما القرآن واضح في تخصيص هذا المقام لإبراهيم وحده.",
             proofs: [
                 { label: "تخصيص الخلّة لإبراهيم:", verse: "وَاتَّخَذَ اللَّهُ إِبْرَاهِيمَ خَلِيلًا", ref: "النساء: 125", comment: "الآية جاءت بصيغة الحصر والتقرير لمقام خاص بإبراهيم، ولو كان هذا مقاماً ممنوحاً للنبي محمد لذكر ذلك القرآن." },
                 { label: "الدقة في الأوصاف النبوية:", verse: "وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٍ / وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ", ref: "القلم: 4 / الأنبياء: 107", comment: "هذه هي الأوصاف التي أرادها الله لنبيه، وإقحام لقب 'الخليل' هو إضافة بشرية لم ينزل بها الوحي." },
@@ -559,7 +634,7 @@
             proofs: [
                 { label: "الذنوب سبب الهلاك:", verse: "أَوَلَمْ يَسِيرُوا فِي الْأَرْضِ فَيَنظُرُوا كَيْفَ كَانَ عَاقِبَةُ الَّذِينَ كَانُوا مِن قَبْلِهِمْ... فَأَخَذَهُمُ اللَّهُ بِذُنُوبِهِمْ", ref: "غافر: 21", comment: "الله عز وجل يخبرنا أنه أهلك الأمم السابقة 'بذنوبهم'، فكيف تكون الذنوب سبباً لبقاء قوم ومجيئهم كما تدعي الرواية؟" },
                 { label: "الإهلاك بالذنب:", verse: "أَلَمْ يَرَوْا كَمْ أَهْلَكْنَا مِن قَبْلِهِم مِّن قَرْنٍ مَّكَّنَّاهُمْ فِي الْأَرْضِ... فَأَهْلَكْنَاهُم بِذُنُوبِهِمْ", ref: "الأنعام: 6", comment: "القرآن يربط بين الذنب والهلاك (الإفناء)، والرواية تربط بين عدم الذنب والإفناء، وهذا تناقض تام." },
-                { label: "التحذير من مغبة الذنوب:", verse: "فَلْيَحْذَرِ الَّذِينَ يُخَالِفُونَ عَنْ أَمْرِهِ أَن تُصِيبَهُمْ فِتْنَةٌ أَوْ يُصِيبَهُمْ عَذَابٌ أَلِيمٌ", ref: "النور: 63", comment: "القرآن يأمر بالحذر من مخالفة الأمر (الذنب)، بينما الرواية توحي بأن عدم المخالفة يؤدي لذهاب القوم واستبدالهم." },
+                { label: "التحذير من مغبة الذنوب:", verse: "فَلْيَحْذَرِ الَّذِينَ يُخَالِفُونَ عَنْ أَمْرِهِ أَن تُصِيبَهُمْ فِتْنَةٌ أو تُصِيبَهُمْ عَذَابٌ أَلِيمٌ", ref: "النور: 63", comment: "القرآن يأمر بالحذر من مخالفة الأمر (الذنب)، بينما الرواية توحي بأن عدم المخالفة يؤدي لذهاب القوم واستبدالهم." },
                 { label: "الدعوة للتقوى والكمال:", verse: "وَوسَارِعُوا إِلَىٰ مَغْفِرَةٍ مِّن رَّبِّكُمْ وَجَنَّةٍ عَرْضُهَا السَّمَاوَاتُ وَالْأَرْضُ أُعِدَّتْ لِلْمُتَّقِينَ", ref: "آل عمران: 133", comment: "المتقون في القرآن هم الذين يجتنبون كبائر الإثم والفواحش، والله يمدحهم ويثني عليهم، ولم يهددهم بالاستبدال لأنهم لا يذنبون." }
             ]
         },
@@ -581,7 +656,7 @@
             proofs: [
                 { label: "نفي علم المصير:", verse: "قُلْ مَا كُنتُ بِدْعًا مِّنَ الرُّسُلِ وَمَا أَدْرِي مَا يُفْعَلُ بِي وَلَا بِكُمْ ۖ إِنْ أَتَّبِعُ إِلَّا مَا يُوحَىٰ إِلَيَّ", ref: "الأحقاف: 9", comment: "إذا كان النبي بنص القرآن لا يدري ما يُفعل به ولا بأصحابه، فكيف يصدر قائمة جازمة بعشرة أسماء في الجنة؟" },
                 { label: "معيار التفاضل بالتقوى:", verse: "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ... إِنَّ أَكرمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ", ref: "الحجرات: 13", comment: "حصر التبشير في عشرة قرشيين مهاجرين يتصادم مع 'عالمية' التقوى التي لا تعترف بالقبيلة أو العرق كصك غفران وحيد." },
-                { label: "خوف الأنبياء من الحساب:", verse: "إِنِّي أَخَافُ إِنْ عَصَيْتُ رَبِّي عَذَابَ يَوْمٍ عَظيمٍ", ref: "الأنعام: 15", comment: "إذا كان الأنبياء يخافون العذاب، فكيف يُعطى 'الأمان التام' لغير الأنبياء بقائمة رسمية؟" },
+                { label: "خوف الأنبياء من الحساب:", verse: "إِّني أَخَافُ إِنْ عَصَيْتُ رَبِّي عَذَابَ يَوْمٍ عَظيمٍ", ref: "الأنعام: 15", comment: "إذا كان الأنبياء يخافون العذاب، فكيف يُعطى 'الأمان التام' لغير الأنبياء بقائمة رسمية؟" },
                 { label: "عدم تزكية الأنفس:", verse: "فَلَا تُزَكُّوا أَنفُسَكُمْ ۖ هُهو أَعْلَمُ بِمَنِ اتَّقَىٰ", ref: "النجم: 32", comment: "الرواية تقوم بتزكية أسماء محددة تزكية مطلقة ونهائية، والقرآن ينهى عن ذلك ويجعل العلم بالمآل لله وحده." }
             ]
         },
@@ -598,12 +673,11 @@
         }
     ];
 
-    // ==================== وظائف التحكم والبحث ====================
+    // ==================== محرك البحث والتحكم ====================
     let currentPage = 1;
     const perPage = 15;
     let currentFontSizeRem = 1.15;
 
-    // دالة تجاهل الهمزات والتشكيل
     function normalizeArabic(text) {
         if (!text) return "";
         return text
@@ -624,11 +698,8 @@
 
         let results = [];
         novelsData.forEach((novel, index) => {
-            const normalizedTitle = normalizeArabic(novel.title.toLowerCase());
-            const normalizedText = normalizeArabic(novel.text.toLowerCase());
-            const normalizedReason = normalizeArabic(novel.reason.toLowerCase());
-
-            if (normalizedTitle.includes(query) || normalizedText.includes(query) || normalizedReason.includes(query)) {
+            const searchPool = normalizeArabic(novel.title + novel.text + novel.reason).toLowerCase();
+            if (searchPool.includes(query)) {
                 results.push({ ...novel, originalIndex: index });
             }
         });
@@ -654,11 +725,8 @@
     }
 
     function jumpToNovel(index, id) {
-        // حساب الصفحة التي تحتوي على الرواية
         currentPage = Math.floor(index / perPage) + 1;
         renderNovels();
-        
-        // التمرير وفتح البطاقة
         setTimeout(() => {
             const card = document.getElementById(`card-h${id}`);
             if (card) {
@@ -667,8 +735,8 @@
                     toggleHadith(card.querySelector('.hadith-summary'));
                 }
                 card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                card.style.border = "2px solid var(--accent-color)";
-                setTimeout(() => card.style.border = "none", 3000);
+                card.style.boxShadow = "0 0 15px var(--primary-light)";
+                setTimeout(() => card.style.boxShadow = "var(--shadow-sm)", 2000);
             }
         }, 300);
     }
@@ -738,7 +806,6 @@
         document.getElementById('pageInfo').textContent = `الصفحة ${currentPage} من ${total}`;
         document.getElementById('prevPage').disabled = (currentPage === 1);
         document.getElementById('nextPage').disabled = (currentPage === total);
-        document.getElementById('firstPage').disabled = (currentPage === 1);
     }
 
     document.getElementById('nextPage').onclick = () => { currentPage++; renderNovels(); window.scrollTo(0, 400); };
