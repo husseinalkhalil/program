@@ -314,10 +314,16 @@
 <div class="report-modal" id="reportModal">
     <div class="modal-box">
         <h2>إبلاغ عن محتوى</h2>
-        <p id="modalHadithInfo"></p>
-        <div style="display:flex; gap:10px; margin-top:20px;">
-            <button class="pagination-btn" style="flex:1; background:var(--primary-color); color:white;" onclick="closeReportModal()">إرسال</button>
-            <button class="pagination-btn" style="flex:1;" onclick="closeReportModal()">إلغاء</button>
+        <p id="modalHadithInfo">أنت تبلغ عن: جاري التحديد...</p>
+        <form name="hadith-reports" id="reportForm" method="POST" data-netlify="true">
+            <input type="hidden" name="hadith_name" id="hiddenHadithName">
+            <input type="hidden" name="hadith_number" id="hiddenHadithNumber">
+            <label class="report-option"><input type="radio" name="issue_type" value="الرابط لا يعمل" required> <span>الرابط لا يعمل</span></label>
+            <label class="report-option"><input type="radio" name="issue_type" value="الحديث غير مطابق"> <span>الحديث غير مطابق</span></label>
+            <label class="report-option"><input type="radio" name="issue_type" value="رقم الحديث غير مطابق"> <span>رقم الحديث غير مطابق</span></label>
+            <div class="modal-footer" style="display:flex; gap:10px; margin-top:20px;">
+                <button type="submit" class="btn-send">إرسال البلاغ</button>
+                <button type="button" class="btn-cancel" onclick="closeReportModal()">إلغاء</button>
         </div>
     </div>
 </div>
