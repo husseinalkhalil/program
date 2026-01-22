@@ -36,6 +36,9 @@
             --reading-beige: #FCF9F1; 
             --btt-bg: #8E13BB;
             --btt-accent: #FFC600;
+
+            /* المتغير البرمجي للتحكم في حجم الخط للمحتوى فقط */
+            --dynamic-content-size: 1.15rem;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -178,7 +181,10 @@
         }
         
         .hadith-summary { padding: 25px 25px 25px 45px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-        .hadith-summary h3 { font-size: 1.3rem; color: var(--primary-dark); font-weight: 800; flex: 1; text-align: right; transition: all 0.3s ease; }
+        
+        /* حجم عنوان البطاقة ثابت ولا يتأثر بالتحكم بالخط */
+        .hadith-summary h3 { font-size: 1.3rem !important; color: var(--primary-dark); font-weight: 800; flex: 1; text-align: right; transition: all 0.3s ease; }
+        
         .hadith-summary:hover h3 { color: #7c3aed; transform: translateX(-5px); }
         .source-tag { background: #FFC600; padding: 5px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 800; color: var(--primary-color); }
         
@@ -194,7 +200,6 @@
             transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out; 
             background: var(--reading-beige); 
         }
-        /* تعديل جوهري هنا لضمان عدم القص */
         .hadith-details.open { max-height: 5000px; opacity: 1; padding: 10px 30px 50px; border-top: 1px solid rgba(0,0,0,0.05); }
 
         .detail-section { margin-top: 25px; background: transparent; border: none; }
@@ -203,7 +208,14 @@
             display: flex; align-items: center; gap: 10px; color: var(--primary-dark);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        .section-content { padding: 5px 0 10px; line-height: 1.8; font-size: 1.15rem; color: #334155; }
+
+        /* هذا الجزء هو المسؤول عن التكبير الديناميكي للمحتوى */
+        .section-content { 
+            padding: 5px 0 10px; 
+            line-height: 1.8; 
+            font-size: var(--dynamic-content-size); 
+            color: #334155; 
+        }
 
         .hadith-actions { display: flex; align-items: center; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(0,0,0,0.08); }
         .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; text-decoration: none !important; }
@@ -249,10 +261,9 @@
             .hadith-row.is-open .hadith-number-circle { margin-top: 0; margin-bottom: 5px; align-self: flex-start; }
             .hadith-number-circle { width: 38px; height: 38px; font-size: 1rem; margin-top: 25px; }
             .hadith-card { width: 100%; }
-            .hadith-details.open { padding: 15px 15px 40px; } /* زيادة padding أسفل الكارت في الجوال */
+            .hadith-details.open { padding: 15px 15px 40px; }
             .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
             .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
-            .section-content { font-size: 1.05rem !important; } /* تضغير بسيط لتناسب الجوال */
         }
 
         /* ==================== Report Modal & Toast ==================== */
@@ -369,7 +380,6 @@
 </footer>
 
 <script>
-    // ==================== 1. البيانات الكاملة (JSON) ====================
     const novelsData = [
         {
             id: 1, title: "رواية قتل المرتد", source: "البخاري", sourceUrl: "https://dorar.net/h/77qg1XUt",
@@ -450,7 +460,7 @@
             reason: "تنسب هذه الرواية للنبي معجزات حسية خارقة (نبع الماء من جسده وسماع تسبيح الجماد بالصوت)، وهذا يتناقض مع أمرين: أولاً: منطق القرآن الذي نص صراحة على أن البشر 'لا يفقهون' تسبيح المخلوقات، بينما تدعي الرواية أن الصحابة 'سمعوا وفقهوا' هذا التسبيح بآذانهم. ثانياً: منهج القرآن الذي رفض إعطاء النبي معجزات حسية (كفجر الينابيع من الأرض) رداً على تعنت قريش، مؤكداً أن معجزته الكبرى هي 'القرآن' نفسه، وأن المعجزات الحسية توقف نزولها لأن الأولين كذبوا بها.",
             proofs: [
                 { label: "استحالة فقه التسبيح:", verse: "تُسَبِّحُ لَهُ السَّمَاوَاتُ السَّبْعُ وَالْأَرْضُ وَمَن فِيهِنَّ ۚ وَإِن مِّن شَيْءٍ إِلَّا يُسَبِّحُ بِحَمْدِهِ وَلَٰكِن لَّا تَفْقَهُونَ تَسْبِيحَهُمْ", ref: "الإسراء: 44", comment: "الآية تقرر قاعدة كونية عامة وشاملة (لكن لا تفقهون)، والرواية تخرق هذه القاعدة." },
-                { label: "رفض المعجزات المادية:", verse: "وَقَالُوا لَن نُّؤْمِنَ لَكَ حَتَّىٰ تَفْجُرَ لَنَا مِنَ الْأَرْضِ يَنبوعاً... قُلْ سُبْحَانَ رَبِّي هَل| كُنتُ إِلَّا بَشَرًا رَّسُولًا", ref: "الإسراء: 90-93", comment: "النبي يرد بأمر الله أنه 'بشر' لا يملك خرق السنن المادية كفجر الينابيع." }
+                { label: "رغض المعجزات المادية:", verse: "وَقَالُوا لَن نُّؤْمِنَ لَكَ حَتَّىٰ تَفْجُرَ لَنَا مِنَ الْأَرْضِ يَنبوعاً... قُلْ سُبْحَانَ رَبِّي هَل| كُنتُ إِلَّا بَشَرًا رَّسُولًا", ref: "الإسراء: 90-93", comment: "النبي يرد بأمر الله أنه 'بشر' لا يملك خرق السنن المادية كفجر الينابيع." }
             ]
         },
         {
@@ -467,7 +477,7 @@
             text: "يُقالُ لِجَهَنَّمَ: هَلِ امْتَلَأْتِ، وتَقُولُ هلْ مِن مَزِيدٍ، فَيَضَعُ الرَّبُّ تَبارَكَ وتَعالَى قَدَمَهُ عليها، فَتَقُولُ: قَطْ قَطْ.", num: "4849",
             reason: "تتضمن هذه الرواية إشكاليتين خطيرتين تضربان جوهر التوحيد والمنطق القرآني: أولاً (التجسيد): تنسب لله عز وجل 'القَدَم' (وهي جارحة وجزء مادي)، وهذا يقع في فخ 'التشبيه والتجسيم'، بينما الله سبحانه ليس مادة ولا تدركه الأبصار ولا تحويه الأمكنة. ثانياً (قصور القدرة): تُصور الرواية جهنم وكأنها متمردة على إرادة الله، لا تكف عن طلب المزيد، وأن الخالق 'اضطر' لوضع قدمه فيها ليقهرها ويسكتها. وهذا يتناقض مع 'قدرة المشيئة' المطلقة؛ فالله لا يحتاج لفعل مادي ليتحكم في خلقه، بل يكفيه أمره (كن فيكون).",
             proofs: [
-                { label: "نفي المماثلة:", verse: "لَيْسَ كَمِثْلِهِ شَيْءٌ ۖ وَهُوَ السَّمِيعُ الْبَصِيرُ", ref: "الشورى: 11", comment: "هذه قاعدة ذهبية تنسف كل محاولة لتشبيه الله بخلقه أو نسبة أجزاء مادية إليه." },
+                { label: "نفي المماثلة:", verse: "لَيْسَ كَمِثْلِهِ شَيْءٌ ۖ وَهو السَّمِيعُ الْبَصِيرُ", ref: "الشورى: 11", comment: "هذه قاعدة ذهبية تنسف كل محاولة لتشبيه الله بخلقه أو نسبة أجزاء مادية إليه." },
                 { label: "سلطان الكلمة:", verse: "إِنَّمَا أَمْرُهُ إِذَا أَرَادَ شَيْئًا أَن يَقُولَ لَهُ كُن فَيَكُونُ", ref: "يس: 82", comment: "الله لا يحتاج لتدخل مادي في النار، فبكلمة منه ينهي أمرها." }
             ]
         },
@@ -494,7 +504,7 @@
             text: "أنَّهُ نَهَى عن خاتَمِ الذَّهَبِ... لا تَشْرَبُوا في آنِيَةِ الذَّهَبِ والفِضَّةِ، ولَا تَلْبَسُوا الحَرِيرَ والدِّيبَاجَ، فإنَّهَا لهم| في الدُّنْيَا ولَكُمْ في الآخِرَةِ.", num: "5864 / 5633",
             reason: "تضع هذه الروايات قيوداً وتحريمات على نوع من أنواع 'الزينة' و'المتاع' (الذهب والفضة)، في حين أن القرآن الكريم قرر قاعدة أصلية وهي أن كل ما أخرجه الله من الأرض من زينة وطيبات هو مباح للأكل والاستخدام والتمتع به. التحريم في القرآن حُصر في أمور محددة (نص قرآني واضح)، وليس من بينها المعادن أو الزينة. إن ادعاء تحريم الذهب على الرجال أو تحريم أواني الذهب يصادم صريح التوبيخ الإلهي لمن يحرم 'زينة الله'.",
             proofs: [
-                { label: "الإنكار على المحرّمين:", verse: "قُلْ مَنْ حَرَّمَ زِينَةَ اللَّهِ الَّتِي أَخْرَجَ لِعِبَادِهِ وَالطَّيِّبَاتِ مِنَ الرِّزْقِ", ref: "الأعراف: 32", comment: "استفهام استنكاري يفيد نفي أن يكون لأحد حق التحريم للزينة التي أخرجها الله." },
+                { label: "الإنكار على المحرّمين:", verse: "قُلْ مَنْ حَرَّمَ زِينَةَ اللَّهِ الَّتِي أَخْرَجَ لِعِبَادِهِ وَالطيِّبَاتِ مِنَ الرِّزْقِ", ref: "الأعراف: 32", comment: "استفهام استنكاري يفيد نفي أن يكون لأحد حق التحريم للزينة التي أخرجها الله." },
                 { label: "حصر المحرمات:", verse: "قُلْ إِنَّمَا حَرَّمَ رَبِّيَ الْفَوَاحِشَ... وَأَن تُشْرِكُوا بِاللَّهِ مَا لَمْ يُنَزِّلْ بِهِ سُلْطَانًا", ref: "الأعراف: 33", comment: "كلمة (إنما) تفيد الحصر، وقد حصر الله المحرمات في كتابه، وليس لبس الذهب منها." }
             ]
         },
@@ -533,9 +543,9 @@
             text: "رواية طويلة وردت في البخاري وفيها: أن النبي ركب البراق (دابة مجنحة) إلى بيت المقدس فصلى بالأنبياء إماماً، ثم عُرج به إلى السماوات، والتقى فيها بالأنبياء، ثم فُرضت الصلاة خمسين، فكان يتردد بين الله وبين موسى ليطلب التخفيف (بمشورة موسى) حتى صارت خمساً، وتنتهي الرواية بقوله: (فاهبط باسم الله، قال: واستيقظ وهو في المسجد الحرام)", num: "7517",
             reason: "تتعدد أوجه التناقض في هذه الرواية على عدة مستويات: <br>1- مكانياً: تذكر الرواية أن النبي أمّ الأنبياء في الأقصى، لكنها في ختامها تقول إنه هبط من السماء واستيقظ في 'المسجد الحرام'، فمتى وكيف صلى بالأنبياء إذا كان الهبوط في مكة مباشرة؟ <br>2- تشريعياً: كيف يصلي النبي بالأنبياء إماماً في الأقصى 'قبل' أن تُفرض الصلاة أصلاً في السماء؟ (وهي الصلاة التي ذهب ليتلقى فرضيتها في الرحلة ذاتها). <br>3- منطقياً (معجزة البراق): تروي عائشة في حديث آخر (حديث اللعب/الدمى) أن النبي تعجب حين رأى دمية 'فرس له جناحان' وسأل باستنكار: (فرس له جناحان؟)، فكيف يتعجب ممن ركب البراق المجنح وصعد به للسماء؟ وهل يُعقل أن تذكره عائشة بخيل سليمان ولا تذكره بالبراق الذي هو صلب معجزته؟ (مصدر الرواية: <a href='https://dorar.net/h/Im0xONEp' target='_blank' style='color:blue; text-decoration:underline;'>فرس له جناحان</a>). <br>4- عقائدياً (المفاوضات): تُصور الرواية الله عز وجل (حاشاه) وكأنه لم يكن يعلم طاقة البشر ففرض خمسين صلاة، وأن موسى كان أعلم بحال أمة محمد من خالقها، مما جعل التشريع خاضعاً لـ 'مساومة' بشرية، وهذا يضرب كمال الحكمة الإلهية. <br>5- مبدأ الإمامة: القرآن جعل إبراهيم عليه السلام (إماماً للناس)، بينما الرواية تجعل نبينا إماماً لإبراهيم، فهل يُعقل أن يُخلف الله وعده لإبراهيم في كتاب يقرأه الناس؟",
             proofs: [
-                { label: "رفض الرقي الحسي:", verse: "أَوْ تَرْقَىٰ فِي السَّمَاءِ وَلَن نُّؤْمِنَ لِرُقِيِّكَ حَّتَىٰ تُنَزِّلَ عَلَيْنَا كِتَابًا نَّقْرَؤُهُ ۗ قُلْ سُبْحَانَ رَبِّي هَل| كُنتُ إِلَّا بَشَرًا رَّسُولًا", ref: "الإسراء: 93", comment: "عندما طلب الكفار من النبي الصعود للسماء كمعجزة، أمره الله أن يرد بأنه 'بشر رسول' لا يملك خرق السنن، فكيف يفعل سراً ليلاً ما رفض الله فعله علناً كحجة؟" },
+                { label: "رغض الرقي الحسي:", verse: "أَوْ تَرْقَىٰ فِي السَّمَاءِ وَلَن نُّؤْمِنَ لِرُقِيِّكَ حَّتَىٰ تُنَزِّلَ عَلَيْنَا كِتَابًا نَّقْرَؤُهُ ۗ قُلْ سُبْحَانَ رَبِّي هَل| كُنتُ إِلَّا بَشَرًا رَّسُولًا", ref: "الإسراء: 93", comment: "عندما طلب الكفار من النبي الصعود للسماء كمعجزة، أمره الله أن يرد بأنه 'بشر رسول' لا يملك خرق السنن، فكيف يفعل سراً ليلاً ما رفض الله فعله علناً كحجة؟" },
                 { label: "إمامة إبراهيم:", verse: "قَالَ إِنِّي جَاعِلُكَ لِلنَّاسِ إِمَامًا", ref: "البقرة: 124", comment: "هذا نص محكم يقرر إمامة إبراهيم، ولا ينسخه حديث آحاد مضطرب." },
-                { label: "إتمام التشريع بعلم الله:", verse: "أَلَا يَعْلَمُ مَنْ خَلَقَ وَهُوَ اللَّطِيفُ الْخَبِيرُ", ref: "الملك: 14", comment: "الله لا يحتاج لمشورة موسى ليخفف الصلاة عن عباده، فتقديره للفرائض مبني على علمه المطلق بطاقتهم قبل أن يخلقهم." }
+                { label: "إتمام التشريع بعلم الله:", verse: "أَلَا يَعْلَمُ مَنْ خَلَقَ وَهو اللَّطِيفُ الْخَبِيرُ", ref: "الملك: 14", comment: "الله لا يحتاج لمشورة موسى ليخفف الصلاة عن عباده، فتقديره للفرائض مبني على علمه المطلق بطاقتهم قبل أن يخلقهم." }
             ]
         },
         {
@@ -590,7 +600,7 @@
             reason: "تنسف هذه الرواية ركناً أساسياً من أركان العقيدة القرآنية وهو 'العدل المطلق' و'المسؤولية الشخصية'. فادعاء أن الله يغفر للمسلم ذنوبه ثم يأخذ تلك الذنوب 'ليضعها' على أشخاص آخرين (يهود ونصارى) لم يرتكبوها، هو قمة الظلم الذي نزه الله نفسه عنه. الرواية تحول 'يوم الدين' من يوم للحق والميزان بالقسط، إلى محاباة فئوية تُعاقب البريء بذنب المسيء. كما أن هذه الرواية تغري المسلم بالاستهانة بالذنوب (حتى لو كانت كالجبال) ظناً منه أن هناك 'كبش فداء' سيحملها عنه، وهو ما يتناقض مع منهج التقوى والحذر القرآني.",
             proofs: [
                 { label: "قاعدة المسؤولية الفردية:", verse: "وَلَا تَزِرُ وَازِرَةٌ وِزْرَ أُخْرَىٰ", ref: "الأنعام: 164، الإسراء: 15، فاطر: 18، الزمر: 7، النجم: 38", comment: "وهي نص قطعي بأنه لا يمكن لنفس أن تحمل ذنب نفس أخرى مهما كانت القرابة أو العقيدة، والرواية تفرغ هذه القاعدة من معناها تماماً." },
-                { label: "ارتباط الجزاء بالسعي:", verse: "وَأَن لَّيسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ", ref: "النجم: 39", comment: "فإذا كان ليس للإنسان إلّا ما سعى، فكيف يُعاقب اليهودي أو النصراني على 'سعي' المسلم وذنوبه؟" },
+                { label: "ارتباط الجزاء بالسعي:", verse: "وَأَن لَّيسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ", ref: "الجم: 39", comment: "فإذا كان ليس للإنسان إلّا ما سعى، فكيف يُعاقب اليهودي أو النصراني على 'سعي' المسلم وذنوبه؟" },
                 { label: "رهينة العمل:", verse: "كُلُّ نَفْسٍ بِمَا كَسَبَتْ رَهِينَةٌ", ref: "المدثر: 38", comment: "كل إنسان محبوس ومرهون بعمله الشخصي فقط، لا بعمل غيره." },
                 { label: "دقة الميزان:", verse: "فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ ۞ وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ", ref: "الزلزلة: 7-8", comment: "القرآن يؤكد أن المحاسبة بالذرة، والشر الذي يعمله الإنسان سيراه هو، وليس شخصاً آخر." },
                 { label: "نفي الظلم عن الله:", verse: "إِنَّ اللَّهَ لَا يَظْلِمُ مِثْقَالَ ذَرَّةٍ", ref: "النساء: 40", comment: "تحميل شخص ذنب غيره هو أقصى درجات الظلم، والله منزه عن ذلك." },
@@ -626,7 +636,7 @@
             text: "لَنْ يُنَجِّيَ أحَدًا مِنكُم عَمَلُهُ، قالوا: ولا أنْتَ يا رَسولَ اللَّهِ؟ قالَ: ولا أنا، إلَّا أنْ يَتَغَمَّدَنِي اللَّهُ برَحْمَةٍ، سَدِّدُوا وقارِبُوا...", num: "6463",
             reason: "تؤدي هذه الرواية إلى تثبيط العزائم وهدم مبدأ 'العدل والمسؤولية'؛ فهي توحي بأن سعي الإنسان وعمله الصالح لا قيمة لهما، وأن دخول الجنة عملية قائمة على 'المحاباة' الإلهية دون اعتبار للجهد البشري. هذا يتناقض جذرياً مع المنطق القرآني الذي جعل الجنة 'ثمناً' و'ميراثاً' مقابل العمل الصالح. إن نفي دخول النبي نفسه الجنة بعمله يضرب قدوة العمل الصالح في مقتل.",
             proofs: [
-                { label: "العمل سبب الدخول:", verse: "تِلْكَ الْجَنَّةُ الَّتِي أُورِثْتُمُوهَا بِمَا كُنتُمْ تَعْمَلُونَ", ref: "الزخرف: 72", comment: "حرف الباء في (بما) هو 'باء السببية'، أي أن سبب الميراث والملك للجنة هو العمل، والرواية تنفي هذه السببية." },
+                { label: "العمل سبب الدخول:", verse: "تِلْكَ الْجَنَّةُ الَّتِي أورِثْتُمُوهَا بِمَا كُنتُمْ تَعْمَلُونَ", ref: "الزخرف: 72", comment: "حرف الباء في (بما) هو 'باء السببية'، أي أن سبب الميراث والملك للجنة هو العمل، والرواية تنفي هذه السببية." },
                 { label: "أمر الملائكة للمؤمنين:", verse: "الَّذِينَ تَتَوَفَّاهُمُ الْمَلَائِكَةُ طَيِّبِينَ ۙ يَقُولُونَ سَلَامٌ عَلَيْكُمُ ادْخُلُوا الْجَنَّةَ بِمَا كُنتُمْ تَعْمَلُونَ", ref: "النحل: 32", comment: "الملائكة تعلن صراحة أن الدخول هو 'بسبب العمل'، فكيف تنسب الرواية للنبي قولاً يعاكس قول الملائكة؟" },
                 { label: "الجزاء العادل:", verse: "فَلَا تَعْلَمُ نَفْسٌ مَّا أُخْفِيَ لَهُم مِّن قُرَّةِ أَعْيُنٍ جَزَاءً بِمَا كَانُوا يَعْمَلُونَ", ref: "السجدة: 17", comment: "الله جعل ما في الجنة 'جزاءً' للعمل، والجزاء يقتضي لزوماً استحقاقاً مبنياً على فعل." },
                 { label: "نفي الظلم والعبثية:", verse: "وَمَا تُجْزَوْنَ إِلَّا مَا كُنتُمْ تَعْمَلُونَ", ref: "الصافات: 39", comment: "تؤكد الآية أن منظومة الحساب والجزاء محصورة تماماً فيما يعمله الإنسان." },
@@ -640,7 +650,7 @@
             proofs: [
                 { label: "نفي السماع عن أهل القبور:", verse: "وَمَا أَنتَ بِمُسْمِعٍ مَّن فِي الْقُبُورِ", ref: "فاطر: 22", comment: "الآية واضحة كالشمس في نفي قدرة النبي على إسماع الموتى، والرواية تدعي أنه أسمعهم فعلاً، بل وكانوا أسمع من الصحابة!" },
                 { label: "حاجز البرزخ:", verse: "وَمِن وَرَائِهِم بَرْزَخٌ إِلَىٰ يَوْمِ يُبْعَثُونَ", ref: "المؤمنون: 100", comment: "البرزخ هو الحاجز والمانع من العودة أو التواصل بين العالمين، والقول بسماعهم لخطاب النبي هو خرق لهذا الحاجز الإلهي." },
-                { label: "عدم استجابة الأموات:", verse: "إِن تَدْعُوهُمْ لَا يَسْمَعُوا دُعَاءَكُمْ وَلَوْ سَمِعُوا مَا اسْتَجَابُوا لَكُمْ", ref: "فاطر: 14", comment: "وحتى لو فُرض سماعهم (على سبيل الجدل) فهم لا يملكون القدرة على الاستجابة أو التفاعل، بينما الرواية تصر على أنهم 'سمعوا' يقيناً كفعل مادي." },
+                { label: "عدم استجابة الأموات:", verse: "إِن تتدْعُوهُمْ لَا يَسْمَعُوا دُعَاءَكُمْ وَلَوْ سَمِعُوا مَا اسْتَجَابُوا لَكُمْ", ref: "فاطر: 14", comment: "وحتى لو فُرض سماعهم (على سبيل الجدل) فهم لا يملكون القدرة على الاستجابة أو التفاعل، بينما الرواية تصر على أنهم 'سمعوا' يقيناً كفعل مادي." },
                 { label: "استنكار عمر بن الخطاب:", verse: "كيف تكلم أجساداً لا أرواح فيها؟", ref: "من نص الرواية", comment: "يُلاحظ أن عمر بن الخطاب (بفطرته العقلية) استنكر الفعل، مما يدل على أن المنطق البشري والقرآني يرفض فكرة تواصل الموتى مع عالمنا." }
             ]
         },
@@ -664,7 +674,7 @@
                 { label: "كفاية الله للمستهزئين:", verse: "إِنَّا كَفَيْنَاكَ الْمُسْتَهْزِئِينَ", ref: "الحجر: 95", comment: "الله عز وجل تعهد بكفاية النبي من شر المستهزئين، مما ينفي الحاجة للجوء لوسائل القتل والغدر للرد على كلماتهم." },
                 { label: "علاج ضيق الصدر:", verse: "وَلَقَدْ نَعْلَمُ أَنَّكَ يَضِيقُ صَدْرُكَ بِمَا يَقُولُونَ * فَسَبِّح| بِحَمْدِ رَبِّكَ وَكُن مِّنَ السَّاجِدِينَ", ref: "الحجر: 97-98", comment: "لم يقترح القرآن قتل صاحب القول السيئ لعلاج ضيق صدر النبي، بل أمره بالصلاة والسجود." },
                 { label: "توقع الأذى والصبر:", verse: "وَلَتَسْمَعُنَّ مِنَ الَّذِينَ أُوتُوا الْكِتَابَ مِن قَبْلِكُمْ وَمِنَ الَّذِينَ أَشْرَكُوا أَذًى كَثِيرًا ۚ وَإِن تَصْبِرُوا وَتَتَّقُوا فَإِنَّ ذَٰلِكَ مِنْ عَزْمِ الْأُمُورِ", ref: "آل عمران: 186", comment: "القرآن يخبر المسلمين بأنهم سيسمعون 'أذى كثيراً'، وجعل الاستجابة الصحيحة هي 'الصبر والتقوى'." },
-                { label: "الإعراض عن الجاهلين:", verse: "خُذِ الْعَفْوَ وَأْمُرْ بِالْعُرْفِ وَأَعْرِضْ عَنِ الْجَاهِلِينَ", ref: "الأعراف: 199", comment: "المنهج النبوي القرآني هو 'الإعراض' وليس 'الاغتيال'." }
+                { label: "الإعراض عن الجاهلين:", verse: "خُذِ الْعَفْوَ وَأْمُرْ بِالْعُرْفِ وَأَعْرِضْ عَنِ الْجاهِلِينَ", ref: "الأعراف: 199", comment: "المنهج النبوي القرآني هو 'الإعراض' وليس 'الاغتيال'." }
             ]
         },
         {
@@ -694,7 +704,7 @@
             reason: "تصادم هذه الرواية نصاً قرآنياً تكرر في سبعة مواضع في كتاب الله، وهو أن خلق السماوات والأرض وما بينهما تم في 'ستة أيام'، بينما تجعل الرواية مدة الخلق 'سبعة أيام'. هذا التناقض العددي ليس مجرد خطأ بسيط، بل هو اختلاف في جوهر الخبر الإلهي. كما أن الرواية تقحم 'يوم السبت' كبداية للخلق، وهو ما يتوافق مع موروثات إسرائيلية سابقة، بينما القرآن الكريم كان حاسماً في رقم 'ستة'. ومن المثير للانتباه أن علماء كبار كالبخاري وابن تيمية انتقدوا هذه الرواية وأكدوا أنها تخالف القرآن.",
             proofs: [
                 { label: "حتمية الأيام الستة:", verse: "اللَّهُ الَّذِي خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ وَمَا بَيْنَهُمَا فِي سِتَّةِ أَيَّامٍ", ref: "السجدة: 4", comment: "تكرر هذا الرقم (ستة أيام) في سور: (الأعراف، يونس، هود، الفرقان، ق، الحديد)، مما يجعله حقيقة قرآنية قطعية لا تقبل الزيادة، والرواية تزيد عليها يوماً سابعاً." },
-                { label: "تفصيل الخلق في سورة فصلت:", verse: "قُلْ أَئِنَّكُمْ لَتَكْفُرُونَ بِالَّذِي خَلَقَ الْأَرْضَ فِي يَوْمَيْنِ... وَجَعَلَ فِيهَا رَوَاسِيَ مِن فَوْقِهَا وَبَارَكَ فِيهَا وَقَدَّرَ فِيهَا أَقْوَاتَهَا فِي أَرْبَعَةِ أَيَّامٍ... فَقَضَاهُنَّ سَبْعَ سَمَاوَاتٍ فِي يَوْمَيْنِ", ref: "فصلت: 9-12", comment: "المجموع في التفصيل القرآني يعود دائماً إلى الرقم ستة (باعتبار تداخل الأيام)، ولا يمكن بحال من الأحوال أن يصل إلى سبعة أيام كما زعمت الرواية." },
+                { label: "تفصيل الخلق في سورة فصلت:", verse: "قُلْ أَئِنَّكُمْ لَتَكْفُرُونَ بِالَّذِي خَلَقَ الْأَرْضَ فِي يَوْمَيْنِ... وَجَعَلَ فِيهَا رَوَاسِيَ مِن فَوْقِهَا وَبَارَكا فِيهَا وَقَدَّرَ فِيهَا أَقْوَاتَهَا فِي أَرْبَعَةِ أَيَّامٍ... فَقَضَاهُنَّ سَبْعَ سَمَاوَاتٍ فِي يَوْمَيْنِ", ref: "فصلت: 9-12", comment: "المجموع في التفصيل القرآني يعود دائماً إلى الرقم ستة (باعتبار تداخل الأيام)، ولا يمكن بحال من الأحوال أن يصل إلى سبعة أيام كما زعمت الرواية." },
                 { label: "نفي اللغوب (التعب):", verse: "وَلَقَدْ خَلَقْنَا السَّمَاوَاتِ وَالْأَرْضَ وَمَا بَيْنَهُمَا فِي سِتَّةِ أَيَّامٍ وَمَا مَسَّنَا مِن لُّغُوبٍ", ref: "ق: 38", comment: "جاءت هذه الآية لتصحح مفاهيم خاطئة ادعت أن الله خلق في ستة واستراح في السابع، فثبّت القرآن رقم (6) ونفى التعب، بينما جاءت الرواية لتجعل الخلق مستمراً طوال أيام الأسبوع." },
                 { label: "وحدة المصدر والمضمون:", verse: "اتفاق سبع آيات على رقم ستة", ref: "القرآن الكريم", comment: "القرآن الكريم يفسر بعضه بعضاً، واتفاق سبع آيات على رقم 'ستة' يجعل أي رواية تخالف هذا الرقم 'شاذة' ومنكرة لمصادمتها النص القرآني المحكم." }
             ]
@@ -729,7 +739,7 @@
                 { label: "نفي علم المصير:", verse: "قُلْ مَا كُنتُ بِدْعًا مِّنَ الرُّسُلِ وَمَا أَدْرِي مَا يُفْعَلُ بِي وَلَا بِكُمْ ۖ إِنْ أَتَّبِعُ إِلَّا مَا يُوحَىٰ إِلَيَّ", ref: "الأحقاف: 9", comment: "إذا كان النبي بنص القرآن لا يدري ما يُفعل به ولا بأصحابه، فكيف يصدر قائمة جازمة بعشرة أسماء في الجنة؟" },
                 { label: "معيار التفاضل بالتقوى:", verse: "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ... إِنَّ أَكرمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ", ref: "الحجرات: 13", comment: "حصر التبشير في عشرة قرشيين مهاجرين يتصادم مع 'عالمية' التقوى التي لا تعترف بالقبيلة أو العرق كصك غفران وحيد." },
                 { label: "خوف الأنبياء من الحساب:", verse: "إِنِّي أَخَافُ إِنْ عَصَيْتُ رَبِّي عَذَابَ يَوْمٍ عَظيمٍ", ref: "الأنعام: 15", comment: "إذا كان الأنبياء يخافون العذاب، فكيف يُعطى 'الأمان التام' لغير الأنبياء بقائمة رسمية؟" },
-                { label: "عدم تزكية الأنفس:", verse: "فَلَا تُزَكُّوا أَنفُسَكُمْ ۖ هُوَ أَعْلَمُ بِمَنِ اتَّقَىٰ", ref: "النجم: 32", comment: "الرواية تقوم بتزكية أسماء محددة تزكية مطلقة ونهائية، والقرآن ينهى عن ذلك ويجعل العلم بالمآل لله وحده." }
+                { label: "عدم تزكية الأنفس:", verse: "فَلَا تُزَكُّوا أَنفُسَكُمْ ۖ هُهو أَعْلَمُ بِمَنِ اتَّقَىٰ", ref: "النجم: 32", comment: "الرواية تقوم بتزكية أسماء محددة تزكية مطلقة ونهائية، والقرآن ينهى عن ذلك ويجعل العلم بالمآل لله وحده." }
             ]
         },
         {
@@ -743,9 +753,9 @@
                 { label: "الشهادة الحقيقية هي العمل:", verse: "وَمَنْ أَحْسَنُ قَوْلًا مِّمَّن دَعَا إِلَى اللَّهِ وَعَمِلَ صَالِحًا", ref: "فصلت: 33", comment: "القرآن يقرن دائماً القول بالعمل، والادعاء بأن القول وحده يكفي لدخول الجنة هو تعطيل لجوهر التكليف القرآني." }
             ]
         }
-        ];
+    ];
 
-    // ==================== 2. نظام البحث مع التظليل ====================
+    // ==================== 1. نظام البحث ====================
     function performSearch() {
         const query = document.getElementById('globalSearch').value.toLowerCase().trim();
         const resultsContainer = document.getElementById('searchResults');
@@ -756,35 +766,8 @@
 
         let results = [];
         novelsData.forEach(novel => {
-            const text = novel.text.toLowerCase();
-            const title = novel.title.toLowerCase();
-            const reason = novel.reason.toLowerCase();
-            let foundIn = '';
-            let foundText = '';
-            let matchCount = 0;
-
-            if (title.includes(query)) {
-                foundIn = 'العنوان';
-                foundText = novel.title;
-                matchCount++;
-            } else if (text.includes(query)) {
-                foundIn = 'نص الرواية';
-                foundText = novel.text;
-                matchCount++;
-            } else if (reason.includes(query)) {
-                foundIn = 'وجه التناقض';
-                foundText = novel.reason;
-                matchCount++;
-            }
-
-            if (matchCount > 0) {
-                results.push({
-                    id: novel.id,
-                    title: novel.title,
-                    foundIn,
-                    foundText,
-                    source: novel.source
-                });
+            if (novel.title.toLowerCase().includes(query) || novel.text.toLowerCase().includes(query) || novel.reason.toLowerCase().includes(query)) {
+                results.push(novel);
             }
         });
 
@@ -797,11 +780,7 @@
         results.slice(0, 10).forEach(result => {
             const item = document.createElement('div');
             item.className = 'search-item';
-            item.innerHTML = `
-                <div style="font-weight:700; margin-bottom:8px;">${highlight(result.title, query)}</div>
-                <div style="font-size:0.9em; color:#666;">في: ${result.foundIn}</div>
-                <div style="font-size:0.85em; color:#555; margin-top:6px;">${highlight(result.foundText.substring(0, 100) + '...', query)}</div>
-            `;
+            item.innerHTML = `<strong>${result.title}</strong><br><small>${result.source}</small>`;
             item.onclick = () => {
                 scrollToNovel(result.id);
                 resultsContainer.style.display = 'none';
@@ -812,31 +791,23 @@
         resultsContainer.style.display = 'block';
     }
 
-    function highlight(text, query) {
-        const regex = new RegExp(`(${query})`, 'gi');
-        return text.replace(regex, '<mark>$1</mark>');
-    }
-
     function scrollToNovel(id) {
         const card = document.getElementById(`card-h${id}`);
         if (card) {
             const details = card.querySelector('.hadith-details');
-            if (details && !details.classList.contains('open')) {
+            if (!details.classList.contains('open')) {
                 card.querySelector('.hadith-summary').click();
             }
             setTimeout(() => {
                 card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                card.style.boxShadow = '0 0 0 3px var(--accent-color)';
-                setTimeout(() => card.style.boxShadow = '', 2000);
             }, 300);
         }
     }
 
-    // ==================== 3. محرك العرض والتحكم ====================
+    // ==================== 2. العرض والتحكم ====================
     let currentPage = 1;
     const perPage = 15;
-    let filteredNovels = [...novelsData];
-    let fontScale = 1;
+    let currentFontSizeRem = 1.15; // حجم الخط الافتراضي
 
     function renderNovels() {
         const container = document.getElementById('hadithContainer');
@@ -844,21 +815,15 @@
         
         const start = (currentPage - 1) * perPage;
         const end = start + perPage;
-        const pageData = filteredNovels.slice(start, end);
-
-        if (pageData.length === 0) {
-            container.innerHTML = "<p style='text-align:center; padding:50px;'>لا توجد نتائج مطابقة لبحثك.</p>";
-        }
+        const pageData = novelsData.slice(start, end);
 
         pageData.forEach((novel) => {
             let proofsHTML = "";
             novel.proofs.forEach(p => {
                 proofsHTML += `
-                    <div class="section-content" style="font-size: ${1.15 * fontScale}rem">
-                        <b style="font-weight: bold;">${p.label}</b> قال تعالى: 
-                        <span style="color: #0056b3; font-weight: 500;">{${p.verse}}</span> 
-                        <span style="color: #28a745; font-size: 12px; font-weight: bold;">[${p.ref}]</span>. 
-                        <span style="color: #334155;">${p.comment}</span>
+                    <div class="section-content">
+                        <b>${p.label}</b> قال تعالى: <span style="color: #0056b3;">{${p.verse}}</span> 
+                        <span style="color: #28a745; font-size: 0.8rem;">[${p.ref}]</span>. ${p.comment}
                     </div>`;
             });
 
@@ -868,7 +833,7 @@
                 <div class="hadith-card" id="card-h${novel.id}">
                     <i class="far fa-bookmark fav-header-icon" title="أضف للمفضلة" onclick="toggleFavorite(event, 'h${novel.id}')"></i>
                     <div class="hadith-summary" onclick="toggleHadith(this)">
-                        <h3 style="font-size: ${1.3 * fontScale}rem">${novel.title}</h3>
+                        <h3>${novel.title}</h3>
                         <div style="display:flex; align-items:center; gap:12px;">
                             <span class="source-tag">${novel.source}</span>
                             <i class="fas fa-chevron-down toggle-icon"></i>
@@ -877,8 +842,8 @@
                     <div class="hadith-details">
                         <div class="detail-section">
                             <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
-                            <div class="section-content" style="font-size: ${1.15 * fontScale}rem">${novel.text}</div>
-                            <div class="section-content"><b style="font-weight: bold;">رقم الرواية: ${novel.num}</b></div>
+                            <div class="section-content">${novel.text}</div>
+                            <div class="section-content"><b>رقم الرواية: ${novel.num}</b></div>
                             <div class="hadith-actions">
                                 <a href="${novel.sourceUrl}" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
                                 <div class="action-btn btn-report" onclick="openReportModal('${novel.title}', '${novel.num}')"><i class="fas fa-flag"></i> إبلاغ</div>
@@ -886,7 +851,7 @@
                         </div>
                         <div class="detail-section">
                             <div class="section-header"><i class="fas fa-exclamation-triangle"></i> وجه التناقض</div>
-                            <div class="section-content" style="font-size: ${1.15 * fontScale}rem">${novel.reason}</div>
+                            <div class="section-content">${novel.reason}</div>
                         </div>
                         <div class="detail-section">
                             <div class="section-header"><i class="fas fa-balance-scale"></i> الميزان (الرد القرآني)</div>
@@ -902,6 +867,24 @@
         syncFavIcons();
     }
 
+    // --- تحديث حجم الخط برمجياً عبر CSS Variables ---
+    function updateFontSize() {
+        document.documentElement.style.setProperty('--dynamic-content-size', currentFontSizeRem + 'rem');
+    }
+
+    document.getElementById('fontIncrease').onclick = () => { currentFontSizeRem += 0.1; updateFontSize(); };
+    document.getElementById('fontDecrease').onclick = () => { if(currentFontSizeRem > 0.8) currentFontSizeRem -= 0.1; updateFontSize(); };
+    document.getElementById('fontReset').onclick = () => { currentFontSizeRem = 1.15; updateFontSize(); };
+
+    function toggleHadith(el) {
+        const details = el.nextElementSibling;
+        const row = el.closest('.hadith-row');
+        details.classList.toggle('open');
+        row.classList.toggle('is-open');
+        const icon = el.querySelector('.toggle-icon');
+        if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
     function toggleMobileMenu() {
         const links = document.getElementById('navLinks');
         const overlay = document.getElementById('navOverlay');
@@ -915,40 +898,17 @@
         }
     }
 
-    document.getElementById('navOverlay').onclick = toggleMobileMenu;
-
-    function toggleHadith(el) {
-        const details = el.nextElementSibling;
-        const row = el.closest('.hadith-row');
-        details.classList.toggle('open');
-        row.classList.toggle('is-open');
-        const icon = el.querySelector('.toggle-icon');
-        if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
-    }
-
-    function changePage(step) {
-        currentPage += step;
-        renderNovels();
-        window.scrollTo({top:0, behavior:'smooth'});
-    }
-
-    function goToPage(p) {
-        currentPage = p;
-        renderNovels();
-        window.scrollTo({top:0, behavior:'smooth'});
-    }
-
     function updatePaginationUI() {
-        const total = Math.ceil(filteredNovels.length / perPage);
-        document.getElementById('pageInfo').textContent = `الصفحة ${currentPage} من ${total || 1}`;
+        const total = Math.ceil(novelsData.length / perPage);
+        document.getElementById('pageInfo').textContent = `الصفحة ${currentPage} من ${total}`;
         document.getElementById('prevPage').disabled = (currentPage === 1);
-        document.getElementById('nextPage').disabled = (currentPage === total || total === 0);
+        document.getElementById('nextPage').disabled = (currentPage === total);
         document.getElementById('firstPage').disabled = (currentPage === 1);
     }
 
-    document.getElementById('fontIncrease').onclick = () => { fontScale += 0.1; renderNovels(); };
-    document.getElementById('fontDecrease').onclick = () => { if(fontScale > 0.8) fontScale -= 0.1; renderNovels(); };
-    document.getElementById('fontReset').onclick = () => { fontScale = 1; renderNovels(); };
+    document.getElementById('nextPage').onclick = () => { currentPage++; renderNovels(); window.scrollTo(0, 400); };
+    document.getElementById('prevPage').onclick = () => { currentPage--; renderNovels(); window.scrollTo(0, 400); };
+    document.getElementById('firstPage').onclick = () => { currentPage = 1; renderNovels(); window.scrollTo(0, 400); };
 
     function toggleFavorite(e, id) {
         e.stopPropagation();
@@ -971,62 +931,37 @@
         const favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
         document.querySelectorAll('.fav-header-icon').forEach(icon => {
             const cardId = icon.parentElement.id.replace('card-', '');
-            const id = cardId.replace('h', '');
-            const isFav = favs.some(f => f.id === id);
+            const isFav = favs.some(f => f.id === cardId);
             icon.classList.toggle('fas', isFav);
             icon.classList.toggle('far', !isFav);
-            icon.style.color = isFav ? "var(--primary-color)" : "var(--matte-purple)";
         });
     }
-
-    document.getElementById("reportForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        const formData = new FormData(this);
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString(),
-        }).then(() => {
-            closeReportModal();
-            const toast = document.getElementById("successToast");
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 3500);
-            this.reset();
-        });
-    });
 
     function openReportModal(name, num) {
         document.getElementById('hiddenHadithName').value = name;
         document.getElementById('hiddenHadithNumber').value = num;
-        document.getElementById('modalHadithInfo').textContent = `أنت تبلغ عن: ${name} (رواية رقم ${num})`;
+        document.getElementById('modalHadithInfo').textContent = `أنت تبلغ عن: ${name} (رقم ${num})`;
         document.getElementById('reportModal').classList.add('show');
-        document.body.classList.add('no-scroll');
-    }
-    function closeReportModal() {
-        document.getElementById('reportModal').classList.remove('show');
-        document.body.classList.remove('no-scroll');
     }
 
-    const btt = document.getElementById('backToTop');
+    function closeReportModal() {
+        document.getElementById('reportModal').classList.remove('show');
+    }
+
     window.addEventListener('scroll', () => {
+        const btt = document.getElementById('backToTop');
         if (window.scrollY > 400) btt.classList.add('show');
         else btt.classList.remove('show');
     });
-    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
+    document.getElementById('backToTop').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
     document.getElementById('globalSearch').addEventListener('input', performSearch);
-    document.getElementById('nextPage').onclick = () => changePage(1);
-    document.getElementById('prevPage').onclick = () => changePage(-1);
-    document.getElementById('firstPage').onclick = () => goToPage(1);
 
     document.addEventListener('DOMContentLoaded', () => {
         renderNovels();
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.universal-search')) {
-                document.getElementById('searchResults').style.display = 'none';
-            }
-        });
+        updateFontSize(); // تفعيل الحجم عند البداية
     });
 </script>
+
 </body>
 </html>
