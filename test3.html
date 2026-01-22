@@ -79,8 +79,8 @@
             height: 75px;
         }
 
-        .logo-container { order: 1; }
-        .logo-container img { height: 45px; width: auto; transition: transform 0.4s ease; }
+        .logo-container { order: 1; } 
+        .logo-container img { height: 45px; width: auto; transition: 0.3s ease; }
 
         .nav-links {
             display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2;
@@ -88,9 +88,7 @@
 
         .nav-links a {
             color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap;
-            display: flex; align-items: center; gap: 5px;
         }
-
         .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
         .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
@@ -103,15 +101,10 @@
                 background: var(--surface-color);
                 flex-direction: column; padding: 20px; height: calc(100vh - 75px);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
-                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
-                gap: 10px; margin: 0; flex: unset; z-index: 1000; display: flex !important;
+                overflow-y: auto; z-index: 1000; display: flex !important;
             }
             .nav-links.show { right: 0; }
-            .nav-links a { 
-                color: var(--text-primary); width: 100%; padding: 12px; 
-                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
-                border-bottom: 1px solid rgba(0,0,0,0.03);
-            }
+            .nav-links a { color: var(--text-primary); width: 100%; border-bottom: 1px solid rgba(0,0,0,0.03); }
         }
 
         /* ==================== Header & Search ==================== */
@@ -157,15 +150,15 @@
         }
         
         .hadith-summary { padding: 25px 25px 25px 45px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
-        
         .hadith-summary h3 { font-size: 1.3rem !important; color: var(--primary-dark); font-weight: 800; flex: 1; text-align: right; transition: all 0.3s ease; }
-        
         .source-tag { background: #FFC600; padding: 5px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 800; color: var(--primary-color); }
         
         .fav-header-icon { 
             font-size: 1.6rem; color: var(--matte-purple); transition: all 0.3s ease; cursor: pointer; 
             position: absolute; top: 0; left: 0; padding: 10px 15px; z-index: 10;
         }
+        .fav-header-icon:hover { transform: scale(1.15); color: var(--primary-color); }
+        .fav-header-icon.active { color: var(--primary-color); }
 
         .hadith-details { 
             max-height: 0; opacity: 0; overflow: hidden; 
@@ -180,11 +173,10 @@
             display: flex; align-items: center; gap: 10px; color: var(--primary-dark);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        
         .section-content { padding: 5px 0 10px; line-height: 1.8; font-size: var(--dynamic-content-size); color: #334155; }
 
         .hadith-actions { display: flex; align-items: center; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(0,0,0,0.08); }
-        .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; }
+        .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .btn-source { background: rgba(94, 44, 165, 0.1); color: var(--primary-color); border: 1px solid rgba(94, 44, 165, 0.2); }
         .btn-report { background: rgba(225, 29, 72, 0.08); color: #e11d48; border: 1px solid rgba(225, 29, 72, 0.1); }
 
@@ -206,7 +198,7 @@
         /* ==================== Pagination ==================== */
         #pagination-wrapper { background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); text-align: center; margin: 40px auto; border: 1px solid rgba(0,0,0,0.05); max-width: 500px; }
         .pagination-btn { background: #f1f5f9; color: var(--text-primary); border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; margin: 0 5px; font-family: 'Tajawal'; font-weight: 600; transition: 0.3s; }
-        .pagination-btn:hover { background: var(--primary-color); color: white; }
+        .pagination-btn:hover { background: var(--primary-color); color: white; transform: translateY(-2px); }
         .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ==================== Social Media ==================== */
@@ -218,10 +210,10 @@
         /* ==================== Footer ==================== */
         footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; }
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
-        .footer-links a { color: #cbd5e1; font-size: 0.95rem; }
+        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; }
         .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
 
-        /* ==================== Mobile Design (Original Reverted) ==================== */
+        /* ==================== Mobile Design (Original) ==================== */
         @media (max-width: 768px) {
             .hadith-summary h3 { font-size: 1.05rem !important; }
             .unified-header { padding: 90px 15px 40px; border-radius: 0 0 35px 35px; }
@@ -234,12 +226,16 @@
             .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
         }
 
-        /* Report Modal & Toast */
-        .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+        /* ==================== Report Modal ==================== */
+        .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
         .report-modal.show { display: flex; }
-        .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; }
-        .success-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #059669; color: white; padding: 14px 35px; border-radius: 50px; z-index: 3000; display: none; }
-        .success-toast.show { display: block; }
+        .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; box-shadow: var(--shadow-lg); animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .report-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 12px; cursor: pointer; }
+        .btn-send { flex: 2; background: var(--primary-color); color: white; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; font-weight: 700; cursor: pointer; }
+        .btn-cancel { flex: 1; background: #f1f5f9; color: #475569; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; cursor: pointer; }
+        .success-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: white; padding: 14px 35px; border-radius: 50px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 3000; transition: 0.5s; opacity: 0; display: flex; align-items: center; gap: 12px; }
+        .success-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     </style>
 </head>
 <body>
@@ -288,6 +284,7 @@
 <div class="container">
     <div id="hadithContainer"></div>
 
+    <!-- Pagination -->
     <div id="pagination-wrapper">
         <span id="pageInfo">الصفحة 1 من 1</span>
         <div style="margin-top: 15px;">
@@ -301,16 +298,17 @@
     <div class="social-section">
         <h2 style="font-weight: 800; color: var(--primary-dark); margin-bottom: 10px;">تابعنا على منصات التواصل</h2>
         <div class="social-grid">
-            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn" title="يوتيوب"><img src="/icons/yot-soc.png" alt="yt"></a>
-            <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn" title="فيسبوك"><img src="/icons/fac-soc.png" alt="fb"></a>
-            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn" title="إنستغرام"><img src="/icons/ins-soc.png" alt="in"></a>
-            <a href="https://t.me/tanoeer" target="_blank" class="social-btn" title="تلغرام"><img src="/icons/tel-soc.png" alt="tg"></a>
-            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn" title="تيك توك"><img src="/icons/tik-soc.png" alt="tk"></a>
-            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn" title="سناب شات"><img src="/icons/snap.png" alt="sc"></a>
+            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn"><img src="/icons/yot-soc.png" alt="yt"></a>
+            <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn"><img src="/icons/fac-soc.png" alt="fb"></a>
+            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn"><img src="/icons/ins-soc.png" alt="in"></a>
+            <a href="https://t.me/tanoeer" target="_blank" class="social-btn"><img src="/icons/tel-soc.png" alt="tg"></a>
+            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn"><img src="/icons/tik-soc.png" alt="tk"></a>
+            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn"><img src="/icons/snap.png" alt="sc"></a>
         </div>
     </div>
 </div>
 
+<!-- لوحة الإبلاغ الأصلية -->
 <div class="report-modal" id="reportModal">
     <div class="modal-box">
         <h2>إبلاغ عن محتوى</h2>
@@ -324,11 +322,12 @@
             <div class="modal-footer" style="display:flex; gap:10px; margin-top:20px;">
                 <button type="submit" class="btn-send">إرسال البلاغ</button>
                 <button type="button" class="btn-cancel" onclick="closeReportModal()">إلغاء</button>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 
-<div class="success-toast" id="successToast">تمت العملية بنجاح</div>
+<div class="success-toast" id="successToast"><i class="fas fa-check-circle"></i> <span>شكراً لمساهمتك</span></div>
 
 <footer>
     <div class="footer-links">
@@ -340,7 +339,7 @@
 </footer>
 
 <script>
-    // ==================== البيانات والبرمجة ====================
+    // ==================== 1. البيانات الكاملة ====================
     const novelsData = [
         {
             id: 1, title: "رواية قتل المرتد", source: "البخاري", sourceUrl: "https://dorar.net/h/77qg1XUt",
@@ -529,7 +528,7 @@
                 { label: "تخصصية السلطة:", verse: "وَلْتَكُن مِّنكُمْ أُمَّةٌ يَدْعُونَ إِلَى الْخَيْرِ وَيَأْمُرُونَ بِالْمَعْرُوفِ وَيَنْهَوْنَ عَنِ الْمُنكَرِ", ref: "آل عمران: 104", comment: "لفظ (مِنكم) يفيد التبعيض، أي لتكن 'مجموعة متخصصة' هي من تتولى هذا الدور لضمان العدالة وعدم الفوضى، وليس كل 'من رأى' من العوام." },
                 { label: "حدود الوظيفة النبوية:", verse: "لَّسْتَ عَلَيْهِم بِمُصَيْطِرٍ و وَمَا أَنتَ عَلَيْهِم بِجَبَّارٍ", ref: "الغاشية: 22 / ق: 45", comment: "إذا كان النبي نفسه ممنوعاً من 'السيطرة' و'الجبر' لإرغام الناس، فكيف يُعطى آحاد الناس الحق في تغيير سلوك الآخرين بـ 'أيديهم'؟" },
                 { label: "النهي عن التجسس والتدخل:", verse: "وَلَا تَجَسَّسُوا", ref: "الحجرات: 12", comment: "التغيير باليد يتطلب مراقبة الناس وتتبع عوراتهم للبحث عن 'المنكر'، وهو ما نهى عنه القرآن صراحة لحماية خصوصية البشر وكرامتهم." },
-                { label: "مبدأ البلاغ لا الإكراه:", verse: "فَإِذَا لَقِيتُمُ الَّذِينَ كَفَرُوا فَضَرْبَ الرِّقَابِ حَتَّىٰ إِذَا أَثْخَنتُمُوهُمْ فَشُدُّوا الْوَثَاقَ فَإِمَّا مَنًّا بَعْدُ وَإِمَّا فِدَاءً", ref: "محمد: 4", comment: "القرآن يحصر التعامل مع المخالف في 'البلاغ'، بينما الرواية ترفع سقف التعامل إلى 'اليد' والقوة." }
+                { label: "مبدأ البلاغ لا الإكراه:", verse: "فَإِنْ أَسْلَمُوا فَقَدِ اهْتَدَوا ۖ وَّإِن تَوَلَّوْا فَإِنَّمَا عَلَيْكَ الْبَلَاغُ", ref: "آل عمران: 20", comment: "القرآن يحصر التعامل مع المخالف في 'البلاغ'، بينما الرواية ترفع سقف التعامل إلى 'اليد' والقوة." }
             ]
         },
         {
@@ -541,7 +540,7 @@
                 { label: "الأمر بالقول الحسن للجميع:", verse: "وَقُولُوا لِلنَّاسِ حُسْنًا", ref: "البقرة: 83", comment: "لم يقل القرآن 'قولوا للمسلمين فقط حسناً'، بل أمر بالحُسن في القول مع كل 'الناس'، السلام هو رأس القول الحسن، فكيف يُنهى عن بدئه؟" },
                 { label: "البر والقسط مع المسالمين:", verse: "لَّا يَنْهَاكُمُ اللَّهُ عنِ الَّذِينَ لَم| يُقَاتِلُوكُمْ فِي الدِّينِ وَلَمْ يُخْرِجُوكُم مِّن دِيَارِكُمْ أَنْ تَبَرُّوهُمْ وَتُقْسِطُوا إِلَيْهِمْ", ref: "الممتحنة: 8", comment: "البر هو أعلى مراتب الإحسان، والقسط هو العدل، ومن البر والقسط أن تسلم على جارك أو عابر الطريق وتعطيه حقه في المرور بكرامة، لا أن تضطره إلى أضيقه." },
                 { label: "رد التحية بأحسن منها:", verse: "وَإِذَا حُيِّيتُم بِتَحِيَّةٍ فَحَيُّوا بِأَحْسَنَ مِنْهَا أَوْ رُدُّوهَا", ref: "النساء: 86", comment: "هذه آية عامة في رد السلام، ومنطقها يقتضي أن المبادرة بالسلام هي الأصل في نشر السكينة، والنهي عنها يتصادم مع روح الحث على إفشاء السلام." },
-                { label: "تزكية خلق النبي:", verse: "فَبِمَا رَحْمَةٍ مِّنَ اللَّهِ لِنتَ لَهُمْ ۖ وَلَوْ كُنتَ فَظًّا غَلِيظَ الْقَلْبِ لَانفَضُّوا مِنْ حَوْلِكَ", ref: "الآل عمران: 159", comment: "الفظاظة والغلظة (كالتضييق في الطريق) هي صفات نفاها الله عن نبيه، وأكد أن الرحمة واللين هما أساس دعوته." }
+                { label: "تزكية خلق النبي:", verse: "فَبِمَا رَحْمَةٍ مِّنَ اللَّهِ لِنتَ لَهُمْ ۖ وَلَوْ كُنتَ فَظًّا غَلِيظَ الْقَلْبِ لَانفَضُّوا مِنْ حَوْلِكَ", ref: "آل عمران: 159", comment: "الفظاظة والغلظة (كالتضييق في الطريق) هي صفات نفاها الله عن نبيه، وأكد أن الرحمة واللين هما أساس دعوته." }
             ]
         },
         {
@@ -597,11 +596,11 @@
             text: "لَنْ يُنَجِّيَ أحَدًا مِنكُم عَمَلُهُ، قالوا: ولا أنْتَ يا رَسولَ اللَّهِ؟ قالَ: ولا أنا، إلَّا أنْ يَتَغَمَّدَنِي اللَّهُ برَحْمَةٍ، سَدِّدُوا وقارِبُوا...", num: "6463",
             reason: "تؤدي هذه الرواية إلى تثبيط العزائم وهدم مبدأ 'العدل والمسؤولية'؛ فهي توحي بأن سعي الإنسان وعمله الصالح لا قيمة لهما، وأن دخول الجنة عملية قائمة على 'المحاباة' الإلهية دون اعتبار للجهد البشري. هذا يتناقض جذرياً مع المنطق القرآني الذي جعل الجنة 'ثمناً' و'ميراثاً' مقابل العمل الصالح. إن نفي دخول النبي نفسه الجنة بعمله يضرب قدوة العمل الصالح في مقتل.",
             proofs: [
-                { label: "العمل سبب الدخول:", verse: "تِلْكَ الْجَنَّةُ الَّتِي أورِثْتُمُوهَا بِمَا كُنتُمْ تَعْمَلُونَ", ref: "الزخرف: 72", comment: "حرف الباء في (بما) هو 'باء السببية'، أي أن سبب الميراث والملك للجنة هو العمل، والرواية تنفي هذه السببية." },
+                { label: "العمل سبب الدخول:", verse: "تِلْكَ الْجَنَّةُ الَّتِي أورِثْتُمُوهَا بِمَا كُنتُمْ تَعْمَلُونَ", ref: "الزخرف: 72", comment: "حرف الباء في (بما) هو 'باء السببية Jockey'، أي أن سبب الميراث والملك للجنة هو العمل، والرواية تنفي هذه السببية." },
                 { label: "أمر الملائكة للمؤمنين:", verse: "الَّذِينَ تَتَوَفَّاهُمُ الْمَلَائِكَةُ طَيِّبِينَ ۙ يَقُولُونَ سَلَامٌ عَلَيْكُمُ ادْخُلُوا الْجَنَّةَ بِمَا كُنتُمْ تَعْمَلُونَ", ref: "النحل: 32", comment: "الملائكة تعلن صراحة أن الدخول هو 'بسبب العمل'، فكيف تنسب الرواية للنبي قولاً يعاكس قول الملائكة؟" },
                 { label: "الجزاء العادل:", verse: "فَلَا تَعْلَمُ نَفْسٌ مَّا أُخْفِيَ لَهُم مِّن قُرَّةِ أَعْيُنٍ جَزَاءً بِمَا كَانُوا يَعْمَلُونَ", ref: "السجدة: 17", comment: "الله جعل ما في الجنة 'جزاءً' للعمل، والجزاء يقتضي لزوماً استحقاقاً مبنياً على فعل." },
                 { label: "نفي الظلم والعبثية:", verse: "وَمَا تُجْزَوْنَ إِلَّا مَا كُنتُمْ تَعْمَلُونَ", ref: "الصافات: 39", comment: "تؤكد الآية أن منظومة الحساب والجزاء محصورة تماماً فيما يعمله الإنسان." },
-                { label: "تزكية عمل الرسل:", verse: "إِنَّهُمْ كَانُوا يُسَارِعُونَ فِي الْخَيْرَاتِ", ref: "الأنبياء: 90", comment: "جعل الله المسارعة في الخيرات سبباً لرضاه عن أنبيائه، فكيف يُقال إن عملهم لا يدخلهم الجنة؟" }
+                { label: "تزكية عمل الرسل:", verse: "إِنَّهُمْ كَانُوا يُسَارِعُونَ فِي الْخَيْرَاتِ", ref: "الأنياء: 90", comment: "جعل الله المسارعة في الخيرات سبباً لرضاه عن أنبيائه، فكيف يُقال إن عملهم لا يدخلهم الجنة؟" }
             ]
         },
         {
@@ -646,13 +645,13 @@
                 { label: "الميثاق العالمي للنجاة:", verse: "إِنَّ الَّذِينَ آمَنُوا وَالَّذِينَ هَادُوا وَالنَّصَارَىٰ وَالصَّابِئِينَ مَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ وَعَمِلَ صَالِحًا فَلَهُمْ أَجْرُهُمْ عِندَ رَبِّهِمْ وَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ", ref: "البقرة: 62", comment: "هذه الآية تضع 'دستور الخلاص' القرآني؛ فهي لم تشترط 'الإيمان بمحمد' كاسم بل اشترطت الإيمان بالله والعمل الصالح." },
                 { label: "تكرار القاعدة:", verse: "إِنَّ الَّذِينَ آمَنُوا وَالَّذِينَ هَادُوا وَالصَّابِئُونَ وَالنَّصَارَىٰ مَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ وَعَمِلَ صَالِحًا فَلَا خَوْفٌ عَلَيْهِمْ وَلَا هُمْ يَحْزَنُونَ", ref: "المائدة: 69", comment: "تأكيد قرآني آخر ينفي فكرة النسخ المزعومة، ويؤكد أن معيار النجاة قيمي وليس طائفياً." },
                 { label: "الرد على دعاوى الاحتكار:", verse: "وَقَالُوا لَن يَدْخُلَ الْجَنَّةَ إِلَّا مَن كَانَ هُودًا أَوْ نَصَارَىٰ ۗ تِلْكَ أَمَانِيُّهُمْ... بَلَىٰ مَنْ أَسْلَمَ وَجْهَهُ لِلَّهِ وَهُوَ مُحْسِنٌ فَلَهُ أَجْرُهُ عِندَ رَبِّهِ", ref: "البقرة: 111-112", comment: "القرآن ذمّ من يحصر الجنة في 'طائفة'، ردّ بأن المعيار هو 'إسلام الوجه لله' و'الإحسان'." },
-                { label: "العدل الإلهي والعمل:", verse: "لَّيْسَ بِأَمَانِيِّكُمْ وَلَا أَمَانِيِّ أَهْلِ الْكِتَابِ ۗ مَن يَعْمَلْ سُوءًا يُجْزَ بِهِ", ref: "النساء: 123", comment: "الآية تؤكد أن النجاة ليست بالتمني أو الانتساب، بل بالعمل، والرواية تعطل هذا العدل لتجعله انتساباً." }
+                { label: "العدل الإلهي والعمل:", verse: "لَّيْسَ بِأَمَانِيِّكُمْ وَلَا أَمَانِيِّ أهدْلِ الْكِتَابِ ۗ مَن يَعْمَلْ سُوءًا يُجْزَ بِهِ", ref: "النساء: 123", comment: "الآية تؤكد أن النجاة ليست بالتمني أو الانتساب، بل بالعمل، والرواية تعطل هذا العدل لتجعله انتساباً." }
             ]
         },
         {
             id: 30, title: "اتخاذ النبي خليلاً كإبراهيم", source: "مسلم", sourceUrl: "https://dorar.net/h/poqToSpR",
             text: "سَمِعْتُ النبيَّ صَلَّى اللَّهُ عليه وسلَّمَ قَبْلَ أنْ يَمُوتَ بخَمْسٍ، وهو يقولُ: إنِّي أبْرَأُ إلى اللهِ أنْ يَكونَ لي مِنكُم خَلِيلٌ، فإنَّ اللهِ تَعَالَى قَدِ اتَّخَذَنِي خَلِيلًا، كما اتَّخَذَ إبْرَاهِيمَ خَلِيلًا، ولو كُنْتُ مُتَّخِذًا مِن أُمَّتي خَلِيلًا لَاتَّخَذْتُ أبَا بَكْرٍ خَلِيلًا، ألَا وإنَّ مَن كانَ قَبْلَكُمْ كَانُوا يَتَّخِذُونَ قُبُورَ أنْبِيَائِهِمْ وصَالِحِيهِمْ مَسَاجِدَ، ألَا فلا تَتَّخِذُوا القُبُورَ مَسَاجِدَ، إنِّي أنْهَاكُمْ عن ذلكَ.", num: "532",
-            reason: "تحاول هذه الرواية إضفاء لقب 'الخليل' على النبي محمد كمساواة له مع النبي إبراهيم، وهذا يتناقض مع الدقة القرآنية في توزيع المقامات. فالقرآن خص كل نبي بصفة تميزه؛ فموسى 'كليم الله'، وإبراهيم 'خليل الله'. ولم يذكر القرآن قط أن محمداً 'خليل'، بل شرفه بلقب 'رسول الله' و'رحمة للعالمين'. إن محاولة الرواة 'استنساخ' ألقاب الأنبياء السابقين تعكس رغبة بشرية في المفاخرة، بينما القرآن واضح في تخصيص هذا مقام لإبراهيم وحده.",
+            reason: "تحاول هذه الرواية إضفاء لقب 'الخليل' على النبي محمد كمساواة له مع النبي إبراهيم، وهذا يتناقض مع الدقة القرآنية في توزيع المقامات. فالقرآن خص كل نبي بصفة تميزه؛ فموسى 'كليم الله'، وإبراهيم 'خليل الله'. ولم يذكر القرآن قط أن محمداً 'خليل'، بل شرفه بلقب 'رسول الله' و'رحمة للعالمين'. إن محاولة الرواة 'استنساخ' ألقاب الأنبياء السابقين تعكس رغبة بشرية في المفاخرة، بينما القرآن واضح في تخصيص هذا المقام لإبراهيم وحده.",
             proofs: [
                 { label: "تخصيص الخلّة لإبراهيم:", verse: "وَاتَّخَذَ اللَّهُ إِبْرَاهِيمَ خَلِيلًا", ref: "النساء: 125", comment: "الآية جاءت بصيغة الحصر والتقرير لمقام خاص بإبراهيم، ولو كان هذا مقاماً ممنوحاً للنبي محمد لذكر ذلك القرآن." },
                 { label: "الدقة في الأوصاف النبوية:", verse: "وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٍ / وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ", ref: "القلم: 4 / الأنبياء: 107", comment: "هذه هي الأوصاف التي أرادها الله لنبيه، وإقحام لقب 'الخليل' هو إضافة بشرية لم ينزل بها الوحي." },
@@ -661,7 +660,7 @@
         },
         {
             id: 31, title: "أيام الخلق السبعة", source: "مسلم", sourceUrl: "https://dorar.net/h/s5UP4qXf",
-            text: "أَخَذَ رَسُولُ اللهِ صَلَّى اللَّهُ عليه وَسَلَّمَ بيَدِي فَقالَ: خَلَقَ اللَّهُ عَزَّ وَجَلَّ التُّرْبَةَ يَومَ السَّبْتِ، وَخَلَقَ فِيهَا الجِبَالَ يَومَ الأحَدِ، وَخَلَقَ الشَّجَرَ يَومَ الاثْنَيْنِ، وَخَلَقَ المَكْروهَ يَومَ الثُّلَاثَاءِ، وَخَلَقَ النُّورَ يَومَ الأرْبِعَاءِ، وَبَثَّ فِيهَا الدَّوَابَّ يَومَ الخَمِيسِ، وَخَلَقَ آدَمَ عليه السَّلَامُ بَعْدَ العَصْرِ مِن يَومِ الجُمُعَةِ، في آخِرِ الخَلْقِ، في آخِرِ سَاعَةٍ مِن سَاعَاتِ الجُمُعَةِ، فِيما بيْنَ العَصْرِ إلى اللَّيْلِ.", num: "2789",
+            text: "أَخَذَ رَسُولُ اللهِ صَلَّى اللَّهُ عليه وَسَلَّمَ بيَدِي فَقالَ: خَلَقَ اللَّهُ عَزَّ وَجَلَّ التُّرْبَةَ يَومَ السَّبْتِ، وَخَلَقَ فِيهَا الجِبَالَ يَومَ الأحَدِ، وَخَلَقَ الشَّجَرَ يَومَ الاثْنَيْنِ، وَخَلَقَ المَكروهَ يَومَ الثُّلَاثَاءِ، وَخَلَقَ النُّورَ يَومَ الأرْبِعَاءِ، وَبَثَّ فِيهَا الدَّوَابَّ يَومَ الخَمِيسِ، وَخَلَقَ آدَمَ عليه السَّلَامُ بَعْدَ العَصْرِ مِن يَومِ الجُمُعَةِ، في آخِرِ الخَلْقِ، في آخِرِ سَاعَةٍ مِن سَاعَاتِ الجُمُعَةِ، فِيما بيْنَ العَصْرِ إلى اللَّيْلِ.", num: "2789",
             reason: "تصادم هذه الرواية نصاً قرآنياً تكرر في سبعة مواضع في كتاب الله، وهو أن خلق السماوات والأرض وما بينهما تم في 'ستة أيام'، بينما تجعل الرواية مدة الخلق 'سبعة أيام'. هذا التناقض العددي ليس مجرد خطأ بسيط، بل هو اختلاف في جوهر الخبر الإلهي. كما أن الرواية تقحم 'يوم السبت' كبداية للخلق، وهو ما يتوافق مع موروثات إسرائيلية سابقة، بينما القرآن الكريم كان حاسماً في رقم 'ستة'. ومن المثير للانتباه أن علماء كبار كالبخاري وابن تيمية انتقدوا هذه الرواية وأكدوا أنها تخالف القرآن.",
             proofs: [
                 { label: "حتمية الأيام الستة:", verse: "اللَّهُ الَّذِي خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ وَمَا بَيْنَهُمَا فِي سِتَّةِ أَيَّامٍ", ref: "السجدة: 4", comment: "تكرر هذا الرقم (ستة أيام) في سور: (الأعراف، يونس، هود، الفرقان، ق، الحديد)، مما يجعله حقيقة قرآنية قطعية لا تقبل الزيادة، والرواية تزيد عليها يوماً سابعاً." },
@@ -716,10 +715,12 @@
         }
     ];
 
+    // ==================== 2. محرك التحكم والبحث ====================
     let currentPage = 1;
     const perPage = 15;
     let currentFontSizeRem = 1.15;
 
+    // دالة تجاهل الهمزات والتشكيل
     function normalizeArabic(text) {
         if (!text) return "";
         return text
@@ -739,7 +740,8 @@
     }
 
     function performSearch() {
-        const query = normalizeArabic(document.getElementById('globalSearch').value.toLowerCase());
+        const input = document.getElementById('globalSearch').value.toLowerCase();
+        const query = normalizeArabic(input);
         const resultsContainer = document.getElementById('searchResults');
         resultsContainer.innerHTML = '';
         resultsContainer.style.display = 'none';
@@ -748,8 +750,8 @@
 
         let results = [];
         novelsData.forEach((novel, index) => {
-            const searchField = normalizeArabic(novel.title + novel.text + novel.reason).toLowerCase();
-            if (searchField.includes(query)) {
+            const searchPool = normalizeArabic(novel.title + novel.text + novel.reason).toLowerCase();
+            if (searchPool.includes(query)) {
                 results.push({ ...novel, originalIndex: index });
             }
         });
@@ -786,7 +788,7 @@
                 }
                 card.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 card.style.boxShadow = "0 0 15px var(--primary-light)";
-                setTimeout(() => card.style.boxShadow = "var(--shadow-sm)", 2000);
+                setTimeout(() => card.style.boxShadow = "var(--shadow-sm)", 3000);
             }
         }, 300);
     }
@@ -894,19 +896,42 @@
         document.getElementById('pageInfo').textContent = `الصفحة ${currentPage} من ${total}`;
         document.getElementById('prevPage').disabled = (currentPage === 1);
         document.getElementById('nextPage').disabled = (currentPage === total);
+        document.getElementById('firstPage').disabled = (currentPage === 1);
     }
 
     document.getElementById('nextPage').onclick = () => { currentPage++; renderNovels(); window.scrollTo(0, 400); };
     document.getElementById('prevPage').onclick = () => { currentPage--; renderNovels(); window.scrollTo(0, 400); };
     document.getElementById('firstPage').onclick = () => { currentPage = 1; renderNovels(); window.scrollTo(0, 400); };
 
+    // ==================== لوحة الإبلاغ الأصلية ====================
     function openReportModal(title, num) {
-        document.getElementById('modalHadithInfo').textContent = `إبلاغ عن: ${title} (${num})`;
+        document.getElementById('hiddenHadithName').value = title;
+        document.getElementById('hiddenHadithNumber').value = num;
+        document.getElementById('modalHadithInfo').textContent = `أنت تبلغ عن: ${title} (رواية رقم ${num})`;
         document.getElementById('reportModal').classList.add('show');
+        document.body.classList.add('no-scroll');
     }
+
     function closeReportModal() {
         document.getElementById('reportModal').classList.remove('show');
+        document.body.classList.remove('no-scroll');
     }
+
+    document.getElementById("reportForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
+        }).then(() => {
+            closeReportModal();
+            const toast = document.getElementById("successToast");
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3500);
+            this.reset();
+        });
+    });
 
     window.addEventListener('scroll', () => {
         const btt = document.getElementById('backToTop');
