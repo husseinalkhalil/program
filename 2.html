@@ -508,7 +508,7 @@
             <div class="hadith-row">
                 <div class="hadith-number-circle">${novel.id}</div>
                 <div class="hadith-card" id="card-h${novel.id}">
-                    <i class="far fa-bookmark fav-header-icon" title="أضف للمفضلة" onclick="toggleFavorite(event, '${novel.id}')"></i>
+                    <i class="far fa-bookmark fav-header-icon" title="أضف للمفضلة" onclick="toggleFavorite(event, ${novel.id})"></i>
                     <div class="hadith-summary" onclick="toggleHadith(this)">
                         <h3>${titleText}</h3>
                         <div style="display:flex; align-items:center; gap:12px;">
@@ -558,7 +558,11 @@
 
     function toggleFavorite(e, id) {
         e.stopPropagation();
-        const cardId = 'h' + id;
+        
+        // إنشاء مفتاح فريد لكل رواية
+        // نضيف البادئة 'novel_' لتمييز روايات هذا القسم عن غيرها
+        const cardId = 'novel_' + id;
+        
         let favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
         const idx = favs.findIndex(f => f.id === cardId);
 
@@ -566,7 +570,13 @@
             favs.splice(idx, 1);
         } else {
             const novel = novelsData.find(n => n.id == id);
-            favs.push({ id: cardId, title: novel.title, type: 'رواية' });
+            favs.push({ 
+                id: cardId, 
+                title: novel.title, 
+                type: 'رواية',
+                novelId: id,
+                page: 'hadith'
+            });
         }
 
         localStorage.setItem('myFavorites', JSON.stringify(favs));
@@ -575,12 +585,16 @@
 
     function syncFavIcons() {
         const favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
+        
         document.querySelectorAll('.fav-header-icon').forEach(icon => {
             const onclickAttr = icon.getAttribute('onclick');
-            const idMatch = onclickAttr.match(/'(\d+)'/);
+            const idMatch = onclickAttr.match(/toggleFavorite\(event,\s*(\d+)\)/);
+            
             if (idMatch) {
-                const cardId = 'h' + idMatch[1];
+                // استخدام نفس المفتاح الفريد للبحث
+                const cardId = 'novel_' + idMatch[1];
                 const isFav = favs.some(f => f.id === cardId);
+                
                 icon.classList.toggle('fas', isFav);
                 icon.classList.toggle('far', !isFav);
                 icon.style.color = isFav ? "var(--primary-color)" : "var(--matte-purple)";
