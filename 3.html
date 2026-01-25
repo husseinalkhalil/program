@@ -686,11 +686,20 @@
                     </div>
                     <div class="hadith-details">
                         <div class="detail-section">
-                            <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية</div>
+                            <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية (1)</div>
                             <div class="section-content">${textText}</div>
-                            ${novel.num ? `<div class="section-content"><b style="font-weight: bold;">رقم الرواية: ${novel.num}</b></div>` : ''}
+                            ${novel.num ? `<div class="section-content"><b style="font-weight: bold;">رقم الرواية (1): ${novel.num}</b></div>` : ''}
                             <div class="hadith-actions">
-                                <a href="${novel.sourceUrl}" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
+                                <a href="${novel.sourceUrl}" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية (1)</a>
+                                <div class="action-btn btn-report" onclick="openReportModal('${novel.title}', '${novel.num}')"><i class="fas fa-flag"></i> إبلاغ</div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-header"><i class="fas fa-quote-right"></i> نص الرواية (2)</div>
+                            <div class="section-content">${textText}</div>
+                            ${novel.num ? `<div class="section-content"><b style="font-weight: bold;">رقم الرواية (2): ${novel.num}</b></div>` : ''}
+                            <div class="hadith-actions">
+                                <a href="${novel.sourceUrl}" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية (2)</a>
                                 <div class="action-btn btn-report" onclick="openReportModal('${novel.title}', '${novel.num}')"><i class="fas fa-flag"></i> إبلاغ</div>
                             </div>
                         </div>
