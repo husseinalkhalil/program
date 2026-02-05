@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html dir="ltr" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>التاريخ - حسين الخليل</title>
+    <title>History - Hussein Al-Khalil</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
-    <link href="images/logo-small.png" rel="icon" type="image/png"/>
-    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <link href="/images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="/images/logo-small.png" rel="apple-touch-icon"/>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,6 +28,7 @@
             --text-secondary: #64748b;
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
             --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
         }
@@ -65,35 +66,35 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
+        .logo-container { order: 1; }
         .logo-container img { height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 
         .nav-links {
             display: flex; flex: 1; justify-content: space-evenly;
-            align-items: center; flex-wrap: wrap; margin: 0 20px;
+            align-items: center; flex-wrap: wrap; margin: 0 20px; order: 2;
         }
 
         .nav-links a {
-            color: white; font-weight: 700; font-size: 1.05rem;
+            color: white; font-weight: 700; font-size: 0.9rem;
             padding: 8px 12px; border-radius: 20px;
             display: flex; align-items: center; gap: 5px; white-space: nowrap;
         }
-
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
-        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
 
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
             .nav-links {
-                position: fixed; top: 60px; right: -280px; width: 280px;
+                position: fixed; top: 60px; left: -280px; width: 280px;
                 background: var(--surface-color);
                 flex-direction: column; padding: 20px; height: calc(100vh - 60px);
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.1); transition: left 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
                 gap: 10px; margin: 0; flex: unset; z-index: 1000;
             }
-            .nav-links.show { right: 0; }
+            .nav-links.show { left: 0; }
             .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
             nav { padding: 0.8rem 5%; }
         }
@@ -110,17 +111,17 @@
         /* Search Box */
         .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto 40px auto; }
         #globalSearch {
-            width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none; font-size: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal', sans-serif; outline: none; background: white;
+            width: 100%; padding: 18px 25px 18px 50px; border-radius: 50px; border: none; font-size: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal', sans-serif; outline: none; background: white; text-align: left;
         }
-        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
+        .search-icon-placeholder { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
         .search-results {
             position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 10000; text-align: right; display: none;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 10000; text-align: left; display: none;
             color: var(--text-primary); border: 1px solid rgba(0,0,0,0.05);
         }
         .search-count { padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
-        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: 0.2s; }
         .search-item:hover { background: rgba(94, 44, 165, 0.05); }
         mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
@@ -128,7 +129,7 @@
         .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper { position: relative; z-index: 20; margin-top: -90px; margin-bottom: 60px; }
 
-        /* Video Grid */
+        /* Video Grid - Fixed Sizing */
         .videos-grid { 
             display: grid; 
             grid-template-columns: repeat(4, 1fr); 
@@ -151,7 +152,6 @@
 
         .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 3rem; opacity: 0.8; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         
-        /* Fixed Title Height */
         .video-title { 
             font-size: 1.1rem; font-weight: 700; color: var(--text-primary); 
             margin-bottom: 15px; line-height: 1.4; flex-grow: 1; text-align: center; 
@@ -181,23 +181,23 @@
         .page-arrow:disabled { opacity: 0.4; cursor: not-allowed; border-color: #cbd5e1; color: #64748b; }
         .video-counter { font-weight: 700; color: var(--text-secondary); font-size: 0.95rem; }
 
-        /* Social */
+        /* Social Section */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); max-width: 1200px; margin-left: auto; margin-right: auto;}
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.8); transition: all 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .social-btn img { width: 24px; height: 24px; }
-        .social-btn:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .social-btn img { width: 26px; transition: 0.3s; filter: grayscale(1) opacity(0.8); }
+        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
-        .social-btn.facebook:hover { background: #1877F2; }
-        .social-btn.instagram:hover { background: #E4405F; }
-        .social-btn.youtube:hover { background: #FF0000; }
-        .social-btn.tiktok:hover { background: #000000; }
-        .social-btn.telegram:hover { background: #0088CC; }
-        .social-btn.snap:hover { background: #FFFC00; }
-        .social-btn.snap:hover img { filter: none; }
+        .social-yt:hover { background: #FF0000; }
+        .social-fb:hover { background: #1877F2; }
+        .social-ins:hover { background: #E4405F; }
+        .social-tg:hover { background: #0088CC; }
+        .social-tk:hover { background: #000000; }
+        .social-sc:hover { background: #FFFC00; } 
+        .social-sc:hover img { filter: none; }
 
         /* Footer */
         footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
@@ -206,7 +206,7 @@
         .footer-links a:hover { color: var(--accent-color); }
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px; }
 
-        /* Fixed Navigation */
+        /* Back to top */
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; font-size: 1.2rem; box-shadow: var(--shadow-md); }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         
@@ -223,25 +223,25 @@
 
     <nav>
         <div class="logo-container">
-            <a href="index.html"><img src="images/logo.png" alt="شعار حسين الخليل" /></a>
+            <a href="index.html"><img src="/images/logo.png" alt="Hussein Al-Khalil Logo" /></a>
         </div>
-        <div class="nav-links">
-            <a href="index.html">الرئيسية</a>
-            <a href="books.html">الكتب</a>
-            <a href="articles.html">المقالات</a>
-            <a href="hadith.html">الروايات</a>
-            <a href="khawatir.html">خواطر</a>
-            <a href="videos.html">الفيديوهات</a>
-            <a href="history.html" style="background: rgba(255,255,255,0.2);">التاريخ</a>
-            <a href="podcast.html">البودكاست</a>
-            <a href="ask.html">الأسئلة</a>
-            <a href="hewar.html">حوارات</a>
-            <a href="inq.html">تساؤلات</a>
-            <a href="manhaj.html">المنهج</a>
-            <a href="favorites.html">المفضلة</a>
-            <a href="support.html">دعم المحتوى</a>
-            <a href="about.html">من نحن</a>
-            <a href="/en/history.html" style="color: #ffd700 !important; font-weight: 800; font-size: 1rem; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 8px 16px; border-radius: 20px;">En<i class="fas fa-globe"></i></a>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="books.html">Books</a>
+            <a href="articles.html">Articles</a>
+            <a href="hadith.html">Narrations</a>
+            <a href="khawatir.html">Reflections</a>
+            <a href="videos.html">Videos</a>
+            <a href="history.html" style="background: rgba(255,255,255,0.2);">History</a>
+            <a href="podcast.html">Podcast</a>
+            <a href="ask.html">Ask</a>
+            <a href="hewar.html">Dialogues</a>
+            <a href="inq.html">Inquiries</a>
+            <a href="manhaj.html">Methodology</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="support.html">Support</a>
+            <a href="about.html">About Us</a>
+            <a href="/history.html" style="color: #ffd700 !important; font-weight: 800; border: 1px solid rgba(255, 215, 0, 0.5); padding: 5px 15px; border-radius: 20px;"><i class="fas fa-globe"></i> عربي</a>
         </div>
         <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
     </nav>
@@ -249,8 +249,8 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>التاريخ</h1>
-                <p>مقاطع مختارة عن الخرافات والتاريخ والأديان والملل الأخرى</p>
+                <h1>History</h1>
+                <p>Selected clips about myths, history, religions, and other sects</p>
             </div>
         </div>
     </header>
@@ -258,7 +258,7 @@
     <div class="container main-wrapper">
         <div class="universal-search">
             <i class="fas fa-search search-icon-placeholder"></i>
-            <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+            <input type="text" id="globalSearch" placeholder="Search across all content..." />
             <div class="search-results" id="searchResults"></div>
         </div>
 
@@ -268,24 +268,24 @@
         <!-- Pagination Section -->
         <div class="pagination-section">
             <div class="pagination-controls">
-                <button class="page-arrow" id="lastPage" onclick="goToLastPage()">الأخيرة <i class="fas fa-angle-double-left"></i></button>
-                <button class="page-arrow" id="nextPage" onclick="changePage(1)">التالية <i class="fas fa-chevron-left"></i></button>
-                <span class="video-counter" id="pageIndicator">صفحة 1 من 1</span>
-                <button class="page-arrow" id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i> السابقة</button>
-                <button class="page-arrow" id="firstPage" onclick="goToPage(1)"><i class="fas fa-angle-double-right"></i> الأولى</button>
+                <button class="page-arrow" id="firstPage" onclick="goToPage(1)"><i class="fas fa-angle-double-left"></i> First</button>
+                <button class="page-arrow" id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i> Prev</button>
+                <span class="video-counter" id="pageIndicator">Page 1 of 1</span>
+                <button class="page-arrow" id="nextPage" onclick="changePage(1)">Next <i class="fas fa-chevron-right"></i></button>
+                <button class="page-arrow" id="lastPage" onclick="goToLastPage()">Last <i class="fas fa-angle-double-right"></i></button>
             </div>
-            <div class="video-counter" id="totalCounter">عرض 0 من أصل 0 فيديو</div>
+            <div class="video-counter" id="totalCounter">Showing 0 of 0 videos</div>
         </div>
 
         <div class="social-section" style="margin-top: 60px;">
-            <div class="section-title"><h2>تابعني على مواقع التواصل</h2></div>
+            <div class="section-title"><h2>Follow Me</h2></div>
             <div class="social-grid">
-                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn youtube"><img src="icons/yot-soc.png" alt="يوتيوب"></a>
-                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" class="social-btn facebook"><img src="icons/fac-soc.png" alt="فيسبوك"></a>
-                <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" class="social-btn instagram"><img src="icons/ins-soc.png" alt="إنستغرام"></a>
-                <a href="https://t.me/tanoeer" target="_blank" class="social-btn telegram"><img src="icons/tel-soc.png" alt="تلغرام"></a>
-                <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" class="social-btn tiktok"><img src="icons/tik-soc.png" alt="تيك توك"></a>
-                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn snap"><img src="icons/snap.png" alt="سناب شات"></a>
+                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt"><img src="/icons/yot-soc.png" alt="yt"></a>
+                <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb"><img src="/icons/fac-soc.png" alt="fb"></a>
+                <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins"><img src="/icons/ins-soc.png" alt="in"></a>
+                <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg"><img src="/icons/tel-soc.png" alt="tg"></a>
+                <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk"><img src="/icons/tik-soc.png" alt="tk"></a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc"><img src="/icons/snap.png" alt="sc"></a>
             </div>
         </div>
     </div>
@@ -296,54 +296,54 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="terms.html">الشروط والأحكام</a>
-                <a href="privacy.html">سياسة الخصوصية</a>
-                <a href="contact.html">اتصل بنا</a>
-                <a href="feedback.html">شاركنا رأيك</a>
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="feedback.html">Share Your Opinion</a>
             </div>
-            <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
+            <div class="copyright">Hussein Al-Khalil - All Rights Reserved © 2025</div>
         </div>
     </footer>
 
     <script>
-        // ==================== Videos Data (JSON) ====================
+        // ==================== Video Data (JSON) ====================
         const videosData = [
-            { id: "sIHISEJfPH0", title: "أهل السنة والجماعة" },
-            { id: "l6o1RGwy6TY", title: "الأيزيديون" },
-            { id: "OzA1NmopJ7k", title: "الأعور الدجال" },
-            { id: "vxT082Eet7w", title: "المهدي المنتظر" },
-            { id: "dBG4w64cW8w", title: "الخوارج" },
-            { id: "VDynPZvNXM0", title: "المرشديون" },
-            { id: "b2loDJqwnlQ", title: "الإسماعيلية" },
-            { id: "ltIYOyML3BE", title: "الإباضية" },
-            { id: "oDDBoTx0t5Q", title: "الياينية" },
-            { id: "i6x3cK2MuHY", title: "الطاوية" },
-            { id: "qQ3oRyO3pGw", title: "الشينتوية" },
-            { id: "cMUtBHMdgfk", title: "العلويون" },
-            { id: "RV06KmxvzPA", title: "الدروز" },
-            { id: "eUtTHdTrRTk", title: "الديانة البهائية" },
-            { id: "aba3m8xGGDo", title: "الديانة الكونفوشيوسية" },
-            { id: "t1J3M8D4Xec", title: "الديانة السيخية" },
-            { id: "jlnefbaCzUo", title: "قصة أصحاب الفيل" },
-            { id: "svP8omiK_OA", title: "الديانة البوذية" },
-            { id: "lZoTROZUoW0", title: "الديانة الهندوسية" },
-            { id: "uOlb4xYpAms", title: "تدمير التماثيل تدميرًا للتاريخ" },
-            { id: "-8HV__MVLNc", title: "خرافات في كتب الروايات" },
-            { id: "Cplld9BB7i8", title: "خرافة تلبس الجن بالانسان" },
-            { id: "BDFnqLoPrTA", title: "هاروت وماروت" },
-            { id: "xR9mxBhRw00", title: "السحر" },
-            { id: "aKZnOZjXsw8", title: "خرافة الحسد" },
-            { id: "W6DAvH4-kqo", title: "خرافة الاصابة بالعين" },
-            { id: "tVTLhi_MAkM", title: "خرافة سكب الماء الساخن" },
-            { id: "9KOvdr5pjyQ", title: "خرافة طي سجادة الصلاة" },
-            { id: "U7fMWUd54N0", title: "خرافات صدقها المسلمون" },
-            { id: "sYEPdEZQB50", title: "الترويج للدين بالخرافة" },
-            { id: "wOsoyyneqmA", title: "عندما تبيع الوهم" },
-            { id: "shXjuuUBOlA", title: "الصابئة المندائيون" },
-            { id: "0DpidAR1MPU", title: "السريان" },
-            { id: "dQRovOQVoB4", title: "الديانة المانوية" },
-            { id: "yfMETxdXqbs", title: "الديانة الزرادشتية" },
-            { id: "EfCEfaLgbYU", title: "القدس ليست اورشليم" }
+            { id: "sIHISEJfPH0", title: "Ahl al-Sunnah wal-Jama'ah" },
+            { id: "l6o1RGwy6TY", title: "The Yazidis" },
+            { id: "OzA1NmopJ7k", title: "The Antichrist" },
+            { id: "vxT082Eet7w", title: "The Awaited Mahdi" },
+            { id: "dBG4w64cW8w", title: "The Kharijites" },
+            { id: "VDynPZvNXM0", title: "The Murshidiyah" },
+            { id: "b2loDJqwnlQ", title: "Isma'ilism" },
+            { id: "ltIYOyML3BE", title: "Ibadism" },
+            { id: "oDDBoTx0t5Q", title: "Jainism" },
+            { id: "i6x3cK2MuHY", title: "Taoism" },
+            { id: "qQ3oRyO3pGw", title: "Shintoism" },
+            { id: "cMUtBHMdgfk", title: "The Alawites" },
+            { id: "RV06KmxvzPA", title: "The Druze" },
+            { id: "eUtTHdTrRTk", title: "Bahá'í Faith" },
+            { id: "aba3m8xGGDo", title: "Confucianism" },
+            { id: "t1J3M8D4Xec", title: "Sikhism" },
+            { id: "jlnefbaCzUo", title: "The Story of the Elephant Owners" },
+            { id: "svP8omiK_OA", title: "Buddhism" },
+            { id: "lZoTROZUoW0", title: "Hinduism" },
+            { id: "uOlb4xYpAms", title: "Destruction of Statues is Destruction of History" },
+            { id: "-8HV__MVLNc", title: "Myths in Books of Narrations" },
+            { id: "Cplld9BB7i8", title: "The Myth of Jinn Possession" },
+            { id: "BDFnqLoPrTA", title: "Harut and Marut" },
+            { id: "xR9mxBhRw00", title: "Magic (Sihr)" },
+            { id: "aKZnOZjXsw8", title: "The Myth of Envy" },
+            { id: "W6DAvH4-kqo", title: "The Myth of the Evil Eye" },
+            { id: "tVTLhi_MAkM", title: "The Myth of Pouring Hot Water" },
+            { id: "9KOvdr5pjyQ", title: "The Myth of Folding the Prayer Mat" },
+            { id: "U7fMWUd54N0", title: "Myths Believed by Muslims" },
+            { id: "sYEPdEZQB50", title: "Promoting Religion Through Myths" },
+            { id: "wOsoyyneqmA", title: "When You Sell Illusion" },
+            { id: "shXjuuUBOlA", title: "The Mandaeans" },
+            { id: "0DpidAR1MPU", title: "The Syriacs" },
+            { id: "dQRovOQVoB4", title: "Manichaeism" },
+            { id: "yfMETxdXqbs", title: "Zoroastrianism" },
+            { id: "EfCEfaLgbYU", title: "Jerusalem is Not Aelia" }
         ];
 
         // ==================== Pagination Logic ====================
@@ -369,9 +369,9 @@
                     </div>
                     <h3 class="video-title">${video.title}</h3>
                     <div class="video-actions">
-                        <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${video.id}', '${video.title}', this)">
+                        <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('${video.id}', '${video.title.replace(/'/g, "\\'")}', this)">
                             <i class="${isFav ? 'fas fa-check' : 'far fa-star'}"></i> 
-                            ${isFav ? 'في المفضلة' : 'أضف للمفضلة'}
+                            ${isFav ? 'In Favorites' : 'Add to Favorites'}
                         </button>
                     </div>
                 `;
@@ -382,10 +382,10 @@
 
         function updatePaginationUI() {
             const totalPages = Math.ceil(videosData.length / itemsPerPage);
-            document.getElementById('pageIndicator').textContent = `صفحة ${currentPage} من ${totalPages || 1}`;
+            document.getElementById('pageIndicator').textContent = `Page ${currentPage} of ${totalPages || 1}`;
             const startItem = videosData.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1;
             const endItem = Math.min(currentPage * itemsPerPage, videosData.length);
-            document.getElementById('totalCounter').textContent = `عرض ${startItem}-${endItem} من أصل ${videosData.length} فيديو`;
+            document.getElementById('totalCounter').textContent = `Showing ${startItem}-${endItem} of ${videosData.length} videos`;
             
             document.getElementById('prevPage').disabled = currentPage === 1;
             document.getElementById('firstPage').disabled = currentPage === 1;
@@ -399,10 +399,10 @@
 
         // ==================== General Site Functions ====================
         function toggleMobileMenu() {
-            const nav = document.querySelector('.nav-links');
+            const navLinks = document.getElementById('navLinks');
             const overlay = document.querySelector('.nav-overlay');
-            nav.classList.toggle('show');
-            overlay.style.display = nav.classList.contains('show') ? 'block' : 'none';
+            navLinks.classList.toggle('show');
+            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
             document.body.classList.toggle('no-scroll');
         }
 
@@ -412,23 +412,23 @@
             let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
             const index = favorites.findIndex(item => item.id === id && item.type === 'video');
             if (index === -1) {
-                favorites.push({ id, title, type: 'video', url: `https://www.youtube.com/embed/${id}` });
+                favorites.push({ id: id, title: title, type: 'video', url: `https://www.youtube.com/embed/${id}` });
                 btn.classList.add("active");
-                btn.innerHTML = '<i class="fas fa-check"></i> في المفضلة';
-                showMessage("تمت الإضافة للمفضلة");
+                btn.innerHTML = '<i class="fas fa-check"></i> In Favorites';
+                showMessage("Added to favorites successfully");
             } else {
                 favorites.splice(index, 1);
                 btn.classList.remove("active");
-                btn.innerHTML = '<i class="far fa-star"></i> أضف للمفضلة';
-                showMessage("تمت الإزالة من المفضلة");
+                btn.innerHTML = '<i class="far fa-star"></i> Add to Favorites';
+                showMessage("Removed from favorites");
             }
             localStorage.setItem("favorites", JSON.stringify(favorites));
         }
 
         function showMessage(text) {
-            const msg = document.getElementById("message");
-            msg.textContent = text; msg.style.display = "block";
-            setTimeout(() => msg.style.display = "none", 2000);
+            const message = document.getElementById("message");
+            message.textContent = text; message.style.display = "block";
+            setTimeout(() => message.style.display = "none", 2000);
         }
 
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -438,14 +438,14 @@
             else btn.classList.remove('visible');
         });
 
-        // ==================== Original Global Search Logic ====================
+        // ==================== Original Search Logic ====================
         let cachedPagesContent = null;
         let isSearchInitialized = false;
 
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
             try {
-                const response = await fetch('site-map.json?v=' + new Date().getTime());
+                const response = await fetch('/site-map.json?v=' + new Date().getTime());
                 const pagesList = await response.json();
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
@@ -456,7 +456,7 @@
                         const doc = parser.parseFromString(html, 'text/html');
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                         return {
-                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة',
+                            page: doc.title.replace('Hussein Al-Khalil - ', '').trim() || 'Page',
                             url: url,
                             content: (doc.querySelector('.container, main, body') || doc.body).textContent.replace(/\s+/g, ' ').trim()
                         };
@@ -467,28 +467,14 @@
             } catch (error) { return []; }
         }
 
-        function normalizeArabic(text) {
-            return text.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
-        }
-
         function getSafeRegex(searchTerm) {
-            let regexStr = '';
-            const cleanTerm = normalizeArabic(searchTerm);
-            for (let char of cleanTerm) {
-                if (char === 'ا') regexStr += '[اأإآ]';
-                else if (char === 'ه') regexStr += '[هة]';
-                else if (char === 'ي') regexStr += '[يىئ]';
-                else if (char === 'و') regexStr += '[وؤ]';
-                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                regexStr += '[\\u064B-\\u065F\\u0670]*';
-            }
-            return new RegExp(regexStr, 'gi');
+            return new RegExp(searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
         }
 
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
             if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            resultsContainer.innerHTML = '<div class="search-item"><p>Searching...</p></div>';
             resultsContainer.style.display = 'block';
             const data = await loadAllPagesContent();
             const searchRegex = getSafeRegex(query);
@@ -496,7 +482,7 @@
                 searchRegex.lastIndex = 0;
                 return searchRegex.test(item.page) || searchRegex.test(item.content);
             });
-            resultsContainer.innerHTML = `<div class="search-count">تم العثور على ${results.length} نتيجة</div>`;
+            resultsContainer.innerHTML = `<div class="search-count">Found ${results.length} results</div>`;
             results.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
