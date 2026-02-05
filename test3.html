@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html dir="ltr" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>الفيديوهات</title>
+    <title>Videos - Hussein Al-Khalil</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
-    <link href="images/logo-small.png" rel="icon" type="image/png"/>
-    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <link href="/images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="/images/logo-small.png" rel="apple-touch-icon"/>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,27 +23,17 @@
             --primary-light: #8a5bc7;
             --accent-color: #ffd700;
             --bg-color: #f9f7f2;
-            
-            /* اللون الجديد الموحد: ضباب اللافندر */
             --surface-color: #F8F5FD; 
-            
             --text-primary: #1e293b;
             --text-secondary: #64748b;
-            
-            /* تحديث الظلال */
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
             --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
             --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
-            
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Tajawal', sans-serif;
@@ -53,12 +43,7 @@
             overflow-x: hidden;
         }
 
-        /* منع السكرول عند فتح القائمة */
-        body.no-scroll {
-            overflow: hidden !important;
-            height: 100vh;
-        }
-
+        body.no-scroll { overflow: hidden !important; height: 100vh; }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
         /* ==================== Navigation ==================== */
@@ -78,41 +63,37 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
+        .logo-container { order: 1; }
         .logo-container img { height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 
         .nav-links {
             display: flex; flex: 1; justify-content: space-evenly;
-            align-items: center; flex-wrap: wrap; margin: 0 20px;
+            align-items: center; flex-wrap: wrap; margin: 0 20px; order: 2;
         }
 
         .nav-links a {
-            color: white; font-weight: 700; font-size: 1.05rem;
+            color: white; font-weight: 700; font-size: 0.9rem;
             padding: 8px 12px; border-radius: 20px;
             display: flex; align-items: center; gap: 5px; white-space: nowrap;
         }
 
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
-        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
 
         @media (max-width: 1200px) {
-            .hamburger { display: block; order: 1; }
-            .logo-container { order: 2; }
+            .hamburger { display: block; order: 1; } /* Hamburger on the Left */
+            .logo-container { order: 2; } /* Logo on the Right */
             .nav-links {
-                position: fixed; top: 60px; right: -280px; width: 280px;
-                background: var(--surface-color); /* استخدام اللون الجديد */
-                flex-direction: column;
-                padding: 20px; height: calc(100vh - 60px);
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                position: fixed; top: 60px; left: -280px; width: 280px; /* Slide from Left */
+                background: var(--surface-color);
+                flex-direction: column; padding: 20px; height: calc(100vh - 60px);
+                box-shadow: 5px 0 15px rgba(0,0,0,0.1); transition: left 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
-                gap: 10px; margin: 0; flex: unset;
+                gap: 10px; margin: 0; flex: unset; z-index: 1000;
             }
-            .nav-links.show { right: 0; }
-            .nav-links a { 
-                color: var(--text-primary); width: 100%; padding: 12px; 
-                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
-                border-bottom: 1px solid rgba(0,0,0,0.03);
-            }
+            .nav-links.show { left: 0; }
+            .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
             .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
             nav { padding: 0.8rem 5%; }
         }
@@ -120,10 +101,8 @@
         /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: 120px 20px 140px; /* مسافة سفلية إضافية للتداخل */
-            text-align: center; color: white;
-            border-radius: 0 0 50px 50px; position: relative;
-            z-index: 1; /* الخلفية في الطبقة السفلية */
+            padding: 120px 20px 140px; text-align: center; color: white;
+            border-radius: 0 0 50px 50px; position: relative; z-index: 1;
         }
 
         .hero-content {
@@ -134,64 +113,47 @@
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
 
-        /* Global Search Box (Moved inside Main Wrapper) */
+        /* Global Search Box */
         .universal-search { 
             width: 100%; max-width: 600px; 
             position: relative; 
-            z-index: 100; /* أعلى طبقة */
+            z-index: 100;
             margin: 0 auto 40px auto; 
         }
         
         #globalSearch {
-            width: 100%; padding: 18px 50px 18px 25px;
+            width: 100%; padding: 18px 25px 18px 50px;
             border-radius: 50px; border: none; font-size: 1rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             font-family: 'Tajawal', sans-serif; outline: none; background: white;
-            transition: box-shadow 0.3s ease;
+            transition: box-shadow 0.3s ease; text-align: left;
         }
         #globalSearch:focus { box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.4); }
-        
+
         .search-icon-placeholder {
-            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+            position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
             color: var(--primary-color); pointer-events: none;
         }
 
-        /* Search Results Dropdown */
         .search-results {
             position: absolute; top: 115%; left: 0; right: 0;
             background: #ffffff; border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px;
-            overflow-y: auto; z-index: 200; text-align: right;
+            overflow-y: auto; z-index: 10000; text-align: left;
             display: none; color: var(--text-primary);
             border: 1px solid rgba(0,0,0,0.05);
         }
-        .search-results::-webkit-scrollbar { width: 8px; }
-        .search-results::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 0 0 0 15px; }
-        .search-results::-webkit-scrollbar-thumb { background: var(--primary-light); border-radius: 4px; }
-
-        .search-count {
-            padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color);
-            border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc;
-            border-radius: 15px 15px 0 0; font-weight: 700;
-        }
-
-        .search-item {
-            padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05);
-            cursor: pointer; transition: background 0.2s;
-        }
-        .search-item:last-child { border-bottom: none; }
+        .search-count { padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
         .search-item:hover { background: rgba(94, 44, 165, 0.05); }
         .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; font-weight: 700; }
         .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
-        .search-item mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
+        mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
         /* Container Structure */
         .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper {
-            position: relative;
-            z-index: 20; /* طبقة البطاقات */
-            margin-top: -90px; /* سحب للأعلى */
-            margin-bottom: 60px;
+            position: relative; z-index: 20; margin-top: -90px; margin-bottom: 60px;
         }
 
         /* Video Grid */
@@ -206,7 +168,6 @@
         }
         .video-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); }
         
-        /* Top Border Accent */
         .video-card::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
             background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
@@ -246,23 +207,25 @@
         .favorite-btn:hover { background: var(--primary-color); color: white; border-color: var(--primary-color); }
         .favorite-btn.active { background: var(--accent-color); color: #422006; border-color: var(--accent-color); }
 
-        /* Social */
+        /* Social Section with Restored Effects */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); max-width: 1200px; margin-left: auto; margin-right: auto;}
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: all 0.3s; }
-        .social-btn img { width: 24px; height: 24px; transition: filter 0.3s; }
-        .social-btn:hover { transform: translateY(-5px) scale(1.1); }
+        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .social-btn img { width: 24px; height: 24px; transition: 0.3s; filter: grayscale(1) opacity(0.8); }
+        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
-        .social-btn.facebook:hover { background: #1877F2; }
-        .social-btn.instagram:hover { background: #E4405F; }
-        .social-btn.youtube:hover { background: #FF0000; }
-        .social-btn.tiktok:hover { background: #000000; }
-        .social-btn.telegram:hover { background: #0088CC; }
-        .social-btn.snap:hover { background: #FFFC00; }
-        .social-btn.snap:hover img { filter: none; }
+
+        /* Platform Specific Colors */
+        .social-yt:hover { background: #FF0000; }
+        .social-fb:hover { background: #1877F2; }
+        .social-ins:hover { background: #E4405F; }
+        .social-tg:hover { background: #0088CC; }
+        .social-tk:hover { background: #000000; }
+        .social-sc:hover { background: #FFFC00; } 
+        .social-sc:hover img { filter: none; }
 
         /* Footer */
         footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
@@ -271,26 +234,18 @@
         .footer-links a:hover { color: var(--accent-color); }
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
-        /* Fixed */
-        .share-fixed-btn { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 990; transition: 0.3s; }
-        .share-fixed-btn:hover { transform: scale(1.1); }
-        .share-fixed-btn img { width: 24px; filter: brightness(0); }
+        /* Fixed Navigation */
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         .back-to-top:hover { transform: translateY(-5px); background: var(--primary-dark); }
-        .copy-alert { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: white; padding: 12px 25px; border-radius: 30px; box-shadow: var(--shadow-lg); z-index: 10000; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-        .copy-alert.show { opacity: 1; }
         
         #message { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-        /* Responsive */
         @media (max-width: 1200px) { .videos-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 900px) { 
             .videos-grid { grid-template-columns: repeat(2, 1fr); } 
             .hero-text h1 { font-size: 2rem; } 
-            /* زيادة المسافة السفلية في الموبايل لتجنب التداخل */
             .hero-section { padding: 100px 20px 160px; } 
-            .share-fixed-btn { display: none; } 
         }
         @media (max-width: 600px) { .videos-grid { grid-template-columns: 1fr; } }
         @media (max-width: 768px) { .footer-links { gap: 12px; } .social-grid { gap: 5px; flex-wrap: nowrap; } .social-btn { width: 48px; height: 48px; flex-shrink: 0; } }
@@ -303,29 +258,27 @@
     <!-- Navigation -->
     <nav>
         <div class="logo-container">
-            <a href="index.html">
-                <img src="images/logo.png" alt="شعار حسين الخليل" />
-            </a>
+            <a href="index.html"><img src="/images/logo.png" alt="Hussein Al-Khalil Logo" /></a>
         </div>
 
-        <div class="nav-links">
-            <a href="index.html">الرئيسية</a>
-            <a href="books.html">الكتب</a>
-            <a href="articles.html">المقالات</a>
-            <a href="hadith.html">الروايات</a>
-            <a href="khawatir.html">خواطر</a>
-            <a href="videos.html" style="background: rgba(255,255,255,0.2);">الفيديوهات</a>
-            <a href="history.html">التاريخ</a>
-            <a href="podcast.html">البودكاست</a>
-            <a href="ask.html">الأسئلة</a>
-            <a href="hewar.html">حوارات</a>
-            <a href="inq.html">تساؤلات</a>
-            <a href="manhaj.html">المنهج</a>
-            <a href="favorites.html">المفضلة</a>
-            <a href="support.html">دعم المحتوى</a>
-            <a href="about.html">من نحن</a>
-            <a href="/en/videos.html" style="color: #ffd700 !important; font-weight: 800; font-size: 1rem; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 8px 16px; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; line-height: 1; font-family: sans-serif; height: auto;">En<i class="fas fa-globe" style="font-size: 1rem; line-height: 1;"></i></a>
-            <a href="#" onclick="handleMobileShare(); return false;" class="mobile-share-link" style="display: none;">مشاركة</a>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="books.html">Books</a>
+            <a href="articles.html">Articles</a>
+            <a href="hadith.html">Narrations</a>
+            <a href="khawatir.html">Reflections</a>
+            <a href="videos.html" style="background: rgba(255,255,255,0.2);">Videos</a>
+            <a href="history.html">History</a>
+            <a href="podcast.html">Podcast</a>
+            <a href="ask.html">Ask</a>
+            <a href="hewar.html">Dialogues</a>
+            <a href="inq.html">Inquiries</a>
+            <a href="manhaj.html">Methodology</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="support.html">Support</a>
+            <a href="about.html">About Us</a>
+            <!-- Golden Switcher to Arabic -->
+            <a href="/videos.html" style="color: #ffd700 !important; font-weight: 800; border: 1px solid rgba(255, 215, 0, 0.5); padding: 5px 15px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;"><i class="fas fa-globe"></i> عربي</a>
         </div>
 
         <div class="hamburger" onclick="toggleMobileMenu()">
@@ -337,77 +290,59 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>الفيديوهات</h1>
-                <p>مقاطع مختارة من قناتي على اليوتيوب تناقش مختلف القضايا</p>
+                <h1>Videos</h1>
+                <p>Selected clips from my YouTube channel discussing various intellectual issues</p>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Wrapper -->
+    <!-- Main Content -->
     <div class="container main-wrapper">
         
-        <!-- Global Search Box (Inside Main Wrapper) -->
+        <!-- Global Search Box -->
         <div class="universal-search">
             <i class="fas fa-search search-icon-placeholder"></i>
-            <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+            <input type="text" id="globalSearch" placeholder="Search across all content..." />
             <div class="search-results" id="searchResults"></div>
         </div>
 
         <!-- Dynamic Videos Grid -->
         <div class="videos-grid" id="videosGrid">
-            <!-- سيتم إنشاء المحتوى بواسطة JavaScript -->
+            <!-- Content generated by JavaScript -->
         </div>
 
-        <!-- Social Media -->
-        <div class="social-section" style="margin-top: 60px;">
+        <!-- Social Media Section -->
+        <div class="social-section">
             <div class="section-title">
-                <h2>تابعني على مواقع التواصل</h2>
+                <h2>Follow me on Social Media</h2>
             </div>
             <div class="social-grid">
-                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn youtube" title="يوتيوب">
-                    <img src="icons/yot-soc.png" alt="يوتيوب">
-                </a>
-                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" class="social-btn facebook" title="فيسبوك">
-                    <img src="icons/fac-soc.png" alt="فيسبوك">
-                </a>
-                <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" class="social-btn instagram" title="إنستغرام">
-                    <img src="icons/ins-soc.png" alt="إنستغرام">
-                </a>
-                <a href="https://t.me/tanoeer" target="_blank" class="social-btn telegram" title="تلغرام">
-                    <img src="icons/tel-soc.png" alt="تلغرام">
-                </a>
-                <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" class="social-btn tiktok" title="تيك توك">
-                    <img src="icons/tik-soc.png" alt="تيك توك">
-                </a>
-                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn snap" title="سناب شات">
-                    <img src="icons/snap.png" alt="سناب شات">
-                </a>
+                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="YouTube"><img src="/icons/yot-soc.png" alt="yt"></a>
+                <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb" title="Facebook"><img src="/icons/fac-soc.png" alt="fb"></a>
+                <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="Instagram"><img src="/icons/ins-soc.png" alt="in"></a>
+                <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="Telegram"><img src="/icons/tel-soc.png" alt="tg"></a>
+                <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="TikTok"><img src="/icons/tik-soc.png" alt="tk"></a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="Snapchat"><img src="/icons/snap.png" alt="sc"></a>
             </div>
         </div>
-    </div>
-
-    <!-- Fixed Buttons -->
-    <div class="share-fixed-btn" onclick="handleMobileShare()">
-        <img src="images/share.png" alt="مشاركة">
     </div>
 
     <div class="back-to-top" onclick="scrollToTop()">
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
-    <div id="message" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);"></div>
+    <div class="copy-alert" id="copyAlert">Link copied successfully ✅</div>
 
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="terms.html">الشروط والأحكام</a>
-                <a href="privacy.html">سياسة الخصوصية</a>
-                <a href="contact.html">اتصل بنا</a>
-                <a href="feedback.html">شاركنا رأيك</a>
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="feedback.html">Share Your Opinion</a>
             </div>
             <div class="copyright">
-                حسين الخليل - جميع الحقوق محفوظة © 2025
+                Hussein Al-Khalil - All Rights Reserved © 2025
             </div>
         </div>
     </footer>
@@ -415,57 +350,57 @@
     <script>
         // ==================== Videos Data (JSON Format) ====================
         const videosData = [
-            { id: "96pGvXmx5bM", title: "الزاني لا ينكح إلّا زانية أو مشركة" },
-            { id: "bATkpINuvHw", title: "تارك الصلاة ليس بكافر" },
-            { id: "FBwO_BsK1dk", title: "لماذا لم يفصل القرآن الصلاة؟" },
-            { id: "NIOiSwIUGs8", title: "ما معنى الغائط؟ هل هو مكان قضاء الحاجة؟" },
-            { id: "aJ-4IYa5ox0", title: "هل شعر المرأة عورة؟" },
-            { id: "7wIDSBlUAf8", title: "التبرّج" },
-            { id: "S3oHA2a0c1M", title: "لو صليت ألف ركعة وظلمت؟!" },
-            { id: "C66NFtg-KPI", title: "وإن طائفتان من المؤمنين اقتتلوا" },
-            { id: "SF45e62fWPg", title: "من هو المؤمن؟" },
-            { id: "EZlf4cuWC2k", title: "جرائم في كتاب البخاري" },
-            { id: "fvdsqlD0YBY", title: "بين تحريم القرآن وترهيب الكهنوت" },
-            { id: "ASnSsKFYDoU", title: "أنا لا أعبد النبي ولا البخاري" },
-            { id: "JGv9cWsqbmc", title: "هل الصلاة تنهى عن الفحشاء والمنكر؟" },
-            { id: "BlAdzlxf5fI", title: "دفع الخمس عند الشيعة بين الحقيقة والسرقة" },
-            { id: "mxi3kfRLMsY", title: "سايكس بيكو الكهنوت" },
-            { id: "VmhNW3BPLAc", title: "إجرام كهنوتي بحق الإسلام" },
-            { id: "faI1favhHBU", title: "تعقيد الشعائر، قرآني أم كهنوتي؟" },
-            { id: "NQie8xW-x7E", title: "هل الله بحاجة لصلاتنا؟ ما حقيقة عقوبة تارك الصلاة؟" },
-            { id: "ox6LhMhcn3E", title: "هل تشعر بصلاتك أم أنها مجرد طقوس؟" },
-            { id: "3heav8z5LJ0", title: "بين برمجة المجتمع وعدل الله" },
-            { id: "1MXWGGb-QvE", title: "الذين يحاربون الله ورسوله" },
-            { id: "xL2M8_H8mNo", title: "جريمة تكفير الناس" },
-            { id: "JC8lF54C7kk", title: "هل سيحاسبنا الله على ديننا أم أعمالنا؟" },
-            { id: "8h2dx_yuB6U", title: "هل الإسلام دين العنف؟" },
-            { id: "mdWxPStRfnE", title: "من هو أحمد؟ هل هو اسم آخر لنبينا محمد؟" },
-            { id: "zN52VOu_n8I", title: "قراءة الفاتحة والتشهد في الصلاة" },
-            { id: "LoxvuToLaEU", title: "هل الصلاة فرض وواجب على المسلم؟" },
-            { id: "U7AxdI5N87g", title: "ما معنى مكة وبكة والقبلة والبيت الحرام؟" },
-            { id: "L7dKk3wk9Aw", title: "لماذا الله لا ينقذ الأبرياء؟" },
-            { id: "bJChbYrr2hw", title: "الصلاة كما أرادها الله لا كما أرادها الكهنوت" },
-            { id: "wEVNsdUnjMU", title: "الحور العين" },
-            { id: "Q16Zmfe644A", title: "محرمات، الإسلام بريئ منها" },
-            { id: "9351NKWhm7g", title: "اكذوبة زواج النبي من طفلة" },
-            { id: "ZsSs72rP64k", title: "التناقض بين القرآن والروايات" },
-            { id: "ecNdpEu3Dko", title: "تحليل السمك والكبد قرآنيًا" },
-            { id: "o6rOEWGxQSM", title: "زواج المسلمة من غير المسلم" },
-            { id: "LLlVdPQtop0", title: "انتشار أفكار التنويريين" },
-            { id: "ifMKU0NYJL0", title: "الخمر بين التحريم والاجتناب" },
-            { id: "6MmcZaOw6vw", title: "صلاةالجمعة بين الحقيقة والوهم" },
-            { id: "rHQIbb4VLwA", title: "كيف أصلي بحسب القرآن؟" },
-            { id: "kG5_euF30ec", title: "مفهوم الجُنُب والإغتسال" },
-            { id: "oJXCZ7arX70", title: "سأحاجج ربي" },
-            { id: "cqwPD1xzTVc", title: "الحجاب عادة أم عبادة؟" },
-            { id: "l7ta3MoNREU", title: "الطلاق من كتاب الله" },
-            { id: "fI_3ZGLMJPE", title: "مفهوم الصلاة على النبي" },
-            { id: "Y5XQuJc3qRw", title: "الحجاب أثناء الصلاة" },
-            { id: "aQeddsec4Mo", title: "الصلاة التواترية توقيفية؟" },
-            { id: "AUMUy3VPDoQ", title: "مثنى وثلاث ورباع" },
-            { id: "dIC9UHjVkP8", title: "تحريف الإسلام" },
-            { id: "zh0jRbhLqQc", title: "منهجية جمع البخاري" },
-            { id: "aiXBF_n7Sxk", title: "عدد ركعات الصلاة" }
+            { id: "96pGvXmx5bM", title: "Adulterers shall not marry except with adulterers or polytheists" },
+            { id: "bATkpINuvHw", title: "Those who abandon prayer are not infidels" },
+            { id: "FBwO_BsK1dk", title: "Why didn't the Quran detail the movements of prayer?" },
+            { id: "NIOiSwIUGs8", title: "What is the meaning of \"Gha'it\"? Is it a place for relief?" },
+            { id: "aJ-4IYa5ox0", title: "Is a woman's hair part of her \"Awra\"?" },
+            { id: "7wIDSBlUAf8", title: "Tabarruj (The ostentation of beauty)" },
+            { id: "S3oHA2a0c1M", title: "What if you pray a thousand times but commit injustice?!" },
+            { id: "C66NFtg-KPI", title: "\"And if two factions among the believers should fight\"" },
+            { id: "SF45e62fWPg", title: "Who is a believer?" },
+            { id: "EZlf4cuWC2k", title: "Crimes in the book of Al-Bukhari" },
+            { id: "fvdsqlD0YBY", title: "Between Quranic prohibition and clerical intimidation" },
+            { id: "ASnSsKFYDoU", title: "I worship neither the Prophet nor Al-Bukhari" },
+            { id: "JGv9cWsqbmc", title: "Does prayer prevent indecency and wrongdoing?" },
+            { id: "BlAdzlxf5fI", title: "Paying Khums in Shiasm: Truth vs. Theft" },
+            { id: "mxi3kfRLMsY", title: "The Sykes-Picot of the Clergy" },
+            { id: "VmhNW3BPLAc", title: "Clerical crimes against Islam" },
+            { id: "faI1favhHBU", title: "Complicating rituals: Quranic or Clerical?" },
+            { id: "NQie8xW-x7E", title: "Does God need our prayers? The reality of abandoning prayer." },
+            { id: "ox6LhMhcn3E", title: "Do you feel your prayer or is it just rituals?" },
+            { id: "3heav8z5LJ0", title: "Between social programming and God's justice" },
+            { id: "1MXWGGb-QvE", title: "Those who fight God and His Messenger" },
+            { id: "xL2M8_H8mNo", title: "The crime of calling people infidels (Takfir)" },
+            { id: "JC8lF54C7kk", title: "Will God judge us by our religion or our deeds?" },
+            { id: "8h2dx_yuB6U", title: "Is Islam a religion of violence?" },
+            { id: "mdWxPStRfnE", title: "Who is Ahmad? Is it another name for Prophet Muhammad?" },
+            { id: "zN52VOu_n8I", title: "Reading Al-Fatiha and Tashahhud in prayer" },
+            { id: "LoxvuToLaEU", title: "Is prayer an obligation upon a Muslim?" },
+            { id: "U7AxdI5N87g", title: "Meanings of Mecca, Bakkah, Qibla, and the Sacred House" },
+            { id: "L7dKk3wk9Aw", title: "Why doesn't God save the innocent?" },
+            { id: "bJChbYrr2hw", title: "Prayer as God intended, not as the clergy intended" },
+            { id: "wEVNsdUnjMU", title: "Al-Hoor Al-Ayn (The maidens of Paradise)" },
+            { id: "Q16Zmfe644A", title: "Prohibitions that Islam is innocent of" },
+            { id: "9351NKWhm7g", title: "The lie of the Prophet's marriage to a child" },
+            { id: "ZsSs72rP64k", title: "Contradiction between Quran and Narrations" },
+            { id: "ecNdpEu3Dko", title: "Quranic analysis of Fish and Liver" },
+            { id: "o6rOEWGxQSM", title: "Marriage of a Muslim woman to a non-Muslim" },
+            { id: "LLlVdPQtop0", title: "Why did enlightenment ideas spread at this time?" },
+            { id: "ifMKU0NYJL0", title: "Alcohol between prohibition and avoidance" },
+            { id: "6MmcZaOw6vw", title: "Friday Prayer: Truth vs. Illusion" },
+            { id: "rHQIbb4VLwA", title: "How to pray according to the Quran?" },
+            { id: "kG5_euF30ec", title: "Concept of \"Junub\" and Ritual Bath (Ghusl)" },
+            { id: "oJXCZ7arX70", title: "I will argue with my Lord (Important episode)" },
+            { id: "cqwPD1xzTVc", title: "Hijab: Custom or Worship?" },
+            { id: "l7ta3MoNREU", title: "Divorce from the Book of God" },
+            { id: "fI_3ZGLMJPE", title: "The concept of \"Blessings upon the Prophet\"" },
+            { id: "Y5XQuJc3qRw", title: "Is Hijab obligatory for women during prayer?" },
+            { id: "aQeddsec4Mo", title: "Is \"Tawatur\" prayer divine?" },
+            { id: "AUMUy3VPDoQ", title: "Two, three, and four (Polygamy)" },
+            { id: "dIC9UHjVkP8", title: "The distortion of Islam" },
+            { id: "zh0jRbhLqQc", title: "Methodology of Al-Bukhari's collection" },
+            { id: "aiXBF_n7Sxk", title: "The number of prayer units according to the Quran" }
         ];
 
         // ==================== Render Videos Function ====================
@@ -476,17 +411,17 @@
             grid.innerHTML = videosData.map(video => {
                 const isFavorite = favorites.some(fav => fav.id === video.id && fav.type === 'video');
                 const btnClass = isFavorite ? "favorite-btn active" : "favorite-btn";
-                const btnText = isFavorite ? '<i class="fas fa-check"></i> في المفضلة' : '<i class="far fa-star"></i> أضف للمفضلة';
+                const btnText = isFavorite ? '<i class="fas fa-check"></i> In Favorites' : '<i class="far fa-star"></i> Add to Favorites';
 
                 return `
                     <div class="video-card">
                         <div class="video-thumbnail" onclick="openYoutubeVideo('${video.id}')">
-                            <img src="https://img.youtube.com/vi/${video.id}/maxresdefault.jpg" alt="${video.title}">
+                            <img src="https://img.youtube.com/vi/${video.id}/maxresdefault.jpg" alt="Video">
                             <div class="play-icon"><i class="fas fa-play"></i></div>
                         </div>
                         <h3 class="video-title">${video.title}</h3>
                         <div class="video-actions">
-                            <button class="${btnClass}" onclick="toggleFavorite('${video.id}', '${video.title}', this)">
+                            <button class="${btnClass}" onclick="toggleFavorite('${video.id}', '${video.title.replace(/'/g, "\\'")}', this)">
                                 ${btnText}
                             </button>
                         </div>
@@ -495,45 +430,14 @@
             }).join('');
         }
 
-        // Toggle Mobile Menu
         function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
+            const navLinks = document.getElementById('navLinks');
             const overlay = document.querySelector('.nav-overlay');
-            const body = document.body;
-
             navLinks.classList.toggle('show');
-            
-            if(navLinks.classList.contains('show')) {
-                overlay.style.display = 'block';
-                body.classList.add('no-scroll');
-            } else {
-                overlay.style.display = 'none';
-                body.classList.remove('no-scroll');
-            }
+            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
+            document.body.classList.toggle('no-scroll');
         }
 
-        // Share
-        function handleMobileShare() {
-            const link = "https://www.husseinalkhalil.com/videos.html";
-            if (navigator.share) {
-                navigator.share({ title: 'فيديوهات حسين الخليل', url: link }).catch(console.error);
-            } else {
-                navigator.clipboard.writeText(link).then(() => {
-                    const alert = document.getElementById('copyAlert');
-                    alert.classList.add('show');
-                    setTimeout(() => alert.classList.remove('show'), 2000);
-                });
-            }
-        }
-
-        window.addEventListener('load', () => {
-            if (window.innerWidth < 1200) {
-                const mobileShareLink = document.querySelector('.mobile-share-link');
-                if(mobileShareLink) mobileShareLink.style.display = 'flex';
-            }
-        });
-
-        // Open Video
         function openYoutubeVideo(id) {
             window.open(`https://www.youtube.com/watch?v=${id}`, '_blank');
         }
@@ -544,7 +448,6 @@
             const index = favorites.findIndex(item => item.id === id && item.type === 'video');
             
             if (index === -1) {
-                // Add
                 favorites.push({
                     id: id,
                     title: title,
@@ -552,26 +455,31 @@
                     url: `https://www.youtube.com/embed/${id}`
                 });
                 btn.classList.add("active");
-                btn.innerHTML = '<i class="fas fa-check"></i> في المفضلة';
-                showMessage("تمت الإضافة إلى المفضلة");
+                btn.innerHTML = '<i class="fas fa-check"></i> In Favorites';
+                showMessage("Added to favorites");
             } else {
-                // Remove
                 favorites.splice(index, 1);
                 btn.classList.remove("active");
-                btn.innerHTML = '<i class="far fa-star"></i> أضف للمفضلة';
-                showMessage("تمت الإزالة من المفضلة");
+                btn.innerHTML = '<i class="far fa-star"></i> Add to Favorites';
+                showMessage("Removed from favorites");
             }
             localStorage.setItem("favorites", JSON.stringify(favorites));
         }
 
         function showMessage(text) {
             const message = document.getElementById("message");
-            message.textContent = text;
-            message.style.display = "block";
-            setTimeout(() => message.style.display = "none", 2000);
+            if(!message) {
+               const msgDiv = document.createElement('div');
+               msgDiv.id = 'message';
+               msgDiv.style.cssText = "position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);";
+               document.body.appendChild(msgDiv);
+            }
+            const msg = document.getElementById("message");
+            msg.textContent = text;
+            msg.style.display = "block";
+            setTimeout(() => msg.style.display = "none", 2000);
         }
 
-        // Back to Top
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -584,127 +492,58 @@
         // ==================== Global Search Logic ====================
         let cachedPagesContent = null;
         let isSearchInitialized = false;
-        
+
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
-
             try {
-                // Fetch site-map.json with cache busting
-                const response = await fetch('site-map.json?v=' + new Date().getTime());
-                if (!response.ok) throw new Error('Could not load site-map.json');
+                const response = await fetch('/site-map.json?v=' + new Date().getTime());
                 const pagesList = await response.json();
-
-                // Process each item
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
-                    
-                    let manualContent = (typeof item === 'object' && item.content) ? item.content : null;
-                    let manualTitle = (typeof item === 'object' && item.page) ? item.page : null;
-
-                    if (manualContent) {
-                        return { 
-                            page: manualTitle || url, 
-                            url: url, 
-                            content: manualContent 
-                        };
-                    }
-
                     try {
                         const pageResp = await fetch(url);
-                        if (!pageResp.ok) return null;
                         const html = await pageResp.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
-                        
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                         const mainContent = doc.querySelector('.container, main, body') || doc.body;
-
                         return {
-                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة',
+                            page: doc.title.replace('Hussein Al-Khalil - ', '').replace('Official Website', '').trim() || 'Page',
                             url: url,
                             content: mainContent.textContent.replace(/\s+/g, ' ').trim()
                         };
                     } catch (e) { return null; }
                 });
-
-                const results = await Promise.all(promises);
-                cachedPagesContent = results.filter(Boolean);
+                cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
                 return cachedPagesContent;
-            } catch (error) {
-                console.error("Search Error:", error);
-                return [];
-            }
-        }
-
-        function normalizeArabic(text) {
-            if (!text) return '';
-            text = text.replace(/[\u064B-\u065F\u0670]/g, ''); 
-            text = text.replace(/[أإآ]/g, 'ا');
-            text = text.replace(/[ة]/g, 'ه');
-            text = text.replace(/[ى]/g, 'ي');
-            text = text.replace(/[ؤ]/g, 'و');
-            text = text.replace(/[ئ]/g, 'ي');
-            return text;
+            } catch (error) { return []; }
         }
 
         function getSafeRegex(searchTerm) {
-            let regexStr = '';
-            const cleanTerm = normalizeArabic(searchTerm);
-            
-            for (let i = 0; i < cleanTerm.length; i++) {
-                const char = cleanTerm[i];
-                if (char === 'ا') regexStr += '[اأإآ]';
-                else if (char === 'ه') regexStr += '[هة]';
-                else if (char === 'ي') regexStr += '[يىئ]';
-                else if (char === 'و') regexStr += '[وؤ]';
-                else if (char.match(/[a-zA-Z]/)) regexStr += char;
-                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                
-                regexStr += '[\\u064B-\\u065F\\u0670]*'; 
-            }
-            return new RegExp(regexStr, 'gi');
+            return new RegExp(searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
         }
 
         function displayGlobalResults(results, queryRegex, container) {
             container.innerHTML = '';
             if (results.length === 0) {
-                container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+                container.innerHTML = '<div class="search-item"><p>⚠️ No results found</p></div>';
                 container.style.display = 'block';
                 return;
             }
-            
-            // Add Count
             const countDiv = document.createElement('div');
             countDiv.className = 'search-count';
-            countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
+            countDiv.textContent = `Found ${results.length} results`;
             container.appendChild(countDiv);
-            
+
             results.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
-                
                 const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
-                
-                let snippet = '';
                 queryRegex.lastIndex = 0;
                 const match = queryRegex.exec(item.content);
-                
-                if (match) {
-                    const start = Math.max(0, match.index - 60);
-                    const end = Math.min(item.content.length, match.index + 100);
-                    snippet = item.content.substring(start, end);
-                    if (start > 0) snippet = '...' + snippet;
-                    if (end < item.content.length) snippet = snippet + '...';
-                } else {
-                    snippet = item.content.substring(0, 150) + '...';
-                }
-                
-                const highlightedSnippet = snippet.replace(queryRegex, match => `<mark>${match}</mark>`);
-
-                // Pass query as parameter
-                const searchTerm = document.getElementById('globalSearch').value.trim();
-                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${highlightedSnippet}</p>`;
-                div.onclick = () => window.location.href = item.url + "?highlight=" + encodeURIComponent(searchTerm);
+                let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
+                div.onclick = () => window.location.href = item.url;
                 container.appendChild(div);
             });
             container.style.display = 'block';
@@ -712,18 +551,12 @@
 
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
-
-            if (!query || query.length < 2) {
-                resultsContainer.style.display = 'none';
-                return;
-            }
-            
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث في جميع المحتويات...</p></div>';
+            if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
+            resultsContainer.innerHTML = '<div class="search-item"><p>Searching...</p></div>';
             resultsContainer.style.display = 'block';
 
             const data = await loadAllPagesContent();
             const searchRegex = getSafeRegex(query);
-            
             const results = data.filter(item => {
                 searchRegex.lastIndex = 0;
                 const titleMatch = searchRegex.test(item.page);
@@ -731,33 +564,30 @@
                 const contentMatch = searchRegex.test(item.content);
                 return titleMatch || contentMatch;
             });
-
             displayGlobalResults(results, searchRegex, resultsContainer);
         }
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            
             // 1. Render Videos from JSON
             renderVideos();
 
             // 2. Setup Search Listener
             const searchInput = document.getElementById('globalSearch');
             let timer;
-            if(searchInput) {
+            if (searchInput) {
                 searchInput.addEventListener('input', (e) => {
                     clearTimeout(timer);
                     timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500);
                 });
                 searchInput.addEventListener('focus', () => {
-                    if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; }
+                    if (!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; }
                 });
             }
 
             // Close search on outside click
             document.addEventListener('click', (e) => {
                 const searchContainer = document.querySelector('.universal-search');
-                if(searchContainer && !searchContainer.contains(e.target)) {
+                if (searchContainer && !searchContainer.contains(e.target)) {
                     document.getElementById('searchResults').style.display = 'none';
                 }
             });
