@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html dir="ltr" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>الحوارات - حسين الخليل</title>
+    <title>Dialogues - Hussein Al-Khalil</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
-    <link href="images/logo-small.png" rel="icon" type="image/png"/>
-    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <link href="/images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="/images/logo-small.png" rel="apple-touch-icon"/>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,34 +66,35 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
+        .logo-container { order: 1; }
         .logo-container img { height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 
         .nav-links {
             display: flex; flex: 1; justify-content: space-evenly;
-            align-items: center; flex-wrap: wrap; margin: 0 20px;
+            align-items: center; flex-wrap: wrap; margin: 0 20px; order: 2;
         }
 
         .nav-links a {
-            color: white; font-weight: 700; font-size: 1.05rem;
+            color: white; font-weight: 700; font-size: 0.9rem;
             padding: 8px 12px; border-radius: 20px;
             display: flex; align-items: center; gap: 5px; white-space: nowrap;
         }
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
-        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
 
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
             .nav-links {
-                position: fixed; top: 60px; right: -280px; width: 280px;
+                position: fixed; top: 60px; left: -280px; width: 280px;
                 background: var(--surface-color);
                 flex-direction: column; padding: 20px; height: calc(100vh - 60px);
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.1); transition: left 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
                 gap: 10px; margin: 0; flex: unset; z-index: 1000;
             }
-            .nav-links.show { right: 0; }
+            .nav-links.show { left: 0; }
             .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
             nav { padding: 0.8rem 5%; }
         }
@@ -110,24 +111,24 @@
         /* Search Section */
         .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto 40px auto; }
         #globalSearch {
-            width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none; font-size: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal', sans-serif; outline: none; background: white;
+            width: 100%; padding: 18px 25px 18px 50px; border-radius: 50px; border: none; font-size: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal', sans-serif; outline: none; background: white; text-align: left;
         }
-        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
+        .search-icon-placeholder { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
         .search-results {
             position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 200; text-align: right; display: none;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 200; text-align: left; display: none;
             color: var(--text-primary); border: 1px solid rgba(0,0,0,0.05);
         }
         .search-count { padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
         .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
         mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
-        /* Main Wrapper */
+        /* Layout */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper { position: relative; z-index: 20; margin-top: -90px; margin-bottom: 60px; max-width: 1000px; margin-left: auto; margin-right: auto; }
 
-        /* Grid - Stable Layout */
+        /* Dialogues Grid - Stable Layout */
         #articlesList { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
@@ -139,17 +140,17 @@
         .article {
             background: var(--surface-color); border-radius: 16px; padding: 30px;
             box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
-            border-right: 5px solid var(--primary-color); position: relative;
-            text-align: right; overflow: hidden; display: flex;
+            border-left: 5px solid var(--primary-color); position: relative;
+            text-align: left; overflow: hidden; display: flex;
             flex-direction: column; height: 100%; transition: all 0.4s;
             cursor: pointer; width: 100%;
         }
-        .article:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); border-right-width: 8px; }
+        .article:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); border-left-width: 8px; }
         
         .article::before {
             content: '\f086'; font-family: "Font Awesome 6 Free"; font-weight: 900;
-            position: absolute; left: -20px; bottom: -20px; font-size: 8rem;
-            color: rgba(94, 44, 165, 0.03); transform: rotate(15deg);
+            position: absolute; right: -20px; bottom: -20px; font-size: 8rem;
+            color: rgba(94, 44, 165, 0.03); transform: rotate(-15deg);
             pointer-events: none; transition: all 0.4s;
         }
 
@@ -190,22 +191,18 @@
         .video-counter { font-weight: 700; color: var(--text-secondary); font-size: 0.95rem; }
 
         /* Social */
-        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); max-width: 1200px; margin-left: auto; margin-right: auto;}
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: 0.3s; }
+        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.8); transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .social-btn img { width: 24px; height: 24px; }
-        .social-btn:hover { transform: translateY(-5px) scale(1.1); }
+        .social-btn:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
         .social-btn.facebook:hover { background: #1877F2; }
         .social-btn.instagram:hover { background: #E4405F; }
         .social-btn.youtube:hover { background: #FF0000; }
-        .social-btn.tiktok:hover { background: #000000; }
-        .social-btn.telegram:hover { background: #0088CC; }
-        .social-btn.snap:hover { background: #FFFC00; }
-        .social-btn.snap:hover img { filter: none; }
 
         /* Footer - Original Effects */
         footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
@@ -230,25 +227,26 @@
 
     <nav>
         <div class="logo-container">
-            <a href="index.html"><img src="images/logo.png" alt="شعار حسين الخليل" /></a>
+            <a href="index.html"><img src="/images/logo.png" alt="Logo" /></a>
         </div>
         <div class="nav-links">
-            <a href="index.html">الرئيسية</a>
-            <a href="books.html">الكتب</a>
-            <a href="articles.html">المقالات</a>
-            <a href="hadith.html">الروايات</a>
-            <a href="khawatir.html">خواطر</a>
-            <a href="videos.html">الفيديوهات</a>
-            <a href="history.html">التاريخ</a>
-            <a href="podcast.html">البودكاست</a>
-            <a href="ask.html">الأسئلة</a>
-            <a href="hewar.html" style="background: rgba(255,255,255,0.2);">حوارات</a>
-            <a href="inq.html">تساؤلات</a>
-            <a href="manhaj.html">المنهج</a>
-            <a href="favorites.html">المفضلة</a>
-            <a href="support.html">دعم المحتوى</a>
-            <a href="about.html">من نحن</a>
-            <a href="/en/hewar.html" style="color: #ffd700 !important; font-weight: 800; font-size: 1rem; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 8px 16px; border-radius: 20px;">En<i class="fas fa-globe"></i></a>
+            <a href="index.html">Home</a>
+            <a href="books.html">Books</a>
+            <a href="articles.html">Articles</a>
+            <a href="hadith.html">Narrations</a>
+            <a href="khawatir.html">Reflections</a>
+            <a href="videos.html">Videos</a>
+            <a href="history.html">History</a>
+            <a href="podcast.html">Podcast</a>
+            <a href="ask.html">Ask</a>
+            <a href="hewar.html" style="background: rgba(255,255,255,0.2);">Dialogues</a>
+            <a href="inq.html">Inquiries</a>
+            <a href="manhaj.html">Methodology</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="support.html">Support</a>
+            <a href="about.html">About Us</a>
+            <a href="/hewar.html" style="color: #ffd700 !important; font-weight: 800; border: 1px solid rgba(255, 215, 0, 0.5); padding: 5px 15px; border-radius: 20px;"><i class="fas fa-globe"></i> عربي</a>
+            <a href="#" onclick="window.print()" title="Print"><i class="fas fa-print"></i></a>
         </div>
         <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
     </nav>
@@ -256,8 +254,8 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>الحوارات</h1>
-                <p>في هذه الصفحة أشارك حوارات من خارج الصندوق، حوارات واقعية بطابع الكوميديا السوداء</p>
+                <h1>Dialogues</h1>
+                <p>On this page, I share dialogues from outside the box—realistic dialogues with a black comedy character</p>
             </div>
         </div>
     </header>
@@ -265,7 +263,7 @@
     <div class="container main-wrapper">
         <div class="universal-search">
             <i class="fas fa-search search-icon-placeholder"></i>
-            <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+            <input type="text" id="globalSearch" placeholder="Search across all content..." />
             <div class="search-results" id="searchResults"></div>
         </div>
 
@@ -275,24 +273,24 @@
         <!-- Pagination Section -->
         <div class="pagination-section">
             <div class="pagination-controls">
-                <button class="page-arrow" id="lastPage" onclick="goToLastPage()">الأخيرة <i class="fas fa-angle-double-left"></i></button>
-                <button class="page-arrow" id="nextPage" onclick="changePage(1)">التالية <i class="fas fa-chevron-left"></i></button>
-                <span class="video-counter" id="pageIndicator">صفحة 1 من 1</span>
-                <button class="page-arrow" id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i> السابقة</button>
-                <button class="page-arrow" id="firstPage" onclick="goToPage(1)"><i class="fas fa-angle-double-right"></i> الأولى</button>
+                <button class="page-arrow" id="firstPage" onclick="goToPage(1)"><i class="fas fa-angle-double-left"></i> First</button>
+                <button class="page-arrow" id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i> Prev</button>
+                <span class="video-counter" id="pageIndicator">Page 1 of 1</span>
+                <button class="page-arrow" id="nextPage" onclick="changePage(1)">Next <i class="fas fa-chevron-right"></i></button>
+                <button class="page-arrow" id="lastPage" onclick="goToLastPage()">Last <i class="fas fa-angle-double-right"></i></button>
             </div>
-            <div class="video-counter" id="totalCounter">عرض 0 من أصل 0 حوار</div>
+            <div class="video-counter" id="totalCounter">Showing 0 of 0 dialogues</div>
         </div>
 
         <div class="social-section">
-            <div class="section-title"><h2>تابعني على مواقع التواصل</h2></div>
+            <div class="section-title"><h2>Follow Me</h2></div>
             <div class="social-grid">
-                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn youtube"><img src="icons/yot-soc.png" alt="يوتيوب"></a>
-                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" class="social-btn facebook"><img src="icons/fac-soc.png" alt="فيسبوك"></a>
-                <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" class="social-btn instagram"><img src="icons/ins-soc.png" alt="إنستغرام"></a>
-                <a href="https://t.me/tanoeer" target="_blank" class="social-btn telegram"><img src="icons/tel-soc.png" alt="تلغرام"></a>
-                <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" class="social-btn tiktok"><img src="icons/tik-soc.png" alt="تيك توك"></a>
-                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn snap"><img src="icons/snap.png" alt="سناب شات"></a>
+                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn youtube"><img src="/icons/yot-soc.png" alt="yt"></a>
+                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" class="social-btn facebook"><img src="/icons/fac-soc.png" alt="fb"></a>
+                <a href="https://instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" class="social-btn instagram"><img src="/icons/ins-soc.png" alt="in"></a>
+                <a href="https://t.me/tanoeer" target="_blank" class="social-btn telegram"><img src="/icons/tel-soc.png" alt="tg"></a>
+                <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" class="social-btn tiktok"><img src="/icons/tik-soc.png" alt="tk"></a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn snap"><img src="/icons/snap.png" alt="sc"></a>
             </div>
         </div>
     </div>
@@ -303,44 +301,44 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="terms.html">الشروط والأحكام</a>
-                <a href="privacy.html">سياسة الخصوصية</a>
-                <a href="contact.html">اتصل بنا</a>
-                <a href="feedback.html">شاركنا رأيك</a>
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="feedback.html">Share your opinion</a>
             </div>
-            <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
+            <div class="copyright">Hussein Al-Khalil - All Rights Reserved © 2025</div>
         </div>
     </footer>
 
     <script>
         // ==================== Dialogues Data (JSON) ====================
         const dialoguesData = [
-            { id: 26, date: "11 مايو 2025", title: "❖ حوار مع شرفنطح (9).", url: "hewar/26.html" },
-            { id: 25, date: "11 مايو 2025", title: "❖ تعطيل العقول.", url: "hewar/25.html" },
-            { id: 24, date: "11 مايو 2025", title: "❖ حوار كهنوتي.", url: "hewar/24.html" },
-            { id: 23, date: "11 مايو 2025", title: "❖ اقتباس من كتاب: الإسلام بين القرآن والتراث.", url: "hewar/23.html" },
-            { id: 22, date: "11 مايو 2025", title: "❖ حوار مختصر.", url: "hewar/22.html" },
-            { id: 21, date: "11 مايو 2025", title: "❖ الغزوةالمشّقلّيتيّة.", url: "hewar/21.html" },
-            { id: 20, date: "10 مايو 2025", title: "❖ عروض الباقات الكهنوتية", url: "hewar/20.html" },
-            { id: 19, date: "10 مايو 2025", title: "❖ حوار مع شرفنطح (1)", url: "hewar/19.html" },
-            { id: 18, date: "10 مايو 2025", title: "❖ حوار مع شرفنطح (2)", url: "hewar/18.html" },
-            { id: 17, date: "10 مايو 2025", title: "❖ حوار مع شرفنطح (3)", url: "hewar/17.html" },
-            { id: 16, date: "10 مايو 2025", title: "❖ حوار مع شرفنطح (4)", url: "hewar/16.html" },
-            { id: 15, date: "10 مايو 2025", title: "❖ حوار مع شرفنطح (5)", url: "hewar/15.html" },
-            { id: 14, date: "10 مايو 2025", title: "❖ حوار مع شرفنطح (6)", url: "hewar/14.html" },
-            { id: 13, date: "10 مايو 2025", title: "❖ حوار مع شرفنطح (7)", url: "hewar/13.html" },
-            { id: 12, date: "10 مايو 2025", title: "❖ حوار مع شرفنطح (8)", url: "hewar/12.html" },
-            { id: 11, date: "10 مايو 2025", title: "❖ حوار الصعاليك", url: "hewar/11.html" },
-            { id: 10, date: "10 مايو 2025", title: "❖ متفق عليه", url: "hewar/9.html" },
-            { id: 9, date: "5 مايو 2025", title: "❖ حوار من دون عنعنة 1 (الصلاة)", url: "hewar/9.html" },
-            { id: 8, date: "5 مايو 2025", title: "❖ حوار من دون عنعنة 2 (الأطعمة)", url: "hewar/8.html" },
-            { id: 7, date: "5 مايو 2025", title: "❖ حوار من دون عنعنة 3 (الجهاد في سبيل الله)", url: "hewar/7.html" },
-            { id: 6, date: "5 مايو 2025", title: "❖ حوار من دون عنعنة 4 (التفسير)", url: "hewar/6.html" },
-            { id: 5, date: "5 مايو 2025", title: "❖ حوار من دون عنعنة 5 (الحكمة)", url: "hewar/5.html" },
-            { id: 4, date: "5 مايو 2025", title: "❖ حوار من دون عنعنة 6 (المرأة)", url: "hewar/4.html" },
-            { id: 3, date: "5 مايو 2025", title: "❖ حوار من دون عنعنة 7 (كيفية الصلاة)", url: "hewar/3.html" },
-            { id: 2, date: "5 مايو 2025", title: "❖ حوار من دون عنعنة 8 (المحرمات والمحلّلات)", url: "hewar/2.html" },
-            { id: 1, date: "5 مايو 2025", title: "❖ حوار من دون عنعنة 9 (الخاتمة)", url: "hewar/1.html" }
+            { id: 26, date: "May 11, 2025", title: "❖ Dialogue with Sharafantah (9).", url: "/en/hewar/26.html" },
+            { id: 25, date: "May 11, 2025", title: "❖ Disabling Minds.", url: "/en/hewar/25.html" },
+            { id: 24, date: "May 11, 2025", title: "❖ A Sacerdotal Dialogue.", url: "/en/hewar/24.html" },
+            { id: 23, date: "May 11, 2025", title: "❖ Excerpt from the book: Islam between Quran and Heritage.", url: "/en/hewar/23.html" },
+            { id: 22, date: "May 11, 2025", title: "❖ A Brief Dialogue.", url: "/en/hewar/22.html" },
+            { id: 21, date: "May 11, 2025", title: "❖ The \"Mushaqalliti\" Invasion.", url: "/en/hewar/21.html" },
+            { id: 20, date: "May 10, 2025", title: "❖ Sacerdotal Package Offers", url: "/en/hewar/20.html" },
+            { id: 19, date: "May 10, 2025", title: "❖ Dialogue with Sharafantah (1)", url: "/en/hewar/19.html" },
+            { id: 18, date: "May 10, 2025", title: "❖ Dialogue with Sharafantah (2)", url: "/en/hewar/18.html" },
+            { id: 17, date: "May 10, 2025", title: "❖ Dialogue with Sharafantah (3)", url: "/en/hewar/17.html" },
+            { id: 16, date: "May 10, 2025", title: "❖ Dialogue with Sharafantah (4)", url: "/en/hewar/16.html" },
+            { id: 15, date: "May 10, 2025", title: "❖ Dialogue with Sharafantah (5)", url: "/en/hewar/15.html" },
+            { id: 14, date: "May 10, 2025", title: "❖ Dialogue with Sharafantah (6)", url: "/en/hewar/14.html" },
+            { id: 13, date: "May 10, 2025", title: "❖ Dialogue with Sharafantah (7)", url: "/en/hewar/13.html" },
+            { id: 12, date: "May 10, 2025", title: "❖ Dialogue with Sharafantah (8)", url: "/en/hewar/12.html" },
+            { id: 11, date: "May 10, 2025", title: "❖ Dialogue of the Vagabonds", url: "/en/hewar/11.html" },
+            { id: 10, date: "May 10, 2025", title: "❖ Agreed Upon", url: "/en/hewar/9.html" },
+            { id: 9, date: "May 5, 2025", title: "❖ Dialogue without \"An'anah\" 1 (Prayer)", url: "/en/hewar/9.html" },
+            { id: 8, date: "May 5, 2025", title: "❖ Dialogue without \"An'anah\" 2 (Food)", url: "/en/hewar/8.html" },
+            { id: 7, date: "May 5, 2025", title: "❖ Dialogue without \"An'anah\" 3 (Jihad in the Way of God)", url: "/en/hewar/7.html" },
+            { id: 6, date: "May 5, 2025", title: "❖ Dialogue without \"An'anah\" 4 (Interpretation)", url: "/en/hewar/6.html" },
+            { id: 5, date: "May 5, 2025", title: "❖ Dialogue without \"An'anah\" 5 (Wisdom)", url: "/en/hewar/5.html" },
+            { id: 4, date: "May 5, 2025", title: "❖ Dialogue without \"An'anah\" 6 (Women)", url: "/en/hewar/4.html" },
+            { id: 3, date: "May 5, 2025", title: "❖ Dialogue without \"An'anah\" 7 (How to Pray)", url: "/en/hewar/3.html" },
+            { id: 2, date: "May 5, 2025", title: "❖ Dialogue without \"An'anah\" 8 (Forbidden and Permissible)", url: "/en/hewar/2.html" },
+            { id: 1, date: "May 5, 2025", title: "❖ Dialogue without \"An'anah\" 9 (Conclusion)", url: "/en/hewar/1.html" }
         ];
 
         // ==================== Pagination Logic ====================
@@ -370,7 +368,7 @@
                         <button class="article-button ${isFav ? 'active' : ''}" 
                                 onclick="toggleFavorite(this, '${item.title.replace(/'/g, "\\'")}')">
                             <i class="${isFav ? 'fas' : 'far'} fa-star"></i> 
-                            ${isFav ? 'تمت الإضافة' : 'أضف للمفضلة'}
+                            ${isFav ? 'Added' : 'Add to Favorites'}
                         </button>
                     </div>
                 `;
@@ -381,10 +379,10 @@
 
         function updatePaginationUI() {
             const totalPages = Math.ceil(dialoguesData.length / itemsPerPage);
-            document.getElementById('pageIndicator').textContent = `صفحة ${currentPage} من ${totalPages || 1}`;
+            document.getElementById('pageIndicator').textContent = `Page ${currentPage} of ${totalPages || 1}`;
             const startItem = dialoguesData.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1;
             const endItem = Math.min(currentPage * itemsPerPage, dialoguesData.length);
-            document.getElementById('totalCounter').textContent = `عرض ${startItem}-${endItem} من أصل ${dialoguesData.length} حوار`;
+            document.getElementById('totalCounter').textContent = `Showing ${startItem}-${endItem} of ${dialoguesData.length} dialogues`;
             
             document.getElementById('prevPage').disabled = currentPage === 1;
             document.getElementById('firstPage').disabled = currentPage === 1;
@@ -396,7 +394,7 @@
         function goToPage(page) { currentPage = page; renderDialogues(); scrollToTop(); }
         function goToLastPage() { currentPage = Math.ceil(dialoguesData.length / itemsPerPage) || 1; renderDialogues(); scrollToTop(); }
 
-        // ==================== General Site Functions ====================
+        // ==================== Site Functions ====================
         function toggleMobileMenu() {
             const nav = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
@@ -411,13 +409,13 @@
             if (isFavorite) {
                 favorites = favorites.filter(i => i !== item);
                 button.classList.remove("active");
-                button.innerHTML = '<i class="far fa-star"></i> أضف للمفضلة';
-                showMessage("تمت إزالة العنصر من المفضلة");
+                button.innerHTML = '<i class="far fa-star"></i> Add to Favorites';
+                showMessage("Removed from favorites");
             } else {
                 favorites.push(item);
                 button.classList.add("active");
-                button.innerHTML = '<i class="fas fa-star"></i> تمت الإضافة';
-                showMessage("تمت إضافة العنصر إلى المفضلة");
+                button.innerHTML = '<i class="fas fa-star"></i> Added';
+                showMessage("Added to favorites");
             }
             localStorage.setItem("favorites", JSON.stringify(favorites));
         }
@@ -435,14 +433,14 @@
             else btn.classList.remove('visible');
         });
 
-        // ==================== Global Search Logic (Original) ====================
+        // Global Search Original Logic
         let cachedPagesContent = null;
         let isSearchInitialized = false;
 
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
             try {
-                const response = await fetch('site-map.json?v=' + new Date().getTime());
+                const response = await fetch('/site-map.json?v=' + new Date().getTime());
                 const pagesList = await response.json();
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
@@ -453,7 +451,7 @@
                         const doc = parser.parseFromString(html, 'text/html');
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                         return {
-                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة',
+                            page: doc.title.replace('Hussein Al-Khalil - ', '').replace('Official Website', '').trim() || 'Page',
                             url: url,
                             content: (doc.querySelector('.container, main, body') || doc.body).textContent.replace(/\s+/g, ' ').trim()
                         };
@@ -464,40 +462,18 @@
             } catch (error) { return []; }
         }
 
-        function normalizeArabic(text) {
-            return text.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
-        }
-
-        function getSafeRegex(searchTerm) {
-            let regexStr = '';
-            const cleanTerm = normalizeArabic(searchTerm);
-            for (let char of cleanTerm) {
-                if (char === 'ا') regexStr += '[اأإآ]';
-                else if (char === 'ه') regexStr += '[هة]';
-                else if (char === 'ي') regexStr += '[يىئ]';
-                else if (char === 'و') regexStr += '[وؤ]';
-                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                regexStr += '[\\u064B-\\u065F\\u0670]*';
-            }
-            return new RegExp(regexStr, 'gi');
-        }
-
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
             if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            resultsContainer.innerHTML = '<div class="search-item"><p>Searching...</p></div>';
             resultsContainer.style.display = 'block';
             const data = await loadAllPagesContent();
-            const searchRegex = getSafeRegex(query);
-            const results = data.filter(item => {
-                searchRegex.lastIndex = 0;
-                return searchRegex.test(item.page) || searchRegex.test(item.content);
-            });
-            resultsContainer.innerHTML = `<div class="search-count">تم العثور على ${results.length} نتيجة</div>`;
+            const results = data.filter(item => item.page.toLowerCase().includes(query.toLowerCase()) || item.content.toLowerCase().includes(query.toLowerCase()));
+            resultsContainer.innerHTML = `<div class="search-count">Found ${results.length} results</div>`;
             results.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
-                div.innerHTML = `<h3>${item.page.replace(searchRegex, m => `<mark>${m}</mark>`)}</h3><p>${item.content.substring(0, 150).replace(searchRegex, m => `<mark>${m}</mark>`)}...</p>`;
+                div.innerHTML = `<h3>${item.page.replace(new RegExp(query, 'gi'), m => `<mark>${m}</mark>`)}</h3><p>${item.content.substring(0, 150).replace(new RegExp(query, 'gi'), m => `<mark>${m}</mark>`)}...</p>`;
                 div.onclick = () => window.location.href = item.url;
                 resultsContainer.appendChild(div);
             });
