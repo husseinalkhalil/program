@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Reflections - Hussein Al-Khalil</title>
+    <title>المقالات - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
-    <link href="/images/logo-small.png" rel="icon" type="image/png"/>
-    <link href="/images/logo-small.png" rel="apple-touch-icon"/>
+    <link href="images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="images/logo-small.png" rel="apple-touch-icon"/>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,35 +66,34 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        .logo-container { order: 1; }
         .logo-container img { height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
 
         .nav-links {
             display: flex; flex: 1; justify-content: space-evenly;
-            align-items: center; flex-wrap: wrap; margin: 0 20px; order: 2;
+            align-items: center; flex-wrap: wrap; margin: 0 20px;
         }
 
         .nav-links a {
-            color: white; font-weight: 700; font-size: 0.9rem;
+            color: white; font-weight: 700; font-size: 1.05rem;
             padding: 8px 12px; border-radius: 20px;
             display: flex; align-items: center; gap: 5px; white-space: nowrap;
         }
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
-        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
 
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
             .nav-links {
-                position: fixed; top: 60px; left: -280px; width: 280px;
+                position: fixed; top: 60px; right: -280px; width: 280px;
                 background: var(--surface-color);
                 flex-direction: column; padding: 20px; height: calc(100vh - 60px);
-                box-shadow: 5px 0 15px rgba(0,0,0,0.1); transition: left 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
                 gap: 10px; margin: 0; flex: unset; z-index: 1000;
             }
-            .nav-links.show { left: 0; }
+            .nav-links.show { right: 0; }
             .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
             nav { padding: 0.8rem 5%; }
         }
@@ -106,79 +105,60 @@
             border-radius: 0 0 50px 50px; position: relative; z-index: 1;
         }
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
-        .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+        .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
 
-        /* Search Section */
+        /* Search Box */
         .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto 40px auto; }
         #globalSearch {
-            width: 100%; padding: 18px 25px 18px 50px; border-radius: 50px; border: none; font-size: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal', sans-serif; outline: none; background: white; text-align: left;
+            width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none; font-size: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal', sans-serif; outline: none; background: white;
         }
-        .search-icon-placeholder { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
+        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
         .search-results {
-            position: absolute; top: 110%; left: 0; right: 0; background: #ffffff; border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 10000; text-align: left; display: none;
+            position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 200; text-align: right; display: none;
             color: var(--text-primary); border: 1px solid rgba(0,0,0,0.05);
         }
         .search-count { padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
         .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
-        .search-item:hover { background: rgba(94, 44, 165, 0.05); }
         mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
-        /* Container Structure */
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+        /* Layout */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper { position: relative; z-index: 20; margin-top: -90px; margin-bottom: 60px; max-width: 1000px; margin-left: auto; margin-right: auto; }
 
-        /* Thoughts Grid - Stable Layout */
-        #thoughtsList { 
+        /* Articles Grid - Stable Scaling */
+        #articlesList { 
             display: grid; 
-            grid-template-columns: 1fr 1fr; 
+            grid-template-columns: repeat(2, 1fr); 
             gap: 25px; 
             width: 100%;
             align-items: start;
         }
 
-        .thought-card {
+        .article {
             background: var(--surface-color); border-radius: 16px; padding: 30px;
             box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
-            border-left: 5px solid var(--primary-color);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; flex-direction: column; position: relative;
-            overflow: hidden; height: 100%; width: 100%; text-align: left;
+            border-right: 5px solid var(--primary-color); position: relative;
+            display: flex; flex-direction: column; height: 100%; transition: 0.3s;
+            cursor: pointer; width: 100%;
         }
-        .thought-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); }
-        .thought-card::before {
-            content: '\f0eb'; font-family: "Font Awesome 6 Free"; font-weight: 900;
-            position: absolute; right: -20px; bottom: -20px; font-size: 8rem;
-            color: rgba(94, 44, 165, 0.03); transform: rotate(-15deg);
-            pointer-events: none; transition: all 0.4s;
-        }
+        .article:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); border-right-width: 8px; }
+        
+        .article h2 { margin-bottom: 15px; position: relative; z-index: 1; flex-grow: 1; }
+        .article h2 a { color: var(--text-primary); font-size: 1.3rem; font-weight: 800; display: block; line-height: 1.4; }
+        .article h2 a:hover { color: var(--primary-color); }
 
-        .thought-content {
-            font-size: 1.15rem; line-height: 1.8; color: var(--text-primary);
-            margin-bottom: 25px; white-space: pre-line; flex-grow: 1;
-            position: relative; z-index: 1;
+        .meta-data { margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
+        .publish-date { font-size: 0.85rem; color: var(--text-secondary); background: rgba(94, 44, 165, 0.05); padding: 6px 12px; border-radius: 20px; }
+        
+        .article-button { 
+            background: transparent; border: 1px solid #e2e8f0; color: var(--text-secondary); 
+            padding: 6px 14px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-size: 0.85rem; 
+            position: relative; z-index: 5; 
         }
-
-        .meta-data {
-            display: flex; justify-content: space-between; align-items: center;
-            border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px;
-            margin-top: auto; position: relative; z-index: 1; flex-wrap: wrap; gap: 10px;
-        }
-        .publish-date {
-            font-size: 0.85rem; color: var(--text-secondary); background: rgba(94, 44, 165, 0.05);
-            padding: 6px 12px; border-radius: 20px; display: inline-flex;
-            align-items: center; gap: 6px; font-weight: 500;
-        }
-        .actions { display: flex; gap: 10px; }
-        .action-btn {
-            background: transparent; border: 1px solid #e2e8f0; color: var(--text-secondary);
-            width: 36px; height: 36px; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; cursor: pointer;
-            transition: all 0.3s; font-size: 1rem;
-        }
-        .action-btn:hover { background: #fef9c3; color: #b45309; border-color: #fde047; transform: scale(1.1); }
-        .action-btn.favorited { color: #fbbf24; border-color: #fbbf24; }
+        .article-button:hover { background: #fef9c3; color: #b45309; border-color: #fde047; transform: scale(1.05); }
+        .article-button.active { background: var(--accent-color); color: #422006; border-color: var(--accent-color); }
 
         /* Pagination Section */
         .pagination-section {
@@ -195,38 +175,42 @@
         .page-arrow:disabled { opacity: 0.4; cursor: not-allowed; border-color: #cbd5e1; color: #64748b; }
         .video-counter { font-weight: 700; color: var(--text-secondary); font-size: 0.95rem; }
 
-        /* Social Section */
-        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); max-width: 1200px; margin-left: auto; margin-right: auto;}
+        /* Social */
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .social-btn img { width: 26px; transition: 0.3s; filter: grayscale(1) opacity(0.8); }
-        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: 0.3s; }
+        .social-btn:hover { transform: translateY(-5px) scale(1.1); }
+        .social-btn img { width: 24px; height: 24px; transition: 0.3s; }
         .social-btn:hover img { filter: brightness(0) invert(1); }
-        .social-yt:hover { background: #FF0000; }
-        .social-fb:hover { background: #1877F2; }
-        .social-ins:hover { background: #E4405F; }
-        .social-tg:hover { background: #0088CC; }
-        .social-tk:hover { background: #000000; }
-        .social-sc:hover { background: #FFFC00; } 
-        .social-sc:hover img { filter: none; }
+        .social-btn.facebook:hover { background: #1877F2; }
+        .social-btn.instagram:hover { background: #E4405F; }
+        .social-btn.youtube:hover { background: #FF0000; }
+        .social-btn.tiktok:hover { background: #000000; }
+        .social-btn.telegram:hover { background: #0088CC; }
+        .social-btn.snap:hover { background: #FFFC00; }
+        .social-btn.snap:hover img { filter: none; }
 
-        /* Footer */
+        /* Footer - Restored Effects */
         footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
         .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
         .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.9rem; transition: 0.3s; }
         .footer-links a:hover { color: var(--accent-color); }
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px; }
 
-        /* Back to top */
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; font-size: 1.2rem; box-shadow: var(--shadow-md); }
+        /* Fixed */
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         
         #message { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-        @media (max-width: 900px) { #thoughtsList { grid-template-columns: 1fr; } .hero-text h1 { font-size: 2rem; } }
+        @media (max-width: 900px) { 
+            #articlesList { grid-template-columns: 1fr; } 
+            .hero-text h1 { font-size: 2rem; } 
+            .hero-section { padding: 100px 20px 160px; } 
+        }
         @media (max-width: 600px) { .pagination-controls { flex-wrap: wrap; justify-content: center; } }
     </style>
 </head>
@@ -236,25 +220,25 @@
 
     <nav>
         <div class="logo-container">
-            <a href="index.html"><img src="/images/logo.png" alt="Hussein Al-Khalil Logo" /></a>
+            <a href="index.html"><img src="images/logo.png" alt="شعار حسين الخليل" /></a>
         </div>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html">Home</a>
-            <a href="books.html">Books</a>
-            <a href="articles.html">Articles</a>
-            <a href="hadith.html">Narrations</a>
-            <a href="khawatir.html" style="background: rgba(255,255,255,0.2);">Reflections</a>
-            <a href="videos.html">Videos</a>
-            <a href="history.html">History</a>
-            <a href="podcast.html">Podcast</a>
-            <a href="ask.html">Ask</a>
-            <a href="hewar.html">Dialogues</a>
-            <a href="inq.html">Inquiries</a>
-            <a href="manhaj.html">Methodology</a>
-            <a href="favorites.html">Favorites</a>
-            <a href="support.html">Support</a>
-            <a href="about.html">About Us</a>
-            <a href="/khawatir.html" style="color: #ffd700 !important; font-weight: 800; border: 1px solid rgba(255, 215, 0, 0.5); padding: 5px 15px; border-radius: 20px;"><i class="fas fa-globe"></i> عربي</a>
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="books.html">الكتب</a>
+            <a href="articles.html" style="background: rgba(255,255,255,0.2);">المقالات</a>
+            <a href="hadith.html">الروايات</a>
+            <a href="khawatir.html">خواطر</a>
+            <a href="videos.html">الفيديوهات</a>
+            <a href="history.html">التاريخ</a>
+            <a href="podcast.html">البودكاست</a>
+            <a href="ask.html">الأسئلة</a>
+            <a href="hewar.html">حوارات</a>
+            <a href="inq.html">تساؤلات</a>
+            <a href="manhaj.html">المنهج</a>
+            <a href="favorites.html">المفضلة</a>
+            <a href="support.html">دعم المحتوى</a>
+            <a href="about.html">من نحن</a>
+            <a href="/en/articles.html" style="color: #ffd700 !important; font-weight: 800; font-size: 1rem; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 8px 16px; border-radius: 20px;">En<i class="fas fa-globe"></i></a>
         </div>
         <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
     </nav>
@@ -262,8 +246,8 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Reflections</h1>
-                <p>Short contemplations and quick insights on life and religion</p>
+                <h1>المقالات</h1>
+                <p>قراءة عقلانية ونقد للموروث بوعي واحترام للعقل</p>
             </div>
         </div>
     </header>
@@ -271,34 +255,34 @@
     <div class="container main-wrapper">
         <div class="universal-search">
             <i class="fas fa-search search-icon-placeholder"></i>
-            <input type="text" id="globalSearch" placeholder="Search across all content..." />
+            <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
             <div class="search-results" id="searchResults"></div>
         </div>
 
-        <!-- Thoughts Grid -->
-        <div id="thoughtsList"></div>
+        <!-- Articles Grid -->
+        <div id="articlesList"></div>
 
         <!-- Pagination Section -->
         <div class="pagination-section">
             <div class="pagination-controls">
-                <button class="page-arrow" id="firstPage" onclick="goToPage(1)"><i class="fas fa-angle-double-left"></i> First</button>
-                <button class="page-arrow" id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i> Prev</button>
-                <span class="video-counter" id="pageIndicator">Page 1 of 1</span>
-                <button class="page-arrow" id="nextPage" onclick="changePage(1)">Next <i class="fas fa-chevron-right"></i></button>
-                <button class="page-arrow" id="lastPage" onclick="goToLastPage()">Last <i class="fas fa-angle-double-right"></i></button>
+                <button class="page-arrow" id="lastPage" onclick="goToLastPage()">الأخيرة <i class="fas fa-angle-double-left"></i></button>
+                <button class="page-arrow" id="nextPage" onclick="changePage(1)">التالية <i class="fas fa-chevron-left"></i></button>
+                <span class="video-counter" id="pageIndicator">صفحة 1 من 1</span>
+                <button class="page-arrow" id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i> السابقة</button>
+                <button class="page-arrow" id="firstPage" onclick="goToPage(1)"><i class="fas fa-angle-double-right"></i> الأولى</button>
             </div>
-            <div class="video-counter" id="totalCounter">Showing 0 of 0 reflections</div>
+            <div class="video-counter" id="totalCounter">عرض 0 من أصل 0 مقال</div>
         </div>
 
         <div class="social-section">
-            <div class="section-title"><h2>Follow Me</h2></div>
+            <div class="section-title"><h2>تابعني على مواقع التواصل</h2></div>
             <div class="social-grid">
-                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt"><img src="/icons/yot-soc.png" alt="yt"></a>
-                <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb"><img src="/icons/fac-soc.png" alt="fb"></a>
-                <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins"><img src="/icons/ins-soc.png" alt="in"></a>
-                <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg"><img src="/icons/tel-soc.png" alt="tg"></a>
-                <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk"><img src="/icons/tik-soc.png" alt="tk"></a>
-                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc"><img src="/icons/snap.png" alt="sc"></a>
+                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn youtube"><img src="icons/yot-soc.png" alt="يوتيوب"></a>
+                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" class="social-btn facebook"><img src="icons/fac-soc.png" alt="فيسبوك"></a>
+                <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" class="social-btn instagram"><img src="icons/ins-soc.png" alt="إنستغرام"></a>
+                <a href="https://t.me/tanoeer" target="_blank" class="social-btn telegram"><img src="icons/tel-soc.png" alt="تلغرام"></a>
+                <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" class="social-btn tiktok"><img src="icons/tik-soc.png" alt="تيك توك"></a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn snap"><img src="icons/snap.png" alt="سناب شات"></a>
             </div>
         </div>
     </div>
@@ -309,114 +293,96 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="terms.html">Terms & Conditions</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="contact.html">Contact Us</a>
-                <a href="feedback.html">Share Your Opinion</a>
+                <a href="terms.html">الشروط والأحكام</a>
+                <a href="privacy.html">سياسة الخصوصية</a>
+                <a href="contact.html">اتصل بنا</a>
+                <a href="feedback.html">شاركنا رأيك</a>
             </div>
-            <div class="copyright">Hussein Al-Khalil - All Rights Reserved © 2025</div>
+            <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
         </div>
     </footer>
 
     <script>
-        // ==================== Thoughts Data (JSON) ====================
-        const thoughtsData = [
-            { id: 66, date: "Jan 13, 2026", content: "Shortest paths to hearts and minds:\nTo a man’s heart: appreciation.\nTo a woman’s heart: attention.\nTo a child’s heart: playing with them.\nTo the mind: questioning.\nTo happiness: contentment.\nTo peace: justice.\nTo isolation: social media.\nTo Paradise: righteous deeds.\nTo Hell: injustice.\nTo Atheism: Al-Bukhari’s book." },
-            { id: 65, date: "Jan 3, 2026", content: "Exaggerating the claim of perfection is a deficiency, while admitting deficiency is a virtue." },
-            { id: 64, date: "Nov 16, 2025", content: "\"For a wisdom known only to God\"\nA phrase turned by many into a pretext to disable minds and halt thinking." },
-            { id: 63, date: "Aug 15, 2025", content: "The God who judges you based on the religion \"you inherited\" is an unjust and biased God.\nThe God who judges you based on your deeds and behavior is a Just God." },
-            { id: 62, date: "Aug 15, 2025", content: "After depriving his sisters of their father's inheritance, swallowing the share of his orphaned nephews under the pretext of guardianship, cutting from his worker's meager wage, and cheating his customer by selling a counterfeit item after swearing by God it was original...\nHe noticed his neighbor listening to music in his car.\nHe approached him with a scowl and said: \"May God reward you, neighbor. Don't you know that music is haram? Fear God, for you are in great sin!\" Then he added: \"And why don't I see you in the mosque? Prayer is the pillar of religion and the first thing a servant is held accountable for on the Day of Resurrection.\"\nHe then proceeded to the mosque, and during ablution, he carefully checked his mouth to ensure not a single drop of water entered his stomach—for he was fasting voluntarily, seeking the pleasure of God." },
-            { id: 61, date: "July 13, 2025", content: "The strongest type of drug is not those we hear about, but a heritage book you read once and live drugged by it for the rest of your life, lost in the euphoria of illusion, unconscious while thinking you possess insight.\nThere's no need to buy drugs; save your money and read just one of these books.\nOne dose is enough to make you hallucinate for years, seeing truth in the form of a beard and a turban, thinking everyone who disagrees with you is an infidel or a heretic, feeling like a scholar when in reality you are just a victim repeating your sheikh’s words, mistaking them for revelation." },
-            { id: 60, date: "July 13, 2025", content: "You propose an idea, and they tell you: \"Are you more knowledgeable than the righteous ancestors (Salaf)?\"\nAs if truth was born in the second century of the Hijra, then died forever after!" },
-            { id: 59, date: "July 13, 2025", content: "They raised us to worship God out of fear of torment, not out of love for justice.\nWe pray so we don’t burn, not to elevate ourselves.\nWe supplicate so we don’t lose, not because we trust.\nThus, our relationship with God became a conditional transaction, not absolute love." },
-            { id: 58, date: "July 13, 2025", content: "One of the most difficult psychological illusions: for a person to imagine that their opinion of someone, a society, or their evaluation of people has any weight or value with God." },
-            { id: 57, date: "July 13, 2025", content: "You don't need to disbelieve in the Quran or even criticize heritage books to stir the anger of the \"angels of the earth.\"\nIt's enough to simply pray for mercy for a non-Muslim, and you'll find them calling you an infidel immediately, excluding you from the fold without hesitation. They even see silence regarding you as necessitating divine wrath.\nOf course, the god of heritage, not the God of the Quran.\nFor them, religion is not a way of life, ethics, or justice, but ready-made defensive slogans:\nWho prayed for mercy for a non-Muslim? Kafir!\nWho remained silent? Hypocrite!\nWho discussed the ruling? Heretic!" },
-            { id: 56, date: "June 30, 2025", content: "The book that has most offended Islam is Al-Bukhari's book.\nYet, one of the most sacred books for Muslims is Al-Bukhari's book!" },
-            { id: 55, date: "May 29, 2025", content: "The first things a ruler is asked about on the Day of Resurrection:\n1- Justice. 2- Education. 3- Health.\nIf these were sound, the rest of their work is sound; if corrupt, the rest is corrupt.\nAnd the first things a servant is asked about: Association (Shirk) and Injustice. If sound, the rest is sound; if corrupt, the rest is corrupt." },
-            { id: 54, date: "May 29, 2025", content: "There are those who think intelligently and those who think stupidly; do not be surprised by their ideas.\nDo not forget that the spinal cord connects the brain to the rear end." },
-            { id: 53, date: "May 29, 2025", content: "I heard about a non-veiled woman who stood in solidarity with a veiled woman forced to remove her hijab at work.\nBut I never heard of a veiled woman standing with a non-veiled woman who removed her hijab out of lack of conviction; instead, she often calls her the foulest names after threatening her with Hellfire!!\nWhy in our society are purity, chastity, ethics, and honor linked to a piece of cloth on a female's head?\nWhy is a man's honor linked to his sister's conduct, or more accurately, between a female's thighs?\nIn that case, someone with no sister would have no honor!" },
-            { id: 51, date: "May 29, 2025", content: "Some say that Ramadan is not just fasting from food and drink, but also from hurting people, backbiting, and gossip.\nNo, my friend, you are wrong; this type of fasting is required every single day of the year, not just in Ramadan." },
-            { id: 50, date: "May 29, 2025", content: "A person recovers when you leave them alone and stop sticking your nose into their life and acting as their judge.\nJust leave them be, and they will be perfectly fine." },
-            { id: 49, date: "May 29, 2025", content: "He remained an atheist until his father died, then he said to his sister: \"O sister, for the male is a share equal to that of two females.\"" },
-            { id: 48, date: "May 29, 2025", content: "In the religion of the clergymen, if you eat camel meat, you must redo your ablution because it spoils it; but if you drink its urine, you will be cured of your diseases!" },
-            { id: 47, date: "May 29, 2025", content: "A wife complained about her husband's lack of memorizing the Quran.\nShe swore that if he memorized it in one year, she would find him a second wife.\nThe man immersed himself in it until he finished in just six months.\nThe wife then fasted for three days." },
-            { id: 46, date: "May 29, 2025", content: "A man slaughtered a fat calf, lit the grill, and told his brother: \"Go out and call our loved ones and neighbors to eat with us.\"\nThe brother went out shouting: \"People, help us! There is a fire in my brother's house!\"\nA few moments later, a group of people rushed out while the rest acted as if they hadn't heard.\nThe people who came ate and drank until they were full.\nThe brother looked at them and asked: \"I don't know these people, and I haven't seen them before. Where are our friends?\"\nThe brother replied: \"Those who left their homes came to help us extinguish a fire, not for a feast. These are the ones who deserve our generosity.\"\nSummary: The one you don't find beside you in times of hardship doesn't deserve to be called a friend or brother; they only deserve your indifference." },
-            { id: 45, date: "May 29, 2025", content: "If the Prophet returned and wanted to lead us in prayer, according to which school would he pray?\nSending blessings on the Prophet in the first Tashahhud is Sunnah for Shafi'i, not for Hanafi, and disliked for Maliki!\nThe second Salaam is an obligation for Hanbali, invalidates prayer if left for Shafi'i, does not invalidate for Hanafi, and is Sunnah for Maliki!\nThe Basmalah at the start of Fatiha—your prayer is void if you leave it for Shafi'i, but valid for Maliki and Hanafi!" },
-            { id: 44, date: "May 29, 2025", content: "The follower of conjecture believes in an absolute truth that all other religions and sects are polytheistic and false, and only his belief is correct.\nHe has proofs (from his references) for all who disagree with him that they are astray, and if someone proves the polytheism of his own belief, he insults them.\nIn his eyes, everyone is wrong except him.\nYou are his beloved until he discovers you disagree with his creed; then you become an infidel, a heretic, and a misguided soul." },
-            { id: 43, date: "May 29, 2025", content: "Do not debate or discuss with someone who sees you as astray and false.\nDo not discuss with someone whose only goal is to prove you wrong and himself right.\nDo not discuss with those who do not believe in difference or who practice exclusion.\nDiscuss with those who believe in the validity of diversity in all fields." },
-            { id: 42, date: "May 29, 2025", content: "The methodology of the religious clergy in dealing with people is like the methodology of Pharaoh when he said: \"I do not show you except what I see.\"\nWhat the clergyman believes and sees is the absolute truth that should not be questioned, and that everyone must believe in!" },
-            { id: 41, date: "May 29, 2025", content: "In the Quranic dialogue between God and the angels about the creation of Adam:\nThe angels said: \"Will You place therein one who spreads corruption and sheds blood?\"\nThey did not say: \"Will You place one who associates others with You, or disbelieves, or becomes an atheist?\"\nBecause disbelief and atheism only harm the individual. Corruption and bloodshed harm the entire society.\nThe angels' focus was strictly on the public interest." },
-            { id: 40, date: "May 29, 2025", content: "There is a big difference between expressing an opinion and imposing an opinion.\nThe first is a basic right. The second is a transgression against others." },
-            { id: 39, date: "May 29, 2025", content: "If you believe everything you inherited is an absolute truth beyond criticism, keep your ideas and do not tire yourself with research or discussion, for you will reach no new result.\nThe first step on the path of knowledge is the abolition of sanctification." },
-            { id: 38, date: "May 29, 2025", content: "When facing problems, look for solutions first, not for reasons." },
-            { id: 37, date: "May 29, 2025", content: "Some (men) in certain societies abstain from kissing or hugging their wives in front of their children, seeing it as a lack of manners or immorality.\nYet, they do not hesitate to insult or strike her in front of them, seeing it as manliness and authority." },
-            { id: 36, date: "May 29, 2025", content: "According to the Quranic judgment, faith lies in following the verses of God.\nAccording to the clerical judgment, faith requires following books written by men, otherwise you are an infidel headed for Hell." },
-            { id: 35, date: "May 29, 2025", content: "\"And We made you peoples and tribes 👈that you may know one another👉\"\nTo know one another, not to fight, declare each other infidels, hate, or exclude one another.\nLife is a right for all, not a monopoly for me or you. The world accommodates everyone whose heart is pure.\nAs for those with a diseased heart, only a bed in a mental hospital fits them." },
-            { id: 34, date: "May 29, 2025", content: "Head covering in Japanese society is a sign of work; in Russian society, a sign of cold; in Africa, a sign of heat. But in certain traditional societies, it is the sole sign of honor, chastity, and purity." },
-            { id: 33, date: "May 29, 2025", content: "An undertaker told me: \"We spent an hour trying to pull his nose out because he had stuck it so deep into people's private business, but we couldn't and had to cut it off. We buried him without a nose.\"\nHe died, but his nose remained stuck in people's privacy." },
-            { id: 32, date: "May 29, 2025", content: "If the truth fears criticism, then it is falsehood, for truth does not fear being questioned.\nIn the logic of the clergy, encouraging logic and questioning is called \"heresy,\" while encouraging hatred and exclusion is called \"piety.\"" },
-            { id: 31, date: "May 29, 2025", content: "We don't watch TV, listen to music, live in the West, read philosophers, or use modern technology... all \"so our creed doesn't shake.\"\nThe problem then is in our creed, not in these things." },
-            { id: 30, date: "May 29, 2025", content: "They said: \"Your mind will lead you to atheism.\"\nAs if their minds led them to Mars!\nTheir minds only led them to \"camel urine therapy.\"" },
-            { id: 29, date: "May 29, 2025", content: "The concept of \"Tawatur\" (mass transmission) is just the verse \"Nay, but we follow what we found our fathers doing,\" but with makeup on." },
-            { id: 28, date: "May 29, 2025", content: "\"Who is your sheikh?\"\nThe literal translation of this question is: \"Sheep need a shepherd because they cannot find the way alone.\"" },
-            { id: 27, date: "May 29, 2025", content: "Mules always boast that their ancestors were horses. (German proverb)" },
-            { id: 26, date: "May 29, 2025", content: "The fairest thing on earth is that everyone will die." },
-            { id: 25, date: "May 29, 2025", content: "A society cannot be virtuous if it does not possess the freedom to commit vice." },
-            { id: 24, date: "May 29, 2025", content: "Entering Paradise does not depend on your criteria or the criteria of your sect or your sect's understanding of God's religion." },
-            { id: 23, date: "May 29, 2025", content: "Minds shrink when they are busy with the minds of others, and they grow when they focus on themselves." },
-            { id: 22, date: "May 29, 2025", content: "The three impossibilities:\n1- A clergyman who prioritizes reason over transmission.\n2- A traditional woman convinced she is not \"defective\" or an \"Awra.\"\n3- A traditionalist who respects those different from him without questioning their intentions." },
-            { id: 21, date: "May 29, 2025", content: "When do you realize you need a psychiatrist?\nWhen you get angry, argue, and fight over events that happened 1,400 years ago, transmitted to you through contemporary people." },
-            { id: 20, date: "May 29, 2025", content: "If you wish, be a devil in your thought and a human in your behavior, but beware of being a human in your thought and a devil in your behavior. Your intellectual rebellion might be forgiven if your conduct is pure, but your devilish conduct will not be forgiven, even if you boast of prayer and fasting." },
-            { id: 19, date: "May 29, 2025", content: "When an atheist wants to attack Islam, he defends heritage books more than the traditionalists themselves. He turns into a guardian of a heritage he never believed in. Not out of love, but because it provides him with ammunition and fertile ground for mockery." },
-            { id: 18, date: "May 29, 2025", content: "An eye accustomed to darkness is pained by light." },
-            { id: 17, date: "May 29, 2025", content: "The environment you grow up in shapes your consciousness and plants your beliefs. If you do not rebel against it in your quest for truth, you will remain a prisoner of its borders, thinking you see while you are veiled." },
-            { id: 16, date: "May 26, 2025", content: "The fundamental difference between one who clings to the Quran and one who clings to heritage lies in the rule used as a scale for judgment.\nFor example: when discussing \"Zakat threshold,\" the Quranic seeker finds no mention of it in the Book of God and thus rejects it as a human addition. The heritage seeker, if he doesn't find it in the Quran, does not doubt his scale (heritage) but instead accuses the Quran of being incomplete." },
-            { id: 15, date: "May 15, 2025", content: "The problem is not those who do not read; the problem is those who read and do not change." },
-            { id: 14, date: "May 15, 2025", content: "\"I want to ask you a question, but don't get upset.\"\nThe literal translation of this sentence is: \"I want to upset you, but don't get upset.\"\nSave yourself the headache and tell them: \"Don't ask, because I will get upset.\"" },
-            { id: 13, date: "May 15, 2025", content: "In all forums, they hold Quran memorization competitions, but you never hear of Quran reflection (Tadabbur) competitions.\nDo you know why?\nBecause the clergy believe reflection is exclusive to them. You are allowed to \"memorize,\" but beware of \"understanding.\"\nIf 100 Muslims memorize the Quran, the only result is that the number of Quranic copies increased by 100." },
-            { id: 12, date: "May 15, 2025", content: "In inherited jurisprudence, it is permissible to marry a child, yet she is not allowed to vote because she is a \"minor.\" But when it comes to sex and animalistic desire, she suddenly becomes a \"mature and conscious human.\"" },
-            { id: 11, date: "May 15, 2025", content: "Deceiving people is easier than convincing them that they have been deceived." },
-            { id: 10, date: "May 15, 2025", content: "Your religion, creed, name, and language are hostages to the environment you were born in. Your family decides your faith through indoctrination. Do not be fanatical about something you inherited by mere coincidence.\nIf you were born in Iran, you'd be a fanatical Shia; in Nepal, a Buddhist; in India, a Hindu; in the Vatican, a Christian." },
-            { id: 9, date: "May 15, 2025", content: "There is a nation that eats what it does not sow, wears what it does not weave, and treats itself with what it does not manufacture—yet believes the entire world is conspiring against it!" },
-            { id: 8, date: "May 15, 2025", content: "In clerical logic, if you lie and cheat people, you are a sinner.\nBut if you do none of that yet you smoke, shave your beard, or listen to music, you are a \"Sinner Pro Max.\"" },
-            { id: 7, date: "May 15, 2025", content: "Some of our brothers think they are the center of the universe and that God refers only to them in the verse \"Indeed, the religion with Allah is Islam.\" They do not know that every peaceful human who lives in peace and does not harm anyone is a \"Muslim\" to God." },
-            { id: 6, date: "May 15, 2025", content: "We memorize the verse: \"That was a nation which has passed on. It will have what it earned, and you will have what you have earned.\"\nYet, we still fight: who was right and who was wrong 1,400 years ago? As if God will hold us accountable for events we never lived!" },
-            { id: 5, date: "May 7, 2025", content: "How to identify ideologically closed minds?\nThey care about the speaker, not the speech. They personalize the topic instead of discussing the argument.\nThe benefit of identifying them? Buying your peace of mind by ending the discussion early. Tell them they are right and move on." },
-            { id: 4, date: "May 7, 2025", content: "In the logic of some, loving the Prophet consists not in denying the narrations that insult him, but in merely reciting \"blessings upon him\" whenever his name is mentioned." },
-            { id: 3, date: "May 7, 2025", content: "If you want to promote any lie, wrap it in a religious cover." },
-            { id: 2, date: "May 7, 2025", content: "* \"Lions and leopards are very kind. The most dangerous animals are chickens and birds.\" (The worm's advice)\n* \"Chickens and birds are very kind. The most dangerous animals are lions and leopards.\" (The gazelle's advice)" },
-            { id: 1, date: "May 7, 2025", content: "Technology does not mean modern devices, but rather working with what is available to achieve the goal we desire." }
+        // ==================== Articles Data (JSON) ====================
+        const articlesData = [
+            { id: 47, date: "6 يناير 2026", title: "❖ الحجاب: بين حقيقة التنزيل وفلكلور التقاليد.", url: "article/47.html" },
+            { id: 46, date: "20 ديسمبر 2025", title: "❖ وهم الحقيقة المطلقة.", url: "article/46.html" },
+            { id: 45, date: "24 أغسطس 2025", title: "❖ زنا التنفس.", url: "article/45.html" },
+            { id: 44, date: "13 يوليو 2025", title: "❖ مفهوم الربا من كتاب الله", url: "article/44.html" },
+            { id: 43, date: "13 يوليو 2025", title: "❖ للذكر مثل حظ الانثيين", url: "article/43.html" },
+            { id: 42, date: "10 يوليو 2025", title: "❖ وطني أولاً، هل أصبحت الوطنية تهمة؟", url: "article/42.html" },
+            { id: 41, date: "9 يوليو 2025", title: "❖ لا تبرر، أنت لست موظفًا في خدمة أفكار الآخرين.", url: "article/41.html" },
+            { id: 40, date: "5 يوليو 2025", title: "❖ فلسطين وحصان طروادة.", url: "article/40.html" },
+            { id: 39, date: "20 يونيو 2025", title: "❖ الحور العين.", url: "article/39.html" },
+            { id: 38, date: "9 يونيو 2025", title: "❖ الإيمان الصادق لا يحتاج إلى ترويج.", url: "article/38.html" },
+            { id: 37, date: "30 مايو 2025", title: "❖ بني إسرائيل.", url: "article/37.html" },
+            { id: 36, date: "30 مايو 2025", title: "❖ العقل والنقل.", url: "article/36.html" },
+            { id: 35, date: "27 مايو 2025", title: "❖ رسالة إلى صديقي المتمسك بالتراث الديني.", url: "article/35.html" },
+            { id: 34, date: "27 مايو 2025", title: "❖ رسالة إلى صديقي الملحد.", url: "article/34.html" },
+            { id: 33, date: "27 مايو 2025", title: "❖ رسالة إلى صديقي السُنّي وصديقي الشيعي.", url: "article/33.html" },
+            { id: 32, date: "27 مايو 2025", title: "❖ رسالة إلى صديقي المثقف.", url: "article/32.html" },
+            { id: 31, date: "27 مايو 2025", title: "❖ قتل الوزغ.", url: "article/31.html" },
+            { id: 30, date: "27 مايو 2025", title: "❖ لا عنصرية في الإسلام.", url: "article/30.html" },
+            { id: 29, date: "27 مايو 2025", title: "❖ نعمة العقل.", url: "article/29.html" },
+            { id: 28, date: "27 مايو 2025", title: "❖ الخمر وحكمه.", url: "article/28.html" },
+            { id: 27, date: "27 مايو 2025", title: "❖ حياة النبي.", url: "article/27.html" },
+            { id: 26, date: "27 مايو 2025", title: "❖ الجرح والتعديل.", url: "article/26.html" },
+            { id: 25, date: "27 مايو 2025", title: "❖ معالجة الخطأ بالخطأ.", url: "article/25.html" },
+            { id: 24, date: "27 مايو 2025", title: "❖ أنا والعندليب.", url: "article/24.html" },
+            { id: 23, date: "27 مايو 2025", title: "❖ مفاهيم مغلوطة.", url: "article/23.html" },
+            { id: 22, date: "26 مايو 2025", title: "❖ حُسن الخاتمة وسوء الخاتمة.", url: "article/22.html" },
+            { id: 21, date: "26 مايو 2025", title: "❖ الأعراب أشد كفراً ونفاقا.", url: "article/21.html" },
+            { id: 20, date: "26 مايو 2025", title: "❖ الملحد وأنواعه", url: "article/20.html" },
+            { id: 19, date: "26 مايو 2025", title: "❖ تغسيل الميت وتكفينه", url: "article/19.html" },
+            { id: 18, date: "26 مايو 2025", title: "❖ الناسخ والمنسوخ.", url: "article/18.html" },
+            { id: 17, date: "26 مايو 2025", title: "❖ أكذوبة أسباب النزول", url: "article/17.html" },
+            { id: 16, date: "26 مايو 2025", title: "❖ القرآن أم التراث؟", url: "article/16.html" },
+            { id: 15, date: "13 مايو 2025", title: "❖ أصحاب القوقعة.", url: "article/15.html" },
+            { id: 14, date: "13 مايو 2025", title: "❖ حذارِ.", url: "article/14.html" },
+            { id: 13, date: "13 مايو 2025", title: "❖ وهم الحقيقة المطلقة.", url: "article/13.html" },
+            { id: 12, date: "13 مايو 2025", title: "❖ كيف تُشيّطن أفكارك؟", url: "article/12.html" },
+            { id: 11, date: "13 مايو 2025", title: "❖ قصة قصيرة.", url: "article/11.html" },
+            { id: 10, date: "13 مايو 2025", title: "❖ أعراض فهم الدين بالمقلوب.", url: "article/10.html" },
+            { id: 9, date: "13 مايو 2025", title: "❖ الباحث عن الأضواء.", url: "article/9.html" },
+            { id: 8, date: "13 مايو 2025", title: "❖ النقل على العقل.", url: "article/8.html" },
+            { id: 7, date: "13 مايو 2025", title: "❖ وهم الحواس في الإلحاد، الحقيقة أوسع مما يُرى.", url: "article/7.html" },
+            { id: 6, date: "13 مايو 2025", title: "❖ لا تسعَ لإرضاء أحد.", url: "article/6.html" },
+            { id: 5, date: "13 مايو 2025", title: "❖ ازدواجية الضمير", url: "article/5.html" },
+            { id: 4, date: "13 مايو 2025", title: "❖ دعهم يتكلمون، وواصل طريقك بسلام", url: "article/4.html" },
+            { id: 3, date: "13 مايو 2025", title: "❖ هوامش على الطريق.", url: "article/3.html" },
+            { id: 2, date: "10 مايو 2025", title: "❖ نظرية الحصان الميت.", url: "article/2.html" },
+            { id: 1, date: "28 فبراير 2025", title: "❖ الجدال مع المؤدلجين، معركة خاسرة.", url: "article/1.html" }
         ];
 
         // ==================== Pagination Logic ====================
         const itemsPerPage = 40;
         let currentPage = 1;
 
-        function renderThoughts() {
-            const list = document.getElementById('thoughtsList');
+        function renderArticles() {
+            const list = document.getElementById('articlesList');
             list.innerHTML = '';
-            
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
-            const paginatedItems = thoughtsData.slice(start, end);
+            const paginatedItems = articlesData.slice(start, end);
             const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-            paginatedItems.forEach(thought => {
-                const isFav = favorites.some(fav => fav.id === thought.id && fav.type === 'thought');
+            paginatedItems.forEach(item => {
+                const isFav = favorites.includes(item.title);
                 const card = document.createElement('div');
-                card.className = 'thought-card';
-                card.id = `thought-${thought.id}`;
+                card.className = 'article';
+                card.onclick = (e) => {
+                    if (e.target.closest('.article-button')) return;
+                    window.location.href = item.url;
+                };
                 card.innerHTML = `
-                    <div class="thought-content">${thought.content}</div>
+                    <h2><a href="${item.url}">${item.title}</a></h2>
                     <div class="meta-data">
-                        <span class="publish-date"><i class="far fa-calendar-alt"></i> ${thought.date}</span>
-                        <div class="actions">
-                            <button class="action-btn favorite-btn ${isFav ? 'favorited' : ''}" 
-                                onclick="toggleFavorite(${thought.id}, '${thought.content.substring(0,20).replace(/'/g, "\\'")}', this)" title="Add to Favorites">
-                                <i class="${isFav ? 'fas' : 'far'} fa-star"></i>
-                            </button>
-                            <button class="action-btn" onclick="printThought(this)" title="Print"><i class="fas fa-print"></i></button>
-                        </div>
+                        <span class="publish-date">${item.date}</span>
+                        <button class="article-button ${isFav ? 'active' : ''}" 
+                                onclick="toggleFavorite(this, '${item.title.replace(/'/g, "\\'")}')">
+                            <i class="${isFav ? 'fas' : 'far'} fa-star"></i> 
+                            ${isFav ? 'تمت الإضافة' : 'أضف للمفضلة'}
+                        </button>
                     </div>
                 `;
                 list.appendChild(card);
@@ -425,11 +391,11 @@
         }
 
         function updatePaginationUI() {
-            const totalPages = Math.ceil(thoughtsData.length / itemsPerPage);
-            document.getElementById('pageIndicator').textContent = `Page ${currentPage} of ${totalPages || 1}`;
-            const startItem = thoughtsData.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1;
-            const endItem = Math.min(currentPage * itemsPerPage, thoughtsData.length);
-            document.getElementById('totalCounter').textContent = `Showing ${startItem}-${endItem} of ${thoughtsData.length} reflections`;
+            const totalPages = Math.ceil(articlesData.length / itemsPerPage);
+            document.getElementById('pageIndicator').textContent = `صفحة ${currentPage} من ${totalPages || 1}`;
+            const startItem = articlesData.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1;
+            const endItem = Math.min(currentPage * itemsPerPage, articlesData.length);
+            document.getElementById('totalCounter').textContent = `عرض ${startItem}-${endItem} من أصل ${articlesData.length} مقال`;
             
             document.getElementById('prevPage').disabled = currentPage === 1;
             document.getElementById('firstPage').disabled = currentPage === 1;
@@ -437,11 +403,11 @@
             document.getElementById('lastPage').disabled = currentPage === totalPages || totalPages === 0;
         }
 
-        function changePage(delta) { currentPage += delta; renderThoughts(); scrollToTop(); }
-        function goToPage(page) { currentPage = page; renderThoughts(); scrollToTop(); }
-        function goToLastPage() { currentPage = Math.ceil(thoughtsData.length / itemsPerPage) || 1; renderThoughts(); scrollToTop(); }
+        function changePage(delta) { currentPage += delta; renderArticles(); scrollToTop(); }
+        function goToPage(page) { currentPage = page; renderArticles(); scrollToTop(); }
+        function goToLastPage() { currentPage = Math.ceil(articlesData.length / itemsPerPage) || 1; renderArticles(); scrollToTop(); }
 
-        // ==================== General Site Functions ====================
+        // ==================== General Functions ====================
         function toggleMobileMenu() {
             const nav = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
@@ -450,34 +416,21 @@
             document.body.classList.toggle('no-scroll');
         }
 
-        function toggleFavorite(id, title, btn) {
+        function toggleFavorite(button, item) {
             let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-            const index = favorites.findIndex(item => item.id === id && item.type === 'thought');
-            if (index === -1) {
-                favorites.push({ id, title, type: 'thought' });
-                btn.classList.add("favorited");
-                btn.querySelector('i').className = 'fas fa-star';
-                showMessage("Added to favorites");
+            const isFavorite = favorites.includes(item);
+            if (isFavorite) {
+                favorites = favorites.filter(i => i !== item);
+                button.classList.remove("active");
+                button.innerHTML = '<i class="far fa-star"></i> أضف للمفضلة';
+                showMessage("تمت إزالة العنصر من المفضلة");
             } else {
-                favorites.splice(index, 1);
-                btn.classList.remove("favorited");
-                btn.querySelector('i').className = 'far fa-star';
-                showMessage("Removed from favorites");
+                favorites.push(item);
+                button.classList.add("active");
+                button.innerHTML = '<i class="fas fa-star"></i> تمت الإضافة';
+                showMessage("تمت إضافة العنصر إلى المفضلة");
             }
             localStorage.setItem("favorites", JSON.stringify(favorites));
-        }
-
-        function printThought(btn) {
-            const card = btn.closest('.thought-card');
-            const content = card.querySelector('.thought-content').innerHTML;
-            const date = card.querySelector('.publish-date').textContent;
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <html dir="ltr"><head><title>Print Reflection</title><style>body { font-family: sans-serif; padding: 40px; line-height: 1.8; }.content { font-size: 18px; margin-bottom: 20px; white-space: pre-line; }.date { color: #666; font-size: 14px; }</style></head>
-                <body><div class="content">${content}</div><div class="date">${date}</div></body></html>
-            `);
-            printWindow.document.close();
-            printWindow.print();
         }
 
         function showMessage(text) {
@@ -493,14 +446,14 @@
             else btn.classList.remove('visible');
         });
 
-        // ==================== RESTORED ORIGINAL SEARCH LOGIC ====================
+        // ==================== Original Search Logic ====================
         let cachedPagesContent = null;
         let isSearchInitialized = false;
 
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
             try {
-                const response = await fetch('/site-map.json?v=' + new Date().getTime());
+                const response = await fetch('site-map.json?v=' + new Date().getTime());
                 const pagesList = await response.json();
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
@@ -511,7 +464,7 @@
                         const doc = parser.parseFromString(html, 'text/html');
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                         return {
-                            page: doc.title.replace('Hussein Al-Khalil - ', '').trim() || 'Page',
+                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة',
                             url: url,
                             content: (doc.querySelector('.container, main, body') || doc.body).textContent.replace(/\s+/g, ' ').trim()
                         };
@@ -522,14 +475,28 @@
             } catch (error) { return []; }
         }
 
+        function normalizeArabic(text) {
+            return text.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+        }
+
         function getSafeRegex(searchTerm) {
-            return new RegExp(searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+            let regexStr = '';
+            const cleanTerm = normalizeArabic(searchTerm);
+            for (let char of cleanTerm) {
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                regexStr += '[\\u064B-\\u065F\\u0670]*';
+            }
+            return new RegExp(regexStr, 'gi');
         }
 
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
             if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
-            resultsContainer.innerHTML = '<div class="search-item"><p>Searching...</p></div>';
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
             resultsContainer.style.display = 'block';
             const data = await loadAllPagesContent();
             const searchRegex = getSafeRegex(query);
@@ -537,7 +504,7 @@
                 searchRegex.lastIndex = 0;
                 return searchRegex.test(item.page) || searchRegex.test(item.content);
             });
-            resultsContainer.innerHTML = `<div class="search-count">Found ${results.length} results</div>`;
+            resultsContainer.innerHTML = `<div class="search-count">تم العثور على ${results.length} نتيجة</div>`;
             results.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
@@ -548,7 +515,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderThoughts();
+            renderArticles();
             const searchInput = document.getElementById('globalSearch');
             let timer;
             if(searchInput) {
