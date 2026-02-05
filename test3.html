@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>الفيديوهات - حسين الخليل</title>
+    <title>التاريخ - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
@@ -77,6 +77,7 @@
             padding: 8px 12px; border-radius: 20px;
             display: flex; align-items: center; gap: 5px; white-space: nowrap;
         }
+
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
         .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
@@ -115,7 +116,7 @@
         .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
         .search-results {
             position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 200; text-align: right; display: none;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 10000; text-align: right; display: none;
             color: var(--text-primary); border: 1px solid rgba(0,0,0,0.05);
         }
         .search-count { padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
@@ -127,15 +128,15 @@
         .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper { position: relative; z-index: 20; margin-top: -90px; margin-bottom: 60px; }
 
-        /* Video Grid - Fixed consistent width */
+        /* Video Grid */
         .videos-grid { 
             display: grid; 
             grid-template-columns: repeat(4, 1fr); 
             gap: 25px; 
             width: 100%;
+            align-items: start;
         }
 
-        /* Video Card - Fixed sizing */
         .video-card {
             background: var(--surface-color); border-radius: 16px; padding: 15px; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
             transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; flex-direction: column;
@@ -150,7 +151,7 @@
 
         .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 3rem; opacity: 0.8; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         
-        /* Fixed Title Height for consistency */
+        /* Fixed Title Height */
         .video-title { 
             font-size: 1.1rem; font-weight: 700; color: var(--text-primary); 
             margin-bottom: 15px; line-height: 1.4; flex-grow: 1; text-align: center; 
@@ -198,14 +199,14 @@
         .social-btn.snap:hover { background: #FFFC00; }
         .social-btn.snap:hover img { filter: none; }
 
-        /* Footer - Restored Original Styles */
+        /* Footer */
         footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
         .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
         .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.9rem; transition: 0.3s; }
         .footer-links a:hover { color: var(--accent-color); }
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px; }
 
-        /* Back to top */
+        /* Fixed Navigation */
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; font-size: 1.2rem; box-shadow: var(--shadow-md); }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         
@@ -230,8 +231,8 @@
             <a href="articles.html">المقالات</a>
             <a href="hadith.html">الروايات</a>
             <a href="khawatir.html">خواطر</a>
-            <a href="videos.html" style="background: rgba(255,255,255,0.2);">الفيديوهات</a>
-            <a href="history.html">التاريخ</a>
+            <a href="videos.html">الفيديوهات</a>
+            <a href="history.html" style="background: rgba(255,255,255,0.2);">التاريخ</a>
             <a href="podcast.html">البودكاست</a>
             <a href="ask.html">الأسئلة</a>
             <a href="hewar.html">حوارات</a>
@@ -240,7 +241,7 @@
             <a href="favorites.html">المفضلة</a>
             <a href="support.html">دعم المحتوى</a>
             <a href="about.html">من نحن</a>
-            <a href="/en/videos.html" style="color: #ffd700 !important; font-weight: 800; font-size: 1rem; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 8px 16px; border-radius: 20px;">En<i class="fas fa-globe"></i></a>
+            <a href="/en/history.html" style="color: #ffd700 !important; font-weight: 800; font-size: 1rem; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 8px 16px; border-radius: 20px;">En<i class="fas fa-globe"></i></a>
         </div>
         <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
     </nav>
@@ -248,8 +249,8 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>الفيديوهات</h1>
-                <p>مقاطع مختارة من قناتي على اليوتيوب تناقش مختلف القضايا</p>
+                <h1>التاريخ</h1>
+                <p>مقاطع مختارة عن الخرافات والتاريخ والأديان والملل الأخرى</p>
             </div>
         </div>
     </header>
@@ -276,7 +277,7 @@
             <div class="video-counter" id="totalCounter">عرض 0 من أصل 0 فيديو</div>
         </div>
 
-        <div class="social-section">
+        <div class="social-section" style="margin-top: 60px;">
             <div class="section-title"><h2>تابعني على مواقع التواصل</h2></div>
             <div class="social-grid">
                 <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn youtube"><img src="icons/yot-soc.png" alt="يوتيوب"></a>
@@ -305,59 +306,44 @@
     </footer>
 
     <script>
-        // ==================== Videos Data ====================
+        // ==================== Videos Data (JSON) ====================
         const videosData = [
-            { id: "96pGvXmx5bM", title: "الزاني لا ينكح إلّا زانية أو مشركة" },
-            { id: "bATkpINuvHw", title: "تارك الصلاة ليس بكافر" },
-            { id: "FBwO_BsK1dk", title: "لماذا لم يفصل القرآن الصلاة؟" },
-            { id: "NIOiSwIUGs8", title: "ما معنى الغائط؟ هل هو مكان قضاء الحاجة؟" },
-            { id: "aJ-4IYa5ox0", title: "هل شعر المرأة عورة؟" },
-            { id: "7wIDSBlUAf8", title: "التبرّج" },
-            { id: "S3oHA2a0c1M", title: "لو صليت ألف ركعة وظلمت؟!" },
-            { id: "C66NFtg-KPI", title: "وإن طائفتان من المؤمنين اقتتلوا" },
-            { id: "SF45e62fWPg", title: "من هو المؤمن؟" },
-            { id: "EZlf4cuWC2k", title: "جرائم في كتاب البخاري" },
-            { id: "fvdsqlD0YBY", title: "بين تحريم القرآن وترهيب الكهنوت" },
-            { id: "ASnSsKFYDoU", title: "أنا لا أعبد النبي ولا البخاري" },
-            { id: "JGv9cWsqbmc", title: "هل الصلاة تنهى عن الفحشاء والمنكر؟" },
-            { id: "BlAdzlxf5fI", title: "دفع الخمس عند الشيعة بين الحقيقة والسرقة" },
-            { id: "mxi3kfRLMsY", title: "سايكس بيكو الكهنوت" },
-            { id: "VmhNW3BPLAc", title: "إجرام كهنوتي بحق الإسلام" },
-            { id: "faI1favhHBU", title: "تعقيد الشعائر، قرآني أم كهنوتي؟" },
-            { id: "NQie8xW-x7E", title: "هل الله بحاجة لصلاتنا؟ ما حقيقة عقوبة تارك الصلاة؟" },
-            { id: "ox6LhMhcn3E", title: "هل تشعر بصلاتك أم أنها مجرد طقوس؟" },
-            { id: "3heav8z5LJ0", title: "بين برمجة المجتمع وعدل الله" },
-            { id: "1MXWGGb-QvE", title: "الذين يحاربون الله ورسوله" },
-            { id: "xL2M8_H8mNo", title: "جريمة تكفير الناس" },
-            { id: "JC8lF54C7kk", title: "هل سيحاسبنا الله على ديننا أم أعمالنا؟" },
-            { id: "8h2dx_yuB6U", title: "هل الإسلام دين العنف؟" },
-            { id: "mdWxPStRfnE", title: "من هو أحمد؟ هل هو اسم آخر لنبينا محمد؟" },
-            { id: "zN52VOu_n8I", title: "قراءة الفاتحة والتشهد في الصلاة" },
-            { id: "LoxvuToLaEU", title: "هل الصلاة فرض وواجب على المسلم؟" },
-            { id: "U7AxdI5N87g", title: "ما معنى مكة وبكة والقبلة والبيت الحرام؟" },
-            { id: "L7dKk3wk9Aw", title: "لماذا الله لا ينقذ الأبرياء؟" },
-            { id: "bJChbYrr2hw", title: "الصلاة كما أرادها الله لا كما أرادها الكهنوت" },
-            { id: "wEVNsdUnjMU", title: "الحور العين" },
-            { id: "Q16Zmfe644A", title: "محرمات، الإسلام بريئ منها" },
-            { id: "9351NKWhm7g", title: "اكذوبة زواج النبي من طفلة" },
-            { id: "ZsSs72rP64k", title: "التناقض بين القرآن والروايات" },
-            { id: "ecNdpEu3Dko", title: "تحليل السمك والكبد قرآنيًا" },
-            { id: "o6rOEWGxQSM", title: "زواج المسلمة من غير المسلم" },
-            { id: "LLlVdPQtop0", title: "انتشار أفكار التنويريين" },
-            { id: "ifMKU0NYJL0", title: "الخمر بين التحريم والاجتناب" },
-            { id: "6MmcZaOw6vw", title: "صلاةالجمعة بين الحقيقة والوهم" },
-            { id: "rHQIbb4VLwA", title: "كيف أصلي بحسب القرآن؟" },
-            { id: "kG5_euF30ec", title: "مفهوم الجُنُب والإغتسال" },
-            { id: "oJXCZ7arX70", title: "سأحاجج ربي" },
-            { id: "cqwPD1xzTVc", title: "الحجاب عادة أم عبادة؟" },
-            { id: "l7ta3MoNREU", title: "الطلاق من كتاب الله" },
-            { id: "fI_3ZGLMJPE", title: "مفهوم الصلاة على النبي" },
-            { id: "Y5XQuJc3qRw", title: "الحجاب أثناء الصلاة" },
-            { id: "aQeddsec4Mo", title: "الصلاة التواترية توقيفية؟" },
-            { id: "AUMUy3VPDoQ", title: "مثنى وثلاث ورباع" },
-            { id: "dIC9UHjVkP8", title: "تحريف الإسلام" },
-            { id: "zh0jRbhLqQc", title: "منهجية جمع البخاري" },
-            { id: "aiXBF_n7Sxk", title: "عدد ركعات الصلاة" }
+            { id: "sIHISEJfPH0", title: "أهل السنة والجماعة" },
+            { id: "l6o1RGwy6TY", title: "الأيزيديون" },
+            { id: "OzA1NmopJ7k", title: "الأعور الدجال" },
+            { id: "vxT082Eet7w", title: "المهدي المنتظر" },
+            { id: "dBG4w64cW8w", title: "الخوارج" },
+            { id: "VDynPZvNXM0", title: "المرشديون" },
+            { id: "b2loDJqwnlQ", title: "الإسماعيلية" },
+            { id: "ltIYOyML3BE", title: "الإباضية" },
+            { id: "oDDBoTx0t5Q", title: "الياينية" },
+            { id: "i6x3cK2MuHY", title: "الطاوية" },
+            { id: "qQ3oRyO3pGw", title: "الشينتوية" },
+            { id: "cMUtBHMdgfk", title: "العلويون" },
+            { id: "RV06KmxvzPA", title: "الدروز" },
+            { id: "eUtTHdTrRTk", title: "الديانة البهائية" },
+            { id: "aba3m8xGGDo", title: "الديانة الكونفوشيوسية" },
+            { id: "t1J3M8D4Xec", title: "الديانة السيخية" },
+            { id: "jlnefbaCzUo", title: "قصة أصحاب الفيل" },
+            { id: "svP8omiK_OA", title: "الديانة البوذية" },
+            { id: "lZoTROZUoW0", title: "الديانة الهندوسية" },
+            { id: "uOlb4xYpAms", title: "تدمير التماثيل تدميرًا للتاريخ" },
+            { id: "-8HV__MVLNc", title: "خرافات في كتب الروايات" },
+            { id: "Cplld9BB7i8", title: "خرافة تلبس الجن بالانسان" },
+            { id: "BDFnqLoPrTA", title: "هاروت وماروت" },
+            { id: "xR9mxBhRw00", title: "السحر" },
+            { id: "aKZnOZjXsw8", title: "خرافة الحسد" },
+            { id: "W6DAvH4-kqo", title: "خرافة الاصابة بالعين" },
+            { id: "tVTLhi_MAkM", title: "خرافة سكب الماء الساخن" },
+            { id: "9KOvdr5pjyQ", title: "خرافة طي سجادة الصلاة" },
+            { id: "U7fMWUd54N0", title: "خرافات صدقها المسلمون" },
+            { id: "sYEPdEZQB50", title: "الترويج للدين بالخرافة" },
+            { id: "wOsoyyneqmA", title: "عندما تبيع الوهم" },
+            { id: "shXjuuUBOlA", title: "الصابئة المندائيون" },
+            { id: "0DpidAR1MPU", title: "السريان" },
+            { id: "dQRovOQVoB4", title: "الديانة المانوية" },
+            { id: "yfMETxdXqbs", title: "الديانة الزرادشتية" },
+            { id: "EfCEfaLgbYU", title: "القدس ليست اورشليم" }
         ];
 
         // ==================== Pagination Logic ====================
@@ -367,7 +353,6 @@
         function renderVideos() {
             const grid = document.getElementById('videosGrid');
             grid.innerHTML = '';
-            
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
             const paginatedItems = videosData.slice(start, end);
@@ -397,19 +382,20 @@
 
         function updatePaginationUI() {
             const totalPages = Math.ceil(videosData.length / itemsPerPage);
-            document.getElementById('pageIndicator').textContent = `صفحة ${currentPage} من ${totalPages}`;
-            const startItem = ((currentPage - 1) * itemsPerPage) + 1;
+            document.getElementById('pageIndicator').textContent = `صفحة ${currentPage} من ${totalPages || 1}`;
+            const startItem = videosData.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1;
             const endItem = Math.min(currentPage * itemsPerPage, videosData.length);
             document.getElementById('totalCounter').textContent = `عرض ${startItem}-${endItem} من أصل ${videosData.length} فيديو`;
+            
             document.getElementById('prevPage').disabled = currentPage === 1;
             document.getElementById('firstPage').disabled = currentPage === 1;
-            document.getElementById('nextPage').disabled = currentPage === totalPages;
-            document.getElementById('lastPage').disabled = currentPage === totalPages;
+            document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
+            document.getElementById('lastPage').disabled = currentPage === totalPages || totalPages === 0;
         }
 
         function changePage(delta) { currentPage += delta; renderVideos(); scrollToTop(); }
         function goToPage(page) { currentPage = page; renderVideos(); scrollToTop(); }
-        function goToLastPage() { currentPage = Math.ceil(videosData.length / itemsPerPage); renderVideos(); scrollToTop(); }
+        function goToLastPage() { currentPage = Math.ceil(videosData.length / itemsPerPage) || 1; renderVideos(); scrollToTop(); }
 
         // ==================== General Site Functions ====================
         function toggleMobileMenu() {
@@ -452,7 +438,7 @@
             else btn.classList.remove('visible');
         });
 
-        // ==================== RESTORED ORIGINAL SEARCH LOGIC ====================
+        // ==================== Original Global Search Logic ====================
         let cachedPagesContent = null;
         let isSearchInitialized = false;
 
