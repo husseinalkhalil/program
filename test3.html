@@ -139,16 +139,29 @@
             position: absolute; top: 115%; left: 0; right: 0;
             background: #ffffff; border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px;
-            overflow-y: auto; z-index: 10000; text-align: left;
+            overflow-y: auto; z-index: 200; text-align: left;
             display: none; color: var(--text-primary);
             border: 1px solid rgba(0,0,0,0.05);
         }
-        .search-count { padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
-        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
+        .search-results::-webkit-scrollbar { width: 8px; }
+        .search-results::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 0 0 0 15px; }
+        .search-results::-webkit-scrollbar-thumb { background: var(--primary-light); border-radius: 4px; }
+
+        .search-count {
+            padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color);
+            border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc;
+            border-radius: 15px 15px 0 0; font-weight: 700;
+        }
+
+        .search-item {
+            padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05);
+            cursor: pointer; transition: background 0.2s;
+        }
+        .search-item:last-child { border-bottom: none; }
         .search-item:hover { background: rgba(94, 44, 165, 0.05); }
         .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; font-weight: 700; }
         .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
-        mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
+        .search-item mark { background-color: #ffd700; color: #422006; padding: 0 3px; border-radius: 3px; }
 
         /* Container Structure */
         .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
@@ -226,7 +239,7 @@
         .social-sc:hover { background: #FFFC00; } 
         .social-sc:hover img { filter: none; }
 
-        /* Copy Alert Fixed Style */
+        /* Alert and Message Styles */
         .copy-alert { 
             position: fixed; top: 100px; left: 50%; transform: translateX(-50%); 
             background: var(--primary-color); color: white; padding: 12px 25px; 
@@ -234,13 +247,7 @@
             opacity: 0; transition: opacity 0.3s; pointer-events: none; 
         }
         .copy-alert.show { opacity: 1; }
-
-        /* Footer */
-        footer { background: var(--primary-dark); color: white; padding: 40px 20px; text-align: center; margin-top: auto; }
-        .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
-        .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
-        .footer-links a:hover { color: var(--accent-color); }
-        .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        #message { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
         /* Back to Top */
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
@@ -298,6 +305,7 @@
 
     <!-- Main Content -->
     <div class="container main-wrapper">
+        <!-- Global Search Box -->
         <div class="universal-search">
             <i class="fas fa-search search-icon-placeholder"></i>
             <input type="text" id="globalSearch" placeholder="Search across all content..." />
@@ -326,8 +334,8 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <!-- Alert Box (Hidden by CSS) -->
     <div class="copy-alert" id="copyAlert">Link copied successfully ✅</div>
+    <div id="message"></div>
 
     <footer>
         <div class="container">
@@ -344,6 +352,7 @@
     </footer>
 
     <script>
+        // ==================== Videos Data ====================
         const videosData = [
             { id: "96pGvXmx5bM", title: "Adulterers shall not marry except with adulterers or polytheists" },
             { id: "bATkpINuvHw", title: "Those who abandon prayer are not infidels" },
@@ -426,25 +435,21 @@
                 favorites.push({ id, title, type: 'video', url: `https://www.youtube.com/embed/${id}` });
                 btn.classList.add("active");
                 btn.innerHTML = '<i class="fas fa-check"></i> In Favorites';
-                showFloatingMsg("Added to favorites");
+                showMessage("Added to favorites");
             } else {
                 favorites.splice(index, 1);
                 btn.classList.remove("active");
                 btn.innerHTML = '<i class="far fa-star"></i> Add to Favorites';
-                showFloatingMsg("Removed from favorites");
+                showMessage("Removed from favorites");
             }
             localStorage.setItem("favorites", JSON.stringify(favorites));
         }
 
-        function showFloatingMsg(text) {
-            const alertBox = document.getElementById('copyAlert');
-            const originalText = alertBox.textContent;
-            alertBox.textContent = text;
-            alertBox.classList.add('show');
-            setTimeout(() => { 
-                alertBox.classList.remove('show');
-                setTimeout(() => alertBox.textContent = originalText, 300);
-            }, 2000);
+        function showMessage(text) {
+            const message = document.getElementById("message");
+            message.textContent = text;
+            message.style.display = "block";
+            setTimeout(() => message.style.display = "none", 2000);
         }
 
         function toggleMobileMenu() {
@@ -463,43 +468,127 @@
             else btn.classList.remove('visible');
         });
 
-        // Global Search Logic
+        // ==================== Global Search Logic (Restored from Original) ====================
+        let cachedPagesContent = null;
+        let isSearchInitialized = false;
+
         async function loadAllPagesContent() {
+            if (cachedPagesContent) return cachedPagesContent;
             try {
                 const response = await fetch('/site-map.json?v=' + new Date().getTime());
+                if (!response.ok) throw new Error('Could not load site-map.json');
                 const pagesList = await response.json();
+
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
                     try {
                         const pageResp = await fetch(url);
+                        if (!pageResp.ok) return null;
                         const html = await pageResp.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
-                        return { page: doc.title.replace('Hussein Al-Khalil - ', '').replace('Official Website', '').trim(), url: url, content: doc.body.textContent.replace(/\s+/g, ' ').trim() };
+                        const mainContent = doc.querySelector('.container, main, body') || doc.body;
+
+                        return {
+                            page: doc.title.replace('Hussein Al-Khalil - ', '').replace('Official Website', '').trim() || 'Page',
+                            url: url,
+                            content: mainContent.textContent.replace(/\s+/g, ' ').trim()
+                        };
                     } catch (e) { return null; }
                 });
-                return (await Promise.all(promises)).filter(Boolean);
-            } catch (error) { return []; }
+
+                const results = await Promise.all(promises);
+                cachedPagesContent = results.filter(Boolean);
+                return cachedPagesContent;
+            } catch (error) {
+                console.error("Search Error:", error);
+                return [];
+            }
+        }
+
+        function getSafeRegex(searchTerm) {
+            return new RegExp(searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        }
+
+        function displayGlobalResults(results, queryRegex, container) {
+            container.innerHTML = '';
+            if (results.length === 0) {
+                container.innerHTML = '<div class="search-item"><p>⚠️ No results found</p></div>';
+                container.style.display = 'block';
+                return;
+            }
+            const countDiv = document.createElement('div');
+            countDiv.className = 'search-count';
+            countDiv.textContent = `Found ${results.length} results`;
+            container.appendChild(countDiv);
+
+            results.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-item';
+                const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
+                
+                let snippet = '';
+                queryRegex.lastIndex = 0;
+                const match = queryRegex.exec(item.content);
+                if (match) {
+                    const start = Math.max(0, match.index - 60);
+                    const end = Math.min(item.content.length, match.index + 100);
+                    snippet = item.content.substring(start, end);
+                    if (start > 0) snippet = '...' + snippet;
+                    if (end < item.content.length) snippet = snippet + '...';
+                } else {
+                    snippet = item.content.substring(0, 150) + '...';
+                }
+
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}</p>`;
+                div.onclick = () => window.location.href = item.url;
+                container.appendChild(div);
+            });
+            container.style.display = 'block';
         }
 
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
             if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
-            resultsContainer.innerHTML = '<div class="search-item"><p>Searching...</p></div>';
+            
+            resultsContainer.innerHTML = '<div class="search-item"><p>Searching across all content...</p></div>';
             resultsContainer.style.display = 'block';
+
             const data = await loadAllPagesContent();
-            const searchRegex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-            const results = data.filter(item => searchRegex.test(item.page) || searchRegex.test(item.content));
-            resultsContainer.innerHTML = results.length ? `<div class="search-count">Found ${results.length} results</div>` + results.map(item => `<div class="search-item" onclick="location.href='${item.url}'"><h3>${item.page}</h3><p>${item.content.substring(0, 100)}...</p></div>`).join('') : '<div class="search-item"><p>No results found</p></div>';
+            const searchRegex = getSafeRegex(query);
+            
+            const results = data.filter(item => {
+                searchRegex.lastIndex = 0;
+                const titleMatch = searchRegex.test(item.page);
+                searchRegex.lastIndex = 0;
+                const contentMatch = searchRegex.test(item.content);
+                return titleMatch || contentMatch;
+            });
+
+            displayGlobalResults(results, searchRegex, resultsContainer);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             renderVideos();
             const searchInput = document.getElementById('globalSearch');
             let timer;
-            if (searchInput) searchInput.addEventListener('input', (e) => { clearTimeout(timer); timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500); });
-            document.addEventListener('click', (e) => { if (!document.querySelector('.universal-search').contains(e.target)) document.getElementById('searchResults').style.display = 'none'; });
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500);
+                });
+                searchInput.addEventListener('focus', () => {
+                    if (!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; }
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                const searchContainer = document.querySelector('.universal-search');
+                if (searchContainer && !searchContainer.contains(e.target)) {
+                    document.getElementById('searchResults').style.display = 'none';
+                }
+            });
         });
     </script>
 </body>
