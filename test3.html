@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html dir="ltr" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>البودكاست - حسين الخليل</title>
+    <title>Podcast - Hussein Al-Khalil</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
-    <link href="images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="/images/logo-small.png" rel="icon" type="image/png"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -40,16 +40,16 @@
         .nav-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 998; display: none; }
         nav { background: rgba(94, 44, 165, 0.95); backdrop-filter: blur(10px); padding: 0.8rem 2%; position: fixed; width: 100%; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .logo-container img { height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
-        .nav-links { display: flex; flex: 1; justify-content: space-evenly; align-items: center; flex-wrap: wrap; margin: 0 20px; }
-        .nav-links a { color: white; font-weight: 700; font-size: 1.05rem; padding: 8px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+        .nav-links { display: flex; flex: 1; justify-content: space-evenly; align-items: center; flex-wrap: wrap; margin: 0 20px; order: 2; }
+        .nav-links a { color: white; font-weight: 700; font-size: 0.9rem; padding: 8px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
-        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
 
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
-            .nav-links { position: fixed; top: 60px; right: -280px; width: 280px; background: var(--surface-color); flex-direction: column; padding: 20px; height: calc(100vh - 60px); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start; gap: 10px; margin: 0; flex: unset; z-index: 1000; }
-            .nav-links.show { right: 0; }
+            .nav-links { position: fixed; top: 60px; left: -280px; width: 280px; background: var(--surface-color); flex-direction: column; padding: 20px; height: calc(100vh - 60px); box-shadow: 5px 0 15px rgba(0,0,0,0.1); transition: left 0.3s ease; overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start; gap: 10px; margin: 0; flex: unset; z-index: 1000; }
+            .nav-links.show { left: 0; }
             .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
             nav { padding: 0.8rem 5%; }
         }
@@ -60,9 +60,9 @@
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         
         .universal-search { width: 100%; max-width: 600px; position: relative; margin: 0 auto 40px; z-index: 100; }
-        #globalSearch { width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal', sans-serif; outline: none; background: white; transition: box-shadow 0.3s ease; }
-        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
-        .search-results { position: absolute; top: 115%; left: 0; right: 0; background: white; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; display: none; text-align: right; border: 1px solid rgba(0,0,0,0.05); z-index: 10000; }
+        #globalSearch { width: 100%; padding: 18px 25px 18px 50px; border-radius: 50px; border: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal', sans-serif; outline: none; background: white; transition: box-shadow 0.3s ease; text-align: left; }
+        .search-icon-placeholder { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
+        .search-results { position: absolute; top: 115%; left: 0; right: 0; background: white; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; display: none; text-align: left; border: 1px solid rgba(0,0,0,0.05); z-index: 10000; }
         .search-count { padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
         .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
         mark { background: var(--accent-color); color: #422006; padding: 0 3px; border-radius: 3px; }
@@ -72,7 +72,7 @@
         .main-wrapper { position: relative; z-index: 20; margin-top: -90px; margin-bottom: 60px; }
 
         /* Podcast Player */
-        .podcast-player { background: linear-gradient(145deg, #ffffff, #f8f5ff); border-radius: 20px; padding: 25px; margin: 0 auto 40px; box-shadow: var(--shadow-md); max-width: 800px; border-right: 6px solid var(--primary-color); position: relative; z-index: 10; }
+        .podcast-player { background: linear-gradient(145deg, #ffffff, #f8f5ff); border-radius: 20px; padding: 25px; margin: 0 auto 40px; box-shadow: var(--shadow-md); max-width: 800px; border-left: 6px solid var(--primary-color); position: relative; z-index: 10; text-align: center; }
         .player-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 15px 0; }
         .control-btn { background: white; color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 50%; width: 45px; height: 45px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
         .control-btn.main-play { width: 55px; height: 55px; background: var(--primary-color); color: white; font-size: 1.5rem; }
@@ -81,7 +81,7 @@
         .volume-controls { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 15px; }
         .volume-slider { width: 100px; height: 6px; background: #e2e8f0; border-radius: 3px; outline: none; cursor: pointer; }
 
-        /* Podcasts Grid */
+        /* Podcasts Grid - Scalable */
         .podcasts-grid { 
             display: grid; 
             grid-template-columns: repeat(6, 1fr); 
@@ -131,7 +131,7 @@
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px; }
 
         /* Social */
-        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
+        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); max-width: 1200px; margin-left: auto; margin-right: auto;}
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
@@ -143,16 +143,12 @@
         .social-btn.facebook:hover { background: #1877F2; }
         .social-btn.instagram:hover { background: #E4405F; }
         .social-btn.youtube:hover { background: #FF0000; }
-        .social-btn.tiktok:hover { background: #000000; }
-        .social-btn.telegram:hover { background: #0088CC; }
-        .social-btn.snap:hover { background: #FFFC00; }
-        .social-btn.snap:hover img { filter: none; }
 
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: 0.3s; z-index: 995; }
         .back-to-top.visible { opacity: 1; }
         #message { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--primary-color); color: white; padding: 15px 30px; border-radius: 10px; display: none; z-index: 2000; }
 
-        /* Responsive Breakpoints (Matches Original Layout) */
+        /* Responsive Breakpoints */
         @media (max-width: 1550px) { .podcasts-grid { grid-template-columns: repeat(5, 1fr); } }
         @media (max-width: 1300px) { .podcasts-grid { grid-template-columns: repeat(4, 1fr); } }
         @media (max-width: 992px) { .podcasts-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -167,25 +163,25 @@
 
     <nav>
         <div class="logo-container">
-            <a href="index.html"><img src="images/logo.png" alt="شعار حسين الخليل" /></a>
+            <a href="index.html"><img src="/images/logo.png" alt="Hussein Al-Khalil Logo" /></a>
         </div>
         <div class="nav-links">
-            <a href="index.html">الرئيسية</a>
-            <a href="books.html">الكتب</a>
-            <a href="articles.html">المقالات</a>
-            <a href="hadith.html">الروايات</a>
-            <a href="khawatir.html">خواطر</a>
-            <a href="videos.html">الفيديوهات</a>
-            <a href="history.html">التاريخ</a>
-            <a href="podcast.html" style="background: rgba(255,255,255,0.2);">البودكاست</a>
-            <a href="ask.html">الأسئلة</a>
-            <a href="hewar.html">حوارات</a>
-            <a href="inq.html">تساؤلات</a>
-            <a href="manhaj.html">المنهج</a>
-            <a href="favorites.html">المفضلة</a>
-            <a href="support.html">دعم المحتوى</a>
-            <a href="about.html">من نحن</a>
-            <a href="/en/podcast.html" style="color: #ffd700 !important; font-weight: 800; font-size: 1rem; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 8px 16px; border-radius: 20px;">En<i class="fas fa-globe"></i></a>
+            <a href="index.html">Home</a>
+            <a href="books.html">Books</a>
+            <a href="articles.html">Articles</a>
+            <a href="hadith.html">Hadiths</a>
+            <a href="khawatir.html">Thoughts</a>
+            <a href="videos.html">Videos</a>
+            <a href="history.html">History</a>
+            <a href="podcast.html" style="background: rgba(255,255,255,0.2);">Podcast</a>
+            <a href="ask.html">Ask</a>
+            <a href="hewar.html">Dialogues</a>
+            <a href="inq.html">Inquiries</a>
+            <a href="manhaj.html">Methodology</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="support.html">Support</a>
+            <a href="about.html">About Us</a>
+            <a href="/podcast.html" style="color: #ffd700 !important; font-weight: 800; font-size: 1rem; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 8px 16px; border-radius: 20px;">Ar<i class="fas fa-globe"></i></a>
         </div>
         <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
     </nav>
@@ -193,8 +189,8 @@
     <header class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>البودكاست</h1>
-                <p>استمع إلى حلقات بودكاست "فكر من جديد" التي تناقش مواضيع فكرية معاصرة</p>
+                <h1>Podcast</h1>
+                <p>Listen to "Think Again" podcast episodes discussing contemporary intellectual topics</p>
             </div>
         </div>
     </header>
@@ -202,12 +198,12 @@
     <div class="container main-wrapper">
         <div class="universal-search">
             <i class="fas fa-search search-icon-placeholder"></i>
-            <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+            <input type="text" id="globalSearch" placeholder="Search all content..." />
             <div class="search-results" id="searchResults"></div>
         </div>
 
         <div class="podcast-player">
-            <div class="episode-title" id="current-title" style="text-align: center; font-weight: 800; color: var(--primary-dark); margin-bottom: 10px;">اختر حلقة للاستماع</div>
+            <div class="episode-title" id="current-title" style="text-align: center; font-weight: 800; color: var(--primary-dark); margin-bottom: 10px;">Choose an episode to listen</div>
             <div class="player-controls">
                 <button class="control-btn" onclick="skipBackward()"><i class="fas fa-undo"></i></button>
                 <button class="control-btn main-play" onclick="togglePlay()" id="playBtn"><i class="fas fa-play"></i></button>
@@ -227,28 +223,30 @@
             </div>
         </div>
 
+        <!-- Podcasts Grid -->
         <div class="podcasts-grid" id="podcastsGrid"></div>
 
+        <!-- Pagination Section -->
         <div class="pagination-section">
             <div class="pagination-controls">
-                <button class="page-arrow" id="lastPage" onclick="goToLastPage()">الأخيرة <i class="fas fa-angle-double-left"></i></button>
-                <button class="page-arrow" id="nextPage" onclick="changePage(1)">التالية <i class="fas fa-chevron-left"></i></button>
-                <span class="video-counter" id="pageIndicator">صفحة 1 من 1</span>
-                <button class="page-arrow" id="prevPage" onclick="changePage(-1)">السابقة <i class="fas fa-chevron-right"></i></button>
-                <button class="page-arrow" id="firstPage" onclick="goToPage(1)"><i class="fas fa-angle-double-right"></i> الأولى</button>
+                <button class="page-arrow" id="firstPage" onclick="goToPage(1)"><i class="fas fa-angle-double-left"></i> First</button>
+                <button class="page-arrow" id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i> Prev</button>
+                <span class="video-counter" id="pageIndicator">Page 1 of 1</span>
+                <button class="page-arrow" id="nextPage" onclick="changePage(1)">Next <i class="fas fa-chevron-right"></i></button>
+                <button class="page-arrow" id="lastPage" onclick="goToLastPage()">Last <i class="fas fa-angle-double-right"></i></button>
             </div>
-            <div class="video-counter" id="totalCounter">عرض 0 من أصل 0 حلقة</div>
+            <div class="video-counter" id="totalCounter">Showing 0 of 0 episodes</div>
         </div>
 
         <div class="social-section">
-            <div class="section-title"><h2>تابعني على مواقع التواصل</h2></div>
+            <div class="section-title"><h2>Follow Me</h2></div>
             <div class="social-grid">
                 <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn youtube"><img src="icons/yot-soc.png" alt="YouTube"></a>
-                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" class="social-btn facebook"><img src="icons/fac-soc.png" alt="فيسبوك"></a>
-                <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" class="social-btn instagram"><img src="icons/ins-soc.png" alt="إنستغرام"></a>
-                <a href="https://t.me/tanoeer" target="_blank" class="social-btn telegram"><img src="icons/tel-soc.png" alt="تلغرام"></a>
-                <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" class="social-btn tiktok"><img src="icons/tik-soc.png" alt="تيك توك"></a>
-                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn snap"><img src="icons/snap.png" alt="سناب شات"></a>
+                <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn facebook"><img src="icons/fac-soc.png" alt="Facebook"></a>
+                <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn instagram"><img src="icons/ins-soc.png" alt="Instagram"></a>
+                <a href="https://t.me/tanoeer" target="_blank" class="social-btn telegram"><img src="icons/tel-soc.png" alt="Telegram"></a>
+                <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn tiktok"><img src="icons/tik-soc.png" alt="TikTok"></a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn snap"><img src="icons/snap.png" alt="Snapchat"></a>
             </div>
         </div>
     </div>
@@ -256,12 +254,12 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="terms.html">الشروط والأحكام</a>
-                <a href="privacy.html">سياسة الخصوصية</a>
-                <a href="contact.html">اتصل بنا</a>
-                <a href="feedback.html">شاركنا رأيك</a>
+                <a href="/terms.html">Terms & Conditions</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/contact.html">Contact Us</a>
+                <a href="/feedback.html">Feedback</a>
             </div>
-            <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
+            <div class="copyright">Hussein Al-Khalil - All Rights Reserved © 2025</div>
         </div>
     </footer>
 
@@ -270,64 +268,64 @@
 
     <script>
         const podcastList = [
-            {id: "59", title: "تآمر الغرب وافتراءات البخاري", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-0-30/417136327-44100-2-f0cc5df887dad.m4a"},
-            {id: "58", title: "الختان عادة أم عبادة؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-11-27/415058466-44100-2-8470ea4118846.m4a"},
-            {id: "57", title: "الصلاة فزّاعة المسلم", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-11-27/415058508-44100-2-22a418a2f2a7c.m4a"},
-            {id: "56", title: "هل الصلاة فرض على المسلم؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-24/404459013-44100-2-2fe8fe2931b35.m4a"},
-            {id: "55", title: "هل الله خلق الظلم؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-12/403797674-44100-2-f53f8ef599752.m4a"},
-            {id: "54", title: "الصلاة كما أرادها الله", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-9/403624728-44100-2-821a645b1d4e1.m4a"},
-            {id: "53", title: "نظرية الحلوى المكشوفة", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-29/375941594-44100-2-fb93811371068.m4a"},
-            {id: "52", title: "مصير الهندوسي أو البوذي؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-29/375941252-44100-2-92ba1fdab4323.m4a"},
-            {id: "51", title: "لماذا أخلاق الموروث سيئة؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-16/374554834-44100-2-a7fc3525b18a1.m4a"},
-            {id: "50", title: "هل ذكر الله عدد ركعات الصلاة؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-12/374097843-44100-2-45524aa7b6248.m4a"},
-            {id: "49", title: "القراءات السبعة للقرآن", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685968-44100-2-d9b6b161a46e4.m4a"},
-            {id: "48", title: "القضاء والقدر", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685523-44100-2-e01b42113f1b9.m4a"},
-            {id: "47", title: "الهداية والمشيئة", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685270-44100-2-94c25034d70e2.m4a"},
-            {id: "46", title: "المذاهب الأربعة واختلافاتها", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370684968-44100-2-b901852b42c08.m4a"},
-            {id: "45", title: "العمل الصالح", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370684630-44100-2-06b5554303a56.m4a"},
-            {id: "44", title: "هل نحن ملزمين بكتب أسباب النزول؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367353738-44100-2-e0b57d1bf8bac.m4a"},
-            {id: "43", title: "هل التوراة والانجيل محرّفة؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367353241-44100-2-d54c624af8817.m4a"},
-            {id: "42", title: "هل كتاب البخاري صناعة يهودية؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-0-11/392914886-44100-2-33b38030cf50e.m4a"},
-            {id: "41", title: "هل الإجماع مصدر تشريع؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367352174-44100-2-f941b665764d6.m4a"},
-            {id: "40", title: "من هو المسلم؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367351847-44100-2-695ef843a517b.m4a"},
-            {id: "38", title: "قطع يد السارق بين الحقيقة والوهم", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367350787-44100-2-bb1a65c4ae514.m4a"},
-            {id: "37", title: "فاسألوا أهل الذكر", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367350412-44100-2-12494d6db0695.m4a"},
-            {id: "36", title: "صحيح البخاري", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367349906-44100-2-2ee0f74fd7ceb.m4a"},
-            {id: "35", title: "الصراط المستقيم بين الحقيقة والوهم", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346960-44100-2-ad4ae7943a43c.m4a"},
-            {id: "34", title: "الرجم بين الحقيقة والوهم", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346531-44100-2-fa5f197715506.m4a"},
-            {id: "33", title: "الترحُّم على غير المسلمين", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346217-44100-2-d26dce76a0f45.m4a"},
-            {id: "32", title: "التبني في الاسلام", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346037-44100-2-c2b4a165fa3c1.m4a"},
-            {id: "31", title: "هل الصلاة التواترية توقيفية؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-27/357416853-44100-2-1cd9688646b46.m4a"},
-            {id: "30", title: "مثنى وثلاث ورباع", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-21/356623843-44100-2-4b164060e77da.m4a"},
-            {id: "29", title: "الغيبة والتجسس", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-21/356623843-44100-2-4b164060e77da.m4a"},
-            {id: "28", title: "علامات الساعة بين الحقيقة والوهم", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-1/353718794-44100-2-ebe4bd57c05a6.m4a"},
-            {id: "27", title: "المثلية الجنسية", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-1/353718437-44100-2-6e57b7fc89c69.m4a"},
-            {id: "26", title: "الطلاق من كتاب الله", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-9-11/350697775-44100-2-3010dec3a7cde.m4a"},
-            {id: "25", title: "الحجاب عادة أم عبادة؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-9-5/349902772-44100-2-edfb5dc8e42a3.m4a"},
-            {id: "24", title: "سأنكر كل ما هو دون القرآن", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-9-5/349902213-44100-2-76b4451f43f95.m4a"},
-            {id: "23", title: "ما هو مفهوم الجُنُب؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-23/348198363-44100-2-558bc3296546.m4a"},
-            {id: "22", title: "لماذا القرآن نزل عربيًا؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-17/347381814-44100-2-7ccd53ec818ef.m4a"},
-            {id: "21", title: "هل أصلي على كيفي؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-11/346563815-44100-2-dbe146588121b.m4a"},
-            {id: "20", title: "صلاة الجمعة بين الحقيقة والوهم", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345320563-44100-2-2c5bddde79623.m4a"},
-            {id: "19", title: "لماذا انتشرت أفكار التنويريين؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345320099-44100-2-25697b82d90ac.m4a"},
-            {id: "18", title: "الخمر بين التحريم والاجتناب", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345318401-44100-2-4f0cfba8d4f71.m4a"},
-            {id: "17", title: "الأطعمة والسمك والكبد", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345317816-44100-2-a9c1100332161.m4a"},
-            {id: "16", title: "زواج المسلمة من غير المسلم", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345317270-44100-2-442dd51f28c4f.m4a"},
-            {id: "15", title: "مفهوم واضربوهن", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345316317-44100-2-7d9f3db2742d7.m4a"},
-            {id: "14", title: "أكذوبة زواج النبي من طفلة", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345316177-44100-2-c085280cba311.m4a"},
-            {id: "13", title: "لماذا خلقنا الله؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345316177-44100-2-c085280cba311.m4a"},
-            {id: "12", title: "حادثة الافك", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345315951-44100-2-f9e569931af3b.m4a"},
-            {id: "11", title: "التناقض بين الروايات والقران", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345315421-44100-2-0492d2e4a286a.m4a"},
-            {id: "10", title: "الجرح والتعديل", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-7-23/344201589-44100-2-928cd7afa617b.m4a"},
-            {id: "9", title: "حجاب المرأة", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-7-10/342643787-44100-2-69858796fc4c3.m4a"},
-            {id: "8", title: "ملك اليمين", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-6-27/340895826-44100-2-cadc6035241f2.m4a"},
-            {id: "7", title: "هل النبي كان فقيرًا؟", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-6-27/340895826-44100-2-cadc6035241f2.m4a"},
-            {id: "6", title: "الفرق بين النبي والرسول", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-6-21/340080802-44100-2-f5e1bc473e858.m4a"},
-            {id: "5", title: "الناسخ والمنسوخ", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-5-10/334337459-44100-2-0defc0a3c56c7.m4a"},
-            {id: "4", title: "شهادة الأنثى", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-5-1/332854542-44100-2-502f331af81db.m4a"},
-            {id: "3", title: "مفهوم الجهاد والقتال", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-5-8/334123023-44100-2-b0f6a2cfb737c.m4a"},
-            {id: "2", title: "الفرق بين التدبر والتفقه", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-4-15/329694974-44100-2-dc82fef717a1f.m4a"},
-            {id: "1", title: "حلقة تفصيلية", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-4-11/329048140-44100-2-57046444006aa.m4a"}
+            {id: "59", title: "Western Conspiracy and Al-Bukhari's Fabrications", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-0-30/417136327-44100-2-f0cc5df887dad.m4a"},
+            {id: "58", title: "Circumcision: Custom or Worship?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-11-27/415058466-44100-2-8470ea4118846.m4a"},
+            {id: "57", title: "Prayer: The Muslim's Bugbear", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-11-27/415058508-44100-2-22a418a2f2a7c.m4a"},
+            {id: "56", title: "Is Prayer Mandatory for Muslims?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-24/404459013-44100-2-2fe8fe2931b35.m4a"},
+            {id: "55", title: "Did God Create Injustice?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-12/403797674-44100-2-f53f8ef599752.m4a"},
+            {id: "54", title: "Prayer as God Intended It", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-6-9/403624728-44100-2-821a645b1d4e1.m4a"},
+            {id: "53", title: "Exposed Candy Theory", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-29/375941594-44100-2-fb93811371068.m4a"},
+            {id: "52", title: "The Fate of Hindus and Buddhists", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-29/375941252-44100-2-92ba1fdab4323.m4a"},
+            {id: "51", title: "Why is Traditional Heritage Morality Poor?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-16/374554834-44100-2-a7fc3525b18a1.m4a"},
+            {id: "50", title: "Did God Mention the Number of Rak'ahs?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-3-12/374097843-44100-2-45524aa7b6248.m4a"},
+            {id: "49", title: "The Seven Qira'at of the Quran", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685968-44100-2-d9b6b161a46e4.m4a"},
+            {id: "48", title: "Fate and Predestination", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685523-44100-2-e01b42113f1b9.m4a"},
+            {id: "47", title: "Guidance and Divine Will", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370685270-44100-2-94c25034d70e2.m4a"},
+            {id: "46", title: "The Four Schools and their Differences", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370684968-44100-2-b901852b42c08.m4a"},
+            {id: "45", title: "Good Deeds", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-2-12/370684630-44100-2-06b5554303a56.m4a"},
+            {id: "44", title: "Are we bound by Occasions of Revelation?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367353738-44100-2-e0b57d1bf8bac.m4a"},
+            {id: "43", title: "Are the Torah and Bible Corrupted?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367353241-44100-2-d54c624af8817.m4a"},
+            {id: "42", title: "Is Bukhari's Book a Jewish Creation?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2025-0-11/392914886-44100-2-33b38030cf50e.m4a"},
+            {id: "41", title: "Is Consensus a Source of Legislation?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367352174-44100-2-f941b665764d6.m4a"},
+            {id: "40", title: "Who is a Muslim?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367351847-44100-2-695ef843a517b.m4a"},
+            {id: "38", title: "Cutting the Thief's Hand: Truth vs Illusion", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367350787-44100-2-bb1a65c4ae514.m4a"},
+            {id: "37", title: "Ask the People of Remembrance", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367350412-44100-2-12494d6db0695.m4a"},
+            {id: "36", title: "Sahih al-Bukhari", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367349906-44100-2-2ee0f74fd7ceb.m4a"},
+            {id: "35", title: "The Straight Path: Truth vs Illusion", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346960-44100-2-ad4ae7943a43c.m4a"},
+            {id: "34", title: "Stoning: Truth vs Illusion", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346531-44100-2-fa5f197715506.m4a"},
+            {id: "33", title: "Praying for Non-Muslims", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346217-44100-2-d26dce76a0f45.m4a"},
+            {id: "32", title: "Adoption in Islam", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2024-1-13/367346037-44100-2-c2b4a165fa3c1.m4a"},
+            {id: "31", title: "Is Traditional Prayer Ta'qifi?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-27/357416853-44100-2-1cd9688646b46.m4a"},
+            {id: "30", title: "Two, Three, and Four", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-21/356623843-44100-2-4b164060e77da.m4a"},
+            {id: "29", title: "Backbiting and Spying", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-21/356623843-44100-2-4b164060e77da.m4a"},
+            {id: "28", title: "Signs of the Hour: Truth vs Illusion", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-1/353718794-44100-2-ebe4bd57c05a6.m4a"},
+            {id: "27", title: "Homosexuality", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-10-1/353718437-44100-2-6e57b7fc89c69.m4a"},
+            {id: "26", title: "Divorce from the Book of God", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-9-11/350697775-44100-2-3010dec3a7cde.m4a"},
+            {id: "25", title: "Hijab: Custom or Worship?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-9-5/349902772-44100-2-edfb5dc8e42a3.m4a"},
+            {id: "24", title: "I will Deny Everything but the Quran", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-9-5/349902213-44100-2-76b4451f43f95.m4a"},
+            {id: "23", title: "The Concept of Janabah", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-23/348198363-44100-2-558bc3296546.m4a"},
+            {id: "22", title: "Why was the Quran Revealed in Arabic?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-17/347381814-44100-2-7ccd53ec818ef.m4a"},
+            {id: "21", title: "Can I Pray However I Want?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-11/346563815-44100-2-dbe146588121b.m4a"},
+            {id: "20", title: "Friday Prayer: Truth vs Illusion", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345320563-44100-2-2c5bddde79623.m4a"},
+            {id: "19", title: "Why Enlightened Ideas Spread?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345320099-44100-2-25697b82d90ac.m4a"},
+            {id: "18", title: "Alcohol: Prohibition vs Avoidance", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345318401-44100-2-4f0cfba8d4f71.m4a"},
+            {id: "17", title: "Foods: Fish and Liver", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345317816-44100-2-a9c1100332161.m4a"},
+            {id: "16", title: "Marriage of a Muslim Woman to a Non-Muslim", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345317270-44100-2-442dd51f28c4f.m4a"},
+            {id: "15", title: "The Concept of 'Wadribuhunn'", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345316317-44100-2-7d9f3db2742d7.m4a"},
+            {id: "14", title: "The Lie of the Prophet's Marriage to a Child", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345316177-44100-2-c085280cba311.m4a"},
+            {id: "13", title: "Why Did God Create Us?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345316177-44100-2-c085280cba311.m4a"},
+            {id: "12", title: "The Incident of Al-Ifk", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345315951-44100-2-f9e569931af3b.m4a"},
+            {id: "11", title: "Contradiction between Hadiths and Quran", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-8-1/345315421-44100-2-0492d2e4a286a.m4a"},
+            {id: "10", title: "Al-Jarh wa al-Ta'dil", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-7-23/344201589-44100-2-928cd7afa617b.m4a"},
+            {id: "9", title: "Women's Hijab", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-7-10/342643787-44100-2-69858796fc4c3.m4a"},
+            {id: "8", title: "Milk al-Yamin", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-6-27/340895826-44100-2-cadc6035241f2.m4a"},
+            {id: "7", title: "Was the Prophet Poor?", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-6-27/340895826-44100-2-cadc6035241f2.m4a"},
+            {id: "6", title: "Difference between Nabi and Rasul", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-6-21/340080802-44100-2-f5e1bc473e858.m4a"},
+            {id: "5", title: "Abrogation (Naskh)", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-5-10/334337459-44100-2-0defc0a3c56c7.m4a"},
+            {id: "4", title: "Female Testimony", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-5-1/332854542-44100-2-502f331af81db.m4a"},
+            {id: "3", title: "Concept of Jihad and Fighting", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-5-8/334123023-44100-2-b0f6a2cfb737c.m4a"},
+            {id: "2", title: "Difference between Tadabbur and Tafaqquh", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-4-15/329694974-44100-2-dc82fef717a1f.m4a"},
+            {id: "1", title: "Detailed Episode", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2023-4-11/329048140-44100-2-57046444006aa.m4a"}
         ];
 
         const itemsPerPage = 40;
@@ -348,9 +346,9 @@
                 card.id = `podcast-${p.id}`;
                 card.dataset.audio = p.audio;
                 card.innerHTML = `
-                    <img src="images/pod.jpg">
+                    <img src="/images/pod.jpg">
                     <h2>${p.title}</h2>
-                    <a href="#" class="listen-link" onclick="playPod(event, this)"><i class="fas fa-play-circle"></i> استمع الآن</a>
+                    <a href="#" class="listen-link" onclick="playPod(event, this)"><i class="fas fa-play-circle"></i> Listen Now</a>
                     <div class="podcast-actions">
                         <button class="favorite-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${p.title}', 'podcast-${p.id}')"><i class="${isFav ? 'fas' : 'far'} fa-star"></i></button>
                     </div>
@@ -362,10 +360,10 @@
 
         function updatePaginationUI() {
             const totalPages = Math.ceil(podcastList.length / itemsPerPage);
-            document.getElementById('pageIndicator').textContent = `صفحة ${currentPage} من ${totalPages || 1}`;
+            document.getElementById('pageIndicator').textContent = `Page ${currentPage} of ${totalPages || 1}`;
             const startItem = podcastList.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1;
             const endItem = Math.min(currentPage * itemsPerPage, podcastList.length);
-            document.getElementById('totalCounter').textContent = `عرض ${startItem}-${endItem} من أصل ${podcastList.length} حلقة`;
+            document.getElementById('totalCounter').textContent = `Showing ${startItem}-${endItem} of ${podcastList.length} episodes`;
             document.getElementById('prevPage').disabled = currentPage === 1;
             document.getElementById('firstPage').disabled = currentPage === 1;
             document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
@@ -412,8 +410,8 @@
         function toggleFav(btn, title, id) {
             let favs = JSON.parse(localStorage.getItem("favorites")) || [];
             const idx = favs.findIndex(f => f.id === id);
-            if (idx === -1) { favs.push({id, title, type:'podcast'}); btn.classList.add('active'); btn.firstChild.className='fas fa-star'; showMsg("تمت الإضافة للمفضلة"); }
-            else { favs.splice(idx, 1); btn.classList.remove('active'); btn.firstChild.className='far fa-star'; showMsg("تمت الإزالة من المفضلة"); }
+            if (idx === -1) { favs.push({id, title, type:'podcast'}); btn.classList.add('active'); btn.firstChild.className='fas fa-star'; showMsg("Added to Favorites"); }
+            else { favs.splice(idx, 1); btn.classList.remove('active'); btn.firstChild.className='far fa-star'; showMsg("Removed from Favorites"); }
             localStorage.setItem("favorites", JSON.stringify(favs));
         }
 
@@ -421,13 +419,13 @@
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         function toggleMobileMenu() { const n = document.querySelector('.nav-links'), o = document.querySelector('.nav-overlay'); n.classList.toggle('show'); o.style.display = n.classList.contains('show') ? 'block' : 'none'; document.body.classList.toggle('no-scroll'); }
 
-        // Global Search Original Logic
+        // Original Global Search Logic
         let cachedPagesContent = null;
         let isSearchInitialized = false;
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
             try {
-                const response = await fetch('site-map.json?v=' + new Date().getTime());
+                const response = await fetch('/site-map.json?v=' + new Date().getTime());
                 const pagesList = await response.json();
                 const promises = pagesList.map(async (item) => {
                     let url = typeof item === 'string' ? item : item.url;
@@ -436,7 +434,7 @@
                         const html = await pageResp.text();
                         const doc = new DOMParser().parseFromString(html, 'text/html');
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
-                        return { page: doc.title.replace('حسين الخليل - ', '').trim() || 'صفحة', url: url, content: (doc.querySelector('.container, main, body') || doc.body).textContent.replace(/\s+/g, ' ').trim() };
+                        return { page: doc.title.replace('Hussein Al-Khalil - ', '').trim() || 'Page', url: url, content: (doc.querySelector('.container, main, body') || doc.body).textContent.replace(/\s+/g, ' ').trim() };
                     } catch (e) { return null; }
                 });
                 cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
@@ -444,17 +442,14 @@
             } catch (error) { return []; }
         }
 
-        function normalizeArabic(text) { return text.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي'); }
-
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
             if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            resultsContainer.innerHTML = '<div class="search-item"><p>Searching...</p></div>';
             resultsContainer.style.display = 'block';
             const data = await loadAllPagesContent();
-            const cleanQuery = normalizeArabic(query);
-            const results = data.filter(item => normalizeArabic(item.page).includes(cleanQuery) || normalizeArabic(item.content).includes(cleanQuery));
-            resultsContainer.innerHTML = `<div class="search-count">تم العثور على ${results.length} نتيجة</div>`;
+            const results = data.filter(item => item.page.toLowerCase().includes(query.toLowerCase()) || item.content.toLowerCase().includes(query.toLowerCase()));
+            resultsContainer.innerHTML = `<div class="search-count">Found ${results.length} results</div>`;
             results.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
