@@ -28,7 +28,6 @@
             --text-secondary: #64748b;
             --shadow-sm: 0 4px 15px rgba(94, 44, 165, 0.08);
             --shadow-md: 0 8px 20px rgba(94, 44, 165, 0.12);
-            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
         }
@@ -78,8 +77,8 @@
             padding: 8px 12px; border-radius: 20px;
             display: flex; align-items: center; gap: 5px; white-space: nowrap;
         }
-
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
         .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
 
         @media (max-width: 1200px) {
@@ -91,7 +90,7 @@
                 flex-direction: column; padding: 20px; height: calc(100vh - 60px);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
-                gap: 10px; margin: 0; flex: unset;
+                gap: 10px; margin: 0; flex: unset; z-index: 1000;
             }
             .nav-links.show { right: 0; }
             .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
@@ -128,19 +127,19 @@
         .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper { position: relative; z-index: 20; margin-top: -90px; margin-bottom: 60px; }
 
-        /* Video Grid - Fixed Scaling Issue */
+        /* Video Grid - Fixed consistent width */
         .videos-grid { 
             display: grid; 
             grid-template-columns: repeat(4, 1fr); 
             gap: 25px; 
             width: 100%;
-            align-items: start; /* يمنع البطاقات من التمدد الطولي غير المتساوي */
         }
 
+        /* Video Card - Fixed sizing */
         .video-card {
             background: var(--surface-color); border-radius: 16px; padding: 15px; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
             transition: all 0.4s ease; position: relative; overflow: hidden; display: flex; flex-direction: column;
-            width: 100%; /* ضمان ثبات العرض بناءً على العمود */
+            width: 100%;
         }
         .video-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-md); }
         .video-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--primary-color), var(--primary-light)); }
@@ -150,7 +149,14 @@
         .video-card:hover .video-thumbnail img { transform: scale(1.05); opacity: 1; }
 
         .play-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 3rem; opacity: 0.8; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .video-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; line-height: 1.4; flex-grow: 1; text-align: center; display: block; min-height: 3em; }
+        
+        /* Fixed Title Height for consistency */
+        .video-title { 
+            font-size: 1.1rem; font-weight: 700; color: var(--text-primary); 
+            margin-bottom: 15px; line-height: 1.4; flex-grow: 1; text-align: center; 
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; 
+            overflow: hidden; min-height: 3.1rem;
+        }
 
         .favorite-btn {
             background: #f8fafc; border: 1px solid #e2e8f0; color: var(--text-secondary); padding: 8px 16px; border-radius: 20px;
@@ -180,9 +186,9 @@
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); transition: all 0.3s; }
+        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.8); transition: all 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .social-btn img { width: 24px; height: 24px; }
-        .social-btn:hover { transform: translateY(-5px) scale(1.1); }
+        .social-btn:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
         .social-btn.facebook:hover { background: #1877F2; }
         .social-btn.instagram:hover { background: #E4405F; }
@@ -197,10 +203,10 @@
         .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
         .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.9rem; transition: 0.3s; }
         .footer-links a:hover { color: var(--accent-color); }
-        .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px; }
 
         /* Back to top */
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; font-size: 1.2rem; }
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; font-size: 1.2rem; box-shadow: var(--shadow-md); }
         .back-to-top.visible { opacity: 1; pointer-events: all; }
         
         #message { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
@@ -299,6 +305,7 @@
     </footer>
 
     <script>
+        // ==================== Videos Data ====================
         const videosData = [
             { id: "96pGvXmx5bM", title: "الزاني لا ينكح إلّا زانية أو مشركة" },
             { id: "bATkpINuvHw", title: "تارك الصلاة ليس بكافر" },
@@ -353,12 +360,14 @@
             { id: "aiXBF_n7Sxk", title: "عدد ركعات الصلاة" }
         ];
 
+        // ==================== Pagination Logic ====================
         const itemsPerPage = 40;
         let currentPage = 1;
 
         function renderVideos() {
             const grid = document.getElementById('videosGrid');
             grid.innerHTML = '';
+            
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
             const paginatedItems = videosData.slice(start, end);
@@ -402,6 +411,7 @@
         function goToPage(page) { currentPage = page; renderVideos(); scrollToTop(); }
         function goToLastPage() { currentPage = Math.ceil(videosData.length / itemsPerPage); renderVideos(); scrollToTop(); }
 
+        // ==================== General Site Functions ====================
         function toggleMobileMenu() {
             const nav = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
@@ -494,16 +504,13 @@
             if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
             resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
             resultsContainer.style.display = 'block';
-
             const data = await loadAllPagesContent();
             const searchRegex = getSafeRegex(query);
             const results = data.filter(item => {
                 searchRegex.lastIndex = 0;
                 return searchRegex.test(item.page) || searchRegex.test(item.content);
             });
-
             resultsContainer.innerHTML = `<div class="search-count">تم العثور على ${results.length} نتيجة</div>`;
-            if (results.length === 0) { resultsContainer.innerHTML += '<div class="search-item"><p>لا توجد نتائج</p></div>'; }
             results.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-item';
