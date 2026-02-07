@@ -327,12 +327,12 @@
     <div class="social-section">
         <h2 style="font-weight: 800; color: var(--primary-dark); margin-bottom: 10px;">تابعنا على منصات التواصل</h2>
         <div class="social-grid">
-            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="/icons/yot-soc.png" alt="yt"></a>
-            <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="/icons/fac-soc.png" alt="fb"></a>
-            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="إنستغرام"><img src="/icons/ins-soc.png" alt="in"></a>
-            <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="تلغرام"><img src="/icons/tel-soc.png" alt="tg"></a>
-            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="تيك توك"><img src="/icons/tik-soc.png" alt="tk"></a>
-            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="سناب شات"><img src="/icons/snap.png" alt="sc"></a>
+            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn" title="يوتيوب"><img src="/icons/yot-soc.png" alt="yt"></a>
+            <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn" title="فيسبوك"><img src="/icons/fac-soc.png" alt="fb"></a>
+            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn" title="إنستغرام"><img src="/icons/ins-soc.png" alt="in"></a>
+            <a href="https://t.me/tanoeer" target="_blank" class="social-btn" title="تلغرام"><img src="/icons/tel-soc.png" alt="tg"></a>
+            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn" title="تيك توك"><img src="/icons/tik-soc.png" alt="tk"></a>
+            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn" title="سناب شات"><img src="/icons/snap.png" alt="sc"></a>
         </div>
     </div>
 </div>
@@ -368,10 +368,11 @@
 </footer>
 
 <script>
-    // ==================== البيانات والبرمجة ====================
+    // تم استخدام معرفات فريدة (IDs) لضمان عدم التداخل مع الصفحات الأخرى
     const novelsData = [
         {
-            id: 1, 
+            id: 'h101', 
+            displayOrder: 1,
             title: "الحجر الذي سرق ملابس موسى", 
             source: "البخاري", 
             sourceUrl: "https://dorar.net/h/IAjTfeMN",
@@ -383,7 +384,8 @@
 4. السلوك غير المنطقي: تذكر الرواية أن موسى "طفق بالحجر ضرباً" حتى ترك فيه ندوباً! فما هو المنطق من ضرب حجر جماد لا يعقل ولا يشعر؟ وهل يُعاقب الحجر؟ وهل يترك الضرب سواءً باليد أو بالعصا ندوباً غائرة في الصخر الأصم؟ إن هذا التصوير يبتعد تماماً عن الوقار والحكمة المعهودة في الأنبياء، ويقترب من الأساطير والقصص الخيالية.`
         },
         {
-            id: 2, 
+            id: 'h102', 
+            displayOrder: 2,
             title: "صكوك الإنشاءات الغيبية", 
             source: "مسلم", 
             sourceUrl: "https://dorar.net/h/MXty4834",
@@ -406,12 +408,7 @@
 
     function normalizeArabic(text) {
         if (!text) return "";
-        return text
-            .replace(/[\u064B-\u065F]/g, "") 
-            .replace(/[أإآ]/g, "ا")           
-            .replace(/ة/g, "ه")               
-            .replace(/ى/g, "ي")               
-            .trim();
+        return text.replace(/[\u064B-\u065F]/g, "").replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي").trim();
     }
 
     function highlightText(text, query) {
@@ -438,7 +435,7 @@
 
         let results = [];
         novelsData.forEach((novel, index) => {
-            const searchField = normalizeArabic(novel.title + novel.text + (novel.reason || "") + (novel.secondHadithText || "")).toLowerCase();
+            const searchField = normalizeArabic(novel.title + novel.text + novel.reason + (novel.secondHadithText || "")).toLowerCase();
             if (searchField.includes(query)) {
                 results.push({ ...novel, originalIndex: index });
             }
@@ -470,7 +467,7 @@
         currentPage = Math.floor(index / perPage) + 1;
         renderNovels(searchQuery);
         setTimeout(() => {
-            const card = document.getElementById(`card-h${id}`);
+            const card = document.getElementById(`card-${id}`);
             if (card) {
                 const details = card.querySelector('.hadith-details');
                 if (!details.classList.contains('open')) {
@@ -505,9 +502,9 @@
 
             container.innerHTML += `
             <div class="hadith-row">
-                <div class="hadith-number-circle">${novel.id}</div>
-                <div class="hadith-card" id="card-h${novel.id}">
-                    <i class="far fa-bookmark fav-header-icon" title="أضف للمفضلة" onclick="toggleFavorite(event, ${novel.id})"></i>
+                <div class="hadith-number-circle">${novel.displayOrder}</div>
+                <div class="hadith-card" id="card-${novel.id}">
+                    <i class="far fa-bookmark fav-header-icon" data-id="${novel.id}" title="أضف للمفضلة" onclick="toggleFavorite(event, '${novel.id}')"></i>
                     <div class="hadith-summary" onclick="toggleHadith(this)">
                         <h3>${titleText}</h3>
                         <div style="display:flex; align-items:center; gap:12px;">
@@ -516,16 +513,18 @@
                         </div>
                     </div>
                     <div class="hadith-details">
+                        <!-- الرواية -->
                         <div class="detail-section">
                             <div class="section-header"><i class="fas fa-quote-right"></i> الرواية</div>
                             <div class="section-content">${textText}</div>
                             ${novel.num ? `<div class="section-content"><b style="font-weight: bold;">رقم الرواية: ${novel.num}</b></div>` : ''}
                             <div class="hadith-actions">
                                 <a href="${novel.sourceUrl}" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
-                                <div class="action-btn btn-report" onclick="openReportModal('${novel.title} - الرواية', '${novel.num}')"><i class="fas fa-flag"></i> إبلاغ</div>
+                                <div class="action-btn btn-report" onclick="openReportModal('${novel.title}', '${novel.num}')"><i class="fas fa-flag"></i> إبلاغ</div>
                             </div>
                         </div>
-                        
+
+                        <!-- الرواية الثانية إن وجدت -->
                         ${novel.secondHadithText ? `
                         <div class="detail-section">
                             <div class="section-header"><i class="fas fa-quote-right"></i> الرواية الثانية</div>
@@ -533,11 +532,11 @@
                             ${novel.secondHadithNum ? `<div class="section-content"><b style="font-weight: bold;">رقم الرواية: ${novel.secondHadithNum}</b></div>` : ''}
                             <div class="hadith-actions">
                                 <a href="${novel.secondHadithUrl}" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
-                                <div class="action-btn btn-report" onclick="openReportModal('${novel.title} - الرواية الثانية', '${novel.secondHadithNum || ''}')"><i class="fas fa-flag"></i> إبلاغ</div>
                             </div>
                         </div>
                         ` : ''}
 
+                        <!-- التحليل والنقد -->
                         <div class="detail-section">
                             <div class="section-header"><i class="fas fa-magnifying-glass-chart"></i> التحليل والنقد</div>
                             <div class="section-content">${reasonText}</div>
@@ -561,15 +560,23 @@
 
     function toggleFavorite(e, id) {
         e.stopPropagation();
-        const cardId = 'novel_' + id;
+        const storageKey = 'novel_' + id; // مفتاح فريد لمنع تداخل المقالات
         let favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
-        const idx = favs.findIndex(f => f.id === cardId);
+        const idx = favs.findIndex(f => f.id === storageKey);
+
         if (idx > -1) {
             favs.splice(idx, 1);
         } else {
-            const novel = novelsData.find(n => n.id == id);
-            favs.push({ id: cardId, title: novel.title, type: 'رواية', novelId: id, page: 'hadith' });
+            const novel = novelsData.find(n => n.id === id);
+            favs.push({ 
+                id: storageKey, 
+                title: novel.title, 
+                type: 'رواية', 
+                novelId: id, 
+                page: 'hadith' 
+            });
         }
+
         localStorage.setItem('myFavorites', JSON.stringify(favs));
         syncFavIcons();
     }
@@ -577,15 +584,11 @@
     function syncFavIcons() {
         const favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
         document.querySelectorAll('.fav-header-icon').forEach(icon => {
-            const onclickAttr = icon.getAttribute('onclick');
-            const idMatch = onclickAttr.match(/toggleFavorite\(event,\s*(\d+)\)/);
-            if (idMatch) {
-                const cardId = 'novel_' + idMatch[1];
-                const isFav = favs.some(f => f.id === cardId);
-                icon.classList.toggle('fas', isFav);
-                icon.classList.toggle('far', !isFav);
-                icon.style.color = isFav ? "var(--primary-color)" : "var(--matte-purple)";
-            }
+            const id = icon.getAttribute('data-id');
+            const isFav = favs.some(f => f.id === 'novel_' + id);
+            icon.classList.toggle('fas', isFav);
+            icon.classList.toggle('far', !isFav);
+            icon.style.color = isFav ? "var(--primary-color)" : "var(--matte-purple)";
         });
     }
 
@@ -623,22 +626,6 @@
         document.getElementById('reportModal').classList.remove('show');
         document.body.classList.remove('no-scroll');
     }
-
-    document.getElementById("reportForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        const formData = new FormData(this);
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString(),
-        }).then(() => {
-            closeReportModal();
-            const toast = document.getElementById("successToast");
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 3500);
-            this.reset();
-        });
-    });
 
     window.addEventListener('scroll', () => {
         const btt = document.getElementById('backToTop');
