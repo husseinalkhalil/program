@@ -140,18 +140,17 @@
             .logo-container { order: 2; } /* الشعار يمين */
             .nav-links {
                 position: fixed; 
-                /* تعديل القيمة لـ 128px لإلغاء أي فراغ بصري ناتج عن الظلال أو دقة الشاشة */
-                top: 128px; 
+                top: 0; /* تغيير هنا: بداية من أعلى الصفحة */
                 right: -280px; width: 280px;
                 background: var(--surface-color);
                 flex-direction: column; 
-                padding: 0; 
-                margin-top: 0;
-                height: calc(100vh - 128px); 
+                padding: 0;
+                height: 100vh; /* ارتفاع كامل */
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
-                gap: 0; z-index: 1000;
+                gap: 0; margin: 0; z-index: 1000;
                 display: flex !important;
+                margin-top: calc(var(--ticker-height) + 75px); /* إضافة هنا: دفع القائمة لأسفل أسفل الهيدر */
             }
             .nav-links.show { right: 0; }
             .nav-links a { 
@@ -159,7 +158,6 @@
                 border-radius: 0; font-size: 1.05rem; justify-content: flex-start; 
                 border-bottom: 1px solid rgba(0,0,0,0.03);
                 font-weight: 700;
-                margin: 0;
             }
         }
 
