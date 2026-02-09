@@ -31,7 +31,7 @@
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
             --ticker-height: 55px; 
-            --gold-ticker: #E0B44C;
+            --gold-ticker: #E0B44C; /* اللون المطلوب */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,7 +54,7 @@
         body.no-scroll { overflow: hidden !important; height: 100vh; }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* ==================== News Ticker (ظهور سريع وحركة مستمرة) ==================== */
+        /* ==================== News Ticker (حركة مستمرة وظهور فوري) ==================== */
         .news-ticker {
             background: var(--gold-ticker);
             color: #261a00;
@@ -75,8 +75,7 @@
         .ticker-wrapper {
             display: flex;
             white-space: nowrap;
-            animation: ticker-scroll 55s linear infinite; /* سرعة متوازنة */
-            padding-right: 50px; /* تقليل المسافة ليظهر الكلام فوراً عند الفتح */
+            animation: ticker-scroll 65s linear infinite; /* سرعة أبطأ */
         }
 
         .ticker-item {
@@ -86,14 +85,12 @@
             gap: 12px;
         }
 
-        .ticker-item i { color: #5e2ca5; }
-
         @keyframes ticker-scroll {
-            0% { transform: translateX(-20%); } /* يبدأ من مكان قريب ليظهر النص فوراً */
+            0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
         }
 
-        /* ==================== Navigation (إعادة الترتيب الأصلي تماماً) ==================== */
+        /* ==================== Navigation (استعادة الترتيب الأصلي) ==================== */
         .nav-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
@@ -113,50 +110,51 @@
             height: 75px;
         }
 
-        .logo-container { order: 1; } 
+        .logo-container { order: 1; } /* الشعار يمين */
         .logo-container img { height: 45px; width: auto; transition: 0.4s; }
 
         .nav-links {
             display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2;
         }
 
-        /* روابط نصية فقط بدون أيقونات */
         .nav-links a {
             color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px;
-            white-space: nowrap; transition: 0.3s;
+            white-space: nowrap;
         }
 
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
-        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
+        .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; } /* الزر يسار */
 
         @media (max-width: 1200px) {
-            .hamburger { display: block; order: 1; } /* الترتيب الأصلي في الجوال */
-            .logo-container { order: 2; } /* الترتيب الأصلي في الجوال */
+            .hamburger { display: block; order: 1; } /* الزر يسار (في RTL ترتيب 1 يكون أقصى اليسار) */
+            .logo-container { order: 2; } /* الشعار يمين */
+            
             .nav-links {
                 position: fixed; 
                 top: calc(75px + var(--ticker-height));
                 right: -280px; width: 280px;
                 background: var(--surface-color);
-                flex-direction: column; padding: 20px; 
+                flex-direction: column; 
+                padding: 0; /* تم إلغاء البادينج العلوي لإزالة الفراغ */
                 height: calc(100vh - (75px + var(--ticker-height)));
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
-                gap: 10px; margin: 0; flex: unset; z-index: 1000;
-                display: flex !important;
+                gap: 0; margin: 0; z-index: 1000;
             }
             .nav-links.show { right: 0; }
             .nav-links a { 
-                color: var(--text-primary); width: 100%; padding: 12px; 
-                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
+                color: var(--text-primary); width: 100%; 
+                padding: 15px 20px; /* مسافات منظمة */
+                border-radius: 0; font-size: 1rem; justify-content: flex-start; 
                 border-bottom: 1px solid rgba(0,0,0,0.03);
             }
         }
 
-        /* ==================== باقي كود التنسيق الأصلي للمحتوى ==================== */
+        /* ==================== باقي كود التصميم الأصلي ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: calc(var(--ticker-height) + 100px) 0 40px;
+            padding: calc(var(--ticker-height) + 110px) 0 40px;
             border-radius: 0 0 50px 50px;
             margin-bottom: 30px;
             width: 100%;
@@ -217,7 +215,7 @@
         mark { background-color: #ffd700; color: #000; padding: 0 2px; border-radius: 2px; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
-        .section-title { margin: 60px 0 35px; text-align: center; }
+        .section-title { margin: 60px 0 35px; text-align: center; border: none; padding: 0; cursor: default; }
         .section-title h2 { font-size: 1.8rem; font-weight: 800; color: var(--text-primary); position: relative; display: inline-block; }
         .section-title h2::after { content: ""; position: absolute; bottom: -10px; left: 20%; width: 60%; height: 4px; background: var(--primary-color); border-radius: 2px; }
 
@@ -236,19 +234,6 @@
         .card-icon-wrapper { width: 70px; height: 70px; background: rgba(0,0,0,0.03); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
         .card-icon-wrapper img { width: 35px; }
         .feature-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
-
-        .slider-section { 
-            margin: 0 auto 60px; position: relative; border-radius: var(--radius-xl); overflow: hidden; 
-            box-shadow: var(--shadow-lg); aspect-ratio: 16/9; width: 100%; max-width: 850px; background: #000;
-        }
-        .slider { display: flex; height: 100%; transition: transform 0.4s ease-in-out; }
-        .slide { min-width: 100%; position: relative; }
-        .slide img { width: 100%; height: 100%; object-fit: contain; } 
-        .slide-content { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); padding: 40px 20px 20px; color: white; text-align: right; }
-        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.4); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; }
-        .slider-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100; }
-        .slider-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; }
-        .slider-dot.active { background: white; transform: scale(1.3); }
 
         .book-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px; }
         .book-card { background: var(--surface-color); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; }
@@ -289,13 +274,13 @@
     <!-- News Ticker -->
     <div class="news-ticker">
         <div class="ticker-wrapper">
-            <div class="ticker-item"><i class="fas fa-book"></i> صدر حديثاً: كتاب "البخاري في ميزان القرآن" متاح الآن في قسم الكتب.</div>
-            <div class="ticker-item"><i class="fas fa-video"></i> جديد اليوتيوب: حلقة "ما الفرق بين الموت والوفاة" متوفرة الآن للمشاهدة.</div>
-            <div class="ticker-item"><i class="fas fa-microphone"></i> استمع إلى الحلقات الجديدة عبر منصة البودكاست الرسمية للموقع.</div>
-            <div class="ticker-item"><i class="fas fa-bullhorn"></i> تابعونا على تلغرام للحصول على آخر التحديثات والخواطر الفكرية.</div>
-            <!-- تكرار للمحتوى -->
-            <div class="ticker-item"><i class="fas fa-book"></i> صدر حديثاً: كتاب "البخاري في ميزان القرآن" متاح الآن في قسم الكتب.</div>
-            <div class="ticker-item"><i class="fas fa-video"></i> جديد اليوتيوب: حلقة "ما الفرق بين الموت والوفاة" متوفرة الآن للمشاهدة.</div>
+            <div class="ticker-item">صدر حديثاً: كتاب "البخاري في ميزان القرآن" متاح الآن في قسم الكتب.</div>
+            <div class="ticker-item">جديد اليوتيوب: حلقة "ما الفرق بين الموت والوفاة" متوفرة الآن للمشاهدة.</div>
+            <div class="ticker-item">استمع إلى الحلقات الجديدة عبر منصة البودكاست الرسمية للموقع.</div>
+            <div class="ticker-item">تابعونا على تلغرام للحصول على آخر التحديثات والخواطر الفكرية.</div>
+            <!-- تكرار المحتوى للحركة المستمرة -->
+            <div class="ticker-item">صدر حديثاً: كتاب "البخاري في ميزان القرآن" متاح الآن في قسم الكتب.</div>
+            <div class="ticker-item">جديد اليوتيوب: حلقة "ما الفرق بين الموت والوفاة" متوفرة الآن للمشاهدة.</div>
         </div>
     </div>
 
@@ -321,7 +306,7 @@
         <a href="favorites.html">المفضلة</a>
         <a href="support.html">دعم المحتوى</a>
         <a href="about.html">من نحن</a>
-        <a href="/en/index.html" style="color: #ffd700 !important; font-weight: 800; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 5px 15px; border-radius: 20px;">En<i class="fas fa-globe"></i></a>
+        <a href="/en/index.html" style="color: #ffd700 !important; font-weight: 800; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 5px 15px; border-radius: 20px;">En</a>
     </div>
     <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
 </nav>
