@@ -140,17 +140,16 @@
             .logo-container { order: 2; } /* الشعار يمين */
             .nav-links {
                 position: fixed; 
-                top: 0; /* تغيير هنا: بداية من أعلى الصفحة */
+                top: calc(var(--ticker-height) + 75px); /* التعديل: بداية من أسفل الهيدر مباشرة */
                 right: -280px; width: 280px;
                 background: var(--surface-color);
                 flex-direction: column; 
                 padding: 0;
-                height: 100vh; /* ارتفاع كامل */
+                height: calc(100vh - (var(--ticker-height) + 75px)); /* التعديل: ارتفاع مناسب */
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
                 gap: 0; margin: 0; z-index: 1000;
                 display: flex !important;
-                margin-top: calc(var(--ticker-height) + 75px); /* إضافة هنا: دفع القائمة لأسفل أسفل الهيدر */
             }
             .nav-links.show { right: 0; }
             .nav-links a { 
