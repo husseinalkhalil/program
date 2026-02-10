@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html dir="ltr" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-    <title>حسين الخليل - الموقع الرسمي</title>
-    <meta name="description" content="الموقع الرسمي لحسين الخليل - قراءة عقلانية ونقد للتراث بمنهج معاصر. كتب، مقالات، فيديوهات، وحوارات.">
+    <title>Hussein Al-Khalil - Official Website</title>
+    <meta name="description" content="The official website of Hussein Al-Khalil - A rational reading and critique of heritage with a contemporary approach. Books, articles, videos, and dialogues.">
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
-    <link href="images/logo-small.png" rel="icon" type="image/png"/>
-    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <link href="/images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="/images/logo-small.png" rel="apple-touch-icon"/>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +30,7 @@
             --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
             --radius-lg: 1rem;
             --radius-xl: 1.5rem;
+            /* Added Ticker Variables */
             --ticker-height: 55px; 
             --gold-ticker: #E0B44C;
         }
@@ -51,10 +52,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        body.no-scroll { overflow: hidden !important; height: 100vh; }
+        body.no-scroll {
+            overflow: hidden !important;
+            height: 100vh;
+        }
+
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* ==================== News Ticker ==================== */
+        /* ==================== News Ticker (Added from Arabic Code) ==================== */
         .news-ticker {
             background: var(--gold-ticker);
             color: #261a00;
@@ -76,7 +81,7 @@
             display: flex;
             white-space: nowrap;
             animation: ticker-scroll 60s linear infinite;
-            padding-right: 0;
+            padding-left: 0;
             align-items: center;
         }
 
@@ -88,18 +93,18 @@
         }
 
         .ticker-logo-separator {
-            height: 40px; /* شعار كبير وموسط */
+            height: 40px; 
             width: auto;
             margin: 0 15px;
             display: block;
         }
 
         @keyframes ticker-scroll {
-            0% { transform: translateX(-10%); } /* يبدأ فوراً عند الفتح */
-            100% { transform: translateX(100%); }
+            0% { transform: translateX(100%); } 
+            100% { transform: translateX(-100%); }
         }
 
-        /* ==================== Navigation (Original Header) ==================== */
+        /* ==================== Navigation ==================== */
         .nav-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
@@ -112,7 +117,7 @@
             padding: 0 5%;
             position: fixed;
             width: 100%; 
-            top: var(--ticker-height);
+            top: var(--ticker-height); /* Adjusted for ticker */
             z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -120,15 +125,23 @@
         }
 
         .logo-container { order: 1; } 
-        .logo-container img { height: 45px; width: auto; transition: 0.4s; }
+        .logo-container img { 
+            height: 45px; 
+            width: auto; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
+        }
+        .logo-container img:hover {
+            transform: scale(1.08);
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
+        }
 
         .nav-links {
             display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2;
         }
 
         .nav-links a {
-            color: white; font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px;
-            white-space: nowrap; transition: 0.3s;
+            color: white; font-weight: 700; font-size: 0.9rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap;
+            display: flex; align-items: center; gap: 5px;
         }
 
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
@@ -136,42 +149,112 @@
         .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; order: 3; }
 
         @media (max-width: 1200px) {
-            .hamburger { display: block; order: 1; } /* الزر يسار */
-            .logo-container { order: 2; } /* الشعار يمين */
+            .hamburger { display: block; order: 1; } 
+            .logo-container { order: 2; } 
             .nav-links {
                 position: fixed; 
-                top: calc(var(--ticker-height) + 20px); /* التعديل: بداية من أسفل الهيدر مباشرة */
-                right: -280px; width: 280px;
+                top: calc(var(--ticker-height) + 75px); /* Adjusted for ticker */
+                left: -280px; width: 280px; 
                 background: var(--surface-color);
-                flex-direction: column; 
-                padding: 0;
-                height: calc(100vh - (var(--ticker-height) + 75px)); /* التعديل: ارتفاع مناسب */
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                flex-direction: column; padding: 20px; 
+                height: calc(100vh - (var(--ticker-height) + 75px));
+                box-shadow: 5px 0 15px rgba(0,0,0,0.1); transition: left 0.3s ease;
                 overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
-                gap: 0; margin: 0; z-index: 1000;
-                display: flex !important;
+                gap: 10px; margin: 0; flex: unset; z-index: 1000;
+                order: unset; transform: none; display: flex !important;
             }
-            .nav-links.show { right: 0; }
+            .nav-links.show { left: 0; }
             .nav-links a { 
-                color: var(--text-primary); width: 100%; padding: 18px 25px; 
-                border-radius: 0; font-size: 1.05rem; justify-content: flex-start; 
+                color: var(--text-primary); width: 100%; padding: 12px; 
+                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
                 border-bottom: 1px solid rgba(0,0,0,0.03);
-                font-weight: 700;
             }
+            .nav-links a:hover { background: rgba(94, 44, 165, 0.05); color: var(--primary-color); transform: none; }
         }
 
-        /* ==================== Layout & Content ==================== */
+        /* ==================== Promo Section ==================== */
+        .new-book-promo {
+            background: linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%);
+            border: 2px solid var(--accent-color);
+            border-radius: var(--radius-xl);
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1050px;
+            width: 95%;
+            margin: 0 auto 40px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: 0.4s;
+        }
+        
+        .promo-cover {
+            width: 155px; border-radius: 5px; box-shadow: var(--shadow-lg); 
+            transform: rotate(3deg); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .new-book-promo:hover .promo-cover { transform: rotate(0deg) scale(1.1); }
+
+        .promo-text { text-align: left; color: var(--text-primary); flex: 1; }
+        
+        .promo-badge {
+            background: #16a34a; color: white; padding: 6px 15px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 800; display: inline-block; margin-bottom: 12px;
+            animation: badge-blink 1.5s infinite;
+        }
+        @keyframes badge-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        .promo-title { color: var(--primary-dark); font-size: 1.8rem; font-weight: 900; margin-bottom: 8px; line-height: 1.3; }
+        .promo-desc { font-size: 1.1rem; margin-bottom: 15px; opacity: 0.9; }
+
+        .promo-pricing-area { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
+        
+        .old-price-box {
+            position: relative;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #ef4444; 
+            display: inline-block;
+            line-height: 1;
+        }
+        .old-price-box::after {
+            content: "";
+            position: absolute;
+            top: 40%; 
+            left: -10%;
+            width: 120%;
+            height: 4px; 
+            background: #ffd700;
+            transform: translateY(-50%) rotate(8deg);
+            z-index: 1;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .new-price-huge { font-size: 4.5rem; font-weight: 900; color: #16a34a; line-height: 1; }
+        
+        .promo-timer-box {
+            background: #1e293b; color: white; padding: 12px 25px; border-radius: 15px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .timer-label { font-size: 0.8rem; font-weight: bold; color: #cbd5e1; margin-bottom: 4px; }
+        #countdown-timer { font-family: monospace; font-size: 1.4rem; font-weight: 800; color: var(--accent-color); }
+
+        /* ==================== Featured Books ==================== */
         .unified-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            padding: calc(var(--ticker-height) + 100px) 0 40px;
+            padding: calc(var(--ticker-height) + 100px) 0 40px; /* Adjusted for ticker */
             border-radius: 0 0 50px 50px;
             margin-bottom: 30px;
             width: 100%;
         }
-
         .featured-books-container {
-            padding: 20px 5px; max-width: 850px; width: 95%;
-            margin: 0 auto 10px; text-align: center; position: relative;
+            padding: 20px 5px; 
+            max-width: 850px; 
+            width: 95%;
+            margin: 0 auto 10px;
+            text-align: center;
+            position: relative;
         }
         .featured-books-title {
             color: white; font-size: 1.6rem; font-weight: 800; margin-bottom: 30px;
@@ -183,50 +266,71 @@
         .book-item-link { display: block; perspective: 2000px; position: relative; z-index: 1; }
         .book-tilt-cover {
             width: 135px; height: 200px; object-fit: cover; border-radius: 15px; 
-            box-shadow: 15px 15px 35px rgba(0,0,0,0.4); display: block;
+            box-shadow: -15px 15px 35px rgba(0,0,0,0.4); display: block;
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
-            transform: rotateY(-28deg) rotateX(8deg) rotateZ(-1deg);
+            transform: rotateY(28deg) rotateX(8deg) rotateZ(1deg);
+            will-change: transform; 
         }
         .book-item-link:hover .book-tilt-cover {
             transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.15); 
             box-shadow: 0 25px 50px rgba(0,0,0,0.5); z-index: 10;
         }
 
+        /* ==================== Hero & Profile ==================== */
         .hero-section { text-align: center; color: white; padding: 0 20px; }
         .profile-img { 
-            width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.2); 
-            object-fit: cover; object-position: center 15%; margin-bottom: 20px; transition: 0.4s;
+            width: 150px; height: 150px; border-radius: 50%; 
+            border: 4px solid rgba(255,255,255,0.2); 
+            object-fit: cover; object-position: center 15%; 
+            margin-bottom: 20px; transition: all 0.4s ease;
             box-shadow: 0 5px 15px rgba(0,0,0,0.15);
         }
-        .profile-img:hover { transform: translateY(-6px); }
+        .profile-img:hover { transform: translateY(-6px) scale(1.03); border-color: rgba(255,255,255,0.6); }
         .hero-text h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
         .disclaimer-text {
             margin: 25px auto 0; max-width: 800px; font-size: 1.15rem;
             color: #e2e8f0; line-height: 1.8; font-weight: 500;
         }
-        .feedback-inline-link { color: var(--accent-color); font-weight: 800; }
+        .feedback-inline-link {
+            color: var(--accent-color); font-weight: 800; text-decoration: none;
+            display: inline-block; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .feedback-inline-link:hover { transform: scale(1.1); color: white; }
         
         .universal-search { width: 100%; max-width: 600px; margin: 35px auto 0; position: relative; }
         #globalSearch { 
             width: 100%; padding: 18px 25px; border-radius: 50px; border: none; font-size: 1rem; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); outline: none; text-align: right;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); outline: none; text-align: left;
             font-family: 'Tajawal', sans-serif;
         }
-
-        /* ==================== Search Results (Restored Original) ==================== */
         .search-results {
             position: absolute; top: 110%; left: 0; right: 0; 
             background: white; border-radius: 15px; max-height: 400px; 
             overflow-y: auto; display: none; z-index: 1002; color: #333; 
-            text-align: right; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05);
+            text-align: left; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05);
         }
-        .search-count { padding: 12px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
         .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
         .search-item:hover { background: rgba(94, 44, 165, 0.05); }
-        .search-item h3 { color: var(--primary-color); font-size: 1.05rem; margin-bottom: 5px; font-weight: 700; }
-        .search-item p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; line-height: 1.5; }
-        mark { background-color: #ffd700; color: #000; padding: 0 3px; border-radius: 3px; }
+        .search-item h3 { color: var(--primary-color); font-size: 1rem; margin-bottom: 5px; font-weight: 700; }
+        .search-count { padding: 10px 20px; font-size: 0.85rem; color: var(--primary-color); border-bottom: 2px solid rgba(94, 44, 165, 0.1); background: #f8fafc; font-weight: 700; }
+        mark { background-color: #ffd700; color: #000; padding: 0 2px; border-radius: 2px; }
 
+        /* ==================== Updates Section ==================== */
+        .updates-section { margin-bottom: 60px; text-align: left; }
+        .update-item { 
+            display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid rgba(0,0,0,0.05); 
+            transition: all 0.3s ease; border-radius: 8px; margin-bottom: 5px;
+        }
+        .update-item:hover { background: rgba(94, 44, 165, 0.05); transform: translateX(8px); }
+        
+        .update-badge {
+            color: white; font-size: 0.7rem; padding: 3px 10px; border-radius: 12px; margin-right: 12px; font-weight: 800;
+            animation: blinking-new 1.4s infinite ease-in-out;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        @keyframes blinking-new { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.95); } }
+
+        /* ==================== Layout Elements ==================== */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
         .section-title { margin: 60px 0 35px; text-align: center; border: none; padding: 0; cursor: default; }
         .section-title h2 { font-size: 1.8rem; font-weight: 800; color: var(--text-primary); position: relative; display: inline-block; }
@@ -236,83 +340,91 @@
         .youtube-btn { background: var(--surface-color); color: #ff0000; padding: 12px 25px; border-radius: 50px; font-weight: 700; box-shadow: var(--shadow-md); border: 2px solid white; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
         .youtube-btn:hover { transform: translateY(-5px); background: #ff0000; color: white; }
 
-        .updates-section { margin-bottom: 60px; text-align: right; }
-        .update-item { display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid rgba(0,0,0,0.05); transition: 0.3s; border-radius: 8px; margin-bottom: 5px;}
-        .update-item:hover { background: rgba(94, 44, 165, 0.05); transform: translateX(-8px); }
-        .update-badge { color: white; font-size: 0.7rem; padding: 3px 10px; border-radius: 12px; margin-left: 12px; font-weight: 800; animation: blinking-new 1.4s infinite; }
-        @keyframes blinking-new { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.95); } }
-
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 25px; margin-bottom: 80px; }
         .feature-card { background: var(--surface-color); border-radius: var(--radius-xl); padding: 30px; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
-        .card-icon-wrapper { width: 70px; height: 70px; background: rgba(0,0,0,0.03); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-        .card-icon-wrapper img { width: 35px; }
+        
+        .card-icon-wrapper { width: 70px; height: 70px; background: rgba(0,0,0,0.03); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: 0.4s ease; }
+        .card-icon-wrapper img { width: 35px; transition: 0.4s ease; }
+        .feature-card:hover .card-icon-wrapper { background: rgba(94, 44, 165, 0.1); }
+        .feature-card:hover .card-icon-wrapper img { transform: scale(1.1); }
+        
         .feature-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+
+        .book-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px; }
+        .book-card { background: var(--surface-color); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: 0.4s ease; border: 1px solid rgba(0,0,0,0.05); }
+        .book-card img { width: 100%; height: 220px; object-fit: contain; background: #f1f5f9; transition: 0.4s; padding: 10px; }
+        .book-info { padding: 15px; text-align: center; }
+        .book-info h4 { color: var(--primary-dark); font-size: 1rem; line-height: 1.5; transition: 0.3s; }
+        .book-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-lg); }
+        .book-card:hover h4 { color: #B45309 !important; }
 
         .slider-section { 
             margin: 0 auto 60px; position: relative; border-radius: var(--radius-xl); overflow: hidden; 
             box-shadow: var(--shadow-lg); aspect-ratio: 16/9; width: 100%; max-width: 850px; background: #000;
         }
         .slider { display: flex; height: 100%; transition: transform 0.4s ease-in-out; }
-        .slide { min-width: 100%; position: relative; }
+        .slide { min-width: 100%; position: relative; background: #000; }
         .slide img { width: 100%; height: 100%; object-fit: contain; } 
-        .slide-content { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); padding: 40px 20px 20px; color: white; text-align: right; }
+        .slide-content { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); padding: 40px 20px 20px; color: white; text-align: left; }
         .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.4); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; }
+        .slider-arrow:hover { background: var(--primary-color); }
         .slider-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100; }
-        .slider-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; }
+        .slider-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: 0.3s; }
         .slider-dot.active { background: white; transform: scale(1.3); }
-
-        .book-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px; }
-        .book-card { background: var(--surface-color); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; }
-        .book-card img { width: 100%; height: 220px; object-fit: contain; background: #f1f5f9; padding: 10px; }
-        .book-info { padding: 15px; text-align: center; }
-        .book-card:hover { transform: translateY(-10px); }
 
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
         .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .social-btn img { width: 26px; }
-        .social-btn:hover { transform: translateY(-8px); scale: 1.1; }
+        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .social-btn img { width: 26px; transition: 0.3s; }
+        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .social-btn:hover img { filter: brightness(0) invert(1); }
         .social-yt:hover { background: #FF0000; }
         .social-fb:hover { background: #1877F2; }
         .social-ins:hover { background: #E4405F; }
         .social-tg:hover { background: #0088CC; }
         .social-tk:hover { background: #000000; }
-        .social-sc:hover { background: #FFFC00; }
+        .social-sc:hover { background: #FFFC00; } .social-sc:hover img { filter: none; }
 
         footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; }
-        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
-        .footer-links a { color: #cbd5e1; font-weight: 500; text-decoration: none; }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
+        .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: color 0.3s ease; }
         .footer-links a:hover { color: var(--accent-color); }
+        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; } 
         .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
 
         @media (max-width: 768px) {
             .unified-header { padding: calc(var(--ticker-height) + 80px) 0 35px; border-radius: 0 0 35px 35px; }
-            .books-display-flex { flex-wrap: nowrap; gap: 5px; }
-            .book-item-link { flex: 1; max-width: 23%; }
-            .book-tilt-cover { width: 100%; height: auto; aspect-ratio: 2/3; border-radius: 8px; }
+            .featured-books-container { max-width: 100%; padding: 10px 2px; }
+            .new-book-promo { flex-direction: column; text-align: center; padding: 25px 20px; gap: 20px; width: 92%; }
+            .promo-cover { width: 140px; transform: none; }
+            .promo-title { font-size: 1.5rem; }
+            .books-display-flex { flex-wrap: nowrap; gap: 5px; padding: 0 5px; }
+            .book-item-link { perspective: 1200px; flex: 1; max-width: 23%; }
+            .book-tilt-cover { width: 100%; height: auto; aspect-ratio: 2/3; border-radius: 8px; transform: rotateY(28deg) rotateX(8deg) rotateZ(1deg); box-shadow: -8px 8px 15px rgba(0,0,0,0.4); }
             .hero-text h1 { font-size: 1.7rem; }
             .book-tabs { grid-template-columns: 1fr; }
+            .book-card img { height: 280px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- News Ticker -->
+    <!-- News Ticker (Added and Translated) -->
     <div class="news-ticker">
         <div class="ticker-wrapper">
-            <div class="ticker-item">صدر حديثاً: كتاب "البخاري في ميزان القرآن" متاح الآن في قسم الكتب.</div>
-            <img src="images/logo.png" class="ticker-logo-separator" alt="logo">
-            <div class="ticker-item">جديد اليوتيوب: حلقة "ما الفرق بين الموت والوفاة" متوفرة الآن للمشاهدة.</div>
-            <img src="images/logo.png" class="ticker-logo-separator" alt="logo">
-            <div class="ticker-item">استمع إلى الحلقات الجديدة عبر منصة البودكاست الرسمية للموقع.</div>
-            <img src="images/logo.png" class="ticker-logo-separator" alt="logo">
-            <div class="ticker-item">تابعونا على تلغرام للحصول على آخر التحديثات والخواطر الفكرية.</div>
-            <img src="images/logo.png" class="ticker-logo-separator" alt="logo">
+            <div class="ticker-item">Newly Released: "Al-Bukhari in the Balance of the Quran" is now available in the Books section.</div>
+            <img src="/images/logo.png" class="ticker-logo-separator" alt="logo">
+            <div class="ticker-item">New on YouTube: "The Difference Between Death and Passing" episode is now available.</div>
+            <img src="/images/logo.png" class="ticker-logo-separator" alt="logo">
+            <div class="ticker-item">Listen to the latest episodes via the official website Podcast platform.</div>
+            <img src="/images/logo.png" class="ticker-logo-separator" alt="logo">
+            <div class="ticker-item">Follow us on Telegram for the latest updates and intellectual reflections.</div>
+            <img src="/images/logo.png" class="ticker-logo-separator" alt="logo">
             <!-- Seamless Loop -->
-            <div class="ticker-item">صدر حديثاً: كتاب "البخاري في ميزان القرآن" متاح الآن في قسم الكتب.</div>
-            <img src="images/logo.png" class="ticker-logo-separator" alt="logo">
-            <div class="ticker-item">جديد اليوتيوب: حلقة "ما الفرق بين الموت والوفاة" متوفرة الآن للمشاهدة.</div>
-            <img src="images/logo.png" class="ticker-logo-separator" alt="logo">
+            <div class="ticker-item">Newly Released: "Al-Bukhari in the Balance of the Quran" is now available in the Books section.</div>
+            <img src="/images/logo.png" class="ticker-logo-separator" alt="logo">
+            <div class="ticker-item">New on YouTube: "The Difference Between Death and Passing" episode is now available.</div>
+            <img src="/images/logo.png" class="ticker-logo-separator" alt="logo">
         </div>
     </div>
 
@@ -320,62 +432,65 @@
 
 <nav>
     <div class="logo-container">
-        <a href="index.html"><img src="images/logo.png" alt="logo" /></a>
+        <a href="index.html"><img src="/images/logo.png" alt="logo" /></a>
     </div>
     <div class="nav-links" id="navLinks">
-        <a href="index.html">الرئيسية</a>
-        <a href="books.html">الكتب</a>
-        <a href="articles.html">المقالات</a>
-        <a href="hadith.html">الروايات</a>
-        <a href="khawatir.html">خواطر</a>
-        <a href="videos.html">الفيديوهات</a>
-        <a href="history.html">التاريخ</a>
-        <a href="podcast.html">البودكاست</a>
-        <a href="ask.html">الأسئلة</a>
-        <a href="hewar.html">حوارات</a>
-        <a href="inq.html">تساؤلات</a>
-        <a href="manhaj.html">المنهج</a>
-        <a href="favorites.html">المفضلة</a>
-        <a href="support.html">دعم المحتوى</a>
-        <a href="about.html">من نحن</a>
-        <a href="/en/index.html" style="color: #ffd700 !important; font-weight: 800; border: 1.5px solid rgba(255, 215, 0, 0.6); padding: 5px 15px; border-radius: 20px;">En</a>
+        <a href="/index.html" style="background: rgba(255,255,255,0.2);">Home</a>
+        <a href="books.html">Books</a>
+        <a href="articles.html">Articles</a>
+        <a href="hadith.html">Narrations</a>
+        <a href="khawatir.html">Reflections</a>
+        <a href="videos.html">Videos</a>
+        <a href="history.html">History</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="ask.html">Ask</a>
+        <a href="hewar.html">Dialogues</a>
+        <a href="inq.html">Inquiries</a>
+        <a href="manhaj.html">Methodology</a>
+        <a href="favorites.html">Favorites</a>
+        <a href="support.html">Support Us</a>
+        <a href="about.html">About Us</a>
+        <!-- The Golden Arabic Switcher -->
+        <a href="/index.html" style="color: #ffd700 !important; font-weight: 800; border: 1px solid rgba(255, 215, 0, 0.5); padding: 5px 15px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;"><i class="fas fa-globe"></i> عربي</a>
     </div>
     <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
 </nav>
 
 <div class="unified-header">
+
+    <!-- Featured Books -->
     <section class="featured-books-container">
-        <h2 class="featured-books-title">كتب فكرية</h2>
+        <h2 class="featured-books-title">Intellectual Works</h2>
         <div class="books-display-flex">
-            <a href="https://husseinalkhalil.com/books?book=book-6" class="book-item-link">
-                <img src="images/islam-cover.jpg" alt="Book 6" class="book-tilt-cover">
+            <a href="https://husseinalkhalil.com/en/books?book=book-6" class="book-item-link">
+                <img src="/images/islam-cover.jpg" alt="Book 6" class="book-tilt-cover">
             </a>
-            <a href="https://husseinalkhalil.com/books?book=book-3" class="book-item-link">
-                <img src="images/mn-cover.jpg" alt="Book 3" class="book-tilt-cover">
+            <a href="https://husseinalkhalil.com/en/books?book=book-3" class="book-item-link">
+                <img src="/images/mn-en.jpg" alt="Book 3" class="book-tilt-cover">
             </a>
-            <a href="https://husseinalkhalil.com/books?book=book-7" class="book-item-link">
-                <img src="images/quran-cover.jpg" alt="Book 7" class="book-tilt-cover">
+            <a href="https://husseinalkhalil.com/en/books?book=book-7" class="book-item-link">
+                <img src="/images/quran-cover.jpg" alt="Book 7" class="book-tilt-cover">
             </a>
-            <a href="https://husseinalkhalil.com/books?book=book-2" class="book-item-link">
-                <img src="images/bkh.jpg" alt="Book 2" class="book-tilt-cover">
+            <a href="https://husseinalkhalil.com/en/books?book=book-2" class="book-item-link">
+                <img src="/images/bkh.jpg" alt="Book 2" class="book-tilt-cover">
             </a>
         </div>
     </section>
 
     <header class="hero-section">
         <div class="hero-content">
-            <a href="about.html"><img src="images/profile.png" alt="profile" class="profile-img"></a>
+            <a href="about.html"><img src="/images/profile.png" alt="profile" class="profile-img"></a>
             <div class="hero-text">
-                <h1>أهلاً بك في موقع حسين الخليل</h1>
-                <p>قراءة عقلانية ونقد للتراث بمنهج معاصر. نافذة للتفكير والتأمل الحر.</p>
+                <h1>Welcome to Hussein Al-Khalil's Official Website</h1>
+                <p>A rational reading and critique of heritage using a contemporary approach. A window for free thinking and contemplation.</p>
                 <div class="disclaimer-text">
-                    <p>كل ما أنشره لا أزعم فيه امتلاك الحقيقة المطلقة، ولا أُلزم به أحداً. غايتي أن أفتح نافذة للتفكير والتأمل.</p>
-                    <p style="margin-top: 10px;">هذا الموقع يعبّر عن رؤية صاحبه الفكرية فقط، ولا يتبع ولا يمثّل أي حزب أو جماعة أو طائفة أو جهة دينية أو سياسية.</p>
-                    <p style="margin-top: 10px;">نرحب بمشاركتك من خلال صفحة <a href="feedback.html" class="feedback-inline-link">شاركنا رأيك</a></p>
-                </div>
+    <p>In everything I publish, I do not claim to possess the absolute truth, nor do I impose my views on anyone. My goal is to open a window for thinking and reflection.</p>
+    <p style="margin-top: 10px;">This website expresses only the author's intellectual vision; it is not affiliated with and does not represent any party, group, sect, or any religious or political entity.</p>
+    <p style="margin-top: 10px;">We welcome your ideas and suggestions to develop and improve the site through the <a href="feedback.html" class="feedback-inline-link">Share your Opinion</a> page.</p>
+</div>
             </div>
             <div class="universal-search">
-                <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+                <input type="text" id="globalSearch" placeholder="Search across all content..." />
                 <div class="search-results" id="searchResults"></div>
             </div>
         </div>
@@ -384,87 +499,86 @@
 
 <div class="container">
     <div class="quick-actions">
-        <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="youtube-btn"><i class="fab fa-youtube"></i> القناة الرئيسية</a>
-        <a href="https://youtube.com/@hussein.ch2" target="_blank" class="youtube-btn"><i class="fab fa-youtube"></i> قناة التاريخ</a>
-        <a href="support.html" class="youtube-btn" style="color:var(--primary-color);"><i class="fas fa-heart"></i> دعم المشروع</a>
+        <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="youtube-btn"><i class="fab fa-youtube"></i> Main Channel</a>
+        <a href="https://youtube.com/@hussein.ch2" target="_blank" class="youtube-btn"><i class="fab fa-youtube"></i> History Channel</a>
+        <a href="support.html" class="youtube-btn" style="color:var(--primary-color);"><i class="fas fa-heart"></i> Support the Project</a>
     </div>
 
-    <div class="section-title"><h2>آخر التحديثات</h2></div>
+    <div class="section-title"><h2>Latest Updates</h2></div>
     <div class="updates-section" id="updatesContainer"></div>
 
-    <div class="section-title"><h2>أحدث الحلقات</h2></div>
+    <div class="section-title"><h2>Latest Episodes</h2></div>
     <div class="slider-section">
         <div class="slider" id="slider">
-            <div class="slide"><a href="https://youtu.be/b3r26PoWQNo" target="_blank"><img src="images/v1.jpg" alt="1"><div class="slide-content"><h3>ما الفرق بين الموت والوفاة؟</h3></div></a></div>
-            <div class="slide"><a href="https://youtu.be/-vpx_6uo274" target="_blank"><img src="images/v2.jpg" alt="2"><div class="slide-content"><h3>البخاري وطعنه بالقرآن والنبي</h3></div></a></div>
-            <div class="slide"><a href="https://youtu.be/O2ietEmjMuc" target="_blank"><img src="images/v3.jpg" alt="3"><div class="slide-content"><h3>ما الفرق بين مكة وبكة؟</h3></div></a></div>
+            <div class="slide"><a href="https://youtu.be/b3r26PoWQNo" target="_blank"><img src="/images/v1.jpg" alt="1"><div class="slide-content"><h3>What is the difference between death and passing?</h3></div></a></div>
+            <div class="slide"><a href="#" target="_blank"><img src="/images/v2.jpg" alt="2"><div class="slide-content"><h3>Al-Bukhari and his defamation of the Quran and the Prophet</h3></div></a></div>
+<div class="slide"><a href="#" target="_blank"><img src="/images/v3.jpg" alt="3"><div class="slide-content"><h3>What is the difference between Mecca and Bakka?</h3></div></a></div>
         </div>
-        <button class="slider-arrow prev" onclick="prevSlide()" style="right:20px;"><i class="fas fa-chevron-right"></i></button>
-        <button class="slider-arrow next" onclick="nextSlide()" style="left:20px;"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-arrow prev" onclick="prevSlide()" style="left:20px;"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-arrow next" onclick="nextSlide()" style="right:20px;"><i class="fas fa-chevron-right"></i></button>
         <div class="slider-nav" id="sliderDots"></div>
     </div>
 
-    <div class="section-title"><h2>استكشف المحتوى</h2></div>
+    <div class="section-title"><h2>Explore Content</h2></div>
     <div class="cards-grid">
-        <div class="feature-card" onclick="location.href='books.html'"><div class="card-icon-wrapper"><img src="icons/books.png" alt="B"></div><h3>الكتب</h3><p>مؤلفات وروايات فكرية نقدية.</p></div>
-        <div class="feature-card" onclick="location.href='articles.html'"><div class="card-icon-wrapper"><img src="icons/articles.png" alt="A"></div><h3>المقالات</h3><p>طروحات فكرية معاصرة.</p></div>
-        <div class="feature-card" onclick="location.href='hadith.html'"><div class="card-icon-wrapper"><img src="icons/hadith.png" alt="V"></div><h3>الروايات</h3><p>نقد الروايات بميزان القرآن.</p></div>
-        <div class="feature-card" onclick="location.href='videos.html'"><div class="card-icon-wrapper"><img src="icons/videos.png" alt="V"></div><h3>الفيديوهات</h3><p>شرح المنهج والمناقشات.</p></div>
-        <div class="feature-card" onclick="location.href='manhaj.html'"><div class="card-icon-wrapper"><img src="icons/manhaj.png" alt="M"></div><h3>المنهج</h3><p>قواعد تدبر القرآن الكريم.</p></div>
-        <div class="feature-card" onclick="location.href='khawatir.html'"><div class="card-icon-wrapper"><img src="icons/khawatir.png" alt="K"></div><h3>خواطر</h3><p>تأملات فكرية وإضاءات.</p></div>
-        <div class="feature-card" onclick="location.href='history.html'"><div class="card-icon-wrapper"><img src="icons/history.png" alt="H"></div><h3>التاريخ</h3><p>قراءة أحداث التاريخ بنقد.</p></div>
-        <div class="feature-card" onclick="location.href='podcast.html'"><div class="card-icon-wrapper"><img src="icons/podcast.png" alt="P"></div><h3>البودكاست</h3><p>حلقات صوتية معمقة.</p></div>
-        <div class="feature-card" onclick="location.href='ask.html'"><div class="card-icon-wrapper"><img src="icons/ask.png" alt="Q"></div><h3>الأسئلة</h3><p>مساحة لطرح تساؤلاتك.</p></div>
-        <div class="feature-card" onclick="location.href='hewar.html'"><div class="card-icon-wrapper"><img src="icons/hewar.png" alt="D"></div><h3>حوارات</h3><p>مناقشات مع مختلف الآراء.</p></div>
-        <div class="feature-card" onclick="location.href='inq.html'"><div class="card-icon-wrapper"><img src="icons/inq.png" alt="I"></div><h3>تساؤلات</h3><p>إجابات مختصرة ومباشرة.</p></div>
-        <div class="feature-card" onclick="location.href='support.html'"><div class="card-icon-wrapper"><img src="icons/support.png" alt="S"></div><h3>دعم المحتوى</h3><p>ساهم في نشر المعرفة.</p></div>
+        <div class="feature-card" onclick="location.href='books.html'"><div class="card-icon-wrapper"><img src="/icons/books.png" alt="B"></div><h3>Books</h3><p>Critical intellectual publications and novels.</p></div>
+        <div class="feature-card" onclick="location.href='articles.html'"><div class="card-icon-wrapper"><img src="/icons/articles.png" alt="A"></div><h3>Articles</h3><p>Contemporary intellectual propositions.</p></div>
+        <div class="feature-card" onclick="location.href='hadith.html'"><div class="card-icon-wrapper"><img src="/icons/hadith.png" alt="V"></div><h3>Narrations</h3><p>Critiquing narrations by the scale of Quran.</p></div>
+        <div class="feature-card" onclick="location.href='videos.html'"><div class="card-icon-wrapper"><img src="/icons/videos.png" alt="V"></div><h3>Videos</h3><p>Explanations of methodology and discussions.</p></div>
+        <div class="feature-card" onclick="location.href='manhaj.html'"><div class="card-icon-wrapper"><img src="/icons/manhaj.png" alt="M"></div><h3>Methodology</h3><p>Rules for contemplating the Holy Quran.</p></div>
+        <div class="feature-card" onclick="location.href='khawatir.html'"><div class="card-icon-wrapper"><img src="/icons/khawatir.png" alt="K"></div><h3>Reflections</h3><p>Intellectual thoughts and insights.</p></div>
+        <div class="feature-card" onclick="location.href='history.html'"><div class="card-icon-wrapper"><img src="/icons/history.png" alt="H"></div><h3>History</h3><p>Critically reading historical events.</p></div>
+        <div class="feature-card" onclick="location.href='podcast.html'"><div class="card-icon-wrapper"><img src="/icons/podcast.png" alt="P"></div><h3>Podcast</h3><p>Deep dive audio episodes.</p></div>
+        <div class="feature-card" onclick="location.href='ask.html'"><div class="card-icon-wrapper"><img src="/icons/ask.png" alt="Q"></div><h3>Ask</h3><p>A space to raise your questions.</p></div>
+        <div class="feature-card" onclick="location.href='hewar.html'"><div class="card-icon-wrapper"><img src="/icons/hewar.png" alt="D"></div><h3>Dialogues</h3><p>Discussions with various perspectives.</p></div>
+        <div class="feature-card" onclick="location.href='inq.html'"><div class="card-icon-wrapper"><img src="/icons/inq.png" alt="I"></div><h3>Inquiries</h3><p>Short and direct answers.</p></div>
+        <div class="feature-card" onclick="location.href='support.html'"><div class="card-icon-wrapper"><img src="/icons/support.png" alt="S"></div><h3>Support Us</h3><p>Contribute to spreading knowledge.</p></div>
     </div>
 
-    <div class="section-title"><h2>كتب مختارة</h2></div>
+    <div class="section-title"><h2>Selected Books</h2></div>
     <div class="book-tabs">
         <div class="book-card">
-            <a href="https://husseinalkhalil.com/books?book=book-5"><img src="images/mkh1.png" alt="1"><div class="book-info"><h4>رواية: جريمة في القلب</h4></div></a>
-        </div>
-        <div class="book-card">
-            <a href="https://husseinalkhalil.com/books?book=book-4"><img src="images/mkh2.png" alt="2"><div class="book-info"><h4>رواية: هتون الحب</h4></div></a>
-        </div>
-        <div class="book-card">
-            <a href="https://husseinalkhalil.com/books?book=book-8"><img src="images/mkh3.png" alt="3"><div class="book-info"><h4>كتاب: فكر من جديد</h4></div></a>
-        </div>
+                <a href="https://husseinalkhalil.com/en/books?book=book-5"><img src="/images/mkh1.png" alt="1"><div class="book-info"><h4>Novel: Crime in the Heart</h4></div></a>
+            </div>
+            <div class="book-card">
+                <a href="https://husseinalkhalil.com/en/books?book=book-4"><img src="/images/mkh2.png" alt="2"><div class="book-info"><h4>Novel: Hatun Al-Hob</h4></div></a>
+            </div>
+            <div class="book-card">
+                <a href="https://husseinalkhalil.com/en/books?book=book-8"><img src="/images/mkh3.png" alt="3"><div class="book-info"><h4>Book: Think Again</h4></div></a>
+            </div>
     </div>
 
-    <div class="section-title"><h2>تابعنا على منصات التواصل</h2></div>
+    <div class="section-title"><h2>Follow Us</h2></div>
     <div class="social-section">
         <div class="social-grid">
-            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="icons/yot-soc.png" alt="yt"></a>
-            <a href="https://facebook.com/husseinalkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="icons/fac-soc.png" alt="fb"></a>
-            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="إنستغرام"><img src="icons/ins-soc.png" alt="in"></a>
-            <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="تلغرام"><img src="icons/tel-soc.png" alt="tg"></a>
-            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="تيك توك"><img src="icons/tik-soc.png" alt="tk"></a>
-            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="سناب شات"><img src="icons/snap.png" alt="sc"></a>
+            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="YouTube"><img src="/icons/yot-soc.png" alt="yt"></a>
+            <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb" title="Facebook"><img src="/icons/fac-soc.png" alt="fb"></a>
+            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="Instagram"><img src="/icons/ins-soc.png" alt="in"></a>
+            <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="Telegram"><img src="/icons/tel-soc.png" alt="tg"></a>
+            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="TikTok"><img src="/icons/tik-soc.png" alt="tk"></a>
+            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="Snapchat"><img src="/icons/snap.png" alt="sc"></a>
         </div>
     </div>
 </div>
 
 <footer>
     <div class="footer-links">
-        <a href="terms.html">الشروط والأحكام</a> |
-        <a href="privacy.html">سياسة الخصوصية</a> |
-        <a href="contact.html">اتصل بنا</a> |
-        <a href="feedback.html">شاركنا رأيك</a>
+        <a href="terms.html">Terms & Conditions</a> <span class="footer-divider">|</span>
+        <a href="privacy.html">Privacy Policy</a> <span class="footer-divider">|</span>
+        <a href="contact.html">Contact Us</a> <span class="footer-divider">|</span>
+        <a href="feedback.html">Share your opinion</a>
     </div>
-    <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
+    <div class="copyright">Hussein Al-Khalil - All Rights Reserved © 2025</div>
 </footer>
 
 <script>
-    /* ==================== RESTORED ORIGINAL GLOBAL SEARCH LOGIC ==================== */
     let cachedPagesContent = null;
     let isSearchInitialized = false;
 
     async function loadAllPagesContent() {
         if (cachedPagesContent) return cachedPagesContent;
         try {
-            const response = await fetch('site-map.json?v=' + new Date().getTime());
+            const response = await fetch('/site-map.json?v=' + new Date().getTime());
             const pagesList = await response.json();
             const promises = pagesList.map(async (item) => {
                 let url = typeof item === 'string' ? item : item.url;
@@ -476,7 +590,7 @@
                     doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                     const mainContent = doc.querySelector('.container, main, body') || doc.body;
                     return { 
-                        page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                        page: doc.title.replace('Hussein Al-Khalil - ', '').replace('Official Website', '').trim() || 'Page', 
                         url: url, 
                         content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
                     };
@@ -487,37 +601,20 @@
         } catch (error) { return []; }
     }
 
-    function normalizeArabic(text) {
-        if (!text) return '';
-        text = text.replace(/[\u064B-\u065F\u0670]/g, '');
-        text = text.replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
-        return text;
-    }
-
     function getSafeRegex(searchTerm) {
-        let regexStr = '';
-        const cleanTerm = normalizeArabic(searchTerm);
-        for (let char of cleanTerm) {
-            if (char === 'ا') regexStr += '[اأإآ]';
-            else if (char === 'ه') regexStr += '[هة]';
-            else if (char === 'ي') regexStr += '[يىئ]';
-            else if (char === 'و') regexStr += '[وؤ]';
-            else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            regexStr += '[\\u064B-\u065F\u0670]*';
-        }
-        return new RegExp(regexStr, 'gi');
+        return new RegExp(searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
     }
 
-    function displayGlobalResults(results, queryRegex, container) {
+    function displayResults(results, queryRegex, container) {
         container.innerHTML = '';
         if (results.length === 0) {
-            container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+            container.innerHTML = '<div class="search-item"><p>⚠️ No results found</p></div>';
             container.style.display = 'block';
             return;
         }
         const countDiv = document.createElement('div');
         countDiv.className = 'search-count';
-        countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
+        countDiv.textContent = `Found ${results.length} results`;
         container.appendChild(countDiv);
 
         results.forEach(item => {
@@ -526,7 +623,7 @@
             const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
             queryRegex.lastIndex = 0;
             const match = queryRegex.exec(item.content);
-            let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+            let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 140));
             div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
             div.onclick = () => window.location.href = item.url;
             container.appendChild(div);
@@ -534,12 +631,11 @@
         container.style.display = 'block';
     }
 
-    async function performGlobalSearch(query) {
+    async function performSearch(query) {
         const resultsContainer = document.getElementById('searchResults');
         if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
-        resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+        resultsContainer.innerHTML = '<div class="search-item"><p>Searching...</p></div>';
         resultsContainer.style.display = 'block';
-
         const data = await loadAllPagesContent();
         const searchRegex = getSafeRegex(query);
         const results = data.filter(item => {
@@ -549,35 +645,29 @@
             const contentMatch = searchRegex.test(item.content);
             return titleMatch || contentMatch;
         });
-        displayGlobalResults(results, searchRegex, resultsContainer);
+        displayResults(results, searchRegex, resultsContainer);
     }
 
-    /* ==================== Updates & UI Logic ==================== */
-    const updatesList = [
-        { title: "الكتب | إصدار جديد. كتاب: البخاري في ميزان القران ", url: "https://husseinalkhalil.com/books?book=book-2", date: "29 يناير", isNew: true },
-        { title: "الكتب | إصدار جديد، كتاب: من خلق الله؟", url: "https://husseinalkhalil.com/books?book=book-2", date: "1 يناير", isNew: true },
-        { title: "الكتب | لأننا نؤمن بقيمة ما نقدمه.. أتحنا لكم خاصية (المعاينة المجانية) لتستكشفوا فصول الكتاب قبل الشراء.", url: "https://husseinalkhalil.com/books", date: "12 يناير", isNew: true }
-    ];
+    function initCountdown() {
+        const timerEl = document.getElementById("countdown-timer");
+        if (!timerEl) return;
 
-    function renderUpdates() {
-        const container = document.getElementById('updatesContainer');
-        if (!container) return;
-        const badgeGradients = [
-            'linear-gradient(45deg, #a855f7, #ec4899)', 
-            'linear-gradient(45deg, #06b6d4, #3b82f6)', 
-            'linear-gradient(45deg, #f59e0b, #ef4444)'  
-        ];
-        updatesList.forEach((up, index) => {
-            const div = document.createElement('div');
-            div.className = 'update-item';
-            const gradient = badgeGradients[index % badgeGradients.length];
-            const delay = index * 0.45;
-            div.innerHTML = `
-                ${up.isNew ? `<span class="update-badge" style="background: ${gradient}; animation-delay: ${delay}s">جديد</span>` : ''} 
-                <a href="${up.url}" target="_blank" style="flex:1; font-weight:600;">${up.title}</a> 
-                <span style="font-size:0.85rem; color:#888;">${up.date}</span>`;
-            container.appendChild(div);
-        });
+        const endTime = new Date("Jan 30, 2026 23:59:59").getTime();
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const dist = endTime - now;
+            if (dist < 0) {
+                clearInterval(timer);
+                timerEl.innerHTML = "Exclusive offer ended";
+                return;
+            }
+            const days = Math.floor(dist / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((dist % (1000 * 60)) / 1000);
+            timerEl.innerHTML = 
+                `${days.toString().padStart(2, '0')}d : ${hours.toString().padStart(2, '0')}h : ${mins.toString().padStart(2, '0')}m : ${secs.toString().padStart(2, '0')}s`;
+        }, 1000);
     }
 
     function toggleMobileMenu() {
@@ -594,12 +684,31 @@
         }
     }
 
+    const updatesList = [
+        { title: "Videos | What is the meaning of Tasbih and how do we praise God?", url: "https://youtu.be/5muIiv0zulc", date: "Jan 8", isNew: true },
+        { title: "Books | New release: Who Created God?", url: "https://husseinalkhalil.com/en/books?book=book-2", date: "Jan 1", isNew: true },
+        { title: "Books | (Free Preview) feature is now available.", url: "https://husseinalkhalil.com/en/books", date: "Jan 12", isNew: true }
+    ];
+
+    function renderUpdates() {
+        const container = document.getElementById('updatesContainer');
+        if (!container) return;
+        const badgeGradients = ['linear-gradient(45deg, #a855f7, #ec4899)', 'linear-gradient(45deg, #06b6d4, #3b82f6)', 'linear-gradient(45deg, #f59e0b, #ef4444)'];
+        updatesList.forEach((up, index) => {
+            const div = document.createElement('div');
+            div.className = 'update-item';
+            const gradient = badgeGradients[index % badgeGradients.length];
+            div.innerHTML = `${up.isNew ? `<span class="update-badge" style="background: ${gradient}">NEW</span>` : ''} <a href="${up.url}" target="_blank" style="flex:1; font-weight:600;">${up.title}</a> <span style="font-size:0.85rem; color:#888;">${up.date}</span>`;
+            container.appendChild(div);
+        });
+    }
+
     let slideIdx = 0;
     function showSlide(n) {
         slideIdx = n;
         const slider = document.getElementById('slider');
         if (!slider) return;
-        slider.style.transform = `translateX(${n * 100}%)`;
+        slider.style.transform = `translateX(-${n * 100}%)`; // LTR slide
         document.querySelectorAll('.slider-dot').forEach((dot, i) => dot.classList.toggle('active', i === n));
     }
     function nextSlide() { slideIdx = (slideIdx + 1) % 3; showSlide(slideIdx); }
@@ -607,24 +716,20 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         renderUpdates();
-
+        initCountdown(); // Start countdown timer
         const sInput = document.getElementById('globalSearch');
         if (sInput) {
             let sTimer;
             sInput.addEventListener('input', (e) => {
                 clearTimeout(sTimer);
-                sTimer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500);
+                sTimer = setTimeout(() => performSearch(e.target.value.trim()), 500);
             });
             sInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
         }
-
         document.addEventListener('click', (e) => {
             const results = document.getElementById('searchResults');
-            if(results && !document.querySelector('.universal-search').contains(e.target)) {
-                results.style.display = 'none';
-            }
+            if(results && !document.querySelector('.universal-search').contains(e.target)) { results.style.display = 'none'; }
         });
-
         const dotsCont = document.getElementById('sliderDots');
         if (dotsCont) {
             dotsCont.innerHTML = '';
@@ -634,7 +739,7 @@
                 d.onclick = () => showSlide(i);
                 dotsCont.appendChild(d);
             }
-            setInterval(nextSlide, 5000); 
+            setInterval(nextSlide, 3500); 
         }
     });
 </script>
