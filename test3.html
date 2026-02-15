@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* التنسيقات الأساسية الأصلية كما هي */
+        /* المتغيرات الأساسية (الكود الأصلي) */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -62,9 +62,9 @@
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
-            .nav-links { position: fixed; top: 60px; right: -280px; width: 280px; background: var(--surface-color); flex-direction: column; padding: 20px; height: calc(100vh - 60px); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; overflow-y: auto; z-index: 1000; }
+            .nav-links { position: fixed; top: 60px; right: -280px; width: 280px; background: var(--surface-color); flex-direction: column; padding: 20px; height: calc(100vh - 60px); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; overflow-y: auto; z-index: 1000; gap: 10px; margin: 0; }
             .nav-links.show { right: 0; }
-            .nav-links a { color: var(--text-primary); width: 100%; border-bottom: 1px solid rgba(0,0,0,0.03); justify-content: flex-start; }
+            .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-radius: 8px; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
             nav { padding: 0.8rem 5%; }
         }
 
@@ -73,23 +73,26 @@
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto 40px auto; }
         #globalSearch { width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal'; outline: none; }
-        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
+        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); }
         .search-results { position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 10000; text-align: right; display: none; border: 1px solid rgba(0,0,0,0.05); }
 
-        /* Thoughts Grid */
+        /* Container Structure */
         .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper { position: relative; z-index: 20; margin-top: -90px; margin-bottom: 60px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+
+        /* Thoughts Grid */
         #thoughtsList { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; }
         @media (max-width: 900px) { #thoughtsList { grid-template-columns: 1fr; } }
 
-        /* البطاقة الجديدة بالإطار */
-        .thought-card-wrapper { display: flex; flex-direction: column; gap: 10px; }
+        /* Card Design - Dynamic Height */
+        .thought-card-wrapper { display: flex; flex-direction: column; gap: 12px; }
         .thought-card {
             background-color: #fdfbff;
             border: 2px solid var(--primary-color);
             position: relative;
             padding: 60px 45px;
-            min-height: 280px;
+            height: auto; /* يجعل الارتفاع يتحدد حسب النص */
+            min-height: 250px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -99,45 +102,47 @@
             transition: 0.3s;
         }
 
-        .corner { position: absolute; width: 45px; height: 45px; background-size: contain; background-repeat: no-repeat; z-index: 5; }
+        .corner { position: absolute; width: 40px; height: 40px; background-size: contain; background-repeat: no-repeat; z-index: 5; }
         .corner-tl { top: 5px; left: 5px; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
         .corner-tr { top: 5px; right: 5px; transform: rotate(90deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
         .corner-bl { bottom: 5px; left: 5px; transform: rotate(-90deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
         .corner-br { bottom: 5px; right: 5px; transform: rotate(180deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
+        
         .side-rhombus { position: absolute; top: 50%; width: 14px; height: 14px; background: var(--primary-color); transform: translateY(-50%) rotate(45deg); z-index: 6; }
         .rhombus-l { left: -8px; }
         .rhombus-r { right: -8px; }
 
-        /* نص الخاطرة */
         .thought-content {
             font-size: 1.15rem;
-            line-height: 2;
+            line-height: 1.8;
             color: var(--primary-dark);
             font-weight: 700;
             z-index: 10;
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
         }
         
-        /* تنيسق كل سطر كعنصر مستقل لحل مشكلة التكسر */
         .thought-line {
             display: block;
             text-align: center;
             direction: rtl;
             letter-spacing: 0px !important;
+            white-space: normal; /* يسمح بالتفاف النص تلقائياً إذا كان السطر طويلاً */
         }
 
-        /* الرابط أسفل الصورة (مخفي تماماً في الموقع) */
+        /* الرابط أسفل الصورة للتحميل فقط */
         .capture-footer-url { 
-            visibility: hidden;
-            height: 0;
-            margin: 0;
+            display: none; /* مخفي في الموقع */
+            margin-top: 20px; 
             font-size: 0.85rem; 
             color: var(--primary-light); 
             font-weight: 800; 
             text-align: center;
+            width: 100%;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 10px;
         }
 
         .meta-data { display: flex; justify-content: space-between; align-items: center; padding: 5px 10px; flex-wrap: wrap; gap: 10px; }
@@ -166,6 +171,7 @@
 
         /* Pagination & Footer */
         .pagination-section { display: flex; flex-direction: column; align-items: center; gap: 15px; margin: 50px 0; padding: 25px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+        .pagination-controls { display: flex; align-items: center; gap: 10px; }
         .page-arrow { padding: 8px 18px; border-radius: 25px; border: 2px solid var(--primary-color); background: white; color: var(--primary-color); font-weight: 700; cursor: pointer; transition: 0.3s; }
         .page-arrow:hover:not(:disabled) { background: var(--primary-color); color: white; }
         .page-arrow:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -176,6 +182,7 @@
         .copyright { color: rgba(255,255,255,0.6); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 20px; }
 
         .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; }
+        .back-to-top.visible { opacity: 1; pointer-events: all; }
         #message { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#5e2ca5; color:white; padding:15px 30px; border-radius:10px; display:none; z-index:2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
     </style>
 </head>
@@ -348,7 +355,7 @@
             paginatedItems.forEach(thought => {
                 const isFav = favorites.some(fav => fav.id === thought.id && fav.type === 'thought');
                 
-                // حل تكسر الحروف: تقسيم النص لأسطر وعرض كل سطر كعنصر مستقل
+                // تقسيم النص لأسطر لضمان عدم تكسر الحروف في البدايات
                 const lines = thought.content.split('\n');
                 let contentHTML = '';
                 lines.forEach(line => {
@@ -385,33 +392,31 @@
         async function downloadImage(id) {
             const element = document.getElementById(`card-${id}`);
             
+            // حل نهائي: طول مرن 100% مع معالجة الحروف
             html2canvas(element, {
-                scale: 4, // دقة عالية جداً
+                scale: 3,
                 backgroundColor: "#fdfbff",
                 useCORS: true,
                 onclone: (clonedDoc) => {
                     const clonedCard = clonedDoc.getElementById(`card-${id}`);
                     const clonedLink = clonedCard.querySelector('.capture-footer-url');
+                    const clonedContent = clonedCard.querySelector('.thought-content');
                     const clonedLines = clonedCard.querySelectorAll('.thought-line');
                     
-                    // إجبار ظهور الرابط في الصورة فقط
-                    clonedLink.style.visibility = 'visible';
-                    clonedLink.style.height = 'auto';
+                    // 1. إظهار الرابط وضبط الارتفاع ليكون مرناً (تلقائي)
                     clonedLink.style.display = 'block';
-                    clonedLink.style.marginTop = '25px';
-
-                    // تثبيت العرض تماماً في النسخة المخصصة للتحميل
-                    clonedCard.style.width = "600px";
-                    clonedCard.style.minHeight = "400px";
-
-                    // إصلاح تكسر بداية الأسطر بضبط الخصائص بعناية
+                    clonedCard.style.height = 'auto'; // الارتفاع تلقائي حسب النص
+                    clonedCard.style.minHeight = 'auto';
+                    clonedCard.style.width = '600px'; // عرض ثابت للصورة المحملة لضمان جودة الخط
+                    
+                    // 2. معالجة تكسر الحروف في الأسطر
                     clonedLines.forEach(line => {
-                        line.style.textAlign = 'center';
                         line.style.direction = 'rtl';
-                        line.style.display = 'block';
-                        line.style.margin = '5px 0';
+                        line.style.textAlign = 'center';
                         line.style.letterSpacing = '0px';
-                        line.style.whiteSpace = 'nowrap'; // يمنع النزول لسطر جديد بشكل تلقائي يكسر الحساب
+                        line.style.marginBottom = '5px';
+                        // إضافة مسافة خفيفة جداً في البداية لمنع التكسر
+                        line.innerHTML = '&#8203;' + line.innerHTML;
                     });
                 }
             }).then(canvas => {
@@ -419,7 +424,7 @@
                 link.download = `hussein-alkhalil-${id}.png`;
                 link.href = canvas.toDataURL("image/png");
                 link.click();
-                showMessage("تم تحميل الخاطرة بنجاح");
+                showMessage("تم التحميل بنجاح");
             });
         }
 
@@ -472,9 +477,9 @@
 
         function showMessage(text) { const m = document.getElementById("message"); m.textContent = text; m.style.display="block"; setTimeout(()=>m.style.display="none",2000); }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        window.addEventListener('scroll', () => { const b = document.querySelector('.back-to-top'); if(window.scrollY>300) b.classList.add('visible'); else b.classList.remove('visible'); });
+        window.addEventListener('scroll', () => { const b = document.querySelector('.back-to-top'); if (window.scrollY > 300) b.classList.add('visible'); else b.classList.remove('visible'); });
 
-        // Search logic (Original)
+        // Search logic
         let cachedPagesContent = null;
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
