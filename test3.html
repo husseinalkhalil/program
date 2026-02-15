@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* التنسيقات الأساسية الأصلية */
+        /* التنسيقات الأساسية الأصلية كما هي */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -62,7 +62,7 @@
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
-            .nav-links { position: fixed; top: 60px; right: -280px; width: 280px; background: var(--surface-color); flex-direction: column; padding: 20px; height: calc(100vh - 60px); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; overflow-y: auto; z-index: 1000; gap: 10px; margin: 0; }
+            .nav-links { position: fixed; top: 60px; right: -280px; width: 280px; background: var(--surface-color); flex-direction: column; padding: 20px; height: calc(100vh - 60px); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; overflow-y: auto; z-index: 1000; }
             .nav-links.show { right: 0; }
             .nav-links a { color: var(--text-primary); width: 100%; border-bottom: 1px solid rgba(0,0,0,0.03); justify-content: flex-start; }
             nav { padding: 0.8rem 5%; }
@@ -73,7 +73,7 @@
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto 40px auto; }
         #globalSearch { width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal'; outline: none; }
-        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); }
+        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
         .search-results { position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 10000; text-align: right; display: none; border: 1px solid rgba(0,0,0,0.05); }
 
         /* Thoughts Grid */
@@ -82,14 +82,14 @@
         #thoughtsList { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; }
         @media (max-width: 900px) { #thoughtsList { grid-template-columns: 1fr; } }
 
-        /* Card Design - Improved */
-        .thought-card-wrapper { display: flex; flex-direction: column; gap: 12px; }
+        /* البطاقة الجديدة بالإطار */
+        .thought-card-wrapper { display: flex; flex-direction: column; gap: 10px; }
         .thought-card {
             background-color: #fdfbff;
             border: 2px solid var(--primary-color);
             position: relative;
-            padding: 55px 45px;
-            min-height: 300px;
+            padding: 60px 45px;
+            min-height: 280px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -104,7 +104,6 @@
         .corner-tr { top: 5px; right: 5px; transform: rotate(90deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
         .corner-bl { bottom: 5px; left: 5px; transform: rotate(-90deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
         .corner-br { bottom: 5px; right: 5px; transform: rotate(180deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
-        
         .side-rhombus { position: absolute; top: 50%; width: 14px; height: 14px; background: var(--primary-color); transform: translateY(-50%) rotate(45deg); z-index: 6; }
         .rhombus-l { left: -8px; }
         .rhombus-r { right: -8px; }
@@ -112,26 +111,33 @@
         /* نص الخاطرة */
         .thought-content {
             font-size: 1.15rem;
-            line-height: 1.8;
+            line-height: 2;
             color: var(--primary-dark);
             font-weight: 700;
-            white-space: pre-line;
             z-index: 10;
             width: 100%;
-            direction: rtl;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        /* تنيسق كل سطر كعنصر مستقل لحل مشكلة التكسر */
+        .thought-line {
+            display: block;
             text-align: center;
+            direction: rtl;
+            letter-spacing: 0px !important;
         }
 
-        /* الرابط أسفل الصورة (يظهر فقط برمجياً عند التحميل) */
-        .capture-url { 
-            display: none; 
-            margin-top: 25px; 
-            font-size: 0.9rem; 
+        /* الرابط أسفل الصورة (مخفي تماماً في الموقع) */
+        .capture-footer-url { 
+            visibility: hidden;
+            height: 0;
+            margin: 0;
+            font-size: 0.85rem; 
             color: var(--primary-light); 
             font-weight: 800; 
-            border-top: 1px solid rgba(0,0,0,0.1); 
-            padding-top: 12px; 
-            width: 85%;
+            text-align: center;
         }
 
         .meta-data { display: flex; justify-content: space-between; align-items: center; padding: 5px 10px; flex-wrap: wrap; gap: 10px; }
@@ -142,19 +148,18 @@
         .action-btn.download-btn { color: var(--primary-color); border-color: var(--primary-color); }
         .action-btn.favorited { color: #fbbf24; border-color: #fbbf24; }
 
-        /* Social Section (Original Restored) */
+        /* Social Section Restored */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); max-width: 1200px; margin-left: auto; margin-right: auto;}
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
         .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
         .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.8); transition: all 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .social-btn img { width: 24px; height: 24px; }
         .social-btn:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .social-btn.youtube:hover { background: #FF0000; }
         .social-btn.facebook:hover { background: #1877F2; }
         .social-btn.instagram:hover { background: #E4405F; }
-        .social-btn.telegram:hover { background: #0088CC; }
+        .social-btn.youtube:hover { background: #FF0000; }
         .social-btn.tiktok:hover { background: #000000; }
         .social-btn.snap:hover { background: #FFFC00; }
         .social-btn:hover img { filter: brightness(0) invert(1); }
@@ -329,8 +334,8 @@
             { id: 1, date: "7 مايو 2025", content: "التكنولوجيا لا تعني الاجهزة الحديثة وإنما العمل بما موجود لتحقيق الهدف الذي نريد." }
         ];
 
-        let itemsPerPage = 20;
         let currentPage = 1;
+        const itemsPerPage = 20;
 
         function renderThoughts() {
             const list = document.getElementById('thoughtsList');
@@ -342,6 +347,14 @@
 
             paginatedItems.forEach(thought => {
                 const isFav = favorites.some(fav => fav.id === thought.id && fav.type === 'thought');
+                
+                // حل تكسر الحروف: تقسيم النص لأسطر وعرض كل سطر كعنصر مستقل
+                const lines = thought.content.split('\n');
+                let contentHTML = '';
+                lines.forEach(line => {
+                    if (line.trim()) contentHTML += `<div class="thought-line">${line}</div>`;
+                });
+
                 const container = document.createElement('div');
                 container.className = 'thought-card-wrapper';
                 container.innerHTML = `
@@ -352,9 +365,8 @@
                         <div class="corner corner-br"></div>
                         <div class="side-rhombus rhombus-l"></div>
                         <div class="side-rhombus rhombus-r"></div>
-                        <!-- تغليف النص بحاوية إضافية لضمان ثباته عند التحميل -->
-                        <div class="thought-content" style="display:block; width:100%;">${thought.content}</div>
-                        <div class="capture-url">husseinalkhalil.com/khawatir</div>
+                        <div class="thought-content">${contentHTML}</div>
+                        <div class="capture-footer-url">husseinalkhalil.com/khawater</div>
                     </div>
                     <div class="meta-data">
                         <span class="publish-date"><i class="far fa-calendar-alt"></i> ${thought.date}</span>
@@ -373,46 +385,45 @@
         async function downloadImage(id) {
             const element = document.getElementById(`card-${id}`);
             
-            // حل نهائي: فرض حجم البطاقة وتنسيق النص يدوياً قبل التقاطها
             html2canvas(element, {
-                scale: 3,
+                scale: 4, // دقة عالية جداً
                 backgroundColor: "#fdfbff",
-                logging: false,
                 useCORS: true,
                 onclone: (clonedDoc) => {
                     const clonedCard = clonedDoc.getElementById(`card-${id}`);
-                    const clonedLink = clonedCard.querySelector('.capture-url');
-                    const clonedText = clonedCard.querySelector('.thought-content');
+                    const clonedLink = clonedCard.querySelector('.capture-footer-url');
+                    const clonedLines = clonedCard.querySelectorAll('.thought-line');
                     
-                    // 1. ضمان ظهور الرابط في كل الأجهزة
+                    // إجبار ظهور الرابط في الصورة فقط
+                    clonedLink.style.visibility = 'visible';
+                    clonedLink.style.height = 'auto';
                     clonedLink.style.display = 'block';
-                    clonedLink.style.opacity = '1';
-                    
-                    // 2. معالجة تكسر الحروف: تثبيت العرض والاتجاه والخط تماماً
+                    clonedLink.style.marginTop = '25px';
+
+                    // تثبيت العرض تماماً في النسخة المخصصة للتحميل
                     clonedCard.style.width = "600px";
-                    clonedCard.style.padding = "60px 50px";
-                    
-                    clonedText.style.direction = 'rtl';
-                    clonedText.style.textAlign = 'center';
-                    clonedText.style.letterSpacing = '0px';
-                    clonedText.style.fontVariantLigatures = 'none';
-                    clonedText.style.display = 'block';
-                    clonedText.style.whiteSpace = 'pre-line';
-                    clonedText.style.fontSize = '1.2rem';
-                    
-                    // إصلاح مشكلة الكلمة الأولى: إضافة مسافة شفافة صغيرة قبل النص
-                    clonedText.innerHTML = '&#8203;' + clonedText.innerHTML;
+                    clonedCard.style.minHeight = "400px";
+
+                    // إصلاح تكسر بداية الأسطر بضبط الخصائص بعناية
+                    clonedLines.forEach(line => {
+                        line.style.textAlign = 'center';
+                        line.style.direction = 'rtl';
+                        line.style.display = 'block';
+                        line.style.margin = '5px 0';
+                        line.style.letterSpacing = '0px';
+                        line.style.whiteSpace = 'nowrap'; // يمنع النزول لسطر جديد بشكل تلقائي يكسر الحساب
+                    });
                 }
             }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = `hussein-alkhalil-${id}.png`;
                 link.href = canvas.toDataURL("image/png");
                 link.click();
-                showMessage("تم التحميل بنجاح");
+                showMessage("تم تحميل الخاطرة بنجاح");
             });
         }
 
-        // ==================== Helper Functions ====================
+        // ==================== General Helpers ====================
         function updatePaginationUI() {
             const totalPages = Math.ceil(thoughtsData.length / itemsPerPage);
             document.getElementById('pageIndicator').textContent = `صفحة ${currentPage} من ${totalPages || 1}`;
@@ -454,16 +465,16 @@
 
         function printThought(id) {
             const content = thoughtsData.find(t => t.id === id).content;
-            const printWin = window.open('', '_blank');
-            printWin.document.write(`<html dir="rtl"><body style="padding:40px;text-align:center;font-family:sans-serif;"><h2>خاطرة حسين الخليل</h2><p style="font-size:1.5rem;line-height:1.8;white-space:pre-line;">${content}</p></body></html>`);
-            printWin.document.close(); printWin.print();
+            const win = window.open('', '_blank');
+            win.document.write(`<html dir="rtl"><body style="padding:50px;text-align:center;font-family:sans-serif;"><h2>حسين الخليل</h2><p style="font-size:1.5rem;line-height:2;white-space:pre-line;">${content}</p></body></html>`);
+            win.document.close(); win.print();
         }
 
         function showMessage(text) { const m = document.getElementById("message"); m.textContent = text; m.style.display="block"; setTimeout(()=>m.style.display="none",2000); }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         window.addEventListener('scroll', () => { const b = document.querySelector('.back-to-top'); if(window.scrollY>300) b.classList.add('visible'); else b.classList.remove('visible'); });
 
-        // Search logic
+        // Search logic (Original)
         let cachedPagesContent = null;
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
