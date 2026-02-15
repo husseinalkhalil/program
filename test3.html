@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ==================== استعادة كافة التنسيقات الأصلية للموقع ==================== */
+        /* ==================== استعادة التنسيقات الأصلية للموقع بالكامل ==================== */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -54,7 +54,7 @@
         /* Navigation (Original) */
         .nav-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 998; display: none; }
         nav { background: rgba(94, 44, 165, 0.95); backdrop-filter: blur(10px); padding: 0.8rem 2%; position: fixed; width: 100%; top: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .logo-container img { height: 40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+        .logo-container img { height: 40px; }
         .nav-links { display: flex; flex: 1; justify-content: space-evenly; align-items: center; flex-wrap: wrap; margin: 0 20px; }
         .nav-links a { color: white; font-weight: 700; font-size: 1.05rem; padding: 8px 12px; border-radius: 20px; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
         .nav-links a:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
@@ -63,49 +63,49 @@
         @media (max-width: 1200px) {
             .hamburger { display: block; order: 1; }
             .logo-container { order: 2; }
-            .nav-links { position: fixed; top: 60px; right: -280px; width: 280px; background: var(--surface-color); flex-direction: column; padding: 20px; height: calc(100vh - 60px); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start; gap: 10px; margin: 0; flex: unset; z-index: 1000; }
+            .nav-links { position: fixed; top: 60px; right: -280px; width: 280px; background: var(--surface-color); flex-direction: column; padding: 20px; height: calc(100vh - 60px); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; overflow-y: auto; z-index: 1000; flex-wrap: nowrap; justify-content: flex-start; gap: 10px; margin: 0; flex: unset; }
             .nav-links.show { right: 0; }
             .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-radius: 8px; font-size: 1rem; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
             nav { padding: 0.8rem 5%; }
         }
 
         /* Hero Section (Original) */
-        .hero-section { background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); padding: 120px 20px 140px; text-align: center; color: white; border-radius: 0 0 50px 50px; position: relative; z-index: 1; }
+        .hero-section { background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); padding: 120px 20px 140px; text-align: center; color: white; border-radius: 0 0 50px 50px; position: relative; z-index: 1; width: 100%; }
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
         .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
 
-        /* Search (Original) */
+        /* Search Section (Original) */
         .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto 40px auto; }
-        #globalSearch { width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal'; outline: none; background: white; }
+        #globalSearch { width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal', sans-serif; outline: none; background: white; }
         .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
         .search-results { position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 10000; text-align: right; display: none; color: var(--text-primary); border: 1px solid rgba(0,0,0,0.05); }
 
-        /* Containers (Original) */
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+        /* Container & Grid (Original) */
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; width: 100%; }
         .main-wrapper { position: relative; z-index: 20; margin-top: -90px; margin-bottom: 60px; max-width: 1000px; margin-left: auto; margin-right: auto; }
-
-        /* Thoughts Grid */
         #thoughtsList { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; width: 100%; }
         @media (max-width: 900px) { #thoughtsList { grid-template-columns: 1fr; } }
 
-        /* ==================== تصميم بطاقة الخواطر الجديد ==================== */
-        .thought-card-wrapper { display: flex; flex-direction: column; gap: 10px; }
+        /* ==================== تصميم بطاقة الخاطرة مع الإطار المرن ==================== */
+        .thought-card-wrapper { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+        
         .thought-card {
             background-color: #fdfbff;
             border: 2px solid var(--primary-color);
             position: relative;
-            padding: 55px 40px;
-            min-height: 280px;
+            padding: 60px 40px;
+            height: auto;
+            min-height: 250px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            overflow: hidden;
             transition: 0.3s;
+            overflow: visible; /* مهم لعدم قص المعينات الجانبية */
         }
 
-        /* الزخارف الجانبية */
+        /* الزخارف الجانبية - SVG مدمج */
         .corner { position: absolute; width: 40px; height: 40px; background-size: contain; background-repeat: no-repeat; z-index: 5; }
         .corner-tl { top: 5px; left: 5px; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
         .corner-tr { top: 5px; right: 5px; transform: rotate(90deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
@@ -115,20 +115,21 @@
         .rhombus-l { left: -8px; }
         .rhombus-r { right: -8px; }
 
-        /* نص الخاطرة في الموقع (مرتب وطبيعي) */
+        /* نص الخاطرة */
         .thought-content {
             font-size: 1.15rem;
-            line-height: 1.8;
+            line-height: 1.9;
             color: var(--primary-dark);
             font-weight: 700;
             white-space: pre-line;
             z-index: 10;
             width: 100%;
             direction: rtl;
+            text-align: center;
         }
 
-        /* الرابط المخفي (يظهر فقط في التحميل) */
-        .capture-footer-url { 
+        /* الرابط أسفل الصورة (يظهر فقط برمجياً عند التحميل) */
+        .capture-url { 
             display: none; 
             margin-top: 25px; 
             font-size: 0.85rem; 
@@ -137,14 +138,14 @@
             text-align: center;
             border-top: 1px solid rgba(0,0,0,0.05);
             padding-top: 10px;
-            width: 100%;
+            width: 85%;
         }
 
-        /* الأزرار (Original Style) */
+        /* الأزرار (Original) */
         .meta-data { display: flex; justify-content: space-between; align-items: center; padding: 5px 10px; flex-wrap: wrap; gap: 10px; }
         .publish-date { font-size: 0.85rem; color: var(--text-secondary); background: rgba(94, 44, 165, 0.05); padding: 6px 12px; border-radius: 20px; font-weight: 500; }
-        .actions { display: flex; gap: 8px; }
-        .action-btn { background: white; border: 1px solid #e2e8f0; color: var(--text-secondary); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .actions { display: flex; gap: 10px; }
+        .action-btn { background: white; border: 1px solid #e2e8f0; color: var(--text-secondary); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
         .action-btn:hover { background: #fef9c3; color: #b45309; transform: scale(1.1); }
         .action-btn.download-btn { color: var(--primary-color); border-color: var(--primary-color); }
         .action-btn.favorited { color: #fbbf24; border-color: #fbbf24; }
@@ -165,7 +166,8 @@
         .social-btn.snap:hover { background: #FFFC00; }
         .social-btn:hover img { filter: brightness(0) invert(1); }
 
-        .pagination-section { display: flex; flex-direction: column; align-items: center; gap: 15px; margin: 50px 0; padding: 25px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+        /* Pagination & Footer (Original) */
+        .pagination-section { display: flex; flex-direction: column; align-items: center; gap: 15px; margin: 50px 0; padding: 25px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); width: 100%; }
         .pagination-controls { display: flex; align-items: center; gap: 10px; }
         .page-arrow { padding: 8px 18px; border-radius: 25px; border: 2px solid var(--primary-color); background: white; color: var(--primary-color); font-weight: 700; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
         .page-arrow:hover:not(:disabled) { background: var(--primary-color); color: white; }
@@ -239,6 +241,7 @@
             <div class="video-counter" id="totalCounter">عرض 0 من أصل 0 خاطرة</div>
         </div>
 
+        <!-- Social Section -->
         <div class="social-section">
             <div class="section-title"><h2>تابعني على مواقع التواصل</h2></div>
             <div class="social-grid">
@@ -268,7 +271,7 @@
     </footer>
 
     <script>
-        // ==================== Thoughts Data (All 66 Included) ====================
+        // ==================== Thoughts Data (All 66 thoughts) ====================
         const thoughtsData = [
             { id: 66, date: "13 يناير 2026", content: "أقرب الطرق إلى قلب الرجل: تقديره.\nأقرب الطرق إلى قلب المرأة: الاهتمام.\nأقرب الطرق إلى قلب الطفل: اللعب معه.\nأقرب الطرق إلى العقل: السؤال.\nأقرب الطرق إلى السعادة: الرضا.\nأقرب الطرق إلى السلام: العدل.\nأقرب الطرق إلى العزلة: مواقع التواصل.\nأقرب الطرق إلى الجنة: العمل الصالح.\nأقرب الطرق إلى جهنم: الظلم.\nأقرب الطرق إلى الإلحاد: كتاب البخاري." },
             { id: 65, date: "3 يناير 2026", content: "المبالغة في إدعاء الكمال نقص، والاعتراف بالنقص فضيلة." },
@@ -337,6 +340,7 @@
             { id: 1, date: "7 مايو 2025", content: "التكنولوجيا لا تعني الاجهزة الحديثة وإنما العمل بما موجود لتحقيق الهدف الذي نريد." }
         ];
 
+        // ==================== Logic ====================
         let currentPage = 1;
         const itemsPerPage = 20;
 
@@ -360,7 +364,6 @@
                         <div class="corner corner-br"></div>
                         <div class="side-rhombus rhombus-l"></div>
                         <div class="side-rhombus rhombus-r"></div>
-                        <!-- النص هنا يظهر بشكل طبيعي جداً للمستخدم -->
                         <div class="thought-content">${thought.content}</div>
                         <div class="capture-footer-url">husseinalkhalil.com/khawater</div>
                     </div>
@@ -393,24 +396,24 @@
                     // 1. إظهار الرابط في الصورة فقط
                     clonedLink.style.display = 'block';
                     
-                    // 2. معالجة ذكية لتكسر الحروف: تقسيم النص لأسطر (فقط في نسخة التحميل)
-                    const text = clonedContent.innerText;
-                    const lines = text.split('\n');
+                    // 2. حل تكسر الأسطر (معالجة ذكية للتحميل فقط لكي لا يخرب الموقع)
+                    const textLines = clonedContent.innerText.split('\n');
                     clonedContent.innerHTML = '';
-                    lines.forEach(line => {
+                    textLines.forEach(line => {
                         if (line.trim()) {
                             const lineDiv = document.createElement('div');
                             lineDiv.style.textAlign = 'center';
                             lineDiv.style.direction = 'rtl';
+                            lineDiv.style.width = '100%';
                             lineDiv.style.letterSpacing = '0px';
                             lineDiv.style.marginBottom = '5px';
-                            // إضافة المسافة الشفافة لمنع تكسر أول حرف
+                            // إضافة المسافة لثبات الحرف الأول
                             lineDiv.innerHTML = '&#8203;' + line; 
                             clonedContent.appendChild(lineDiv);
                         }
                     });
 
-                    // 3. فرض طول مرن وعرض ثابت للصورة النهائية
+                    // 3. تثبيت العرض تماماً في الصورة المحملة
                     clonedCard.style.width = "600px";
                     clonedCard.style.height = "auto";
                     clonedCard.style.minHeight = "auto";
@@ -425,7 +428,7 @@
             });
         }
 
-        // ==================== General Helpers ====================
+        // ==================== Helpers (Original) ====================
         function updatePaginationUI() {
             const totalPages = Math.ceil(thoughtsData.length / itemsPerPage);
             document.getElementById('pageIndicator').textContent = `صفحة ${currentPage} من ${totalPages || 1}`;
@@ -476,7 +479,7 @@
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         window.addEventListener('scroll', () => { const b = document.querySelector('.back-to-top'); if(window.scrollY>300) b.classList.add('visible'); else b.classList.remove('visible'); });
 
-        // Search logic
+        // Search logic (Original)
         let cachedPagesContent = null;
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
