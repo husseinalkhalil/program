@@ -6,7 +6,7 @@
     <title>خواطر - حسين الخليل</title>
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
-    <!-- html2canvas - النسخة الأحدث لضمان التوافق -->
+    <!-- html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- Favicon -->
     <link href="images/logo-small.png" rel="icon" type="image/png"/>
@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* Shared Variables & Styles (Original) */
         :root {
             --primary-color: #5e2ca5;
             --primary-dark: #451b7a;
@@ -63,27 +64,28 @@
             .logo-container { order: 2; }
             .nav-links { position: fixed; top: 60px; right: -280px; width: 280px; background: var(--surface-color); flex-direction: column; padding: 20px; height: calc(100vh - 60px); box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; overflow-y: auto; z-index: 1000; }
             .nav-links.show { right: 0; }
-            .nav-links a { color: var(--text-primary); width: 100%; border-bottom: 1px solid rgba(0,0,0,0.03); justify-content: flex-start; }
-            nav { padding: 0.8rem 5%; }
+            .nav-links a { color: var(--text-primary); width: 100%; padding: 12px; border-radius: 8px; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
         }
 
         /* Hero & Search */
         .hero-section { background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); padding: 120px 20px 140px; text-align: center; color: white; border-radius: 0 0 50px 50px; position: relative; z-index: 1; }
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
+        .hero-text p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
         .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto 40px auto; }
         #globalSearch { width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15); font-family: 'Tajawal'; outline: none; }
-        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); pointer-events: none; }
+        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--primary-color); }
         .search-results { position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); max-height: 400px; overflow-y: auto; z-index: 10000; text-align: right; display: none; border: 1px solid rgba(0,0,0,0.05); }
 
-        /* Container & Grid */
+        /* Container Structure */
         .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper { position: relative; z-index: 20; margin-top: -90px; margin-bottom: 60px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+
+        /* Thoughts Grid */
         #thoughtsList { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; }
         @media (max-width: 900px) { #thoughtsList { grid-template-columns: 1fr; } }
 
-        /* Thought Card - Improved Design */
-        .thought-card-wrapper { display: flex; flex-direction: column; gap: 15px; }
-
+        /* Thought Card - Professional Frame */
+        .thought-card-wrapper { display: flex; flex-direction: column; gap: 12px; }
         .thought-card {
             background-color: #fdfbff;
             border: 2px solid var(--primary-color);
@@ -96,21 +98,21 @@
             justify-content: center;
             text-align: center;
             overflow: hidden;
-            transition: 0.3s;
+            transition: transform 0.3s ease;
         }
 
-        /* الزخارف الجانبية والزوايا */
+        /* SVG Corners & Rhombus */
         .corner { position: absolute; width: 45px; height: 45px; background-size: contain; background-repeat: no-repeat; z-index: 5; }
-        .corner-tl { top: 5px; left: 5px; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40 M20 20 Q10 20 10 30 M20 20 Q20 10 30 10' fill='none' stroke='%235e2ca5' stroke-width='4'/%3E%3Ccircle cx='10' cy='10' r='5' fill='%235e2ca5'/%3E%3C/svg%3E"); }
-        .corner-tr { top: 5px; right: 5px; transform: rotate(90deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40 M20 20 Q10 20 10 30 M20 20 Q20 10 30 10' fill='none' stroke='%235e2ca5' stroke-width='4'/%3E%3Ccircle cx='10' cy='10' r='5' fill='%235e2ca5'/%3E%3C/svg%3E"); }
-        .corner-bl { bottom: 5px; left: 5px; transform: rotate(-90deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40 M20 20 Q10 20 10 30 M20 20 Q20 10 30 10' fill='none' stroke='%235e2ca5' stroke-width='4'/%3E%3Ccircle cx='10' cy='10' r='5' fill='%235e2ca5'/%3E%3C/svg%3E"); }
-        .corner-br { bottom: 5px; right: 5px; transform: rotate(180deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40 M20 20 Q10 20 10 30 M20 20 Q20 10 30 10' fill='none' stroke='%235e2ca5' stroke-width='4'/%3E%3Ccircle cx='10' cy='10' r='5' fill='%235e2ca5'/%3E%3C/svg%3E"); }
-
+        .corner-tl { top: 5px; left: 5px; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
+        .corner-tr { top: 5px; right: 5px; transform: rotate(90deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
+        .corner-bl { bottom: 5px; left: 5px; transform: rotate(-90deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
+        .corner-br { bottom: 5px; right: 5px; transform: rotate(180deg); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L40 10 M10 10 L10 40' fill='none' stroke='%235e2ca5' stroke-width='6'/%3E%3Ccircle cx='10' cy='10' r='6' fill='%235e2ca5'/%3E%3C/svg%3E"); }
+        
         .side-rhombus { position: absolute; top: 50%; width: 14px; height: 14px; background: var(--primary-color); transform: translateY(-50%) rotate(45deg); z-index: 6; }
         .rhombus-l { left: -8px; }
         .rhombus-r { right: -8px; }
 
-        /* تحسينات النص لمنع تكسر الحروف عند التحميل */
+        /* النص - مع تثبيت الخصائص لمنع تكسر الحروف */
         .thought-content {
             font-size: 1.15rem;
             line-height: 1.8;
@@ -119,33 +121,33 @@
             white-space: pre-line;
             z-index: 10;
             width: 100%;
-            letter-spacing: 0 !important;
-            word-spacing: normal !important;
+            direction: rtl;
+            unicode-bidi: isolate;
+            letter-spacing: 0px !important;
             font-variant-ligatures: none !important;
         }
 
-        /* الرابط المخفي (يظهر فقط في التحميل) */
-        .download-footer-link {
-            display: none;
-            margin-top: 20px;
-            font-size: 0.85rem;
-            color: var(--primary-light);
-            font-weight: 800;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            padding-top: 10px;
+        /* الرابط المخصص للتحميل فقط */
+        .capture-url { 
+            display: none; /* مخفي في الموقع */
+            margin-top: 25px; 
+            font-size: 0.85rem; 
+            color: var(--primary-light); 
+            font-weight: 800; 
+            border-top: 1px solid rgba(0,0,0,0.05); 
+            padding-top: 10px; 
             width: 80%;
-            text-align: center;
         }
 
         .meta-data { display: flex; justify-content: space-between; align-items: center; padding: 5px 10px; flex-wrap: wrap; gap: 10px; }
-        .publish-date { font-size: 0.85rem; color: var(--text-secondary); background: rgba(94, 44, 165, 0.05); padding: 6px 12px; border-radius: 20px; }
-        .actions { display: flex; gap: 10px; }
+        .publish-date { font-size: 0.85rem; color: var(--text-secondary); background: rgba(94, 44, 165, 0.05); padding: 6px 12px; border-radius: 20px; font-weight: 500; }
+        .actions { display: flex; gap: 8px; }
         .action-btn { background: white; border: 1px solid #e2e8f0; color: var(--text-secondary); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
         .action-btn:hover { background: #fef9c3; color: #b45309; transform: scale(1.1); }
         .action-btn.download-btn { color: var(--primary-color); border-color: var(--primary-color); }
         .action-btn.favorited { color: #fbbf24; border-color: #fbbf24; }
 
-        /* Social Section (Original) */
+        /* Social Section (Original Restored) */
         .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); max-width: 1200px; margin-left: auto; margin-right: auto;}
         .section-title { text-align: center; margin-bottom: 40px; position: relative; }
         .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; }
@@ -166,7 +168,7 @@
         /* Pagination & Footer */
         .pagination-section { display: flex; flex-direction: column; align-items: center; gap: 15px; margin: 50px 0; padding: 25px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
         .pagination-controls { display: flex; align-items: center; gap: 10px; }
-        .page-arrow { padding: 8px 18px; border-radius: 25px; border: 2px solid var(--primary-color); background: white; color: var(--primary-color); font-weight: 700; cursor: pointer; display: flex; align-items: center; transition: 0.3s; }
+        .page-arrow { padding: 8px 18px; border-radius: 25px; border: 2px solid var(--primary-color); background: white; color: var(--primary-color); font-weight: 700; cursor: pointer; transition: 0.3s; }
         .page-arrow:hover:not(:disabled) { background: var(--primary-color); color: white; }
         .page-arrow:disabled { opacity: 0.4; cursor: not-allowed; }
 
@@ -268,7 +270,7 @@
     </footer>
 
     <script>
-        // ==================== Thoughts Data ====================
+        // ==================== Thoughts Data (All 66 thoughts) ====================
         const thoughtsData = [
             { id: 66, date: "13 يناير 2026", content: "أقرب الطرق إلى قلب الرجل: تقديره.\nأقرب الطرق إلى قلب المرأة: الاهتمام.\nأقرب الطرق إلى قلب الطفل: اللعب معه.\nأقرب الطرق إلى العقل: السؤال.\nأقرب الطرق إلى السعادة: الرضا.\nأقرب الطرق إلى السلام: العدل.\nأقرب الطرق إلى العزلة: مواقع التواصل.\nأقرب الطرق إلى الجنة: العمل الصالح.\nأقرب الطرق إلى جهنم: الظلم.\nأقرب الطرق إلى الإلحاد: كتاب البخاري." },
             { id: 65, date: "3 يناير 2026", content: "المبالغة في إدعاء الكمال نقص، والاعتراف بالنقص فضيلة." },
@@ -279,7 +281,7 @@
             { id: 60, date: "13 يوليو 2025", content: "اقترحت فكرة،\nقالوا لك: وهل أنت أعلم من السلف؟\nوكأن الحقيقة وُلدت في القرن الثاني الهجري.\nثم ماتت بعدها إلى الأبد!" },
             { id: 59, date: "13 يوليو 2025", content: "ربّونا على أن نعبد الله خوفًا من العذاب،\nلا حبًا في العدل.\nنصلي كي لا نحترق، لا كي نرتقي.\nندعو كي لا نخسر، لا لأننا نثق.\nهكذا صارت علاقتنا بالله:\nمعاملة مشروطة، لا محبة مطلقة." },
             { id: 58, date: "13 يوليو 2025", content: "من أصعب الأوهام النفسية: أن يظن الإنسان ويتخيل أن رأيه في شخص أو مجتمع أو تقييمه للناس، له أثر وقيمة عند الله." },
-            { id: 57, date: "13 يوليو 2025", content: "أنت لا تحتاج أن تكفر بالقرآن، ولا حتى تنتقد كتب التراث لإثارة غضب \"ملائكة الأرض\".\nيكفي فقط أن تترحم على إنسان غير مسلم، وستجدهم يكفّرونك فورًا، ويُخرجونك من الملة دون تردد، بل يرون أن مجرد السكوت عنك يستوجب غضب الإله.\nطبعًا، إله التراث، لا إله القرآن.\nفالدين بالنسبة لهم ليس منهج حياة أو خلق أو عدل، بل شعارات دفاعية جاهزة:\nمن ترحم على غير المسلم؟ كافر!\nمن سكت عن الترحم؟ منافق!\nمن ناقش الحكم؟ زنديق!" },
+            { id: 57, date: "13 يوليو 2025", content: "أنت لا تحتاج أن تكفر بالقرآن، ولا حتى تنتقد كتب التراث لإثارة غضب \"ملائكة الأرض\".\nيكفي فقط أن تترحم على إنسان غير مسلم، وستجدهم يكفّرونك فورًا، ويُخرجونك من الملة دون تردد، بل يرون أن مجرد السكوت عنك يستوجب غضب الإله.\nطبعًا، إله التراث، لا إله القرآن.\nفالدين بالنسبة لهم ليس منهج حياة أو خلق أو عدل، بل شعارات دفاعية جاهزة:\nمن ترحم على غير المسلم? كافر!\nمن سكت عن الترحم? منافق!\nمن ناقش الحكم? زنديق!" },
             { id: 56, date: "30 يونيو 2025", content: "أكثر كتاب أساء للإسلام، هو كتاب البخاري.\nومن أكثر الكتب المقدسة عند المسلمين، هو كتاب البخاري!" },
             { id: 55, date: "29 مايو 2025", content: "أول ما يُسأل عنه الحاكم يوم القيامة:\n1- القضاء.\n2- التعليم.\n3- الصحة.\nفإذا صَلُحت صَلُح باقي عمله واذا فسدت فسد باقي عمله.\nوأول ما يُسأل عنه العبد يوم القيامة الشرك والظلم فإذا صَلُحت صَلُح باقي عمله واذا فسدت فسد باقي عمله." },
             { id: 54, date: "29 مايو 2025", content: "هناك من يُفكّر بذكاء وهناك من يُفكّر بغباء، فلا تتعجّب من أفكارهم.\nلا تنسى أن العمود الفقري يربط بين المؤخرة والدماغ." },
@@ -306,7 +308,7 @@
             { id: 32, date: "29 مايو 2025", content: "إذا كان الحق يخشى على نفسه من النقد فهو باطل وليس حق، لأن الحق لا يخشى النقد.\nبمنطق الكهنوت، فإن التحريض على استخدام العقل والمنطق والتفكير السليم والتشكيك في كل معلومة حتى يثبت العكس، يسمونه إلحاد وزندقة وخروج عن الملة، أما التحريض على القتل وسفك الدماء والعنصرية والتكفير والكراهية والتطرف يسمونه ايمان وتقوى وجهاد في سبيل الله!!" },
             { id: 31, date: "29 مايو 2025", content: "لا نشاهد التلفاز حتى لا تتزعزع عقيدتنا.\nلا نستمع للموسيقى ولا الغناء حتى لا تتزعزع عقيدتنا.\nلا نعيش في بلاد الغرب حتى لا تتزعزع عقيدتنا.\nلا نقرأ لكتب الفلاسفة حتى لا تتزعزع عقيدتنا.\nلا نندمج مع المجتمعات الاخرى حتى لا تتزعزع عقيدتنا.\nلا نستخدم الشبكة العنكبوتية حتى لا تتزعزع عقيدتنا.\nلا نستمع لمحاضرة مفكر أو فيلسوف حتى لا تتزعزع عقيدتنا.\nلا نشاهد الافلام حتى لا تتزعزع عقيدتنا.\nلا نستخدم الأجهزة الذكية حتى لا تتزعزع عقيدتنا.\nلا نستخدم مواقع التواصل حتى لا تتزعزع عقيدتنا.\n\nالمشكلة إذًا بعقيدتنا وليست بهذه الأشياء." },
             { id: 30, date: "29 مايو 2025", content: "قال عقلك هذا رح يوصلك للإلحاد.\nعلى أساس عقولكم أوصلتكم للمريخ!\nعقولكم أيضًا أوصلتكم للتداوي ببول البعير!" },
-            { id: 29, date: "29 مايو 2025", content: "ترى مفهوم التواتر هو نفس الآية ﴿قالوا بَل نَتَّبِعُ ما وَجَدنا عَلَيهِ آباءَنا﴾ بس حاطين له مكياج." },
+            { id: 29, date: "29 مايو 2025", content: "ترى مفهوم التواتر هو نفس الآية ﴿قالوا بَل نَتَّبِعُ ما وجدنا عَليهِ آباءَنا﴾ بس حاطين له مكياج." },
             { id: 28, date: "29 مايو 2025", content: "مين شيخك؟\nيعني نترك العلماء ونتبعك!!\nالترجمة الحرفية لهذه المقولة هي المثل القائل: الغنم تحتاج راعي يسوقها لانها ما تدل الدرب وحدها.\nوفي رواية ثانية صححها المعزاني: لا بد للقطيع من مرياع." },
             { id: 27, date: "29 مايو 2025", content: "تتفاخرُ البغال دائمًا بأنّ أسلافها كانوا خيولًا.\n(مثل ألماني)" },
             { id: 26, date: "29 مايو 2025", content: "إن أعدل ما في الأرض أن الجميع سيموت." },
@@ -337,10 +339,7 @@
             { id: 1, date: "7 مايو 2025", content: "التكنولوجيا لا تعني الاجهزة الحديثة وإنما العمل بما موجود لتحقيق الهدف الذي نريد." }
         ];
 
-        // ==================== Pagination & Rendering ====================
-        let itemsPerPage = 20;
-        let currentPage = 1;
-
+        // ==================== Logic ====================
         function renderThoughts() {
             const list = document.getElementById('thoughtsList');
             list.innerHTML = '';
@@ -362,7 +361,7 @@
                         <div class="side-rhombus rhombus-l"></div>
                         <div class="side-rhombus rhombus-r"></div>
                         <div class="thought-content">${thought.content}</div>
-                        <div class="download-footer-link">husseinalkhalil.com/khawater</div>
+                        <div class="card-url-footer">husseinalkhalil.com/khawater</div>
                     </div>
                     <div class="meta-data">
                         <span class="publish-date"><i class="far fa-calendar-alt"></i> ${thought.date}</span>
@@ -378,40 +377,44 @@
             updatePaginationUI();
         }
 
-        // ==================== Improved Download Function ====================
         async function downloadImage(id) {
             const element = document.getElementById(`card-${id}`);
             
-            // استخدام ميزة onclone لضمان إظهار الرابط وضبط التنسيق فقط عند الالتقاط
-            // هذا يحل مشكلة اختفاء الرابط في الجوال ومشكلة تكسر الحروف
+            // حل نهائي لتكسر الحروف وظهور الرابط في الجوال
             html2canvas(element, {
                 scale: 3,
                 backgroundColor: "#fdfbff",
+                logging: false,
                 useCORS: true,
-                allowTaint: true,
                 onclone: (clonedDoc) => {
                     const clonedCard = clonedDoc.getElementById(`card-${id}`);
-                    const clonedLink = clonedCard.querySelector('.download-footer-link');
+                    const clonedLink = clonedCard.querySelector('.card-url-footer');
                     const clonedText = clonedCard.querySelector('.thought-content');
                     
-                    // إظهار الرابط في النسخة الملتقطة فقط
+                    // إظهار الرابط في الجوال والكمبيوتر فقط في ملف الصورة
+                    clonedLink.style.opacity = '1';
                     clonedLink.style.display = 'block';
                     
-                    // تثبيت خصائص النص لضمان عدم التكسر
+                    // منع تكسر الحروف يدوياً في الصورة الملتقطة
                     clonedText.style.letterSpacing = '0px';
                     clonedText.style.fontVariantLigatures = 'none';
+                    clonedText.style.wordSpacing = 'normal';
                     clonedText.style.direction = 'rtl';
+                    clonedText.style.display = 'block';
+                    clonedText.style.textAlign = 'center';
                 }
             }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = `hussein-alkhalil-${id}.png`;
                 link.href = canvas.toDataURL("image/png");
                 link.click();
-                showMessage("تم حفظ الخاطرة بنجاح");
+                showMessage("تم تحميل الخاطرة بنجاح");
+            }).catch(err => {
+                console.error("Download Error:", err);
+                alert("عذراً، حدث خطأ أثناء التحميل. يرجى المحاولة مرة أخرى.");
             });
         }
 
-        // ==================== Helper Functions ====================
         function updatePaginationUI() {
             const totalPages = Math.ceil(thoughtsData.length / itemsPerPage);
             document.getElementById('pageIndicator').textContent = `صفحة ${currentPage} من ${totalPages || 1}`;
@@ -462,7 +465,7 @@
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         window.addEventListener('scroll', () => { const b = document.querySelector('.back-to-top'); if(window.scrollY>300) b.classList.add('visible'); else b.classList.remove('visible'); });
 
-        // Search logic
+        // Search logic (Original)
         let cachedPagesContent = null;
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
