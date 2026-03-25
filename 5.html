@@ -173,7 +173,7 @@
             transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out; 
             background: var(--reading-beige); 
         }
-        .hadith-details.open { max-height: 5000px; opacity: 1; padding: 10px 30px 50px; border-top: 1px solid rgba(0,0,0,0.05); }
+        .hadith-details.open { max-height: 10000px; opacity: 1; padding: 10px 30px 50px; border-top: 1px solid rgba(0,0,0,0.05); }
 
         .detail-section { margin-top: 25px; background: transparent; border: none; }
         .section-header { 
@@ -214,48 +214,25 @@
         .pagination-info-container { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 15px; font-weight: 700; color: var(--text-primary); }
         .total-count-badge { background: var(--primary-color); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem; }
 
-        /* ==================== Social Media ==================== */
-        .social-section { text-align: center; margin-bottom: 60px; background: var(--surface-color); padding: 40px; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); margin-top: 50px; }
-        .social-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .social-btn img { width: 26px; transition: 0.3s; }
-        .social-btn:hover { transform: translateY(-8px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
-        .social-btn:hover img { filter: brightness(0) invert(1); }
-        .social-yt:hover { background: #FF0000; } 
-        .social-fb:hover { background: #1877F2; } 
-        .social-ins:hover { background: #E4405F; } 
-        .social-tg:hover { background: #0088CC; } 
-        .social-tk:hover { background: #000000; } 
-        .social-sc:hover { background: #FFFC00; }
-
         /* ==================== Footer ==================== */
         footer { background: #1e293b; color: white; padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; }
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
         .footer-links a { color: #cbd5e1; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: color 0.3s ease; }
-        .footer-links a:hover { color: var(--accent-color); }
-        .footer-divider { color: #475569; font-size: 0.8rem; user-select: none; } 
         .copyright { color: #64748b; font-size: 0.85rem; border-top: 1px solid #334155; padding-top: 25px; margin-top: 25px; }
 
         /* ==================== Mobile Design ==================== */
         @media (max-width: 768px) {
             .hadith-summary h3 { font-size: 1.05rem !important; }
-            .unified-header { padding: 90px 15px 40px; border-radius: 0 0 35px 35px; }
-            .page-title { font-size: 1.7rem; }
             .hadith-row { flex-direction: row; align-items: flex-start; gap: 10px; }
             .hadith-row.is-open { flex-direction: column; }
-            .hadith-row.is-open .hadith-number-circle { margin-top: 0; margin-bottom: 5px; align-self: flex-start; }
             .hadith-number-circle { width: 38px; height: 38px; font-size: 1rem; margin-top: 25px; }
-            .hadith-card { width: 100%; }
-            .hadith-details.open { padding: 15px 15px 40px; }
             .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
-            .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
         }
 
         /* ==================== Report Modal & Toast ==================== */
         .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
         .report-modal.show { display: flex; }
         .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; box-shadow: var(--shadow-lg); animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .report-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 12px; cursor: pointer; }
         .btn-send { flex: 2; background: var(--primary-color); color: white; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; font-weight: 700; cursor: pointer; }
         .btn-cancel { flex: 1; background: #f1f5f9; color: #475569; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; cursor: pointer; }
@@ -320,19 +297,6 @@
             <button id="nextPage" class="pagination-btn">التالي</button>
         </div>
     </div>
-
-    <!-- قسم تابعنا -->
-    <div class="social-section">
-        <h2 style="font-weight: 800; color: var(--primary-dark); margin-bottom: 10px;">تابعنا على منصات التواصل</h2>
-        <div class="social-grid">
-            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="/icons/yot-soc.png" alt="yt"></a>
-            <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="/icons/fac-soc.png" alt="fb"></a>
-            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="إنستغرام"><img src="/icons/ins-soc.png" alt="in"></a>
-            <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="تلغرام"><img src="/icons/tel-soc.png" alt="tg"></a>
-            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="تيك توك"><img src="/icons/tik-soc.png" alt="tk"></a>
-            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="سناب شات"><img src="/icons/snap.png" alt="sc"></a>
-        </div>
-    </div>
 </div>
 
 <div class="report-modal" id="reportModal">
@@ -366,7 +330,6 @@
 </footer>
 
 <script>
-    // ==================== البيانات والبرمجة ====================
     const novelsData = [
         {
             id: 1, 
@@ -375,40 +338,24 @@
             sourceUrl: "https://dorar.net/h/LTDUBZSa",
             text: `كان النَّبيُّ صلَّى اللهُ عليه وسلَّم يَدورُ على نِسائِه في السَّاعةِ الواحِدةِ مِنَ اللَّيلِ والنَّهارِ، وهنَّ إحدى عَشرةَ، قال: قُلتُ لأنَسٍ: أوكان يُطيقُه؟ قال: كُنَّا نَتَحَدَّثُ أنَّه أُعطيَ قوَّةَ ثَلاثينَ. وقال سَعيدٌ، عن قَتادةَ: إنَّ أنَسًا حَدَّثَهم، تِسعُ نِسوةٍ.`, 
             num: "268",
-            offense: `1. <b>انتهاك خصوصية بيت النبوة والأمانة:</b> تثير الرواية تساؤلاً أخلاقياً وتوثيقياً جوهرياً؛ فالمعلومات الواردة تتعلق بأدق تفاصيل العلاقة الزوجية الحميمة التي لا يطلع عليها إلّا الزوجان. فكيف تيسر لخادم النبي (أنس بن مالك) الإحاطة بهذه الخصوصيات وإحصاؤها بهذا الشكل المادي؟ نحن هنا أمام مأزق منطقي:
-            <ul>
-                <li>إما أن يكون النبي هو من أخبر خادمه بذلك تفاخراً، وهذا باطل لأنه يتناقض مع وقار النبوة ومع الحديث الذي يصف من ينشر أسرار الفراش بأنه (من أشر الناس عند الله منزلة يوم القيامة.  <a href="https://dorar.net/h/s8dzmQV1" target="_blank" style="color: blue; text-decoration: underline;">المصدو</a>)</li>
-                <li>وإما أن يكون الراوي قد تتبع حركات النبي الخاصة وتلصص على غرفه، وهذا يعني خيانة للأمانة وانتهاكاً لقوله تعالى: {يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَدْخُلُوا بُيُوتَ النَّبِيِّ إِلَّا أَن يُؤْذَنَ لَكُمْ}. [الأحزاب: 53]</li>
-            </ul>
-            2. <b>التعارض مع التكليف الرباني بالعبادة:</b> يصطدم هذا التصوير بصرامة مع الأمر الإلهي للنبي في سورة المزمل: {قُمِ اللَّيْلَ إِلَّا قَلِيلًا}. فكيف يستقيم هذا الانقطاع التام للعبادة والقيام الطويل بالليل، مع رواية تدعي أن ليله ونهاره كانا موزعين على "الدوران المستمر" بين الزوجات؟
-            <br>3. <b>التناقض الوظيفي والزمني:</b> لم يكن النبي مجرد رب أسرة، بل كان رئيس دولة، وقائداً عسكرياً. إن حصر نشاطه في ليلة ونهار بالساعة الواحدة في هذا الطواف الجسدي المفرط يجعله شخصية متمحورة حول الغريزة، مما يسيء لصورته كرسول صاحب رسالة عالمية.
-            <br>4. <b>تسطيح مفهوم المعجزة النبوية:</b> تحاول الرواية إضفاء "بطولة جسدية" عبر الزعم بأنه أُعطي قوة ثلاثين رجلاً في الجماع، وهو تصوير مادي ينتمي لثقافة المفاخرة الجسدية الجاهلية، ويُقدم النبي بصورة تتنافى مع وصفه القرآني: {وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٍ}.`
         },
         {
             id: 2, 
             title: "محاولة انتحار النبي عند فتر الوحي", 
             source: "البخاري", 
             sourceUrl: "https://dorar.net/h/sM0T91MS",
-            text: `...وفَتَرَ الوحيُ فترةً حتَّى حَزِنَ النَّبيُّ صلَّى اللهُ عليه وسلَّم -فيما بَلَغَنا- حُزنًا غَدا منه مِرارًا كَي يَتَرَدَّى مِن رُؤوسِ شَواهِقِ الجِبالِ، فكُلَّما أوفى بذِروةِ جَبَلٍ لكَي يُلقيَ منه نَفسَه تَبَدَّى له جِبريلُ، فقال: يا مُحَمَّدُ، إنَّكَ رَسولُ اللهِ حَقًّا، فيَسكُنُ لذلك جَأشُه، وتَقِرُّ نَفسُه، فيَرجِعُ، فإذا طالَت عليه فترةُ الوحيِ غَدا لمِثلِ ذلك...`, 
+            text: `...وفَتَرَ الوحيُ فترةً حتَّى حَزِنَ النَّبيُّ صلَّى اللهُ عليه وسلَّم -فيما بَلَغَنا- حُزنًا غَدا منه مِرارًا كَي يَتَرَدَّى مِن رُؤوسِ شَواهِقِ الجِبالِ، فكُلَّما أوفى بذِروةِ جَبَلٍ لكَي يُلقيَ منه نَفسَه تَبَدَّى له جِبريلُ، فقال: يا مُحَمَّدُ، إنَّكَ رَسولُ اللهِ حَقًّا، فيَسكُنُ لذلك جَأشُه، وتَقِرُّ نَفسُه، فيَرجِعُ، فإذا طالَت عليه فترةُ الوحيِ غَدا لمِثلِ ذلك، فإذا أوفى بذِروةِ جَبَلٍ تَبَدَّى له جِبريلُ، فقال له مِثلَ ذلك.`, 
             num: "6982",
-            offense: `1. <b>مخالفة صريح النهي القرآني:</b> تضرب هذه الرواية في مقتل النهي الإلهي القاطع في قوله تعالى: {وَلَا تَقْتُلُوا أَنفُسَكُمْ}. فكيف ينهى الخالق عباده عن الانتحار، ثم يختار لرسالته إنساناً يُصور بمظهر مَن يغالب رغبة انتحارية متكررة؟
-            <br>2. <b>الطعن في حكمة الاصطفاء الإلهي:</b> النبوة اختيار لقمة الهرم البشري من حيث الاتزان العقلي والصلابة الروحية. إن تقديم النبي في صورة الشخص الذي يعاني من أزمة نفسية تدفعه لإنهاء حياته هو طعن مباشر في حكمة الخالق سبحانه.
-            <br>3. <b>تصوير النبي بمظهر اليأس:</b> مَن يحاول الانتحار هو إنسان يمر بحالة يأس مطلق تتنافى مع مقام مَن شُرح صدره. الرواية تُظهر النبي ضعيفاً لا يملك صبراً ولا يقيناً لدرجة احتياجه لتدخل ملائكي حسي كل مرة ليمنعه.
-            <br>4. <b>تهافت "المناورة الدفاعية" (بلاغات الزهري):</b> يلجأ المدافعون للقول بأنها من "بلاغات الزهري" وليست على شرط البخاري. وهذا يضعنا أمام تساؤل: إذا كانت مكذوبة، فما الداعي لوجودها في كتاب أُحيط بهالة من "العصمة"؟ إن ترك لغم يمس مقام النبوة في قلب الكتاب هو جناية بحق الدين.
-            <br>5. <b>تقديم "هيبة الكتاب" على "هيبة النبوة":</b> السكوت عن كذب الرواية بدعوى الحفاظ على مكانة "البخاري" هو تقديم لصناعة الحديث على قداسة النبي. نقد هذه الرواية هو انتصار للصورة القرآنية للنبي الذي ثبت أمام أعتى العواصف.`
+            offense: `1. <b>مخالفة صريح النهي القرآني:</b> تضرب هذه الرواية في مقتل النهي الإلهي القاطع في قوله تعالى: {وَلَا تَقْتُلُوا أَنفُسَكُمْ ۚ إِنَّ اللَّهَ كَانَ بِكُمْ رَحِيمًا} [النساء: 29]. فكيف ينهى الخالق عباده عن الانتحار ويصف نفسه بالرحيم، ثم يختار لرسالته إنساناً يُصور في الروايات بمظهر مَن يغالب رغبة انتحارية متكررة؟ <br><br>2. <b>الطعن في حكمة الاصطفاء الإلهي:</b> النبوة ليست مجرد وظيفة، بل هي اختيار لقمة الهرم البشري من حيث الاتزان العقلي والصلابة الروحية. إن تقديم النبي في صورة الشخص الذي يعاني من اضطراب وجداني أو أزمة نفسية حادة تدفعه لإنهاء حياته لمجرد تأخر الوحي، هو طعن مباشر في حكمة الخالق سبحانه؛ فهل يعجز الله عن اختيار إنسان أكثر نضجاً وثباتاً ليحمل رسالته الخاتمة؟ <br><br>3. <b>تصوير النبي بمظهر اليأس وفقدان اليقين:</b> مَن يحاول الانتحار هو إنسان يمر بحالة من فقدان التوازن واليأس المطلق، وهي حالة تتنافى تماماً مع مقام مَن شُرح صدره ورُفع ذكره. الرواية تُظهر النبي ضعيفاً لا يملك صبراً ولا يقيناً في وعد ربه، لدرجة احتياجه لتدخل ملائكي حسي في كل مرة ليمنعه من قتل نفسه. <br><br>4. <b>تهافت "المناورة الدفاعية" (بلاغات الزهري):</b> يلجأ المدافعون للقول بأن هذه الإضافة ليست على شرط البخاري وأنها من "بلاغات الزهري". وهذا المنطق يضعنا أمام تساؤل أخلاقي: إذا كانت الرواية مكذوبة أو واهية، فما الداعي لوجودها في كتاب أُحيط بهالة من "العصمة" وزُعم أن كل ما فيه قد جاوز القنطرة؟ إن ترك لغم فكري يمس مقام النبوة في قلب "أصح كتاب" بحجة التنبيه هو جناية بحق الدين؛ فإما أن يكون الكتاب صحيحاً فتتحملوا تبعات الإساءة، وإما أن تعترفوا ببشريته وقابليته للخطأ والوضع مما يستوجب تنقيحه فوراً. <br><br>5. <b>تقديم "هيبة الكتاب" على "هيبة النبوة":</b> إن السكوت عن كذب هذه الرواية بدعوى الحفاظ على مكانة "صحيح البخاري" هو تقديم لصناعة الحديث وتقديس الورق على قداسة مقام النبي. نقد هذه الرواية هو انتصار للصورة القرآنية للنبي؛ صورة الرجل الذي ثبت أمام أعتى العواصف، وتنزيه له من صور بائسة وضعها الرواة لتبرير لحظات ضعف نُسبت زيفاً لمن اصطفاه الله هادياً ومبشراً ونذيراً.`
         },
         {
             id: 3, 
             title: "لعن النبي وسبّه للمؤمنين وشرطه", 
             source: "مسلم", 
             sourceUrl: "https://dorar.net/h/ArbUcvrj",
-            text: `دَخَلَ على رَسولِ اللهِ صلَّى اللهُ عليه وسلَّم رَجُلانِ فكَلَّماه بشَيءٍ، فأغضَباه، فلَعَنَهما وسَبَّهما، فلَمَّا خَرَجا، قُلتُ: يا رَسولَ اللهِ، مَن أصابَ مِنَ الخَيرِ شيئًا ما أصابَه هذانِ، قال: وما ذاكِ؟ قالت: قُلتُ: لَعَنتَهما وسَبَبتَهما، قال: أوما عَلِمتِ ما شارَطتُ عليه رَبِّي؟ قُلتُ: اللَّهمَّ إنَّما أنا بَشَرٌ، فأيُّ المُسلِمينَ لَعَنتُه أو سَبَبتُه فاجعَلْه له زَكاةً وأجرًا.`, 
+            text: `دَخَلَ على رَسولِ اللهِ صلَّى اللهُ عليه وسلَّم رَجُلانِ فكَلَّماه بشَيءٍ، لا أدري ما هو، فأغضَباه، فلَعَنَهما وسَبَّهما، فلَمَّا خَرَجا، قُلتُ: يا رَسولَ اللهِ، مَن أصابَ مِنَ الخَيرِ شيئًا ما أصابَه هذانِ، قال: وما ذاكِ؟ قالت: قُلتُ: لَعنتَهما وسَبَبتَهما، قال: أوما عَلِمتِ ما شارَطتُ عليه رَبِّي؟ قُلتُ: اللَّهمَّ إنَّما أنا بَشَرٌ، فأيُّ المُسلِمينَ لَعنتُه أو سَبَبتُه فاجعَلْه له زَكاةً وأجرًا.`, 
             num: "2600",
-            offense: `1. <b>مصادمة التزكية الإلهية:</b> تُصوّر هذه الروايات النبي بصورة الرجل الذي لا يملك زمام نفسه عند الغضب، فيندفع لسب ولعن أشخاص "لا ندري ما ذنبهم". هذا ينسف التزكية القرآنية {وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٍ}، فالعظمة تقتضي الترفع عن بذاءة اللسان.
-            <br>2. <b>التناقض التشريعي الصارخ:</b> تضع الرواية النبي في موضع "المخالف لأمره"؛ فهو الذي قال (سِبَابُ المُسْلِمِ فُسُوقٌ.  <a href="https://dorar.net/h/pQZJbU9r" target="_blank" style="color: blue; text-decoration: underline;">المصدو</a>) فكيف يمارس ما وصفه بالفسوق ضد مؤمنين في بيته؟
-            <br>3. <b>عبثية عقد المقايضة مع الله:</b> فكرة أن النبي اشترط تحويل "السب" إلى "أجر" لا يقبلها عقل؛ فهي تحول الفعل القبيح إلى مكافأة. والعدل الإلهي يقرر أن السيئة لا تنتج حسنة، والرواية تبدو "ترقيعاً" لتبرير مرويات أظهرت النبي حاد الطباع.
-            <br>4. <b>هدم صورة المربي:</b> النبي مأمور باللين {وَلَوْ كُنتَ فَظًّا غَلِيظَ الْقَلْبِ لَانفَضُّوا مِنْ حَوْلِكَ}. اللعن والسب هما قمة الفظاظة، والادعاء بوقوعهما منه يطعن في جوهر مهمته كرحمة للعالمين.
-            <br>5. <b>الإساءة للذات الإلهية:</b> تُصور الرواية الله سبحانه وكأنه يستجيب لشرط يحول العقوبة (اللعنة) إلى ثواب، مما يجعل الحساب الأخروي خاضعة لردّات فعل غاضبة، وهو ما يتنافى مع {مَا يُبَدَّلُ الْقَوْلُ لَدَيَّ}.`
+            offense: `1. <b>مصادمة التزكية الإلهية:</b> تُصوّر هذه الروايات النبي بصورة الرجل الذي لا يملك زمام نفسه عند الغضب، فيندفع لسب ولعن أشخاص "لا ندري ما هو ذنبهم" لمجرد أنهم أغضبوه. هذا التصوير ينسف التزكية القرآنية المطلقة لخلقه في قوله تعالى: {وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٍ} [القلم: 4]. فالعظمة في الخلق تقتضي كظم الغيظ والترفع عن بذاءة اللسان، فكيف يُنسب له "اللعن والسب" وهو الذي بُعث ليتمم مكارم الأخلاق؟ <br><br>2. <b>التناقض التشريعي الصارخ:</b> تضع هذه المرويات النبي في موضع "المخالف لأمره"؛ فهو الذي قال -بحسب رواية أخرى في البخاري: (سِبَابُ المُسْلِمِ فُسُوقٌ.  <a href="https://dorar.net/h/pQZJbU9r" target="_blank" style="color: blue; text-decoration: underline;">المصدر</a>) فكيف ينهى النبي عن فعل ويصف فاعله بالفسوق (أي الخروج عن الطاعة والإثم) ثم يمارسه هو ضد مؤمنين دخلوا عليه في بيته؟ هل يعقل أن يكون القدوة أول من يقع في "الفسوق" اللفظي؟ <br><br>3. <b>عبثية "عقد المقايضة" مع الله:</b> فكرة أن النبي اشترط على ربه أن يُحول "لعنته وسبه" إلى "زكاة وقربة" للمشتوم هي فكرة لا يقبلها عقل ولا منطق؛ فهي تحول "الفعل القبيح" (السب) إلى "مكافأة إلهية" (أجر وقربة). والعدل الإلهي والمنطق القرآني يقرران أن السيئة لا تنتج حسنة، وأن النبي منزه عن أن يظلم أحداً بسبه ثم يطلب من الله جبر هذا الظلم بمقايضة غيبية، مما يظهر الرواية وكأنها "ترقيع" وضعه الرواة لتبرير مرويات أخرى أظهرت النبي حاد الطباع. <br><br>4. <b>هدم صورة المعلم والمربي:</b> النبي في القرآن مأمور باللين: {فَبِمَا رَحْمَةٍ مِّنَ اللَّهِ لِنتَ لَهُمْ ۖ وَلَوْ كُنتَ فَظًّا غَلِيظَ الْقَلْبِ لَانفَضُّوا مِنْ حَوْلِكَ} [آل عمران: 159]. اللعن والسب هما قمة الفظاظة والغلظة، والادعاء بوقوعهما منه يطعن في جوهر مهمته كرحمة للعالمين، ويجعله منفراً بدلاً من أن يكون مؤلفاً للقلوب. <br><br>5. <b>الإساءة للذات الإلهية:</b> تُصور الرواية الله سبحانه وكأنه يستجيب لشرط بشري يحول العقوبة (اللعنة) إلى ثواب، مما يجعل منظومة الحساب الأخروي خاضعة لردّات فعل غاضبة، وهو ما يتنافى مع قوله تعالى: {مَا يُبَدَّلُ الْقَوْلُ لَدَيَّ وَمَا أَنَا بِظَلَّامٍ لِّلْعَبِيدِ}. [ق: 29]`
         },
         {
             id: 4, 
@@ -417,29 +364,16 @@
             sourceUrl: "https://dorar.net/h/UEc0hMEf",
             text: `أتَيتُ النَّبيَّ صلَّى اللهُ عليه وسلَّم فوجَدتُه يَستَنُّ بسِواكٍ بيَدِه يقولُ: أُعْ أُعْ، والسِّواكُ في فيه، كَأنَّه يَتَهَوَّعُ.`, 
             num: "244",
-            offense: `1. <b>انعدام الغاية التشريعية:</b> الغاية من السنة هي الهداية والقيّم. أما تدوين أصوات "التهوع" ومحاكاتها بكلمات مثل "أُعْ أُعْ"، فهو إقحام لتفاصيل جسدية منفرة في صلب "المقدس" يفرغ الرواية من أي قيمة مضافة.
-            <br>2. <b>الابتذال في وصف مقام النبوة:</b> يُصور هذا النص النبي بمظهر مادي غير لائق. إن تحويل "القيء" إلى مادة مروية في كتب الدين يسيء لصورة المعلم، ويصدم الذوق الإنساني السليم الذي ينزه العظماء عن مثل هذه الأوصاف.
-            <br>3. <b>التناقض مع "الخُلُق العظيم":</b> عظمة الخلق تشمل الرقي في السلوك والترفع عن كل ما يخدش الوقار. إن وصف النبي بحالة "التهوع" يتناقض مع الجلال والهيبة التي رسمها له القرآن.
-            <br>4. <b>فتح باب السخرية والمذمة:</b> تحولت هذه المرويات إلى مادة خصبة للمتربصين للسخرية من النبي. وبدلاً من أن يكون الحديث نافذة للحكمة، أصبح بسبب هذا الوصف المبتذل وسيلة لتصوير النبي بصورة بدائية تفتقر للتمدن.
-            <br>5. <b>تسطيح مفهوم التدوين النبوي:</b> التمسك بمثل هذه الروايات كجزء من "الدين" هو تضييع لجوهر الرسالة المعنية بتزكية النفوس، واختزال لها في مشاهد حسية لا تخدم إيماناً ولا تبني وعياً.`
+            offense: `1. <b>انعدام الغاية التشريعية والمعرفية:</b> يقرر العقل والمنطق أن الغاية من السنة والوحي هي الهداية والتشريع وبناء القيم. فإذا كان الغرض من الرواية هو الحث على نظافة الفم، فقد كفتنا نصوص كثيرة راقية في هذا الباب. أما تدوين أصوات "التهوع" (الرغبة في القيء) ومحاكاة تلك الأصوات بكلمات مثل "أُعْ أُعْ"، فهو إقحام لتفاصيل جسدية منفرة في صلب "المقدس" دون أي ضرورة دينية أو أخلاقية، مما يفرغ الرواية من أي قيمة مضافة. <br><br>2. <b>الابتذال في وصف مقام النبوة:</b> يُصور هذا النص النبي -وهو الذي أُوتي جوامع الكلم وكمال الوقار- بمظهر مادي غير لائق، حيث يركز الراوي على مخرجات جسدية منفرة تُعرض عادةً في الغرف المغلقة. إن تحويل "القيء" أو "التهوع" إلى مادة مروية تُتلى في كتب "الدين" يسيء لصورة المعلم والمربي، ويصدم الذوق الإنساني السليم الذي ينزه العظماء عن مثل هذه الأوصاف. <br><br>3. <b>التناقض مع "الخُلُق العظيم":</b> يصف القرآن الكريم النبي بـ {وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٍ} [القلم: 4]. والعظمة في الخلق تشمل الرقي في السلوك، والجمال في الهيئة، والترفع عن كل ما يخدش الوقار والحياء. إن وصف النبي بحالة "التهوع" المزعجة يتناقض مع الجلال والهيبة التي رسمها له القرآن، ويُظهره بصورة تبتعد عن الكمال البشري الذي يُفترض أن يتحلى به صاحب الرسالة الخاتمة. <br><br>4. <b>فتح باب السخرية والمذمة:</b> لقد تحولت هذه المرويات، بسبب إصرار الرواة على تدوين "قشور" مادية منفرة، إلى مادة خصبة للمتربصين والمنتقدين للسخرية من شخص النبي. فبدلاً من أن يكون الحديث نافذة للحكمة، أصبح بسبب هذا الوصف المبتذل عبئاً على صورة الإسلام، ووسيلة لتصوير النبي بصورة بدائية تفتقر لأبسط قواعد التمدن والرقي السلوكي. <br><br>5. <b>تسطيح مفهوم التدوين النبوي:</b> إن السؤال الكبير يظل قائماً: هل يحتاج الدين الخاتم لتوثيق أصوات المخارج الجسدية لكي يكتمل؟ إن التمسك بمثل هذه الروايات كجزء من "الدين" هو تضييع لجوهر الرسالة المعنية بتزكية النفوس وإقامة العدل، واختزال لها في مشاهد حسية لا تخدم إيماناً ولا تبني وعياً.`
         },
         {
             id: 5, 
             title: "البؤس والجوع النبوي", 
             source: "البخاري/مسلم", 
             sourceUrl: "https://dorar.net/h/gAIw5UsE",
-            text: `1. "إن كُنَّا لَنَنظُرُ إلى الهِلالِ ثَلاثةَ أهِلَّةٍ في شَهرَينِ، وما أوقِدَت في أبياتِ رَسولِ اللهِ نارٌ... كان يُعيشُنا الأسودانِ التَّمرُ والماءُ."
-            <br><br>
-            2. "خَرَجَ رَسولُ اللهِ ذاتَ يَومٍ فإذا هو بأبي بَكرٍ وعُمَرَ، فقال: ما أخرَجَكُما؟ قالا: الجوعُ، قال: وأنا والذي نَفسي بيَدِه لَأخرَجَني الذي أخرَجَكُما." (: <a href="https://dorar.net/h/KcKhK1dh" target="_blank" style="color: blue; text-decoration: underline;">المصدر</a>)
-            <br><br>
-            3. "توفِّيَ رَسولُ اللهِ ودِرعُه مَرهونةٌ عِندَ يَهوديٍّ بثَلاثينَ صاعًا مِن شَعيرٍ." (: <a href="https://dorar.net/h/MSQnHmDE" target="_blank" style="color: blue; text-decoration: underline;">المصدر</a>)`, 
-            num: "6459",
-            offense: `1. <b>تصوير النبي بمظهر العجز الإداري:</b> تُصور هذه المرويات النبي -وهو رئيس الدولة المشرف على بيت المال- بصورة الرجل العاجز عن تأمين أدنى مقومات الحياة لأهله لمدة شهرين، حتى أصبحوا "محط شفقة". هذا يسيء لمقام النبوة ولقدرته على رعاية رعيته.
-            <br>2. <b>المفارقة بين التعدد والإعدام المادي:</b> كيف يمتلك رجل "إمبراطورية أسرية" من تسعة بيوت، بينما هو عاجز عن إطعام زوجة واحدة أو فك رهن درعه الحربي من أجل شعير؟ الرواية تظهره مفرطاً في التعدد ومعدماً في النفقة، وهو تناقض يسيء لمنهجه.
-            <br>3. <b>النيل من الكرامة النبوية (مشهد التسوّل):</b> تصف الرواية خروج النبي وصاحبيه هائمين ليلاً بحثاً عن طعام عند الناس. هذا المشهد يقدم صورة "مهينة" لا تليق بحكام المدينة وأسيادها، وتصورهم تاركين خلفهم نساءً وأطفالاً بلا زاد.
-            <br>4. <b>التصادم مع المنهج القرآني:</b> القرآن يعتبر الفقر سلاحاً شيطانياً {الشَّيْطَانُ يَعِدُكُمُ الْفَقْرَ}. فكيف يكون صاحب الرسالة رهينة لوعود الشيطان طوال حياته؟ الفقر ليس "زهداً"، والزهد لا يكون إلّا لمن ملك الدنيا فتركها.
-            <br>5. <b>تكذيب الوعد الإلهي:</b> امتن الله على نبيه بأنه أغناه بعد عيلة {وَوَجَدَكَ عَائِلًا فَأَغْنَىٰ}. والروايات تصر على إظهاره "عائلاً بائساً" حتى وفاته (الدرع المرهونة)، مما يعد تكذيباً عملياً لكرامة النبي واستغنائه برزق ربه.
-            <br>6. <b>تخدير الشعوب:</b> الهدف من حشد هذه الروايات هو حث الناس على القبول بالظلم والبؤس تحت مسمى "الاقتداء بالنبي الجائع"، بينما الحقيقة هي أن النبي كان مثالاً للعزة والرزق الطيب.`
+            text: `1. "إن كُنَّا لَنَنظُرُ إلى الهِلالِ ثَلاثةَ أهِلَّةٍ في شَهرَينِ، وما أوقِدَت في أبياتِ رَسولِ اللهِ صلَّى اللهُ عليه وسلَّم نارٌ، فقُلتُ: ما كان يُعيشُكُم؟ قالت: الأسودانِ التَّمرُ والماءُ." <br> رقم الرواية: 6459 <br><br> 2. " خَرَجَ رَسولُ اللهِ صلَّى اللهُ عليه وسلَّم ذاتَ يَومٍ -أو لَيلةٍ- فإذا هو بأبي بَكرٍ وعُمَرَ، فقال: ما أخرَجَكُما مِن بُيوتِكُما هذه السَّاعةَ؟ قالا: الجوعُ يا رَسولَ اللهِ، قال: وأنا، والذي نَفسي بيَدِه لَأخرَجَني الذي أخرَجَكُما، قوموا، فقاموا معهُ، فأتى رَجُلًا مِنَ الأنصارِ." <br> رقم الرواية: 2038  <a href="https://dorar.net/h/KcKhK1dh" target="_blank" style="color: blue; text-decoration: underline;">المصدر</a> <br><br> 3. "توفِّيَ رَسولُ اللهِ صلَّى اللهُ عليه وسلَّم ودِرعُه مَرهونةٌ عِندَ يَهوديٍّ بثَلاثينَ صاعًا مِن شَعيرٍ." <br> رقم الرواية: 2916  <a href="https://dorar.net/h/MSQnHmDE" target="_blank" style="color: blue; text-decoration: underline;">المصدر</a>`, 
+            num: "6459 / 2038 / 2916",
+            offense: `1. <b>تصوير النبي بمظهر العجز الإداري والأسري:</b> تُصور هذه المرويات النبي -وهو رئيس الدولة، وقائد الجيوش، والمشرف على بيت المال والصدقات والغنائم- بصورة الرجل العاجز عن تأمين أدنى مقومات الحياة الأساسية لأهله (الخبز والنار) لمدة شهرين كاملين، حتى أصبح أهل بيته "محط شفقة" ومعونة من الجيران. هذا التصوير لا يخدم مفهوم "الزهد"، بل يسيء لمقام النبوة ولقدرة النبي على رعاية رعيته وأهل بيته. <br><br>2. <b>المفارقة المنطقية بين "التعدد" و"الإعدام المادي":</b> تكتمل المفارقة حين نجد أن هذا النبي "المُعدم" الذي لا يوقد ناراً، هو ذاته المرتبط بتسع زوجات في آن واحد، ولكل واحدة منهن "بيت" مستقل وميزانية إدارية (كما في رواية استئذانه ليمرض في بيت عائشة.  <a href="https://dorar.net/h/x87unf5B" target="_blank" style="color: blue; text-decoration: underline;">المصدر</a>) فبأي منطق عقلي يمتلك رجل "إمبراطورية أسرية" من تسعة بيوت (على أقل تقدير)، بينما هو عاجز عن إطعام زوجة واحدة أو فك رهن درعه الحربي من أجل صاعات شعير؟ إن التعدد في القرآن مشروط بالقدرة والعدل، والرواية تظهره مفرطاً في التعدد ومعدماً في النفقة، وهو تناقض يسيء لمنهجه التربوي. <br><br>3. <b>النيل من الكرامة النبوية (مشهد التسوّل المستور):</b> تصف رواية مسلم خروج النبي وصاحبيه ليلاً هائمين على وجوههم من شدة الجوع ليطرقوا أبواب الناس بحثاً عن ضيافة. إن هذا المشهد يقدم صورة "مهينة" لا تليق بمقام النبوة؛ فهل يعقل أن يجوع حكام المدينة وأسيادها لدرجة الهيام ليلاً في الطرقات بحثاً عن الطعام، تاركين خلفهم نساءً وأطفالاً بلا زاد؟ <br><br>4. <b>التصادم مع المنهج القرآني في "الغنى والفقر":</b> يصطدم تصوير الفقر كمنقبة نبوية بالرؤية القرآنية التي تعتبر الفقر سلاحاً شيطانياً لا هبة إلهية: {الشَّيْطَانُ يَعِدُكُمُ الْفَقْرَ وَيَأْمُرُكُم بِالْفَحْشَاءِ} [البقرة: 268]. فكيف يرتضي الرواة أن يكون صاحب الرسالة رهينة لوعود الشيطان بالفقر طوال حياته؟ إن الفقر ليس "زهداً"، بل هو حالة عوز سعى الإسلام لاجتثاثها، والزهد الحقيقي لا يكون إلّا لمن ملك الدنيا فتركها، لا لمن عجز عن لقمة العيش. <br><br>5. <b>تكذيب الوعد الإلهي بالنماء:</b> امتن الله على نبيه الكريم بأنه أغناه بعد عيلة: {وَوَجَدَكَ عَائِلًا فَأَغْنَىٰ} [الضحى: 8]. والروايات تصر على إظهاره "عائلاً بائساً" حتى لحظة وفاته (الدرع المرهونة)، مما يعد تكذيباً عملياً للواقع الذي أقره القرآن من كرامة النبي واستغنائه برزق ربه. <br><br>6. <b>تخدير الشعوب وتقديس البؤس:</b> إن الهدف من حشد هذه الروايات هو "تخدير" الناس وحثهم على القبول بالظلم الاجتماعي والبؤس المادي تحت مسمى "الاقتداء بالنبي الجائع"، بينما الحقيقة التاريخية والقرآنية تؤكد أن النبي كان مثالاً للعزة، والمنعة، والرزق الطيب، والتوازن بين جلال الرسالة وعزة النفس البشرية.`
         }
     ];
 
@@ -449,12 +383,7 @@
 
     function normalizeArabic(text) {
         if (!text) return "";
-        return text
-            .replace(/[\u064B-\u065F]/g, "") 
-            .replace(/[أإآ]/g, "ا")           
-            .replace(/ة/g, "ه")               
-            .replace(/ى/g, "ي")               
-            .trim();
+        return text.replace(/[\u064B-\u065F]/g, "").replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي").trim();
     }
 
     function highlightText(text, query) {
@@ -469,61 +398,6 @@
         links.classList.toggle('show');
         overlay.style.display = links.classList.contains('show') ? 'block' : 'none';
         document.body.classList.toggle('no-scroll');
-    }
-
-    function performSearch() {
-        const query = normalizeArabic(document.getElementById('globalSearch').value.toLowerCase());
-        const resultsContainer = document.getElementById('searchResults');
-        resultsContainer.innerHTML = '';
-        resultsContainer.style.display = 'none';
-
-        if (query === '') return;
-
-        let results = [];
-        novelsData.forEach((novel, index) => {
-            const searchField = normalizeArabic(novel.title + novel.text + novel.offense).toLowerCase();
-            if (searchField.includes(query)) {
-                results.push({ ...novel, originalIndex: index });
-            }
-        });
-
-        if (results.length === 0) {
-            resultsContainer.innerHTML = '<div class="search-item" style="text-align:center; color:#888;">لا توجد نتائج</div>';
-            resultsContainer.style.display = 'block';
-            return;
-        }
-
-        results.slice(0, 10).forEach(result => {
-            const item = document.createElement('div');
-            item.className = 'search-item';
-            const highlightedTitle = highlightText(result.title, query);
-            const highlightedSource = highlightText(result.source, query);
-            item.innerHTML = `<strong>${highlightedTitle}</strong><br><small>${highlightedSource}</small>`;
-            item.onclick = () => {
-                jumpToNovel(result.originalIndex, result.id, query);
-                resultsContainer.style.display = 'none';
-                document.getElementById('globalSearch').value = '';
-            };
-            resultsContainer.appendChild(item);
-        });
-        resultsContainer.style.display = 'block';
-    }
-
-    function jumpToNovel(index, id, searchQuery = null) {
-        currentPage = Math.floor(index / perPage) + 1;
-        renderNovels(searchQuery);
-        setTimeout(() => {
-            const card = document.getElementById(`card-h${id}`);
-            if (card) {
-                const details = card.querySelector('.hadith-details');
-                if (!details.classList.contains('open')) {
-                    toggleHadith(card.querySelector('.hadith-summary'));
-                }
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                card.style.boxShadow = "0 0 15px var(--primary-light)";
-                setTimeout(() => card.style.boxShadow = "var(--shadow-sm)", 2000);
-            }
-        }, 300);
     }
 
     function renderNovels(searchQuery = null) {
@@ -548,7 +422,7 @@
             <div class="hadith-row">
                 <div class="hadith-number-circle">${novel.id}</div>
                 <div class="hadith-card" id="card-h${novel.id}">
-                    <i class="far fa-bookmark fav-header-icon" data-id="${novel.id}" title="أضف للمفضلة" onclick="toggleFavorite(event, ${novel.id})"></i>
+                    <i class="far fa-bookmark fav-header-icon" data-id="${novel.id}" onclick="toggleFavorite(event, ${novel.id})"></i>
                     <div class="hadith-summary" onclick="toggleHadith(this)">
                         <h3>${titleText}</h3>
                         <div style="display:flex; align-items:center; gap:12px;">
@@ -560,7 +434,6 @@
                         <div class="detail-section">
                             <div class="section-header"><i class="fas fa-quote-right"></i> الرواية</div>
                             <div class="section-content">${textText}</div>
-                            ${novel.num ? `<div class="section-content"><b style="font-weight: bold;">رقم الرواية: ${novel.num}</b></div>` : ''}
                             <div class="hadith-actions">
                                 <a href="${novel.sourceUrl}" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
                                 <div class="action-btn btn-report" onclick="openReportModal('${novel.title}', '${novel.num}')"><i class="fas fa-flag"></i> إبلاغ</div>
@@ -589,25 +462,15 @@
 
     function toggleFavorite(e, id) {
         e.stopPropagation();
-        // مفتاح مفضلات خاص بقسم الإساءة (القالب السادس)
         const cardId = 'offense_novel_' + id;
-        
         let favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
         const idx = favs.findIndex(f => f.id === cardId);
-
         if (idx > -1) {
             favs.splice(idx, 1);
         } else {
             const novel = novelsData.find(n => n.id == id);
-            favs.push({ 
-                id: cardId, 
-                title: novel.title, 
-                type: 'رواية مسيئة',
-                novelId: id,
-                page: 'hadith_offense'
-            });
+            favs.push({ id: cardId, title: novel.title, type: 'رواية مسيئة', novelId: id, page: 'hadith_offense' });
         }
-
         localStorage.setItem('myFavorites', JSON.stringify(favs));
         syncFavIcons();
     }
@@ -616,9 +479,7 @@
         const favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
         document.querySelectorAll('.fav-header-icon').forEach(icon => {
             const id = icon.getAttribute('data-id');
-            const cardId = 'offense_novel_' + id;
-            const isFav = favs.some(f => f.id === cardId);
-            
+            const isFav = favs.some(f => f.id === 'offense_novel_' + id);
             icon.classList.toggle('fas', isFav);
             icon.classList.toggle('far', !isFav);
             icon.style.color = isFav ? "var(--primary-color)" : "var(--matte-purple)";
@@ -635,24 +496,19 @@
 
     function updatePaginationUI() {
         const totalPages = Math.ceil(novelsData.length / perPage) || 1;
-        const totalHadiths = novelsData.length;
-        
         document.getElementById('pageInfo').textContent = `الصفحة ${currentPage} من ${totalPages}`;
-        document.getElementById('totalHadithCount').textContent = `عدد الروايات: ${totalHadiths}`;
-        
+        document.getElementById('totalHadithCount').textContent = `عدد الروايات: ${novelsData.length}`;
         document.getElementById('prevPage').disabled = (currentPage === 1);
         document.getElementById('nextPage').disabled = (currentPage === totalPages);
-        document.getElementById('firstPage').disabled = (currentPage === 1);
     }
 
     document.getElementById('nextPage').onclick = () => { currentPage++; renderNovels(); window.scrollTo(0, 400); };
     document.getElementById('prevPage').onclick = () => { currentPage--; renderNovels(); window.scrollTo(0, 400); };
-    document.getElementById('firstPage').onclick = () => { currentPage = 1; renderNovels(); window.scrollTo(0, 400); };
 
     function openReportModal(title, num) {
         document.getElementById('hiddenHadithName').value = title;
         document.getElementById('hiddenHadithNumber').value = num;
-        document.getElementById('modalHadithInfo').textContent = `أنت تبلغ عن: ${title} ${num ? '(رواية رقم ' + num + ')' : ''}`;
+        document.getElementById('modalHadithInfo').textContent = `أنت تبلغ عن: ${title}`;
         document.getElementById('reportModal').classList.add('show');
         document.body.classList.add('no-scroll');
     }
@@ -662,22 +518,6 @@
         document.body.classList.remove('no-scroll');
     }
 
-    document.getElementById("reportForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        const formData = new FormData(this);
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString(),
-        }).then(() => {
-            closeReportModal();
-            const toast = document.getElementById("successToast");
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 3500);
-            this.reset();
-        });
-    });
-
     window.addEventListener('scroll', () => {
         const btt = document.getElementById('backToTop');
         if (window.scrollY > 400) btt.classList.add('show');
@@ -685,7 +525,6 @@
     });
 
     document.getElementById('backToTop').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.getElementById('globalSearch').addEventListener('input', performSearch);
 
     document.addEventListener('DOMContentLoaded', () => {
         renderNovels();
