@@ -577,21 +577,103 @@
             else btn.classList.remove('visible');
         });
 
-        // Search Logic
-        async function performGlobalSearch(query) {
-            const resultsContainer = document.getElementById('searchResults');
-            if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
-            resultsContainer.innerHTML = '<div style="padding:15px;">جاري البحث...</div>';
-            resultsContainer.style.display = 'block';
-            
+        /* ==================== GLOBAL SEARCH LOGIC (Unified) ==================== */
+        let cachedPagesContent = null;
+        let isSearchInitialized = false;
+
+        async function loadAllPagesContent() {
+            if (cachedPagesContent) return cachedPagesContent;
             try {
                 const response = await fetch('site-map.json?v=' + new Date().getTime());
                 const pagesList = await response.json();
-                // (تكملة منطق البحث كما في الكود الأصلي...)
-            } catch (e) { console.log("Search error"); }
+                const promises = pagesList.map(async (item) => {
+                    let url = typeof item === 'string' ? item : item.url;
+                    try {
+                        const pageResp = await fetch(url);
+                        const html = await pageResp.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                        const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                        return { 
+                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                            url: url, 
+                            content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
+                        };
+                    } catch (e) { return null; }
+                });
+                cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
+                return cachedPagesContent;
+            } catch (error) { return []; }
+        }
+
+        function normalizeArabic(text) {
+            if (!text) return '';
+            text = text.replace(/[\u064B-\u065F\u0670]/g, '');
+            text = text.replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+            return text;
+        }
+
+        function getSafeRegex(searchTerm) {
+            let regexStr = '';
+            const cleanTerm = normalizeArabic(searchTerm);
+            for (let char of cleanTerm) {
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                regexStr += '[\\u064B-\u065F\u0670]*';
+            }
+            return new RegExp(regexStr, 'gi');
+        }
+
+        function displayGlobalResults(results, queryRegex, container) {
+            container.innerHTML = '';
+            if (results.length === 0) {
+                container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+                container.style.display = 'block';
+                return;
+            }
+            const countDiv = document.createElement('div');
+            countDiv.className = 'search-count';
+            countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
+            container.appendChild(countDiv);
+
+            results.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-item';
+                const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
+                queryRegex.lastIndex = 0;
+                const match = queryRegex.exec(item.content);
+                let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
+                div.onclick = () => window.location.href = item.url;
+                container.appendChild(div);
+            });
+            container.style.display = 'block';
+        }
+
+        async function performGlobalSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            resultsContainer.style.display = 'block';
+
+            const data = await loadAllPagesContent();
+            const searchRegex = getSafeRegex(query);
+            const results = data.filter(item => {
+                searchRegex.lastIndex = 0;
+                const titleMatch = searchRegex.test(item.page);
+                searchRegex.lastIndex = 0;
+                const contentMatch = searchRegex.test(item.content);
+                return titleMatch || contentMatch;
+            });
+            displayGlobalResults(results, searchRegex, resultsContainer);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Page Specific Logic: Book Filtering ---
             const params = new URLSearchParams(window.location.search);
             const bookId = params.get("book");
             if (bookId) {
@@ -600,11 +682,15 @@
                 });
             }
             
-            const searchInput = document.getElementById('globalSearch');
-            if(searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    performGlobalSearch(e.target.value.trim());
+            // --- Unified Search Initialization ---
+            const sInput = document.getElementById('globalSearch');
+            if(sInput) {
+                let sTimer;
+                sInput.addEventListener('input', (e) => {
+                    clearTimeout(sTimer);
+                    sTimer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500);
                 });
+                sInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
             }
 
             document.addEventListener('click', (e) => {
