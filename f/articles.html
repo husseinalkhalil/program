@@ -489,8 +489,7 @@
             else btn.classList.remove('visible');
         });
 
-        // Search Logic
-        /* ==================== GLOBAL SEARCH LOGIC ==================== */
+        /* ==================== GLOBAL SEARCH LOGIC (Unified) ==================== */
         let cachedPagesContent = null;
         let isSearchInitialized = false;
 
@@ -586,6 +585,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            renderArticles(); // تحميل المقالات عند فتح الصفحة
+
             const sInput = document.getElementById('globalSearch');
             if (sInput) {
                 let sTimer;
