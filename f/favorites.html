@@ -128,6 +128,14 @@
         }
         #globalSearch:focus { border-color: var(--accent-gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); transform: scale(1.02); }
         .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--accent-gold); pointer-events: none; }
+        .search-results {
+            position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1); max-height: 400px; overflow-y: auto; z-index: 200; text-align: right; display: none;
+            color: var(--text-primary); border: 1px solid rgba(0,0,0,0.05);
+        }
+        .search-count { padding: 10px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(212, 175, 55, 0.1); background: #f8fafc; font-weight: 700; }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; }
+        mark { background-color: var(--accent-gold); color: #fff; padding: 0 3px; border-radius: 3px; }
 
         /* ==================== Favorites Grid ==================== */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -263,14 +271,15 @@
             </div>
             <div class="universal-search">
                 <i class="fas fa-search search-icon-placeholder"></i>
-                <input type="text" id="globalSearch" placeholder="ابحث في مفضلتك..." />
+                <input type="text" id="globalSearch" placeholder="ابحث في الموقع ومفضلتك..." />
+                <div class="search-results" id="searchResults"></div>
             </div>
         </div>
     </header>
 
     <div class="container main-wrapper">
         <div id="searchResultsInfo" class="search-results-info">
-            <span id="resultsCount">0</span> نتيجة بحث
+            <span id="resultsCount">0</span> نتيجة من المفضلة
         </div>
 
         <div id="noResultsMessage" style="display:none; text-align:center; padding:30px; color:var(--text-secondary); background:white; border-radius:16px; box-shadow:var(--shadow-sm); margin-bottom:20px;">
@@ -324,15 +333,15 @@
             if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
         });
 
-        // ==================== Logic ====================
-        function normalizeArabicText(text) {
+        // ==================== Local Favorites Logic ====================
+        function normalizeFavText(text) {
             if(!text) return "";
             return text.replace(/[\u064B-\u065F\u0670]/g, "").replace(/[أإآاءئؤ]/g, "ا").replace(/[ة]/g, "ه").replace(/[ى]/g, "ي").toLowerCase();
         }
 
-        function getSafeRegex(searchTerm) {
+        function getFavRegex(searchTerm) {
             let regexStr = '';
-            const cleanTerm = normalizeArabicText(searchTerm);
+            const cleanTerm = normalizeFavText(searchTerm);
             for (let i = 0; i < cleanTerm.length; i++) {
                 const char = cleanTerm[i];
                 if (char === 'ا') regexStr += '[اأإآ]';
@@ -350,7 +359,7 @@
             const fav1 = JSON.parse(localStorage.getItem("favorites")) || [];
             const fav2 = JSON.parse(localStorage.getItem("myFavorites")) || [];
             const combined = [...fav1, ...fav2];
-            const uniqueFavorites = combined.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
+            const uniqueFavorites = combined.filter((v, i, a) => a.findIndex(t => ((t.id || t) === (v.id || v))) === i);
             renderFavorites(uniqueFavorites);
         }
 
@@ -373,7 +382,7 @@
                 if(searchTerm) { info.style.display = 'block'; countSpan.textContent = items.length; } else { info.style.display = 'none'; }
             }
 
-            const regex = searchTerm ? getSafeRegex(searchTerm) : null;
+            const regex = searchTerm ? getFavRegex(searchTerm) : null;
 
             items.forEach(item => {
                 let title = item.title || item; 
@@ -423,22 +432,147 @@
             loadFavorites();
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const searchInput = document.getElementById('globalSearch');
-            searchInput.addEventListener('input', () => {
-                const term = searchInput.value.trim();
-                const fav1 = JSON.parse(localStorage.getItem("favorites")) || [];
-                const fav2 = JSON.parse(localStorage.getItem("myFavorites")) || [];
-                const favorites = [...fav1, ...fav2].filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
-                if (!term) { renderFavorites(favorites); return; }
-                const normTerm = normalizeArabicText(term);
-                const filtered = favorites.filter(item => {
-                    let textToCheck = typeof item === 'string' ? normalizeArabicText(item) : normalizeArabicText(item.title) + " " + normalizeArabicText(item.content || "") + " " + normalizeArabicText(item.source || "");
-                    return textToCheck.includes(normTerm);
+        // ==================== GLOBAL SEARCH LOGIC (Unified) ====================
+        let cachedPagesContent = null;
+        let isSearchInitialized = false;
+
+        async function loadAllPagesContent() {
+            if (cachedPagesContent) return cachedPagesContent;
+            try {
+                const response = await fetch('site-map.json?v=' + new Date().getTime());
+                const pagesList = await response.json();
+                const promises = pagesList.map(async (item) => {
+                    let url = typeof item === 'string' ? item : item.url;
+                    try {
+                        const pageResp = await fetch(url);
+                        const html = await pageResp.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                        const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                        return { 
+                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                            url: url, 
+                            content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
+                        };
+                    } catch (e) { return null; }
                 });
-                renderFavorites(filtered, term);
+                cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
+                return cachedPagesContent;
+            } catch (error) { return []; }
+        }
+
+        function normalizeArabic(text) {
+            if (!text) return '';
+            text = text.replace(/[\u064B-\u065F\u0670]/g, '');
+            text = text.replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+            return text;
+        }
+
+        function getSafeRegex(searchTerm) {
+            let regexStr = '';
+            const cleanTerm = normalizeArabic(searchTerm);
+            for (let char of cleanTerm) {
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                regexStr += '[\\u064B-\u065F\u0670]*';
+            }
+            return new RegExp(regexStr, 'gi');
+        }
+
+        function displayGlobalResults(results, queryRegex, container) {
+            container.innerHTML = '';
+            if (results.length === 0) {
+                container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج في الموقع</p></div>';
+                container.style.display = 'block';
+                return;
+            }
+            const countDiv = document.createElement('div');
+            countDiv.className = 'search-count';
+            countDiv.textContent = `تم العثور على ${results.length} نتيجة في الموقع`;
+            container.appendChild(countDiv);
+
+            results.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-item';
+                const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
+                queryRegex.lastIndex = 0;
+                const match = queryRegex.exec(item.content);
+                let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
+                div.onclick = () => window.location.href = item.url;
+                container.appendChild(div);
             });
+            container.style.display = 'block';
+        }
+
+        async function performGlobalSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث في الموقع...</p></div>';
+            resultsContainer.style.display = 'block';
+
+            const data = await loadAllPagesContent();
+            const searchRegex = getSafeRegex(query);
+            const results = data.filter(item => {
+                searchRegex.lastIndex = 0;
+                const titleMatch = searchRegex.test(item.page);
+                searchRegex.lastIndex = 0;
+                const contentMatch = searchRegex.test(item.content);
+                return titleMatch || contentMatch;
+            });
+            displayGlobalResults(results, searchRegex, resultsContainer);
+        }
+
+        // ==================== Combined Initialization ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. تحميل المفضلة عند فتح الصفحة
             loadFavorites();
+
+            // 2. تفعيل مربع البحث ليعمل على النظامين (المحلي والموقع كامل)
+            const searchInput = document.getElementById('globalSearch');
+            let sTimer;
+
+            if (searchInput) {
+                searchInput.addEventListener('focus', () => { 
+                    if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } 
+                });
+
+                searchInput.addEventListener('input', (e) => {
+                    const term = e.target.value.trim();
+                    
+                    // أ. فلترة العناصر المفضلة المعروضة في الشاشة
+                    const fav1 = JSON.parse(localStorage.getItem("favorites")) || [];
+                    const fav2 = JSON.parse(localStorage.getItem("myFavorites")) || [];
+                    const favorites = [...fav1, ...fav2].filter((v, i, a) => a.findIndex(t => ((t.id || t) === (v.id || v))) === i);
+                    
+                    if (!term) { 
+                        renderFavorites(favorites); 
+                    } else {
+                        const normTerm = normalizeFavText(term);
+                        const filtered = favorites.filter(item => {
+                            let textToCheck = typeof item === 'string' ? normalizeFavText(item) : normalizeFavText(item.title) + " " + normalizeFavText(item.content || "") + " " + normalizeFavText(item.source || "");
+                            return textToCheck.includes(normTerm);
+                        });
+                        renderFavorites(filtered, term);
+                    }
+
+                    // ب. إظهار القائمة المنسدلة للبحث في كامل الموقع
+                    clearTimeout(sTimer);
+                    sTimer = setTimeout(() => performGlobalSearch(term), 500);
+                });
+            }
+
+            // إخفاء قائمة البحث عند النقر خارجها
+            document.addEventListener('click', (e) => {
+                const results = document.getElementById('searchResults');
+                if(results && !document.querySelector('.universal-search').contains(e.target)) {
+                    results.style.display = 'none';
+                }
+            });
         });
     </script>
 </body>
