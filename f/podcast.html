@@ -120,17 +120,21 @@
         /* Search Box */
         .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto; }
         #globalSearch {
-            width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: 1px solid #e2e8f0; font-size: 1rem;
+            width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #e2e8f0; font-size: 1rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); font-family: 'Tajawal', sans-serif; outline: none; background: white;
-            transition: 0.3s;
+            transition: 0.3s; text-align: right;
         }
         #globalSearch:focus { border-color: var(--accent-gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
-        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--accent-gold); pointer-events: none; }
         .search-results {
-            position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1); max-height: 400px; overflow-y: auto; z-index: 200; text-align: right; display: none;
-            color: var(--text-primary); border: 1px solid rgba(0,0,0,0.05);
+            position: absolute; top: 110%; left: 0; right: 0; 
+            background: white; border-radius: 15px; max-height: 400px; 
+            overflow-y: auto; display: none; z-index: 1002; color: #333; 
+            text-align: right; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05);
         }
+        .search-count { padding: 12px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(212, 175, 55, 0.1); background: #f8fafc; font-weight: 700; }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
+        .search-item:hover { background: rgba(212, 175, 55, 0.05); }
+        .search-item h3 { color: var(--primary-color); font-size: 1.05rem; margin-bottom: 5px; font-weight: 700; }
         mark { background-color: var(--accent-gold); color: #fff; padding: 0 3px; border-radius: 3px; }
 
         /* ==================== Main Content ==================== */
@@ -186,7 +190,7 @@
         /* Pagination Section */
         .pagination-section {
             display: flex; flex-direction: column; align-items: center; gap: 15px;
-            margin: 50px 0; padding: 25px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid #f1e4c0;
+            margin: 50px 0; padding: 25px; background: white; border-radius: 1rem; box-shadow: var(--shadow-sm); border: 1px solid #f1e4c0;
         }
         .pagination-controls { display: flex; align-items: center; gap: 10px; }
         .page-arrow {
@@ -269,7 +273,6 @@
                 <p>استمع إلى حلقات بودكاست "فكر من جديد" التي تناقش مواضيع فكرية ودينية معاصرة</p>
             </div>
             <div class="universal-search">
-                <i class="fas fa-search search-icon-placeholder"></i>
                 <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
                 <div class="search-results" id="searchResults"></div>
             </div>
@@ -343,6 +346,102 @@
     </footer>
 
     <script>
+        /* ==================== GLOBAL SEARCH LOGIC (ORIGINAL FROM INDEX) ==================== */
+        let cachedPagesContent = null;
+        let isSearchInitialized = false;
+
+        async function loadAllPagesContent() {
+            if (cachedPagesContent) return cachedPagesContent;
+            try {
+                const response = await fetch('site-map.json?v=' + new Date().getTime());
+                const pagesList = await response.json();
+                const promises = pagesList.map(async (item) => {
+                    let url = typeof item === 'string' ? item : item.url;
+                    try {
+                        const pageResp = await fetch(url);
+                        const html = await pageResp.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                        const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                        return { 
+                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                            url: url, 
+                            content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
+                        };
+                    } catch (e) { return null; }
+                });
+                cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
+                return cachedPagesContent;
+            } catch (error) { return []; }
+        }
+
+        function normalizeArabic(text) {
+            if (!text) return '';
+            text = text.replace(/[\u064B-\u065F\u0670]/g, '');
+            text = text.replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+            return text;
+        }
+
+        function getSafeRegex(searchTerm) {
+            let regexStr = '';
+            const cleanTerm = normalizeArabic(searchTerm);
+            for (let char of cleanTerm) {
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                regexStr += '[\\u064B-\\u065F\\u0670]*';
+            }
+            return new RegExp(regexStr, 'gi');
+        }
+
+        function displayGlobalResults(results, queryRegex, container) {
+            container.innerHTML = '';
+            if (results.length === 0) {
+                container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+                container.style.display = 'block';
+                return;
+            }
+            const countDiv = document.createElement('div');
+            countDiv.className = 'search-count';
+            countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
+            container.appendChild(countDiv);
+
+            results.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-item';
+                const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
+                queryRegex.lastIndex = 0;
+                const match = queryRegex.exec(item.content);
+                let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
+                div.onclick = () => window.location.href = item.url;
+                container.appendChild(div);
+            });
+            container.style.display = 'block';
+        }
+
+        async function performGlobalSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            resultsContainer.style.display = 'block';
+
+            const data = await loadAllPagesContent();
+            const searchRegex = getSafeRegex(query);
+            const results = data.filter(item => {
+                searchRegex.lastIndex = 0;
+                const titleMatch = searchRegex.test(item.page);
+                searchRegex.lastIndex = 0;
+                const contentMatch = searchRegex.test(item.content);
+                return titleMatch || contentMatch;
+            });
+            displayGlobalResults(results, searchRegex, resultsContainer);
+        }
+
+        /* ==================== Podcast Specific Logic ==================== */
         // كافة الحلقات الـ 60 موجودة هنا
         const podcastList = [
             {id: "60", title: "قصة زواج النبي بصفية بنت حيي", audio: "https://d3ctxlq1ktw2nl.cloudfront.net/staging/2026-2-6/419452705-44100-2-f8a127cb97ec1.m4a"},
@@ -502,58 +601,26 @@
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         function toggleMobileMenu() { const n = document.querySelector('.nav-links'), o = document.querySelector('.nav-overlay'); n.classList.toggle('show'); o.style.display = n.classList.contains('show') ? 'block' : 'none'; document.body.classList.toggle('no-scroll'); }
 
-        // Search Original
-        let cachedPagesContent = null;
-        let isSearchInitialized = false;
-        async function loadAllPagesContent() {
-            if (cachedPagesContent) return cachedPagesContent;
-            try {
-                const response = await fetch('site-map.json?v=' + new Date().getTime());
-                const pagesList = await response.json();
-                const promises = pagesList.map(async (item) => {
-                    let url = typeof item === 'string' ? item : item.url;
-                    try {
-                        const pageResp = await fetch(url);
-                        const html = await pageResp.text();
-                        const doc = new DOMParser().parseFromString(html, 'text/html');
-                        doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
-                        return { page: doc.title.replace('حسين الخليل - ', '').trim() || 'صفحة', url: url, content: (doc.querySelector('.container, main, body') || doc.body).textContent.replace(/\s+/g, ' ').trim() };
-                    } catch (e) { return null; }
-                });
-                cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
-                return cachedPagesContent;
-            } catch (error) { return []; }
-        }
-
-        function normalizeArabic(text) { return text.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي'); }
-
-        async function performGlobalSearch(query) {
-            const resultsContainer = document.getElementById('searchResults');
-            if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
-            resultsContainer.style.display = 'block';
-            const data = await loadAllPagesContent();
-            const cleanQuery = normalizeArabic(query);
-            const results = data.filter(item => normalizeArabic(item.page).includes(cleanQuery) || normalizeArabic(item.content).includes(cleanQuery));
-            resultsContainer.innerHTML = `<div class="search-count">تم العثور على ${results.length} نتيجة</div>`;
-            results.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'search-item';
-                div.innerHTML = `<h3>${item.page}</h3><p>${item.content.substring(0, 150)}...</p>`;
-                div.onclick = () => window.location.href = item.url;
-                resultsContainer.appendChild(div);
-            });
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             renderPodcasts();
+            
             const sInput = document.getElementById('globalSearch');
-            if(sInput) {
-                let timer;
-                sInput.addEventListener('input', (e) => { clearTimeout(timer); timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500); });
+            if (sInput) {
+                let sTimer;
+                sInput.addEventListener('input', (e) => {
+                    clearTimeout(sTimer);
+                    sTimer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500);
+                });
                 sInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
             }
-            document.addEventListener('click', (e) => { if(!document.querySelector('.universal-search').contains(e.target)) document.getElementById('searchResults').style.display = 'none'; });
+
+            document.addEventListener('click', (e) => {
+                const results = document.getElementById('searchResults');
+                if(results && !document.querySelector('.universal-search').contains(e.target)) {
+                    results.style.display = 'none';
+                }
+            });
+            
             window.addEventListener('scroll', () => {
                  const b = document.querySelector('.back-to-top');
                  if(b) b.classList.toggle('visible', window.scrollY > 500);
