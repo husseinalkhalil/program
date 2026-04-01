@@ -436,7 +436,7 @@
             else btn.classList.remove('visible');
         });
 
-        // Search Original
+        /* ==================== GLOBAL SEARCH LOGIC (Unified) ==================== */
         let cachedPagesContent = null;
         let isSearchInitialized = false;
 
@@ -453,10 +453,11 @@
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
-                        return {
-                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة',
-                            url: url,
-                            content: (doc.querySelector('.container, main, body') || doc.body).textContent.replace(/\s+/g, ' ').trim()
+                        const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                        return { 
+                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                            url: url, 
+                            content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
                         };
                     } catch (e) { return null; }
                 });
@@ -466,7 +467,10 @@
         }
 
         function normalizeArabic(text) {
-            return text.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+            if (!text) return '';
+            text = text.replace(/[\u064B-\u065F\u0670]/g, '');
+            text = text.replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+            return text;
         }
 
         function getSafeRegex(searchTerm) {
@@ -483,40 +487,68 @@
             return new RegExp(regexStr, 'gi');
         }
 
+        function displayGlobalResults(results, queryRegex, container) {
+            container.innerHTML = '';
+            if (results.length === 0) {
+                container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+                container.style.display = 'block';
+                return;
+            }
+            const countDiv = document.createElement('div');
+            countDiv.className = 'search-count';
+            countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
+            container.appendChild(countDiv);
+
+            results.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-item';
+                const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
+                queryRegex.lastIndex = 0;
+                const match = queryRegex.exec(item.content);
+                let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
+                div.onclick = () => window.location.href = item.url;
+                container.appendChild(div);
+            });
+            container.style.display = 'block';
+        }
+
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
             if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
             resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
             resultsContainer.style.display = 'block';
+
             const data = await loadAllPagesContent();
             const searchRegex = getSafeRegex(query);
             const results = data.filter(item => {
                 searchRegex.lastIndex = 0;
-                return searchRegex.test(item.page) || searchRegex.test(item.content);
+                const titleMatch = searchRegex.test(item.page);
+                searchRegex.lastIndex = 0;
+                const contentMatch = searchRegex.test(item.content);
+                return titleMatch || contentMatch;
             });
-            resultsContainer.innerHTML = `<div class="search-count">تم العثور على ${results.length} نتيجة</div>`;
-            results.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'search-item';
-                div.innerHTML = `<h3>${item.page.replace(searchRegex, m => `<mark>${m}</mark>`)}</h3><p>${item.content.substring(0, 150).replace(searchRegex, m => `<mark>${m}</mark>`)}...</p>`;
-                div.onclick = () => window.location.href = item.url;
-                resultsContainer.appendChild(div);
-            });
+            displayGlobalResults(results, searchRegex, resultsContainer);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderDialogues();
-            const searchInput = document.getElementById('globalSearch');
-            let timer;
-            if(searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    clearTimeout(timer);
-                    timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500);
+            renderDialogues(); // تحميل وعرض الحوارات
+            
+            const sInput = document.getElementById('globalSearch');
+            if (sInput) {
+                let sTimer;
+                sInput.addEventListener('input', (e) => {
+                    clearTimeout(sTimer);
+                    sTimer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500);
                 });
-                searchInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
+                sInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
             }
+
             document.addEventListener('click', (e) => {
-                if(!document.querySelector('.universal-search').contains(e.target)) document.getElementById('searchResults').style.display = 'none';
+                const results = document.getElementById('searchResults');
+                if(results && !document.querySelector('.universal-search').contains(e.target)) {
+                    results.style.display = 'none';
+                }
             });
         });
     </script>
