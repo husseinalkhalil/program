@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ازدواجية الضمير - حسين الخليل</title>
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+    <!-- Favicon -->
+    <link href="images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==================== Shared Styles (Unified Identity from First Code) ==================== */
+        :root {
+            --primary-color: #5c4a24; 
+            --accent-gold: #d4af37; 
+            --bg-color: #f9f7f2; 
+            --ticker-footer-bg: #f1e4c0; 
+            --surface-color: #ffffff; 
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            
+            --shadow-sm: 0 4px 15px rgba(212, 175, 55, 0.1);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --nav-height: 75px;
+            --gradient-header: linear-gradient(135deg, #fdfcf8 0%, #f1e4c0 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            animation: fadeInPage 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.no-scroll { overflow: hidden !important; height: 100vh; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* Navigation */
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+            z-index: 998; display: none;
+        }
+
+        nav {
+            background: var(--ticker-footer-bg); 
+            padding: 0 5%;
+            position: fixed; width: 100%; top: 0;
+            z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            height: var(--nav-height);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .logo-container { order: 1; }
+        .logo-container img { height: 45px; transition: 0.4s; }
+
+        .nav-links {
+            display: flex; flex: 1; justify-content: space-evenly;
+            align-items: center; flex-wrap: wrap; margin: 0 10px; order: 2;
+        }
+
+        .nav-links a {
+            color: var(--primary-color); font-weight: 700; font-size: 0.95rem;
+            padding: 8px 12px; border-radius: 20px;
+            display: flex; align-items: center; gap: 5px; white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { background: rgba(255,255,255,0.3); color: var(--accent-gold); transform: translateY(-2px); }
+
+        .hamburger { display: none; color: var(--primary-color); font-size: 1.5rem; cursor: pointer; order: 3; }
+
+        @media (max-width: 1200px) {
+            .hamburger { display: block; order: 1; }
+            .logo-container { order: 2; }
+            .nav-links {
+                position: fixed; top: var(--nav-height); right: -280px; width: 280px;
+                background: white; flex-direction: column;
+                padding: 15px 0 40px; height: calc(100vh - var(--nav-height));
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
+                gap: 0; margin: 0; z-index: 1001; display: flex !important;
+            }
+            .nav-links.show { right: 0; }
+            .nav-links a { color: var(--text-primary); width: 100%; padding: 18px 25px; border-radius: 0; font-size: 1.05rem; border-bottom: 1px solid rgba(0,0,0,0.03); font-weight: 700; justify-content: flex-start; }
+            nav { padding: 0.8rem 5%; }
+        }
+
+        /* Hero Section */
+        .unified-header {
+            background: var(--gradient-header);
+            padding: calc(var(--nav-height) + 40px) 20px 60px;
+            text-align: center; color: var(--primary-color);
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 30px; width: 100%;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .hero-content {
+            max-width: 900px; margin: 0 auto;
+            display: flex; flex-direction: column; align-items: center; gap: 20px;
+        }
+
+        .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; font-family: 'Tajawal', sans-serif; line-height: 1.4; text-align: center; }
+        .hero-text p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; opacity: 0.9; font-weight: 500; text-align: center; }
+
+        /* Container & Main Layout */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; flex: 1; }
+        
+        .main-wrapper {
+            position: relative; z-index: 20; margin-top: -30px;
+            max-width: 1100px; 
+            margin-left: auto; margin-right: auto;
+            margin-bottom: 60px;
+        }
+
+        /* ==================== Article Specific Styles ==================== */
+        .article-content-container {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 50px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .article-meta {
+            display: flex; justify-content: center; gap: 15px;
+            margin-bottom: 30px; padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-secondary); font-size: 0.95rem; font-weight: 700;
+        }
+        
+        .article-meta span { display: flex; align-items: center; gap: 5px; }
+        .article-meta i { color: var(--accent-gold); }
+
+        .article-body {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            text-align: justify; line-height: 1.9;
+            transition: font-size 0.3s;
+        }
+
+        .article-body p { margin-bottom: 20px; }
+        .article-body strong { color: var(--primary-color); font-weight: 800; font-size: 1.05em; }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 40px 0 15px;
+            position: relative; display: inline-block;
+            font-size: 1.5rem; font-weight: 800;
+            font-family: 'Tajawal', sans-serif;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-gold); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 25px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--accent-gold);
+            position: absolute; right: 0; font-weight: bold; font-size: 1.2rem;
+        }
+
+        /* Font Controls (Fixed) */
+        .font-controls-fixed {
+            position: fixed; top: 120px; left: 30px;
+            display: flex; flex-direction: column; gap: 10px;
+            z-index: 990;
+        }
+        
+        .font-btn {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: white; border: 1px solid var(--accent-gold);
+            color: var(--primary-color); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+        .font-btn:hover { background: var(--accent-gold); color: white; transform: scale(1.1); }
+
+        /* Action Buttons */
+        .article-actions {
+            margin-top: 50px; padding-top: 25px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
+        }
+        
+        .action-btn-pill {
+            padding: 12px 30px; border-radius: 50px;
+            border: 2px solid var(--accent-gold); background: #fdfcf8;
+            color: var(--primary-color); font-weight: 800;
+            cursor: pointer; display: flex; align-items: center; gap: 10px;
+            transition: all 0.3s;
+        }
+        .action-btn-pill:hover { background: var(--accent-gold); color: white; transform: translateY(-3px); }
+
+        /* Footer & Others */
+        footer { 
+            background: var(--ticker-footer-bg); 
+            color: var(--primary-color); 
+            padding: 60px 20px; 
+            text-align: center; 
+            margin-top: auto; 
+            border-top: 3px solid var(--accent-gold);
+        }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+        .footer-links a { color: var(--primary-color); font-weight: 700; opacity: 0.8; font-size: 0.95rem; }
+        .footer-links a:hover { color: var(--accent-gold); opacity: 1; }
+        
+        /* Social Links */
+        .social-links {
+            display: flex; justify-content: center; gap: 15px; margin: 20px 0;
+        }
+        .social-links a {
+            width: 40px; height: 40px; border-radius: 50%; 
+            background: rgba(92, 74, 36, 0.1);
+            display: flex; align-items: center; justify-content: center; 
+            color: var(--primary-color); transition: 0.3s; font-size: 1.1rem;
+        }
+        .social-links a:hover { background: var(--accent-gold); color: white; transform: translateY(-3px); }
+
+        .copyright { 
+            color: var(--primary-color); 
+            font-size: 0.85rem; 
+            border-top: 1px solid rgba(92, 74, 36, 0.1); 
+            padding-top: 25px; 
+            margin-top: 25px; 
+            opacity: 0.7; 
+            font-weight: 600;
+        }
+
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; background: var(--primary-color); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s;
+            z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem;
+        }
+        .back-to-top.visible { opacity: 1; pointer-events: all; }
+        .back-to-top:hover { transform: translateY(-5px); background: var(--accent-gold); }
+
+        /* Print Media */
+        @media print {
+            nav, .unified-header, .font-controls-fixed, .article-actions, footer, .back-to-top { display: none; }
+            .main-wrapper { margin: 0; max-width: 100%; }
+            .article-content-container { box-shadow: none; border: none; padding: 0; }
+            body { background: white; color: black; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .font-controls-fixed { top: auto; bottom: 30px; left: 30px; flex-direction: row; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 1.8rem; }
+            .unified-header { padding-top: calc(var(--nav-height) + 20px); border-radius: 0 0 35px 35px; }
+            .article-content-container { padding: 25px; }
+            .main-wrapper { margin-top: 0; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo-container">
+            <a href="/index.html">
+                <img src="/images/logo.png" alt="شعار حسين الخليل" />
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <a href="/index.html">الرئيسية</a>
+            <a href="/books.html">الكتب</a>
+            <a href="/articles.html" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">المقالات</a>
+            <a href="/khawatir.html">خواطر</a>
+            <a href="/videos.html">الفيديوهات</a>
+            <a href="/history.html">التاريخ</a>
+            <a href="/podcast.html">البودكاست</a>
+            <a href="/ask.html">الأسئلة</a>
+            <a href="/hewar.html">حوارات</a>
+            <a href="/inq.html">تساؤلات</a>
+            <a href="/manhaj.html">المنهج</a>
+            <a href="/favorites.html">المفضلة</a>
+            <a href="/support.html">دعم المحتوى</a>
+            <a href="/about.html">من نحن</a>
+            <a href="/en/article/5.html" style="color: var(--primary-color) !important; font-weight: 800; border: 1.5px solid var(--accent-gold); padding: 5px 15px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;"><i class="fas fa-globe"></i>En</a>
+            <a href="#" onclick="window.print()" title="طباعة"><i class="fas fa-print"></i></a>
+        </div>
+
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Unified Header Style) -->
+    <header class="unified-header">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>❖ ازدواجية الضمير</h1>
+                <p>عن المعايير المزدوجة والضمير الانتقائي في الحكم على القضايا الإنسانية والسياسية.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Font Controls -->
+    <div class="font-controls-fixed">
+        <button class="font-btn" id="fontIncrease" title="تكبير الخط"><i class="fas fa-plus"></i></button>
+        <button class="font-btn" id="fontReset" title="إعادة تعيين"><i class="fas fa-redo"></i></button>
+        <button class="font-btn" id="fontDecrease" title="تصغير الخط"><i class="fas fa-minus"></i></button>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="container main-wrapper">
+        <div class="article-content-container">
+            <div class="article-meta">
+                <span><i class="far fa-calendar-alt"></i> 13 مايو 2025</span>
+                <span><i class="far fa-folder"></i> مقالات فكرية</span>
+            </div>
+
+            <!-- Content Body -->
+            <div class="article-body" id="articleBody">
+                <p>في عالم يزعم أنه قائم على العدالة والمساواة، نجد ظاهرة خطيرة تتسلل إلى مواقف الأفراد والمجتمعات، بل وحتى إلى الإعلام والسياسة، وهي "ازدواجية الضمير أو الضمير الانتقائي" هذا الضمير ليس مطلقًا في مبادئه، بل يستيقظ عندما يتوافق الحدث مع تحيزاته، وينام حين لا يتماشى مع مصالحه أو رؤيته للعالم.</p>
+                <p>ازدواجية الضمير، هو ذلك الشعور الإنساني الذي يظهر فقط عندما يكون الضحية من "الفئة التي نتعاطف معها"، أو عندما يكون الجاني من "الفئة التي نكرهها"، لكنه يختفي إذا انعكست الأدوار. بكلمات أخرى، هو معيار مزدوج في تقييم المآسي والجرائم، حيث تُحدد المواقف بناءً على هوية الفاعل والمفعول به، وليس بناءً على المبدأ الأخلاقي ذاته.</p>
+                <p>عندما يُقتل إنسان من مجموعة عرقية أو دينية معينة، يثور العالم غضبًا، لكن عندما يُقتل شخص من مجموعة أخرى، يُنظر إلى الحادثة ببرود أو حتى يتم تبريرها.</p>
+                
+                <p><strong>نجد بعض الدول أو الأفراد يدافعون بشراسة عن حقوق الإنسان عندما تكون الدولة المعتدية خصمًا سياسيًا لهم، لكنهم يبررون الانتهاكات نفسها إذا كان الجاني حليفًا لهم.</strong></p>
+
+                <p>هناك من يدافع عن حرية التعبير عندما يتعلق الأمر برأيه، لكنه يسعى إلى قمع أي رأي مخالف تحت حجج مختلفة مثل "الأمن القومي" أو "احترام المقدسات".</p>
+                <p>تم شجب الفساد والديكتاتورية في دولة معينة، لكن يتم التغاضي عنهما في دولة أخرى فقط لأن النظام الحاكم هناك يتوافق مع المصالح الشخصية أو الأيديولوجية للمنتقدين.</p>
+                <p>فالبشر بطبيعتهم يميلون إلى دعم من يشبههم في الفكر أو الهوية، وغالبًا ما يؤدي ذلك إلى رؤية مشوهة للواقع. وسائل الإعلام مثلًا، تلعب دورًا كبيرًا في تشكيل الضمير الانتقائي عبر انتقاء الأخبار التي تعرضها، وكيفية تقديمها، واللغة المستخدمة في توصيف الضحايا والجناة.</p>
+                <p>القوى الكبرى تستخدم الضمير الانتقائي كسلاح سياسي، حيث يتم توظيف حقوق الإنسان والديمقراطية كأدوات ضغط، بينما يتم غض الطرف عن الانتهاكات عندما تخدم مصالحها.</p>
+                <p>ولتجاوز كل هذا، يجب أن يسأل الإنسان نفسه: هل موقفي سيكون نفسه لو كان الضحية أو الجاني من فئة أخرى؟ هل أحكم بناءً على المبادئ أم على الهويات؟</p>
+                <p>بدلاً من الاعتماد على مصدر واحد قد يكون متحيزًا، يجب البحث في وجهات نظر مختلفة للوصول إلى صورة أكثر حيادية. ويجب أن يكون موقف الإنسان ثابتًا تجاه القضايا الأخلاقية، بغض النظر عن هوية الفاعل أو الضحية.</p>
+
+                <h3>الخلاصة:</h3>
+                <p>ازدواجية الضمير هو أحد أخطر أمراض المجتمعات الحديثة، لأنه يجعل من العدالة مجرد أداة يتم استخدامها حسب الهوى، وليس كمبدأ إنساني ثابت.</p>
+                <p>إذا أردنا عالمًا أكثر عدلًا وإنصافًا، فعلينا أن نتخلى عن هذه الازدواجية، وأن نكون صادقين مع أنفسنا قبل أن نحاكم الآخرين.</p>
+                <p>العدالة الحقيقية تتطلب منا أن نكون متسقين في مبادئنا، وأن نرفض المعايير المزدوجة التي تهدم أسس الأخلاق والإنصاف في المجتمع.</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="article-actions">
+                <button class="action-btn-pill" onclick="window.print()">
+                    <i class="fas fa-print"></i> طباعة المقال
+                </button>
+                <button class="action-btn-pill" onclick="handleShare()">
+                    <i class="fas fa-share-alt"></i> مشاركة المقال
+                </button>
+                <button class="action-btn-pill" onclick="copyLink()">
+                    <i class="fas fa-link"></i> نسخ الرابط
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/terms.html">الشروط والأحكام</a>
+                <a href="/privacy.html">سياسة الخصوصية</a>
+                <a href="/contact.html">اتصل بنا</a>
+                <a href="/feedback.html">شاركنا رأيك</a>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" title="انستغرام"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/@husseinalkhalil" target="_blank" title="يوتيوب"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" title="تيك توك"><i class="fab fa-tiktok"></i></a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" title="سناب شات"><i class="fab fa-snapchat-ghost"></i></a>
+                <a href="https://t.me/tanoeer" target="_blank" title="تيليجرام"><i class="fab fa-telegram"></i></a>
+            </div>
+
+            <div class="copyright">
+                حسين الخليل - جميع الحقوق محفوظة © 2025
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.nav-overlay');
+            navLinks.classList.toggle('show');
+            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
+            document.body.classList.toggle('no-scroll');
+        }
+
+        // Font Resizing Logic
+        const articleBody = document.getElementById('articleBody');
+        const defaultFontSize = 1.2;
+        let currentFontSize = defaultFontSize;
+
+        document.getElementById('fontIncrease').addEventListener('click', () => {
+            if (currentFontSize < 2.5) {
+                currentFontSize += 0.1;
+                articleBody.style.fontSize = `${currentFontSize}rem`;
+            }
+        });
+
+        document.getElementById('fontDecrease').addEventListener('click', () => {
+            if (currentFontSize > 0.9) {
+                currentFontSize -= 0.1;
+                articleBody.style.fontSize = `${currentFontSize}rem`;
+            }
+        });
+
+        document.getElementById('fontReset').addEventListener('click', () => {
+            currentFontSize = defaultFontSize;
+            articleBody.style.fontSize = `${defaultFontSize}rem`;
+        });
+
+        // Share & Copy Link
+        function handleShare() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                copyLink();
+            }
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("تم نسخ رابط المقال بنجاح ✅");
+            });
+        }
+
+        // Back to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+        });
+    </script>
+</body>
+</html>

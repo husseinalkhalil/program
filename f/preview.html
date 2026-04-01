@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>معاينة الكتاب - حسين الخليل</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* الهوية البصرية المعتمدة */
+            --primary-color: #5c4a24; 
+            --primary-dark: #3e3218; 
+            --accent-gold: #d4af37; 
+            --bg-color: #f9f7f2; 
+            --ticker-footer-bg: #f1e4c0; 
+            --surface-color: #ffffff; 
+            --text-primary: #1e293b;
+            --viewer-gradient: radial-gradient(circle, #fdfcf8 0%, #f1e4c0 100%);
+            --btn-nav-bg: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-primary: #f8fafc;
+            --viewer-gradient: radial-gradient(circle, #1e293b 0%, #080c14 100%);
+            --btn-nav-bg: #334155;
+            --ticker-footer-bg: #1e293b;
+            --primary-color: #d4af37;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            height: 100dvh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- الهيدر العلوي (معاينة) --- */
+        .header {
+            height: 65px;
+            background: var(--ticker-footer-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            border-bottom: 2px solid var(--accent-gold);
+            transition: transform 0.4s ease;
+        }
+        .header-preview-icon { font-size: 1.4rem; color: var(--primary-color); opacity: 0.9; }
+
+        .header-btn {
+            background: var(--surface-color); color: var(--primary-color);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; border: 1px solid var(--accent-gold);
+            transition: var(--transition); cursor: pointer; text-decoration: none;
+        }
+        .header-btn:hover { background: var(--accent-gold); color: white; }
+
+        /* --- منطقة عرض الكتاب --- */
+        .viewer-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            margin-top: 65px; 
+            margin-bottom: 140px; 
+            overflow: hidden;
+            background: var(--viewer-gradient);
+            touch-action: none;
+            transition: all 0.4s ease;
+        }
+
+        .book-wrapper {
+            width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            will-change: transform;
+        }
+
+        #page-image {
+            max-width: 100%; max-height: 100%;
+            width: auto; height: auto;
+            object-fit: contain;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+            border-radius: 4px; background-color: white;
+            transition: opacity 0.3s ease;
+        }
+
+        /* --- شريط التحكم السفلي --- */
+        .bottom-controls-bar {
+            position: fixed;
+            bottom: 80px; left: 0; right: 0;
+            height: 65px;
+            background: var(--ticker-footer-bg);
+            display: flex; justify-content: center; align-items: center;
+            gap: 10px;
+            border-top: 2px solid var(--accent-gold);
+            z-index: 1100;
+            padding: 0 10px;
+        }
+
+        .btn-nav {
+            background: var(--surface-color); border: 1px solid var(--accent-gold); 
+            color: var(--primary-color);
+            width: 40px; height: 40px; border-radius: 12px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: var(--transition);
+        }
+        .btn-nav:hover { background: var(--primary-color); color: white; transform: scale(1.05); }
+
+        .page-num { font-size: 0.95rem; font-weight: 800; min-width: 70px; text-align: center; color: var(--primary-color); }
+        .divider { width: 1px; height: 20px; background: rgba(92, 74, 36, 0.2); }
+
+        /* --- شريط الشراء السفلي --- */
+        .footer-buy-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 80px;
+            background: var(--ticker-footer-bg);
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 20px; border-top: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+            transition: transform 0.4s ease;
+        }
+        .btn-buy-main {
+            background: var(--primary-color); color: white;
+            width: 100%; max-width: 450px; padding: 14px;
+            border-radius: 15px; cursor: pointer; border: none;
+            font-weight: 800; font-size: 1.1rem;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(92, 74, 36, 0.3);
+            transition: 0.3s;
+        }
+        .btn-buy-main:hover { background: var(--accent-gold); transform: translateY(-2px); }
+
+        /* --- نافذة خيارات الشراء (Modal) --- */
+        .buy-modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            display: none; justify-content: center; align-items: center;
+            z-index: 3000; backdrop-filter: blur(8px);
+        }
+        .buy-modal {
+            background: var(--bg-color); width: 95%; max-width: 450px;
+            border-radius: 25px; padding: 30px; text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            animation: modalSlide 0.4s ease-out;
+            border: 1px solid var(--accent-gold);
+        }
+        @keyframes modalSlide { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .modal-section-preview { margin-bottom: 25px; }
+        .preview-large-btn {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            background: var(--primary-color); color: white; padding: 18px;
+            border-radius: 15px; text-decoration: none; font-weight: 800;
+            font-size: 1.1rem; border: 2px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+        .preview-large-btn:hover { background: var(--accent-gold); }
+
+        .platforms-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        
+        .platform-btn {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 20px; border-radius: 12px; background: white;
+            border: 1px solid rgba(0,0,0,0.08); text-decoration: none;
+            color: var(--text-primary); font-weight: 700; transition: 0.3s;
+        }
+        .platform-btn:hover { border-color: var(--accent-gold); color: var(--primary-color); transform: translateX(-5px); box-shadow: var(--shadow-sm); }
+
+        .brand-info { display: flex; align-items: center; gap: 12px; }
+        .brand-info img { width: 24px; height: 24px; object-fit: contain; }
+        .cart-icon { color: var(--accent-gold); font-size: 1.1rem; }
+
+        .modal-divider { display: flex; align-items: center; text-align: center; margin: 20px 0; color: var(--primary-color); font-size: 0.9rem; font-weight: 700; }
+        .modal-divider::before, .modal-divider::after { content: ''; flex: 1; border-bottom: 1px solid rgba(92, 74, 36, 0.2); }
+        .modal-divider:not(:empty)::before { margin-left: .5em; }
+        .modal-divider:not(:empty)::after { margin-right: .5em; }
+
+        .close-modal { margin-top: 25px; color: var(--text-secondary); cursor: pointer; font-weight: 700; font-size: 1rem; }
+
+        /* زر الخروج العائم */
+        .exit-reading-mode {
+            position: fixed; top: 15px; left: 15px; z-index: 2001;
+            background: var(--primary-color); color: white;
+            width: 42px; height: 42px; border-radius: 50%;
+            display: none; align-items: center; justify-content: center;
+            border: 2px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- تفعيل وضع القراءة الكاملة --- */
+        body.is-reading .header { transform: translateY(-110%); }
+        body.is-reading .footer-buy-bar { transform: translateY(110%); }
+        body.is-reading .bottom-controls-bar {
+            bottom: 15px; left: 10px; right: 10px;
+            border-radius: 20px; border: 1px solid var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        body.is-reading .viewer-container { margin: 0 !important; height: 100dvh; padding: 5px; }
+        body.is-reading .exit-reading-mode { display: flex; }
+
+        /* لودر التحميل */
+        #loader {
+            position: fixed; inset: 0; background: var(--bg-color);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 2000;
+        }
+        .spinner { width: 40px; height: 40px; border: 3px solid #f1e4c0; border-top-color: var(--accent-gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+            .viewer-container { align-items: flex-start; padding-top: 20px; }
+            .btn-nav { width: 36px; height: 36px; font-size: 0.85rem; }
+            .page-num { min-width: 55px; font-size: 0.8rem; }
+            .bottom-controls-bar { gap: 6px; height: 60px; }
+            .btn-buy-main { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- نافذة خيارات الشراء -->
+<div class="buy-modal-overlay" id="optionsModal">
+    <div class="buy-modal">
+        <div class="modal-section-preview">
+            <a href="books.html" id="modalBackLink" class="preview-large-btn">
+                <i class="fas fa-arrow-right"></i>
+                <span>العودة لصفحة الكتاب</span>
+            </a>
+        </div>
+
+        <div class="modal-divider">شراء النسخة الكاملة من</div>
+
+        <div class="platforms-grid">
+            <a href="#" id="modalGumroad" target="_blank" class="platform-btn">
+                <div class="brand-info">
+                    <img src="images/gumroad.png" alt="Gumroad">
+                    <span>Gumroad</span>
+                </div>
+                <i class="fas fa-shopping-basket cart-icon"></i>
+            </a>
+            <a href="#" id="modalPayhip" target="_blank" class="platform-btn">
+                <div class="brand-info">
+                    <img src="images/payhip.png" alt="Payhip">
+                    <span>Payhip</span>
+                </div>
+                <i class="fas fa-shopping-basket cart-icon"></i>
+            </a>
+            <a href="#" id="modalKofi" target="_blank" class="platform-btn">
+                <div class="brand-info">
+                    <img src="images/ko-fi.png" alt="Ko-fi">
+                    <span>Ko-fi</span>
+                </div>
+                <i class="fas fa-shopping-basket cart-icon"></i>
+            </a>
+        </div>
+        
+        <div class="close-modal" onclick="closeModal()">إلغاء</div>
+    </div>
+</div>
+
+<div id="loader">
+    <div class="spinner"></div>
+    <p style="margin-top: 15px; font-size: 1rem; color: var(--primary-color); font-weight: bold;">جاري تحميل المعاينة...</p>
+</div>
+
+<button class="exit-reading-mode" onclick="toggleReadingMode()" id="exitBtn">
+    <i class="fas fa-compress"></i>
+</button>
+
+<header class="header">
+    <div class="header-preview-icon"><i class="fas fa-eye"></i></div>
+    <a href="books.html" id="exitLink" class="header-btn" title="خروج"><i class="fas fa-sign-out-alt"></i></a>
+</header>
+
+<main class="viewer-container" id="viewer">
+    <div class="book-wrapper" id="book-wrapper">
+        <img id="page-image" src="" alt="صفحة الكتاب">
+    </div>
+</main>
+
+<div class="bottom-controls-bar">
+    <button class="btn-nav" onclick="changePage(-1)"><i class="fas fa-chevron-right"></i></button>
+    <span class="page-num" id="page-info">... / ...</span>
+    <button class="btn-nav" onclick="changePage(1)"><i class="fas fa-chevron-left"></i></button>
+    <div class="divider"></div>
+    <button class="btn-nav" onclick="adjustZoom(0.3)"><i class="fas fa-search-plus"></i></button>
+    <button class="btn-nav" onclick="resetZoom()"><i class="fas fa-sync-alt"></i></button>
+    <button class="btn-nav" onclick="adjustZoom(-0.3)"><i class="fas fa-search-minus"></i></button>
+    <div class="divider"></div>
+    <button class="btn-nav" onclick="toggleDarkMode()"><i class="fas fa-moon" id="darkIcon"></i></button>
+    <button class="btn-nav" onclick="toggleReadingMode()"><i class="fas fa-expand" id="fsIcon"></i></button>
+</div>
+
+<div class="footer-buy-bar">
+    <button class="btn-buy-main" onclick="openOptionsModal()">
+        <i class="fas fa-shopping-cart"></i> خيارات الشراء
+    </button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script>
+    // 1. قاعدة بيانات الكتب والمسارات - لم يتم تغيير أي شيء
+    const booksDatabase = {
+        'mn-khlaq': {
+            pdf: 'pdf/mm.pdf',
+            backUrl: 'books.html?book=book-2', 
+            gumroad: 'https://husseinalkhalil.gumroad.com/l/book7',
+            payhip: 'https://payhip.com/b/QYlSk',
+            kofi: 'https://ko-fi.com/s/0f3b97dbda'
+        },
+        'islam-heritage': {
+            pdf: 'pdf/is.pdf',
+            backUrl: 'books.html?book=book-5',
+            gumroad: 'https://husseinalkhalil.gumroad.com/l/book5',
+            payhip: 'https://payhip.com/b/jnVxT',
+            kofi: 'https://ko-fi.com/s/6f34541ce4'
+        },
+        'quran-kfa': {
+            pdf: 'pdf/qq.pdf',
+            backUrl: 'books.html?book=book-6',
+            gumroad: 'https://husseinalkhalil.gumroad.com/l/book6',
+            payhip: 'https://payhip.com/b/QMfTl',
+            kofi: 'https://ko-fi.com/s/f5468a41b1'
+        },
+        'fakeer': {
+            pdf: 'pdf/ff.pdf',
+            backUrl: 'books.html?book=book-7',
+            gumroad: 'https://husseinalkhalil.gumroad.com/l/book1',
+            payhip: 'https://payhip.com/b/3g9xp',
+            kofi: 'https://ko-fi.com/s/d16f951c95'
+        },
+        'bb': {
+            pdf: 'pdf/bb.pdf',
+            backUrl: 'books.html?book=book-2',
+            gumroad: 'https://husseinalkhalil.gumroad.com/l/book11',
+            payhip: 'https://payhip.com/b/F3ZTu',
+            kofi: 'https://ko-fi.com/s/1985e6d43a'
+       },
+        'mn-en': {
+            pdf: 'pdf/mn-en.pdf',
+            backUrl: 'https://husseinalkhalil.com/en/books?book=book-3',
+            gumroad: 'https://husseinalkhalil.gumroad.com/l/book7',
+            payhip: 'https://payhip.com/b/QYlSk',
+            kofi: 'https://ko-fi.com/s/0f3b97dbda'
+        }
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const bookKey = urlParams.get('id');
+    const currentBook = booksDatabase[bookKey] || booksDatabase['mn-khlaq'];
+
+    document.getElementById('exitLink').href = currentBook.backUrl;
+    document.getElementById('modalBackLink').href = currentBook.backUrl;
+
+    function openOptionsModal() {
+        document.getElementById('modalGumroad').href = currentBook.gumroad;
+        document.getElementById('modalPayhip').href = currentBook.payhip;
+        document.getElementById('modalKofi').href = currentBook.kofi;
+        document.getElementById('optionsModal').style.display = 'flex';
+    }
+
+    function closeModal() { document.getElementById('optionsModal').style.display = 'none'; }
+
+    const pdfUrl = pdfUrl_override = currentBook.pdf; 
+    let pdfDoc = null, currPage = 1, totalPages = 0, zoomLevel = 1;
+    let isDragging = false, startX, startY, translateX = 0, translateY = 0;
+    const wrapper = document.getElementById('book-wrapper');
+    const imgEl = document.getElementById('page-image');
+    const infoEl = document.getElementById('page-info');
+    const loader = document.getElementById('loader');
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    async function loadBook() {
+        try {
+            pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+            totalPages = pdfDoc.numPages; 
+            renderPage(1);
+        } catch (e) { loader.innerHTML = '<p style="color:red; font-weight:800;">عذراً، تعذر تحميل المعاينة. تأكد من وجود ملف PDF في المسار الصحيح.</p>'; }
+    }
+
+    async function renderPage(num) {
+        loader.style.display = 'flex';
+        const page = await pdfDoc.getPage(num);
+        const viewport = page.getViewport({ scale: 2.5 }); 
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.height = viewport.height; canvas.width = viewport.width;
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+        imgEl.src = canvas.toDataURL('image/jpeg', 0.8);
+        currPage = num;
+        infoEl.textContent = `${num} / ${totalPages}`;
+        resetZoom();
+        loader.style.display = 'none';
+    }
+
+    function changePage(step) {
+        let newPage = currPage + step;
+        if(newPage >= 1 && newPage <= totalPages) renderPage(newPage);
+    }
+
+    function updateTransform() { wrapper.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoomLevel})`; }
+    function adjustZoom(delta) { zoomLevel = Math.max(1, Math.min(4, zoomLevel + delta)); if (zoomLevel === 1) { translateX = 0; translateY = 0; } updateTransform(); }
+    function resetZoom() { zoomLevel = 1; translateX = 0; translateY = 0; updateTransform(); }
+    
+    function toggleReadingMode() {
+        document.body.classList.toggle('is-reading');
+        const icon = document.getElementById('fsIcon');
+        icon.classList.toggle('fa-expand'); icon.classList.toggle('fa-compress');
+    }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const icon = document.getElementById('darkIcon');
+        icon.classList.toggle('fa-moon'); icon.classList.toggle('fa-sun');
+        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    }
+
+    const startDrag = (x, y) => { if (zoomLevel <= 1) return; isDragging = true; startX = x - translateX; startY = y - translateY; };
+    const doDrag = (x, y) => { if (!isDragging) return; translateX = x - startX; translateY = y - startY; updateTransform(); };
+    const viewer = document.getElementById('viewer');
+    viewer.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
+    window.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
+    window.addEventListener('mouseup', () => isDragging = false);
+    viewer.addEventListener('touchstart', (e) => startDrag(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+    viewer.addEventListener('touchmove', (e) => doDrag(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+    viewer.addEventListener('touchend', () => isDragging = false);
+
+    if (localStorage.getItem('theme') === 'dark') toggleDarkMode();
+    loadBook();
+</script>
+</body>
+</html>

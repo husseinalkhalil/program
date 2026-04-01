@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>المفضلة - حسين الخليل</title>
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+    <!-- Favicon -->
+    <link href="images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #5c4a24; 
+            --accent-gold: #d4af37; 
+            --bg-color: #f9f7f2; 
+            --ticker-footer-bg: #f1e4c0; 
+            --surface-color: #ffffff; 
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --shadow-sm: 0 4px 15px rgba(212, 175, 55, 0.1);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            --nav-height: 75px;
+            --gradient-header: linear-gradient(135deg, #fdfcf8 0%, #f1e4c0 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            animation: fadeInPage 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.no-scroll { overflow: hidden !important; height: 100vh; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* ==================== Navigation (Unified Specs) ==================== */
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+            z-index: 998; display: none;
+        }
+
+        nav {
+            background: var(--ticker-footer-bg); 
+            padding: 0 5%;
+            position: fixed; width: 100%; top: 0;
+            z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            height: var(--nav-height);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .logo-container { order: 1; }
+        .logo-container img { height: 45px; transition: 0.4s; }
+
+        .nav-links {
+            display: flex; flex: 1; justify-content: space-evenly;
+            align-items: center; margin: 0 10px; order: 2;
+        }
+
+        .nav-links a {
+            color: var(--primary-color); font-weight: 700; font-size: 0.95rem;
+            padding: 8px 12px; border-radius: 20px;
+            white-space: nowrap; transition: 0.3s;
+        }
+        .nav-links a:hover { background: rgba(255,255,255,0.3); color: var(--accent-gold); transform: translateY(-2px); }
+
+        .hamburger { display: none; color: var(--primary-color); font-size: 1.5rem; cursor: pointer; order: 3; }
+
+        @media (max-width: 1200px) {
+            .hamburger { display: block; order: 1; } 
+            .logo-container { order: 2; }
+            .nav-links {
+                position: fixed; top: var(--nav-height); right: -280px; width: 280px;
+                background: white;
+                flex-direction: column; padding: 15px 0 40px;
+                height: calc(100vh - var(--nav-height));
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
+                gap: 0; margin: 0; z-index: 1001; display: flex !important;
+            }
+            .nav-links.show { right: 0; }
+            .nav-links a { color: var(--text-primary); width: 100%; padding: 18px 25px; border-radius: 0; font-size: 1.05rem; border-bottom: 1px solid rgba(0,0,0,0.03); font-weight: 700; justify-content: flex-start; }
+        }
+
+        /* ==================== Unified Header & Hero ==================== */
+        .unified-header {
+            background: var(--gradient-header);
+            padding: calc(var(--nav-height) + 40px) 20px 60px;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 30px; width: 100%; text-align: center;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .hero-text h1 { 
+            font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; 
+            font-family: 'Tajawal', sans-serif; color: var(--primary-color);
+        }
+        .hero-text p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 25px; font-weight: 500; }
+
+        /* Search Box in Hero */
+        .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto; }
+        #globalSearch {
+            width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: 1px solid #e2e8f0; font-size: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); font-family: 'Tajawal', sans-serif; outline: none; background: white;
+            transition: 0.3s;
+        }
+        #globalSearch:focus { border-color: var(--accent-gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); transform: scale(1.02); }
+        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--accent-gold); pointer-events: none; }
+
+        /* ==================== Favorites Grid ==================== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .main-wrapper { position: relative; z-index: 20; margin-bottom: 60px; max-width: 1100px; margin-left: auto; margin-right: auto;}
+
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .fav-card {
+            background: white; border-radius: 16px; padding: 25px;
+            box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
+            border-right: 5px solid var(--accent-gold);
+            transition: all 0.3s; position: relative; display: flex; flex-direction: column;
+        }
+        .fav-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-right-color: var(--primary-color); }
+
+        .fav-card::before {
+            position: absolute; left: -15px; bottom: -15px; font-size: 6rem;
+            color: rgba(212, 175, 55, 0.05); transform: rotate(15deg);
+            pointer-events: none;
+        }
+
+        .fav-type { font-size: 0.8rem; color: var(--primary-color); margin-bottom: 10px; font-weight: 800; display: flex; align-items: center; gap: 5px; }
+        .fav-title { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 15px; font-weight: 800; line-height: 1.4; }
+        .fav-content { font-size: 1rem; color: var(--text-primary); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; white-space: pre-line; max-height: 150px; overflow: hidden; text-overflow: ellipsis; }
+        .fav-date { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px; display: block; }
+
+        .fav-actions { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px; }
+        
+        .remove-btn { background: #fef2f2; color: #ef4444; border: 1px solid #fee2e2; padding: 6px 15px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 700; transition: 0.3s; }
+        .remove-btn:hover { background: #ef4444; color: white; }
+
+        .view-btn { color: var(--primary-color); font-weight: 800; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
+        .view-btn:hover { color: var(--accent-gold); text-decoration: underline; }
+
+        .highlight { background-color: var(--accent-gold); color: white; padding: 0 2px; border-radius: 2px; }
+
+        /* Empty State - Adjusted to 1000px Width */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-md);
+            grid-column: 1 / -1; /* تجعل المستطيل يمتد عبر كل الأعمدة */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 40px auto; 
+            width: 100%;
+            max-width: 1000px; /* العرض المطلوب */
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .empty-state i { font-size: 4rem; color: var(--accent-gold); margin-bottom: 20px; opacity: 0.5; }
+        .empty-state p { color: var(--primary-color); font-size: 1.2rem; font-weight: 800; }
+
+        .search-results-info { text-align: center; margin-bottom: 20px; display: none; color: var(--accent-gold); font-weight: 800; font-size: 1.2rem; }
+
+        /* Social */
+        .social-section { text-align: center; margin-bottom: 60px; background: white; padding: 40px; border-radius: 1.5rem; box-shadow: var(--shadow-sm); border: 1px solid rgba(212,175,55,0.1); }
+        .section-title { text-align: center; margin-bottom: 40px; position: relative; }
+        .section-title h2 { color: var(--primary-color); font-size: 2rem; display: inline-block; padding-bottom: 15px; font-weight: 800; font-family: 'Tajawal', sans-serif; }
+        .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent-gold); border-radius: 2px; }
+        .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--bg-color); transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .social-btn img { width: 26px; }
+        .social-btn:hover { background: var(--accent-gold); transform: translateY(-5px) scale(1.1); }
+        .social-btn:hover img { filter: brightness(0) invert(1); }
+
+        /* Footer */
+        footer { 
+            background: var(--ticker-footer-bg); color: var(--primary-color); 
+            padding: 60px 20px; text-align: center; margin-top: auto; 
+            border-top: 3px solid var(--accent-gold);
+        }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+        .footer-links a { color: var(--primary-color); font-weight: 700; opacity: 0.8; }
+        .footer-links a:hover { color: var(--accent-gold); opacity: 1; }
+        .copyright { color: var(--primary-color); font-size: 0.85rem; border-top: 1px solid rgba(92, 74, 36, 0.1); padding-top: 25px; margin-top: 25px; opacity: 0.7; font-weight: 600; }
+
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
+        .back-to-top.visible { opacity: 1; pointer-events: all; }
+        .back-to-top:hover { background: var(--accent-gold); }
+
+        @media (max-width: 900px) {
+            .favorites-grid { grid-template-columns: 1fr; }
+            .hero-text h1 { font-size: 2rem; }
+            .unified-header { padding-top: calc(var(--nav-height) + 20px); border-radius: 0 0 35px 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
+
+    <nav>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="images/logo.png" alt="شعار حسين الخليل" />
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="books.html">الكتب</a>
+            <a href="articles.html">المقالات</a>
+            <a href="hadith.html">الروايات</a>
+            <a href="khawatir.html">خواطر</a>
+            <a href="videos.html">الفيديوهات</a>
+            <a href="history.html">التاريخ</a>
+            <a href="podcast.html">البودكاست</a>
+            <a href="ask.html">الأسئلة</a>
+            <a href="hewar.html">حوارات</a>
+            <a href="inq.html">تساؤلات</a>
+            <a href="manhaj.html">المنهج</a>
+            <a href="favorites.html" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">المفضلة</a>
+            <a href="support.html">دعم المحتوى</a>
+            <a href="about.html">من نحن</a>
+            <a href="/en/favorites.html" style="color: var(--primary-color) !important; font-weight: 800; border: 1.5px solid var(--accent-gold); padding: 5px 15px; border-radius: 20px;">En</a>
+        </div>
+        <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <header class="unified-header">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>المفضلة</h1>
+                <p>مساحتك الخاصة، حيث تحتفظ بكل ما لامس عقلك وقلبك</p>
+            </div>
+            <div class="universal-search">
+                <i class="fas fa-search search-icon-placeholder"></i>
+                <input type="text" id="globalSearch" placeholder="ابحث في مفضلتك..." />
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-wrapper">
+        <div id="searchResultsInfo" class="search-results-info">
+            <span id="resultsCount">0</span> نتيجة بحث
+        </div>
+
+        <div id="noResultsMessage" style="display:none; text-align:center; padding:30px; color:var(--text-secondary); background:white; border-radius:16px; box-shadow:var(--shadow-sm); margin-bottom:20px;">
+            <i class="fas fa-search" style="font-size:2rem; margin-bottom:10px; color:var(--text-secondary); opacity:0.5;"></i><br>
+            لم يتم العثور على نتائج في مفضلتك.
+        </div>
+
+        <div id="favoritesGrid" class="favorites-grid">
+            <!-- Items injected via JS -->
+        </div>
+
+        <div class="social-section" style="margin-top: 60px;">
+            <div class="section-title"><h2>تابعني على مواقع التواصل</h2></div>
+            <div class="social-grid">
+                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn youtube"><img src="icons/yot-soc.png" alt="يوتيوب"></a>
+                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" class="social-btn facebook"><img src="icons/fac-soc.png" alt="فيسبوك"></a>
+                <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" class="social-btn instagram"><img src="icons/ins-soc.png" alt="إنستغرام"></a>
+                <a href="https://t.me/tanoeer" target="_blank" class="social-btn telegram"><img src="icons/tel-soc.png" alt="تلغرام"></a>
+                <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" class="social-btn tiktok"><img src="icons/tik-soc.png" alt="تيك توك"></a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn snap"><img src="icons/snap.png" alt="سناب شات"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="terms.html">الشروط والأحكام</a>
+                <a href="privacy.html">سياسة الخصوصية</a>
+                <a href="contact.html">اتصل بنا</a>
+                <a href="feedback.html">شاركنا رأيك</a>
+            </div>
+            <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.nav-overlay');
+            navLinks.classList.toggle('show');
+            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
+            document.body.classList.toggle('no-scroll');
+        }
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+        });
+
+        // ==================== Logic ====================
+        function normalizeArabicText(text) {
+            if(!text) return "";
+            return text.replace(/[\u064B-\u065F\u0670]/g, "").replace(/[أإآاءئؤ]/g, "ا").replace(/[ة]/g, "ه").replace(/[ى]/g, "ي").toLowerCase();
+        }
+
+        function getSafeRegex(searchTerm) {
+            let regexStr = '';
+            const cleanTerm = normalizeArabicText(searchTerm);
+            for (let i = 0; i < cleanTerm.length; i++) {
+                const char = cleanTerm[i];
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else if (char.match(/[a-zA-Z]/)) regexStr += char;
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                regexStr += '[\\u064B-\u065F\u0670]*'; 
+            }
+            return new RegExp(regexStr, 'gi');
+        }
+
+        function loadFavorites() {
+            const fav1 = JSON.parse(localStorage.getItem("favorites")) || [];
+            const fav2 = JSON.parse(localStorage.getItem("myFavorites")) || [];
+            const combined = [...fav1, ...fav2];
+            const uniqueFavorites = combined.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
+            renderFavorites(uniqueFavorites);
+        }
+
+        function renderFavorites(items, searchTerm = '') {
+            const grid = document.getElementById("favoritesGrid");
+            grid.innerHTML = '';
+            const noResults = document.getElementById('noResultsMessage');
+            const info = document.getElementById('searchResultsInfo');
+            const countSpan = document.getElementById('resultsCount');
+
+            if (items.length === 0 && !searchTerm) {
+                grid.innerHTML = `<div class="empty-state"><i class="far fa-star"></i><p>قائمتك المفضلة فارغة حالياً.</p></div>`;
+                noResults.style.display = 'none'; info.style.display = 'none'; return;
+            }
+
+            if (items.length === 0 && searchTerm) {
+                noResults.style.display = 'block'; info.style.display = 'none'; return;
+            } else {
+                noResults.style.display = 'none';
+                if(searchTerm) { info.style.display = 'block'; countSpan.textContent = items.length; } else { info.style.display = 'none'; }
+            }
+
+            const regex = searchTerm ? getSafeRegex(searchTerm) : null;
+
+            items.forEach(item => {
+                let title = item.title || item; 
+                let content = item.content || item.source || '';
+                let type = item.type || 'unknown';
+                let date = item.date ? `<span class="fav-date"><i class="far fa-calendar-alt"></i> ${item.date}</span>` : '';
+                let url = item.url || item.pageUrl || '#';
+                
+                if (typeof item === 'string') { type = 'unknown'; content = 'عنصر محفوظ (نسخة قديمة)'; }
+
+                let typeLabel = '';
+                if(type === 'thought') typeLabel = '<i class="far fa-lightbulb"></i> خاطرة';
+                else if(type === 'article') typeLabel = '<i class="far fa-file-alt"></i> مقال';
+                else if(type === 'book') typeLabel = '<i class="fas fa-book"></i> كتاب';
+                else if(type === 'video') typeLabel = '<i class="fas fa-video"></i> فيديو';
+                else if(type === 'رواية') typeLabel = '<i class="fas fa-scroll"></i> رواية';
+                else typeLabel = '<i class="fas fa-bookmark"></i> محفوظ';
+
+                if (regex) {
+                    title = title.replace(regex, match => `<span class="highlight">${match}</span>`);
+                    if(content) content = content.replace(regex, match => `<span class="highlight">${match}</span>`);
+                }
+
+                const card = document.createElement('div');
+                card.className = 'fav-card';
+                card.setAttribute('data-type', type);
+                let html = `
+                    <div class="fav-type">${typeLabel}</div>
+                    <div class="fav-title">${title}</div>
+                    ${content ? `<div class="fav-content">${type === 'رواية' ? 'المصدر: ' + content : content}</div>` : ''}
+                    ${date}
+                    <div class="fav-actions">
+                        <button class="remove-btn" onclick="removeItem('${item.id || item}')"><i class="fas fa-trash-alt"></i> حذف</button>
+                        ${url && url !== '#' ? `<a href="${url}" class="view-btn">عرض <i class="fas fa-arrow-left"></i></a>` : ''}
+                    </div>`;
+                card.innerHTML = html;
+                grid.appendChild(card);
+            });
+        }
+
+        function removeItem(id) {
+            ['favorites', 'myFavorites'].forEach(key => {
+                let items = JSON.parse(localStorage.getItem(key)) || [];
+                items = items.filter(item => typeof item === 'string' ? item !== id : item.id != id);
+                localStorage.setItem(key, JSON.stringify(items));
+            });
+            loadFavorites();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('globalSearch');
+            searchInput.addEventListener('input', () => {
+                const term = searchInput.value.trim();
+                const fav1 = JSON.parse(localStorage.getItem("favorites")) || [];
+                const fav2 = JSON.parse(localStorage.getItem("myFavorites")) || [];
+                const favorites = [...fav1, ...fav2].filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
+                if (!term) { renderFavorites(favorites); return; }
+                const normTerm = normalizeArabicText(term);
+                const filtered = favorites.filter(item => {
+                    let textToCheck = typeof item === 'string' ? normalizeArabicText(item) : normalizeArabicText(item.title) + " " + normalizeArabicText(item.content || "") + " " + normalizeArabicText(item.source || "");
+                    return textToCheck.includes(normTerm);
+                });
+                renderFavorites(filtered, term);
+            });
+            loadFavorites();
+        });
+    </script>
+</body>
+</html>

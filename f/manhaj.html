@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>المنهج - حسين الخليل</title>
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+    <!-- Favicon -->
+    <link href="images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #5c4a24; 
+            --accent-gold: #d4af37; 
+            --bg-color: #f9f7f2; 
+            --ticker-footer-bg: #f1e4c0; 
+            --surface-color: #ffffff; 
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --shadow-sm: 0 4px 15px rgba(212, 175, 55, 0.1);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            --nav-height: 75px;
+            --gradient-header: linear-gradient(135deg, #fdfcf8 0%, #f1e4c0 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            animation: fadeInPage 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.no-scroll { overflow: hidden !important; height: 100vh; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* ==================== Navigation (Unified Specs) ==================== */
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+            z-index: 998; display: none;
+        }
+
+        nav {
+            background: var(--ticker-footer-bg); 
+            padding: 0 5%;
+            position: fixed; width: 100%; top: 0;
+            z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            height: var(--nav-height);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .logo-container { order: 1; }
+        .logo-container img { height: 45px; transition: 0.4s; }
+
+        .nav-links {
+            display: flex; flex: 1; justify-content: space-evenly;
+            align-items: center; margin: 0 10px; order: 2;
+        }
+
+        .nav-links a {
+            color: var(--primary-color); font-weight: 700; font-size: 0.95rem;
+            padding: 8px 12px; border-radius: 20px;
+            white-space: nowrap; transition: 0.3s;
+        }
+        .nav-links a:hover { background: rgba(255,255,255,0.3); color: var(--accent-gold); transform: translateY(-2px); }
+
+        .hamburger { display: none; color: var(--primary-color); font-size: 1.5rem; cursor: pointer; order: 3; }
+
+        @media (max-width: 1200px) {
+            .hamburger { display: block; order: 1; } 
+            .logo-container { order: 2; }
+            .nav-links {
+                position: fixed; top: var(--nav-height); right: -280px; width: 280px;
+                background: white;
+                flex-direction: column; padding: 15px 0 40px;
+                height: calc(100vh - var(--nav-height));
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
+                gap: 0; margin: 0; z-index: 1001; display: flex !important;
+            }
+            .nav-links.show { right: 0; }
+            .nav-links a { color: var(--text-primary); width: 100%; padding: 18px 25px; border-radius: 0; font-size: 1.05rem; border-bottom: 1px solid rgba(0,0,0,0.03); font-weight: 700; justify-content: flex-start; }
+        }
+
+        /* ==================== Unified Header & Hero ==================== */
+        .unified-header {
+            background: var(--gradient-header);
+            padding: calc(var(--nav-height) + 40px) 20px 60px;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 30px; width: 100%; text-align: center;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .hero-text h1 { 
+            font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; 
+            font-family: 'Tajawal', sans-serif; color: var(--primary-color);
+        }
+        .hero-text p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 25px; font-weight: 500; }
+
+        /* Search Box */
+        .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto; }
+        #globalSearch {
+            width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: 1px solid #e2e8f0; font-size: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); font-family: 'Tajawal', sans-serif; outline: none; background: white;
+            transition: 0.3s;
+        }
+        #globalSearch:focus { border-color: var(--accent-gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
+        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--accent-gold); pointer-events: none; }
+        .search-results {
+            position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1); max-height: 400px; overflow-y: auto; z-index: 200; text-align: right; display: none;
+            color: var(--text-primary); border: 1px solid rgba(0,0,0,0.05);
+        }
+        mark { background-color: var(--accent-gold); color: #fff; padding: 0 3px; border-radius: 3px; }
+
+        /* ==================== Manhaj Specific Styles ==================== */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        .main-wrapper { position: relative; z-index: 20; margin-bottom: 60px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+
+        .intro-card, .conclusion-card {
+            background: white; border-radius: var(--radius-xl);
+            padding: 40px; box-shadow: var(--shadow-sm); text-align: center;
+            margin-bottom: 50px; font-size: 1.1rem; line-height: 1.8;
+            color: var(--text-primary); border: 1px solid rgba(0,0,0,0.03);
+            border-top: 4px solid var(--accent-gold);
+        }
+
+        .section-title { margin: 60px 0 35px; text-align: center; }
+        .section-title h2 { font-size: 2rem; font-weight: 800; color: var(--primary-color); position: relative; display: inline-block; font-family: 'Tajawal', sans-serif;}
+        .section-title h2::after { content: ""; position: absolute; bottom: -10px; left: 20%; width: 60%; height: 4px; background: var(--accent-gold); border-radius: 2px; }
+
+        .principles-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px; margin-bottom: 50px;
+        }
+
+        .principle-card {
+            background: white; border-radius: 16px; padding: 25px;
+            box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03);
+            border-right: 5px solid var(--accent-gold); transition: all 0.3s;
+            display: flex; flex-direction: column;
+        }
+        .principle-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-right-color: var(--primary-color); }
+        .principle-card h3 { color: var(--primary-color); margin-bottom: 15px; font-size: 1.2rem; font-weight: 800; }
+        .principle-card p { color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin: 0; }
+
+        /* Accordion */
+        .accordion-wrapper { display: flex; flex-direction: column; gap: 15px; margin-bottom: 50px; }
+        details {
+            background: white; border-radius: 16px;
+            box-shadow: var(--shadow-sm); overflow: hidden; transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03); border-right: 5px solid var(--accent-gold);
+            position: relative; z-index: 1;
+        }
+        details:hover { box-shadow: var(--shadow-md); border-right-color: var(--primary-color); }
+        summary {
+            padding: 20px 25px; font-weight: 700; font-size: 1.1rem;
+            color: var(--primary-color); cursor: pointer; list-style: none;
+            position: relative; display: flex; align-items: center; justify-content: space-between;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: '\f078'; font-family: "Font Awesome 6 Free"; font-weight: 900;
+            color: var(--accent-gold); transition: transform 0.3s;
+        }
+        details[open] summary::after { transform: rotate(180deg); }
+        details[open] summary { background: #fdfcf8; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        details p { padding: 25px; margin: 0; color: var(--text-primary); line-height: 1.8; font-size: 1em; background: white; }
+
+        /* Font Controls (Fixed) */
+        .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
+        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid var(--accent-gold); color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); transition: 0.3s; }
+        .font-btn:hover { background: var(--accent-gold); color: white; transform: scale(1.1); }
+
+        /* Social */
+        .social-section { text-align: center; margin-bottom: 60px; background: white; padding: 40px; border-radius: 1.5rem; box-shadow: var(--shadow-sm); border: 1px solid rgba(212,175,55,0.1); }
+        .social-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .social-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--bg-color); transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .social-btn img { width: 26px; }
+        .social-btn:hover { background: var(--accent-gold); transform: translateY(-5px) scale(1.1); }
+        .social-btn:hover img { filter: brightness(0) invert(1); }
+
+        /* Footer */
+        footer { 
+            background: var(--ticker-footer-bg); color: var(--primary-color); 
+            padding: 60px 20px; text-align: center; margin-top: auto; 
+            border-top: 3px solid var(--accent-gold);
+        }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+        .footer-links a { color: var(--primary-color); font-weight: 700; opacity: 0.8; }
+        .footer-links a:hover { color: var(--accent-gold); opacity: 1; }
+        .copyright { color: var(--primary-color); font-size: 0.85rem; border-top: 1px solid rgba(92, 74, 36, 0.1); padding-top: 25px; margin-top: 25px; opacity: 0.7; font-weight: 600; }
+
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
+        .back-to-top.visible { opacity: 1; pointer-events: all; }
+
+        @media (max-width: 900px) {
+            .hero-text h1 { font-size: 2rem; }
+            .unified-header { padding-top: calc(var(--nav-height) + 20px); border-radius: 0 0 35px 35px; }
+            .principles-grid { grid-template-columns: 1fr; }
+            .font-controls-fixed { top: auto; bottom: 30px; left: 30px; flex-direction: row; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
+
+    <nav>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="images/logo.png" alt="شعار حسين الخليل" />
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="books.html">الكتب</a>
+            <a href="articles.html">المقالات</a>
+            <a href="hadith.html">الروايات</a>
+            <a href="khawatir.html">خواطر</a>
+            <a href="videos.html">الفيديوهات</a>
+            <a href="history.html">التاريخ</a>
+            <a href="podcast.html">البودكاست</a>
+            <a href="ask.html">الأسئلة</a>
+            <a href="hewar.html">حوارات</a>
+            <a href="inq.html">تساؤلات</a>
+            <a href="manhaj.html" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">المنهج</a>
+            <a href="favorites.html">المفضلة</a>
+            <a href="support.html">دعم المحتوى</a>
+            <a href="about.html">من نحن</a>
+            <a href="/en/manhaj.html" style="color: var(--primary-color) !important; font-weight: 800; border: 1.5px solid var(--accent-gold); padding: 5px 15px; border-radius: 20px;">En</a>
+        </div>
+
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="unified-header">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>منهج فهم القرآن</h1>
+                <p>إطار منهجي مباشر وواضح لقراءة القرآن من داخله بوعي وعقلانية</p>
+            </div>
+            <div class="universal-search">
+                <i class="fas fa-search search-icon-placeholder"></i>
+                <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Font Controls -->
+    <div class="font-controls-fixed">
+        <button class="font-btn" id="fontIncrease" title="تكبير الخط"><i class="fas fa-plus"></i></button>
+        <button class="font-btn" id="fontReset" title="إعادة تعيين"><i class="fas fa-redo"></i></button>
+        <button class="font-btn" id="fontDecrease" title="تصغير الخط"><i class="fas fa-minus"></i></button>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="container main-wrapper">
+        
+        <div id="manhajContent">
+            <!-- Introduction -->
+            <div class="intro-card searchable-item">
+                <h2>مقدمة</h2>
+                <p>الهدف من هذا المنهج هو تقديم إطار واضح يسمح بقراءة القرآن من داخله، بعيدًا عن سلطة الروايات والتقليد، ومن دون تبعية لمذهب أو مرجعية بشرية. المرجعية الأولى والأخيرة هي النص القرآني؛ وما عداه يُعامل كمادة تاريخية أو لغوية لا كسُلطة فوق النص ولا في موازاته أو جنبًا إلى جنب معه.</p>
+            </div>
+
+            <!-- Principles -->
+            <div class="section-title"><h2>أساسيات المنهج</h2></div>
+            <div class="principles-grid">
+                <div class="principle-card searchable-item">
+                    <h3>1) مركزية النص القرآني</h3>
+                    <p>الفهم يبدأ من الآية نفسها ومن مجموع النص، لا من الشروح اللاحقة. لا تُقدّم الروايات أو التفاسير على القرآن، وأي فهم يصطدم بظاهر النص أو بمبادئه الكبرى يُعاد تقييمه.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>2) وحدة المفهوم القرآني</h3>
+                    <p>لا نستخلص المعنى من آية وحيدة، بل من مجموع استعمال الكلمة في القرآن: جذرها، اشتقاقاتها، سياقاتها ومواضع ورودها والمجال الدلالي الذي تتشكل منه.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>3) السياق البنيوي لا السياق الخارجي</h3>
+                    <p>القرآن يفسّر بعضه بعضًا داخل بنيته النصية: ترتيب الأفكار، العلاقات الحجاجية، والانتقال الدلالي داخل السورة. ما يرد من روايات يُعامل كمرجع تاريخي وليس كأداة تفسيرية ملزمة.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>4) الدقة اللغوية غير التراثية</h3>
+                    <p>نعتمد المعنى العربي الأصلي للكلمات قبل أن تتحملها المدارس الاصطلاحية اللاحقة. نفرّق بين المعنى اللغوي والأثر المذهبي.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>5) القراءة الأخلاقية للنص</h3>
+                    <p>الالتزام بمبادئ كبرى متكررة في القرآن: العدل، الرحمة، عدم الظلم، والمسؤولية الفردية. أي فهم ينتج عنه ظلم أو تبرير للإكراه يُعد فهمًا ناقصًا.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>6) نزع القداسة عن البشر</h3>
+                    <p>لا عصمة إلّا للوحي نفسه. الفقهاء جزء من التاريخ الفكري، يمكن الأخذ منهم أو الرد عليهم، لكن لا تُسلم لهم السلطة على النص، وكل ما يقولون، إنما هو اجتهادهم قابل للأخذ والرد ولا يمكن أن يمنح صفة القداسة ولا الحقيقة المطلقة.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>7) بناء الاستنتاج على منطق محكم</h3>
+                    <p>الاستنتاج يقوم على دليل لغوي، اتساق نصي، والالتزام بالمبادئ الأخلاقية. إذا اختل عنصر، يجب مراجعة الاستنتاج.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>8) ترتيل القرآن</h3>
+                    <p>الترتيل هنا ليس القراءة الصوتية، بل جمعُ الآيات التي تتناول الموضوع الواحد وترتيبُها في بنية متكاملة لفهم مراد النص. فلا تُفهم المسألة القرآنية من آية منفردة، بل من خلال ضمّ جميع الآيات المتعلقة بها وترتيبها وتنظيمها وفق سياقها ودلالاتها وجذرها اللغوي.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>9) قاعدة الارتكاز</h3>
+                    <p>القرآن هو المصدر الوحيد للتشريع الديني، ولا يُقدَّم عليه أي نص أو رواية أو تراث. هو القاعدة والميزان والمعيار الذي تُقاس به المفاهيم؛ فما وافقه قُبل، وما خالفه رُدّ.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>10) القراءة العقلانية</h3>
+                    <p>عند تدبر القرآن، ينبغي الدخول إلى النص من دون حمولات مسبقة أو مفاهيم ورثتها عبر المذاهب والفتاوى. لا تبحث عمّا لقّنوك إياه داخل القرآن؛ بل اقرأه كأنك تقرأه للمرة الأولى، بعقل مفتوح وقلب خالٍ من التوجّهات المسبقة.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>11) الإسقاطات</h3>
+                    <p>عند التعامل مع أي مفهوم موروث، اجعل القرآن هو المرجعية التي تُسقط عليها الفكرة، لا العكس. فإن وُجد لها أصل قرآني فهي مقبولة، وإن لم يوجد فهي إضافة بشرية لا حجّية لها.</p>
+                </div>
+                <div class="principle-card searchable-item">
+                    <h3>12) لا تُحمّل القرآن ما لا يقوله</h3>
+                    <p>عند تحليل أي قضية دينية، لا يجوز أن نأتي بمفاهيم أو أحكام من خارج القرآن ثم نبحث لها عن أصل داخله أو نحاول إسقاط القرآن عليها. المنهج الصحيح هو أن يبدأ الباحث من داخل القرآن لا من خارجه.</p>
+                </div>
+            </div>
+
+            <!-- Examples -->
+            <div class="section-title"><h2>أمثلة تطبيقية مختصرة</h2></div>
+            <div class="accordion-wrapper">
+                <details class="searchable-item">
+                    <summary>الذكر</summary>
+                    <p>يوضع جذر <code>ذ-ك-ر</code> موضع الدراسة، ويتم تتبع مواضع ورود الكلمة لفهم حقلها الدلالي: التذكير، البيان، التبليغ والوعي—لا مجرد نص محفوظ.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>الشيطان</summary>
+                    <p>يُنظر إليه في سياق القرآن كمفهوم يشمل النزعات والإغواء والسلوك الذي يصدّ عن الهدى، وليس كمجرد شخصية متجسدة بالضرورة.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>الدين</summary>
+                    <p>يُفهم كمنظومة قيم وسلوك لا كمؤسسة كهنوتية أو مجرد طقوس، وفق ما يظهر من استعمال الكلمة النصي، علينا أن نعي جيدًا أن الإيمان مسألة فردية.</p>
+                </details>
+            </div>
+
+            <!-- FAQs -->
+            <div class="section-title"><h2>اعتراضات وأسئلة شائعة</h2></div>
+            <div class="accordion-wrapper">
+                <details class="searchable-item">
+                    <summary>هل يلغي هذا التراث؟</summary>
+                    <p>لا؛ التراث يبقى مادة بشرية تُستخدم أو تُقوّم، لكن لا تُمنح سلطة فوق النص القرآني.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>من يضمن صحة الفهم؟</summary>
+                    <p>لا يوجد ضامن بشري. الضمان منهجي: وضوح خطوات التحليل يجعل النتيجة قابلة للنقد والمراجعة.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>لماذا لا نعتمد الروايات؟</summary>
+                    <p>لأن النص (القرآن) لم يطلب مرجعًا فوقه، ولأن الروايات تأتي بعد النص بزمن وتختلف في دقتها ودلالتها.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>هل المنهج مغلق؟</summary>
+                    <p>المنهج قابلاً للمراجعة، لكنه يستند إلى أسس ثابتة: النص، اللغة، الأخلاق، والمنطق.</p>
+                </details>
+                <details class="searchable-item">
+                    <summary>هل نحن ملزمون بكتب الروايات واجماع الفقهاء؟</summary>
+                    <p>لا، نحن ملزمون بالوحي الوحيد فقط، (القرآن)، وكل ما هو دون القرآن من كتب روايات وفقه واجماع واتفاق، إنما هي اجتهادات بشرية لا قداسة لها.</p>
+                </details>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="conclusion-card searchable-item">
+                <h2>خاتمة</h2>
+                <p>المنهج هنا أداة لتحرير القراءة من القيود غير النصية؛ ليس مذهبًا جديدًا، بل إطارًا عمليًا لقراءةٍ منضبطة وقابلة للنقد. الهدف: الوصول إلى فهم أقرب للنص عبر خطوات واضحة ومفتوحة للمراجعة.</p>
+            </div>
+        </div>
+
+        <div class="social-section">
+            <div class="section-title"><h2>تابعني على مواقع التواصل</h2></div>
+            <div class="social-grid">
+                <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn youtube"><img src="icons/yot-soc.png" alt="يوتيوب"></a>
+                <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" class="social-btn facebook"><img src="icons/fac-soc.png" alt="فيسبوك"></a>
+                <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" class="social-btn instagram"><img src="icons/ins-soc.png" alt="إنستغرام"></a>
+                <a href="https://t.me/tanoeer" target="_blank" class="social-btn telegram"><img src="icons/tel-soc.png" alt="تلغرام"></a>
+                <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" class="social-btn tiktok"><img src="icons/tik-soc.png" alt="تيك توك"></a>
+                <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn snap"><img src="icons/snap.png" alt="سناب شات"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
+    <div class="copy-alert" id="copyAlert">تم نسخ الرابط بنجاح ✅</div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="terms.html">الشروط والأحكام</a>
+                <a href="privacy.html">سياسة الخصوصية</a>
+                <a href="contact.html">اتصل بنا</a>
+                <a href="feedback.html">شاركنا رأيك</a>
+            </div>
+            <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.nav-overlay');
+            navLinks.classList.toggle('show');
+            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
+            document.body.classList.toggle('no-scroll');
+        }
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
+        });
+
+        // Search Logic
+        let cachedPagesContent = null;
+        let isSearchInitialized = false;
+        async function loadAllPagesContent() {
+            if (cachedPagesContent) return cachedPagesContent;
+            try {
+                const response = await fetch('site-map.json?v=' + new Date().getTime());
+                const pagesList = await response.json();
+                const promises = pagesList.map(async (item) => {
+                    let url = typeof item === 'string' ? item : item.url;
+                    try {
+                        const pageResp = await fetch(url);
+                        const html = await pageResp.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                        const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                        return { page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', url: url, content: mainContent.textContent.replace(/\s+/g, ' ').trim() };
+                    } catch (e) { return null; }
+                });
+                cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
+                return cachedPagesContent;
+            } catch (error) { return []; }
+        }
+
+        function normalizeArabic(text) {
+            return text.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+        }
+
+        function getSafeRegex(searchTerm) {
+            let regexStr = '';
+            const cleanTerm = normalizeArabic(searchTerm);
+            for (let char of cleanTerm) {
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                regexStr += '[\\u064B-\u065F\u0670]*';
+            }
+            return new RegExp(regexStr, 'gi');
+        }
+
+        async function performGlobalSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            resultsContainer.style.display = 'block';
+            const data = await loadAllPagesContent();
+            const searchRegex = getSafeRegex(query);
+            const results = data.filter(item => {
+                searchRegex.lastIndex = 0;
+                return searchRegex.test(item.page) || searchRegex.test(item.content);
+            });
+            resultsContainer.innerHTML = `<div class="search-count">تم العثور على ${results.length} نتيجة</div>`;
+            results.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-item';
+                div.innerHTML = `<h3>${item.page.replace(searchRegex, m => `<mark>${m}</mark>`)}</h3><p>${item.content.substring(0, 150).replace(searchRegex, m => `<mark>${m}</mark>`)}...</p>`;
+                div.onclick = () => window.location.href = item.url;
+                resultsContainer.appendChild(div);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('globalSearch');
+            let timer;
+            if(searchInput) {
+                searchInput.addEventListener('input', (e) => { clearTimeout(timer); timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500); });
+                searchInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
+            }
+            document.addEventListener('click', (e) => {
+                if(!document.querySelector('.universal-search').contains(e.target)) document.getElementById('searchResults').style.display = 'none';
+            });
+        });
+
+        // Font Resize
+        const contentWrapper = document.getElementById('manhajContent');
+        let fontScale = 1;
+        function renderFont() {
+            if (!contentWrapper) return;
+            contentWrapper.querySelectorAll('h2').forEach(el => el.style.fontSize = `${2 * fontScale}rem`);
+            contentWrapper.querySelectorAll('h3').forEach(el => el.style.fontSize = `${1.3 * fontScale}rem`);
+            contentWrapper.querySelectorAll('summary').forEach(el => el.style.fontSize = `${1.1 * fontScale}rem`);
+            contentWrapper.querySelectorAll('p').forEach(el => el.style.fontSize = `${1 * fontScale}em`);
+        }
+        document.getElementById('fontIncrease').addEventListener('click', () => { if (fontScale < 1.6) { fontScale += 0.1; renderFont(); } });
+        document.getElementById('fontDecrease').addEventListener('click', () => { if (fontScale > 0.7) { fontScale -= 0.1; renderFont(); } });
+        document.getElementById('fontReset').addEventListener('click', () => { fontScale = 1; renderFont(); });
+    </script>
+</body>
+</html>

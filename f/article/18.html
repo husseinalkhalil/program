@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>الناسخ والمنسوخ - حسين الخليل</title>
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+    <!-- Favicon -->
+    <link href="images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==================== Shared Styles (Unified Identity) ==================== */
+        :root {
+            --primary-color: #5c4a24; 
+            --accent-gold: #d4af37; 
+            --bg-color: #f9f7f2; 
+            --ticker-footer-bg: #f1e4c0; 
+            --surface-color: #ffffff; 
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            
+            --shadow-sm: 0 4px 15px rgba(212, 175, 55, 0.1);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --nav-height: 75px;
+            --gradient-header: linear-gradient(135deg, #fdfcf8 0%, #f1e4c0 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            animation: fadeInPage 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.no-scroll { overflow: hidden !important; height: 100vh; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* Navigation */
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+            z-index: 998; display: none;
+        }
+
+        nav {
+            background: var(--ticker-footer-bg); 
+            padding: 0 5%;
+            position: fixed; width: 100%; top: 0;
+            z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            height: var(--nav-height);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .logo-container { order: 1; }
+        .logo-container img { height: 45px; transition: 0.4s; }
+
+        .nav-links {
+            display: flex; flex: 1; justify-content: space-evenly;
+            align-items: center; flex-wrap: wrap; margin: 0 10px; order: 2;
+        }
+
+        .nav-links a {
+            color: var(--primary-color); font-weight: 700; font-size: 0.95rem;
+            padding: 8px 12px; border-radius: 20px;
+            display: flex; align-items: center; gap: 5px; white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { background: rgba(255,255,255,0.3); color: var(--accent-gold); transform: translateY(-2px); }
+
+        .hamburger { display: none; color: var(--primary-color); font-size: 1.5rem; cursor: pointer; order: 3; }
+
+        @media (max-width: 1200px) {
+            .hamburger { display: block; order: 1; }
+            .logo-container { order: 2; }
+            .nav-links {
+                position: fixed; top: var(--nav-height); right: -280px; width: 280px;
+                background: white; flex-direction: column;
+                padding: 15px 0 40px; height: calc(100vh - var(--nav-height));
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
+                gap: 0; margin: 0; z-index: 1001; display: flex !important;
+            }
+            .nav-links.show { right: 0; }
+            .nav-links a { color: var(--text-primary); width: 100%; padding: 18px 25px; border-radius: 0; font-size: 1.05rem; border-bottom: 1px solid rgba(0,0,0,0.03); font-weight: 700; justify-content: flex-start; }
+            nav { padding: 0.8rem 5%; }
+        }
+
+        /* Hero Section */
+        .unified-header {
+            background: var(--gradient-header);
+            padding: calc(var(--nav-height) + 40px) 20px 60px;
+            text-align: center; color: var(--primary-color);
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 30px; width: 100%;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .hero-content {
+            max-width: 900px; margin: 0 auto;
+            display: flex; flex-direction: column; align-items: center; gap: 20px;
+        }
+
+        .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; font-family: 'Tajawal', sans-serif; line-height: 1.4; text-align: center; }
+        .hero-text p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; opacity: 0.9; font-weight: 500; text-align: center; }
+
+        /* Container & Main Layout */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; flex: 1; }
+        
+        .main-wrapper {
+            position: relative; z-index: 20; margin-top: -30px;
+            max-width: 1100px; 
+            margin-left: auto; margin-right: auto;
+            margin-bottom: 60px;
+        }
+
+        /* ==================== Article Specific Styles ==================== */
+        .article-content-container {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 50px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .article-meta {
+            display: flex; justify-content: center; gap: 15px;
+            margin-bottom: 30px; padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-secondary); font-size: 0.95rem; font-weight: 700;
+        }
+        
+        .article-meta span { display: flex; align-items: center; gap: 5px; }
+        .article-meta i { color: var(--accent-gold); }
+
+        .article-body {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            text-align: justify; line-height: 1.9;
+            transition: font-size 0.3s;
+        }
+
+        .article-body p { margin-bottom: 20px; }
+        .article-body strong { color: var(--primary-color); font-weight: 800; font-size: 1.1em; }
+
+        .article-body h3 {
+            color: var(--primary-color);
+            margin: 40px 0 15px;
+            position: relative; display: inline-block;
+            font-size: 1.5rem; font-weight: 800;
+            font-family: 'Tajawal', sans-serif;
+        }
+        .article-body h3::after {
+            content: ''; display: block; width: 40px; height: 3px;
+            background: var(--accent-gold); margin-top: 5px;
+        }
+
+        /* Lists in article */
+        .article-body ul {
+            list-style: none; padding-right: 0;
+            margin-bottom: 20px;
+        }
+        .article-body ul li {
+            position: relative; padding-right: 25px; margin-bottom: 10px;
+        }
+        .article-body ul li::before {
+            content: '•'; color: var(--accent-gold);
+            position: absolute; right: 0; font-weight: bold; font-size: 1.5rem; line-height: 1.2;
+        }
+
+        /* Video Link Style (Adapted to Identity) */
+        .video-link {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 12px 30px; border-radius: 50px;
+            font-weight: 800; text-decoration: none;
+            background: #fdfcf8; border: 2px solid var(--accent-gold);
+            color: var(--primary-color); box-shadow: var(--shadow-sm);
+            margin: 20px auto;
+            transition: all 0.3s;
+        }
+        .video-link:hover {
+            transform: translateY(-3px);
+            background: var(--accent-gold); color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Font Controls (Fixed) */
+        .font-controls-fixed {
+            position: fixed; top: 120px; left: 30px;
+            display: flex; flex-direction: column; gap: 10px;
+            z-index: 990;
+        }
+        
+        .font-btn {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: white; border: 1px solid var(--accent-gold);
+            color: var(--primary-color); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+        .font-btn:hover { background: var(--accent-gold); color: white; transform: scale(1.1); }
+
+        /* Action Buttons */
+        .article-actions {
+            margin-top: 50px; padding-top: 25px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
+        }
+        
+        .action-btn-pill {
+            padding: 12px 30px; border-radius: 50px;
+            border: 2px solid var(--accent-gold); background: #fdfcf8;
+            color: var(--primary-color); font-weight: 800;
+            cursor: pointer; display: flex; align-items: center; gap: 10px;
+            transition: all 0.3s;
+        }
+        .action-btn-pill:hover { background: var(--accent-gold); color: white; transform: translateY(-3px); }
+
+        /* Footer & Others */
+        footer { background: var(--ticker-footer-bg); color: var(--primary-color); padding: 60px 20px; text-align: center; margin-top: auto; border-top: 3px solid var(--accent-gold); }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+        .footer-links a { color: var(--primary-color); font-weight: 700; opacity: 0.8; font-size: 0.95rem; }
+        .footer-links a:hover { color: var(--accent-gold); opacity: 1; }
+        .copyright { color: var(--primary-color); font-size: 0.85rem; border-top: 1px solid rgba(92, 74, 36, 0.1); padding-top: 25px; margin-top: 25px; opacity: 0.7; font-weight: 600; }
+
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; background: var(--primary-color); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s;
+            z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem;
+        }
+        .back-to-top.visible { opacity: 1; pointer-events: all; }
+        .back-to-top:hover { transform: translateY(-5px); background: var(--accent-gold); }
+
+        /* Print Media */
+        @media print {
+            nav, .unified-header, .font-controls-fixed, .article-actions, footer, .back-to-top { display: none; }
+            .main-wrapper { margin: 0; max-width: 100%; }
+            .article-content-container { box-shadow: none; border: none; padding: 0; }
+            body { background: white; color: black; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .font-controls-fixed { top: auto; bottom: 30px; left: 30px; flex-direction: row; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 1.8rem; }
+            .unified-header { padding-top: calc(var(--nav-height) + 20px); border-radius: 0 0 35px 35px; }
+            .article-content-container { padding: 25px; }
+            .main-wrapper { margin-top: 0; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo-container">
+            <a href="/index.html">
+                <img src="/images/logo.png" alt="شعار حسين الخليل" />
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <a href="/index.html">الرئيسية</a>
+            <a href="/books.html">الكتب</a>
+            <a href="/articles.html" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">المقالات</a>
+            <a href="/khawatir.html">خواطر</a>
+            <a href="/videos.html">الفيديوهات</a>
+            <a href="/history.html">التاريخ</a>
+            <a href="/podcast.html">البودكاست</a>
+            <a href="/ask.html">الأسئلة</a>
+            <a href="/hewar.html">حوارات</a>
+            <a href="/inq.html">تساؤلات</a>
+            <a href="/manhaj.html">المنهج</a>
+            <a href="/favorites.html">المفضلة</a>
+            <a href="/support.html">دعم المحتوى</a>
+            <a href="/about.html">من نحن</a>
+            <a href="/en/article/18.html" style="color: var(--primary-color) !important; font-weight: 800; border: 1.5px solid var(--accent-gold); padding: 5px 15px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;"><i class="fas fa-globe"></i>En</a>
+            <a href="#" onclick="window.print()" title="طباعة"><i class="fas fa-print"></i></a>
+        </div>
+
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="unified-header">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>❖ الناسخ والمنسوخ</h1>
+                <p>بحث في مفهوم النسخ بين النص القرآني والموروث الفقهي</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Font Controls -->
+    <div class="font-controls-fixed">
+        <button class="font-btn" id="fontIncrease" title="تكبير الخط"><i class="fas fa-plus"></i></button>
+        <button class="font-btn" id="fontReset" title="إعادة تعيين"><i class="fas fa-redo"></i></button>
+        <button class="font-btn" id="fontDecrease" title="تصغير الخط"><i class="fas fa-minus"></i></button>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="container main-wrapper">
+        <div class="article-content-container">
+            <div class="article-meta">
+                <span><i class="far fa-calendar-alt"></i> 26 مايو 2025</span>
+                <span><i class="far fa-folder"></i> مقالات فكرية</span>
+            </div>
+
+            <!-- Content Body -->
+            <div class="article-body" id="articleBody">
+                <p style="margin-bottom:20px;">اقرأوا معي هذه الآيات:</p>
+                
+                <p><strong>1- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿ٱتَّبِعْ مَآ أُوحِىَ إِلَيْكَ مِن رَّبِّكَ ۖ لَآ إِلَٰهَ إِلَّا هُوَ ۖ وَأَعْرِضْ عَنِ ٱلْمُشْرِكِينَ ۞ وَلَوْ شَآءَ ٱللَّهُ مَآ أَشْرَكُوا۟ ۗ وَمَا جَعَلْنَٰكَ عَلَيْهِمْ حَفِيظًا ۖ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ﴾</span> الأنعام [ 106-107]. </p>
+                <p><strong>2- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّكَ لَا تَهْدِى مَنْ أَحْبَبْتَ وَلَٰكِنَّ ٱللَّهَ يَهْدِى مَن يَشَآءُ ۚ وَهُوَ أَعْلَمُ بِٱلْمُهْتَدِينَ﴾</span> القصص [56]. </p>
+                <p><strong>3- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿إِنَّآ أَنزَلْنَا عَلَيْكَ ٱلْكِتَٰبَ لِلنَّاسِ بِٱلْحَقِّ ۖ فَمَنِ ٱهْتَدَىٰ فَلِنَفْسِهِۦ ۖ وَمَن ضَلَّ فَإِنَّمَا يَضِلُّ عَلَيْهَا ۖ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ﴾</span> الزمر [41]. </p>
+                <p><strong>4- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَٱلَّذِينَ ٱتَّخَذُوا۟ مِن دُونِهِۦٓ أَوْلِيَآءَ ٱللَّهُ حَفِيظٌ عَلَيْهِمْ وَمَآ أَنتَ عَلَيْهِم بِوَكِيلٍ﴾</span> الشورى [6]. </p>
+                <p><strong>5- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَقُلِ ٱلْحَقُّ مِن رَّبِّكُمْ ۖ فَمَن شَآءَ فَلْيُؤْمِن وَمَن شَآءَ فَلْيَكْفُرْ﴾</span> الكهف [29]. </p>
+                <p><strong>6- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَعَلَى ٱللَّهِ قَصْدُ ٱلسَّبِيلِ وَمِنْهَا جَآئِرٌ ۚ وَلَوْ شَآءَ لَهَدَىٰكُمْ أَجْمَعِينَ﴾</span> النحل [9]. </p>
+                <p><strong>7- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَمَن كَفَرَ فَلَا يَحْزُنكَ كُفْرُهُۥٓ ۚ إِلَيْنَا مَرْجِعُهُمْ فَنُنَبِّئُهُم بِمَا عَمِلُوٓا۟ ۚ إِنَّ ٱللَّهَ عَلِيمٌۢ بِذَاتِ ٱلصُّدُورِ﴾</span> لقمان [23]. </p>
+                <p><strong>8- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿لَّسْتَ عَلَيْهِم بِمُصَيْطِرٍ﴾</span> الغاشية [22]. </p>
+                <p><strong>9- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَمَا خَلَقْنَا ٱلسَّمَٰوَٰتِ وَٱلْأَرْضَ وَمَا بَيْنَهُمَآ إِلَّا بِٱلْحَقِّ ۗ وَإِنَّ ٱلسَّاعَةَ لَأَتِيَةٌ ۖ فَٱصْفَحِ ٱلصَّفْحَ ٱلْجَمِيلَ﴾</span> الحِجر [85]. </p>
+                <p><strong>10- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿ٱدْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِٱلْحِكْمَةِ وَٱلْمَوْعِظَةِ ٱلْحَسَنَةِ ۖ وَجَٰدِلْهُم بِٱلَّتِى هِىَ أَحْسَنُ ۚ إِنَّ رَبَّكَ هُوَ أَعْلَمُ بِمَن ضَلَّ عَن سَبِيلِهِۦ ۖ وَهُوَ أَعْلَمُ بِٱلْمُهْتَدِينَ﴾</span> النحل [125]. </p>
+                <p><strong>11- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿وَلَا تُجَٰدِلُوٓا۟ أَهْلَ ٱلْكِتَٰبِ إِلَّا بِٱلَّتِى هِىَ أَحْسَنُ إِلَّا ٱلَّذِينَ ظَلَمُوا۟ مِنْهُمْ ۖ وَقُولُوٓا۟ ءَامَنَّا بِٱلَّذِىٓ أُنزِلَ إِلَيْنَا وَأُنزِلَ إِلَيْكُمْ وَإِلَٰهُنَا وَإِلَٰهُكُمْ وَٰحِدٌ وَنَحْنُ لَهُۥ مُسْلِمُونَ﴾</span> العنكبوت [46]. </p>
+                <p><strong>12- </strong><span style="color: #5e2ca5; font-weight: bold;">﴿لَّا يَنْهَىٰكُمُ ٱللَّهُ عَنِ ٱلَّذِينَ لَمْ يُقَٰتِلُوكُمْ فِى ٱلدِّينِ وَلَمْ يُخْرِجُوكُم مِّن دِيَٰرِكُمْ أَن تَبَرُّوهُمْ وَتُقْسِطُوٓا۟ إِلَيْهِمْ ۚ إِنَّ ٱللَّهَ يُحِبُّ ٱلْمُقْسِطِينَ﴾</span> الممتحنة [8]. </p>
+
+                <p>جميلة هي هذه الآيات أليس كذلك.</p>
+                <p>فهي تريح القلب وتمنح الطمأنينة، كيف لا وهي تدعو إلى التسامح والمحبة وحرية الاعتقاد.</p>
+                <p> لكن يؤسفني أن أخبركم بأن جميع هذه الآيات <strong> منسوخة! </strong></p>
+                
+                <p><strong><span style="color: #e11d48;">منسوخة؟</span></strong></p>
+                <p><strong><span style="color: green;">نعم منسوخة!!</span></strong></p>
+                <p>منسوخة، ملغية، أي لا يُحتجّ بها، وهي موجودة فقط من أجل القراءة! هذا ما يقوله الشيخ: <span style="color: #1d4ed8;"> أبي محمد مكي ابن ابي طالب القيسي </span> في كتابه: الايضاح لناسخ القرآن ومنسوخه. </p>
+
+                <p>هذا هو مفهوم التراث للدين!</p>
+                <p>ما الذي نسخها؟ من الذي تجرّأ وألغى آيات من كتاب الله؟!</p>
+                <p><strong><span style="color: blue;">الجواب: </span></strong> البشر. </p>
+                <p>مستغربين أليس كذلك؟!</p>
+                <p>كُتُب البشر هي من نسخت وألغت هذه الآيات، بأحاديث ما أنزل الله بها من سلطان وألصقوها بظهر النبي وتقوّلوا عليه ما لم يقله!</p>
+                <p>تصوّروا أن البشر غير المعصومين ينسخون كلام رب البشر!! هذا الإله العظيم الخالي من العيب والنقائص، يُلغى كلامه ويُستبدل بكلام البشر!</p>
+                <p>هل أنتم متخيّلين هذا الموضوع؟</p>
+                <p>لو تلاحظون في الآيات آنفة الذِكر والتي ادعى كهنة الدين أنها منسوخة، لا توجد آية واحدة تتكلم عن القتال! لا توجد آية واحدة تتكلم عن النار والوعيد لمن تجاوز حدود الله!</p>
+                <p>كل الآيات التي "ألغوها" من كتاب الله هي آيات التسامح والعيش المشترك والمحبة والحرية!</p>
+                <p>الله سبحانه وتعالى يدعو ويأمر بالعيش المشترك وبحرية المعتقد لكل البشر والتسامح والسلام والمحبة، ثم يأتي رجال الدين ويقولوا: لا يارب، أحكامك لا تعجبنا، لا نريد حرية ولا تسامح ولا عيش مشترك.</p>
+                <p>نريد القتل والبطش والاعتداء وتقطيع الرؤوس والكراهية والعنصرية.</p>
+                <p>فقاموا بالاتفاق مع سلاطين ذلك الزمان، باختراع مصدر جديد للدين وأطلقوا عليه اسم "السُنّة النبوية" ووضعوا في هذا المصدر جميع أفكارهم الاجرامية ونسبوها زوراً وبهتاناً لرسول الله.</p>
+                <p>كتبوا الكُتُب بأيديهم ثم قالوا أنها من عند الله!</p>
+                <p>كتبوها على مقاسهم وبحسب أفكارهم.</p>
+                <p>وحتى يعطوها صفة القداسة، يكفي أن يكتبوا قبل كل نص إجرامي مقولة "قال رسول الله" حتى تُعطى القداسة ولا يرفضها أي مسلم!</p>
+                <p>وبما أن العقول معطلة وتكتفي فقط بالنقل من رجال الدين، فلن يفكر أحد بسؤال: كيف لرسول الله أن يخالف كتاب الله؟!</p>
+                <p>فأصبح العقل الجمعي للمسلم يتوقف ويصدّق ويؤمن بما سيقال ويسمع لمجرد أن يسمع مقولة "قال رسول الله".</p>
+                <p>افتروا على الرسول كذباً بمقولات تخالف كتاب الله، مثل:</p>
+                
+                <p><strong><span style="color: blue;">1- </span></strong><span style="color: #e11d48;">من بدل دينه فاقتلوه.</span></p>
+                <p><strong><span style="color: blue;">2- </span></strong><span style="color: #e11d48;">أُمرت أن أقاتل الناس.</span></p>
+                <p><strong><span style="color: blue;">3- </span></strong><span style="color: #e11d48;">جئتكم بالذبح.</span></p>
+                <p><strong><span style="color: blue;">4- </span></strong><span style="color: #e11d48;">حديث الرجم.</span></p>
+                
+                <p>والكثير من المرويات التي تخالف كتاب الله وتتعدى على الآمنين باسم الفتوحات الاسلامية واغتصاب النساء باسم السبي. ولا ننسَ بأن المرأة كان لها حصة الأسد من تلك المرويات التي تهينها وتنتقص منها وتُشبّهها بالحمار والشيطان والدابة والكلب والناقصة ومرويات اللعن.</p>
+                <p>كان لديهم عقلية جنسية بهيمية بيدوفيلية تحب التلذذ بالاطفال، فادعوا أن الرسول تزوج بطفلة ودخل بها وهي ابنة تسع سنوات حتى يُحللوا لأنفسهم هذه الجريمة.</p>
+                <p>رسول الله لم يكن موجوداً عندما كتبوا تلك الأحاديث وقالوا إنها أحاديث رسول الله، لم يكن موجوداً ليُكذّبهم ويتبرّء منهم.</p>
+                <p>وإذا انتقدت هذه الأحاديث فأنت بمفهوم رجال الدين والسواد الأعظم من المسلمين بأنك ترد على كلام رسول الله وتتجرّأ عليه، وبالتالي فأنت كافر!</p>
+                <p> أراد الحُكّام غزو البلدان وتوسيع الحكم، طلبوا من رجال الدين تمرير قرار لفعل هذا العمل ومنحه صفة القداسة، وبالطبع لا يوجد أسهل من ذلك.</p>
+                <p>نسب الغزو إلى رسول الله بأنه أمر به ليُعطى صفة القداسة ومباركة وتأييد المسلمين!</p>
+                <p>كهنة الدين لم يستطيعوا أن يُحرّفوا كتاب الله ولا أن يضيفوا أو يحذفوا منه شيئاً، ناسين أو متناسين بأن الله تعهّد بحفظ كتابه، فقاموا باختراع مصدر آخر للدين وأسموه "السُنّة النبوية".</p>
+                <p>لكن لم ينتهِ الأمر عند هذا الحد، فلسان حال حُراس المعبد الكهنوتي يقول: لا تزال هناك مشكلة يجب حلها.</p>
+                <p><strong><span style="color: blue;">ما هي هذه المشكلة يا ترى؟ </span></strong></p>
+                <p><strong><span style="color: green;">الجواب: </span></strong> هناك آيات (آنفة الذكر) لا تتوافق مع ما كتبناه في الأحاديث التي نسبناها لرسول الله ويجب التخلّص منها. </p>
+                <p><strong><span style="color: blue;">ما العمل إذاً? </span></strong></p>
+                <p>نخترع لهم مصطلح الناسخ والمنسوخ وأي آية لا تعجبنا وتدعو إلى التسامح والحرية ولا تتوافق مع أفكارنا، نقول عنها منسوخة، وبذلك تبقى الآيات كما هي في القرآن للقراءة فقط، ولكن حكمها ملغي بالنصوص التي كتبناها نحن.</p>
+                <p>حتى ابليس لا يخطر على باله هذه الأفكار لأنهم هم الأبالسة الحقيقيين.</p>
+                <p>وإذا ما انتقد أحد ما "غير مسلم" دين الإسلام وانتقد رسول الله بأنه بيدوفيلي ويدعو إلى غزو البلدان وقتل كل من لا يؤمن برسالته، مستندين بذلك إلى النصوص البخارية والكُليّنية وغيرها، تثور ثائرة المسلمين كالعادة والتي تحركهم العواطف لا العقول، ويطلقون شعارات "إلّا رسول الله" ويطالبون بقتل من يسيء للرسول وللإسلام لإثبات أن الإسلام هو دين السلام وليس دين القتل والهمجية كما يدّعي المسيء!</p>
+                <p>فبدلاً من تجفيف المستنقع، يكتفون بقتل البعوض فقط.</p>
+                <p>ومن المفارقات العجيبة، أن أهم كتب الروايات والتي تُتعبر "ثلاث أرباع الدين" بحسب المفهوم الكهنوتي، والتي تقضي على القرآن إذا تعارضت مع آيات الله، أن أصحاب هذه الكُتب ليسوا عرباً (مع احترامي لجميع القوميات دون استثناء) ولا يتكلمون اللغة العربية ولم يعيشوا في المجتمع العربي ولا يعرفون العادات والتقاليد العربية، بل جميعهم من شرق آسيا!</p>
+                <p>فمثلاً:</p>
+                <ul>
+                    <li><strong>1- </strong>البخاري من مدينة بخارى بأوزبكستان.</li>
+                    <li><strong>2- </strong>مسلم من مدينة نيسابور بإيران.</li>
+                    <li><strong>3- </strong>الترمذي من مدينة ترمذ بأوزبكستان.</li>
+                    <li><strong>4- </strong> ابن ماجه من مدينة قزوين بإيران.</li>
+                    <li><strong>5- </strong>ابو داوود من مدينة سجستان بأفغانستان.</li>
+                    <li><strong>6- </strong>النسائي من مدينة نسا بتركمانستان.</li>
+                    <li><strong>7- </strong>الكُليني من ايران.</li>
+                    <li><strong>8- </strong>الطوسي من ايران.</li>
+                    <li><strong>9- </strong> الشيخ الصدوق من ايران.</li>
+                </ul>
+                <p><span style="color: red;">غريب: </span>ألا يوجد من بين الصحابة أو التابعين رجل رشيد يجمع أحاديث رسول الله باعتباره عاش معه وهو أعلم بالدين ممن سيأتي بعد مئتي سنة ويقدم لنا كُتُب ويقول أنها المكملة للدين!؟ </p>
+                
+                <h3>الخلاصة:</h3>
+                <p>الناسخ والمنسوخ هي من أخبث الأفكار ومن أقذر الجرائم التي ارتُكِبت بحق الإسلام.</p>
+                <p>لقد تجرأ رجال الدين على تحريف الدين وتشويه صورة الإسلام الحقيقي الذي يدعو إلى التسامح والحرية والسلام.</p>
+                <p>اخترعوا مصادر للدين ونسبوا إليها ما يخدم أغراضهم السياسية والاجتماعية، مستغلين غياب الوعي النقدي لدى عامة المسلمين. يجب علينا العودة إلى القرآن الكريم كمصدر وحيد للدين، ورفض كل ما يتعارض مع روحه ومبادئه السامية التي تحترم الإنسان وتكفل حريته وتدعو إلى التعايش السلمي بين جميع البشر.</p>
+
+                <!-- Video Link -->
+                <div style="text-align: center; margin: 40px 0;">
+                    <a href="https://youtu.be/xWpw-b2uOq8?si=xQWaFkD5X7PT4unZ" target="_blank" class="video-link">
+                        <i class="fas fa-video"></i> حلقة مرئية عن الموضوع
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="article-actions">
+                <button class="action-btn-pill" onclick="window.print()">
+                    <i class="fas fa-print"></i> طباعة المقال
+                </button>
+                <button class="action-btn-pill" onclick="handleShare()">
+                    <i class="fas fa-share-alt"></i> مشاركة المقال
+                </button>
+                <button class="action-btn-pill" onclick="copyLink()">
+                    <i class="fas fa-link"></i> نسخ الرابط
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/terms.html">الشروط والأحكام</a>
+                <a href="/privacy.html">سياسة الخصوصية</a>
+                <a href="/contact.html">اتصل بنا</a>
+                <a href="/feedback.html">شاركنا رأيك</a>
+            </div>
+            <div class="copyright">
+                حسين الخليل - جميع الحقوق محفوظة © 2025
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.nav-overlay');
+            navLinks.classList.toggle('show');
+            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
+            document.body.classList.toggle('no-scroll');
+        }
+
+        // Font Resizing Logic
+        const articleBody = document.getElementById('articleBody');
+        const defaultFontSize = 1.2;
+        let currentFontSize = defaultFontSize;
+
+        document.getElementById('fontIncrease').addEventListener('click', () => {
+            if (currentFontSize < 2.5) {
+                currentFontSize += 0.1;
+                articleBody.style.fontSize = `${currentFontSize}rem`;
+            }
+        });
+
+        document.getElementById('fontDecrease').addEventListener('click', () => {
+            if (currentFontSize > 0.9) {
+                currentFontSize -= 0.1;
+                articleBody.style.fontSize = `${currentFontSize}rem`;
+            }
+        });
+
+        document.getElementById('fontReset').addEventListener('click', () => {
+            currentFontSize = defaultFontSize;
+            articleBody.style.fontSize = `${defaultFontSize}rem`;
+        });
+
+        // Share & Copy Link
+        function handleShare() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                copyLink();
+            }
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("تم نسخ رابط المقال بنجاح ✅");
+            });
+        }
+
+        // Back to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>تعطيل العقول - حسين الخليل</title>
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+    <!-- Favicon -->
+    <link href="images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #5c4a24; 
+            --accent-gold: #d4af37; 
+            --bg-color: #f9f7f2; 
+            --ticker-footer-bg: #f1e4c0; 
+            --surface-color: #ffffff; 
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --shadow-sm: 0 4px 15px rgba(212, 175, 55, 0.1);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            --nav-height: 75px;
+            --gradient-header: linear-gradient(135deg, #fdfcf8 0%, #f1e4c0 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            animation: fadeInPage 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.no-scroll { overflow: hidden !important; height: 100vh; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* ==================== Navigation ==================== */
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+            z-index: 998; display: none;
+        }
+
+        nav {
+            background: var(--ticker-footer-bg); 
+            padding: 0 5%;
+            position: fixed; width: 100%; top: 0;
+            z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            height: var(--nav-height);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .logo-container { order: 1; }
+        .logo-container img { height: 45px; transition: 0.4s; }
+
+        .nav-links {
+            display: flex; flex: 1; justify-content: space-evenly;
+            align-items: center; margin: 0 10px; order: 2;
+        }
+
+        .nav-links a {
+            color: var(--primary-color); font-weight: 700; font-size: 0.95rem;
+            padding: 8px 12px; border-radius: 20px;
+            white-space: nowrap; transition: 0.3s;
+        }
+        .nav-links a:hover { background: rgba(255,255,255,0.3); color: var(--accent-gold); transform: translateY(-2px); }
+
+        .hamburger { display: none; color: var(--primary-color); font-size: 1.5rem; cursor: pointer; order: 3; }
+
+        @media (max-width: 1200px) {
+            .hamburger { display: block; order: 1; } 
+            .logo-container { order: 2; }
+            .nav-links {
+                position: fixed; top: var(--nav-height); right: -280px; width: 280px;
+                background: white;
+                flex-direction: column; padding: 15px 0 40px;
+                height: calc(100vh - var(--nav-height));
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
+                gap: 0; margin: 0; z-index: 1001; display: flex !important;
+            }
+            .nav-links.show { right: 0; }
+            .nav-links a { color: var(--text-primary); width: 100%; padding: 18px 25px; border-radius: 0; font-size: 1.05rem; border-bottom: 1px solid rgba(0,0,0,0.03); font-weight: 700; justify-content: flex-start; }
+        }
+
+        /* ==================== Unified Header & Hero ==================== */
+        .unified-header {
+            background: var(--gradient-header);
+            padding: calc(var(--nav-height) + 40px) 20px 60px;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 30px; width: 100%; text-align: center;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .hero-text h1 { 
+            font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; 
+            font-family: 'Tajawal', sans-serif; color: var(--primary-color);
+            text-align: center;
+        }
+        .hero-text p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-weight: 500; text-align: center; }
+
+        /* ==================== Content Layout ==================== */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+        .main-wrapper { position: relative; z-index: 20; margin-top: -30px; max-width: 1000px; margin-left: auto; margin-right: auto; margin-bottom: 60px; }
+
+        .article-content-container {
+            background: white; border-radius: 1.5rem;
+            padding: 50px; box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .article-meta {
+            display: flex; justify-content: center; gap: 15px;
+            margin-bottom: 30px; padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-secondary); font-size: 0.95rem; font-weight: 700;
+        }
+        .article-meta i { color: var(--accent-gold); }
+
+        /* Dialogue Bubbles Styling */
+        .article-body { font-size: 1.2rem; color: var(--text-primary); line-height: 1.9; transition: font-size 0.3s; }
+        .dialogue-wrapper { display: flex; flex-direction: column; gap: 25px; margin-top: 20px; }
+        .d-row { display: flex; align-items: flex-start; gap: 15px; width: 100%; }
+        .d-icon { min-width: 45px; font-size: 1.8rem; text-align: center; }
+        .d-bubble { position: relative; padding: 20px; border-radius: 15px 0 15px 15px; flex: 1; box-shadow: var(--shadow-sm); }
+
+        /* Speaker 1 (Sheikh 👳🏻‍♂️) - Grey Theme */
+        .speaker-1 .d-bubble { background-color: #f8fafc; border-right: 4px solid #94a3b8; color: #334155; }
+        
+        /* Speaker 2 (Main Speaker 👨🏻) - Golden Theme */
+        .speaker-2 .d-bubble { background-color: #fdfcf8; border-right: 4px solid var(--accent-gold); color: var(--primary-color); }
+
+        /* Font Controls (Fixed) */
+        .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
+        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid var(--accent-gold); color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: var(--shadow-sm); transition: 0.3s; }
+        .font-btn:hover { background: var(--accent-gold); color: white; transform: scale(1.1); }
+
+        /* Bottom Actions */
+        .article-actions { margin-top: 50px; padding-top: 25px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; gap: 15px; justify-content: center; }
+        .action-btn-pill { padding: 12px 30px; border-radius: 50px; border: 2px solid var(--accent-gold); background: #fdfcf8; color: var(--primary-color); font-weight: 800; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .action-btn-pill:hover { background: var(--accent-gold); color: white; transform: translateY(-3px); }
+
+        /* Footer */
+        footer { 
+            background: var(--ticker-footer-bg); color: var(--primary-color); 
+            padding: 60px 20px; text-align: center; margin-top: auto; 
+            border-top: 3px solid var(--accent-gold);
+        }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+        .footer-links a { color: var(--primary-color); font-weight: 700; opacity: 0.8; }
+        .footer-links a:hover { color: var(--accent-gold); opacity: 1; }
+        .copyright { color: var(--primary-color); font-size: 0.85rem; border-top: 1px solid rgba(92, 74, 36, 0.1); padding-top: 20px; margin-top: 25px; opacity: 0.7; font-weight: 600; }
+
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
+        .back-to-top.visible { opacity: 1; }
+
+        @media (max-width: 900px) {
+            .hero-text h1 { font-size: 1.8rem; }
+            .unified-header { padding-top: calc(var(--nav-height) + 20px); border-radius: 0 0 35px 35px; }
+            .main-wrapper { margin-top: 0; }
+            .article-content-container { padding: 25px; }
+            .font-controls-fixed { top: auto; bottom: 30px; left: 30px; flex-direction: row; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
+
+    <nav>
+        <div class="logo-container">
+            <a href="/index.html"><img src="/images/logo.png" alt="شعار حسين الخليل" /></a>
+        </div>
+        <div class="nav-links">
+            <a href="/index.html">الرئيسية</a>
+            <a href="/books.html">الكتب</a>
+            <a href="/articles.html">المقالات</a>
+            <a href="/hadith.html">الروايات</a>
+            <a href="/khawatir.html">خواطر</a>
+            <a href="/videos.html">الفيديوهات</a>
+            <a href="/history.html">التاريخ</a>
+            <a href="/podcast.html">البودكاست</a>
+            <a href="/ask.html">الأسئلة</a>
+            <a href="/hewar.html" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">حوارات</a>
+            <a href="/inq.html">تساؤلات</a>
+            <a href="/manhaj.html">المنهج</a>
+            <a href="/favorites.html">المفضلة</a>
+            <a href="/support.html">دعم المحتوى</a>
+            <a href="/about.html">من نحن</a>
+            <a href="/en/hewar/25.html" style="color: var(--primary-color) !important; font-weight: 800; border: 1.5px solid var(--accent-gold); padding: 5px 15px; border-radius: 20px;">En</a>
+        </div>
+        <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <header class="unified-header">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>❖ حوار: تعطيل العقول</h1>
+                <p>سلسلة حوارات فكرية تناقش الموروث وتدعو لإعمال العقل في كتاب الله</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- أدوات التحكم بحجم الخط -->
+    <div class="font-controls-fixed">
+        <button class="font-btn" id="fontIncrease" title="تكبير الخط"><i class="fas fa-plus"></i></button>
+        <button class="font-btn" id="fontReset" title="إعادة تعيين"><i class="fas fa-redo"></i></button>
+        <button class="font-btn" id="fontDecrease" title="تصغير الخط"><i class="fas fa-minus"></i></button>
+    </div>
+
+    <div class="container main-wrapper">
+        <div class="article-content-container">
+            <div class="article-meta">
+                <span><i class="far fa-calendar-alt"></i> 11 مايو 2025</span>
+                <span><i class="far fa-folder"></i> حوارات</span>
+                <span onclick="window.print()" style="cursor:pointer;"><i class="fas fa-print"></i> طباعة الحوار</span>
+            </div>
+
+            <div class="article-body" id="articleBody">
+                <div class="dialogue-wrapper">
+                    
+                    <!-- 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>أخي الكريم، لماذا تُنكر السُنّة النبوية؟</p>
+                        </div>
+                    </div>
+
+                    <!-- 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>وما حاجتي لنصّ ظنّي الثبوت ولديّ القرآن، قطّعي الثبوت، وهو يكفيني لعبادة الله دون الحاجة لأي مصدر آخر!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 3 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>لكن يا أخي السُنّة مكمّلة للقرآن!</p>
+                        </div>
+                    </div>
+
+                    <!-- 4 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>مكمّلة!! وهل القرآن ناقص!!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 5 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>لا ليس ناقص، لكنّ السُنّة مكملة له.</p>
+                        </div>
+                    </div>
+
+                    <!-- 6 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>لا يُكمّل إلّا الناقص!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 7 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>هااا!!! أقصد أن السُنّة تشرح القرآن وتُفصّله وتُفسّره.</p>
+                        </div>
+                    </div>
+
+                    <!-- 8 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>لكن الله أخبرنا أنه أنزل لنا القرآن مُفصّل، دون الحاجة لمن يُفصّله لنا، والدليل قوله تعالى (كتاب أحكمت آياته ثم 👈فُصّلت👉 من لدن حكيم خبير)</p>
+                            <p>ما يعني أن الحكيم الخبير الذي هو "الله"، هو من فصّله لنا وليست كُتب الحديث!!</p>
+                            <p>قال تعالى (ولقد جئناهم بكتاب 👈فصّلناه👉 على علم هدى ورحمة لقوم يؤمنون)</p>
+                            <p>وقال في آية أخرى (وكل شيء 👈فصّلناه👉 تفصيلا) ركّز على كلمة "كل شيء"</p>
+                            <p>وقال أيضًا (كتاب 👈فُصّلت👉 آياته قرآناً عربياً لقوم يعلمون)</p>
+                            <p>وفي سورة الأنعام قال:</p>
+                            <p style="font-weight: 800; color: var(--primary-color);">(قد 👈فصّلنا👉 الآيات لقوم يعلمون)</p>
+                            <p style="font-weight: 800; color: var(--primary-color);">(قد 👈فصّلنا👉 الآيات لقوم يفقهون)</p>
+                            <p style="font-weight: 800; color: var(--primary-color);">(قد 👈فصّلنا👉 الآيات لقوم يذّكّرون)</p>
+                            <p>انظر مثلاً في سورة الأنعام، عندما جاء الله على ذكر الحلال والحرام وتبيان الصراط المستقيم، كرّر كلمة (فصّلنا الآيات) ثلاث مرات لتنبيهنا على أن آيات الله مُفصّلة، لكن تحتاج أن نُشغّل عقولنا لمعرفتها، أما إذا عطّلنا عقولنا، فسنجد أنه من الصعب أن نُفسّر كلام الله، وبالتالي نحتاج إلى "علماء وفقهاء" ليُفسّروه لنا، وهذا ما يريده كهنة الدين عندما يطالبونا بتعطيل عقولنا أمام القرآن، والإكتفاء بالنقل!! الكثير من الآيات يخبرنا الله أنه فصّل لنا كتابه تفصيلا، ومن ثم تقول أن السُنّة تُفصّل القرآن!! أنت بهذا تفتري على الله وتطعن في كتاب الله دون أن تدري!!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 9 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>لكن هناك أشياء وشرائع لم يذكرها الله في كتابه.</p>
+                        </div>
+                    </div>
+
+                    <!-- 10 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>كيف تقول هذا!!! ألم تقرأ القرآن!! ألم تقرأ قوله تعالى: (ونزّلنا عليك الكتاب 👈تبياناً لكل شيء👉) مرة ثانية ركّز على كلمة "كل شيء" فما سكت عنه الله لم يطالبنا به.</p>
+                        </div>
+                    </div>
+
+                    <!-- 11 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>هااا!!! لا يا أخي، فهمتني خطأ، أقصد أن القرآن والسُنّة مُكمّلين لبعض فلا يمكن الإستغناء عن أي واحد منهما.</p>
+                        </div>
+                    </div>
+
+                    <!-- 12 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>لكن الله تعالى قال (اليوم 👈أكملت👉 لكم دينكم وأتممت عليكم نعمتي ورضيت لكم الإسلام ديناً)</p>
+                            <p>فعندما نزلت هذه الآية التي يُخبرنا الله بها ويخبر رسوله أنه أكمل لنا الدين، هل كانت كُتب السُنّة التي تقول أنها مكمّلة للدين، مدوّنة؟</p>
+                        </div>
+                    </div>
+
+                    <!-- 13 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>لأ طبعاً.</p>
+                        </div>
+                    </div>
+
+                    <!-- 14 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>ومتى تم تدوين كتب الحديث؟</p>
+                        </div>
+                    </div>
+
+                    <!-- 15 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>أول كتاب حديث هو موطأ الإمام مالك.</p>
+                        </div>
+                    </div>
+
+                    <!-- 16 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>حسناً، ومتى تم تدوينه؟</p>
+                        </div>
+                    </div>
+
+                    <!-- 17 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>تقريباً سنة 160 هجرية قد تزيد أو تنقص قليلًا.</p>
+                        </div>
+                    </div>
+
+                    <!-- 18 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>أيّاً كان التاريخ، المهم أنه تم تدوينه كأقل تقدير، بعد 150 سنة بعد وفاة الرسول، أليس كذلك؟</p>
+                        </div>
+                    </div>
+
+                    <!-- 19 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>نعم صحيح يا أخي.</p>
+                        </div>
+                    </div>
+
+                    <!-- 20 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>يعني في عهد رسول الله لم يكن هناك شيء إسمه كتب الحديث!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 21 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>صحيح.</p>
+                        </div>
+                    </div>
+
+                    <!-- 22 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>ولا حتى في عهد الصحابة الذين هم أعلم بالدين من الجيل الذي أتى بعدهم لأنهم عاشوا في زمن نزول الوحي!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 23 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>صحيح.</p>
+                        </div>
+                    </div>
+
+                    <!-- 24 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>ولا حتى في عهد التابعين الذين عاشوا في زمن الصحابة وعاصروهم!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 25 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>صحيح.</p>
+                        </div>
+                    </div>
+
+                    <!-- 26 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>وأول كتاب حديث والذي من المُفترض أن يكون مكمّل للدين، تم تدوينه بعد وفاة الرسول الكريم بـ 150 سنة!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 27 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>نعم 😤😤</p>
+                        </div>
+                    </div>
+
+                    <!-- 28 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>ما يعني أن كتب الحديث تمت إضافتها زوراً وبهتاناً للدين، حتى أصبحت الآن من المسلّمات، وأن إنكارها يعتبر كُفر وخروج من الملة كما يقول رجال الدين!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 29 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>لكن يا أخي السُنّة وحي، كما قال تعالى (وما ينطق عن الهوى إن هو إلّا وحي يوحى)</p>
+                        </div>
+                    </div>
+
+                    <!-- 30 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>يا أخي هذه الآية التي تتشدّقون بها، تعني أن الرسول مأمور بتبليغ الرسالة الإلهية، وأن ما جاء به رسول الله هي أوامر من عند الله.</p>
+                            <p>قال تعالى (يا أيها الرسول بلّغ ما أُنزل إليك من ربك وإن لم تفعل فما بلّغت رسالته)</p>
+                            <p>يعني أن الرسول مُطالب بتبليغ الرسالة دون أي زيادة أو نقصان من عنده، ورسالة الله لنا هو القرآن، وعندما يقول الله تعالى (وما ينطق عن الهوى) يقصد بذلك أن الرسول الكريم هو الناطق بإسم الله، تماماً كما نسمع مقولة الناطق بإسم وزارة الخارجية، فما يقوله ويُصرّح به هو كلام الوزارة وليس كلامه، هو مجرًد ناطق فقط لا غير، فليست لديه صلاحية في زيادة أو نقصان أي شيء من عنده، وينطق التصريح كما أتته الأوامر من الوزارة دون زيادة أو نقصان، فلو كانت السُنّة وحي كما تقول، لكان حريٌّ بالرسول أن يُدونها أو يأمر بكتابتها إلى جانب القرآن، أو على الأقل يكتبها الصحابة!!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 31 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>لكن الله أمرنا بطاعة الرسول.</p>
+                            <p>قال تعالى (وأطيعوا الله وأطيعوا الرسول)</p>
+                            <p>وفي آية أخرى قال (وما آتاكم الرسول فخذوه وما نهاكم عنه فإنتهوا)</p>
+                            <p>فهذه الآيات تُبيّن لنا أن الله أمرنا بطاعة الرسول.</p>
+                        </div>
+                    </div>
+
+                    <!-- 32 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>طاعة رسول الله هي من طاعة الله، ولا شك في ذلك، ومن يقول غير هذا فهو معاند أو جاهل.</p>
+                            <p>الرسول أمرنا بإتباع القرآن وأمرنا أن نلتزم بحدود الله التي جاءت في القرآن، ونحن بإلتزامنا بهذه الحدود نكون قد أطعنا الله والرسول، لأن الرسول لم يأتِ بتشريع أو بأي شيء من عنده.</p>
+                            <p>أما الآية الثانية، فهي نزلت أثناء تقسيم الغنائم، فلو أنك قرأت الآية من بدايتها لفهمت المعنى، قال تعالى في بداية الآية (ما أفاء الله على رسوله) والفيء هي الغنائم من دون قتال، فبدأ رسول الله بتقسيم الغنائم بالعدل وليس بالمساواة، فأبدى بعض الرجال إنزعاجه وإمتعاضه من ذلك، فأنزل الله الآية (وما آتاكم الرسول فخذوه وما نهاكم عنه فانتهوا).</p>
+                            <p>ثم حتى وإن كان معناها في المُطلق، فأوامر ونواهي الرسول هي في تعليمات القرآن الذي جاءنا به الرسول، فعندما نسمع كلام الله وهو يحذرنا من أكل مال اليتيم، ثم نجد من يأكل أموال اليتامى، فهذا قد تعدّى حدود الله ولم ينتهِ عمّا نهى عنه الله ورسول.</p>
+                        </div>
+                    </div>
+
+                    <!-- 33 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>هاااا🤔🤔 لا يا أخي، بل السُنّة تُفسّر القرآن.</p>
+                        </div>
+                    </div>
+
+                    <!-- 34 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>عُدنا من حيث بدأنا، سوف أسألك سؤال.</p>
+                            <p>لو أنني إلتزمت بكتاب الله وحده دون أي كتاب آخر، لأن كتاب الله مُفصّل كما أخبرني الله بذلك، هل يكون ديني ناقص، وسيدخلني ربي جهنم لأنني لم آخذ بكتب لم يأمر بها الله ولم يكتبها رسول الله ولا الصحابة ولا التابعين ودُوّنت بعد مئات السنين من وفاة الرسول؟</p>
+                        </div>
+                    </div>
+
+                    <!-- 35 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>😤😤 لا ولكن هذه الكتب أجمعت عليها الأمة.</p>
+                        </div>
+                    </div>
+
+                    <!-- 36 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>أخي الكريم، عليك أن تعلم أن الإجماع ليس معياراً ولا مقياساً في الدين، معيار الدين ما جاء في القرآن فقط، وليس ما جاء في أي كتاب آخر حتى لو أجمعت عليه الأمة.</p>
+                            <p>قال تعالى (وإن تُطع أكثر من في الأرض 👈يُضلوك👉 عن 👈سبيل الله👉)</p>
+                            <p>ومن ثم يا أخي، الأكثرية لا تعني الحق، فالأكثرية مذمومة في القرآن (أكثرهم: لا يعقلون، لا يفقهون، لا يؤمنون، .....)</p>
+                        </div>
+                    </div>
+
+                    <!-- 37 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>يا أخي لكن هناك إجماع من علماء الدين.</p>
+                        </div>
+                    </div>
+
+                    <!-- 38 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>أخي قلت لك أن الإجماع ليس مقياساً، وأن الله أمرنا بإتباع القرآن، وحذّرنا من إتباع أي شيء سوى القرآن، وليس لأحد الحق أن يتكلم بإسم الدين، أو يزعم أنه أجمع على شي لم يأذن به الله ورسوله.</p>
+                            <p>قال تعالى (أفلا يتدبرون 👈القرآن👉 ولو كان من عند غير الله لوجدوا فيه اختلافاً كثيرا)</p>
+                            <p>لماذا لم يأتِ الله على ذكر كتب الحديث، أليست وحي كما تقولون!! وصَدَق الله، فإن الإختلاف كبير في كتب الحديث، حتى أن "علماء" الحديث لا يُجزمون بصحة كل الأحاديث التي صححوها!!</p>
+                            <p>قال تعالى (فبأي حديث بعد الله و 👈آياته👉 يؤمنون) لم يذكر أحاديث الرسول!!</p>
+                            <p>وقال أيضًا (وقال الرسول يا ربِ إن قومي إتخذوا هذا 👈القرآن👉 مهجورا)</p>
+                            <p>لماذا لم يقل الرسول: إتخذوا هذا القرآن والسنة!! أليست هي أقواله وأنها مكمّلة للدين كما تقول!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 39 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>لكن يا أخي علماء الدين تحدثوا بذلك، وأفتوا وإنتهى الأمر، العلماء تعبوا وإجتهدوا وسافروا وأفنوا حياتهم في طلب العلم، من أنت حتى تطعن بكلامهم، للدين علماء يتحدثون به، ولا يجوز لأي إنسان أن يتحدث في الدين ويفتي من عنده😠.</p>
+                        </div>
+                    </div>
+
+                    <!-- 40 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>أولاً، الله لم يُحمّل الإنسان أكثر من طاقته، لم يطلب من أحد تحمّل عناء السفر والمشقّة وإجهاد النفس من أجل طلب العلم، وهو الذي قال (ولقد يسّرنا القرآن للذكر فهل من مدّكر) كرّرها الله أربع مرات في سورة واحدة، للدلالة على أهمية الموضوع، وأن القرآن ميسّر، وقال في سورة أخرى (ما أنزلنا عليك القرآن لتشقى)</p>
+                            <p>فإذا سافروا وتعبوا وأفنوا حياتهم في طلب العلم كما تقول، فهذا شأنهم، لأن الله لم يأمر بذلك.</p>
+                            <p>ثانياً، من قال لك أن للدين علماء يتحدثون بإسمه، وهم فقط من يجوز لهم التكلم في الدين ولا يجوز لغيرهم، وكأن الله أنزل هذا الدين على العلماء فقط!!! وكأن عقولنا تعطّلت وعلينا أن نفهم الدين بفهم سلفنا الصالح الذين عاشوا قبل ألف سنة!!!</p>
+                            <p>ثم من الذي أعطاهم الحق للتكلم بإسم الله؟</p>
+                            <p>الجواب: لا أحد.</p>
+                            <p>هل لديهم توكيل من الله للتحدث بإسمه؟</p>
+                            <p>الجواب: كلا.</p>
+                            <p>الكثير من القصص التي قصّها الله علينا عن الأمم التي سبقتنا كيف ضلّوا عن سبيل الله، أخبرنا الله عن اليهود والنصارى كيف ضلّوا بعد أن إتخذوا أحبارهم ورهبانهم أرباباً من دون الله.</p>
+                            <p>قال تعالى عن اليهود والنصارى (إتخذوا أحبارهم ورهبانهم أرباباً من دون الله)</p>
+                            <p>وقال أيضًا (فويل للذين يكتبون الكتاب بأيديهم ثم يقولون هذا من عند الله ليشتروا به ثمناً قليلاً فويل لهم مما كتبت أيديهم وويل لهم مما يكسبون)</p>
+                            <p>يحذرنا الله في هذه القصص من أن نحذوا حذوهم وأن نقع في نفس الخطأ الذي وقعوا فيه، والذي بسببه ضلّوا عن سبيل الله، فماذا كانت النتيجة؟ وقعنا بنفس الخطأ الذي وقع فيه اليهود والنصارى، فاليهود كتبوا التلمود وقالوا هذه أقوال موسى!! والنصارى كتبوا الأناجيل وقالوا هذه أقوال عيسى!! ونحن كتبنا السُنّة وقلنا هذه أقوال محمد!! فوقعنا بنفس الخطأ الذي كان يحذرنا منه الله، بل نحن أضلّ، لأننا علمنا الحق وحذّرنا الله ومع ذلك وقعنا في نفس الخطأ، أليس هذا ضلال كبير!!!</p>
+                            <p>قال تعالى (ولا تكونوا من المشركين من الذين فرقوا دينهم وكانوا شيعا كل حزب بما لديهم فرحون)</p>
+                            <p>أليس هذا ما حذّرنا الله منه!! ألم نقع في هذا الخطأ!! ألم ينتج عن كتب الحديث طوائف سنة وشيعة وأحزاب متعددة!! وكل حزب وكل طائفة لديهم أدلتهم من كتبهم وفتاوى علمائهم، ويطعنون ويُكفّرون الأطراف الأخرى ويدَّعون أنهم على باطل!! أليس هذا تصديق لهذه الآية.</p>
+                            <p>وأيضاً قوله تعالى (ولا تكونوا كالذين تفرقوا واختلفوا من بعد ما جاءهم البينات وأولئك لهم عذاب عظيم)</p>
+                            <p>يقصّ الله لنا هذه القصص عمّا سبقونا، وكيف أنهم ضلّوا بعد أن جاءتهم البينات، ونحن أيضاً وصلتنا البينات من خلال القرآن، ومع ذلك ضللنا عن الطريق وألّفنا الكتب وقلنا هذه من عند الله وما هي من عند الله، وتفرقنا وأصبحنا طوائف وفرق وأحزاب لا تُعد ولا تُحصى، ألا تتحدث الآية عن حالنا اليوم!!!</p>
+                        </div>
+                    </div>
+
+                    <!-- 41 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>يعني كل المسلمين بعلمائهم وعوامهم على خطأ وأنت الذي جئت بعد 1400 سنة على حق 🤔</p>
+                        </div>
+                    </div>
+
+                    <!-- 42 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>هذا ليس أسلوب في الحوار والنقاش، فالحُجّة يُردّ عليها بالحُجّة، وليس بالكلام العامي والعاطفي، جئتك بحُجج على صحة ما أنا عليه من كتاب الله، هذا كلام الله لا كلامي!! فإذا كنت تمتلك الحُجّة من نفس المصدر، أي القرآن، فقدّمها لي وحاججني بها!</p>
+                            <p>ودعك من كلام العوام أمثال (كلهم على خطأ وأنت الصح)</p>
+                        </div>
+                    </div>
+
+                    <!-- 43 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>😤😤 أنت كافر وزنديق ومرتد لأنك تسعى لهدم الدين وإلغاء كتب السُنّة التي أجمعت عليها الأمة وتدعوا إلى دين جديد، وسأضرب بكل ما قلته لي عرض الحائط 😠</p>
+                        </div>
+                    </div>
+
+                    <!-- 44 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon">👨🏻</div>
+                        <div class="d-bubble">
+                            <p>أنا فعلاً كافر، لكنّي كافر بتراثكم، وفعلاً أدعوا إلى دين، لكني أدعوا إلى دين الله المتمثّل بكتاب الله، فلهذا تراه دين جديد، يختلف جذرياً عن دين تراثك، الذي ادّعيتم زوراً وبهتاناً أنه دين الله، والله ورسوله بريئين من هذا الدين، وم مما فيه من جرائم وإرهاب يُرتكب بإسمه، فـ ياالله كم تم تشويه هذا الدين الحنيف، وكم تم تشويه هذا الرسول الكريم صاحب الخلق العظيم.</p>
+                            <p>لو أن غيرتكم فعلاً على الدين لنبذتم كتب التراث وضربتم بها عرض الحائط، لو دافعتم عن رسول الله، صاحب الخلق العظيم، بربع ما تدافعون عن البخاري ومسلم والكُليني وغيرهم ممن تسمونهم "علماء"، ممن شوّهوا هذا الرسول الكريم في أحاديثهم ومروياتهم عندما أظهروه على حبه للنساء وللجنس وتشويهه أكثر بالإفتراء عليه أنه تزوج طفلة لا تتجاوز ست سنوات ودخل بها وهي بعمر تسع سنوات، وحبه لقطع الرؤس وعشقه لسفك دماء المسلمين قبل الكفار "كحرق المسلمين المتخلفين عن صلاة الجماعة" وسبي النساء وبيعهن في الأسواق، لنسفّتم هذه الكتب، هذه الكتب التي جعلت للملحدين ولغير المسلمين منفذاً للطعن في هذا الدين وإتهامه بأنه دين الإرهاب، وتجرّؤهم بإتهام رسول الله بأنه رسول القتل وقطع الرؤس، هذه الكتب التي خرجت من رحمها داعش وأخواتها، لكنّكم لا تدافعون عن رسول الله ولا عن الدين، أنتم تدافعون عن تراثكم وعن كهنتكم، وتستميتون في الدفاع عنهم، وأنتم على إستعداد أن تطعنوا في القرآن، في سبيل الدفاع عن تراثكم، فولائكم للكهنة وليس لله ولا للرسول.</p>
+                            <p>صحيح يا شيخ قبل أن تغادر، لماذا لم تسألني (كيف تصلي، كيف عرفت أوقات الصلاة وعددها وكيفيتها) كنت أنتظر منك هذا السؤال الببغائي، أم أنك قمت بعمل (update) جديد؟</p>
+                        </div>
+                    </div>
+
+                    <!-- 45 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon">👳🏻‍♂️</div>
+                        <div class="d-bubble">
+                            <p>😤😤😤😤😤😤</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <span style="font-size: 24px; color: var(--accent-gold);">✦ ✦ ✦</span>
+                </div>
+            </div>
+
+            <div class="article-actions">
+                <button class="action-btn-pill" onclick="window.print()">
+                    <i class="fas fa-print"></i> طباعة الحوار
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="/terms.html">الشروط والأحكام</a>
+                <a href="/privacy.html">سياسة الخصوصية</a>
+                <a href="/contact.html">اتصل بنا</a>
+                <a href="/feedback.html">شاركنا رأيك</a>
+            </div>
+            <div class="copyright">
+                حسين الخليل - جميع الحقوق محفوظة © 2025
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.nav-overlay');
+            navLinks.classList.toggle('show');
+            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
+            document.body.classList.toggle('no-scroll');
+        }
+
+        const articleBody = document.getElementById('articleBody');
+        const defaultFontSize = 1.2;
+        let currentFontSize = defaultFontSize;
+
+        document.getElementById('fontIncrease').addEventListener('click', () => {
+            if (currentFontSize < 2.5) {
+                currentFontSize += 0.1;
+                articleBody.style.fontSize = `${currentFontSize}rem`;
+            }
+        });
+
+        document.getElementById('fontDecrease').addEventListener('click', () => {
+            if (currentFontSize > 0.9) {
+                currentFontSize -= 0.1;
+                articleBody.style.fontSize = `${currentFontSize}rem`;
+            }
+        });
+
+        document.getElementById('fontReset').addEventListener('click', () => {
+            currentFontSize = defaultFontSize;
+            articleBody.style.fontSize = `${defaultFontSize}rem`;
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+        });
+    </script>
+</body>
+</html>
