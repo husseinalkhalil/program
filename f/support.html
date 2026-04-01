@@ -122,17 +122,21 @@
         /* Search Box */
         .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto; }
         #globalSearch {
-            width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: 1px solid #e2e8f0; font-size: 1rem;
+            width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #e2e8f0; font-size: 1rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); font-family: 'Tajawal', sans-serif; outline: none; background: white;
-            transition: 0.3s;
+            transition: 0.3s; text-align: right;
         }
         #globalSearch:focus { border-color: var(--accent-gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
-        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--accent-gold); pointer-events: none; }
         .search-results {
-            position: absolute; top: 115%; left: 0; right: 0; background: #ffffff; border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1); max-height: 400px; overflow-y: auto; z-index: 200; text-align: right; display: none;
-            color: var(--text-primary); border: 1px solid rgba(0,0,0,0.05);
+            position: absolute; top: 110%; left: 0; right: 0; 
+            background: white; border-radius: 15px; max-height: 400px; 
+            overflow-y: auto; display: none; z-index: 1002; color: #333; 
+            text-align: right; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05);
         }
+        .search-count { padding: 12px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(212, 175, 55, 0.1); background: #f8fafc; font-weight: 700; }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
+        .search-item:hover { background: rgba(212, 175, 55, 0.05); }
+        .search-item h3 { color: var(--primary-color); font-size: 1.05rem; margin-bottom: 5px; font-weight: 700; }
         mark { background-color: var(--accent-gold); color: #fff; padding: 0 3px; border-radius: 3px; }
 
         /* ==================== Main Content Layout ==================== */
@@ -257,7 +261,6 @@
                 <p>مساهمتك تساعد في استمرار نشر المعرفة والتنوير بهذا المنهج المعاصر</p>
             </div>
             <div class="universal-search">
-                <i class="fas fa-search search-icon-placeholder"></i>
                 <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
                 <div class="search-results" id="searchResults"></div>
             </div>
@@ -371,24 +374,10 @@
     </footer>
 
     <script>
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const overlay = document.querySelector('.nav-overlay');
-            navLinks.classList.toggle('show');
-            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
-            document.body.classList.toggle('no-scroll');
-        }
-
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        window.addEventListener('scroll', () => {
-            const btn = document.querySelector('.back-to-top');
-            if (window.scrollY > 300) btn.classList.add('visible');
-            else btn.classList.remove('visible');
-        });
-
-        // Search Original Logic
+        /* ==================== GLOBAL SEARCH LOGIC (ORIGINAL FROM INDEX) ==================== */
         let cachedPagesContent = null;
         let isSearchInitialized = false;
+
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
             try {
@@ -403,7 +392,11 @@
                         const doc = parser.parseFromString(html, 'text/html');
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                         const mainContent = doc.querySelector('.container, main, body') || doc.body;
-                        return { page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', url: url, content: mainContent.textContent.replace(/\s+/g, ' ').trim() };
+                        return { 
+                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                            url: url, 
+                            content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
+                        };
                     } catch (e) { return null; }
                 });
                 cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
@@ -412,7 +405,10 @@
         }
 
         function normalizeArabic(text) {
-            return text.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+            if (!text) return '';
+            text = text.replace(/[\u064B-\u065F\u0670]/g, '');
+            text = text.replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+            return text;
         }
 
         function getSafeRegex(searchTerm) {
@@ -424,9 +420,35 @@
                 else if (char === 'ي') regexStr += '[يىئ]';
                 else if (char === 'و') regexStr += '[وؤ]';
                 else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                regexStr += '[\\u064B-\u065F\u0670]*';
+                regexStr += '[\\u064B-\\u065F\\u0670]*';
             }
             return new RegExp(regexStr, 'gi');
+        }
+
+        function displayGlobalResults(results, queryRegex, container) {
+            container.innerHTML = '';
+            if (results.length === 0) {
+                container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+                container.style.display = 'block';
+                return;
+            }
+            const countDiv = document.createElement('div');
+            countDiv.className = 'search-count';
+            countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
+            container.appendChild(countDiv);
+
+            results.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-item';
+                const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
+                queryRegex.lastIndex = 0;
+                const match = queryRegex.exec(item.content);
+                let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
+                div.onclick = () => window.location.href = item.url;
+                container.appendChild(div);
+            });
+            container.style.display = 'block';
         }
 
         async function performGlobalSearch(query) {
@@ -434,31 +456,55 @@
             if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
             resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
             resultsContainer.style.display = 'block';
+
             const data = await loadAllPagesContent();
             const searchRegex = getSafeRegex(query);
             const results = data.filter(item => {
                 searchRegex.lastIndex = 0;
-                return searchRegex.test(item.page) || searchRegex.test(item.content);
+                const titleMatch = searchRegex.test(item.page);
+                searchRegex.lastIndex = 0;
+                const contentMatch = searchRegex.test(item.content);
+                return titleMatch || contentMatch;
             });
-            resultsContainer.innerHTML = `<div class="search-count">تم العثور على ${results.length} نتيجة</div>`;
-            results.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'search-item';
-                div.innerHTML = `<h3>${item.page.replace(searchRegex, m => `<mark>${m}</mark>`)}</h3><p>${item.content.substring(0, 150).replace(searchRegex, m => `<mark>${m}</mark>`)}...</p>`;
-                div.onclick = () => window.location.href = item.url;
-                resultsContainer.appendChild(div);
-            });
+            displayGlobalResults(results, searchRegex, resultsContainer);
         }
+
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.nav-overlay');
+            navLinks.classList.toggle('show');
+            overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
+            document.body.classList.toggle('no-scroll');
+        }
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('globalSearch');
             let timer;
             if(searchInput) {
-                searchInput.addEventListener('input', (e) => { clearTimeout(timer); timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500); });
-                searchInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
+                searchInput.addEventListener('input', (e) => { 
+                    clearTimeout(timer); 
+                    timer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500); 
+                });
+                searchInput.addEventListener('focus', () => { 
+                    if(!isSearchInitialized) { 
+                        loadAllPagesContent(); 
+                        isSearchInitialized = true; 
+                    } 
+                });
             }
             document.addEventListener('click', (e) => {
-                if(!document.querySelector('.universal-search').contains(e.target)) document.getElementById('searchResults').style.display = 'none';
+                const results = document.getElementById('searchResults');
+                if(results && !document.querySelector('.universal-search').contains(e.target)) {
+                    results.style.display = 'none';
+                }
             });
         });
     </script>
