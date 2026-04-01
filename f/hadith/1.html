@@ -128,12 +128,22 @@
         /* Search Box */
         .universal-search { width: 100%; max-width: 600px; position: relative; z-index: 100; margin: 0 auto; }
         #globalSearch {
-            width: 100%; padding: 18px 50px 18px 25px; border-radius: 50px; border: 1px solid #e2e8f0; font-size: 1rem;
+            width: 100%; padding: 18px 25px; border-radius: 50px; border: 1px solid #e2e8f0; font-size: 1rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); font-family: 'Tajawal', sans-serif; outline: none; background: white;
-            transition: 0.3s;
+            transition: 0.3s; text-align: right;
         }
         #globalSearch:focus { border-color: var(--accent-gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
-        .search-icon-placeholder { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--accent-gold); pointer-events: none; }
+        .search-results {
+            position: absolute; top: 110%; left: 0; right: 0; 
+            background: white; border-radius: 15px; max-height: 400px; 
+            overflow-y: auto; display: none; z-index: 1002; color: #333; 
+            text-align: right; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05);
+        }
+        .search-count { padding: 12px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(212, 175, 55, 0.1); background: #f8fafc; font-weight: 700; }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
+        .search-item:hover { background: rgba(212, 175, 55, 0.05); }
+        .search-item h3 { color: var(--primary-color); font-size: 1.05rem; margin-bottom: 5px; font-weight: 700; }
+        mark { background-color: var(--accent-gold); color: #fff; padding: 0 3px; border-radius: 3px; }
 
         /* ==================== Container & Main Layout ==================== */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
@@ -254,7 +264,7 @@
         }
         .font-btn:hover { background: var(--accent-gold); color: white; transform: scale(1.1); }
 
-        /* Search Highlight */
+        /* Search Highlight for in-article search */
         .highlight-text {
             background-color: var(--accent-gold);
             color: #fff;
@@ -310,7 +320,7 @@
 
         /* Print Media */
         @media print {
-            nav, .unified-header, .font-controls-fixed, .article-actions, footer, .back-to-top, .universal-search, .article-favorite-btn { display: none; }
+            nav, .unified-header, .font-controls-fixed, .article-actions, footer, .back-to-top, .universal-search, .article-favorite-btn, .search-results-alert { display: none; }
             .main-wrapper { margin: 0; max-width: 100%; }
             .article-content-container { box-shadow: none; border: none; padding: 0; }
             body { background: white; color: black; }
@@ -394,14 +404,14 @@
             </div>
             
             <div class="universal-search">
-                <i class="fas fa-search search-icon-placeholder"></i>
-                <input type="text" id="globalSearch" placeholder="ابحث عن كلمة داخل المقال..." />
+                <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+                <div class="search-results" id="searchResults"></div>
             </div>
         </div>
     </header>
 
     <div class="search-results-alert" id="searchAlert">
-        تم العثور على <span id="matchCount">0</span> نتيجة
+        تم العثور على <span id="matchCount">0</span> نتيجة داخل المقال
     </div>
 
     <div class="font-controls-fixed">
@@ -506,7 +516,158 @@
     </footer>
 
     <script>
-        // ==================== الفئات (Classes) لحفظ المفضلة ====================
+        /* ==================== GLOBAL SEARCH LOGIC (ORIGINAL FROM INDEX) ==================== */
+        let cachedPagesContent = null;
+        let isSearchInitialized = false;
+
+        async function loadAllPagesContent() {
+            if (cachedPagesContent) return cachedPagesContent;
+            try {
+                const response = await fetch('site-map.json?v=' + new Date().getTime());
+                const pagesList = await response.json();
+                const promises = pagesList.map(async (item) => {
+                    let url = typeof item === 'string' ? item : item.url;
+                    try {
+                        const pageResp = await fetch(url);
+                        const html = await pageResp.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                        const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                        return { 
+                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                            url: url, 
+                            content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
+                        };
+                    } catch (e) { return null; }
+                });
+                cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
+                return cachedPagesContent;
+            } catch (error) { return []; }
+        }
+
+        function normalizeArabic(text) {
+            if (!text) return '';
+            text = text.replace(/[\u064B-\u065F\u0670]/g, '');
+            text = text.replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
+            return text;
+        }
+
+        function getSafeRegex(searchTerm) {
+            let regexStr = '';
+            const cleanTerm = normalizeArabic(searchTerm);
+            for (let char of cleanTerm) {
+                if (char === 'ا') regexStr += '[اأإآ]';
+                else if (char === 'ه') regexStr += '[هة]';
+                else if (char === 'ي') regexStr += '[يىئ]';
+                else if (char === 'و') regexStr += '[وؤ]';
+                else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                regexStr += '[\\u064B-\\u065F\\u0670]*';
+            }
+            return new RegExp(regexStr, 'gi');
+        }
+
+        function displayGlobalResults(results, queryRegex, container) {
+            container.innerHTML = '';
+            if (results.length === 0) {
+                container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+                container.style.display = 'block';
+                return;
+            }
+            const countDiv = document.createElement('div');
+            countDiv.className = 'search-count';
+            countDiv.textContent = `تم العثور على ${results.length} نتيجة`;
+            container.appendChild(countDiv);
+
+            results.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-item';
+                const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
+                queryRegex.lastIndex = 0;
+                const match = queryRegex.exec(item.content);
+                let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+                div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
+                div.onclick = () => window.location.href = item.url;
+                container.appendChild(div);
+            });
+            container.style.display = 'block';
+        }
+
+        async function performGlobalSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+            if (!query || query.length < 2) { 
+                resultsContainer.style.display = 'none'; 
+                return; 
+            }
+            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+            resultsContainer.style.display = 'block';
+
+            const data = await loadAllPagesContent();
+            const searchRegex = getSafeRegex(query);
+            const results = data.filter(item => {
+                searchRegex.lastIndex = 0;
+                const titleMatch = searchRegex.test(item.page);
+                searchRegex.lastIndex = 0;
+                const contentMatch = searchRegex.test(item.content);
+                return titleMatch || contentMatch;
+            });
+            displayGlobalResults(results, searchRegex, resultsContainer);
+        }
+
+        /* ==================== In-Article Search & Highlight (Original) ==================== */
+        const articleBody = document.getElementById('articleBody');
+        const originalContent = articleBody.innerHTML;
+
+        function performInArticleSearch() {
+            const searchTerm = document.getElementById('globalSearch').value.trim();
+            const alertBox = document.getElementById('searchAlert');
+            const matchCountSpan = document.getElementById('matchCount');
+
+            if (searchTerm === '') {
+                articleBody.innerHTML = originalContent;
+                alertBox.style.display = 'none';
+                return;
+            }
+
+            const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = originalContent;
+
+            let matchCount = 0;
+            function highlightNodes(node) {
+                if (node.nodeType === 3) {
+                    const text = node.nodeValue;
+                    if (regex.test(text)) {
+                        const newHtml = text.replace(regex, `<span class="highlight-text">$1</span>`);
+                        const span = document.createElement('span');
+                        span.innerHTML = newHtml;
+                        node.parentNode.replaceChild(span, node);
+                        const matches = text.match(regex);
+                        if(matches) matchCount += matches.length;
+                    }
+                } else if (node.nodeType === 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
+                    for (let i = 0; i < node.childNodes.length; i++) { 
+                        highlightNodes(node.childNodes[i]); 
+                    }
+                }
+            }
+            highlightNodes(tempDiv);
+            
+            if (matchCount > 0) {
+                articleBody.innerHTML = tempDiv.innerHTML;
+                matchCountSpan.textContent = matchCount;
+                alertBox.style.display = 'block';
+                const firstMatch = document.querySelector('.highlight-text');
+                if(firstMatch) firstMatch.scrollIntoView({behavior: 'smooth', block: 'center'});
+            } else {
+                articleBody.innerHTML = originalContent;
+                matchCountSpan.textContent = "0";
+                alertBox.style.display = 'block';
+                setTimeout(() => { alertBox.style.display = 'none'; }, 2000);
+            }
+        }
+
+        /* ==================== Favorite Functions ==================== */
         class ArticleData {
             constructor(id, title, content, type, date, url) {
                 this.id = id;
@@ -618,7 +779,6 @@
 
         const favoriteManager = new FavoriteManager();
 
-        // ==================== الدوال المساعدة ====================
         function showToast(message, iconClass = "fa-check-circle") {
             const toast = document.getElementById('customToast');
             const toastMsg = document.getElementById('toastMessage');
@@ -659,25 +819,24 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const isFav = await favoriteManager.isFavorite('article_wahy_moazi');
-                if (isFav) {
-                    document.getElementById('addToFavorites').classList.add('active');
-                    document.getElementById('favIcon').classList.replace('far', 'fas');
-                }
-            } catch (error) {}
-        });
-
-        // ==================== وظائف الصفحة ====================
+        /* ==================== Utility Functions ==================== */
         function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
             const overlay = document.querySelector('.nav-overlay');
             navLinks.classList.toggle('show');
             overlay.style.display = navLinks.classList.contains('show') ? 'block' : 'none';
+            document.body.classList.toggle('no-scroll');
         }
 
-        const articleBody = document.getElementById('articleBody');
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+        });
+
+        /* ==================== Font Controls ==================== */
         const defaultFontSize = 1.2;
         let currentFontSize = defaultFontSize;
 
@@ -698,60 +857,45 @@
             articleBody.style.fontSize = `${defaultFontSize}rem`;
         });
 
-        // Search and Highlight
-        const searchInput = document.getElementById('globalSearch');
-        const originalContent = articleBody.innerHTML;
-
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.trim();
-            const alertBox = document.getElementById('searchAlert');
-            const matchCountSpan = document.getElementById('matchCount');
-
-            if (searchTerm === '') {
-                articleBody.innerHTML = originalContent;
-                alertBox.style.display = 'none';
-                return;
-            }
-
-            const regex = new RegExp(`(${searchTerm})`, 'gi');
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = originalContent;
-
-            let matchCount = 0;
-            function highlightNodes(node) {
-                if (node.nodeType === 3) {
-                    const text = node.nodeValue;
-                    if (regex.test(text)) {
-                        const newHtml = text.replace(regex, `<span class="highlight-text">$1</span>`);
-                        const span = document.createElement('span');
-                        span.innerHTML = newHtml;
-                        node.parentNode.replaceChild(span, node);
-                        const matches = text.match(regex);
-                        if(matches) matchCount += matches.length;
-                    }
-                } else if (node.nodeType === 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
-                    for (let i = 0; i < node.childNodes.length; i++) { highlightNodes(node.childNodes[i]); }
+        /* ==================== DOM Ready ==================== */
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const isFav = await favoriteManager.isFavorite('article_wahy_moazi');
+                if (isFav) {
+                    document.getElementById('addToFavorites').classList.add('active');
+                    document.getElementById('favIcon').classList.replace('far', 'fas');
                 }
-            }
-            highlightNodes(tempDiv);
-            if (matchCount > 0) {
-                articleBody.innerHTML = tempDiv.innerHTML;
-                matchCountSpan.textContent = matchCount;
-                alertBox.style.display = 'block';
-                const firstMatch = document.querySelector('.highlight-text');
-                if(firstMatch) firstMatch.scrollIntoView({behavior: 'smooth', block: 'center'});
-            } else {
-                articleBody.innerHTML = originalContent;
-                matchCountSpan.textContent = "0";
-                alertBox.style.display = 'block';
-            }
-        });
-
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        window.addEventListener('scroll', () => {
-            const btn = document.querySelector('.back-to-top');
-            if (window.scrollY > 300) btn.classList.add('visible');
-            else btn.classList.remove('visible');
+            } catch (error) {}
+            
+            // Global Search Input Handler
+            const searchInput = document.getElementById('globalSearch');
+            let globalSearchTimer;
+            
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(globalSearchTimer);
+                const query = e.target.value.trim();
+                
+                // Perform global search (across all pages)
+                globalSearchTimer = setTimeout(() => performGlobalSearch(query), 500);
+                
+                // Also perform in-article search for highlighting
+                performInArticleSearch();
+            });
+            
+            searchInput.addEventListener('focus', () => { 
+                if(!isSearchInitialized) { 
+                    loadAllPagesContent(); 
+                    isSearchInitialized = true; 
+                } 
+            });
+            
+            // Close search results when clicking outside
+            document.addEventListener('click', (e) => {
+                const results = document.getElementById('searchResults');
+                if(results && !document.querySelector('.universal-search').contains(e.target)) {
+                    results.style.display = 'none';
+                }
+            });
         });
     </script>
 </body>
