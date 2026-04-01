@@ -214,7 +214,7 @@
             <a href="index.html">الرئيسية</a>
             <a href="books.html">الكتب</a>
             <a href="articles.html">المقالات</a>
-            <a href="hadith.html" class="active">الروايات</a>
+            <a href="hadith.html" class="active" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">الروايات</a>
             <a href="khawatir.html">خواطر</a>
             <a href="videos.html">الفيديوهات</a>
             <a href="history.html">التاريخ</a>
@@ -327,7 +327,21 @@
     </footer>
 
     <script>
-        /* ==================== Search Logic Original ==================== */
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const overlay = document.getElementById('navOverlay');
+            const body = document.body;
+            navLinks.classList.toggle('show');
+            if(navLinks.classList.contains('show')) {
+                overlay.style.display = 'block';
+                body.classList.add('no-scroll');
+            } else {
+                overlay.style.display = 'none';
+                body.classList.remove('no-scroll');
+            }
+        }
+
+        /* ==================== GLOBAL SEARCH LOGIC (Unified) ==================== */
         let cachedPagesContent = null;
         let isSearchInitialized = false;
 
@@ -378,7 +392,7 @@
             return new RegExp(regexStr, 'gi');
         }
 
-        function displayResults(results, queryRegex, container) {
+        function displayGlobalResults(results, queryRegex, container) {
             container.innerHTML = '';
             if (results.length === 0) {
                 container.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
@@ -396,7 +410,7 @@
                 const highlightedTitle = item.page.replace(queryRegex, match => `<mark>${match}</mark>`);
                 queryRegex.lastIndex = 0;
                 const match = queryRegex.exec(item.content);
-                let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 140));
+                let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
                 div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(queryRegex, match => `<mark>${match}</mark>`)}...</p>`;
                 div.onclick = () => window.location.href = item.url;
                 container.appendChild(div);
@@ -404,11 +418,12 @@
             container.style.display = 'block';
         }
 
-        async function performSearch(query) {
+        async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
             if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
             resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
             resultsContainer.style.display = 'block';
+
             const data = await loadAllPagesContent();
             const searchRegex = getSafeRegex(query);
             const results = data.filter(item => {
@@ -418,21 +433,7 @@
                 const contentMatch = searchRegex.test(item.content);
                 return titleMatch || contentMatch;
             });
-            displayResults(results, searchRegex, resultsContainer);
-        }
-
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const overlay = document.getElementById('navOverlay');
-            const body = document.body;
-            navLinks.classList.toggle('show');
-            if(navLinks.classList.contains('show')) {
-                overlay.style.display = 'block';
-                body.classList.add('no-scroll');
-            } else {
-                overlay.style.display = 'none';
-                body.classList.remove('no-scroll');
-            }
+            displayGlobalResults(results, searchRegex, resultsContainer);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -441,10 +442,11 @@
                 let sTimer;
                 sInput.addEventListener('input', (e) => {
                     clearTimeout(sTimer);
-                    sTimer = setTimeout(() => performSearch(e.target.value.trim()), 500);
+                    sTimer = setTimeout(() => performGlobalSearch(e.target.value.trim()), 500);
                 });
                 sInput.addEventListener('focus', () => { if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } });
             }
+
             document.addEventListener('click', (e) => {
                 const results = document.getElementById('searchResults');
                 if(results && !document.querySelector('.universal-search').contains(e.target)) {
