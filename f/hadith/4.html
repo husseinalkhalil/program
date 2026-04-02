@@ -7,8 +7,8 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     
     <!-- Favicon -->
-    <link href="images/logo-small.png" rel="icon" type="image/png"/>
-    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <link href="../images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="../images/logo-small.png" rel="apple-touch-icon"/>
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,7 +131,8 @@
         }
         .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
         .search-item:hover { background: rgba(212, 175, 55, 0.05); }
-        mark { background-color: var(--accent-gold); color: #fff; padding: 0 2px; border-radius: 2px; }
+        .search-count { padding: 12px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(212, 175, 55, 0.1); background: #f8fafc; font-weight: 700; }
+        mark { background-color: var(--accent-gold); color: #fff; padding: 0 3px; border-radius: 3px; }
 
         /* ==================== Hadith Card Styling ==================== */
         .container { max-width: 1150px; margin: 0 auto; padding: 0 20px 60px; width: 100%; flex: 1;}
@@ -203,7 +204,7 @@
         /* ==================== Pagination ==================== */
         #pagination-wrapper { background: white; padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); text-align: center; margin: 40px auto; border: 1px solid rgba(212,175,55,0.1); max-width: 500px; }
         .pagination-btn { background: #fdfcf8; color: var(--primary-color); border: 1px solid var(--accent-gold); padding: 10px 20px; border-radius: 12px; cursor: pointer; margin: 0 5px; font-family: 'Tajawal'; font-weight: 700; transition: 0.3s; }
-        .pagination-btn:hover { background: var(--accent-gold); color: white; transform: translateY(-2px); }
+        .pagination-btn:hover:not(:disabled) { background: var(--accent-gold); color: white; transform: translateY(-2px); }
         .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: #e2e8f0; color: #94a3b8; border-color: #cbd5e1; }
         .pagination-info-container { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 15px; font-weight: 700; color: var(--text-primary); }
         .total-count-badge { background: var(--primary-color); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem; }
@@ -215,7 +216,7 @@
         .social-btn img { width: 26px; transition: 0.3s; }
         .social-btn:hover { transform: translateY(-8px) scale(1.1); background: var(--accent-gold); }
         .social-btn:hover img { filter: brightness(0) invert(1); }
-
+        
         /* ==================== Footer ==================== */
         footer { background: var(--ticker-footer-bg); color: var(--primary-color); padding: 60px 20px; text-align: center; width: 100%; margin-top: auto; border-top: 3px solid var(--accent-gold); }
         .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
@@ -243,6 +244,7 @@
         .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
         .report-modal.show { display: flex; }
         .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; box-shadow: var(--shadow-lg); animation: slideIn 0.3s ease; border: 1px solid var(--accent-gold); }
+        .modal-box h2 { color: var(--primary-color); margin-bottom: 10px; font-family: 'Tajawal', sans-serif;}
         @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .report-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 12px; cursor: pointer; color: var(--primary-color); font-weight: 700; }
         .btn-send { flex: 2; background: var(--primary-color); color: white; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; font-weight: 700; cursor: pointer; transition: 0.3s; }
@@ -258,23 +260,23 @@
 <div class="nav-overlay" id="navOverlay" onclick="toggleMobileMenu()"></div>
 
 <nav>
-    <div class="logo-container"><a href="/index.html"><img src="/images/logo.png" alt="logo" /></a></div>
+    <div class="logo-container"><a href="../index.html"><img src="../images/logo.png" alt="logo" /></a></div>
     <div class="nav-links" id="navLinks">
-        <a href="/index.html">الرئيسية</a>
-        <a href="/books.html">الكتب</a>
-        <a href="/articles.html">المقالات</a>
-        <a href="/hadith.html" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">الروايات</a>
-        <a href="/khawatir.html">خواطر</a>
-        <a href="/videos.html">الفيديوهات</a>
-        <a href="/history.html">التاريخ</a>
-        <a href="/podcast.html">البودكاست</a>
-        <a href="/ask.html">الأسئلة</a>
-        <a href="/hewar.html">حوارات</a>
-        <a href="/inq.html">تساؤلات</a>
-        <a href="/manhaj.html">المنهج</a>
-        <a href="/favorites.html">المفضلة</a>
-        <a href="/support.html">دعم المحتوى</a>
-        <a href="/about.html">من نحن</a>
+        <a href="../index.html">الرئيسية</a>
+        <a href="../books.html">الكتب</a>
+        <a href="../articles.html">المقالات</a>
+        <a href="../hadith.html" class="active">الروايات</a>
+        <a href="../khawatir.html">خواطر</a>
+        <a href="../videos.html">الفيديوهات</a>
+        <a href="../history.html">التاريخ</a>
+        <a href="../podcast.html">البودكاست</a>
+        <a href="../ask.html">الأسئلة</a>
+        <a href="../hewar.html">حوارات</a>
+        <a href="../inq.html">تساؤلات</a>
+        <a href="../manhaj.html">المنهج</a>
+        <a href="../favorites.html">المفضلة</a>
+        <a href="../support.html">دعم المحتوى</a>
+        <a href="../about.html">من نحن</a>
     </div>
     <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
 </nav>
@@ -315,12 +317,12 @@
     <div class="social-section">
         <h2 style="font-weight: 800; color: var(--primary-color); margin-bottom: 10px; font-family: 'Tajawal', sans-serif;">تابعنا على منصات التواصل</h2>
         <div class="social-grid">
-            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="/icons/yot-soc.png" alt="yt"></a>
-            <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="/icons/fac-soc.png" alt="fb"></a>
-            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="إنستغرام"><img src="/icons/ins-soc.png" alt="in"></a>
-            <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="تلغرام"><img src="/icons/tel-soc.png" alt="tg"></a>
-            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="تيك توك"><img src="/icons/tik-soc.png" alt="tk"></a>
-            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="سناب شات"><img src="/icons/snap.png" alt="sc"></a>
+            <a href="https://youtube.com/@husseinalkhalil" target="_blank" class="social-btn social-yt" title="يوتيوب"><img src="../icons/yot-soc.png" alt="yt"></a>
+            <a href="https://www.facebook.com/hussien.alkhalil" target="_blank" class="social-btn social-fb" title="فيسبوك"><img src="../icons/fac-soc.png" alt="fb"></a>
+            <a href="https://instagram.com/husseinalkhalil" target="_blank" class="social-btn social-ins" title="إنستغرام"><img src="../icons/ins-soc.png" alt="in"></a>
+            <a href="https://t.me/tanoeer" target="_blank" class="social-btn social-tg" title="تلغرام"><img src="../icons/tel-soc.png" alt="tg"></a>
+            <a href="https://tiktok.com/@h.alkhalil" target="_blank" class="social-btn social-tk" title="تيك توك"><img src="../icons/tik-soc.png" alt="tk"></a>
+            <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" class="social-btn social-sc" title="سناب شات"><img src="../icons/snap.png" alt="sc"></a>
         </div>
     </div>
 </div>
@@ -347,10 +349,10 @@
 
 <footer>
     <div class="footer-links">
-        <a href="/terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
-        <a href="/privacy.html">سياسة الخصوصية</a> <span class="footer-divider">|</span>
-        <a href="/contact.html">اتصل بنا</a> <span class="footer-divider">|</span>
-        <a href="/feedback.html">شاركنا رأيك</a>
+        <a href="../terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
+        <a href="../privacy.html">سياسة الخصوصية</a> <span class="footer-divider">|</span>
+        <a href="../contact.html">اتصل بنا</a> <span class="footer-divider">|</span>
+        <a href="../feedback.html">شاركنا رأيك</a>
     </div>
     <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
 </footer>
@@ -825,7 +827,7 @@
             num: "", 
             reason: "تأمر هذه الروايات بإبادة كائن حي (الكلاب) أو التنفير المطلق منها واعتبارها نجسة، وهو ما يتناقض مع التكريم القرآني للكلب في قصص الأنبياء والصالحين. القرآن اعتبر صيد الكلب حلالاً وطاهراً بمجرد ذكر اسم الله عليه، ولم يأمر بغسله بالتراب أو سبع مرات. كما أن الله ذكر 'كلب أهل الكهف' كرفيق ومرافق للصالحين دون أدنى ذم، بل خلّد ذكره في القرآن، وهو ما يتصادم مع فكرة أن الملائكة لا تدخل بيتاً فيه كلب.",
             proofs:[
-                { label: "إباحة صيد الكلاب:", verse: "يَسْأَلُونَكَ مَاذَا أُحِلَّ لَهُمْ ۖ قُلْ أُحِلَّ لَكُمُ الطَّيِّبَاتُ ۙ وَمَا عَلَّمْتُم مِّنَ الْجَوارِحِ مُكَلِّبِينَ تُعَلِّمُونَهُنَّ مِمَّا عَلَّمَكُمُ اللَّهُ ۖ فَكُلُوا مِمَّا أَمْسَكْنَ عَلَيْكُمْ", ref: "المائدة: 4", comment: "القرآن اعتبر ما يمسكه الكلب (بفمه ولعابه) من الطيبات المباحة للأكل، ولم يشترط غسله سبعاً أو بالتراب، مما ينفي صفة النجاسة المغلظة." },
+                { label: "إباحة صيد الكلاب:", verse: "يَسْأَلُونَكَ مَاذَا أُحِلَّ لَهُمْ ۖ قُلْ أُحِلَّ لَكُمُ الطَّيِّبَاتُ ۙ وَمَا عَلَّمْتُم مِّنَ الْجَوارِحِ مُكَلِّبِينَ تُعَلِّمُونَهُنَّ مِمَّا عَلَّمَكُمُ اللَّهُ ۖ فَكُلُوا مِمَّا أَمْسَكْنَ عَلَيْكُمْ", ref: "المائدة: 4", comment: "القرآن اعتبر ما يمسكه الكلب (بفمه ولعابه) من الطيبات المباحة للأكل، ولم اشترط غسله سبعاً أو بالتراب، مما ينفي صفة النجاسة المغلظة." },
                 { label: "كلب أهل الكهف:", verse: "وَكَلْبُهُم بَاسِطٌ ذِرَاعَيْهِ بِالْوصِيدِ", ref: "الكهف: 18", comment: "الله ذكر الكلب كعضو في جماعة المؤمنين الفارين بدينهم، فلو كان الكلب يطرد الملائكة أو يمنع الرحمة، لما رافق أصحاب الكهف الذين غشتهم رحمة الله." },
                 { label: "التوازن البيئي:", verse: "وَمَا مِن دَابَّةٍ فِي الْأَرْضِ وَلَا طَائِرٍ يَطِيرُ بِجَنَاحَيْهِ إِلَّا أُمَمٌ أَمْثَالُكُم", ref: "الأنعام: 38", comment: "الكلاب 'أمة' بنص القرآن، والأمر بإبادتها (الفتك بها) هو اعتداء على خلق الله وتوازن البيئة الذي أحكمه الله." }
             ]
@@ -1057,46 +1059,127 @@
         document.body.classList.toggle('no-scroll');
     }
 
-    function performSearch() {
-        const query = normalizeArabic(document.getElementById('globalSearch').value.toLowerCase());
+    /* ==================== GLOBAL SEARCH LOGIC (Hybrid Version) ==================== */
+    let cachedPagesContent = null;
+    let isSearchInitialized = false;
+
+    async function loadAllPagesContent() {
+        if (cachedPagesContent) return cachedPagesContent;
+        try {
+            const response = await fetch('../site-map.json?v=' + new Date().getTime());
+            const pagesList = await response.json();
+            const promises = pagesList.map(async (item) => {
+                let originalUrl = typeof item === 'string' ? item : item.url;
+                let fetchUrl = '../' + originalUrl; 
+                
+                try {
+                    const pageResp = await fetch(fetchUrl);
+                    const html = await pageResp.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                    const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                    return { 
+                        page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                        url: fetchUrl, 
+                        content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
+                    };
+                } catch (e) { return null; }
+            });
+            cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
+            return cachedPagesContent;
+        } catch (error) { return []; }
+    }
+
+    function getSafeRegex(searchTerm) {
+        let regexStr = '';
+        const cleanTerm = normalizeArabic(searchTerm);
+        for (let char of cleanTerm) {
+            if (char === 'ا') regexStr += '[اأإآ]';
+            else if (char === 'ه') regexStr += '[هة]';
+            else if (char === 'ي') regexStr += '[يىئ]';
+            else if (char === 'و') regexStr += '[وؤ]';
+            else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            regexStr += '[\\u064B-\u065F\u0670]*';
+        }
+        return new RegExp(regexStr, 'gi');
+    }
+
+    async function performCombinedSearch(query) {
         const resultsContainer = document.getElementById('searchResults');
-        resultsContainer.innerHTML = '';
-        resultsContainer.style.display = 'none';
-
-        if (query === '') return;
-
-        let results =[];
-        novelsData.forEach((novel, index) => {
-            const searchField = normalizeArabic(novel.title + novel.text + novel.reason).toLowerCase();
-            if (searchField.includes(query)) {
-                results.push({ ...novel, originalIndex: index });
-            }
-        });
-
-        if (results.length === 0) {
-            resultsContainer.innerHTML = '<div class="search-item" style="text-align:center; color:#888;">لا توجد نتائج</div>';
-            resultsContainer.style.display = 'block';
+        if (!query || query.length < 2) {
+            resultsContainer.style.display = 'none';
             return;
         }
 
-        results.slice(0, 10).forEach(result => {
+        resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+        resultsContainer.style.display = 'block';
+
+        const normQuery = normalizeArabic(query.toLowerCase());
+        const searchRegex = getSafeRegex(query);
+
+        // 1. Local Search (novelsData)
+        let localResults = [];
+        novelsData.forEach((novel, index) => {
+            const searchField = normalizeArabic(novel.title + novel.text + novel.reason).toLowerCase();
+            if (searchField.includes(normQuery)) {
+                localResults.push({ ...novel, originalIndex: index });
+            }
+        });
+
+        // 2. Global Search
+        const globalData = await loadAllPagesContent();
+        const globalResults = globalData.filter(item => {
+            searchRegex.lastIndex = 0;
+            const titleMatch = searchRegex.test(item.page);
+            searchRegex.lastIndex = 0;
+            const contentMatch = searchRegex.test(item.content);
+            return titleMatch || contentMatch;
+        });
+
+        // 3. Display Both
+        resultsContainer.innerHTML = '';
+        const totalCount = localResults.length + globalResults.length;
+
+        if (totalCount === 0) {
+            resultsContainer.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+            return;
+        }
+
+        const countDiv = document.createElement('div');
+        countDiv.className = 'search-count';
+        countDiv.textContent = `تم العثور على ${totalCount} نتيجة`;
+        resultsContainer.appendChild(countDiv);
+
+        // Render Local Matches First
+        localResults.slice(0, 10).forEach(result => {
             const item = document.createElement('div');
             item.className = 'search-item';
-            
-            const highlightedTitle = highlightText(result.title, query);
-            const highlightedSource = highlightText(result.source, query);
-            
-            item.innerHTML = `<strong>${highlightedTitle}</strong><br><small>${highlightedSource}</small>`;
+            const highlightedTitle = highlightText(result.title, normQuery);
+            item.innerHTML = `<h3><i class="fas fa-book-open"></i> ${highlightedTitle}</h3><p style="font-size:0.85rem; color:#666;">(داخل هذه الصفحة)</p>`;
             item.onclick = () => {
-                jumpToNovel(result.originalIndex, result.id, query);
+                jumpToNovel(result.originalIndex, result.id, normQuery);
                 resultsContainer.style.display = 'none';
                 document.getElementById('globalSearch').value = '';
             };
             resultsContainer.appendChild(item);
         });
-        resultsContainer.style.display = 'block';
+
+        // Render Global Matches
+        globalResults.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'search-item';
+            const highlightedTitle = item.page.replace(searchRegex, match => `<mark>${match}</mark>`);
+            searchRegex.lastIndex = 0;
+            const match = searchRegex.exec(item.content);
+            let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+            div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(searchRegex, match => `<mark>${match}</mark>`)}...</p>`;
+            div.onclick = () => window.location.href = item.url;
+            resultsContainer.appendChild(div);
+        });
     }
 
+    // ==================== UI and Local Functions ====================
     function jumpToNovel(index, id, searchQuery = null) {
         currentPage = Math.floor(index / perPage) + 1;
         renderNovels(searchQuery);
@@ -1204,7 +1287,7 @@
             favs.splice(idx, 1);
         } else {
             const novel = novelsData.find(n => n.id == id);
-            favs.push({ id: cardId, title: novel.title, type: 'رواية' });
+            favs.push({ id: cardId, title: novel.title, type: 'رواية', page: 'hadith' });
         }
 
         localStorage.setItem('myFavorites', JSON.stringify(favs));
@@ -1286,11 +1369,31 @@
     });
 
     document.getElementById('backToTop').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-    document.getElementById('globalSearch').addEventListener('input', performSearch);
 
     document.addEventListener('DOMContentLoaded', () => {
         renderNovels();
         updateFontSize();
+
+        // Hybrid Search Initialization
+        const searchInput = document.getElementById('globalSearch');
+        if (searchInput) {
+            let sTimer;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(sTimer);
+                sTimer = setTimeout(() => performCombinedSearch(e.target.value.trim()), 500);
+            });
+            searchInput.addEventListener('focus', () => { 
+                if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } 
+            });
+        }
+
+        // Close search results when clicking outside
+        document.addEventListener('click', (e) => {
+            const results = document.getElementById('searchResults');
+            if(results && !document.querySelector('.universal-search').contains(e.target)) {
+                results.style.display = 'none';
+            }
+        });
     });
 </script>
 </body>
