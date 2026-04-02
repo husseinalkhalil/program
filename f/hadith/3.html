@@ -50,6 +50,12 @@
             line-height: 1.6;
             overflow-x: hidden;
             width: 100%;
+            animation: fadeInPage 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         body.no-scroll {
@@ -541,7 +547,7 @@
             id: 21, title: "تناقض الروايات في الوضوء", source: "مسلم/النسائي", sourceUrl: "https://dorar.net/h/faeYgR3g",
             text: `قالَ رَسولُ اللهِ صَلَّى اللَّهُ عليه وسلَّمَ: تَوَضَّؤُوا ممَّا مَسَّتِ النَّارُ.`, 
             num: "353",
-            secondHadithText: `كانَ آخِرُ الأمرَينِ مِن رسولِ اللَّهِ ، تَرْكَ الوضوءِ ، مِمَّا مسَّتِ النَّارُ. <br><br> وفي البخاري: أكل كتف شاة ثم صلى ولم يتوضأ المصدر <a href="https://dorar.net/h/A9O8bb1I" target="_blank" style="color: blue; text-decoration: underline;">من هنا</a>`,
+            secondHadithText: `كانَ آخِرَ الأمرَينِ مِن رسولِ اللَّهِ ، تَرْكَ الوضوءِ ، مِمَّا مسَّتِ النَّارُ. <br><br> وفي البخاري: أكل كتف شاة ثم صلى ولم يتوضأ المصدر <a href="https://dorar.net/h/A9O8bb1I" target="_blank" style="color: blue; text-decoration: underline;">من هنا</a>`,
             secondHadithNum: "185", secondHadithUrl: "https://dorar.net/h/7Ltoelpw",
             reason: `الرواية الأولى توجب الوضوء من المطبوخ على النار، والثانية تؤكد ترك الوضوء من ذلك. تناقض صريح اضطر الفقهاء لادعاء "النسخ" للتوفيق بين الروايتين.`
         },
@@ -881,12 +887,25 @@
                     const html = await pageResp.text();
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
+
+                    // استخراج النصوص العربية من داخل المصفوفات قبل حذفها
+                    let scriptDataText = "";
+                    doc.querySelectorAll('script:not([src])').forEach(script => {
+                        const arabicMatches = script.textContent.match(/[\u0600-\u06FF]+/g);
+                        if (arabicMatches) {
+                            scriptDataText += " " + arabicMatches.join(' ');
+                        }
+                    });
+
                     doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                     const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                    
+                    const fullContent = mainContent.textContent + " " + scriptDataText;
+
                     return { 
                         page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
                         url: fetchUrl, 
-                        content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
+                        content: fullContent.replace(/\s+/g, ' ').trim() 
                     };
                 } catch (e) { return null; }
             });
@@ -904,7 +923,7 @@
             else if (char === 'ي') regexStr += '[يىئ]';
             else if (char === 'و') regexStr += '[وؤ]';
             else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            regexStr += '[\\u064B-\u065F\u0670]*';
+            regexStr += '[\\u064B-\\u065F\\u0670]*';
         }
         return new RegExp(regexStr, 'gi');
     }
