@@ -7,8 +7,8 @@
     <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     <!-- Favicon -->
-    <link href="images/logo-small.png" rel="icon" type="image/png"/>
-    <link href="images/logo-small.png" rel="apple-touch-icon"/>
+    <link href="../images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="../images/logo-small.png" rel="apple-touch-icon"/>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -366,27 +366,27 @@
     <!-- Navigation -->
     <nav>
         <div class="logo-container">
-            <a href="index.html">
-                <img src="images/logo.png" alt="شعار حسين الخليل" />
+            <a href="../index.html">
+                <img src="../images/logo.png" alt="شعار حسين الخليل" />
             </a>
         </div>
 
         <div class="nav-links">
-            <a href="index.html">الرئيسية</a>
-            <a href="books.html">الكتب</a>
-            <a href="articles.html">المقالات</a>
-            <a href="hadith.html" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">الروايات</a>
-            <a href="khawatir.html">خواطر</a>
-            <a href="videos.html">الفيديوهات</a>
-            <a href="history.html">التاريخ</a>
-            <a href="podcast.html">البودكاست</a>
-            <a href="ask.html">الأسئلة</a>
-            <a href="hewar.html">حوارات</a>
-            <a href="inq.html">تساؤلات</a>
-            <a href="manhaj.html">المنهج</a>
-            <a href="favorites.html">المفضلة</a>
-            <a href="support.html">دعم المحتوى</a>
-            <a href="about.html">من نحن</a>
+            <a href="../index.html">الرئيسية</a>
+            <a href="../books.html">الكتب</a>
+            <a href="../articles.html">المقالات</a>
+            <a href="../hadith.html" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">الروايات</a>
+            <a href="../khawatir.html">خواطر</a>
+            <a href="../videos.html">الفيديوهات</a>
+            <a href="../history.html">التاريخ</a>
+            <a href="../podcast.html">البودكاست</a>
+            <a href="../ask.html">الأسئلة</a>
+            <a href="../hewar.html">حوارات</a>
+            <a href="../inq.html">تساؤلات</a>
+            <a href="../manhaj.html">المنهج</a>
+            <a href="../favorites.html">المفضلة</a>
+            <a href="../support.html">دعم المحتوى</a>
+            <a href="../about.html">من نحن</a>
             <a href="/en/#" style="color: var(--primary-color) !important; font-weight: 800; border: 1.5px solid var(--accent-gold); padding: 5px 15px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;"><i class="fas fa-globe"></i>En</a>
         </div>
 
@@ -504,10 +504,10 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="terms.html">الشروط والأحكام</a>
-                <a href="privacy.html">سياسة الخصوصية</a>
-                <a href="contact.html">اتصل بنا</a>
-                <a href="feedback.html">شاركنا رأيك</a>
+                <a href="../terms.html">الشروط والأحكام</a>
+                <a href="../privacy.html">سياسة الخصوصية</a>
+                <a href="../contact.html">اتصل بنا</a>
+                <a href="../feedback.html">شاركنا رأيك</a>
             </div>
             <div class="copyright">
                 حسين الخليل - جميع الحقوق محفوظة © 2025
@@ -516,19 +516,21 @@
     </footer>
 
     <script>
-        /* ==================== GLOBAL SEARCH LOGIC (Unified) ==================== */
+        /* ==================== GLOBAL SEARCH LOGIC (Subfolder Version) ==================== */
         let cachedPagesContent = null;
         let isSearchInitialized = false;
 
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
             try {
-                const response = await fetch('site-map.json?v=' + new Date().getTime());
+                const response = await fetch('../site-map.json?v=' + new Date().getTime());
                 const pagesList = await response.json();
                 const promises = pagesList.map(async (item) => {
-                    let url = typeof item === 'string' ? item : item.url;
+                    let originalUrl = typeof item === 'string' ? item : item.url;
+                    let fetchUrl = '../' + originalUrl; 
+                    
                     try {
-                        const pageResp = await fetch(url);
+                        const pageResp = await fetch(fetchUrl);
                         const html = await pageResp.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
@@ -536,7 +538,7 @@
                         const mainContent = doc.querySelector('.container, main, body') || doc.body;
                         return { 
                             page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
-                            url: url, 
+                            url: fetchUrl, 
                             content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
                         };
                     } catch (e) { return null; }
