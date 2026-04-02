@@ -53,7 +53,7 @@
         body.no-scroll { overflow: hidden !important; height: 100vh; }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* ==================== Navigation (Unified Specs) ==================== */
+        /* ==================== Navigation ==================== */
         .nav-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
@@ -104,7 +104,7 @@
             .nav-links a { color: var(--text-primary); width: 100%; padding: 18px 25px; border-radius: 0; font-size: 1.05rem; border-bottom: 1px solid rgba(0,0,0,0.03); font-weight: 700; justify-content: flex-start; }
         }
 
-        /* ==================== Unified Header & Hero ==================== */
+        /* ==================== Header & Hero ==================== */
         .unified-header {
             background: var(--gradient-header);
             padding: calc(var(--nav-height) + 40px) 20px 60px;
@@ -442,7 +442,7 @@
             if (window.scrollY > 300) btn.classList.add('visible'); else btn.classList.remove('visible');
         });
 
-        /* ==================== GLOBAL SEARCH LOGIC (Unified) ==================== */
+        /* ==================== GLOBAL SEARCH LOGIC (HYBRID - EXTRACTS FROM SCRIPT) ==================== */
         let cachedPagesContent = null;
         let isSearchInitialized = false;
 
@@ -458,12 +458,27 @@
                         const html = await pageResp.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
+
+                        // استخراج النصوص العربية من داخل أكواد الجافاسكربت (المصفوفات)
+                        let scriptDataText = "";
+                        doc.querySelectorAll('script:not([src])').forEach(script => {
+                            const arabicMatches = script.textContent.match(/[\u0600-\u06FF]+/g);
+                            if (arabicMatches) {
+                                scriptDataText += " " + arabicMatches.join(' ');
+                            }
+                        });
+
+                        // حذف الأكواد المزعجة بعد الاستخراج
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                         const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                        
+                        // دمج النص المرئي مع النص المستخرج من المصفوفات
+                        const fullContent = mainContent.textContent + " " + scriptDataText;
+
                         return { 
                             page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
                             url: url, 
-                            content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
+                            content: fullContent.replace(/\s+/g, ' ').trim() 
                         };
                     } catch (e) { return null; }
                 });
