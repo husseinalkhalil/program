@@ -316,7 +316,7 @@
     </footer>
 
     <script>
-        /* ==================== GLOBAL SEARCH LOGIC (ORIGINAL FROM INDEX) ==================== */
+        /* ==================== GLOBAL SEARCH LOGIC (Main Folder - Smart Extraction) ==================== */
         let cachedPagesContent = null;
         let isSearchInitialized = false;
 
@@ -332,12 +332,26 @@
                         const html = await pageResp.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
+
+                        // السر هنا: استخراج النصوص العربية من داخل المصفوفات قبل حذفها
+                        let scriptDataText = "";
+                        doc.querySelectorAll('script:not([src])').forEach(script => {
+                            const arabicMatches = script.textContent.match(/[\u0600-\u06FF]+/g);
+                            if (arabicMatches) {
+                                scriptDataText += " " + arabicMatches.join(' ');
+                            }
+                        });
+
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
                         const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                        
+                        // دمج النص الظاهر مع النص المستخرج من المصفوفات
+                        const fullContent = mainContent.textContent + " " + scriptDataText;
+
                         return { 
                             page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
                             url: url, 
-                            content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
+                            content: fullContent.replace(/\s+/g, ' ').trim() 
                         };
                     } catch (e) { return null; }
                 });
@@ -362,7 +376,7 @@
                 else if (char === 'ي') regexStr += '[يىئ]';
                 else if (char === 'و') regexStr += '[وؤ]';
                 else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                regexStr += '[\\u064B-\\u065F\\u0670]*';
+                regexStr += '[\\u064B-\u065F\u0670]*';
             }
             return new RegExp(regexStr, 'gi');
         }
