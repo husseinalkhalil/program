@@ -139,17 +139,33 @@
         }
         .article-meta i { color: var(--accent-gold); }
 
-        /* Dialogue Styles - Keeping Original Emojis */
+        /* ==================== Dialogue Bubbles Styling ==================== */
         .article-body { font-size: 1.2rem; color: var(--text-primary); line-height: 1.9; transition: font-size 0.3s; }
         .dialogue-wrapper { display: flex; flex-direction: column; gap: 25px; margin-top: 20px; }
         .d-row { display: flex; align-items: flex-start; gap: 15px; width: 100%; }
-        .d-icon { min-width: 45px; font-size: 1.8rem; text-align: center; }
+        
+        /* تنسيق الصور الدائرية ليكون مطابقاً لصفحة شرفنطح */
+        .d-icon { 
+            min-width: 55px; 
+            max-width: 55px;
+            height: 55px;
+        }
+        .d-icon img { 
+            width: 55px; 
+            height: 55px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 2px solid var(--accent-gold); 
+            box-shadow: var(--shadow-sm); 
+            display: block;
+        }
+
         .d-bubble { position: relative; padding: 20px; border-radius: 15px 0 15px 15px; flex: 1; box-shadow: var(--shadow-sm); }
 
-        /* القائد الهندي (👮‍♀️) - Grey Theme */
+        /* القائد الهندي (الضابط) - Grey Theme */
         .speaker-1 .d-bubble { background-color: #f8fafc; border-right: 4px solid #94a3b8; color: #334155; }
         
-        /* عبدالله (🧔🏻) - Golden Theme */
+        /* عبدالله - Golden Theme */
         .speaker-2 .d-bubble { background-color: #fdfcf8; border-right: 4px solid var(--accent-gold); color: var(--primary-color); }
 
         /* نصوص السرد (الراوي) */
@@ -269,17 +285,17 @@
                         <p>شاهد عبدالله قائد الجيش الهندي، فذهب إليه مستفسراً عما يحدث.</p>
                     </div>
 
-                    <!-- عبدالله (🧔🏻) -->
+                    <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>السلام عليكم، من أنتم؟</p>
                         </div>
                     </div>
 
-                    <!-- القائد (👮‍♀️) -->
+                    <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>نحن الجيش الهندي.</p>
                         </div>
@@ -287,7 +303,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>وماذا تفعلون في مدينتي، ما هو سبب هذا الغزو؟</p>
                         </div>
@@ -295,7 +311,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>رجاءً يا أخي، هذا ليس غزواً.</p>
                         </div>
@@ -303,7 +319,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>ليس غزواً! وماذا تسمّيه إذاً؟</p>
                         </div>
@@ -311,7 +327,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>هذه فتوحات هندوسية.</p>
                         </div>
@@ -319,7 +335,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>نعم!! ماذا قلت؟ كيف يعني فتوحات هندوسية، هل من الممكن أن توضح لي؟</p>
                         </div>
@@ -327,7 +343,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>يا أخي نحن نتبع الدين الهندوسي، وتعاليم ديننا تأمرنا بنشر الدين في كل أصقاع الأرض.</p>
                         </div>
@@ -335,7 +351,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>وما هو كتابكم المقدس؟</p>
                         </div>
@@ -343,7 +359,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>إنه كتاب "البهاغافادغيتا".</p>
                         </div>
@@ -351,7 +367,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>وهل تعاليم هذا الكتاب يأمركم بغزو البلدان؟</p>
                         </div>
@@ -359,7 +375,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>يا أخي قلت لك ليست غزواً بل فتوحات، وكتابنا المقدس لا يوجد به أمر بالفتوحات، بل جميع الأوامر فيه هي رد الاعتداء فقط.</p>
                         </div>
@@ -367,7 +383,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>ولماذا "تفتحوننا" إذاً، طالما أن كتابكم المقدس لا يأمركم بذلك؟</p>
                         </div>
@@ -375,7 +391,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>لأن تلك الأوامر الموجودة في كتابنا المقدس قد نُسخت.</p>
                         </div>
@@ -383,7 +399,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>ماذا تقصد بأنها نُسخت؟</p>
                         </div>
@@ -391,7 +407,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>يعني تم الغاؤها.</p>
                         </div>
@@ -399,7 +415,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>ومن الذي تجرّأ على تعاليم كتابكم المقدس وقام بالغائها؟!</p>
                         </div>
@@ -407,7 +423,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>إنهم قادتنا الأشاوس، هم من أخبرونا بذلك، أخبرونا بأن زعيمنا الكبير أخبرهم بذلك.</p>
                         </div>
@@ -415,7 +431,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>ومن هو زعيمكم الكبير وما هي تعليماته وبماذا أمركم؟</p>
                         </div>
@@ -423,7 +439,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>أمرنا بالفتوحات لنشر الدين، وقال لنا (أُمرت أن أُقاتل الناس حتى يعتنقوا دين الهندوسية، فإذا فعلوا ذلك عصموا مني دماءهم وأموالهم).</p>
                         </div>
@@ -431,7 +447,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>ألم تقُل لي أن كتابكم المقدس ينهاكم عن الاعتداء على الآخرين؟ فكيف زعيمكم الكبير يأمركم بالقتال!!</p>
                         </div>
@@ -439,7 +455,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>وألم أقُل لك أنها تعاليم قد نُسخت!!</p>
                         </div>
@@ -447,7 +463,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>هذا يعني أن زعيمكم الكبير لم يلتزم بتعاليم كتابكم المُقدّس!!</p>
                         </div>
@@ -455,7 +471,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>لديه صلاحية في تغيير التعاليم لما يراه مناسباً لنا.</p>
                         </div>
@@ -463,7 +479,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>وكيف لبشر أن يُغيّر تعاليم كتاب مُقدّس!!</p>
                         </div>
@@ -471,7 +487,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>لا أعرف، هكذا أخبرنا قادتنا الأشاوس.</p>
                         </div>
@@ -479,7 +495,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>ألا تخافون من عقاب إلهكم عندما تعصونه بهذه الأفعال.</p>
                         </div>
@@ -487,7 +503,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>لدينا عمل نقوم به ويغفر لنا الإله كل ذنوبنا.</p>
                         </div>
@@ -495,7 +511,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>وما هو هذا العمل العظيم؟</p>
                         </div>
@@ -503,7 +519,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>نحج إلى نهر الغانج النهر المقدس عندنا ونغتسل به، فنعود من ذنوبنا كيوم ولدتنا أمهاتنا.</p>
                         </div>
@@ -511,7 +527,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>حسناً يا أخي وما هو مصيرنا لو رفضنا الدخول في دينكم؟</p>
                         </div>
@@ -519,7 +535,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>بحسب تعاليم زعيمنا الكبير وقادتنا الأشاوس، إذا رفضتم الدخول في ديننا فأمامكم خياران لا ثالث لهما. الأول: القتل. الثاني: دفع الجزية.</p>
                         </div>
@@ -527,7 +543,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>كيف تكون جزية وأنتم المعتدين علينا!!!</p>
                         </div>
@@ -535,7 +551,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>تعاليم ديننا "الأشاوسي" يجب أن تُفرض في كل بقاع العالم، نحن لا ننتظر الإذن منكم ولا من غيركم.</p>
                         </div>
@@ -543,7 +559,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>وهل ستقتلوننا جميعاً؟! رجالاً ونساءً وأطفالاً؟</p>
                         </div>
@@ -551,7 +567,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>لا يا أخي، فديننا دين الرحمة، سنقتل الرجال فقط وسنُبقي على النساء والأطفال سبايا وجواري.</p>
                         </div>
@@ -559,7 +575,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>بأي حق تغتصبونهن!!!</p>
                         </div>
@@ -567,7 +583,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>سوف نقوم بتوزيع النساء على المقاتلين بالعدل، فمن تعاليم ديننا السمحة هي العدالة.</p>
                         </div>
@@ -575,7 +591,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>وكيف عرفت كل هذه التفاصيل عن زعيمكم، بما أنه متوفّي منذ زمن؟</p>
                         </div>
@@ -583,7 +599,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>قادتنا الأشاوس الثقات حفظتهم الآلهة هم من أخبرونا بذلك. نحن لا نُفكّر، قادتنا يفكّرون عنّا.</p>
                         </div>
@@ -591,7 +607,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>على العكس يا أخي سأدخل في دينكم السمح طواعيةً!!</p>
                         </div>
@@ -599,7 +615,7 @@
 
                     <!-- القائد -->
                     <div class="d-row speaker-1">
-                        <div class="d-icon">👮‍♀️</div>
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
                             <p>وهذا هو الخيار الصائب، ولكن قل لي من أين تعلمت هذه الحكمة يا أخي!!</p>
                         </div>
@@ -607,7 +623,7 @@
 
                     <!-- عبدالله -->
                     <div class="d-row speaker-2">
-                        <div class="d-icon">🧔🏻</div>
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
                             <p>لقد تعلمتها من رأس جاري عبدالرحمن الذي قُطع أمامي!!!</p>
                         </div>
