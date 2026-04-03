@@ -196,12 +196,14 @@
         }
         .article-favorite-btn i { font-size: 1.5rem; }
 
-        /* نظام التنبيه المخصص (Toast) */
+        /* نظام التنبيه المخصص (Toast) - تم إخفاؤه تماماً لمنع ظهوره بالخطأ */
         #customToast {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+            visibility: hidden;
             background: var(--primary-color);
             color: white;
             padding: 12px 25px;
@@ -211,11 +213,15 @@
             gap: 12px;
             box-shadow: 0 10px 25px rgba(92, 74, 36, 0.3);
             z-index: 10001;
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             font-weight: 600;
             border: 2px solid var(--accent-gold);
         }
-        #customToast.show { transform: translateX(-50%) translateY(0); }
+        #customToast.show { 
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
         #customToast i { color: var(--accent-gold); font-size: 1.2rem; }
 
         .article-meta {
