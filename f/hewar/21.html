@@ -53,7 +53,7 @@
         body.no-scroll { overflow: hidden !important; height: 100vh; }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* ==================== Navigation (Unified Specs) ==================== */
+        /* ==================== Navigation ==================== */
         .nav-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
@@ -104,7 +104,7 @@
             .nav-links a { color: var(--text-primary); width: 100%; padding: 18px 25px; border-radius: 0; font-size: 1.05rem; border-bottom: 1px solid rgba(0,0,0,0.03); font-weight: 700; justify-content: flex-start; }
         }
 
-        /* ==================== Unified Header & Hero ==================== */
+        /* ==================== Header ==================== */
         .unified-header {
             background: var(--gradient-header);
             padding: calc(var(--nav-height) + 40px) 20px 60px;
@@ -113,14 +113,15 @@
             border-bottom: 2px solid var(--accent-gold);
         }
 
-        .hero-text h1 { 
-            font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; 
-            font-family: 'Tajawal', sans-serif; color: var(--primary-color);
-            text-align: center;
+        .hero-content {
+            max-width: 900px; margin: 0 auto;
+            display: flex; flex-direction: column; align-items: center; gap: 30px;
         }
-        .hero-text p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-weight: 500; text-align: center; }
 
-        /* ==================== Main Content Layout ==================== */
+        .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; font-family: 'Tajawal', sans-serif; color: var(--primary-color); text-align: center; }
+        .hero-text p { font-size: 1.2rem; color: var(--text-secondary); opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+        /* ==================== Main Content Container ==================== */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         .main-wrapper { position: relative; z-index: 20; margin-top: -30px; max-width: 1000px; margin-left: auto; margin-right: auto; margin-bottom: 60px; }
 
@@ -139,17 +140,17 @@
         }
         .article-meta i { color: var(--accent-gold); }
 
-        /* ==================== Dialogue Bubbles Styling ==================== */
+        /* ==================== Dialogue Styling ==================== */
         .article-body { font-size: 1.2rem; color: var(--text-primary); line-height: 1.9; transition: font-size 0.3s; }
         .dialogue-wrapper { display: flex; flex-direction: column; gap: 25px; margin-top: 20px; }
         .d-row { display: flex; align-items: flex-start; gap: 15px; width: 100%; }
         
-        /* تنسيق الصور الدائرية ليكون مطابقاً لصفحة شرفنطح */
         .d-icon { 
             min-width: 55px; 
             max-width: 55px;
             height: 55px;
         }
+
         .d-icon img { 
             width: 55px; 
             height: 55px; 
@@ -162,10 +163,10 @@
 
         .d-bubble { position: relative; padding: 20px; border-radius: 15px 0 15px 15px; flex: 1; box-shadow: var(--shadow-sm); }
 
-        /* القائد الهندي (الضابط) - Grey Theme */
-        .speaker-1 .d-bubble { background-color: #f8fafc; border-right: 4px solid #94a3b8; color: #334155; }
+        /* القائد الهندي - Grey Theme */
+        .speaker-1 .d-bubble { background-color: #f8fafc; border-right: 4px solid #94a3b8; color: #334155; } 
         
-        /* عبدالله - Golden Theme */
+        /* عبدالله - Gold Theme */
         .speaker-2 .d-bubble { background-color: #fdfcf8; border-right: 4px solid var(--accent-gold); color: var(--primary-color); }
 
         /* نصوص السرد (الراوي) */
@@ -182,17 +183,16 @@
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
         }
 
-        /* Font Controls (Fixed) */
+        /* ==================== Controls ==================== */
         .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
-        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid var(--accent-gold); color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: var(--shadow-sm); transition: 0.3s; }
+        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid var(--accent-gold); color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); transition: 0.3s; }
         .font-btn:hover { background: var(--accent-gold); color: white; transform: scale(1.1); }
 
-        /* Bottom Actions */
-        .article-actions { margin-top: 50px; padding-top: 25px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; gap: 15px; justify-content: center; }
+        .article-actions { margin-top: 50px; padding-top: 25px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .action-btn-pill { padding: 12px 30px; border-radius: 50px; border: 2px solid var(--accent-gold); background: #fdfcf8; color: var(--primary-color); font-weight: 800; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
         .action-btn-pill:hover { background: var(--accent-gold); color: white; transform: translateY(-3px); }
 
-        /* Footer */
+        /* ==================== Footer ==================== */
         footer { 
             background: var(--ticker-footer-bg); color: var(--primary-color); 
             padding: 60px 20px; text-align: center; margin-top: auto; 
@@ -203,8 +203,8 @@
         .footer-links a:hover { color: var(--accent-gold); opacity: 1; }
         .copyright { color: var(--primary-color); font-size: 0.85rem; border-top: 1px solid rgba(92, 74, 36, 0.1); padding-top: 20px; margin-top: 25px; opacity: 0.7; font-weight: 600; }
 
-        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; }
-        .back-to-top.visible { opacity: 1; }
+        .back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: 0.3s; z-index: 995; box-shadow: var(--shadow-md); font-size: 1.2rem; pointer-events: none; }
+        .back-to-top.visible { opacity: 1; pointer-events: all; }
 
         @media (max-width: 900px) {
             .hero-text h1 { font-size: 1.8rem; }
@@ -212,6 +212,13 @@
             .main-wrapper { margin-top: 0; }
             .article-content-container { padding: 25px; }
             .font-controls-fixed { top: auto; bottom: 30px; left: 30px; flex-direction: row; }
+        }
+        
+        @media print {
+            nav, .unified-header, .font-controls-fixed, .article-actions, footer, .back-to-top { display: none; }
+            .main-wrapper { margin: 0; max-width: 100%; }
+            .article-content-container { box-shadow: none; border: none; padding: 0; }
+            body { background: white; color: black; }
         }
     </style>
 </head>
@@ -248,7 +255,7 @@
         <div class="hero-content">
             <div class="hero-text">
                 <h1>❖ الغزوة المشّقلّيتيّة</h1>
-                <p>قصة فكرية ساخرة تناقش مفاهيم الغزو والفتوحات</p>
+                <p>قصة ساخرة عن الغزو والفتوحات.</p>
             </div>
         </div>
     </header>
@@ -264,7 +271,6 @@
             <div class="article-meta">
                 <span><i class="far fa-calendar-alt"></i> 11 مايو 2025</span>
                 <span><i class="far fa-folder"></i> حوارات</span>
-                <span onclick="window.print()" style="cursor:pointer;"><i class="fas fa-print"></i> طباعة الحوار</span>
             </div>
 
             <div class="article-body" id="articleBody">
@@ -283,355 +289,697 @@
                         <p>عبدالله: ولماذا فعل هذا؟ ما هو السبب؟ هل أخطأنا بحقهم؟!!</p>
                         <p>عبدالرحمن: لا أدري، فأنا مثلك كنت نائماً ثم استيقظت على دويّ الانفجارات وصراخ النساء والأطفال، وأصوات القادة وهم ينادون علينا من مكبرات الصوت للخروج إلى ساحة المدينة.</p>
                         <p>شاهد عبدالله قائد الجيش الهندي، فذهب إليه مستفسراً عما يحدث.</p>
+                        <p>وجرى بينهما هذا الحوار.</p>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 (Abdullah) -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>السلام عليكم، من أنتم؟</p>
-                        </div>
+                        <div class="d-bubble"><p>السلام عليكم، من أنتم؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 (Commander) -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>نحن الجيش الهندي.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>وماذا تفعلون في مدينتي، ما هو سبب هذا الغزو؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>رجاءً يا أخي، هذا ليس غزواً.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>ليس غزواً! (لك يخرب بيتك من حالك، هاجمين علينا بنصاص الليالي وتقول مو غزو) وماذا تسمّيه إذاً؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>هذه فتوحات هندوسية.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>نعم!! ماذا قلت؟ كيف يعني فتوحات هندوسية، لم أفهم، هل من الممكن أن توضح لي؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>يا أخي نحن نتبع الدين الهندوسي، وتعاليم ديننا تأمرنا بنشر الدين في كل أصقاع الأرض.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>وما هو كتابكم المقدس؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>إنه كتاب "البهاغافادغيتا".</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>وهل تعاليم هذا الكتاب يأمركم بغزو البلدان؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>يا أخي قلت لك ليست غزواً بل فتوحات، وكتابنا المقدس لا يوجد به أمر بالفتوحات، بل جميع الأوامر فيه هي رد الاعتداء فقط.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>ولماذا "تفتحوننا" إذاً، طالما أن كتابكم المقدس لا يأمركم بذلك؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>لأن تلك الأوامر الموجودة في كتابنا المقدس قد نُسخت.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>ماذا تقصد بأنها نُسخت؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>يعني تم الغاؤها.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>ومن الذي تجرّأ على تعاليم كتابكم المقدس وقام بالغائها؟!</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>إنهم قادتنا الأشاوس، هم من أخبرونا بذلك، أخبرونا بأن زعيمنا الكبير أخبرهم بذلك.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>ومن هو زعيمكم الكبير وما هي تعليماته وبماذا أمركم؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>أمرنا بالفتوحات لنشر الدين، وقال لنا (أُمرت أن أُقاتل الناس حتى يعتنقوا دين الهندوسية، فإذا فعلوا ذلك عصموا مني دماءهم وأموالهم).</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>ألم تقُل لي أن كتابكم المقدس ينهاكم عن الاعتداء على الآخرين؟ فكيف زعيمكم الكبير يأمركم بالقتال!!</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>وألم أقُل لك أنها تعاليم قد نُسخت!!</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>هذا يعني أن زعيمكم الكبير لم يلتزم بتعاليم كتابكم المُقدّس!!</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>لديه صلاحية في تغيير التعاليم لما يراه مناسباً لنا.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>وكيف لبشر أن يُغيّر تعاليم كتاب مُقدّس!!</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>لا أعرف، هكذا أخبرنا قادتنا الأشاوس.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>ألا تخافون من عقاب إلهكم عندما تعصونه بهذه الأفعال.</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>لدينا عمل نقوم به ويغفر لنا الإله كل ذنوبنا.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>وما هو هذا العمل العظيم؟ هل تطعمون الفقراء الطعام أم تكسون العراة الملابس، أم تنفقون على الأيتام؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>لا هذا ولا ذاك، نحج إلى نهر الغانج النهر المقدس عندنا ونغتسل به، فنعود من ذنوبنا كيوم ولدتنا أمهاتنا.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>حسناً يا أخي وما هو مصيرنا لو رفضنا الدخول في دينكم؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>هل تريد الجواب بحسب كتابنا المُقدّس أم بحسب كلام زعيمنا الكبير وقادتنا الأشاوس؟</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>بحسب كتابكم المُقدّس، فأنا أُكنّ كل الاحترام والتقدير للكُتُب المقدّسة لأنها لا تدعوا إلى العنف.</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>حسناً، بحسب كتابنا المُقدّس فلكم حرية الاختيار في الدين والمعتقد ولا أحد له الحق في إجباركم لاعتناق ديننا.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>هذا يعني أن كتابكم المقدس لا يُجبر أحداً لاعتناق دينه!</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>نعم هو كذلك يا أخي.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>حسناً وما هو مصيرنا بحسب تعليمات وأقوال زعيمكم الكبير وقادتكم؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>أولاً اسمهم قادتكم الأشاوس، فعليك أن تحترمهم وتُجلّهم فقد أفنوا حياتهم في تعاليم ديننا "الحنيف"، من أنت حتى تتحدّث عنهم هكذا دون أن تقول "الأشاوس" ما هو علمك؟ لم تصل إلى ربع ما وصلوا إليه من علم.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>أعتذر منك فأنا لم أقصد الاهانة أبداً وكان يجب عليّ أن أُضيف كلمة "الأشاوس" حتى يظهر احترامي لهم، فأرجو أن تغفر لي هذا الخطأ العظيم.</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
                         <div class="d-bubble">
-                            <p>نحن الجيش الهندي.</p>
+                            <p>حسنا سأجيبك، بحسب تعاليم زعيمنا الكبير وقادتنا الأشاوس، إذا رفضتم الدخول في ديننا فأمامكم خياران لا ثالث لهما.</p>
+                            <p>الأول: القتل.</p>
+                            <p>الثاني: دفع الجزية.</p>
                         </div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>وماذا تفعلون في مدينتي، ما هو سبب هذا الغزو؟</p>
-                        </div>
+                        <div class="d-bubble"><p>دفع الجزية!! يبدو أنك مخطئ يا أخي، فالجزية يدفعها المعتدي عندما ينهزم في المعركة، فكيف قلبّتم الآية! أم أنها الأتاوة هي من تقصدها وأسميّتها الجزية!!</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>رجاءً يا أخي، هذا ليس غزواً.</p>
-                        </div>
+                        <div class="d-bubble"><p>حسّن ملافظك 😡 ليست أتاوة بل هي جزية.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>ليس غزواً! وماذا تسمّيه إذاً؟</p>
-                        </div>
+                        <div class="d-bubble"><p>كيف تكون جزية وأنتم المعتدين علينا!!!</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>هذه فتوحات هندوسية.</p>
-                        </div>
+                        <div class="d-bubble"><p>😡</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>نعم!! ماذا قلت؟ كيف يعني فتوحات هندوسية، هل من الممكن أن توضح لي؟</p>
-                        </div>
+                        <div class="d-bubble"><p>أقصد محتلين.</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>يا أخي نحن نتبع الدين الهندوسي، وتعاليم ديننا تأمرنا بنشر الدين في كل أصقاع الأرض.</p>
-                        </div>
+                        <div class="d-bubble"><p>😡😡</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>وما هو كتابكم المقدس؟</p>
-                        </div>
+                        <div class="d-bubble"><p>غزاة؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>إنه كتاب "البهاغافادغيتا".</p>
-                        </div>
+                        <div class="d-bubble"><p>😡😡😡</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>وهل تعاليم هذا الكتاب يأمركم بغزو البلدان؟</p>
-                        </div>
+                        <div class="d-bubble"><p>فاتحين؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>يا أخي قلت لك ليست غزواً بل فتوحات، وكتابنا المقدس لا يوجد به أمر بالفتوحات، بل جميع الأوامر فيه هي رد الاعتداء فقط.</p>
-                        </div>
+                        <div class="d-bubble"><p>🥰🥰</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>ولماذا "تفتحوننا" إذاً، طالما أن كتابكم المقدس لا يأمركم بذلك؟</p>
-                        </div>
+                        <div class="d-bubble"><p>نعم أقصد انكم جيش الفاتحين وليس المعتدين، وهذا واضح جداً من خلال فوّهة المدافع والدبابات المُصوّبة نحونا، ثم من الذي طلب منكم الدخول إلى بلادنا؟ نحن كُنّا مطمئنين في بلادنا وننعم بالأمن والأمان، ألا ترى هذه الفوضى التي خلّفتموها؟ ألا تسمع صراخ الأطفال والنساء من الخوف؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>لأن تلك الأوامر الموجودة في كتابنا المقدس قد نُسخت.</p>
-                        </div>
+                        <div class="d-bubble"><p>تعاليم ديننا "الأشاوسي" يجب أن تُفرض في كل بقاع العالم، نحن لا ننتظر الإذن منكم ولا من غيركم، ويجب أن تكون تعاليم ديننا دستوراً يسري بالقوة على كل البشر.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>ماذا تقصد بأنها نُسخت؟</p>
-                        </div>
+                        <div class="d-bubble"><p>وهل ستقتلوننا جميعاً؟! رجالاً ونساءً وأطفالاً؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>يعني تم الغاؤها.</p>
-                        </div>
+                        <div class="d-bubble"><p>نَهي نَهي.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>ومن الذي تجرّأ على تعاليم كتابكم المقدس وقام بالغائها؟!</p>
-                        </div>
+                        <div class="d-bubble"><p>نعم؟! 🙄</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>إنهم قادتنا الأشاوس، هم من أخبرونا بذلك، أخبرونا بأن زعيمنا الكبير أخبرهم بذلك.</p>
-                        </div>
+                        <div class="d-bubble"><p>أقصد لا يا أخي، فديننا دين الرحمة، سنقتل الرجال فقط وسنُبقي على النساء والأطفال.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>ومن هو زعيمكم الكبير وما هي تعليماته وبماذا أمركم؟</p>
-                        </div>
+                        <div class="d-bubble"><p>وماذا ستفعلون بهم، أقصد النساء والأطفال؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>أمرنا بالفتوحات لنشر الدين، وقال لنا (أُمرت أن أُقاتل الناس حتى يعتنقوا دين الهندوسية، فإذا فعلوا ذلك عصموا مني دماءهم وأموالهم).</p>
-                        </div>
+                        <div class="d-bubble"><p>سوف نأخذ النساء سبايا وجواري.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>ألم تقُل لي أن كتابكم المقدس ينهاكم عن الاعتداء على الآخرين؟ فكيف زعيمكم الكبير يأمركم بالقتال!!</p>
-                        </div>
+                        <div class="d-bubble"><p>بأي حق تغتصبونهن!!!</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>وألم أقُل لك أنها تعاليم قد نُسخت!!</p>
-                        </div>
+                        <div class="d-bubble"><p>يا أخي ليس اغتصاب، بل سبايا، لماذا مفرداتك عنيفة واجرامية وتفتقد للانسانية!؟ "قال اغتصاب قال".</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>هذا يعني أن زعيمكم الكبير لم يلتزم بتعاليم كتابكم المُقدّس!!</p>
-                        </div>
+                        <div class="d-bubble"><p>وماذا ستفعلون بهن إذ طالما أنكم لن تغتصبونهن؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>لديه صلاحية في تغيير التعاليم لما يراه مناسباً لنا.</p>
-                        </div>
+                        <div class="d-bubble"><p>سوف نقوم بتوزيع النساء على المقاتلين بالعدل، فمن تعاليم ديننا السمحة هي العدالة.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>وكيف لبشر أن يُغيّر تعاليم كتاب مُقدّس!!</p>
-                        </div>
+                        <div class="d-bubble"><p>وتعاليم دينكم السمحة فقط لمقاتليكم؟ ألا يوجد حق لنا كبشر، ألا يوجد لدينا حرية الاختيار برفض دينكم؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>لا أعرف، هكذا أخبرنا قادتنا الأشاوس.</p>
-                        </div>
+                        <div class="d-bubble"><p>بالعكس يا أخي لديكم الحرية المُطلقة في رفض الدخول لديننا، أليست هذه حرية اختيار!!!</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>ألا تخافون من عقاب إلهكم عندما تعصونه بهذه الأفعال.</p>
-                        </div>
+                        <div class="d-bubble"><p>ولكنكم ستقتلون من يرفض الدخول أو تأخذون منه الأتاوات!!</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>لدينا عمل نقوم به ويغفر لنا الإله كل ذنوبنا.</p>
-                        </div>
+                        <div class="d-bubble"><p>😡😡</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>وما هو هذا العمل العظيم؟</p>
-                        </div>
+                        <div class="d-bubble"><p>أقصد الجزية الجزية.</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>نحج إلى نهر الغانج النهر المقدس عندنا ونغتسل به، فنعود من ذنوبنا كيوم ولدتنا أمهاتنا.</p>
-                        </div>
+                        <div class="d-bubble"><p>نعم فأنتم تمتلكون حرية الاختيار ونحن أيضا نمتلك حرية الاختيار بمصيركم.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>حسناً يا أخي وما هو مصيرنا لو رفضنا الدخول في دينكم؟</p>
-                        </div>
+                        <div class="d-bubble"><p>وماذا سيفعل المقاتلين بالنساء بعد توزيعهن عليهم؟ هل سيتزوّجونهن؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>بحسب تعاليم زعيمنا الكبير وقادتنا الأشاوس، إذا رفضتم الدخول في ديننا فأمامكم خياران لا ثالث لهما. الأول: القتل. الثاني: دفع الجزية.</p>
-                        </div>
+                        <div class="d-bubble"><p>ستكون النساء جواري وسبايا للمقاتلين، ولهم كامل الحق في فعل ما يحلوا لهم بهن، من وطئ وبيع في سوق الجواري وغيرها من الأشياء.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>كيف تكون جزية وأنتم المعتدين علينا!!!</p>
-                        </div>
+                        <div class="d-bubble"><p>وماذا عن الأطفال؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>تعاليم ديننا "الأشاوسي" يجب أن تُفرض في كل بقاع العالم، نحن لا ننتظر الإذن منكم ولا من غيركم.</p>
-                        </div>
+                        <div class="d-bubble"><p>سنأخذهم خدم لنا في مدينتنا، والطفلة التي تتحمّل الوطئ، سيضاجعها بعض الاخوة الأفاضل من المقاتلين باعتبارها أصبحت "ملك يسار"!!</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>وهل ستقتلوننا جميعاً؟! رجالاً ونساءً وأطفالاً؟</p>
-                        </div>
+                        <div class="d-bubble"><p>طفلة ووطئ!!! ما هذا الاجرام!! كيف لكم فعل هذا! إنها مجرد طفلة، كيف تستلذّون بها!!!</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>لا يا أخي، فديننا دين الرحمة، سنقتل الرجال فقط وسنُبقي على النساء والأطفال سبايا وجواري.</p>
-                        </div>
+                        <div class="d-bubble"><p>هذه تعاليم ديننا "الأشاوسي" فزعيمنا الكبير تزوج من طفلة لم تبلغ التاسعة من عمرها.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>بأي حق تغتصبونهن!!!</p>
-                        </div>
+                        <div class="d-bubble"><p>ولِمَ كل هذا؟ لماذا تفرضون أفكاركم علينا، نحن لا نريد ذلك.</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>سوف نقوم بتوزيع النساء على المقاتلين بالعدل، فمن تعاليم ديننا السمحة هي العدالة.</p>
-                        </div>
+                        <div class="d-bubble"><p>ألم أقل لك أن تعاليم ديننا دستوراً يجب أن يسري بالقوة على كل البشر.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>وكيف عرفت كل هذه التفاصيل عن زعيمكم، بما أنه متوفّي منذ زمن؟</p>
-                        </div>
+                        <div class="d-bubble"><p>ولماذا!!؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>قادتنا الأشاوس الثقات حفظتهم الآلهة هم من أخبرونا بذلك. نحن لا نُفكّر، قادتنا يفكّرون عنّا.</p>
-                        </div>
+                        <div class="d-bubble"><p>لأننا نحن على حق وجميع البشر على باطل، لذلك يجب أن تكون تعاليم ديننا فرضاً على الجميع.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
-                        <div class="d-bubble">
-                            <p>على العكس يا أخي سأدخل في دينكم السمح طواعيةً!!</p>
-                        </div>
+                        <div class="d-bubble"><p>وماذا ستفعلون بممتلكاتنا وأموالنا، هل ستدعوها وشأنها؟</p></div>
                     </div>
 
-                    <!-- القائد -->
+                    <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble">
-                            <p>وهذا هو الخيار الصائب، ولكن قل لي من أين تعلمت هذه الحكمة يا أخي!!</p>
-                        </div>
+                        <div class="d-bubble"><p>لا طبعاً، ستكون جميع ما تمتلكون غنيمة لنا.</p></div>
                     </div>
 
-                    <!-- عبدالله -->
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>تقصد سرقة لكم.</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>ليست سرقة، بل هي غنائم.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>كيف لكم أن تغتصبوا امرأة.</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>😡😡</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>أقصد تسبون امرأة متزوجة وتطئوها، بعد أن قتلتم زوجها وأخذتم ولدها فلذة كبدها ليكون عبداً لكم، كيف تستلذّون بها، ألا تشعرون بحالتها النفسية، ألستم بشراً!!</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>لا يهمنا المرأة، فهي "سبيّة" أولاً وأخيراً، وهي أصلاً ناقصة روح وحنين، ثم إن هذه الأشياء عادية في تعاليم ديننا "الحنيف" فزعيمنا الكبير تزوج من سبيّة اسمها "رضيّة" بعد قتل زوجها ووالدها في إحدى الفتوحات الهندوسية المباركة، فقُدّمت له كسبيّة بعد الانتهاء من المعركة، فدخل بها ولم يأبه لحالتها النفسية.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>وهل كنت معه في تلك الغزوة؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>مع مَن؟</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>مع زعميكم الكبير.</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>لا يا أخي فزعيمنا الكبير قد توفي منذ زمن بعيد!!</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>وكيف عرفت كل هذه التفاصيل عنه، بما أنه متوفّي منذ سنوات عديدة؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>قادتنا الأشاوس الثقات حفظتهم الآلهة هم من أخبرونا بذلك.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>قد يكون ما أخبروكم به عنه باطلاً، فكيف تتأكد من ذلك؟ ما هو المعيار؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>لا أعرف، نحن لا نُفكّر، قادتنا الاشاوس يفكّرون عنّا، نحن فقط ننفّذ ما يملوه علينا، فهم أعلم منّا، ثم إن كلامهم لا يمكن أن يكون غير صحيح لأنه يُشكّل ثلاث أرباع ديننا الهندوسي، وهناك أحد قادتنا الأشاوس ويُدعى الأذربيجاني الذي يصحح ويُضعّف لنا أقوال زعيمنا الكبير لما يراه مناسباً لنا.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>وكيف لكتابكم المُقدّس أن يستعين برجل كهذا الذي تُسمّيه الزعيم الكبير؟ فكما قلت لي أن كتابكم ينهى عن الاعتداء وفيه كل القيم الانسانية، فكيف يستعين بانسان بيدوفيلي يتزوج من الأطفال، ومجرم يتزوج من السبايا ويأمر بالقتل تقطيع الرؤوس وفرض دينه بالقوة!! فهذا تناقض!!</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>ولكن كتابنا المُقدّس لا يصفه بهذه الأوصاف أبداً يا أخي!!</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>نعم!! وبماذا يصفه إذاً؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>كتابنا المُقدّس يصفه بأجمل الأوصاف الانسانية، فتارةً يقول عنه أنه رحمة لجميع البشر، وتارةً يقول عنه بأنه صاحب خلق جميل، وحتى أن كل من يُحاول الاستهزاء به والانتقاص منه، فإن زعيمنا الكبير لا يرد عليه ولا يلقي له بالاً، فلا يهتم للمستهزئين، ويطالب كتابنا المُقدّس زعيمنا الكبير الصبر على ما يقوله الناس عنه، ويُخبره بأنه يعلم بأن صدره يضيق عمّا يقوله الناس عنه ويطالبه بالصبر والاحتساب وألّا يرد عليهم.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>أكاد لا أُصدّق، هل هذه فعلاً أخلاق زعيمكم الكبير التي ذكرها لكم كتابكم المُقدّس!!</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>نعم يا أخي هذه هي.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>ولماذا إذاً تُناقض ما قلته لي من أنه أمركم بالفتوحات وفرض الدين وقتل كل من لا يؤمن بدينه، وأنه تزوج من السبايا والأطفال، من أين جئت بهذه الأوصاف والمقولات؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>ألم أقل لك أن قادتنا الأشاوس الثقات هم من أخبرونا بذلك!!</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
                     <div class="d-row speaker-2">
                         <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
                         <div class="d-bubble">
-                            <p>لقد تعلمتها من رأس جاري عبدالرحمن الذي قُطع أمامي!!!</p>
+                            <p>هذا يعني أن زعيمكم الكبير بريء مما نُسب له من إجرام ومخالفة كتابكم المُقدّس، لأنه لا يمكن أن يكون شخصاً واحداً، فبحسب الكتاب المُقدس هو رجل نبيل، ولكن بحسب قادتكم الأشاوس هو مجرم!</p>
+                            <p>هل تأكدتم من مصادر كلام قادتكم الأشاوس لتعرفوا إن كانت صحيحة أم لا؟</p>
                         </div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>لا، لم نتأكد، لأننا لا نستطيع وممنوعين من ذلك.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>وما الذي يمنعكم من البحث عن الحقيقة؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>قادتنا الأشاوس، فقد أخبرونا أن هذه الأمور من اختصاصهم هم فقط ولا يجوز لأي أحد البحث والتقصّي خلفهم.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>وبعد أن "تفتحونا" يا ترى هل ستتوجهون بعدها إلى اوروبا شمالاً أم إلى افريقيا جنوباً؟</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>بالطبع سنتوجه إلى أوروبا حيث الحسناوات الشقراوات، أقصد حيث أن هناك مضطهدين يجب مساعدتهم وبلدان يجب فتحها لنشر الهندوسية السمحة فيها.</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>ولماذا تقطعون كل هذه المسافات وتقطعون البحار وتُعرّضون أنفسكم لخطر الغرق وغيره وافريقيا بجانبكم؟ هم أيضاً مضطهدين وبحاجة لمن يساعدهم، مع العلم أننا لم نكن مُضطهدين في بلدنا قبل مجيئكم ولم نشكي لكم همّنا ولم نطلب منكم المساعدة، أم السبب أن افريقيا ليس فيها شقراوات!!</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>هذا ليس من شأنك "سد بوزك ولاك" نحن نعرف شغلنا، هيا تجمّعوا في ساحة المدينة، سيأتي أحد قادتنا الأشاوس يخطب بكم ويعلن فتح هذه المدينة، وأنت يا هذا، هيّا قرّر، هل ستدخل في ديننا وتأمن على حياتك أم ستأبى وتعرف ماذا ينتظرك؟</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>على العكس يا أخي سأدخل في دينكم السمح طواعيةً!!</p></div>
+                    </div>
+
+                    <!-- Speaker 1 -->
+                    <div class="d-row speaker-1">
+                        <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
+                        <div class="d-bubble"><p>وهذا هو الخيار الصائب، ولكن قل لي من أين تعلمت هذه الحكمة في اتخاذ القرار يا أخي!!</p></div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="d-row speaker-2">
+                        <div class="d-icon"><img src="images/msh1.png" alt="عبدالله"></div>
+                        <div class="d-bubble"><p>لقد تعلمتها من رأس جاري عبدالرحمن الذي قُطع أمامي!!!</p></div>
                     </div>
 
                     <!-- Narrator Conclusion -->
                     <div class="neutral-msg">
-                        <p>وهكذا يا سادة يا كرام، عمّ السلام بعد أن اعتنق أهالي مدينة مشّقلّيت دين الفاتحين بكل يسر وأمان ودون فرض واكراه وإلزام، فاقتنعوا بهذا الدين بعد أن تحسّسوا رقابهم، وأصبحت الغزوة المشّقلّيتيّة تُدرّس للأجيال المتعاقبة، وصارت مضرباً في الشجاعة والفخر والأخلاق.</p>
+                        <p>وهكذا يا سادة يا كرام، عمّ السلام بعد أن اعتنق أهالي مدينة مشّقلّيت دين الفاتحين بكل يسر وأمان ودون فرض واكراه وإلزام، فاقتنعوا بهذا الدين بعد أن تحسّسوا رقابهم، وأصبحت الغزوة المشّقلّيتيّة تُدرّس للأجيال المتعاقبة، وصارت مضرباً في الشجاعة والفخر والأخلاق، وأصبح الرهبان الهندوس يخطبون في المعابد عن مناقب أسلافهم الأشاوس الذين فتحوا مدينة مشّقلّيت بالورد والرياحين، وأن دين الهندوسية لم ينتشر أبداً بالقوة والإكراه، وكل من يقول هذا فهو يحاول تدمير ديننا من العلمانيين والليبراليين والمأجورين، فبكى الهندوسيين على عظمة أسلافهم وتمنّوا لو يعود بهم الزمان، ليفتحوا المزيد من البلدان بالورد والرياحين.</p>
                     </div>
 
                 </div>
@@ -641,9 +989,16 @@
                 </div>
             </div>
 
+            <!-- Actions -->
             <div class="article-actions">
                 <button class="action-btn-pill" onclick="window.print()">
                     <i class="fas fa-print"></i> طباعة الحوار
+                </button>
+                <button class="action-btn-pill" onclick="handleShare()">
+                    <i class="fas fa-share-alt"></i> مشاركة الحوار
+                </button>
+                <button class="action-btn-pill" onclick="copyLink()">
+                    <i class="fas fa-link"></i> نسخ الرابط
                 </button>
             </div>
         </div>
@@ -698,6 +1053,24 @@
             currentFontSize = defaultFontSize;
             articleBody.style.fontSize = `${defaultFontSize}rem`;
         });
+
+        // Share & Copy Link
+        function handleShare() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                copyLink();
+            }
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("تم نسخ رابط الحوار بنجاح ✅");
+            });
+        }
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
