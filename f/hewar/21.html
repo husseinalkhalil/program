@@ -104,7 +104,7 @@
             .nav-links a { color: var(--text-primary); width: 100%; padding: 18px 25px; border-radius: 0; font-size: 1.05rem; border-bottom: 1px solid rgba(0,0,0,0.03); font-weight: 700; justify-content: flex-start; }
         }
 
-        /* ==================== Header ==================== */
+        /* ==================== Unified Header & Hero ==================== */
         .unified-header {
             background: var(--gradient-header);
             padding: calc(var(--nav-height) + 40px) 20px 60px;
@@ -120,6 +120,19 @@
 
         .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; font-family: 'Tajawal', sans-serif; color: var(--primary-color); text-align: center; }
         .hero-text p { font-size: 1.2rem; color: var(--text-secondary); opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+        /* تنسيق الصورة الكبيرة بالوسط (مكبرة وبدون الإطار الأبيض السميك) */
+        .hero-main-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-gold);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+            transition: 0.4s;
+            cursor: pointer;
+        }
+        .hero-main-img:hover { transform: scale(1.05) rotate(3deg); box-shadow: 0 20px 45px rgba(212, 175, 55, 0.5); }
 
         /* ==================== Main Content Container ==================== */
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
@@ -208,6 +221,7 @@
 
         @media (max-width: 900px) {
             .hero-text h1 { font-size: 1.8rem; }
+            .hero-main-img { width: 180px; height: 180px; }
             .unified-header { padding-top: calc(var(--nav-height) + 20px); border-radius: 0 0 35px 35px; }
             .main-wrapper { margin-top: 0; }
             .article-content-container { padding: 25px; }
@@ -257,6 +271,8 @@
                 <h1>❖ الغزوة المشّقلّيتيّة</h1>
                 <p>قصة ساخرة عن الغزو والفتوحات.</p>
             </div>
+            <!-- الصورة الكبيرة بالوسط مكبرة وبدون خلفية بيضاء -->
+            <img src="images/msh3.png" alt="الغزوة المشقليتية" class="hero-main-img">
         </div>
     </header>
 
@@ -725,7 +741,7 @@
                     <!-- Speaker 1 -->
                     <div class="d-row speaker-1">
                         <div class="d-icon"><img src="images/msh2.png" alt="القائد الهندي"></div>
-                        <div class="d-bubble"><p>سنأخذهم خدم لنا في مدينتنا، والطفلة التي تتحمّل الوطئ، سيضاجعها بعض الاخوة الأفاضل من المقاتلين باعتبارها أصبحت "ملك يسار" فكما تعلم يا أخي فإن الأنثى لها "احتياجات"!!</p></div>
+                        <div class="d-bubble"><p>سنأخذهم خدم لنا في مدينتنا، والطفلة التي تتحمّل الوطئ، سيضاجعها بعض الاخوة الأفاضل من المقاتلين باعتبارها أصبحت "ملك يسار"!!</p></div>
                     </div>
 
                     <!-- Speaker 2 -->
