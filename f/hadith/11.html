@@ -86,7 +86,7 @@
 
         .nav-links a {
             color: var(--primary-color); font-weight: 700; font-size: 0.85rem;
-            padding: 8px 8px; border-radius: 20px;
+            padding: 8px 12px; border-radius: 20px;
             white-space: nowrap; transition: 0.3s;
         }
         .nav-links a:hover { background: rgba(255,255,255,0.3); color: var(--accent-gold); transform: translateY(-2px); }
@@ -144,10 +144,25 @@
         .search-item:hover { background: rgba(212, 175, 55, 0.05); }
         .search-item h3 { color: var(--primary-color); font-size: 1.05rem; margin-bottom: 5px; font-weight: 700; }
 
-        /* ==================== Article Content ==================== */
+        /* ==================== Container & Main Layout ==================== */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+        
+        /* تقييد عرض المحتوى ليكون كالبطاقة السابقة */
+        .main-wrapper {
+            position: relative; z-index: 20; margin-top: -30px;
+            max-width: 1100px; 
+            margin-left: auto; margin-right: auto;
+            margin-bottom: 60px;
+        }
+
+        /* ==================== Article Specific Content ==================== */
         .article-content-container {
-            background: white; border-radius: var(--radius-xl); padding: 50px;
-            box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.03); position: relative;
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 50px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
         }
 
         .article-favorite-btn {
@@ -226,6 +241,11 @@
             position: fixed; top: 85px; left: 50%; transform: translateX(-50%);
             z-index: 990; font-weight: 800; display: none;
         }
+
+        @media (max-width: 768px) {
+            .article-content-container { padding: 25px; }
+            .hero-text h1 { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -237,6 +257,7 @@
 
     <div class="nav-overlay" onclick="toggleMobileMenu()"></div>
 
+    <!-- Navigation -->
     <nav>
         <div class="logo-container">
             <a href="../index.html"><img src="../images/logo.png" alt="شعار حسين الخليل" /></a>
@@ -262,6 +283,7 @@
         <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
     </nav>
 
+    <!-- Header Section -->
     <header class="unified-header">
         <div class="hero-content">
             <div class="hero-text">
@@ -279,8 +301,10 @@
         تم العثور على <span id="matchCount">0</span> نتيجة داخل المقال
     </div>
 
+    <!-- Main Content Wrapped in Card Layout -->
     <div class="container main-wrapper">
         <div class="article-content-container">
+            
             <button class="article-favorite-btn" id="addToFavorites" title="حفظ في المفضلة" onclick="toggleFavorite()">
                 <i class="far fa-bookmark" id="favIcon"></i>
             </button>
@@ -297,27 +321,27 @@
                 <p>من الحقائق الصادمة أن مصطلح "الوحي الثاني" لم يكن معروفاً في عصر النبي ولا الصحابة؛ فالكل كان مجمعاً على أن الوحي الوحيد هو القرآن. حتى جاء الإمام الشافعي وأطلق هذا المصطلح لأول مرة في تاريخ الفكر الإسلامي. قبل ذلك، كان القرآن هو المرجعية الوحيدة، ولم يخطر ببال أحد أن هناك "كتاباً موازياً" ينسخ القرآن ويقضي عليه.</p>
 
                 <h3 class="section-title">ثانياً: المفهوم اللغوي للطاعة في القرآن</h3>
-                <p>لفظ "الطاعة" في العربية لا يعني الإكراه، بل يدل على <strong>الانقياد عن قبول واستجابة داخلية</strong>. فالرسول لا يُكره الناس، بل يبلّغ الوحي، والناس إما أن يطيعوا (يستجيبوا) أو يتولّوا (يُعرضوا). القرآن يضع دائماً مقابل الطاعة "التولي": <span class="quran-verse">{قُلْ أَطِيعُوا اللَّهَ وَالرَّسُولَ ۖ فَإِن تَوَلَّوْا فَإِنَّ اللَّهَ لَا يُحِبُّ الْكَافِرِينَ}</span>. لم يقل: "فإن خالفوا روايات"، بل جعل المقابل هو التولي عن أصل البلاغ.</p>
+                <p>لفظ "الطاعة" في العربية لا يعني الإكراه، بل يدل على <strong>الانقياد عن قبول واستجابة داخلية</strong>. فالرسول لا يُكره الناس، بل يبلّغ الوحي، والناس إما أن يطيعوا (يستجيبوا) أو يتولّوا (يُعرضوا). القرآن يضع دائماً مقابل الطاعة "التولي": <span class="quran-verse">{قُلْ أَطِيعُوا اللَّهَ وَالرَّسُولَ ۖ فَإِن تَوَلَّوْا فَإِنَّ اللَّهَ لَا يُحِبُّ الْكَافِرِينَ}</span>. لم يقل: "فإن خالفوا روايات"، بل جعل المقابل هو التولي عن أصل البلاغ.</p>
 
                 <h3 class="section-title">ثالثاً: وحدة الطاعة (والله ورسوله أحق أن يرضوه)</h3>
                 <p>يقدم القرآن أدلة قاطعة على أن طاعة الله والرسول واحدة وتصب في "الوحي" حصراً. تأملوا دقة الألفاظ:</p>
                 <ul>
-                    <li><strong>في الإرضاء:</strong> <span class="quran-verse">{وَاللَّهُ وَرَسُولُهُ أَحَقُّ أَن يُرْضُوهُ}</span> [التوبة: 62]. قال "يرضوه" (للمفرد) ولم يقل "يرضوهما"، لأن إرضاء الرسول هو اتباع وحي الله.</li>
-                    <li><strong>في الفضل:</strong> <span class="quran-verse">{أَنْ أَغْنَاهُمُ اللَّهُ وَرَسُولُهُ مِن فَضْلِهِ}</span> [التوبة: 74]. قال "من فضله" ولم يقل "من فضلهما"؛ لأن الله هو صاحب الفضل والرسول مبلغ عنه.</li>
-                    <li><strong>في دخول الجنة:</strong> <span class="quran-verse">{وَمَن يُطِعِ اللَّهَ وَرَسُولَهُ يُدْخِلْهُ جَنَّاتٍ}</span>. قال "يدخله" ولم يقل "يدخلاه"؛ لأن الحكم لله وحده.</li>
-                    <li><strong>في الاستجابة:</strong> <span class="quran-verse">{يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَجِيبُوا لِلَّهِ وَلِلرَّسُولِ إِذَا دَعَاكُمْ لِمَا يُحْيِيكُمْ}</span>. قال "دعاكم" ولم يقل "دعواكم".</li>
+                    <li><strong>في الإرضاء:</strong> <span class="quran-verse">{وَاللَّهُ وَرَسُولُهُ أَحَقُّ أَن يُرْضُوهُ}</span> [التوبة: 62]. قال "يرضوه" (للمفرد) ولم يقل "يرضوهما"، لأن إرضاء الرسول هو اتباع وحي الله.</li>
+                    <li><strong>في الفضل:</strong> <span class="quran-verse">{أَنْ أَغْنَاهُمُ اللَّهُ وَرَسُولُهُ مِن فَضْلِهِ}</span> [التوبة: 74]. قال "من فضله" ولم يقل "من فضلهما"؛ لأن الله هو صاحب الفضل والرسول مبلغ عنه.</li>
+                    <li><strong>في دخول الجنة:</strong> <span class="quran-verse">{وَمَن يُطِعِ اللَّهَ وَرَسُولَهُ يُدْخِلْهُ جَنَّاتٍ}</span>. قال "يدخله" ولم يقل "يدخلاه"؛ لأن الحكم لله وحده.</li>
+                    <li><strong>في الاستجابة:</strong> <span class="quran-verse">{يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَجِيبُوا لِلَّهِ وَلِلرَّسُولِ إِذَا دَعَاكُمْ لِمَا يُحْيِيكُمْ}</span>. قال "دعاكم" ولم يقل "دعواكم".</li>
                 </ul>
                 <p>لو كانت طاعة الرسول منفصلة ولها مصدر مستقل (الروايات)، لكان القرآن متناقضاً ولتحدث بصيغة التثنية، وحاشاه من ذلك.</p>
 
                 <h3 class="section-title">رابعاً: الطاعة مرتبطة بـ "ما أُنزل" حصراً</h3>
-                <p>يحسم القرآن الموضوع بقوله: <span class="quran-verse">{اتَّبِعُوا مَا أُنزِلَ إِلَيْكُم مِّن رَّبِّكُمْ وَلَا تَتَّبِعُوا مِن دُونِهِ أَوْلِيَاءَ}</span>. هل هذه الروايات المتناقضة والمسيئة هي مما أُنزل إلينا من ربنا؟ الرسول نفسه اشتكى لربه قائلاً: <span class="quran-verse">{يَا رَبِّ إِنَّ قَوْمِي اتَّخَذُوا هَٰذَا الْقُرْآنَ مَهْجُورًا}</span>. حصر الشكوى في هجر القرآن، ولم يذكر هجر "الوحي الثاني" المزعوم.</p>
+                <p>يحسم القرآن الموضوع بقوله: <span class="quran-verse">{اتَّبِعُوا مَا أُنزِلَ إِلَيْكُم مِّن رَّبِّكُمْ وَلَا تَتَّبِعُوا مِن دُونِهِ أَوْلِيَاءَ}</span>. هل هذه الروايات المتناقضة والمسيئة هي مما أُنزل إلينا من ربنا؟ الرسول نفسه اشتكى لربه قائلاً: <span class="quran-verse">{يَا رَبِّ إِنَّ قَوْمِي اتَّخَذُوا هَٰذَا الْقُرْآنَ مَهْجُورًا}</span>. حصر الشكوى في هجر القرآن، ولم يذكر هجر "الوحي الثاني" المزعوم.</p>
 
                 <h3 class="section-title">خامساً: حصر مهمة الرسول في "البلاغ"</h3>
-                <p>تكرر القرآن في وصف مهمة النبي: <span class="quran-verse">{مَّا عَلَى الرَّسُولِ إِلَّا الْبَلَاغُ}</span>، و <span class="quran-verse">{إِنْ عَلَيْكَ إِلَّا الْبَلَاغُ}</span>. فإذا كان دوره محدداً بالبلاغ، فإن طاعته لا يمكن أن تتجاوز "ما بلّغه" (القرآن). الطاعة هي اتباع الرسالة، والتولي هو رفض هذا البلاغ. أما اختراع "سنة موازية" للقرآن، فهو افتراض خارجي لا يستند إلى بنية النص القرآني.</p>
+                <p>تكرر القرآن في وصف مهمة النبي: <span class="quran-verse">{مَّا عَلَى الرَّسُولِ إِلَّا الْبَلَاغُ}</span>، و <span class="quran-verse">{إِنْ عَلَيْكَ إِلَّا الْبَلَاغُ}</span>. فإذا كان دوره محدداً بالبلاغ، فإن طاعته لا يمكن أن تتجاوز "ما بلّغه" (القرآن). الطاعة هي اتباع الرسالة، والتولي هو رفض هذا البلاغ. أما اختراع "سنة موازية" للقرآن، فهو افتراض خارجي لا يستند إلى بنية النص القرآني.</p>
 
                 <h3 class="section-title">الخلاصة:</h3>
                 <p>القرآن يقدم مفهوماً متماسكاً: طاعة الرسول تعني الاستجابة للوحي المنزّل. أما تحويل الطاعة إلى التزام بروايات جُمعت بعد وفاته بقرون، وتصحيحها وتضعيفها بيد بشر (آخرهم مات سنة 99)، فهو انتقال من "الدين الإلهي" إلى "الدين الكهنوتي".</p>
-                <p>السؤال ليس: "هل تطيع الرسول؟" بل: "أي رسول تطيع؟" الرسول الذي بلّغ وحي ربه وأمر باتباعه حصراً؟ أم الرسول الذي بنوا له صورة من روايات متناقضة؟ القرآن هو الحجة، وما خالفه فهو باطل. <strong>شغّل عقلك.</strong></p>
+                <p>السؤال ليس: "هل تطيع الرسول؟" بل: "أي رسول تطيع؟" الرسول الذي بلّغ وحي ربه وأمر باتباعه حصراً؟ أم الرسول الذي بنوا له صورة من روايات متناقضة؟ القرآن هو الحجة، وما خالفه فهو باطل. <strong></strong></p>
             </div>
 
             <div class="article-actions">
@@ -351,14 +375,19 @@
                 const response = await fetch('../site-map.json?v=' + new Date().getTime());
                 const pagesList = await response.json();
                 const promises = pagesList.map(async (item) => {
-                    let fetchUrl = '../' + (typeof item === 'string' ? item : item.url);
+                    let path = typeof item === 'string' ? item : item.url;
+                    let fetchUrl = '../' + path;
                     try {
                         const pageResp = await fetch(fetchUrl);
                         const html = await pageResp.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
                         doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
-                        return { page: doc.title.replace('حسين الخليل - ', '').trim(), url: fetchUrl, content: doc.body.textContent.replace(/\s+/g, ' ').trim() };
+                        return { 
+                            page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                            url: fetchUrl, 
+                            content: doc.body.textContent.replace(/\s+/g, ' ').trim() 
+                        };
                     } catch (e) { return null; }
                 });
                 cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
@@ -444,7 +473,10 @@
             localStorage.setItem('user-favorites', JSON.stringify(favorites));
         }
 
-        function toggleMobileMenu() { document.querySelector('.nav-links').classList.toggle('show'); document.querySelector('.nav-overlay').style.display = document.querySelector('.nav-links').classList.contains('show') ? 'block' : 'none'; }
+        function toggleMobileMenu() { 
+            document.querySelector('.nav-links').classList.toggle('show'); 
+            document.querySelector('.nav-overlay').style.display = document.querySelector('.nav-links').classList.contains('show') ? 'block' : 'none'; 
+        }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         document.addEventListener('DOMContentLoaded', () => {
