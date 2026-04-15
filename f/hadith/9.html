@@ -165,7 +165,6 @@
             position: relative;
         }
 
-        /* زر المفضلة بالألوان الجديدة */
         .article-favorite-btn {
             position: absolute;
             top: 30px;
@@ -253,7 +252,7 @@
             background: var(--accent-gold); margin-top: 5px; border-radius: 2px;
         }
 
-        /* Search Highlight for in-article search */
+        /* Search Highlight */
         .highlight-text {
             background-color: var(--accent-gold);
             color: #fff;
@@ -307,37 +306,11 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        /* Print Media */
         @media print {
             nav, .unified-header, .article-actions, footer, .back-to-top, .universal-search, .article-favorite-btn, .search-results-alert { display: none; }
             .main-wrapper { margin: 0; max-width: 100%; }
             .article-content-container { box-shadow: none; border: none; padding: 0; }
             body { background: white; color: black; }
-        }
-
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .hamburger { display: block; order: 1; }
-            .logo-container { order: 2; }
-            .nav-links {
-                position: fixed; top: var(--nav-height); right: -280px; width: 280px;
-                background: white; flex-direction: column;
-                padding: 15px 0 40px; height: calc(100vh - var(--nav-height));
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
-                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
-                gap: 0; margin: 0; z-index: 1001; display: flex !important;
-            }
-            .nav-links.show { right: 0; }
-            .nav-links a { color: var(--text-primary); width: 100%; padding: 18px 25px; border-radius: 0; font-size: 1.05rem; justify-content: flex-start; border-bottom: 1px solid rgba(0,0,0,0.03); }
-        }
-
-        @media (max-width: 768px) {
-            .hero-text h1 { font-size: 1.8rem; }
-            .article-content-container { padding: 25px; }
-            .main-wrapper { max-width: 100%; margin-top: 0; }
-            .article-favorite-btn { top: 15px; left: 15px; width: 42px; height: 42px; }
-            .article-favorite-btn i { font-size: 1.2rem; }
-            .unified-header { padding-top: calc(var(--nav-height) + 20px); border-radius: 0 0 35px 35px; }
         }
     </style>
 </head>
@@ -354,33 +327,18 @@
     <!-- Navigation -->
     <nav>
         <div class="logo-container">
-            <a href="../index.html">
-                <img src="../images/logo.png" alt="شعار حسين الخليل" />
-            </a>
+            <a href="../index.html"><img src="../images/logo.png" alt="شعار حسين الخليل" /></a>
         </div>
-
         <div class="nav-links">
             <a href="../index.html">الرئيسية</a>
             <a href="../books.html">الكتب</a>
             <a href="../articles.html">المقالات</a>
             <a href="../hadith.html" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">الروايات</a>
-            <a href="../khawatir.html">خواطر</a>
-            <a href="../videos.html">الفيديوهات</a>
-            <a href="../history.html">التاريخ</a>
-            <a href="../podcast.html">البودكاست</a>
-            <a href="../ask.html">الأسئلة</a>
-            <a href="../hewar.html">حوارات</a>
-            <a href="../inq.html">تساؤلات</a>
             <a href="../manhaj.html">المنهج</a>
             <a href="../favorites.html">المفضلة</a>
-            <a href="../support.html">دعم المحتوى</a>
             <a href="../about.html">من نحن</a>
-            <a href="/en/#" style="color: var(--primary-color) !important; font-weight: 800; border: 1.5px solid var(--accent-gold); padding: 5px 15px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;"><i class="fas fa-globe"></i>En</a>
         </div>
-
-        <div class="hamburger" onclick="toggleMobileMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
+        <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
     </nav>
 
     <!-- Header Section -->
@@ -390,9 +348,8 @@
                 <h1>وما ينطق عن الهوى.. الرسالة لا الهوى</h1>
                 <p>تحرير الدلالة القرآنية من إسقاطات "الوحي الموازي" واستعادة سيادة النص.</p>
             </div>
-            
             <div class="universal-search">
-                <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+                <input type="text" id="globalSearch" placeholder="ابحث في المقال أو الموقع..." />
                 <div class="search-results" id="searchResults"></div>
             </div>
         </div>
@@ -405,8 +362,6 @@
     <!-- Main Content -->
     <div class="container main-wrapper">
         <div class="article-content-container">
-            
-            <!-- زر الحفظ في المفضلة -->
             <button class="article-favorite-btn" id="addToFavorites" title="حفظ في المفضلة" onclick="toggleFavorite()">
                 <i class="far fa-bookmark" id="favIcon"></i>
             </button>
@@ -416,7 +371,6 @@
                 <span><i class="far fa-folder"></i> الروايات - وما ينطق عن الهوى</span>
             </div>
 
-            <!-- Content Body -->
             <div class="article-body" id="articleBody">
                 <p>تُعد آية سورة النجم <strong>{وَمَا يَنطِقُ عَنِ الْهَوَىٰ ۞ إِنْ هُوَ إِلَّا وَحْيٌ يُوحَىٰ}</strong> واحدة من أكثر الآيات التي تعرضت لعملية "اختطاف دلالي" في تاريخ الفكر الإسلامي. فقد اتخذها حراس الموروث ذريعةً لإضفاء صفة "الألوهية" على كل كلمة أو فعل أو إشارة نُسبت للنبي ﷺ، معتبرين أن كل ما صدر عنه في حياته اليومية، وفي شؤون الطب والسياسة والاجتماع، هو "وحيٌ يوحى" لا يأتيه الباطل من بين يديه ولا من خلفه.</p>
 
@@ -435,7 +389,7 @@
 
                 <h3 class="section-title">ثانياً: مفتاح الفهم في السياق (ما ضل صاحبكم)</h3>
                 <p>القرآن يفسر بعضه بعضاً، والآية لا يمكن انتزاعها من سياق السورة. لنقرأ مطلع سورة النجم: <strong>{وَالنَّجْمِ إِذَا هَوَىٰ ۞ مَا ضَلَّ صَاحِبُكُمْ وَمَا غَوَىٰ ۞ وَمَا يَنطِقُ عَنِ الْهَوَىٰ ۞ إِنْ هُوَ إِلَّا وَحْيٌ يُوحَىٰ}</strong>.</p>
-                <p>مفتاح الفهم هنا هو كلمة <strong>{ضَلَّ}</strong>. لماذا بدأ الله السورة بنفي الضلال عن النبي؟ لأن الكفار افتروا على الرسول بالضلال وأنه يأتي بكلام من عنده ويدّعي أنه كلام الله. فرد الله عليهم بأن ما ينطقه من قرآن ليس ضلالاً ولا هوىً شخصياً، بل هو وحيٌ أوحي له لتبليغه. فالكفار لا يهمهم ما يقوله النبي من أقوال خاصة به لأنهم يعرفون تماماً أنها أقواله البشرية، ما يهمهم هو ما جاء به من كلام الله الذي هو الرسالة السماوية، فنزلت الآية لتؤكد أن القرآن هو من عند الله.</p>
+                <p>مفتاح الفهم هنا هو كلمة <strong>{ضَلَّ}</strong>. لماذا بدأ الله السورة بنفي الضلال عن النبي؟ لأن الكفار اتهموه بأنه "ضال" وأنه يأتي بكلام من عنده ويدّعي أنه كلام الله. فرد الله عليهم بأن ما ينطقه من قرآن ليس ضلالاً ولا هوىً شخصياً، بل هو وحيٌ أوحي له لتبليغه. فالكفار لا يهمهم ما يقوله النبي من أقوال خاصة به لأنهم يعرفون تماماً أنها أقواله البشرية، ما يهمهم هو ما جاء به من كلام الله الذي هو الرسالة السماوية، فنزلت الآية لتؤكد أن القرآن هو من عند الله.</p>
 
                 <h3 class="section-title">ثالثاً: تحرير "الضمير" في قوله (إِنْ هُوَ إِلَّا وَحْيٌ يُوحَىٰ)</h3>
                 <p>يسأل أنصار الموروث: على ماذا يعود الضمير (هو) في الآية؟ ويدّعون أنه يعود على "كل ما ينطق به النبي". وهذا تلاعب بقواعد اللغة والمنطق؛ فالضمير (هو) يعود على <strong>(المَنْطُوق)</strong>، والمنطوق الذي كان يتنازع فيه النبي مع الكفار هو "القرآن الكريم". </p>
@@ -449,39 +403,26 @@
                 <p>مَن يحاول استخدام هذه الآية لشرعنة "صحيح البخاري" أو غيره من كتب الروايات، إنما يحاول "تأليه" النبي وتوسيع دائرة الوحي لتشمل "ظنون البشر"، وهو ما حذر منه القرآن في قوله: <strong>{فَبِأَيِّ حَدِيثٍ بَعْدَ اللَّهِ وَآيَاتِهِ يُؤْمِنُونَ}</strong>. <strong>شغّل عقلك.</strong></p>
             </div>
 
-            <!-- Article Actions -->
             <div class="article-actions">
-                <button class="action-btn-pill" onclick="window.print()">
-                    <i class="fas fa-print"></i> طباعة المقال
-                </button>
+                <button class="action-btn-pill" onclick="window.print()"><i class="fas fa-print"></i> طباعة المقال</button>
             </div>
         </div>
     </div>
 
-    <!-- Back to Top -->
-    <div class="back-to-top" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
-    </div>
+    <div class="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-links">
-                <a href="../terms.html">الشروط والأحكام</a>
-                <a href="../privacy.html">سياسة الخصوصية</a>
-                <a href="../contact.html">اتصل بنا</a>
-                <a href="../feedback.html">شاركنا رأيك</a>
-            </div>
-            <div class="copyright">
-                حسين الخليل - جميع الحقوق محفوظة © 2025
-            </div>
+            <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
         </div>
     </footer>
 
     <script>
-        /* ==================== GLOBAL SEARCH LOGIC ==================== */
+        /* ==================== GLOBAL & IN-ARTICLE SEARCH LOGIC ==================== */
         let cachedPagesContent = null;
         let isSearchInitialized = false;
+        const articleBody = document.getElementById('articleBody');
+        const originalContent = articleBody.innerHTML;
 
         async function loadAllPagesContent() {
             if (cachedPagesContent) return cachedPagesContent;
@@ -489,20 +430,14 @@
                 const response = await fetch('../site-map.json?v=' + new Date().getTime());
                 const pagesList = await response.json();
                 const promises = pagesList.map(async (item) => {
-                    let originalUrl = typeof item === 'string' ? item : item.url;
-                    let fetchUrl = '../' + originalUrl; 
+                    let fetchUrl = '../' + (typeof item === 'string' ? item : item.url);
                     try {
                         const pageResp = await fetch(fetchUrl);
                         const html = await pageResp.text();
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
-                        doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
-                        const mainContent = doc.querySelector('.container, main, body') || doc.body;
-                        return { 
-                            page: doc.title.replace('حسين الخليل - ', '').trim() || 'صفحة', 
-                            url: fetchUrl, 
-                            content: mainContent.textContent.replace(/\s+/g, ' ').trim() 
-                        };
+                        doc.querySelectorAll('script, style, nav, footer').forEach(el => el.remove());
+                        return { page: doc.title.replace('حسين الخليل - ', '').trim(), url: fetchUrl, content: doc.body.textContent.replace(/\s+/g, ' ').trim() };
                     } catch (e) { return null; }
                 });
                 cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
@@ -511,16 +446,12 @@
         }
 
         function normalizeArabic(text) {
-            if (!text) return '';
-            text = text.replace(/[\u064B-\u065F\u0670]/g, '');
-            text = text.replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
-            return text;
+            return text.replace(/[\u064B-\u065F\u0670]/g, '').replace(/[أإآ]/g, 'ا').replace(/[ة]/g, 'ه').replace(/[ى]/g, 'ي').replace(/[ؤ]/g, 'و').replace(/[ئ]/g, 'ي');
         }
 
         function getSafeRegex(searchTerm) {
             let regexStr = '';
-            const cleanTerm = normalizeArabic(searchTerm);
-            for (let char of cleanTerm) {
+            for (let char of normalizeArabic(searchTerm)) {
                 if (char === 'ا') regexStr += '[اأإآ]';
                 else if (char === 'ه') regexStr += '[هة]';
                 else if (char === 'ي') regexStr += '[يىئ]';
@@ -531,81 +462,82 @@
             return new RegExp(regexStr, 'gi');
         }
 
+        function performInArticleSearch(query) {
+            const alertBox = document.getElementById('searchAlert');
+            const matchCountSpan = document.getElementById('matchCount');
+            if (!query) { articleBody.innerHTML = originalContent; alertBox.style.display = 'none'; return; }
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const tempDiv = document.createElement('div'); tempDiv.innerHTML = originalContent;
+            let matchCount = 0;
+            function highlightNodes(node) {
+                if (node.nodeType === 3) {
+                    if (regex.test(node.nodeValue)) {
+                        const span = document.createElement('span');
+                        span.innerHTML = node.nodeValue.replace(regex, `<span class="highlight-text">$1</span>`);
+                        const matches = node.nodeValue.match(regex); if(matches) matchCount += matches.length;
+                        node.parentNode.replaceChild(span, node);
+                    }
+                } else if (node.nodeType === 1 && !/(script|style)/i.test(node.tagName)) {
+                    Array.from(node.childNodes).forEach(highlightNodes);
+                }
+            }
+            highlightNodes(tempDiv);
+            if (matchCount > 0) { articleBody.innerHTML = tempDiv.innerHTML; matchCountSpan.textContent = matchCount; alertBox.style.display = 'block'; }
+            else { articleBody.innerHTML = originalContent; alertBox.style.display = 'none'; }
+        }
+
         async function performGlobalSearch(query) {
             const resultsContainer = document.getElementById('searchResults');
             if (!query || query.length < 2) { resultsContainer.style.display = 'none'; return; }
-            resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
-            resultsContainer.style.display = 'block';
             const data = await loadAllPagesContent();
             const searchRegex = getSafeRegex(query);
-            const results = data.filter(item => searchRegex.test(item.page) || searchRegex.test(item.content));
-            
-            resultsContainer.innerHTML = '';
-            results.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'search-item';
-                div.innerHTML = `<h3>${item.page}</h3><p>${item.content.substring(0, 100)}...</p>`;
-                div.onclick = () => window.location.href = item.url;
-                resultsContainer.appendChild(div);
-            });
+            const results = data.filter(item => searchRegex.test(normalizeArabic(item.page)) || searchRegex.test(normalizeArabic(item.content)));
+            resultsContainer.innerHTML = results.map(item => `<div class="search-item" onclick="location.href='${item.url}'"><h3>${item.page}</h3><p>${item.content.substring(0, 100)}...</p></div>`).join('');
+            resultsContainer.style.display = 'block';
         }
 
-        /* ==================== Favorite Logic ==================== */
-        const PAGE_ID = 'article_nutuq_hawa'; // معرف فريد لهذه الصفحة
-        const PAGE_TITLE = 'وما ينطق عن الهوى.. الرسالة لا الهوى';
-
+        /* ==================== Favorite & UI ==================== */
+        const PAGE_ID = 'article_nutuq_hawa';
         function showToast(message) {
             const toast = document.getElementById('customToast');
             document.getElementById('toastMessage').textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000);
         }
-
         function toggleFavorite() {
-            const btn = document.getElementById('addToFavorites');
-            const icon = document.getElementById('favIcon');
             let favorites = JSON.parse(localStorage.getItem('user-favorites')) || [];
-            const index = favorites.findIndex(item => item.id === PAGE_ID);
-
+            const index = favorites.findIndex(f => f.id === PAGE_ID);
             if (index === -1) {
-                favorites.push({
-                    id: PAGE_ID,
-                    title: PAGE_TITLE,
-                    type: 'article',
-                    date: '19 يناير 2026',
-                    url: window.location.href
-                });
-                btn.classList.add('active');
-                icon.classList.replace('far', 'fas');
-                showToast("تمت الإضافة للمفضلة بنجاح");
+                favorites.push({ id: PAGE_ID, title: 'وما ينطق عن الهوى', url: window.location.href, date: new Date().toLocaleDateString('ar-EG') });
+                document.getElementById('addToFavorites').classList.add('active');
+                document.getElementById('favIcon').classList.replace('far', 'fas');
+                showToast("تمت الإضافة للمفضلة");
             } else {
                 favorites.splice(index, 1);
-                btn.classList.remove('active');
-                icon.classList.replace('fas', 'far');
+                document.getElementById('addToFavorites').classList.remove('active');
+                document.getElementById('favIcon').classList.replace('fas', 'far');
                 showToast("تمت الإزالة من المفضلة");
             }
             localStorage.setItem('user-favorites', JSON.stringify(favorites));
         }
-
-        /* ==================== Utility ==================== */
-        function toggleMobileMenu() {
-            document.querySelector('.nav-links').classList.toggle('show');
-            document.querySelector('.nav-overlay').style.display = 
-                document.querySelector('.nav-links').classList.contains('show') ? 'block' : 'none';
-        }
-
+        function toggleMobileMenu() { document.querySelector('.nav-links').classList.toggle('show'); document.querySelector('.nav-overlay').style.display = document.querySelector('.nav-links').classList.contains('show') ? 'block' : 'none'; }
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const favorites = JSON.parse(localStorage.getItem('user-favorites')) || [];
-            if (favorites.some(item => item.id === PAGE_ID)) {
+            if ((JSON.parse(localStorage.getItem('user-favorites')) || []).some(f => f.id === PAGE_ID)) {
                 document.getElementById('addToFavorites').classList.add('active');
                 document.getElementById('favIcon').classList.replace('far', 'fas');
             }
-
             document.getElementById('globalSearch').addEventListener('input', (e) => {
-                performGlobalSearch(e.target.value.trim());
+                const query = e.target.value.trim();
+                performInArticleSearch(query);
+                performGlobalSearch(query);
             });
+        });
+
+        window.addEventListener('scroll', () => {
+            const btn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) btn.classList.add('visible');
+            else btn.classList.remove('visible');
         });
     </script>
 </body>
