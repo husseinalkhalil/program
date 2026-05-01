@@ -663,26 +663,37 @@
         if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
     }
 
+    // ==================== الدالة المعدلة لحفظ المفضلة ====================
     function toggleFavorite(e, id) {
         e.stopPropagation();
-        const cardId = 'offense_novel_' + id;
+        // استخدام نفس نظام المعرفات المتوقع في صفحة favorites
+        const cardId = 'hadith_' + id;
         let favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
         const idx = favs.findIndex(f => f.id === cardId);
         if (idx > -1) {
             favs.splice(idx, 1);
         } else {
             const novel = novelsData.find(n => n.id == id);
-            favs.push({ id: cardId, title: novel.title, type: 'رواية مسيئة', novelId: id, page: 'hadith_offense' });
+            favs.push({ 
+                id: cardId, 
+                title: novel.title, 
+                type: 'hadith',          // تغيير النوع ليتوافق مع فئة "الروايات" في صفحة المفضلة
+                novelId: id, 
+                page: 'hadith_covenants', // تم تغيير الصفحة لتمييز هذا القالب
+                source: novel.source,
+                text: novel.text.substring(0, 100) // إضافة نص مختصر للعرض في المفضلة
+            });
         }
         localStorage.setItem('myFavorites', JSON.stringify(favs));
         syncFavIcons();
     }
+    // ====================================================================
 
     function syncFavIcons() {
         const favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
         document.querySelectorAll('.fav-header-icon').forEach(icon => {
             const id = icon.getAttribute('data-id');
-            const isFav = favs.some(f => f.id === `offense_novel_${id}`);
+            const isFav = favs.some(f => f.id === `hadith_${id}`);
             icon.classList.toggle('fas', isFav);
             icon.classList.toggle('far', !isFav);
             icon.style.color = isFav ? "var(--accent-gold)" : "var(--text-secondary)";
