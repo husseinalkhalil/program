@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>الروايات - تقارب الروايات مع العهود السابقة.</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+    
+    <!-- Favicon -->
+    <link href="../images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="../images/logo-small.png" rel="apple-touch-icon"/>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==================== Shared Styles (Unified Identity) ==================== */
+        :root {
+            --primary-color: #5c4a24; 
+            --accent-gold: #d4af37; 
+            --bg-color: #f9f7f2; 
+            --ticker-footer-bg: #f1e4c0; 
+            --surface-color: #ffffff; 
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            
+            --shadow-sm: 0 4px 15px rgba(212, 175, 55, 0.1);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --nav-height: 75px;
+            --gradient-header: linear-gradient(135deg, #fdfcf8 0%, #f1e4c0 100%);
+            --dynamic-content-size: 1.15rem;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+            width: 100%;
+            animation: fadeInPage 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.no-scroll { overflow: hidden !important; height: 100vh; position: fixed; width: 100%; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* ==================== Navigation ==================== */
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+            z-index: 998; display: none;
+        }
+
+        nav {
+            background: var(--ticker-footer-bg); 
+            padding: 0 5%;
+            position: fixed;
+            width: 100%; top: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            height: var(--nav-height);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .logo-container { order: 1; }
+        .logo-container img { height: 45px; width: auto; transition: transform 0.4s ease; }
+
+        .nav-links {
+            display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2;
+        }
+
+        .nav-links a {
+            color: var(--primary-color); font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap;
+            display: flex; align-items: center; gap: 5px; transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.3); color: var(--accent-gold); transform: translateY(-2px); }
+
+        .hamburger { display: none; color: var(--primary-color); font-size: 1.5rem; cursor: pointer; order: 3; }
+
+        @media (max-width: 1200px) {
+            .hamburger { display: block; order: 1; }
+            .logo-container { order: 2; }
+            .nav-links {
+                position: fixed; top: var(--nav-height); right: -280px; width: 280px;
+                background: white; flex-direction: column; padding: 20px; height: calc(100vh - var(--nav-height));
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
+                gap: 10px; margin: 0; flex: unset; z-index: 1001; display: flex !important;
+            }
+            .nav-links.show { right: 0; }
+            .nav-links a { 
+                color: var(--text-primary); width: 100%; padding: 12px; 
+                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
+                border-bottom: 1px solid rgba(0,0,0,0.03);
+            }
+            .nav-links a:hover { background: rgba(212,175,55,0.1); color: var(--accent-gold); transform: none; }
+        }
+
+        /* ==================== Header & Search ==================== */
+        .unified-header {
+            background: var(--gradient-header);
+            padding: calc(var(--nav-height) + 40px) 20px 60px;
+            text-align: center; color: var(--primary-color);
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 30px; width: 100%;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .page-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
+        .page-subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; margin: 0 auto; padding: 0 20px; }
+
+        .universal-search { width: 100%; max-width: 600px; margin: 35px auto 0; position: relative; z-index: 900; }
+        #globalSearch { 
+            width: 100%; padding: 18px 25px; border-radius: 50px; border: 2px solid var(--accent-gold);
+            font-size: 1rem; box-shadow: var(--shadow-sm); outline: none; text-align: right;
+            font-family: 'Tajawal', sans-serif; background: white;
+            transition: all 0.3s;
+        }
+        #globalSearch:focus { border-color: var(--primary-color); box-shadow: var(--shadow-md); }
+        .search-results {
+            position: absolute; top: 110%; left: 0; right: 0; 
+            background: white; border-radius: 15px; max-height: 400px; 
+            overflow-y: auto; display: none; z-index: 901; color: var(--text-primary); 
+            text-align: right; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05);
+        }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
+        .search-item:hover { background: rgba(212,175,55,0.1); }
+        .search-count { padding: 12px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(212, 175, 55, 0.1); background: #f8fafc; font-weight: 700; }
+        mark { background-color: var(--accent-gold); color: var(--primary-color); padding: 0 2px; border-radius: 4px; font-weight: 600; }
+
+        /* ==================== Hadith Card Styling ==================== */
+        .container { max-width: 1150px; margin: 0 auto; padding: 0 20px 60px; width: 100%; }
+        .hadith-row { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px; width: 100%; transition: all 0.3s ease; }
+        
+        /* الدائرة والمربع باللون البيج والذهبي */
+        .hadith-number-circle { 
+            width: 46px; height: 46px; 
+            background-color: #fdfcf8; 
+            border: 2.5px solid var(--accent-gold); 
+            color: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-weight: 800; font-size: 1.3rem; flex-shrink: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.05); 
+            margin-top: 15px; z-index: 5;
+        }
+        
+        .hadith-card { 
+            background: var(--surface-color); border-radius: var(--radius-xl); 
+            box-shadow: var(--shadow-sm); border-right: 6px solid var(--accent-gold); 
+            overflow: hidden; transition: 0.3s; flex: 1; border: 1px solid rgba(0,0,0,0.05);
+            position: relative; 
+        }
+        
+        .hadith-summary { padding: 25px 25px 25px 45px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+        .hadith-summary h3 { font-size: 1.3rem; color: var(--primary-color); font-weight: 800; flex: 1; text-align: right; transition: all 0.3s ease; }
+        .hadith-summary:hover h3 { color: var(--accent-gold); transform: translateX(-5px); }
+        
+        .source-tag { 
+            background: #fdfcf8; 
+            padding: 5px 12px; border-radius: 8px; font-size: 0.85rem; 
+            font-weight: 800; color: var(--primary-color); 
+            border: 1px solid var(--accent-gold);
+        }
+        
+        .fav-header-icon { 
+            font-size: 1.6rem; color: var(--text-secondary); transition: all 0.3s ease; cursor: pointer; 
+            position: absolute; top: 0; left: 0; padding: 10px 15px; z-index: 10;
+        }
+        .fav-header-icon:hover { transform: scale(1.15); color: var(--accent-gold); }
+        .fav-header-icon.active { color: var(--accent-gold); }
+
+        .hadith-details { 
+            max-height: 0; opacity: 0; overflow: hidden; 
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out; 
+            background: #fefcf7; 
+        }
+        .hadith-details.open { max-height: 10000px; opacity: 1; padding: 10px 30px 50px; border-top: 1px solid rgba(0,0,0,0.05); }
+
+        .detail-section { margin-top: 25px; background: transparent; border: none; }
+        .section-header { 
+            padding-bottom: 8px; margin-bottom: 10px; font-weight: 800; font-size: 1.1rem; 
+            display: flex; align-items: center; gap: 10px; color: var(--primary-color);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .section-content { padding: 5px 0 10px; line-height: 1.9; font-size: var(--dynamic-content-size); color: var(--text-primary); }
+
+        .hadith-actions { display: flex; align-items: center; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(0,0,0,0.08); }
+        .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; text-decoration: none !important; }
+        .btn-source { background: rgba(92, 74, 36, 0.1); color: var(--primary-color); border: 1px solid rgba(92, 74, 36, 0.2); }
+        .btn-source:hover { background: var(--primary-color); color: white; }
+        .btn-report { background: rgba(225, 29, 72, 0.08); color: #e11d48; border: 1px solid rgba(225, 29, 72, 0.1); }
+        .btn-report:hover { background: #e11d48; color: white; }
+
+        /* ==================== Font Controls & Back to top ==================== */
+        .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
+        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid var(--accent-gold); color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: var(--shadow-sm); transition: 0.3s; }
+        .font-btn:hover { background: var(--accent-gold); color: white; transform: scale(1.1); }
+
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            background-color: var(--primary-color); border: 2px solid var(--accent-gold);
+            color: var(--accent-gold); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 1.2rem;
+            cursor: pointer; z-index: 1001; transition: all 0.4s ease;
+            opacity: 0; visibility: hidden; box-shadow: var(--shadow-md);
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover { transform: translateY(-5px) scale(1.05); background-color: var(--accent-gold); color: var(--primary-color); }
+
+        /* ==================== Pagination ==================== */
+        #pagination-wrapper { background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); text-align: center; margin: 40px auto; border: 1px solid rgba(0,0,0,0.05); max-width: 500px; }
+        .pagination-btn { background: #fdfcf8; color: var(--primary-color); border: 1px solid var(--accent-gold); padding: 10px 20px; border-radius: 12px; cursor: pointer; margin: 0 5px; font-family: 'Tajawal'; font-weight: 600; transition: 0.3s; }
+        .pagination-btn:hover:not(:disabled) { background: var(--accent-gold); color: white; transform: translateY(-2px); }
+        .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: #e2e8f0; color: #94a3b8; border-color: #cbd5e1; }
+        .pagination-info-container { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 15px; font-weight: 700; color: var(--text-primary); }
+        .total-count-badge { background: var(--primary-color); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem; }
+
+        /* ==================== Footer ==================== */
+        footer { background: var(--ticker-footer-bg); color: var(--primary-color); padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; border-top: 3px solid var(--accent-gold); }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
+        .footer-links a { color: var(--primary-color); font-weight: 700; opacity: 0.8; font-size: 0.95rem; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent-gold); opacity: 1; }
+        .footer-divider { color: var(--text-secondary); font-size: 0.8rem; user-select: none; margin: 0 5px;} 
+        .copyright { color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid rgba(92, 74, 36, 0.1); padding-top: 25px; margin-top: 25px; font-weight: 600; }
+
+        /* Social Links */
+        .social-links {
+            display: flex; justify-content: center; gap: 15px; margin: 30px 0 20px;
+        }
+        .social-links a {
+            width: 55px; height: 55px; border-radius: 50%; 
+            background: var(--ticker-footer-bg);
+            display: flex; align-items: center; justify-content: center; 
+            color: var(--primary-color); transition: 0.3s; font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .social-links a:hover { background: var(--accent-gold); color: white; transform: translateY(-8px) scale(1.1); }
+
+        /* ==================== Report Modal & Toast ==================== */
+        .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+        .report-modal.show { display: flex; }
+        .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; box-shadow: var(--shadow-lg); animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .report-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 12px; cursor: pointer; }
+        .btn-send { flex: 2; background: var(--primary-color); color: white; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; font-weight: 700; cursor: pointer; }
+        .btn-cancel { flex: 1; background: #f1f5f9; color: #475569; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; cursor: pointer; }
+        .success-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: white; padding: 14px 35px; border-radius: 50px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 3000; transition: 0.5s; opacity: 0; display: flex; align-items: center; gap: 12px; }
+        .success-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* ==================== Mobile Design ==================== */
+        @media (max-width: 768px) {
+            .hadith-summary h3 { font-size: 1.05rem !important; }
+            .unified-header { padding: calc(var(--nav-height) + 20px) 15px 40px; border-radius: 0 0 35px 35px; }
+            .page-title { font-size: 1.7rem; }
+            .hadith-row { flex-direction: row; align-items: flex-start; gap: 10px; }
+            .hadith-row.is-open { flex-direction: column; }
+            .hadith-row.is-open .hadith-number-circle { margin-top: 0; margin-bottom: 5px; align-self: flex-start; }
+            .hadith-number-circle { width: 38px; height: 38px; font-size: 1rem; margin-top: 25px; }
+            .hadith-card { width: 100%; }
+            .hadith-details.open { padding: 15px 15px 40px; }
+            .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
+            .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-overlay" id="navOverlay" onclick="toggleMobileMenu()"></div>
+
+<nav>
+    <div class="logo-container"><a href="../index.html"><img src="../images/logo.png" alt="logo" /></a></div>
+    <div class="nav-links" id="navLinks">
+        <a href="../index.html">الرئيسية</a>
+        <a href="../books.html">الكتب</a>
+        <a href="../articles.html">المقالات</a>
+        <a href="../hadith.html" class="active" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">الروايات</a>
+        <a href="../khawatir.html">خواطر</a>
+        <a href="../videos.html">الفيديوهات</a>
+        <a href="../history.html">التاريخ</a>
+        <a href="../podcast.html">البودكاست</a>
+        <a href="../ask.html">الأسئلة</a>
+        <a href="../hewar.html">حوارات</a>
+        <a href="../inq.html">تساؤلات</a>
+        <a href="../manhaj.html">المنهج</a>
+        <a href="../favorites.html">المفضلة</a>
+        <a href="../support.html">دعم المحتوى</a>
+        <a href="../about.html">من نحن</a>
+    </div>
+    <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+</nav>
+
+<div class="font-controls-fixed">
+    <button class="font-btn" id="fontIncrease" title="تكبير"><i class="fas fa-plus"></i></button>
+    <button class="font-btn" id="fontReset" title="إعادة"><i class="fas fa-redo"></i></button>
+    <button class="font-btn" id="fontDecrease" title="تصغير"><i class="fas fa-minus"></i></button>
+</div>
+
+<button class="back-to-top" id="backToTop" title="العودة للأعلى"><i class="fas fa-chevron-up"></i></button>
+
+<header class="unified-header">
+    <h1 class="page-title">❖ تقارب الروايات مع العهود السابقة</h1>
+    <p class="page-subtitle">دراسة تحليلية لمدى تطابق بعض الروايات مع نصوص التوراة والتلمود والمدراش والموروث الزرادشتي، وكشف الجذور التاريخية للإسرائيليات</p>
+    <div class="universal-search">
+        <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+        <div class="search-results" id="searchResults"></div>
+    </div>
+</header>
+
+<div class="container">
+    <div id="hadithContainer"></div>
+
+    <div id="pagination-wrapper">
+        <div class="pagination-info-container">
+            <span id="pageInfo">الصفحة 1 من 1</span>
+            <span class="total-count-badge" id="totalHadithCount">عدد الروايات: 0</span>
+        </div>
+        <div style="margin-top: 15px;">
+            <button id="firstPage" class="pagination-btn">الأولى</button>
+            <button id="prevPage" class="pagination-btn">السابق</button>
+            <button id="nextPage" class="pagination-btn">التالي</button>
+        </div>
+    </div>
+
+    <!-- قسم تابعنا -->
+    <div class="social-links" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.05);">
+        <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" title="انستغرام"><i class="fab fa-instagram"></i></a>
+        <a href="https://youtube.com/@husseinalkhalil" target="_blank" title="يوتيوب"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" title="تيك توك"><i class="fab fa-tiktok"></i></a>
+        <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" title="سناب شات"><i class="fab fa-snapchat-ghost"></i></a>
+        <a href="https://t.me/tanoeer" target="_blank" title="تيليجرام"><i class="fab fa-telegram"></i></a>
+    </div>
+</div>
+
+<div class="report-modal" id="reportModal">
+    <div class="modal-box">
+        <h2>إبلاغ عن محتوى</h2>
+        <p id="modalHadithInfo" style="color: var(--text-secondary); margin-bottom: 15px;">أنت تبلغ عن: جاري التحديد...</p>
+        <form name="hadith-reports" id="reportForm" method="POST" data-netlify="true">
+            <input type="hidden" name="hadith_name" id="hiddenHadithName">
+            <input type="hidden" name="hadith_number" id="hiddenHadithNumber">
+            <label class="report-option"><input type="radio" name="issue_type" value="الرابط لا يعمل" required> <span>الرابط لا يعمل</span></label>
+            <label class="report-option"><input type="radio" name="issue_type" value="الحديث غير مطابق"> <span>الحديث غير مطابق</span></label>
+            <label class="report-option"><input type="radio" name="issue_type" value="رقم الحديث غير مطابق"> <span>رقم الحديث غير مطابق</span></label>
+            <div class="modal-footer" style="display:flex; gap:10px; margin-top:20px;">
+                <button type="submit" class="btn-send">إرسال البلاغ</button>
+                <button type="button" class="btn-cancel" onclick="closeReportModal()">إلغاء</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="success-toast" id="successToast"><i class="fas fa-check-circle"></i> <span>شكراً لمساهمتك</span></div>
+
+<footer>
+    <div class="footer-links">
+        <a href="../terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
+        <a href="../privacy.html">سياسة الخصوصية</a> <span class="footer-divider">|</span>
+        <a href="../contact.html">اتصل بنا</a> <span class="footer-divider">|</span>
+        <a href="../feedback.html">شاركنا رأيك</a>
+    </div>
+    <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
+</footer>
+
+<script>
+    // ==================== البيانات الجديدة - تقارب الروايات مع العهود السابقة ====================
+    const novelsData = [
+        { 
+            id: 1, 
+            title: "خلق المرأة من ضلع", 
+            source: "البخاري", 
+            sourceUrl: "https://dorar.net/h/6lg4eJzj", 
+            text: "استَوصوا بالنِّساءِ؛ فإنَّ المَرأةَ خُلِقَت مِن ضِلَعٍ، وإنَّ أعوجَ شَيءٍ في الضِّلَعِ أعلاه، فإن ذَهَبتَ تُقيمُه كَسَرتَه، وإن تَرَكتَه لم يَزَلْ أعوجَ؛ فاستَوصوا بالنِّساءِ.",
+            num: "3331", 
+            comparison: `<strong>التطابق النصي مع العهد القديم (التوراة):</strong><br>
+            يكتشف القارئ الفاحص أن هذا النص هو صدى مباشر لما ورد في "سِفر التكوين" (أول أسفار التوراة). جاء في الإصحاح الثاني (الآيتان 21-22): (فأوقع الربُّ الإلهُ سُباتاً على آدم فنام، فأخذ واحدةً من أضلاعه وملأ مكانها لحماً. وبنى الربُّ الإلهُ الضلعَ التي أخذها من آدم امرأةً وأحضرها إلى آدم). إن الفكرة المركزية بأن المرأة "جزء مقتطع" من الرجل، وأنها مدينة له بوجودها المادي، هي فكرة توراتية بامتياز تسربت عبر "الإسرائيليات" لتنسب لاحقاً للنبي ﷺ بصياغة عربية زادت عليها وصف "الاعوجاج" لترسيخ دونية المرأة.<br><br>
+            <strong>تطهير العقيدة من الدخيل:</strong><br>
+            إن كشف هذا التقارب النصي بين "صحيح البخاري" و"سفر التكوين" هو الخطوة الأولى لتطهير الفكر الإسلامي من الموروثات الدخيلة. فالله الذي كرّم بني آدم لم يخلق حواء من ضلع آدم، والقرآن كافٍ لتوضيح أصل الوجود دون الحاجة لاستعارة أساطير الأقدمين التي جعلت من جسد المرأة لغزاً أو عيباً طبيعياً.<br><br>
+            <strong>المفارقة العلمية:</strong><br>
+            يثبت العلم الحديث أن عدد أضلاع الرجل والمرأة متساوٍ، مما ينسف الأساس "الحسي" الذي قامت عليه الأسطورة، ويؤكد أنها مجرد حكاية رمزية في العهود القديمة أُقحمت في كتب الحديث كحقيقة بيولوجية وتشرعية.`
+        },
+        { 
+            id: 2, 
+            title: "طول آدم وتناقص الخلق", 
+            source: "البخاري", 
+            sourceUrl: "https://dorar.net/h/eHyVa3Hp", 
+            text: "خَلَقَ اللهُ آدَمَ وطولُه سِتُّونَ ذِراعًا، ... ، فلَم يَزَلِ الخَلقُ يَنقُصُ حتَّى الآنَ.",
+            num: "3326", 
+            comparison: `<strong>الجذور في العهد القديم (سِفر التكوين وسِفر العَدَد):</strong><br>
+            على الرغم من أن التوراة لم تذكر رقم "الستين ذراعاً" تحديداً لطول آدم، إلّا أنها هي من أسست لثقافة "العمالقة الجبابرة" الذين سكنوا الأرض قديماً. فنجد في سِفر التكوين (6: 4): (كَانَ فِي الأَرْضِ طُغَاةٌ [جَبَابِرَة] فِي تِلْكَ الأَيَّامِ... هؤُلاَءِ هُمُ الْجَبَابِرَةُ الَّذِينَ مُنْذُ الدَّهْرِ). وفي سِفر العَدَد (13: 33) وصفٌ لهؤلاء العمالقة (بني عناق) لدرجة أن البشر العاديين كانوا في أعينهم كـ "الجَراد".<br><br>
+            <strong>التطابق مع "التلمود" والتقاليد اليهودية:</strong><br>
+            تجد فكرة "طول آدم الخرافي" صدىً أوضح في التلمود (كتاب حجيجا 12أ - Hagigah 12a)؛ حيث تزعم الأساطير اليهودية أن آدم كان طوله يمتد "من الأرض إلى السماء"، وعندما أخطأ وضع الله يده عليه "فقزّمه". إن فكرة "التناقص المستمر" في القامة الجسدية (فلم يزل الخلق ينقص) هي فكرة يهودية مَحضة تهدف لتصوير البشرية في حالة انحدار جسدي وقِيَمي دائم، وهو ما استوعبه البخاري ونسبه للنبي ﷺ.<br><br>
+            <strong>المصادمة مع العلم والآثار:</strong><br>
+            أثبت علم "الأنثروبولوجيا" وعلم الحفريات أن أطوال البشر الأوائل لم تكن تختلف جذرياً عن أطوالنا الحالية، ولم يعثر العلماء طوال تاريخ التنقيب على هيكل عظمي بشري واحد يصل طوله لـ 30 متراً (60 ذراعاً). إن التمسك بهذه الرواية هو تمسك بـ "خيال ميثولوجي" يصادم الواقع المادي والحقائق الأثرية.<br><br>
+            <strong>غياب السند القرآني:</strong><br>
+            القرآن الكريم ذكر قوة الأقوام السابقة كقوم عاد {وَزَادَكُمْ فِي الْخَلْقِ بَسْطَةً}، لكنه لم يذهب أبداً لتلك الأرقام الفلكية التي تخرج بالبشر عن بشريتهم وتحولهم إلى كائنات أسطورية. القرآن يتسم بالواقعية والجلال، بينما تميل الإسرائيليات في الروايات إلى المبالغة العددية التي تثير العجب أكثر من الإيمان.<br><br>
+            <strong>تطهير العقيدة:</strong><br>
+            إن كشف "المنبع التلمودي" لهذه الرواية يحمي مقام النبوة من نِسبة معلومات جغرافية وطبية خاطئة إليه. الإسلام دين العقل والواقع، وتنزيه مروياته من ملحقات العهود السابقة هو ضرورة لاستعادة رصانة الفكر الإسلامي وربطه باليقين القرآني الذي نزه الأنبياء عن المبالغات.`
+        },
+        { 
+            id: 3, 
+            title: "عراك موسى ومَلَك الموت", 
+            source: "البخاري", 
+            sourceUrl: "https://dorar.net/h/qVBjZIBF", 
+            text: "أُرسِلَ مَلَكُ المَوتِ إلى موسى عليهما السَّلامُ، فلَمَّا جاءَه صَكَّه، فرَجَعَ إلى رَبِّه فقال: أرسَلتَني إلى عَبدٍ لا يُريدُ المَوتَ، فرَدَّ اللهُ عليه عَينَه وقال: ارجِعْ، فقُلْ له: يَضَعُ يَدَه على مَتنِ ثَورٍ فلَه بكُلِّ ما غَطَّت به يَدُه بكُلِّ شَعرةٍ سَنةٌ، قال: أي رَبِّ، ثُمَّ ماذا؟ قال: ثُمَّ المَوتُ، قال: فالآنَ، فسَألَ اللهَ أن يُدنيَه مِنَ الأرضِ المُقدَّسةِ رَميةً بحَجَرٍ، قال: قال رَسولُ اللهِ صلَّى اللهُ عليه وسلَّم: فلو كُنتُ ثَمَّ لَأرَيتُكُم قَبرَه، إلى جانِبِ الطَّريقِ، عِندَ الكَثيبِ الأحمَرِ.",
+            num: "1339", 
+            comparison: `<strong>الجذور في التراث اليهودي (الميدراش):</strong><br>
+            إن تتبع "الجغرافيا المعرفية" لهذا النص يكشف بوضوح أننا لسنا أمام وحي إسلامي، بل أمام "حكاية تلمودية" نُقلت بحذافيرها من تراث بني إسرائيل. لا نجد تفاصيل هذا العراك البدني في أسفار العهد القديم الخمسة، لكننا نجدها بدقة مذهلة في (الميدراش) وتحديداً في قصة "وفاة موسى" (Midrash Petirat Mosheh). تذكر الأساطير اليهودية أن موسى رفض الاستسلام لمَلَك الموت (سمايل)، ودار بينهما صراع عنيف انتهى بانتصار موسى وهروب المَلَك من أمامه. إن فكرة "المقاومة الجسدية" للموت هي فكرة متجذرة في الوجدان الإسرائيلي الذي يميل لتمجيد قوميته حتى في مواجهة كائنات السماء.<br><br>
+            <strong>التناقض مع الهيبة الملائكية في القرآن:</strong><br>
+            يُصور القرآن الكريم ملائكة الموت ككائنات قاهرة ومنضبطة تنفذ الأمر الإلهي بلا تردّد أو عجز: {حَتَّىٰ إِذَا جَاءَ أَحَدَكُمُ الْمَوْتُ تَوَفَّتْهُ رُسُلُنَا وَهُمْ لَا يُفَرِّطُونَ} [الأنعام: 61]. فكيف نصدق رواية تَنفي صفة "عَدَمِ التفريط" عن مَلَك الموت وتُصوّرُه بمظهر المَضروب العاجز الذي يفرُّ بعين مفقوءة؟ وهل يُعقل أن تنطبق قوانين الفيزياء الأرضية (الضرب والفقء) على كائنات نورانية غيبية؟ إن هذا "التجسيم" لملائكة الله هو خروج كامل عن جلال التصور القرآني لعالم الغيب.<br><br>
+            <strong>الإساءة لجوهر النبوة ومقام الأنبياء:</strong><br>
+            تُصوّر الرواية النبي موسى بمظهر مَن يكره لقاء الله ويتمرد على قدره المحتوم، بل وتُظهره بمظهر "العنيف" الذي يواجه رسل السماء بالضرب. والمفارقة تشتد في ذيل الرواية، حين يُساومه الخالق —عز وجل— على عدد سنوات حياته بوضع يده على ظهر ثور، وهو أسلوب في التفكير يربط مصائر الأنبياء بـ "عدد شَعر البهائم"، مما يمجُّه العقل السليم ويترفع عنه جلال الربوبية.<br><br>
+            <strong>تسلل الثقافة الشعبية للمقدس:</strong><br>
+            يثبت هذا النص أن الرواة (الذين تأثروا بمرويات كعب الأحبار ووهب بن منبه) قد نقلوا الموروث القصصي الشفهي لليهود ودمجوه في "الحديث النبوي". وبدلاً من أن يكون الحديث شارحاً للقرآن، أصبح ناقلاً لأساطير الأمم السابقة التي حذر القرآن من اتباعها ووصفها بأنها تحريف للكلم عن مواضعه.`
+        },
+        { 
+            id: 4, 
+            title: "الصراط أدق من الشعرة وأحدّ من السيف", 
+            source: "مسلم", 
+            sourceUrl: "https://dorar.net/h/KOAVhCFo", 
+            text: "قال أبو سعيدٍ: بَلَغَني أنَّ الجِسرَ (الصراط المستقيم) أدَقُّ مِنَ الشَّعرةِ، وأحَدُّ مِنَ السَّيفِ.",
+            num: "183", 
+            comparison: `<strong>التطابق الحرفي مع الزرادشتية:</strong><br>
+            تتطابق هذه الرواية بحذافيرها مع مفهوم "جسر تشينفات" (Chinvat Bridge) في الديانة الزرادشتية (الموجود في كتاب "الأوستا" المقدس لديهم قبل الإسلام بآلاف السنين). يصف الزرادشتيون هذا الجسر بأنه يربط بين عالم الأحياء وعالم الأموات فوق الجحيم، وأنه يصبح "عريضاً كالمسار" للصالحين، ولكنه ينقلب "أحدَّ من شفرة الحلاق" وأدق من الشعرة تحت أقدام الأثمة ليسقطوا في النار.<br><br>
+            <strong>انتقال التصور المادي للغيب:</strong><br>
+            القرآن الكريم وصف الصراط بـ "المستقيم" {اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ}، وهو منهج حياة وأخلاق وعمل في الدنيا. أما تحويله في الرواية إلى "خيط مادي حاد" فوق جهنم، فهو اقتباس صريح من "الأساطير الفارسية" التي جعلت العبور للجنة امتحاناً في "التوازن الجسدي" لا في "التقوى الأخلاقية".<br><br>
+            <strong>الاستحالة المنطقية:</strong><br>
+            العلم والمنطق يقرران أن ما هو "أدق من الشعرة" لا يمكن الوقوف عليه فيزيائياً، وما هو "أحد من السيف" يقطع الأجسام. هذا التصوير الترهيبي يهدف لصناعة "فوبيا" غيبية تبتعد عن العدالة الإلهية التي تربط النجاة بنور العمل: {يَسْعَىٰ نُورُهُم بَيْنَ أَيْدِيهِمْ}.`
+        },
+        { 
+            id: 5, 
+            title: "المعراج والتطابق مع الزرادشتية", 
+            source: "البخاري", 
+            sourceUrl: "https://dorar.net/h/m9qaUldL", 
+            text: "روايات طويلة في البخاري ومسلم وتفاسير (في وصف رحلة المعراج).",
+            num: "3887", 
+            comparison: `<strong>التطابق الزرادشتي:</strong><br>
+            توجد صلة مذهلة بين تفاصيل روايات المعراج وبين كتاب زرادشتي شهير يسمى "أردا ويراف ناماغ" (Arda Viraf Namag)، كُتب قبل الإسلام بقرون. يحكي الكتاب قصة الكاهن "ويراف" الذي صعد إلى السماء، ورأى طبقات الجنة السبع، وشاهد أنواع العقوبات في "البرزخ" والجحيم (مثل من يُعذبون لقطعهم الأشجار، أو الزناة، أو من لم يلبسوا الحجاب). التفاصيل في "أردا ويراف" تتطابق مع تفاصيل "المعراج" الروائي بشكل يثير التساؤل حول تأثر الرواة بالثقافة الفارسية أثناء تدوين الحديث في العصر العباسي.<br><br>
+            <strong>صناعة "الخوف" بدلاً من "الهداية":</strong><br>
+            اعتمدت الديانات القديمة على ترهيب الناس بوصف مادي دقيق للجحيم للسيطرة عليهم، وتسلل هذا المنهج للروايات الإسلامية ليعوض غياب "الإقناع العقلي" بـ "الترهيب الأسطوري".`
+            // أضف هذه الروايات بعد الرقم 5 مباشرة في مصفوفة novelsData
+
+      },
+      { 
+        id: 6, 
+        title: "مُنكر ونكير", 
+        source: "صحيح الجامع", 
+        sourceUrl: "https://dorar.net/h/hfriLCnn", 
+        text: "إذا قُبِرَ المَيِّتُ أَتَاهُ مَلكَانِ أسودَانِ أَزْرَقَانِ يقالُ لأَحَدِهما المُنْكَرُ ، ولِلآخَرِ النَّكِيرُ.",
+        num: "724", 
+        comparison: `<strong>التشابه مع الزرادشتية والمانوية:</strong><br>
+        فكرة "محاكمة الروح فور الموت" من قبل كائنين غيبيين هي فكرة زرادشتية أصيلة. في الزرادشتية، يوجد المَلَكان "سراوشا" (Sraosha) و"راشنو" (Rashnu) اللذان يستقبلان الروح عند الجسر ويحاسبانها على أعمالها. كما توجد في الأساطير المصرية القديمة محاكمة الميت أمام "أنوبيس".<br><br>
+        <strong>تسمية الملائكة بأسماء منفرة:</strong><br>
+        يُطلق القرآن على الملائكة أسماءً توحي بالجمال والمهمة (جبريل، ميكال) أو الصفة (الرقيب، العتيد). أما تسمية ملائكة الله بـ "مُنكر ونكير" (وهي مشتقة من الإنكار والاستنكار) ووصفهما بـ "أزرقان وأسودان"، فهو وصف "شيطاني" يهدف لتخويف الميت، ويتناقض مع وقار الملائكة في القرآن الذين {يُبَشِّرُونَ} المؤمنين عند الموت.<br><br>
+        <strong>تأجيل الحساب لليوم الآخر:</strong><br>
+        القرآن الكريم يحصر الحساب والوفاء بالأجور في "يوم القيامة": {إِنَّمَا تُوَفَّوْنَ أُجُورَكُمْ يَوْمَ الْقِيَامَةِ}. الروايات التي استعارت "المحاكمة الفورية" من الزرادشتية والفرعونية تحاول تقديم موعد الحساب لقبر مظلم، مما يصادم التوقيت القرآني للفصل بين العباد.`
+    },
+    { 
+        id: 7, 
+        title: "سجود الشمس: جذور في الميدراش وسفر أخنوخ", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/FiOYsXa7", 
+        text: "كُنتُ مع النَّبيِّ صلَّى اللهُ عليه وسلَّم في المَسجِدِ عِندَ غُروبِ الشَّمسِ، فقال: يا أبا ذَرٍّ، أتَدري أينَ تَغرُبُ الشَّمسُ؟ قُلتُ: اللهُ ورَسولُه أعلَمُ، قال: فإنَّها تَذهَبُ حتَّى تَسجُدَ تَحتَ العَرشِ، فذلك قَولُه تَعالى: {والشَّمسُ تَجري لمُستَقَرٍّ لَها ذلك تَقديرُ العَزيزِ العَليمِ}.",
+        num: "4802", 
+        comparison: `<strong>الجذور في الأدبيات التفسيرية اليهودية (الميدراش):</strong><br>
+        يجد هذا التصور الكوني أصله المباشر في "الميدراش"، وتحديداً في (ميدراش تيهيليم - Midrash Tehillim) في التعليق على المزمور 19. تصف النصوص اليهودية القديمة الشمس والقمر ككائنات واعية تدرك وجود الخالق وتؤدي طقوس العبادة والثناء أمام العرش الإلهي قبل أن يُؤذن لها بالطلوع مجدداً كل يوم.<br><br>
+        <strong>التطابق مع "سفر أخنوخ" (1 Enoch):</strong><br>
+        نجد في (سفر أخنوخ) -وهو من الكتب الأبوكريفية القديمة التي أثرت في المخيال الديني لأهل الكتاب- وصفاً تفصيلياً لحركة الأجرام عبر بوابات سماوية، حيث تُساق الشمس والقمر بأمرٍ إلهي مباشر ومتجدد. فكرة "الاستئذان اليومي" تعكس رؤية كونية قديمة تفترض أن العالم محكوم بـ "أوامر ميكانيكية لحظية" وليس بـ "سنن فيزيائية وقوانين ثابتة" أودعها الخالق في المادة.<br><br>
+        <strong>تسلل "الإسرائيليات" عبر الرواة:</strong><br>
+        إن انتقال هذه التفاصيل (السجود، الاستئذان، الإذن) بحذافيرها من الميدراش إلى "صحيح البخاري" يُثبت أن الرواة الذين كانت لهم صلات بوعي وثقافة أهل الكتاب (مثل كعب الأحبار أو وهب بن منبه) قد نقلوا هذه التصورات الأسطورية التي كانت شائعة في بيئتهم، ونحلوها للنبي لتكتسب صبغة "القداسة الإسلامية" والوحي الغيبي.<br><br>
+        <strong>تصادم "الرواية المقتبسة" مع "الفيزياء القرآنية":</strong><br>
+        يُؤسس القرآن الكريم لحركة الأجرام بصفتها "سباحة" دائبة ومنظمة {وَكُلٌّ فِي فَلَكٍ يَسْبَحُونَ}، وهو مصطلح يتوافق مع العلم الحديث في استمرارية الحركة المدارية. بينما الرواية المقتبسة من الأساطير تفرغ الكون من نظامه الفيزيائي وتحوله إلى مسرح لردات فعل يومية (توقف، سجود، استئذان)، وهو ما يتناقض مع قوله تعالى: {لَا الشَّمْسُ يَنبَغِي لَهَا أَن تُدْرِكَ الْقَمَرَ}.`
+    },
+    { 
+        id: 8, 
+        title: "كذبات إبراهيم: اقتباس من سفر التكوين", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/KK6UDb3Z", 
+        text: "لَم يَكذِب إبراهيمُ عليه السَّلامُ إلَّا ثَلاثَ كَذَباتٍ، ثِنتَينِ منهنَّ في ذاتِ اللهِ عزَّ وجلَّ؛ قَولُه: {إنِّي سَقيمٌ} [الصافات: 89]، وقَولُه: {بَل فعَلَه كَبيرُهم هذا} [الأنبياء: 63]. وقال: بينا هو ذاتَ يَومٍ وسارةُ، إذ أتى على جَبَّارٍ مِنَ الجَبابِرةِ، فقيلَ له: إنَّ هاهنا رَجُلًا معهُ امرَأةٌ مِن أحسَنِ النَّاسِ، فأرسَلَ إليه فسَألَه عَنها، فقال: مَن هذه؟ قال: أُختي، فأتى سارةَ قال: يا سارةُ، ليس على وجهِ الأرضِ مُؤمِنٌ غيري وغَيرُكِ، وإنَّ هذا سَألَني فأخبَرتُه أنَّكِ أُختي، فلا تُكَذِّبيني.",
+        num: "3358", 
+        comparison: `<strong>التطابق النصي مع العهد القديم (سِفر التكوين):</strong><br>
+        وردت هذه القصة في سِفر التكوين (الإصحاح 12، الأعداد 11-13)، حيث جاء فيه: (قَالَ لأَبْرَامَ لِسَارَايَ امْرَأَتِهِ: «إِنِّي قَدْ عَلِمْتُ أَنَّكِ امْرَأَةٌ حَسَنَةُ الْمَنْظَرِ.. فَيَقْتُلُونَنِي وَيَسْتَبْقُونَكِ. قُولِي إِنَّكِ أُخْتِي، لِيَكُونَ لِي خَيْرٌ بِسَبَبِكِ). إن التطابق بين الرواية المذكورة في البخاري وبين نص التوراة تطابق كلي في الجوهر؛ ففكرة "ادعاء الأخوّة" هرباً من القتل أو طمعاً في النجاة هي مِحور القصة في الموروث اليهودي.<br><br>
+        <strong>اختلاف المنظومة الأخلاقية للأنبياء:</strong><br>
+        عُرف عن كُتَّاب العهد القديم نسبتهم للأخطاء والخطايا الكبرى للأنبياء (كالزنا، والكذب، وشرب الخمر)، وهي ثقافة تهدف لـ "أنسنة" الأنبياء بشكل يجردهم من حمايتهم الأخلاقية. إن تسلل قصة "كذبات إبراهيم" إلى "صحيح البخاري" يُبين كيف استلب الرواة هذه الأخلاقيات المضطربة من الموروث اليهودي (الإسرائيليات)، وحولوا قصة توراتية تبرر الكذب إلى "حديث صحيح" يُنسب للنبي.<br><br>
+        <strong>التناقض مع "الصدّيقية" في القرآن:</strong><br>
+        يصف القرآن الكريم نبي الله إبراهيم بصفة مطلقة: {وَاذْكُرْ فِي الْكِتَابِ إِبْرَاهِيمَ ۚ إِنَّهُ كَانَ صِدِّيقًا نَّبِيًّا} [مريم: 41]. ولفظ "صِدِّيق" بصيغة المبالغة ينفي وقوع الكذب منه تماماً. الرواية تضرب في مقتل هذه التزكية الإلهية وتصف إبراهيم بأنه "كذب" (ولو بلفظ التورية)، مما يفتح باباً للتشكيك في مصداقية الأنبياء كقدوات أخلاقية.<br><br>
+        <strong>تزييف الدوافع (الخوف مقابل الثقة):</strong><br>
+        في رواية التوراة والبخاري، يظهر إبراهيم خائفاً على حياته لدرجة التضحية بـ "الحقيقة" (عبر ادعاء أن زوجته أخته)، وهذا يتناقض مع صورة إبراهيم في القرآن؛ ذلك الرجل الذي واجه النار وحده بقلب مطمئن {قُلْنَا يَا نَارُ كُونِي بَرْدًا وَسَلَامًا}. فكيف يخشى مَن لم تهزه النار من "ملك أو جبار" لدرجة اللجوء للكذب؟<br><br>
+        <strong>توجيه لغة الوحي:</strong><br>
+        القرآن حين ذكر قول إبراهيم {إِنِّي سَقِيمٌ} أو {بَلْ فَعَلَهُ كَبِيرُهُمْ}، ساقها في سياق "المناورة العقلية" والاحتجاج المنطقي لإقامة الحجة على المشركين (سقم الروح من أفعالهم، أو السخرية من عجز أصنامهم). أما الرواية فقد حولت هذه الأساليب البلاغية الرفيعة إلى "قائمة كذبات"، مما يُقزم ذكاء النبي وحكمته القرآنية ويجعلها في دائرة الأخلاق المذمومة.`
+    },
+    { 
+        id: 9, 
+        title: "خلق آدم على صورته: استنساخ لعقيدة التوراة", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/40DqixTV", 
+        text: "خَلَقَ اللهُ آدَمَ على صورَتِه.",
+        num: "6227", 
+        comparison: `<strong>التطابق الجوهري مع العهد القديم (التوراة):</strong><br>
+        تُعتبر هذه الفكرة هي الركيزة الأولى في "أنثروبولوجيا العقيدة اليهودية"؛ حيث وردت في أول إصحاح من أسفار التوراة. جاء في سِفر التكوين (الإصحاح 1، العدد 27) ما نصُّه: (فَخَلَقَ اللهُ الإِنْسَانَ عَلَى صُورَتِهِ. عَلَى صُورَةِ اللهِ خَلَقَهُ. ذَكَراً وَأُنْثَى خَلَقَهُمْ). إن التطابق اللفظي والمعنوي بين نص البخاري ونص سِفر التكوين يكاد يكون كاملاً، مما يثبت أن الرواية ليست وحياً جديداً بل هي "صوت صدى" للنص التوراتي القديم.<br><br>
+        <strong>أنسنة الخالق (Imago Dei):</strong><br>
+        يهدف مفهوم "صورة الإله" في التوراة إلى "أنسنة" الخالق بجعله يمتلك ملامح أو هيئة تُشبه هيئة البشر، وهو ما يُعرف بـ (Anthropomorphism-التشخيص). تسلل هذا التصور المادي من بيئة أهل الكتاب إلى مدونات الحديث ليُحول "الغيب المطلق" إلى "كائن مادي" له صورة وشكل يُقاس عليه خلق آدم، مما يضرب في مقتل مفهوم "التنزيه" الذي قامت عليه العقيدة الإسلامية.<br><br>
+        <strong>تهافت محاولات "التأويل" (صراع الهاء):</strong><br>
+        لجأ شُرّاح الحديث لمحاولة الالتفاف على الإساءة بالادعاء أن الهاء في "صورته" تعود على آدم (أي أن الله خلق آدم على هيئته التي هو عليها منذ البداية ولم يتطور). بيد أن هذا التأويل يتهافت أمام التاريخ واللغة؛ فالرواة الذين نقلوا النص (ككعب الأحبار ووهب بن منبه) كانوا يدركون تماماً المصدر التوراتي للفظ، والحديث في صيغ أخرى يقول صراحة: (خلق الله آدم على صورة الرحمن)، مما يؤكد أن المحاولات التبريرية هي مجرد "ترقيع" لنص دخيل يصادم العقل والقرآن.<br><br>
+        <strong>المصادمة مع المحكم القرآني:</strong><br>
+        يُؤسس القرآن الكريم لقاعدة التنزيه المطلق التي تنفي أي وجه للمماثلة بين الخالق والمخلوق: {لَيْسَ كَمِثْلِهِ شَيْءٌ ۖ وَهُوَ السَّمِيعُ الْبَصِيرُ} [الشورى: 11]. والقول بأن الإنسان "على صورة الله" هو إثبات للمماثلة والتشابه، مما يجعل الرواية في حالة تضاد مع جوهر التوحيد القرآني الذي ينزه الله عن الحد، والشكل، والمشابهة للأجسام.<br><br>
+        <strong>تسلل المخيال الإسرائيلي للمقدس:</strong><br>
+        إن وجود هذا النص في البخاري يُبين كيف استطاع "المخيال التوراتي" أن يفرض رؤيته للذات الإلهية داخل المنظومة الروائية الإسلامية. لقد تم تحويل مفاهيم العقيدة من "التنزيه الصرف" إلى "التشبيه المجسد" الذي يرى في الإنسان نسخة مادية مُصغرة عن الخالق، وهو انحراف معرفي هائل حذر منه القرآن عندما وصف بني إسرائيل بأنهم (يُحرّفون الكلم عن مواضعه).`
+    },
+    { 
+        id: 10, 
+        title: "ضحك الله: من المزامير إلى التراث", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/yTOo2vKL", 
+        text: "أنَّ رَسولَ اللهِ صلَّى اللهُ عليه وسلَّم قال: يَضحَكُ اللهُ إلى رَجُلَينِ يَقتُلُ أحَدُهما الآخَرَ يَدخُلانِ الجَنَّةَ: يُقاتِلُ هذا في سَبيلِ اللهِ، فيُقتَلُ، ثُمَّ يَتوبُ اللهُ على القاتِلِ، فيُستَشهَدُ.",
+        num: "2826", 
+        comparison: `<strong>الجذور في التراث اليهودي (المزامير والأمثال):</strong><br>
+        تُعتبر صفة "الضحك" من الصفات المتكررة المنسوبة للرب في العقيدة اليهودية، كتعريف مادي لانفعالاته تجاه أفعال البشر. فنجد في سِفر المزامير (المزمور 2، العدد 4) ما نصُّه: (السَّاكِنُ فِي السَّمَاوَاتِ يَضْحَكُ. الرَّبُّ يَسْتَهْزِئُ بِهِمْ). كما ورد في سِفر الأمثال (الإصحاح 1، العدد 26): (فَأَنَا أَيْضًا أَضْحَكُ عِنْدَ بَلِيَّتِكُمْ. أَشْمَتُ عِنْدَ مَجِيءِ خَوْفِكُمْ).<br><br>
+        <strong>الانتقال من "التنزيه" إلى "التجسيم الحسي":</strong><br>
+        إن الملمح الجوهري في العقيدة اليهودية هو تصوير الخالق كـ "شخصية" لها مشاعر وردود أفعال حسيّة وانفعالية تشبه انفعالات البشر. وجود هذه الصفة في "صحيح البخاري" يمثل استيراداً واضحاً لهذا التصور المادي؛ حيث استبدل الرواة مفهوم "الرضا الإلهي" أو "القبول" (وهي معانٍ كمالية منزهة) بلفظ "الضحك المادي" (وهو فعل بيولوجي بشري)، تأثراً بلغة الأسفار القديمة التي تأنف منها لغة التنزيه القرآنية.<br><br>
+        <strong>المصادمة مع جلال الألوهية في القرآن:</strong><br>
+        يُؤسس القرآن الكريم لعلاقة قائمة على أن الله سبحانه مُنزه عن مشابهة الحوادث: {لَيْسَ كَمِثْلِهِ شَيْءٌ} [الشورى: 11]. والضحك في لغة البشر يقتضي وجود "أدوات مادية" (ثغر، أسنان، صوت) وحالة نفسية من المفاجأة أو السرور المادي، وكلها صفات نقص لا تليق بمقام الخالق. إن الرواية تنزل بـ "الغيب المطلق" إلى مستوى "التفاعل الجسدي"، مما يفتح باباً لتمثيله وتشبيهه بخلقه.<br><br>
+        <strong>تحريف مفهوم "الرحمة" بـ "الانفعال":</strong><br>
+        القرآن يصف رضا الله وتوبته على العباد بالرحمة والفضل {فَتَابَ عَلَيْهِ ۚ إِنَّهُ هُوَ التَّوَّابُ الرَّحِيمُ}. أما الرواية فقد حولت فعل "التوبة" العظيم إلى مشهد "درامي" يضحك فيه الرب، وهو تصوير يهدف لتقريب المعنى للعوام عبر "الأساطير والقصص" الشائعة في الثقافات السابقة، ولكنه يضرب ركن "العظمة الإلهية" في مقتل.<br><br>
+        <strong>تسلل الموروث "الإسرائيلي" عبر بوابة الرواة:</strong><br>
+        إن تطابق وصف "الضحك" بين نصوص التوراة وبين الرواية يقطع بأننا أمام "ثقافة عابرة للحدود" نُسبت زُوراً للنبي. فالنبي الذي علّم الناس (سبحان الله) لتنزيهه عن كل نقص، لا يمكن أن ينسب لربه صفات تُقزمه في صورة إنسان يضحك من أفعال عباده، مما يثبت أن الرواية استوعبت الأدب التوراتي وصبغته بصبغة إسلامية لتبرير تصورات مادية للذات الإلهية.`
+    },
+    { 
+        id: 11, 
+        title: "أصابع الرحمن: التجسيم اليهودي إلى التراث", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/zqzyAlBw", 
+        text: "جاءَ حَبرٌ مِنَ الأحبارِ إلى رَسولِ اللهِ صلَّى اللهُ عليه وسلَّم فقال: يا مُحَمَّدُ، إنَّا نَجِدُ أنَّ اللهَ يَجعَلُ السَّمَواتِ على إصبَعٍ، والأرَضينَ على إصبَعٍ، والشَّجَرَ على إصبَعٍ، والماءَ والثَّرى على إصبَعٍ، وسائِرَ الخَلائِقِ على إصبَعٍ، فيَقولُ: أنا المَلِكُ، فضَحِكَ النَّبيُّ صلَّى اللهُ عليه وسلَّم حتَّى بَدَت نَواجِذُه تَصديقًا لقَولِ الحَبرِ، ثُمَّ قَرَأ رَسولُ اللهِ صلَّى اللهُ عليه وسلَّم: {وما قَدَرُوا اللهَ حَقَّ قَدْرِهِ والأرضُ جَميعًا قَبضَتُه يَومَ القيامةِ والسَّمَواتُ مَطويَّاتٌ بيَمينِه سُبحانَه وتَعالى عَمَّا يُشرِكونَ} [الزمر: 67].",
+        num: "4811", 
+        comparison: `<strong>الجذور في العهد القديم (سِفر الخروج):</strong><br>
+        تجد هذه الفكرة أصلها المباشر في سِفر الخروج (الإصحاح 31، العدد 18)، حيث يُوصف لوح الشهادة بأنه مكتوب بـ (إصبع الله): (ثُمَّ أَعْطَى مُوسَى.. لَوْحَيِ الشَّهَادَةِ: لَوْحَيْ حَجَرٍ مَكْتُوبَيْنِ بِإِصْبِعِ اللهِ). كما يمتلئ التراث التفسيري اليهودي (الميدراش) بتفاصيل "أنثروبومورفية" (تشبيهية) تُقسم أركان الكون على أصابع الرب وجوارحه المادية، وهو تصور ينزع عن الخالق صفة التنزه المطلق ويحيله إلى كائن ذي أجزاء.<br><br>
+        <strong>الاعتراف بمصدر المعلومة:</strong><br>
+        تكمن المفارقة الكبرى في أن الرواية نفسها تَعترفُ صراحةً بأن مصدر هذه المعلومة الغيبية هو "حبر يهودي" جاء يملي تصوراته على النبي. وبدلاً من أن يكون الوحي مصححاً لأوهام التجسيم عند الأحبار، جعلت الروايةُ من النبي "مصدقاً" و"مؤيداً" و"ضاحكاً" من شِدّة إعجابه بهذا الوصف المادي للخالق. وهذا يضرب في مقتل "الاستقلال المعرفي" للوحي الإسلامي ويجعل النبي تابعاً لتصورات الأمم السابقة التي أعلن القرآن تحريفها.<br><br>
+        <strong>تحريف غاية النص القرآني:</strong><br>
+        استشهدت الرواية بآية سورة الزمر: {وَمَا قَدَرُوا اللَّهَ حَقَّ قَدْرِهِ...}، وهي آية جاءت في سياق "تنزيه" الله عن تصورات المشركين الجاهلية، وختمت بـ {سُبْحَانَهُ وَتَعَالَىٰ عَمَّا يُشْرِكُونَ}. غير أن الرواية استلبت الآية من سياق التنزيه لتقحمها في سياق "التجسيم الحسي" (الأصابع، القبضة المادية)، مما يعد تلاعباً بمقاصد القرآن لتحويلها إلى مادة تدعم "الخرافة اليهودية" المنقولة.<br><br>
+        <strong>التصادم مع منطق النبوة:</strong><br>
+        النبي ﷺ الذي جاء بمبدأ {لَيْسَ كَمِثْلِهِ شَيْءٌ} لا يمكن منطقياً أن يضحك "تصديقاً" لوصف يجعل للرحمن أصابع مادية يحمل عليها الشجر والمدر. فالتصديق في هذه الحالة هو إقرار بالتشبيه، والتشبيه في العقيدة الإسلامية هو بوابة الشرك، مما يثبت أن الرواية نتاج "بيئة تدوينية" كانت مشحونة بتأثيرات الأحبار والرهبان الذين دخلوا الإسلام ونقلوا معهم موروثهم "المادي" للغيب.<br><br>
+        <strong>سقوط الحجية بالتبعية المعرفية:</strong><br>
+        إن مجرد إسناد القول لحبر يهودي في رواية تُنسب للنبي هو دليل كافٍ على بشرية النص وعدم قدسيته. فالنبي بُعث مهيمناً ومصدقاً لما في الكتب من حق، ومصححاً لما فيها من باطل، والقول بأنه "أُعجب" بتصوراتهم التجسيمية هو انتقاص من علمه بالله ومن جلال مقام الربوبية.`
+    },
+    { 
+        id: 12, 
+        title: "رجم القردة الزانية: قانون توراتي", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/LGrTeHjq", 
+        text: "عَن عَمرِو بنِ مَيمونٍ، قال: رَأيتُ في الجاهِليَّةِ قِردةً اجتَمع عليها قِرَدةٌ، قد زَنَت، فرَجَموها، فرَجَمتُها معهُم.",
+        num: "3849", 
+        comparison: `<strong>الجذور في التشريع التوراتي (سِفر الخروج):</strong><br>
+        على الرغم من أن قصة "رجم القردة" بلفظها لم تَرِد في الأسفار الخمسة، إلّا أن "أصل الفكرة" —وهي إقامة الحدود والرجم على الحيوانات— هو فكرٌ قانوني وتراثي يهودي بامتياز. فنجد في سِفر الخروج (الإصحاح 21، العدد 28) تشريعاً يقضي برجم الحيوان إذا تسبب في مقتل إنسان: (وإذا نَطَحَ ثَوْرٌ رَجُلاً أوِ امْرَأَةً فَمَاتَ، يُرْجَمُ الثَّوْرُ ولا يُؤْكَلُ لَحْمُهُ). هذا الفكر الذي يُحمل الحيوان مسؤولية جنائية مادية هو الممهد لظهور قصص رجم الحيوانات "أخلاقياً".<br><br>
+        <strong>التطابق مع الأساطير التلمودية (غراب نوح):</strong><br>
+        يضج الفلكلور اليهودي (الميدراش) والتقاليد التلمودية بقصص مشابهة تمنح الحيوانات وعياً أخلاقياً وقدرة على ارتكاب "الخطيئة الجنسية". ومن أشهرها ما يُروى في (تلمود سنهدرين 108ب) عن "غراب نوح"؛ حيث تزعم الأساطير أن الغراب خالف أمر نوح واعتدى جنسياً داخل السفينة، فاستحق اللعنة. إن الربط بين "قردة البخاري" وبين "غراب التلمود" يكشف عن خيط ناظم واحد؛ وهو عقلية ترى أن عالم الحيوان مكلَّفٌ أخلاقياً ويجب أن يُحاكَمَ ماديّاً.<br><br>
+        <strong>المصادمة مع المنطق القرآني للحيوان:</strong><br>
+        يقرر القرآن الكريم والعقل أن الحيوانات {أُمَمٌ أَمْثَالُكُم}، لكنها أمم تُسيّرها الغرائز والوحي الفطري الإلهي، ولا تملك "العقل المكلف" الذي يحاسب على الزنا أو القتل الشرعي. بينما رأت العقلية الموروثة من أهل الكتاب أن "الرجم" عقوبة كونية تطال حتى البهائم. إن نسبة فعل الرجم لمجموعة من القردة ومشاركة الراوي لهم، هي محاكاة واضحة لثقافة "العهد القديم" التي لا تفرق في "العقوبة البدنية" بين الإنسان المكلَّف والبهيمة الأعجم.<br><br>
+        <strong>تسلل "المخيال القانوني" للمقدس:</strong><br>
+        يثبت وجود هذا النص في "الصحيح" أن الرواة لم يكتفوا بنقل الأحكام، بل نقلوا "المخيال القانوني" للبيئات السابقة وصبغوه بصبغة تاريخية إسلامية. هذا التوجه أدى لظهور قصص تصدم الفطرة وتحول "عالم الغابة" إلى ساحة لتطبيق حدود (كالرجم) لم يُشرّعها الله إلّا للإنسان ذي الإرادة والوعي (الرجم في القرآن هو الطرد واللعنة وليس الرمي بالحجارة حتى الموت)، مما يسيء لسمو التشريع الإسلامي.<br><br>
+        <strong>تنزيه التراث من الأساطير:</strong><br>
+        إن كشف المنبع التوراتي/التلمودي لهذه الرواية هو ضرورة معرفية؛ فالإسلام جاء ليحرر البشر من الأوهام، ونِسبة "إقامة الحدود" للحيوانات هي تراجع نحو عقلية الأساطير القديمة التي كانت تأنسن الطبيعة بشكل مفرط. نحن نتمسك بالمنطق الذي جعل التكليف منوطاً بالعقل، ونرفض إقحام "قصص رجم القردة" في صلب الموروث الإسلامي الذي يُفترض فيه الرصانة والوقار.`
+    },
+    { 
+        id: 13, 
+        title: "تجسيم الإله: اقتباسات من الأسفار", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/pOi7dx5P", 
+        text: "لا تَزالُ جَهَنَّمُ تَقولُ: هل مِن مَزيدٍ؟ حتَّى يَضَعَ رَبُّ العِزَّةِ فيها قدَمَه، فتَقولُ: قَطْ قَطْ وعِزَّتِك، ويُزوى بَعضُها إلى بَعضٍ. (وفي رواية أخرى في نفس الكتاب: يَكشِفُ رَبُّنا عن ساقِه، فيَسجُدُ له كُلُّ مُؤمِنٍ ومُؤمِنةٍ.)",
+        num: "6661", 
+        comparison: `<strong>الجذور في العهد القديم (أسفار الأنبياء):</strong><br>
+        نجد هذه المادية المفرطة في وصف الرب وجوارحه متجذرة في العهد القديم؛ ففي سِفر حزقيال (21: 17) يُنسب للرب قوله: (وَأَنَا أَيْضًا أَصْفِقُ كَفِّي عَلَى كَفِّي وَأُسْكِنُ غَضَبِي)، وفي سِفر إرميا (1: 9): (وَمَدَّ الرَّبُّ يَدَهُ وَلَمَسَ فَمِي). إن نِسبة "الكَفّ" و"اليَد" و"القَدَم" و"الساق" كأعضاء مادية تقوم بأفعال حسية (كالتصفيق، واللمس، والوضع داخل النار) هو جوهر الفكر التجسيمي الذي استوطن كتب الحديث تأثراً بالثقافة الإسرائيلية.<br><br>
+        <strong>تحويل "المجاز القرآني" إلى "تجسيم روائي":</strong><br>
+        استخدم القرآن الكريم تعبير "يوم يُكشف عن ساق" ككناية لغوية عربية بليغة تدل على "شدة الكرب وهول الموقف" (كقول العرب: كشفت الحرب عن ساقها). بيد أن الرواية استلبت هذا المجاز وحولته إلى "واقعة تشريحية" (يكشف ربنا عن ساقه هو)، مما نقل العقيدة من فضاء التنزيه العقلي إلى فضاء التجسيم الحسي المرفوض.<br><br>
+        <strong>المصادمة مع جلال التنزيه الإلهي:</strong><br>
+        يُقرر القرآن المحكم قاعدة: {لَيْسَ كَمِثْلِهِ شَيْءٌ} [الشورى: 11]. والقول بأن لله "قدماً" يضعها في النار لتسكن، أو "ساقاً" تظهر لتُعرف بها ذاته، هو مساواة صريحة بين الخالق والمخلوق في صفات الأجسام. فالقَدَم والساق هي أجزاء مادية محدودة، والله سبحانه منزه عن التجزئة والتركيب والمكان.<br><br>
+        <strong>تصوير الخالق بصورة "المضطر" للمادة:</strong><br>
+        تُصور رواية "القدم في النار" الخالق وكأنه عجز عن إسكات جهنم بكلمة "كن"، فاضطر لاستخدام عضو مادي (القدم) ليقهرها ويزوي بعضها إلى بعض. هذا التصوير ينزع عن الله صفة "القدرة المطلقة بالكلمة" ويستبدلها بـ "القوة العضلية المادية"، وهو ما يتطابق مع تصورات العهد القديم للرب كـ "محارب" أو "إنسان عملاق" يصارع خلقه.<br><br>
+        <strong>تسلل "الأنثروبومورفيزم" (أنسنة الإله):</strong><br>
+        يثبت هذا التقارب النصي أن الرواة (الذين تتلمذوا على يد أحبار دخلوا الإسلام) قد شحنوا مروياتهم بالتصورات "الأنسنية" للرب، وهي تصورات تهدف لتقريب الإله من أفهام العوام عبر تشبيهه بالبشر، مما يضرب في مقتل نقاء التوحيد الإسلامي الذي جعل الله "غيباً مطلقاً" لا تدركه الأبصار ولا تحويه الصور.`
+    },
+    { 
+        id: 14, 
+        title: "النزول إلى السماء الدنيا: بين التراث والمزامير", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/skvUcELF", 
+        text: "يَنزِلُ رَبُّنا تَبارَكَ وتَعالى كُلَّ لَيلةٍ إلى السَّماءِ الدُّنيا حينَ يَبقى ثُلُثُ اللَّيلِ الآخِرُ، يقولُ: مَن يَدعوني، فأستَجيبَ له؟ مَن يَسألُني فأُعطيَه؟ مَن يَستَغفِرُني فأغفِرَ له؟",
+        num: "1145", 
+        comparison: `<strong>التطابق الحرفي مع العهد القديم:</strong><br>
+        نجد أن الحصر الزماني والمكاني المنسوب للخالق في الرواية يتطابق مع لغة العهد القديم التي تصف حركة الرب الجسدية. ففي مزمور (18: 9) نجد: (طَأْطَأَ السَّمَاوَاتِ وَنَزَلَ، وَضَبَابٌ تَحْتَ رِجْلَيْهِ)، وفي سِفر ميخا (1: 3): (فَإِنَّهُ هُوَذَا الرَّبُّ يَخْرُجُ مِنْ مَكَانِهِ وَيَنْزِلُ وَيَمْشِي عَلَى شَوَامِخِ الأَرْضِ). إن فعل "النزول" و"الخروج من المكان" هو تصور بشري قاصر يُسقط قوانين الجاذبية والمادة على "المطلق"، وهو الملمح الأساسي في العقيدة الإسرائيلية القديمة التي تشرّب منها الرواة.<br><br>
+        <strong>تعطيل "المعية القرآنية الشاملة":</strong><br>
+        يُؤسس القرآن الكريم لعلاقة قائمة على حضور إلهي دائم ومحيط لا يحده زمان ولا يحويه مكان: {وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ} [الحديد: 4]. بينما تستبدل الرواية هذا الحضور الإلهي العظيم بـ "إله محكوم بالحركة الجغرافية"؛ يترك العرش لينزل للسماء الدنيا، ويترك مكاناً ليحل في آخر. هذا "النزول المادي" يفرغ آيات المعية والقرب الإلهي من جلالها الروحي ويحولها إلى "انتقال مادي" يشبه انتقال المخلوقات.<br><br>
+        <strong>أزمة "تعدد الأماكن" وتناقض العلم:</strong><br>
+        يقرر العلم أن الأرض كروية وأن "ثلث الليل الآخر" حالة مستمرة تدور حول الكوكب على مدار الـ 24 ساعة. فإذا كان الرب ينزل في كل ثلث ليل، فإنه سيظل "نازلاً" دائماً في السماء الدنيا ولن يصعد أبداً، مما يبطل غاية النزول المحددة بالثلث الأخير. هذا التناقض المنطقي يثبت أن واضعي الرواية استلهموا تصوراتهم من "جغرافيا المزامير" البدائية التي كانت تتصور الأرض مسطحة والليل يأتي في وقت واحد على الجميع.<br><br>
+        <strong>تجسيد الذات الإلهية:</strong><br>
+        نِسبة "الخروج من مكان" و"النزول لمكان" هي قمة التجسيم؛ لأنها تقتضي أن يكون الخالق "محدوداً" بحدود الفراغ، وأن السماء "تحيط" به وتسعه. وهذا يتصادم مع قوله تعالى: {لَّا تُدْرِكُهُ الْأَبْصَارُ وَهُوَ يُدْرِكُ الْأَبْصَارَ} [الأنعام: 103]، ومع تنزيهه عن المشابهة للأجسام التي تنتقل وتتحرك.<br><br>
+        <strong>تسلل التصور "الأنسني" للرب:</strong><br>
+        إن "إله الرواية" هنا يمارس أفعال الملوك الأرضيين (ينزل ليسمع المطالب في وقت محدد)، تماماً كما هو "إله العهد القديم" الذي يترصد ويتحرك ليراقب عباده. هذا الانحدار في فهم "الربوبية" هو نتاج تدويني استوعب موروثات الأمم السابقة وصاغها بلسان عربي، متجاهلاً أن الله قريب من العبد في سجدته، وفي يقظته، وفي كل لحظة، دون حاجة لخرق قوانين الفيزياء أو الانتقال المكاني.`
+    },
+    { 
+        id: 15, 
+        title: "خلق التربة يوم السبت: محاكاة السبت اليهودي", 
+        source: "مسلم", 
+        sourceUrl: "https://dorar.net/h/s5UP4qXf", 
+        text: "أخَذَ رَسولُ اللهِ صلَّى اللهُ عليه وسلَّم بيَدي، فقال: خَلَقَ اللهُ عَزَّ وجَلَّ التُّربةَ يَومَ السَّبتِ، وخَلَقَ فيها الجِبالَ يَومَ الأحَدِ، وخَلَقَ الشَّجَرَ يَومَ الاثنَينِ، وخَلَقَ المَكروهَ يَومَ الثُّلاثاءِ، وخَلَقَ النُّورَ يَومَ الأربِعاءِ، وبَثَّ فيها الدَّوابَّ يَومَ الخَميسِ، وخَلَقَ آدَمَ عليه السَّلامُ بَعدَ العَصرِ مِن يَومِ الجُمُعةِ.",
+        num: "2789", 
+        comparison: `<strong>التطابق مع سفر التكوين:</strong><br>
+        تتطابق هذه الرواية مع فلسفة "الخلق الأسبوعي" في سِفر التكوين، حيث يُقسم الخلق على أيام الأسبوع. المثير هنا هو البدء بـ "يوم السبت"، وهو اليوم المقدس عند اليهود، ومحاولة جعل آدم هو "خاتم الخلق" يوم الجمعة قبل دخول السبت التالي.<br><br>
+        <strong>المصادمة مع المحكم القرآني:</strong><br>
+        يقرر القرآن الكريم في 7 مواضع أن الخلق تم في "ستة أيام": {خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ وَمَا بَيْنَهُمَا فِي سِتَّةِ أَيَّامٍ}. بينما الرواية تجعلها "سبعة أيام" (من السبت إلى الجمعة)، وهذا تناقض عددي صريح يثبت أن الرواية استلهمت "الأسبوع البشري" وأسقطته على فعل الخالق.<br><br>
+        <strong>نفي التعب (اللغوب):</strong><br>
+        نزل القرآن مصححاً لعقيدة العهد القديم التي زعمت أن الله "استراح" في اليوم السابع، فقال تعالى: {وَمَا مَسَّنَا مِن لُّغُوبٍ}. الرواية بعودتها لنظام السبعة أيام تعيد إنتاج الفكر الذي أراد القرآن إبطاله.`
+    },
+    { 
+        id: 16, 
+        title: "عُوج بن عَنَاق", 
+        source: "تفسير القرطبي", 
+        sourceUrl: "https://quran.ksu.edu.sa/tafseer/qortobi/sura5-aya22.html#qortobi", 
+        text: "تفسير القرطبي لقوله تعالى (إن فيها قومًا جبارين) حيث قال: كان هؤلاء من بقايا عاد،... وكان معهم عوج الأعنق، وكان طوله ثلاثة آلاف ذراع وثلاثمائة وثلاثة وثلاثين ذراعا ; قاله ابن عمر، وكان يحتجن السحاب أي: يجذبه بمحجنه ويشرب منه، ويتناول الحوت من قاع البحر فيشويه بعين الشمس يرفعه إليها ثم يأكله، وأن طوفان نوح لم يصل إلا لركبتيه.",
+        num: "00", 
+        comparison: `<strong>التطابق مع الأساطير التلمودية:</strong><br>
+        هذه القصة هي استنساخ لقصة "عوج ملك باشان" (Og of Bashan) المذكورة في سِفر العدد (21: 33) وسِفر التثنية (3: 11)، حيث يوصف بأنه من بقايا الجبابرة (الرفائيين). الأساطير التلمودية بالغت في طوله بنفس تفاصيل "شواء الحوت في الشمس" ونجاته من الطوفان.<br><br>
+        <strong>الاستحالة العلمية والفيزيائية:</strong><br>
+        تصوير إنسان بطول يصل للسحاب ويتجاوز قمة الجبال يصادم قوانين الجاذبية والبيولوجيا، ولم يعثر العلم على أي أثر لمثل هذه الكائنات.`
+    },
+    { 
+        id: 17, 
+        title: "العرش فوق الماء (استنساخ كوسمولوجيا التكوين)", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/5rgDfSOH", 
+        text: "ولَم يَكُنْ شَيءٌ غَيرُه، وكان عَرشُه على الماءِ، وكَتَبَ في الذِّكرِ كُلَّ شيءٍ، وخَلَقَ السَّمَواتِ والأرضَ.",
+        num: "3191", 
+        comparison: `<strong>التشابه مع العهد القديم:</strong><br>
+        هذا الوصف يتطابق مع مطلع سِفر التكوين (1: 2): (وَكَانَتِ الأَرْضُ خَرِبَةً وَخَالِيَةً، وَعَلَى وَجْهِ الْغَمْرِ ظُلْمَةٌ، وَرُوحُ اللهِ يَرِفُّ عَلَى وَجْهِ الْمِيَاهِ). فكرة وجود "الماء" كمادة أولية يطفو فوقها العرش أو يرف عليها روح الرب قبل خلق السماوات والأرض هي رؤية كونية بابلية/يهودية قديمة.<br><br>
+        <strong>أزلية المادة:</strong><br>
+        توحي الرواية بأن "الماء" كان موجوداً مع الله قبل كل شيء، وهو ما يفتح باب القول بـ "أزلية المادة"، بينما القرآن يقرر أن الله هو "الخالق" لكل شيء من العدم وبكلمة {كُن}.<br><br>
+        <strong>تجسيم الاستواء:</strong><br>
+        الرواية تحول معنى {وَكَانَ عَرْشُهُ عَلَى الْمَاءِ} (الموجودة في القرآن) من دلالة على الإحاطة والتدبير إلى "وصف مكاني" مادي يحدد تموضع الخالق فوق سائل مادي، وهو تأثر واضح بالتصوير الحسي للعهد القديم.`
+    },
+    { 
+        id: 18, 
+        title: "ذبح الموت في صورة كبش", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/ljdCaGkp", 
+        text: "يُؤتى بالمَوتِ كَهَيئةِ كَبشٍ أملَحَ، فيُنادي مُنادٍ: يا أهلَ الجَنَّةِ، فيَشرَئِبُّونَ ويَنظُرونَ.... وكُلُّهم قد رَآه، فيُذبَحُ، ثُمَّ يقولُ: يا أهلَ الجَنَّةِ، خُلودٌ فلا مَوتَ، ويا أهلَ النَّارِ، خُلودٌ فلا مَوتَ.",
+        num: "4730", 
+        comparison: `<strong>التشابه مع الأساطير القديمة:</strong><br>
+        فكرة "تجسيد الموت" في صورة حيوان أو كائن وتدميره لإنهاء سلطانه هي فكرة ميثولوجية قديمة وُجدت في الأساطير الكنعانية (موت إله الموت) وفي بعض التقاليد الغنوصية.<br><br>
+        <strong>التعارض مع "المعنى" والمنطق:</strong><br>
+        الموت هو "حالة" أو "انقطاع حياة"، وليس كائناً بيولوجياً يملك رقبة ويُذبح بالسكين. تحويل المفاهيم المعنوية إلى أجساد مادية تُذبح هو تسطيح للغيب، ويجعل من الآخرة "مسرحاً مادياً" بدائياً.<br><br>
+        <strong>توهين القدرة الإلهية:</strong><br>
+        خلود أهل الجنة والنار هو بـ "كلمة الله" وأمره، ولا يحتاج الخالق لعملية "ذبح رمزية" لكبش لكي يضمن للناس الخلود. الرواية تحاول تقريب الغيب بأدوات "ذبيحية" تنتمي لثقافة القرابين القديمة، بينما القرآن يصف الخلود كقرار إلهي مطلق: {خَالِدِينَ فِيهَا أَبَدًا}.`
+    },
+    { 
+        id: 19, 
+        title: "رؤية الله كالقمر", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/theSFVF6", 
+        text: "كُنَّا جُلوسًا عِندَ النَّبيِّ صلَّى اللهُ عليه وسلَّم إذ نَظَرَ إلى القَمَرِ لَيلةَ البَدرِ، قال: إنَّكُم ستَرَونَ رَبَّكُم كما تَرَونَ هذا القَمَرَ، لا تُضامونَ في رُؤيَتِه، فإنِ استَطَعتُم أن لا تُغلَبوا على صَلاةٍ قَبلَ طُلوعِ الشَّمسِ، وصَلاةٍ قَبلَ غُروبِ الشَّمسِ، فافعَلوا.",
+        num: "7434", 
+        comparison: `<strong>محاولة مادية لرصد الغيب:</strong><br>
+        تُقدّم هذه الرواية محاولة مادية صريحة لإخضاع الذات الإلهية لمقاييس "الرصد البصري" البشري؛ عبر تشبيه رؤية الله برؤية جرم سماوي مادي (القمر). هذا التشبيه ينقل "الغيب المطلق" إلى حيز "المادة المحدودة"، ويجعل من الخالق كائناً يخضع لزوايا النظر، والمسافة، وقوانين الضوء والفيزياء، وهو ما يتنافى مع جلال التنزيه الإلهي.<br><br>
+        <strong>الانسجام مع "مادية الرب" في المزامير:</strong><br>
+        ينسجم هذا الوصف الحسي مع التصورات الواردة في العهد القديم، وتحديداً في مزمور (11: 4): (الرَّبُّ فِي هَيْكَلِ قُدْسِهِ. الرَّبُّ فِي السَّمَاءِ كُرْسِيُّهُ. عَيْنَاهُ تَنْظُرَانِ، أَجْفَانُهُ تَمْتَحِنُ بَنِي آدَمَ). إن هذا التقارب المذهل بين مرويات الحديث وبين أسفار حزقيال، وإرميا، والمزامير، يثبت أن المنظومة الروائية قد تم "اختراقها" بمفاهيم الأنسنة اليهودية (Anthropomorphism) التي تمنح الخالق ملامح جسدية وانفعالات بشرية.<br><br>
+        <strong>تسلل "الأنسنة" عبر بوابة الرواة:</strong><br>
+        لقد نقل الرواة الذين تشرّبوا ثقافة أهل الكتاب تلك الصور الحسية ونسبوها للنبي، ومع مرور الوقت تحولت هذه المرويات إلى "عقائد" يُدافع عنها حراس الموروث بشراسة، بينما هي في حقيقتها "صدى توراتي" يصطدم بصلابة الموقف القرآني الذي نزه الخالق عن الحيز، والمكان، والجوارح، والمشابهة للأجسام.<br><br>
+        <strong>المصادمة مع المحكم القرآني:</strong><br>
+        يُؤسس القرآن الكريم لقاعدة النفي المطلق لإمكانية الإحاطة البصرية بالخالق: {لَّا تُدْرِكُهُ الْأَبْصَارُ وَهُوَ يُدْرِكُ الْأَبْصَارَ} [الأنعام: 103]. والادعاء برؤيته "كما يُرى القمر" هو إثبات للجهة والمكان والحد، وهي صفات نقص تنفيها آية {لَيْسَ كَمِثْلِهِ شَيْءٌ}. الرواية تحاول تحويل الإيمان من "يقين قلبي بالغيب" إلى "ترقب بصري للمادة".<br><br>
+        <strong>الارتباط بـ "عبادة الأجرام":</strong><br>
+        يلاحظ في ذيل الرواية ربط الرؤية بصلاتين (الفجر والعصر) مرتبطتين بطلوع الشمس وغروبها. هذا الربط بين رؤية الله وحركة الشمس والقمر يحمل ملامح من بقايا "الديانات الكوكبية" القديمة التي كانت تربط تجلي الإله بالظواهر الفلكية، وهو ما جاء الإسلام ليهدمه عبر توحيد الله المنزه عن الزمان والمكان.`
+    },
+    { 
+        id: 20, 
+        title: "ختان إبراهيم في الثمانين", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/xc61bFCI", 
+        text: "اختَتَنَ إبراهيمُ بَعدَ ثَمانينَ سَنةً، واختَتَنَ بالقدُومِ. (القدوم: آلة حادة يستخدمها النجار).",
+        num: "6298", 
+        comparison: `<strong>التطابق البنيوي مع سِفر التكوين:</strong><br>
+        تجد هذه الواقعة تفصيلها الجوهري في سِفر التكوين (الإصحاح 17، العدد 24)، حيث جاء فيه: (وَكَانَ إِبْرَاهِيمُ ابْنَ تِسْعٍ وَتِسْعِينَ سَنَةً حِينَ خُتِنَ فِي لَحْمِ غُرْلَتِهِ). نحن هنا أمام ما هو أبعد من مجرد فجوة زمنية بسيطة في تقدير العمر؛ نحن أمام "وحدة مصدر ثقافي" جعلت من ختان النبي إبراهيم في هذه السن المتأخرة والاستثنائية مأثرة دينية، وهي فكرة نابعة من صميم العقلية التوراتية التي تهدف لترسيخ "ميثاق الختان" كفعل تضحية جسدية كبرى تبرهن على الطاعة المطلقة للرب.<br><br>
+        <strong>استعارة "الكادر الدرامي" الجسدي:</strong><br>
+        إن انتقال هذه التفصيلة من سِفر التكوين إلى صلب "صحيح البخاري"، بما فيها الإشارة لاستخدام أداة خشنة كـ "القَدُوم"، يثبت أن الخيال التدويني الإسلامي قد استعار ذات المشهد الدرامي للقصة اليهودية. فبدلاً من أن ينشغل النص بالجوهر الروحي والعقلي لدعوة إبراهيم (الحنيفية)، انحدر نحو توثيق "الواقعة الجراحية" وتفاصيل العمر المتقدم، مما جعل الرواية تظهر وكأنها ملحق لأدبيات العهد القديم التي تهتم بـ "بيولوجيا الأنبياء" أكثر من رسالاتهم.<br><br>
+        <strong>الانحراف عن المنهج القرآني:</strong><br>
+        يركز القرآن الكريم على إبراهيم عليه السلام كنموذج للتوحيد، والوفاء، والتحطم للأصنام، والبحث العقلي عن الخالق {فَلَمَّا رَأَى الْقَمَرَ بَازِغًا}، ولم يتطرق قط لهذه التفاصيل الجسدية المنفرة (الختان بالقدوم في سن الثمانين). إن صمت القرآن عن هذه "الواقعة" هو تنزيه لمقام النبوة عن الانشغال بـ "ميثاق اللحم"، بينما جاءت الرواية لتشرعن ممارسة دينية بناءً على "خلفية ميثولوجية" مستوردة.<br><br>
+        <strong>تصوير الأنبياء بصورة القسوة على الذات:</strong><br>
+        نِسبة فعل "الختان بالقدوم" لنبي من أنبياء الله؛ فهل يأمر الله نبيه بممارسة عملية جراحية بالغة الخطورة والألم باستخدام آلة نجارة بدائية وفي سن متأخرة؟ هذا التصوير ينسجم مع "الإله المتطلب للتضحيات الجسدية" في العهد القديم، ولكنه يصطدم مع "إله اليسر" في القرآن الذي يقول: {يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ}.<br><br>
+        <strong>تسلل "الإسرائيليات" عبر بوابة الرواة:</strong><br>
+        إن هذا التشابه في "الفعل والسن" ليس مصادفة، بل هو دليل على أن مرويات التراث قد تشرّبت مفاهيمها من بيئة يهودية كانت ترى في "ختان الشيخوخة" آية مقدسة. هذا المنزع المادي صبغ الرواية بصبغته، مبتعداً بها عن وقار النبوة وعن العقلانية الإسلامية التي تترفع عن تتبع عورات الأنبياء وتفاصيل أجسادهم.`
+    },
+    { 
+        id: 21, 
+        title: "وسم الجبهة وعلامة كافر", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/5n4VKusd", 
+        text: "ما بَعَثَ اللهُ مِن نَبيٍّ إلَّا أنذَرَ قَومَه الأعورَ الكَذَّابَ، إنَّه أعورُ، وإنَّ رَبَّكُم ليس بأعورَ، مَكتوبٌ بينَ عَينَيه: كافِرٌ.",
+        num: "7408", 
+        comparison: `<strong>الجذور في "سِفر الرؤيا" (العهد الجديد):</strong><br>
+        تجد فكرة "العلامة الجسدية" لعدو الله أو المسيح الدجال في نهاية الزمان أصلها في سِفر الرؤيا (الإصحاح 13، العدد 16-17)، حيث يتحدث النص عن (الوحش) الذي يضع علامةً على جِباه أتباعه أو يُعرف بها: (ويجعل الجميع... يوضع لهم سِمة على يدهم اليمنى أو على جِباههم... ولا يقدر أحد أن يشتري أو يبيع إلّا من له السمة). إن فكرة "الوسم الجبهي" (الرقم أو الكلمة المكتوبة على الجبهة) لتمييز معسكر الإيمان عن معسكر الكفر هي "ثيمة" (Theme) نصرانية يهودية بامتياز كانت شائعة في المخيال الديني للشرق الأوسط قبل الإسلام بقرون.<br><br>
+        <strong>استعارة "الرموز الرؤيوية":</strong><br>
+        يظهر بوضوح أن الرواة قد استعاروا هذا الرمز وحولوه من (سِمة الوحش) في الأدب المسيحي إلى كلمة (كافر) المكتوبة على جبهة الدجال. هذا "التناصّ" (Intertextuality) بين الرواية المنسوبة للنبي وبين سِفر الرؤيا، يُؤكد أن أحاديث الفتن والملاحم لم تكن وحياً مستقلاً عن الموروثات السابقة، بل كانت إعادة إنتاج لـ "الأدب الرؤيوي" (Apocalyptic Literature) الذي شاع في بيئة أهل الكتاب، ونُسب لاحقاً للنبي لإعطاء أحداث النهاية طابعاً مألوفاً للمعتنقين الجدد للدين الذين قدموا من تلك الخلفيات.<br><br>
+        <strong>تسطيح الابتلاء وتحويله لـ "فحص بصري":</strong><br>
+        يصور القرآن الكريم الصراع بين الحق والباطل كصراع وعي، وبصيرة، وموقف أخلاقي. أما الرواية -بمنبعها الأسطوري القديم- فقد حولت الفتنة الكبرى إلى "لغز حسي"؛ فمن يرى كلمة (كافر) ينجو ومن لا يراها يهلك. هذا التصوير يُقزم من شأن الاختبار الإلهي ويجعله رهينة "قدرة بصرية" أو "ملصق تحذيري" على الجبهة، وهو أسلوب ينتمي للقصص الشعبي الذي يميل للتبسيط والتشويق المادي.<br><br>
+        <strong>التصادم مع منطق الغيب القرآني:</strong><br>
+        لم يذكر القرآن الكريم "الدجال" ولا "كلمة كافر على الجبهة" في أيٍّ من آيات أشراط الساعة، بل ركز على انفطار السماء وسجرت البحار وبعثرة ما في القبور. إن غياب هذه "الشخصية الأسطورية" عن النص القرآني المكتمل، وحضورها الطاغي في "الروايات" المتطابقة مع أسفار العهد القديم والجديد، يثبت أنها "ملحقات ميثولوجية" تسللت لتعويض غياب التفاصيل الحسية في القرآن.<br><br>
+        <strong>تجسيد الخالق للمقارنة:</strong><br>
+        تقع الرواية في فخ "التشبيه" حين تبرر عور الدجال بقولها (وإن ربكم ليس بأعور)، وكأن المقارنة بين الله والدجال هي مقارنة في "سلامة العيون" أو الهيئة الجسدية. هذا المنطق يفتح الباب لتخيل أن لله "عيوناً" مادية لكنها سليمة، وهو خروج عن التنزيه المطلق {لَيْسَ كَمِثْلِهِ شَيْءٌ}، ومحاكاة للتصورات "الأنسنية" للرب في التوراة.`
+    },
+    { 
+        id: 22, 
+        title: "موسى وقوائم العرش", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/vYdkKlyq", 
+        text: "النَّاسُ يَصعَقونَ يَومَ القيامةِ، فأكونُ أوَّلَ مَن يُفيقُ، فإذا أنا بموسى آخِذٌ بقائِمةٍ مِن قَوائِمِ العَرشِ، فلا أدري أفاقَ قَبلي أم جوزيَ بصَعقةِ الطُّورِ.",
+        num: "3398", 
+        comparison: `<strong>الجذور في التصوف اليهودي (أدبيات الهيكلوت):</strong><br>
+        تجد فكرة "العرش ذي القوائم" المادية (The Legged Throne) حضوراً مركزياً في (أدبيات الهيكلوت - Hekhalot literature)، وهي نصوص صوفية يهودية قديمة (تعود للقرون الميلادية الأولى) تصف العرش الإلهي كبناء مادي ضخم له قوائم وأركان ملموسة يُمسك بها الأنبياء والملائكة المقربون. هذا التصوير المفرط في ماديته للعرش ولتمسك موسى به هو جزء أصيل من "المخيال اليهودي" الذي يجسد الغيب ليجعله قريباً من الإدراك الحسي.<br><br>
+        <strong>أنسنة العرش وتجسيمه:</strong><br>
+        إن نِسبة "القوائم" أو "الأرجل" لعرش الرحمن في مرويات الحديث، وتصوير موسى ممسكاً بها كأنها أعمدة بناء مادي، هو "تجسيم" صريح للغيب مستمد من كتب أهل الكتاب. فالقرآن الكريم يصف العرش بالجلال، والاستواء، والإحاطة، والتدبير {الرَّحْمَنُ عَلَى الْعَرْشِ اسْتَوَى}، ولا ينزل بوصفه أبداً لمستوى (الأرجل والقوائم) التي توحي بالتركيب والحاجة للدعم المادي، مما يثبت أن الرواية استعارت "النموذج الهندسي" للعرش من التقاليد السابقة.<br><br>
+        <strong>الصراع على "أفضلية الأنبياء":</strong><br>
+        تُصوّر الرواية مشهداً يضع النبي موسى في مرتبة "المنافس" أو "المساوي" للنبي محمد في لحظة الإفاقة الكبرى، بل وتجعل النبي محمد شاكاً في أفضليته في تلك اللحظة. هذا النمط من القصص صِيغ في بيئات تدوينية شهدت صراعات فكرية ومناظرات بين المسلمين واليهود حول "أفضلية الرسل"، فكان الحل هو "اقتباس" مفاخر اليهود في نبيهم ودمجها في الحديث النبوي لضمان قبول المعتنقين الجدد، مما أدى لتشويش العقيدة بصور قومية مستوردة.<br><br>
+        <strong>تحريف مفهوم "الصعقة" القرآنية:</strong><br>
+        يحاول النص الربط بين "صعقة القيامة" وبين "صعقة الطور" المذكورة في القرآن {وَخَرَّ مُوسَىٰ صَعِقًا}. القرآن جعل صعقة الطور واقعة تشريفية تعليمية لموسى في الدنيا، بينما الرواية تحولها إلى "بديل" أو "جزاء" يعفيه من أهوال القيامة. هذا الربط الميكانيكي يفتقر للمنطق القرآني الذي يجعل الناس جميعاً سواء في هول البعث والنشور، دون محاباة مبنية على أحداث تاريخية سابقة.<br><br>
+        <strong>التناقض مع "الاستواء" الإلهي:</strong><br>
+        العرش في الإسلام هو مظهر من مظاهر السلطان والقدرة، وليس "مقعداً" له قوائم مادية. تصوير موسى وهو "يتمسك" بالقائمة يوحي بأن العرش كيان مادي يسبح في الفراغ، وهو تصور يتطابق مع "العربة السماوية" (Merkabah) في الميتافيزيقا اليهودية، وهو تصور رفضه التنزيه القرآني الصرف.`
+    },
+    { 
+        id: 23, 
+        title: "مأدبة كبد الحوت: استنساخ أسطورة اللوياثان التلمودية", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/x3xJMXYM", 
+        text: "....وأمَّا أوَّلُ طَعامٍ يَأكُلُه أهلُ الجَنَّةِ فزيادةُ كَبِدِ الحوتِ.",
+        num: "3938", 
+        comparison: `<strong>الجذور في الميثولوجيا والملّة اليهودية:</strong><br>
+        تجد هذه الفكرة أصلاً ثابتاً ومركزياً في العقيدة اليهودية المتعلقة بنهاية الزمان (Eschatology)؛ حيث يُعتقد أن الله سيقيم مأدبة عظمى للصالحين يأكلون فيها من لحم وحش بحري أسطوري يسمى "اللوياثان" (Leviathan). جاء في (تلمود بابا باترا 74ب - Baba Batra 74b) ما نصُّه: (أنَّ الله سيذبحُ اللوياثان (الحوت العظيم) ويصنعُ من لحمه مأدبةً للأبرار في العالم الآتي).<br><br>
+        <strong>تطابق الرمزية المادية:</strong><br>
+        إن التطابق هنا ليس في مجرد فكرة "الأكل" في الجنة، بل في الاختيار النوعي لـ "الحوت" تحديداً كرمز لأول وجبة سماوية تُقدم للمؤمنين. هذا الاختيار يعكس خيال البيئات القديمة التي كانت تَرى في صيد البحار العظيم (الحيتان) قمة الترف والجزاء، فنقلت هذا الخيال الشعبي المادي إلى تصورات النعيم الغيبي.<br><br>
+        <strong>تسلل "التصورات المادية" للجنة:</strong><br>
+        إن انتقال أسطورة "اللوياثان" من التلمود إلى "صحيح البخاري" يُبين كيف تسرَّبت التصورات المادية للنعيم من الفكر اليهودي إلى الفكر الروائي الإسلامي. فبدلاً من أن يكون نعيم الجنة غيباً مطلقاً لا تدركه الأوصاف البشرية المعهودة، حوّلته الرواية إلى "مأدبة بحرية" مستنسخة من خيالات الأحبار القدماء، مما يُقزم جلال الجنة ويجعلها مجرد صدىً لأساطير الأمم السابقة.<br><br>
+        <strong>التناقض مع "المقام الغيبي" في القرآن:</strong><br>
+        يصف القرآن الكريم طعام أهل الجنة بصفات توحي باللذة والسكينة (فواكه، عسل، لبن، لحم طير) {وَلَحْمِ طَيْرٍ مِّمَّا يَشْتَهُونَ}، ولم يذكر قط قصة "ذبح الحوت" أو أكل كبده. القرآن يجعل النعيم غيبياً {فَلَا تَعْلَمُ نَفْسٌ مَّا أُخْفِيَ لَهُم مِّن قُرَّةِ أَعْيُنٍ}، بينما الرواية المقتبسة تجعل النعيم "معلوماً ومحدداً" بتفاصيل تشريحية (زيادة الكبد)، وهو ما يصادم فلسفة "اللا معلوم" في النعيم الإلهي.<br><br>
+        <strong>أثر الرواة من أهل الكتاب:</strong><br>
+        يظهر السياق القصصي للرواية (سؤال عبد الله بن سلام، وهو حبر يهودي أسلم) بوضوح كيف دخلت هذه المرويات؛ حيث نُسب للنبي الإجابة على أسئلة الأحبار بما يوافق موروثهم "ليثبت صدقه"، مما جعل التراث الإسلامي يستوعب "المخيال التوراتي" كجزء من العقيدة الإسلامية الصحيحة.`
+    },
+    { 
+        id: 24, 
+        title: "مس الشيطان للمولود واللاهوت الكنسي", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/dsjFC3JI", 
+        text: "سَمِعتُ رَسولَ اللهِ صلَّى اللهُ عليه وسلَّم يقولُ: ما مِن بَني آدَمَ مَولودٌ إلَّا يَمَسُّه الشَّيطانُ حينَ يولَدُ، فيَستَهِلُّ صارِخًا مِن مَسِّ الشَّيطانِ، غيرَ مَريَمَ وابنِها. ثُمَّ يقولُ أبو هُرَيرةَ: {وإنِّي أُعيذُها بكَ وذُرِّيَّتَها مِنَ الشَّيطانِ الرَّجيمِ}.",
+        num: "3431", 
+        comparison: `<strong>استيراد "لاهوت الخطيئة الأصلية":</strong><br>
+        يكشف التأمل في هذا النص عن استيراد كامل لأزمة "اللاهوت المسيحي" وصبغها بصبغة روائية إسلامية. فعلى الرغم من أن الأناجيل لا تنطق بلفظ "المس" المادي، إلا أن هذا النص هو تجسيد "حكواتي" ومادي لعقيدة (الخطيئة الأصلية - Original Sin) الواردة في رسالة رومية (5: 12)؛ والتي تنطلق من أن كل مولود يخرج للدنيا وهو "مُصاب" بسلطان الشيطان ودنس المعصية الموروثة. إن "مس الشيطان" الذي ينتج عنه صراخ المولود في الرواية ليس إلا التعبير الحسي عن ذاك "الدنس اللاهوتي" الذي تفرضه المسيحية على بني آدم منذ لحظة التكوين.<br><br>
+        <strong>تطابق "الاستثناء الحصري" مع العقائد الكنسية:</strong><br>
+        يبرز وجه التطابق المذهل في منح الرواية استثناءً حصرياً لمريم وابنها (عيسى) من هذا المس الشيطاني. وهذا يتماشى تماماً مع عقيدة (العصمة من الخطيئة) للمسيح وأمه المذكورة في رسالة العبرانيين (4: 15)، وتقريرات لاهوت (الحبل بلا دنس - Immaculate Conception) المستنبط من لوقا (1: 28)، والذي يجعل العذراء مريم وحدها من لم تنلها "لمسة الشيطان" (أي الخطيئة) حمايةً لها ولابنها. إن الرواية بهذا الشكل لم تكن إلا "تعريباً" لمفاهيم كنسية أراد الرواة إقحامها في الموروث الإسلامي.<br><br>
+        <strong>المصادمة مع "الفطرة" والعدل في القرآن:</strong><br>
+        يُؤسس القرآن الكريم لقاعدة أن الإنسان يُولد بصفحة بيضاء وطهارة فطرية: {فِطْرَتَ اللَّهِ الَّتِي فَطَرَ النَّاسَ عَلَيْهَا} [الروم: 30]. كما يقرر استقلال المسؤولية: {وَلَا تَكْسِبُ كُلُّ نَفْسٍ إِلَّا عَلَيْهَا}. الرواية تخرق هذا اليقين القرآني لتجعل الشيطان شريكاً مادياً في لحظة الولادة لكل البشر، وهو ما يتنافى مع تكريم الله للإنسان وتنزيه عملية الخلق من التدخل الشيطاني القسري.<br><br>
+        <strong>تحريف غاية الدعاء القرآني:</strong><br>
+        استشهد الراوي بآية {وَإِنِّي أُعِيذُهَا بِكَ...} لتبرير الاستثناء، بينما سياق الآية في القرآن هو "دعاء" من امرأة عمران (أُم مريم) وليس "قانوناً بيولوجياً" يحكم عملية الولادة. تحويل "الدعاء القلبي" إلى "حصانة مادية" لمريم وابنها مقابل "اعتداء شيطاني" على بقية البشر هو تلاعب بمقاصد النص القرآني لخدمة التصورات اللاهوتية السابقة.<br><br>
+        <strong>التصادم مع العلم والمنطق:</strong><br>
+        يقرر العلم أن صراخ المولود هو فعل فيزيولوجي ضروري لتوسيع الرئتين وبدء عملية التنفس المستقل، ولا علاقة له بـ "نخس أو مس" غيبي. الرواية تحاول "تفسير" الظواهر الطبيعية بأساطير لاهوتية، مما يُقزم مقام النبوة ويجعلها تنطق بما يكذبه الواقع والطب، وهو ما ننزّه النبي عنه.`
+    },
+    { 
+        id: 25, 
+        title: "النبي المسحور: جذور تلمودية", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/TGdk3CJ6", 
+        text: "عَن عائِشةَ قالت: سُحِرَ النَّبيُّ صلَّى اللهُ عليه وسلَّم، حتَّى كان يُخَيَّلُ إليه أنَّه يَفعَلُ الشَّيءَ وما يَفعَلُه، حتَّى كان ذاتَ يَومٍ دَعا ودَعا، ثُمَّ قال: أشَعَرتِ أنَّ اللهَ أفتاني فيما فيه شِفائي، أتاني رَجُلانِ: فقَعَدَ أحَدُهما عِندَ رَأسي، والآخَرُ عِندَ رِجلَيَّ، فقال أحَدُهما للآخَرِ: ما وجَعُ الرَّجُلِ؟ قال: مَطبوبٌ، قال: ومَن طَبَّه؟ قال: لَبيدُ بنُ الأعصَمِ، قال: فيما ذا؟ قال: في مُشُطٍ ومُشاطةٍ وجُفِّ طَلعةٍ ذَكَرٍ، قال: فأينَ هو؟ قال: في بئرِ ذَروانَ.",
+        num: "3268", 
+        comparison: `<strong>الجذور في التراث التلمودي والقصص اليهودي:</strong><br>
+        تجد فكرة "النبي المسحور" أو صراع الأنبياء مع القوى السحرية وتأثرهم المادي بها جذوراً عميقة في التراث اليهودي. فالتلمود (في سِفر جيتين 68أ - Gittin 68a) ينسج أساطير حول الملك سليمان وكيف استولت الشياطين على ملكه وعقله عبر السحر أو سرقة خاتمه. هذا التصور الذي يجعل "عقل النبي" مستباحاً لألاعيب السحرة والشياطين هو ملمح أساسي في الميثولوجيا الإسرائيلية التي لا ترى غضاضة في نِسبة الضعف والوهم للأنبياء.<br><br>
+        <strong>تسلل ثقافة "الخوف من السحر" البابلية:</strong><br>
+        تسرّبت مفاهيم السحر البابلية (التي تعتمد على الأثر المادي كالمشط والمشاطة والعقد) إلى الوجدان اليهودي ومنه إلى رواة الحديث. هذه الثقافة تَرى في السحر "قوة قاهرة" تعلو فوق الحماية الإلهية، لدرجة أنها تُعطل وعي "القدوة" وتجعله يهذي أو يتخيل أشياءً لم تحدث. إن انتقال هذه "الملاحم السحرية" إلى كتب الحديث الإسلامية هو استيراد لمنظومة فكرية غريبة تهدف لزعزعة اليقين في عصمة الرسول.<br><br>
+        <strong>المصادمة مع المنطق القرآني الصارم:</strong><br>
+        يُشكل القرآن الكريم سياجاً حامياً لمقام النبوة، حيث اعتبر نِسبة "السحر" للنبي تهمةً باطلة يطلقها الظالمون حصراً: {وَقَالَ الظَّالِمُونَ إِن تَتَّبِعُونَ إِلَّا رَجُلًا مَّسْحُورًا} [الفرقان: 8]. فكيف يحول الرواة "فرية الظالمين" التي نفاها الله عن نبيه إلى "واقعة تاريخية" ثابتة في كتب الصحاح؟ إن هذا التناقض يثبت أن الرواية هي صدى لثقافة أهل الكتاب التي استباحت عقول الأنبياء، وليست وحياً يوافق الكتاب.<br><br>
+        <strong>الطعن في "أهلية البلاغ":</strong><br>
+        القبول بوقوع السحر على النبي لدرجة "التخيل والوهم" يفتح باباً خطيراً للتشكيك في كل ما صَدَر عنه؛ فمن يضمن للأمة أن الوحي لم يختلط بأوهام السحر في تلك الفترة؟ إن القرآن يضمن سلامة نطق النبي: {وَمَا يَنطِقُ عَنِ الْهَوَىٰ}، بينما الرواية المقتبسة من الموروثات القديمة تدعي أن "الهوى والسحر" تملكا وعيه، وهو ما يهدم ركن العصمة في التبليغ.<br><br>
+        <strong>تنزيه الغيب من "الأدوات المادية":</strong><br>
+        تذكر الرواية تفاصيل السحر (مشط، مشاطة، بئر) وهي تفاصيل مادية ساذجة تشبه قصص السحرة في الأساطير الشعبية القديمة. والمنطق الإلهي في القرآن يترفع عن جعل "عقدة في مشط" أقوى من "العصمة الربانية". إن ربط مصير النبي بـ "بئر ذروان" هو تقزيم لجلال النبوة وجعلها رهينة لفضلات بيولوجية ومواد جامدة، تماماً كما في ملاحم بابل واليهود.`
+    },
+    { 
+        id: 26, 
+        title: "السبع أرضين وميدراش تانخوما", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/Y6it2rSe", 
+        text: "مَن ظَلَمَ قِيدَ شِبرٍ مِنَ الأرضِ طُوِّقَه مِن سَبعِ أرَضينَ.",
+        num: "2453", 
+        comparison: `<strong>الجذور الصريحة في "ميدراش تانخوما":</strong><br>
+        تجد هذه الفكرة أصلها المفصل في (ميدراش تانخوما - Midrash Tanhuma)، وهو من النصوص اليهودية القديمة المخصصة لتفسير سِفر التكوين. جاء فيه ما نصُّه: (بالمقدارِ الذي خَلَقَ به القُدُّوسُ -مُباركٌ هو- سبعَ سموات، كذلك خَلَقَ سَبْعَ أَرَضِينَ واحدةً فوقَ الأخرى، وأسماؤها هي: إيريتس، أدما، أرقا، غي، نيشيا، زياه، وتيفيل).<br><br>
+        <strong>تبنّي نموذج "الكون الطبقي":</strong><br>
+        إن التطابق هنا يتجاوز مجرد ذكر "الرقم سبعة"، ليصل إلى تبنّي كامل لنموذج (الكون الطبقي المادي) الذي سكن المخيال اليهودي لقرون. فبينما يذكر القرآن الكريم "الأرض" بصيغة الإفراد في جلّ آياته، ويلمح للعدد في موضع واحد دون تفصيل مادي {وَمِنَ الْأَرْضِ مِثْلَهُنَّ}، نجد الرواية البخارية تقرر "تطويق" الإنسان بهذه الطبقات السبع كعقوبة مادية حسية، وهو تصور ينسجم مع "الفيزياء الأسطورية" للعهود السابقة.<br><br>
+        <strong>تسلل "جغرافيا الأحبار" إلى الحديث:</strong><br>
+        إن الولع بالتقسيمات السبعة للأرض بأسماء وتفاصيل محددة هو نسخة "معرَّبة" من تراث الأحبار الذي كان يصف عوالم تحت الأرض بخرائط مكانية دقيقة. انتقال هذه التصورات إلى مدونات الحديث يُثبت أن الرواة (الذين كان الكثير منهم على صلة بثقافة أهل الكتاب) قد استلهموا "جغرافية الغيب" من كتب الأقدمين ونسبوها للنبي لإضفاء طابع إعجازي ترهيبي يصدم العقل.<br><br>
+        <strong>التصادم مع الحقائق الجيولوجية والقرآنية:</strong><br>
+        يقرر العلم الحديث أن الأرض كوكب واحد مكون من طبقات كيميائية (لُب ودثار وقشرة)، وليس "سبع أراضٍ" مستقلة يمكن التطويق بها. كما أن القرآن الكريم يترفع عن وصف العقاب الإلهي بصور "ميكانيكية" مستحيلة (تطويق العنق بسبع طبقات كوكبية)، ويركز على المسؤولية الأخلاقية والجزاء العادل. الرواية تحاول تحويل الظلم (وهو فعل معنوي وقانوني) إلى "حمل فيزيائي" خرافي مستمد من أساطير الطبقات السبع.<br><br>
+        <strong>تسطيح مفهوم "الجزاء":</strong><br>
+        في الموروث التوراتي، تميل العقوبات دائماً لتكون حسية وفجة. أما القرآن فيجعل العقاب خزياً وعذاباً روحياً ومادياً يليق بجلال الله. الادعاء بأن الله سيطوق عنق الظالم بسبع أرضين (مساحة كوكبية هائلة بشبر واحد) هو وصف يفتقر للمنطق؛ فوزن قليل من الأرض كفيل بسحق البشر، مما يثبت أن النص يهدف للإبهار القصصي المأخوذ من الفلكلور القديم للأمم السابقة.`
+    },
+    { 
+        id: 27, 
+        title: "مخاصمة آدم وموسى: محاكاة لجدليات ميدراش تانخوما", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/FxhAFJn2", 
+        text: "احتَجَّ آدَمُ وموسى، فقال له موسى: يا آدَمُ، أنتَ أبونا خَيَّبتَنا وأخرَجتَنا مِنَ الجَنَّةِ، قال له آدَمُ: يا موسى، اصطَفاك اللهُ بكَلامِه، وخَطَّ لك بيَدِه، أتَلومُني على أمرٍ قدَّرَه اللهُ عليَّ قَبلَ أن يَخلُقَني بأربَعينَ سَنةً؟ فحَجَّ آدَمُ موسى، فحَجَّ آدَمُ موسى، ثَلاثًا.",
+        num: "6614", 
+        comparison: `<strong>الجذور في الأدب اليهودي (الميدراش):</strong><br>
+        تُعتبر "المناظرات الغيبية بين الأنبياء" سمة أصيلة في الأدب القصصي اليهودي المعروف بالـ (Haggadah). ويوجد نص موازٍ وصادم في تطابقه في (ميدراش تانخوما - Midrash Tanhuma) يصف صراعاً كلامياً بين موسى وآدم حول الذنب والموت، جاء فيه: (قال موسى لآدم: أنت هو الذي أفسدتَ العالم وجلبتَ الموت على نسلك. فأجابه آدم: وأنت يا موسى، ألم تأخذ التوراة التي كُتب فيها "موتٌ يُميت" قبل أن أُخلق؟ فبأيِّ حقٍّ تلومني على قدرٍ سَبقني؟).<br><br>
+        <strong>التطابق البنيوي والمنطقي:</strong><br>
+        إن بنية "المُحاججة" (Argumentation) والمنطق "الجبري" المستخدم في الرد (الاحتجاج بالكتاب المكتوب سلفاً للهروب من المسؤولية الأخلاقية) هو تطابق حرفي بين الرواية المنسوبة للنبي وبين نصوص الميدراش. هذا النمط من القصص يهدف في الفكر اللاهوتي اليهودي إلى "تلطيف" خطايا الآباء الأوائل عبر إلقاء اللائمة على "الخطة الإلهية المسبقة"، وهو ما تسلل إلى التراث الروائي الإسلامي ليصبح أصلاً في العقيدة.<br><br>
+        <strong>المصادمة مع المنطق القرآني للذنب:</strong><br>
+        يُصور القرآن الكريم آدم عليه السلام بمظهر الإنسان المسؤول الذي يعترف بزلته ويتحمل نتيجتها: {رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ} [الأعراف: 23]. بينما في الرواية (المقتبسة من الميدراش)، يظهر آدم بمظهر "المجادل بالقدر" الذي يرى نفسه "غير ملوم" لأن الفعل كُتب عليه، وهو منطق ينسف فلسفة الابتلاء والمسؤولية الفردية التي هي عماد القرآن.<br><br>
+        <strong>توهين مفهوم "التوبة":</strong><br>
+        في القرآن، تاب الله على آدم لأنه أناب واستغفر. أما في الرواية، فقد انتصر آدم في الحجة لأنه "مُسيّر" لا "مُخيّر". هذا التحول من "توبة العبد" إلى "احتجاج المجبر" هو انحراف معرفي هائل حوّل الأنبياء من قدوات في الرجوع للحق إلى محامين يبررون الخطأ بسلطة القدر، وهو ما نزه الله أنبياءه عنه.<br><br>
+        <strong>تسلل مدرسة "الحكواتية" للمقدس:</strong><br>
+        يثبت هذا التقارب أن الرواة (الذين كانوا يميلون لقصص الأمم السابقة لإبهار المستمعين) قد استلبوا السجالات القديمة للأحبار حول الإرادة والقدر، ونحلوها للنبي ﷺ. وبذلك تحول "الفلكلور اليهودي" إلى "أحاديث صحيحة" تُبنى عليها تصورات المسلمين عن القضاء والقدر، مما جعل "الجبرية" تتغلغل في العقل المسلم لتعطل إرادته تحت ذريعة أن "آدم حجَّ موسى".`
+    },
+    { 
+        id: 28, 
+        title: "عذاب القبر وضغطته: سيناريو من الديانة الزرادشتية", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/pm6cntAd", 
+        text: "إنَّ العَبدَ إذا وُضِعَ في قَبرِه ... أتاه مَلَكانِ فيُقعِدانِه... ويُضرَبُ بمَطارِقَ مِن حَديدٍ ضَربةً، فيَصيحُ صَيحةً يَسمَعُها مَن يَليه غيرَ الثَّقَلَينِ. (وفي رواية ثانية: إنَّ للقبرِ ضغطةً، فلو نجا أو سلِمَ أحدٌ منها لنجا سعدُ بنُ معاذٍ.)",
+        num: "1374", 
+        comparison: `<strong>التطابق مع الأساطير الزرادشتية (أردا ويراف نامه):</strong><br>
+        تجد هذه التفاصيل الحسية أصلها الدقيق في الديانة الزرادشتية (المجوسية) التي سبقت الإسلام بآلاف السنين؛ وتحديداً في كتاب (أردا ويراف نامه - Arda Viraf Nameh) وفي نصوص (الأفستا). تعتقد الزرادشتية أن الروح تواجه "محاكمة صغرى" فور الموت؛ حيث يأتي كائنان غيبيان لمحاسبة الميت، ويُساق الأشرار إلى "ضغطة" في القبر تُحطم عظامهم، ويواجهون عذابات مادية بمطارق وسكاكين تفصيلية قبل القيامة الكبرى. هذا "التطابق الوظيفي" يثبت أن الوعي التدويني قد تشرّب المحيط الثقافي الفارسي وأسقطه على الغيب الإسلامي.<br><br>
+        <strong>المصادمة مع "هدوء الغيب" في القرآن:</strong><br>
+        يُؤسس القرآن الكريم لحالة ما بعد الموت بصفتها حالة "سبات" أو "رقاد" لا انقطاع فيه حتى البعث: {قَالُوا يَا وَيْلَنَا مَن بَعَثَنَا مِن مَّرْقَدِنَا ۜ ۗ هَٰذَا مَا وَعَدَ الرَّحْمَنُ وَصَدَقَ الْمُرْسَلُونَ} [يس: 52]. كلمة (مَرْقَدِنَا) تنفي وقوع أي عذاب حسي أو مطارق حديدية طوال آلاف السنين، وإلا لكان البعث بالنسبة للمُعذَّب "إنقاذاً" وليس "فجيعة" (يا ويلنا). القرآن صمت تماماً عما يسمى "عذاب القبر"، مما يؤكد أن هذا السيناريو هو ملحق أسطوري دخيل.<br><br>
+        <strong>توهين مفهوم "العدالة" بضغطة القبر:</strong><br>
+        تدعي الرواية الثانية أن القبر له "ضغطة" لا ينجو منها أحد، حتى الصالحين كـ "سعد بن معاذ". فبأي منطق إلهي يُعاقب المؤمن الصالح بضغطة تُحطم أضلاعه فور دفنه؟ هذا التصوير يتناقض مع قوله تعالى: {لَا يَحْزُنُهُمُ الْفَزَعُ الْأَكْبَرُ وَتَتَلَقَّاهُمُ الْمَلَائِكَةُ هَٰذَا يَوْمُكُمُ الَّذِي كُنتُمْ تُوعَدُونَ} [الأنبياء: 103]. الرواية استعارت "النزعة الانتقامية" من الديانات القديمة التي تهدف لترهيب الأتباع وتطويعهم نفسياً عبر "فوبيا القبر".<br><br>
+        <strong>تجسيم الملائكة كـ "جلادين":</strong><br>
+        تُصوّر الرواية ملائكة الله (المنوط بهم الرحمة والتسبيح) بمظهر "الجلادين" الذين يحملون مطارق الحديد ليضربوا الأجساد البالية في القبور. هذا الابتذال لعالم الغيب يُحول الملائكة إلى أدوات تعذيب مادية، وهو تصور يتطابق مع "شياطين القبر" في الميثولوجيا المصرية والفارسية القديمة، ويصادم جلال الوظيفة الملائكية في القرآن.<br><br>
+        <strong>العبثية المنطقية في "سماع الصرخة":</strong><br>
+        تدعي الرواية أن كل الكائنات (البهائم) تسمع صراخ المعذب في القبر إلّا الإنس والجن. والواقع العلمي والمشاهدة الحسية تُكذب ذلك؛ فالحيوانات تعيش فوق المقابر وترعى حولها بمنتهى السكينة، ولم يثبت قط تأثر أي كائن بـ "صيحات غيبية". إن إقحام "سماع الحيوانات" هو أسلوب قصصي شعبي يهدف لإضفاء "رهبة زائفة" تفتقر للدليل واليقين.`
+    },
+    { 
+        id: 29, 
+        title: "الختان: استنساخ توراتي", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/uhqXX9jZ", 
+        text: "الفِطرةُ خَمسٌ: الخِتانُ، والِاستِحدادُ، ونَتفُ الإبطِ، وقَصُّ الشَّارِبِ، وتَقليمُ الأظفارِ.",
+        num: "6297", 
+        comparison: `<strong>الجذور في العهد القديم (ميثاق الغُرلة):</strong><br>
+        يُعد الختان الركيزة الأساسية في "ميثاق الدم" بين الرب وبني إسرائيل في التوراة؛ ففي سِفر التكوين (الإصحاح 17، الأعداد 10-14) نجد أمراً صريحاً وقاطعاً: (هذا هو عهدي الذي تحفظونه بيني وبينكم... يُختن منكم كل ذكر... وأما الذكر الأغلف الذي لا يُختن... فتُقطع تلك النفس من شعبها؛ إنه قد نكث عهدي). إن تحويل "قَطْع جزء من الجسد" إلى شرط للنجاة والانتماء هو جوهر القانون التوراتي.<br><br>
+        <strong>المصادمة مع المنطق القرآني للكمال الخَلْقي:</strong><br>
+        يُؤصل القرآن الكريم لقاعدة أن الله خلق الإنسان في أبهى وأكمل صورة: {لَقَدْ خَلَقْنَا الْإِنسَانَ فِي أَحْسَنِ تَقْوِيمٍ} [التين: 4]. والادعاء بأن "الفطرة" (التي هي أصل الخلقة) تقتضي "إزالة جزء" من هذا التقويم الإلهي، هو تناقض منطقي صارخ؛ فالفطرة هي ما وجد عليه الإنسان، وليس ما يُعدل فيه بالجراحة. كما اعتبر القرآن أن "تغيير خلق الله" هو من إيحاءات الشيطان وتعدٍ على إتقان الصنعة الإلهية: {وَلَآمُرَنَّهُمْ فَلَيُغَيِّرُنَّ خَلْقَ اللَّهِ}.<br><br>
+        <strong>الصمت القرآني المُبين:</strong><br>
+        من المثير للدهشة أن القرآن الكريم، الذي فصّل أحكام الطهارة من وضوء وغُسل وتيمم، لم يذكر "الختان" بكلمة واحدة، لا أمراً ولا تلميحاً. حتى في قصة إبراهيم عليه السلام، ذكر القرآن وفاءه بكلمات ربه واختباراته، ولم يذكر مأساة "الختان بالقدوم" أو ميثاق الدم. هذا الصمت يُثبت أن الختان ليس أصلاً في الرسالة الخاتمة، بل ممارسة أُقحمت عبر الروايات المتأثرة بالبيئة الكتابية.<br><br>
+        <strong>تسلل الموروث القومي اليهودي:</strong><br>
+        لقد نَقَل الرواة الذين تشرّبوا ثقافة "الإسرائيليات" عقلية "العهد القديم" إلى مدونات الحديث، محولين ممارسة قومية خاصة ببني إسرائيل إلى ركن موازٍ في الإسلام. إن إدراج الختان ضمن "خمس من الفطرة" جنباً إلى جنب مع قص الأظافر وتنظيف الإبط (وهي أفعال نظافة دورية)، هو خلط بين "الجراحة الدائمة" و"النظافة العارضة"، يهدف لشرعنة الختان وإضفاء صفة القداسة عليه.<br><br>
+        <strong>الإساءة لمفهوم "الإسلام الحنيف":</strong><br>
+        جاء الإسلام ليهدم الأغلال والآصار التي كانت على الأمم السابقة، ومنها التكليفات الجسدية الشاقة. والرواية بعودتها لفرض الختان تضع غُلاً جديداً على أجساد المسلمين لم يأمر به الله، مما يُقزم رسالة الإسلام من كونها ثورة روحية وعقلية، إلى منظومة تنشغل بقطع الجلود لإثبات الولاء، تماماً كما في اللاهوت اليهودي القديم.`
+    },
+    { 
+        id: 30, 
+        title: "بدء الوحي والغط: تكرار أساطير الأقدمين", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/tP56YCW8", 
+        text: "حتَّى جاءَه الحَقُّ وهو في غارِ حِراءٍ، فجاءَه المَلَكُ فقال: اقرَأْ، قال: ما أنا بقارِئٍ، قال: فأخَذَني فغَطَّني (ضمني وعصرني) حتَّى بَلَغَ مِنِّي الجَهدَ ثُمَّ أرسَلَني، فقال: اقرَأْ، قُلتُ: ما أنا بقارِئٍ، فأخَذَني فغَطَّني الثَّانيةَ حتَّى بَلَغَ مِنِّي الجَهدَ ....، فأخَذَني فغَطَّني الثَّالِثةَ ثُمَّ أرسَلَني، فقال: {اقرَأْ باسمِ رَبِّك الذي ... فرَجَعَ بها رَسولُ اللهِ صلَّى اللهُ عليه وسلَّم يَرجُفُ فُؤادُه.",
+        num: "3", 
+        comparison: `<strong>ثيمة "المُلهم الأمي" في ميثولوجيا اليونان:</strong><br>
+        تجد هذه الثيمة (رجل بسيط، في مكان معزول، يُجبر من كائن سماوي على النطق بالمعجز) جذوراً موغلة في القِدَم. فقبل الإسلام بـ 1300 عام، وصف الشاعر اليوناني (هسيود - Hesiod) في ملحمته (الثيوغونيا) كيف جاءته الكائنات السماوية وهو راعٍ بسيط في الجبال، وضغطت عليه ليلهموه كلاماً معجزاً لم يكن يعرفه. إن فكرة "الانتزاع المادي" للإلهام هي "موتيف" (Motif) أدبي قديم استُخدم لتبرير مصدر الكلام الخارق.<br><br>
+        <strong>التطابق مع قصة "زارادشت" والفرس:</strong><br>
+        تتطابق الرواية في تفاصيلها الجوهرية مع قصة (زارادشت)؛ الذي اعتزل البشر في "غار" بجبل (سبلان) لسنوات، ليتلقى وحياً من كائن نوري عظيم (أهورامزدا) بأسلوب يجمع بين الرهبة الجسدية والتلقي الغيبي. هذا التشابه يوضح أن "خيال الغار" كان هو التفسير السائد في الشرق الأدنى لظهور الأنبياء والمصلحين.<br><br>
+        <strong>أسطورة "كادمون" والإجبار على النطق:</strong><br>
+        حتى في التراث الإنجليزي القديم (القرن السابع الميلادي)، نجد قصة (كادمون - Caedmon) التي رواها "بيد" (Bede)؛ حيث يظهر كائن لراعٍ أمي ويأمره بالنشيد، فيعتذر بأنه "لا يعرف القراءة أو الغناء"، فيضغط عليه الكائن حتى ينطق بالمعجز. إن تكرار نمط (الاعتزال، الأمية، الضغط الجسدي، ثم النطق) في تواريخ أديان وملاحم متباعدة يُثبت أن رواة الحديث قد صاغوا تفاصيل "غار حراء" بناءً على "المخيال القصصي" الشائع تاريخياً لإثبات النبوة أمام أتباع الثقافات الأخرى بصورة مألوفة لديهم.<br><br>
+        <strong>المصادمة مع المفهوم القرآني للوحي:</strong><br>
+        القرآن الكريم وصف الوحي بـ "النور" {وَلَٰكِن جَعَلْنَاهُ نُورًا نَّهْدِي بِهِ}، وبـ "البصائر" و"الروح"، ولم يذكر قط قصة "الغط والضغط" أو المعاناة المادية العنيفة. حتى في سورة العلق، جاء الأمر بـ {اقْرَأْ} كدعوة لإعمال الوعي والبدء باسم الخالق، دون إشارة لـ "غار" أو "مخنق". إن القرآن نزه فعل الوحي عن "الترهيب الجسدي" وجعله اتصالاً فائقاً بين وعي النبي وجلال الروح القدس.<br><br>
+        <strong>توهين أهلية النبي ويقينه:</strong><br>
+        تذكر الرواية أن النبي شك في نفسه لدرجة "الخوف من الجنون" أو "الرئي"، واحتاج لشهادة (ورقة بن نوفل) —وهو رجل يتعبد على الطريقة النصرانية العبرانية— لكي يطمئنه بأنه نبي. وهذا يضع "الموروث الكتابي" في مرتبة أعلى من "اليقين النبوي" المباشر، ويُصور النبي كشخصية مترددة تحتاج لوساطة بشرية لفهم حقيقة ربه، وهو ما يتناقض مع جلال الاصطفاء الإلهي.`
+    },
+    { 
+        id: 31, 
+        title: "صراخ الموتى: جذور في الميدراش واللاهوت الزرادشتي", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/LamCyd8Z", 
+        text: "دَخَلَت عليَّ عَجوزانِ مِن عُجُزِ يَهودِ المَدينةِ، فقالتا لي: إنَّ أهلَ القُبورِ يُعَذَّبونَ في قُبورِهم، فكَذَّبتُهما، ولَم أُنعِمْ أن أُصَدِّقَهما، فخَرَجَتا، ودَخَلَ عليَّ النَّبيُّ صلَّى اللهُ عليه وسلَّم، فقُلتُ له: يا رَسولَ اللهِ، إنَّ عَجوزَينِ، وذَكَرتُ له، فقال: صَدَقَتا، إنَّهم يُعَذَّبونَ عَذابًا تَسمَعُه البَهائِمُ كُلُّها، فما رَأيتُه بَعدُ في صَلاةٍ إلَّا تَعَوَّذَ مِن عَذابِ القَبرِ.",
+        num: "6366", 
+        comparison: `<strong>الجذور في التراث اليهودي (ميدراش ربي إليعازر):</strong><br>
+        تجد فكرة "صرخة الروح" التي تسمعها الكائنات غير البشرية أصلاً عميقاً في التقاليد الميدراشية. يذكر كتاب (Pirke De-Rabbi Eliezer) أن الروح عندما تفارق الجسد أو تُعاقب، تصرخ صرخة تملأ أركان الأرض، ويسمعها كل من في الكون إلا الإنسان. وغالباً ما يُشار في الفولكلور اليهودي القديم إلى أن اضطراب الكلاب والبهائم المفاجئ ناتج عن رؤيتها أو سماعها لأهوال عالم الأرواح، وهو بالضبط ما نقله "يهود المدينة" في الرواية.<br><br>
+        <strong>التطابق مع اللاهوت الزرادشتي:</strong><br>
+        يصف كتاب (أردا ويراف نامه) الفارسي —الذي كُتب قبل الإسلام بقرون— صراخ الأرواح المعذبة في "البرزخ" الزرادشتي، وكيف أن هذا الصراخ يُرعب الكائنات الحية القريبة. إن هذا التصوير الحسي لعالم الغيب هو ملمح مشترك بين الديانات التي مالت لتجسيد العقاب وتصويره كمشهد "مادي" يحدث داخل القشرة الأرضية.<br><br>
+        <strong>المفارقة المنطقية وعبثية الغاية:</strong><br>
+        يطرح العقل سؤالاً جوهرياً: إذا كان الغرض من "عذاب القبر" هو العظة والترهيب للبشر (المكلفين) لكي يستقيموا، فما هي الحكمة من حجب أصوات المعذبين عن "الإنسان" وإسماعها لـ "البهائم"؟ البهيمة كائن غير عاقل ولا مكلف، ولن يغير سماعها للصراخ من سلوكها شيئاً. إن جعل "الحيوانات" هي الشاهد الوحيد على عدالة الله في القبور هو تصور يتنافى مع "منطق البلاغ" الإلهي الذي يخاطب العقول لا الغرائز الحيوانية.<br><br>
+        <strong>المصادمة مع السكون القرآني:</strong><br>
+        يُجمع القرآن الكريم على أن حالة ما بعد الموت هي حالة "مرقد" أو سبات عميق، حيث ينقطع شعور الميت بالزمن وبالألم المادي حتى لحظة البعث: {قَالُوا يَا وَيْلَنَا مَن بَعَثَنَا مِن مَّرْقَدِنَا} [يس: 52]. الرواية التي تدعي وجود "عذاب وصراخ" مسموع للبهائم تُحوّل القبر من مكان للصمت والانتظار إلى "مسرح رعب" يومي، وهو تصور يخدم عقلية الترهيب في الأديان السابقة، لكنه يصدم هدوء الغيب في الإسلام.<br><br>
+        <strong>تفسير الظواهر الطبيعية بالخرافة:</strong><br>
+        تعكس الرواية نمط التفكير البدائي الذي كان يفسر اضطراب الحيوانات العفوي (الناتج عن خوف، أو جوع، أو تغير مناخي) بتفسيرات غيبية مرعبة (رؤية شيطان أو سماع معذب). تسلل هذا "المخيال الشعبي" إلى صحيح البخاري يُبين كيف تماهت الرواية مع أوهام البيئة المحيطة، ونسبتها للوحي لتضفي عليها قداسة دينية تعطل الفهم العلمي للطبيعة.`
+    },
+    { 
+        id: 32, 
+        title: "حبس الشمس ليَشوع: استعارة الملاحم العبرية", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/TjqFTTTo", 
+        text: "غَزا نَبيٌّ مِنَ الأنبياءِ... فدَنا مِنَ القَريةِ صَلاةَ العَصرِ أو قَريبًا مِن ذلك، فقال للشَّمسِ: إنَّكِ مَأمورةٌ وأنا مَأمورٌ، اللهُمَّ احبِسْها علينا، فحُبِسَت حتَّى فتَحَ اللهُ عليه...",
+        num: "3124", 
+        comparison: `<strong>التطابق الحرفي مع سِفر يشوع:</strong><br>
+        تُعد هذه الواقعة "نسخة كربونية" من قصة بطل بني إسرائيل (يشوع بن نون) المذكورة في العهد القديم. جاء في سِفر يشوع (الإصحاح 10، الأعداد 12-13) ما نصُّه: (حينئذ كَلَّمَ يَشُوعُ الرَّبَّ.. وَقَالَ أَمَامَ عُيُونِ إِسْرَائِيلَ: «يَا شَمْسُ دُومِي عَلَى جِبْعُونَ..» فَدَامَتِ الشَّمْسُ وَوَقَفَ الْقَمَرُ حَتَّى انْتَقَمَ الشَّعْبُ مِنْ أَعْدَائِهِ). إن انتقال هذه الملحمة العسكرية بتفاصيلها من التراث اليهودي إلى "صحيح البخاري" يثبت تأثر الرواة بالمخيال القصصي لأهل الكتاب.<br><br>
+        <strong>استعارة "الموتيف" الملحمي:</strong><br>
+        فكرة "توقف حركة الكون" من أجل معركة عسكرية هي فكرة توراتية بامتياز، تهدف لتمجيد الحروب القومية لبني إسرائيل وتصوير الخالق وكأنه ينحاز لطرف في صراع مادي عبر تعطيل القوانين الفيزيائية الكبرى. إن تكرار هذه القصة في التراث الإسلامي يُبين كيف كان الرواة يملأون فراغ "تاريخ الأنبياء" بالاقتباس من كتب العهد القديم، محولين الأساطير العسكرية للأمم السابقة إلى "حقائق دينية".<br><br>
+        <strong>التصادم مع العلم والفيزياء الكونية:</strong><br>
+        يقرر العلم الحديث أن الشمس لا "تتحرك" حول الأرض لكي تُحبس، بل إن تعاقب الليل والنهار ناتج عن دوران الأرض حول نفسها. فـ "حبس الشمس" يقتضي فيزيائياً توقف دوران كوكب الأرض فجأة، وهو حدث كوني لو وقع لدمّر كل أشكال الحياة على الكوكب بسبب قوة القصور الذاتي والفيضانات والزلازل الكارثية. الرواية تتبنى رؤية "الأرض المسطحة والثابتة" التي كانت سائدة في العصور القديمة، وتتجاهل القوانين الكونية المحكمة.<br><br>
+        <strong>المصادمة مع المنهج القرآني:</strong><br>
+        يُؤسس القرآن الكريم لحركة الأجرام بصفتها نظاماً آلياً محكماً لا يتوقف ولا يختل {لَا الشَّمْسُ يَنبَغِي لَهَا أَن تُدْرِكَ الْقَمَرَ}، ويؤكد على "ثبات السنن الإلهية" {وَلَن تَجِدَ لِسُنَّةِ اللَّهِ تَبْدِيلًا}. نِسبة فعل "حبس الشمس" للوحي هو إقحام للدين في صراعات الميديا القديمة التي كانت تتنافس في نسبة الخوارق المستحيلة لأبطالها القوميين، وهو ما يتنافى مع وقار النبوة في الإسلام.<br><br>
+        <strong>أسطورة "نار الغنائم":</strong><br>
+        تذكر الرواية أن النار كانت تنزل لتأكل الغنائم قديماً، وهو تصور مستمد من الطقوس "اللاوية" في العهد القديم التي تربط قبول القربان باحتراقه بنار سماوية. هذا التصور المادي للقبول الإلهي يتناقض مع جوهر الإسلام الذي جعل القبول فعلاً قلبياً وأخلاقياً {لَن يَنَالَ اللَّهَ لُحُومُهَا وَلَا دِمَاؤُهَا وَلَٰكِن يَنَالُهُ التَّقْوَىٰ مِنكُمْ}.`
+    },
+    { 
+        id: 33, 
+        title: "ذم النذر: بين سِفر الجامعة والمنطق الجبري التلمودي", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/VvvWceFv", 
+        text: "لا يَأتي ابنَ آدَمَ النَّذرُ بشيءٍ لم يَكُنْ قُدِّرَ له، ولَكِن يُلقيه النَّذرُ إلى القدَرِ قد قُدِّرَ له، فيَستَخرِجُ اللهُ به مِنَ البَخيلِ، فيُؤتي عليه ما لم يَكُنْ يُؤتي عليه مِن قَبلُ.",
+        num: "6694", 
+        comparison: `<strong>الجذور في كتب الحكمة اليهودية (سِفر الجامعة):</strong><br>
+        تجد هذه النظرة "القدرية" المتوجسة من النذور أصلاً في التراث الكتابي؛ ففي سِفر الجامعة (5: 4-5) نجد تحذيراً ينطلق من كون النذر مخاطرة أو عبئاً لا يغير من الواقع شيئاً: (إِذَا نَذَرْتَ نَذْراً لِلَّهِ فَلاَ تَتَأَخَّرْ عَنْ وَفَائِهِ.. أَنْ لاَ تَنْذُرَ خَيْرٌ مِنْ أَنْ تَنْذُرَ وَلاَ تَفِي). الرواية تلتقي مع هذا الفكر في محاولة "التزهيد" في النذر وتصويره كفعل لا طائل منه.<br><br>
+        <strong>التطابق مع "التلمود" (نيداريم):</strong><br>
+        إن فكرة أن النذر هو وسيلة لـ "ابتزاز" النفس البخيلة تجد صدىً واسعاً في التراث الشفهي اليهودي (التلمود - نيداريم 20أ)؛ حيث يُنظر للنذر كأنه "خطيئة" أو وسيلة يلجأ إليها الشخص ضعيف الإيمان لِيُلزم نفسه بالعطاء قسراً، مما يجعله فعلاً مكروهاً في جوهره. وهو تماماً ما ذهبت إليه الرواية البخارية بوصف النذر بأنه مجرد أداة لاستخراج المال من "البخيل".<br><br>
+        <strong>المصادمة مع المديح القرآني للنذر:</strong><br>
+        يُثني القرآن الكريم ثناءً عاطراً على الموفين بالنذر ويجعل ذلك من صفات الأبرار وعباد الله المقربين: {يُوفُونَ بِالنَّذْرِ وَيَخَافُونَ يَوْمًا كَانَ شَرُّهُ مُسْتَطِيرًا} [الإنسان: 7]. كما أمر الله به كجزء من تمام العبادة: {وَلْيُوفُوا نُذُورَهُمْ} [الحج: 29]. فكيف يستقيم مدح الخالق للنذر واعتباره "قربة إيمانية إرادية"، مع رواية تنسب للنبي ذمَّ النذر ووصفه بأنه ممارسة تخص "البخلاء" فقط؟ هذا التناقض يثبت أن الرواية استلهمت رؤية "الفقه اليهودي" المتوجس، وليس "الهدي القرآني" المشجع.<br><br>
+        <strong>تكريس "الجبرية المطلقة":</strong><br>
+        تتبنى الرواية منطقاً "جبرياً" يفرغ العبادة من معناها؛ فادعاء أن النذر لا يقدم ولا يؤخر في القدر يجعل من محاولة الإنسان التقرب إلى الله بالالتزامات الطوعية فعلاً "عبثياً". هذا الفكر يضرب قيمة "الدعاء" و"العمل" و"التغيير" التي أسس لها القرآن، ويستبدلها بإله "يمكر" بالعبد البخيل ليستخرج منه صدقة عبر نذر لا قيمة له، وهو تصوير مادي للربوبية لا يتسق مع سمو المقاصد القرآنية.<br><br>
+        <strong>تحويل "القربة" إلى "مكيدة":</strong><br>
+        لقد تحول "النذر القرآني" في الرواية من كونه علامة على سخاء النفس وحبها لله، إلى "مكيدة قدرية" لاستدراج المشاحين. إن نِسبة هذا التصوير للنبي هي جناية على منطقه التربوي؛ فالنبي الذي بعثه الله ليُزكي النفوس، لا يمكن أن يصف أفعال الطاعة بصفات البخل والعبثية.`
+    },
+    { 
+        id: 34, 
+        title: "الشفاعة الكبرى: قالب الميدراش", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/wTgsajgv", 
+        text: "إذا كان يَومُ القيامةِ ماجَ النَّاسُ بَعضُهم في بَعضٍ، فيَأتونَ آدَمَ.. إبراهيمَ.. موسى .. عيسى.. فيَأتوني، فأقولُ: أنا لَها.",
+        num: "7510", 
+        comparison: `<strong>تبنّي مَنهج "خطايا الأنبياء" التوراتي:</strong><br>
+        تجد هذه الرواية جذورها العميقة في "الأدب الميدراشي" واللاهوت اليهودي؛ حيث عُرِف عن كُتّاب العهد القديم ولعهم بذكر "سقطات الأنبياء" وتضخيمها (مثل كذب إبراهيم، وخطأ آدم، وانفعال موسى) لكسر هيبة العصمة عنهم. فنجد في (ميدراش راباه) حوارات مطولة يتلاوم فيها الأنبياء حول أخطائهم الشخصية. هذا التصوير للأنبياء بمظهر "المذنبين المستحيين" هو ثقافة إسرائيلية مَحضة تسللت لمدونات الحديث، وتختلف تماماً عن صورة "الأنبياء المكرّمين" في القرآن الذين اختارهم الله لطهارة نفوسهم.<br><br>
+        <strong>استعارة "القالب الدرامي" المتسلسل:</strong><br>
+        إن أسلوب انتقال الناس من نبي إلى نبي ورفض كل واحد منهم المهمة هو "قالب قصصي" (Pattern) متكرر في الحكايات اليهودية القديمة التي تهدف لإثبات "أفضلية" بطل ديني معين في نهاية المطاف عبر "استبعاد" من سبقه بطريقة درامية. تكمن "البصمة الإسرائيلية" هنا في إظهار أولي العزم من الرسل بمظهر مَن يُقدم "عُذره الشخصي" وخوفه الذاتي على نجاة البشرية المعذبة في أرض المحشر، وهو تصوير لا يليق برحمة ومكانة الرسل.<br><br>
+        <strong>المصادمة مع يقين المغفرة في القرآن:</strong><br>
+        يبرز التناقض الصارخ مع القرآن في ادعاء أن الأنبياء "يستحيون" من ذنوبهم؛ فالله عز وجل أخبرنا في كتابه أنه قد غفر لآدم وتاب عليه {فَتَابَ عَلَيْهِ ۚ إِنَّهُ هُوَ التَّوَّابُ الرَّحِيمُ}، وغفر لموسى قتله الخطأ بنص صريح: {قَالَ رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي فَغَفَرَ لَهُ} [القصص: 16]، ووصف إبراهيم بالصديقية والخلة. فإذا كان الله قد غفر لهم في الدنيا بشهادة الوحي، فبأي منطق يظلون "خائفين مستحيين" يوم القيامة لدرجة ترك البشرية لمصيرها؟ هل مغفرة الله في الرواية أقل أثراً من مغفرته في القرآن؟<br><br>
+        <strong>توهين مفهوم "عصمة الاصطفاء":</strong><br>
+        الرواية تضع النبي محمداً في كفة، وبقية الأنبياء في كفة "المقصرين"، وهذا يضرب مبدأ "لا نفرق بين أحد من رسله". إن جعل نجاة الناس رهينة بنبي واحد مع إظهار الآخرين بمظهر العاجز المخطئ هو محاولة لرفع مقام النبي محمد بأدوات "الحط من شأن الآخرين"، وهو مذهب لاهوتي قديم كانت تمارسه الفرق الدينية لتمييز أنبيائها، بينما القرآن رفع شأن الجميع بالتزكية المطلقة.<br><br>
+        <strong>تسطيح مشهد القيامة والعدل الإلهي:</strong><br>
+        تُصوّر الرواية الله سبحانه وكأنه ينتظر "وساطة بشرية" ليريح الناس، وأن الأنبياء يترددون في الطلب، مما يحول اليوم الآخر إلى "سجال إداري" بين الخالق ورسله. والمنطق القرآني يجعل الحساب والرحمة والشفاعة ملكاً لله وحده {قُل لِّلَّهِ الشَّفَاعَةُ جَمِيعًا}، وتتم بإذنه للصالحين، لا بأسلوب "الترجي والاعتذار بالخطايا" المقتبس من أساطير الأحبار.`
+    },
+    { 
+        id: 35, 
+        title: "الشؤم في ثلاثة: استنساخ للتوراة والزرادشتية", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/soinpJk8", 
+        text: "ذَكَروا الشُّؤمَ عِندَ النَّبيِّ صلَّى اللهُ عليه وسلَّم، فقال النَّبيُّ صلَّى اللهُ عليه وسلَّم: إن كان الشُّؤمُ في شَيءٍ ففي الدَّارِ، والمَرأةِ، والفَرَسِ.",
+        num: "5094", 
+        comparison: `<strong>استعارة "أركان الحياة" من العهد القديم:</strong><br>
+        لا يكتفي هذا النص بمصادمة منطق التكريم الإنساني، بل ينسخ رؤية مادية للوجود كانت تسكن وجدان الأمم السابقة. نجد هذا "الثالوث" (المرأة، البيت، الدابة) يمثل أركان حياة الرجل ومظنة سعادته أو شقائه في الوجدان السامي القديم. ففي سِفر الخروج (20: 17) ضمن الوصايا العشر، نجد ذات الترتيب: (لاَ تَشْتَه بَيْتَ قَرِيبِكَ. لاَ تَشْتَه امْرَأَةَ قَرِيبِكَ... وَلاَ ثَوْرَهُ، وَلاَ حِمَارَهُ). إن تحويل هذه العناصر من "حقوق وممتلكات" إلى "أوعية للحظ والشؤم" هو مجرد تطوير لاهوتي لنفس العقلية المادية.<br><br>
+        <strong>التطابق مع "ثقافة النحس" الزرادشتية:</strong><br>
+        كانت المعتقدات الفارسية القديمة (الزرادشتية) تربط بين "الأرواح الشريرة" (الأهريمان) وبين سكنى بيوت معينة أو امتلاك دواب بعينها، وتعتبر أن "النحس" قوة مادية يمكن أن تحل في الأشياء وتنتقل لصاحبها. الرواية تتبنى هذا المفهوم "الطوطمي" الذي يرى القوى الخفية كامنة في المادة، وهو تصور يتطابق مع ديانات الأقدمين التي لم تكن تعرف "القانون الأخلاقي" للجزاء، بل تؤمن بالخرافة الحسية.<br><br>
+        <strong>المصادمة مع "الثورة الأخلاقية" في القرآن:</strong><br>
+        حطم القرآن الكريم هذه الأصنام المادية، ونقل مفهوم "البركة والشؤم" من (المادة) إلى (العمل والأخلاق). فالشؤم في القرآن هو نتاج الظلم والفساد {فَأَخَذَهُمُ اللَّهُ بِذُنُوبِهِمْ}، وليس في ذات المرأة التي جعلها الله "سكناً ومودة" {لِّتَسْكُنُوا إِلَيْهَا}، ولا في جدران البيت الذي جعله الله "سكناً وأماناً" {وَاللَّهُ جَعَلَ لَكُم مِّن بُيُوتِكُمْ سَكَنًا}. الرواية تعيد إنتاج ما حاربه القرآن وتُشرعن لـ "الطيرة" (التشاؤم) التي هي من صميم الجاهلية.<br><br>
+        <strong>تسلل الفلكلور إلى "أصح الكتب":</strong><br>
+        يثبت هذا التقارب النصي أن الرواة لم يستطيعوا الفكاك من جاذبية الموروثات البيئية المحيطة أثناء التدوين؛ فاستعاروا هذا الثالوث (المرأة، الدار، الدابة) وصبغوه بصبغة دينية، مما صور النبي بمظهر المصدق لخرافات العصور الوسطى التي تلاحق النساء والجمادات باللعنات والنحس.<br><br>
+        <strong>تزييف مفهوم "القدر والسببية":</strong><br>
+        تحول هذه الرواية الدين من "منظومة قيم" إلى "منظومة حظوظ"؛ فبدلاً من أن يبحث الرجل عن سبب فشله في عمله أو خلقه، تُقدم له الرواية "كبش فداء" جاهز (المرأة أو البيت أو الفرس). هذا الهروب من المسؤولية الشخصية هو ملمح أصيل في الأساطير القديمة، ويتناقض مع قوله تعالى: {وَمَا أَصَابَكُم مِّن مُّصِيبَةٍ فَبِمَا كَسَبَتْ أَيْدِيكُمْ} [الشورى: 30].`
+    },
+    { 
+        id: 36, 
+        title: "قتل المرتد: استنساخ تشريعي لناموس العهد القديم", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/77qg1XUt", 
+        text: "أنَّ عَليًّا رَضيَ اللهُ عنه حَرَّقَ قَومًا، فبَلَغَ ابنَ عَبَّاسٍ، فقال: لو كُنتُ أنا لَم أُحَرِّقْهم؛ لأنَّ النَّبيَّ صلَّى اللهُ عليه وسلَّم قال: لا تُعَذِّبوا بعَذابِ اللهِ، ولَقَتلتُهم، كما قال النَّبيُّ صلَّى اللهُ عليه وسلَّم: مَن بَدَّلَ دينَه فاقتُلوه.",
+        num: "3017", 
+        comparison: `<strong>الجذور في قانون العهد القديم (سِفر التثنية):</strong><br>
+        يكشف التحليل المقارن أن فكرة "إعدام المخالف في المعتقد" هي ركيزة أساسية في قانون العهد القديم. ففي سِفر التثنية (الإصحاح 13، الأعداد 6-10) نجد أمراً صريحاً بقتل مَن يخرج عن الديانة أو يدعو لغيرها، حتى لو كان من أقرب الناس: (إِذَا أَغْوَاكَ أَخُوكَ... قَائلاً: نَذْهَبُ وَنَعْبُدُ آلِهَةً أُخْرَى... فَلاَ تَرْضَ عَنْهُ وَلاَ تَسْمَعْ لَهُ وَلاَ تُشْفِقْ عَيْنُكَ عَلَيْهِ... بَلْ قَتْلاً تَقْتُلُهُ. يَدُكَ تَكُونُ عَلَيْهِ أَوَّلاً لِقَتْلِهِ). كما ورد في سِفر التثنية (17: 2-5) وجوب "رجم" مَن يخالف العهد ويذهب لعبادة غير الرب حتى الموت.<br><br>
+        <strong>الاستنساخ التشريعي القمعي:</strong><br>
+        نحن أمام "استنساخ" كامل للعقلية التشريعية اليهودية القديمة (الناموس)، التي كانت تخلط بين "الدين" وبين "الجنسية السياسية" للقبيلة، وتعتبر تغيير الدين "خيانة عظمى" تستوجب الإبادة الجسدية. تسربت هذه "الغلظة التوراتية" إلى مدونات الحديث عبر الرواة الذين استصحبوا معهم عقلية القمع الديني التي سبقت الإسلام، وحولوا "الإيمان" من قناعة قلبية تُحرس بالبرهان، إلى قيد جسدي يُحرس بالسيف.<br><br>
+        <strong>المصادمة مع "الثورة التحريرية" في القرآن:</strong><br>
+        جاء القرآن الكريم ليهدم هذا الإرث القهري الذي كبّل وعي الأمم السابقة، فأعلن القاعدة الذهبية: {لَا إِكْرَاهَ فِي الدِّينِ ۖ قَد تَّبَيَّنَ الرُّشْدُ مِنَ الْغَيِّ} [البقرة: 256]. فبأي منطق يُعطل الفقهاء "حرية القرآن" ويستوردون "سيف التوراة" ليغرسوه في قلب الإسلام؟ إن القرآن ذكر "الارتداد" في عشرات الآيات ولم يضع له عقوبة دنيوية واحدة، بل فوّض الحساب لله يوم القيامة، مما يثبت أن الرواية نبتت خارج الحقل القرآني.<br><br>
+        <strong>توهين صورة "نبي الرحمة":</strong><br>
+        تُصوّر الرواية النبي كمن يأمر بالقتل لمجرد تغيير "الفكرة" أو "المعتقد"، وهو ما يتناقض مع وصفه بأنه جاء ليضع عن الناس (إِصْرَهُمْ وَالْأَغْلَالَ الَّتِي كَانَتْ عَلَيْهِمْ). الختم بـ (فاقتلوه) هو إعادة لإنتاج "الأغلال" التي جاء النبي ليحطمها، مما يجعله في الرواية -حاشاه- مناقضاً لرسالته التحريرية في القرآن.`
+    },
+    { 
+        id: 37, 
+        title: "بول الشيطان في الأذن: مخيال تلمودي", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/5TbRTJlM", 
+        text: "ذُكِرَ عِندَ النَّبيِّ صلَّى اللهُ عليه وسلَّم رَجُلٌ، فقيلَ: ما زالَ نائِمًا حتَّى أصبَحَ، ما قامَ إلى الصَّلاةِ! فقال: بالَ الشَّيطانُ في أُذُنِه.",
+        num: "1144", 
+        comparison: `<strong>الأذن "بوابة الطاعة" في الفكر التوراتي:</strong><br>
+        نجد لهذه الرواية جذوراً عميقة في الفكر اليهودي القديم الذي يمنح لـ "الأذن" قدسية طقوسية خاصة. ففي سِفر اللاويين (14: 14)، يُعتبر طرف الأذن مكاناً مقدساً يُوضع عليه دم الذبيحة للتطهير؛ ففي العقلية التوراتية، الأذن هي "بوابة السمع" لله والامتثال لأمره. ومن هنا، نجد في التقاليد اليهودية الشفوية (الميدراش) أن الشيطان يحاول دوماً "سد" أو "تدنيس" هذه البوابة لمنع الإنسان من سماع نداء الخالق.<br><br>
+        <strong>التطابق مع شياطين التلمود (المزيقين):</strong><br>
+        يضج التلمود في (كتاب برخوت 6أ - Berakhot 6a) بوصف الشياطين الذين يحيطون بالإنسان وهو نائم ويحاولون إيذاءه مادياً أو تلويثه بـ "النجاسة الروحية". إن نسبة أفعال بيولوجية مادية (كالبول) لكائن غيبي (كالشيطان) هي سمة بارزة في "الشيطنة اليهودية" التي تُحوّل الشيطان من وسواس معنوي إلى كائن قذر يمارس أفعالاً حسية منفرة داخل جسد الإنسان، وهو ما انتقل بحذافيره إلى هذه الرواية.<br><br>
+        <strong>المصادمة مع المفهوم القرآني للعداوة الشيطانية:</strong><br>
+        يُعرف القرآن الكريم الشيطان بأنه "وسواس خناس" يكمن خطره في ممارسة الغواية داخل الوعي والإرادة: {الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ} [الناس: 5]. ولم يصف القرآن الشيطان يوماً بمثل هذه الأوصاف المادية المبتذلة (البول)، بل جعل كيده معنوياً صرفاً. الرواية استعارت قصص "التخويف الشعبي" المادية المقتبسة من كتب الأقدمين لترهيب الناس من النوم عن الصلوات، مستبدلة "الوعظ القلبي" بـ "الأسطرة الجسدية".<br><br>
+        <strong>إهانة الكرامة الإنسانية:</strong><br>
+        يُقرر القرآن تكريم الإنسان: {وَلَقَدْ كَرَّمْنَا بَنِي آدَمَ}. ومن غير المنطقي أن يسمح الخالق للشيطان بانتهاك جسد المؤمن "مادياً" وتلويثه بفضلاته لمجرد أنه غلبه النوم، مما يجعل الإنسان يبدو في الرواية بمظهر "المرحاض" للشيطان، وهو تصور يبتعد عن جلال الربوبية وعظمة التكريم الإلهي للبشر.<br><br>
+        <strong>تسطيح قانون السببية والمسؤولية:</strong><br>
+        تحول الرواية "الخمول والكسل" (وهو فعل بشري ناتج عن إرادة أو تعب) إلى "واقعة بيولوجية شيطانية" مفروضة من الخارج. هذا المنطق يعفي الإنسان من مراجعة أسباب تقصيره النفسية والبدنية، ويشغله بمطاردة أوهام "قطرات البول الخفية" التي لا أثر لها في علم الطب أو الواقع، مما يثبت بشرية النص وتأثره بخيالات القرون المظلمة.`
+    },
+    { 
+        id: 38, 
+        title: "نزول المسيح: صدى لاهوت العهد الجديد", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/TyOp9tyI", 
+        text: "والذي نَفسي بيَدِه لَيوشِكَنَّ أن يَنزِلَ فيكُمُ ابنُ مَريَمَ حَكَمًا مُقسِطًا، فيَكسِرَ الصَّليبَ، ويَقتُلَ الخِنزيرَ، ويَضَعَ الجِزيةَ، ويَفيضَ المالُ حتَّى لا يَقبَلَه أحَدٌ.",
+        num: "2222", 
+        comparison: `<strong>استيراد عقيدة "المجيء الثاني":</strong><br>
+        يَنقل هذا النص العقل المسلم من فضاء القرآن الذي يَعتبر الأنبياء مُبشرين ومُنذرين، إلى فضاء "الملاحم النصرانية" التي تَنظر للمسيح كبطل مادي يَعود في نهاية الزمان لِيَقهر أعداءه بالقوة. تُعد عقيدة "المجيء الثاني" (The Second Coming) الركن الأساسي في لاهوت العهد الجديد (الإنجيل)؛ ففي سِفر الرؤيا (19: 11-15) نجد وصفاً لعودة المسيح لِيَحكم ويُحارب: (ثُمَّ رَأَيْتُ السَّمَاءَ مَفْتُوحَةً، وَإِذَا فَرَسٌ أَبْيَضُ وَالْجَالِسُ عَلَيْهِ يُدْعَى أَمِينًا وَصَادِقًا، وَبِالْعَدْلِ يَحْكُمُ وَيُحَارِبُ... وَمِنْ فَمِهِ يَخْرُجُ سَيْفٌ مَاضٍ لِكَيْ يَضْرِبَ بِهِ الأُمَمَ).<br><br>
+        <strong>تبيئة "يسوع الإنجيلي" في التراث الإسلامي:</strong><br>
+        نحن أمام "أسلمة" واضحة لعقيدة مسيحية مَحضة؛ ففكرة عودة المسيح "حَكَماً عَدلاً" لِيُغير الواقع بالقوة هي الصياغة الروائية لانتصار "يسوع" كما تَخيله كُتَّاب الأناجيل. الرواية البخارية جعلت المسيح يكسر صليبه لِيُثبت بطلان عقيدة متبعيه، ويقتل الخنزير لِيُعلن التزامه بالشريعة، وهي تفاصيل تهدف لمخاطبة الوجدان المسيحي المعتنق للإسلام قديماً بما يألفه من ملاحم.<br><br>
+        <strong>المصادمة مع "إتمام الدين" في القرآن:</strong><br>
+        يطرح المنطق سؤالاً جوهرياً: إذا كان الله قد أكمل الدين بنص القرآن {الْيَوْمَ أَكْمَلْتُ لَكُمْ دِينَكُمْ} [المائدة: 3]، فما هي الحاجة اللاهوتية لعودة نبي سابق لِيُصحح مسار الأمة أو يقتل حيوانات؟ هل عَجَزَ القرآن والوحي المحمدي عن إبطال "الصليب" لغوياً وعقلياً وفلسفياً حتى نحتاج لـ "فأس" المسيح المادية لِيَكسره في نهاية التاريخ؟ إن هذه الرواية تلمح —من حيث لا يشعر رواتها— إلى نقص في كفاية الرسالة المحمدية في حسم الصراع بين الحق والباطل.<br><br>
+        <strong>توهين مفهوم "خاتمية النبوة":</strong><br>
+        يقرر القرآن أن محمداً هو {خَاتَمَ النَّبِيِّينَ}. والادعاء بعودة نبي سابق ليمارس سلطة "الحكم والتشريع" (يضع الجزية) هو خرق عملي لهذه الخاتمية. فبأي شريعة سيحكم عيسى؟ إن قيل بشريعة القرآن، فقد كفانا الله بتعاليم القرآن، وإن قيل بشريعة جديدة أو معدلة، فقد نُسخت الخاتمية، وهو ما يثبت أن الرواية هي "ملحق لاهوتي" مستورد وليست من صلب الوحي.<br><br>
+        <strong>تسطيح الغيب بالملاحم المادية:</strong><br>
+        يُحول هذا السرد الروائي أحداث نهاية الزمان إلى مشهد "كرتوني" يطارد فيه نبي الله الخنازير ويكسر الخشب (الصليب)، وهو تصوير يتنافى مع جلال الغيب القرآني الذي جعل الساعة حدثاً كونياً مهيباً يغير نظام الوجود، لا معركة ميدانية لتصفية الحسابات مع الأدوات المادية.`
+    },
+    { 
+        id: 39, 
+        title: "الأُجراء الثلاثة: استنساخ أدبي من إنجيل متى", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/qWXZTdRt", 
+        text: "مَثَلُ المُسلِمينَ واليَهودِ والنَّصارى كَمَثَلِ رَجُلٍ استَأجَرَ قَومًا يَعمَلونَ له عَمَلًا إلى اللَّيلِ، فعَمِلوا إلى نِصفِ النَّهارِ، فقالوا: لا حاجةَ لَنا إلى أجرِكَ، فاستَأجَرَ آخَرينَ، فقال: أكمِلوا بَقيَّةَ يَومِكُم ولَكُمُ الذي شَرَطتُ، فعَمِلوا، حتَّى إذا كان حينَ صَلاةِ العَصرِ قالوا: لكَ ما عَمِلنا، فاستَأجَرَ قَومًا، فعَمِلوا بَقيَّةَ يَومِهم حتَّى غابَتِ الشَّمسُ، واستَكمَلوا أجرَ الفَريقَينِ.",
+        num: "558", 
+        comparison: `<strong>التطابق الحرفي مع إنجيل متى (العهد الجديد):</strong><br>
+        تجد هذا المَثل بحذافيره في إنجيل متى (الإصحاح 20، الأعداد 1-16)، فيما يُعرف بـ "مَثل فَعَلة الكَرْم": (فَإِنَّ مَلَكُوتَ السَّمَاوَاتِ يُشْبِهُ رَجُلاً رَبَّ بَيْتٍ خَرَجَ مَعَ الصُّبْحِ لِيَسْتَأْجِرَ فَعَلَةً لِكَرْمِهِ.. ثُمَّ خَرَجَ نَحْوَ السَّاعَةِ الثَّالِثَةِ.. وَالسَّادِسَةِ.. وَالتَّاسِعَةِ.. ثُمَّ نَحْوَ السَّاعَةِ الْحَادِيَةَ عَشْرَةَ (قبيل الغروب).. فَلَمَّا كَانَ الْمَسَاءُ قَالَ صَاحِبُ الْكَرْمِ لِوَكِيلِهِ: ادْعُ الْفَعَلَةَ وَأَعْطِهِمُ الأُجْرَةَ مُبْتَدِئاً مِنَ الآخِرِينَ إِلَى الأَوَّلِينَ).<br><br>
+        <strong>استنساخ القالب القصصي:</strong><br>
+        نحن أمام "استنساخ أدبي" كامل؛ فالمسيح في الإنجيل ضرب هذا المَثل ليبين فضل الله ورحمته التي تُعطي المتأخرين كالأوائل. وبدلاً من أن تأتي الرواية بمعنى جديد، قامت باقتباس ذات "الموتيف" (العمل بالأوقات، الغروب، تفاوت الساعات، ومضاعفة الأجر للمتأخرين) ونسبته للوحي الإسلامي.<br><br>
+        <strong>تحوير المعنى من "الرحمة" إلى "المفاضلة":</strong><br>
+        المثير في هذا التماهي هو "التحوير" الأيديولوجي الذي أجراه الرواة؛ فبينما كان المَثل في الإنجيل يهدف لترسيخ قيمة "النعمة الإلهية"، حوّلته الرواية في البخاري إلى أداة للمفاضلة الدينية؛ فجعلت اليهود والنصارى "عاجزين أو زاهدين" في إكمال العمل، وصورت المسلمين كـ "أبطال" استحقوا أجر الجميع، وهو ما يخدم عقلية الصراع الديني التي سادت عصور التدوين.<br><br>
+        <strong>تأثر الموروث بالمناخ الثقافي السابق:</strong><br>
+        يُثبت هذا التطابق أن الموروث الروائي لم ينفصل عن البيئة الثقافية المحيطة به؛ بل استقى أمثاله وحكاياته من "أناجيل النصارى" الشائعة في ذلك الوقت، ونسبها للنبي لإعطائها صبغة شرعية ومقبولية لدى المعتنقين الجدد للدين الذين قدموا من خلفيات مسيحية.<br><br>
+        <strong>المصادمة مع استقلال الوحي:</strong><br>
+        هل كان النبي —الذي أُوتي جوامع الكلم والبيان القرآني الفريد— بحاجة لاستعارة "أمثال المسيح" لِيُعرف أمته بقدرها؟ إن اعتماد الرواية على نصوص سابقة يُسقط عنها صفة "الوحي المستقل" ويجعلها مجرد صدىً لمؤلفات تاريخية، بينما القرآن الكريم عرَّف المؤمنين بصفاتهم الأخلاقية والعملية {التَّائِبُونَ الْعَابِدُونَ الْحَامِدُونَ..}، لا بحكايات الأُجراء المستوردة.`
+   },
+    { 
+        id: 40, 
+        title: "تحريم الصور: استنساخ للوصايا التوراتية", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/WsM19N9s", 
+        text: "دَخَلَ عليَّ النَّبيُّ صلَّى اللهُ عليه وسلَّم وفي البَيتِ قِرامٌ فيه صُوَرٌ، فتَلَوَّنَ وجهُه ثُمَّ تَناولَ السِّترَ فهَتَكَه، وقالت: قال النَّبيُّ صلَّى اللهُ عليه وسلَّم: إنَّ مِن أشَدِّ النَّاسِ عَذابًا يَومَ القيامةِ الذينَ يُصَوِّرونَ هذه الصُّورَ. (وفي رواية ثانية: مَن صَوَّرَ صورةً في الدُّنيا كُلِّفَ يَومَ القيامةِ أن يَنفُخَ فيها الرُّوحَ، وليسَ بنافِخٍ.)",
+        num: "6109", 
+        comparison: `<strong>التطابق الحرفي مع "الوصايا العشر":</strong><br>
+        تجد هذه العقيدة المتشددة تجاه الصور والتماثيل أصلها الصريح والقاطع في العهد القديم؛ ففي سِفر الخروج (الإصحاح 20، الأعداد 4-5) نجد الوصية الثانية: (لاَ تَصْنَعْ لَكَ تِمْثَالاً مَنْحُوتاً، وَلاَ صُورَةً مَا مِمَّا فِي السَّمَاءِ مِنْ فَوْقُ، وَمَا فِي الأَرْضِ مِنْ تَحْتُ.. لاَ تَسْجُدْ لَهُنَّ وَلاَ تَعْبُدْهُنَّ). كما ورد في سِفر التثنية (4: 16) تحذيرٌ شديد من صُنع أي صورة على هيئة ذكر أو أنثى. إن الفكر التوراتي قام على "التحريم المطلق" لتمثيل ذوات الأرواح خوفاً من "المضاهاة" أو الشرك، وهي ذات "الفوبيا" التي انتقلت بحذافيرها إلى كتب الروايات الإسلامية.<br><br>
+        <strong>المصادمة مع المنهج القرآني (نعمة التماثيل):</strong><br>
+        تبرز المفارقة الصادمة عند العودة للقرآن الكريم؛ فالله سبحانه امتنَّ على نبيه سليمان بأنَّ الجنَّ كانت تصنع له "التماثيل" (وهي الصور المجسمة): {يَعْمَلُونَ لَهُ مَا يَشَاءُ مِن مَّحَارِيبَ وَتَمَاثِيلَ وَجِفَانٍ كَالْجَوَابِ} [سبأ: 13]. فكيف يَمتنُّ الله بالتماثيل كـ "نعمة وفضل" على نبي معصوم، ثم تجعلها الرواية سبباً لـ "أشد العذاب"؟ هل يُعقل أن يُناقض الوحي نفسه، فيُحل في القرآن ما يُحرمه في الرواية بأبشع العقوبات؟<br><br>
+        <strong>اختلال ميزان الجريمة والعقاب:</strong><br>
+        تضع الرواية "المصور" (الفنان) في مرتبة "أشد الناس عذاباً"، وهي مرتبة لم يضع فيها القرآن إلا أكابر المجرمين كآل فرعون والمنافقين. فبأي منطق عقلي أو إلهي يكون الرسام أو النحات أشد عذاباً من القاتل، أو المغتصب، أو الظالم الذي يبيد الشعوب؟ إن هذا "التشدد العبراني" في العقوبة يعكس رغبة الرواة في حماية "التوحيد" بأدوات قمعية مادية، بدلاً من حمايته بالوعي والعقل.<br><br>
+        <strong>تحويل "الإبداع البشري" إلى "جناية كونية":</strong><br>
+        تستخدم الروايات منطق (المضاهاة بخلق الله) لتجريم الفن. والمنطق العلمي والقرآني يفرق بين "الخلق من عدم" (وهو حق الله) وبين "التمثيل والمحاكاة الجمالية" (وهو موهبة إلهية للإنسان). الرواية استلبت سعة القرآن التي تدعو للاستمتاع بالجمال {قُلْ مَنْ حَرَّمَ زِينَةَ اللَّهِ}، واستبدلتها بضيق التوراة، محولةً الريشة والإزميل إلى أدوات للشيطان.<br><br>
+        <strong>تسلل "الناموس" إلى الفقه الإسلامي:</strong><br>
+        يثبت هذا التقارب أن "حديث المصورين" هو صدىً حرفي لناموس موسى الذي كان يميل للتحريم السدّي (سد الذرائع) المبالغ فيه. لقد سَرَت "روح التشدد اليهودي" في مدونات التدوين، فصيغت روايات تهدف لتدجين الذوق البشري وقمع التعبير الفني، وصبغت هذا التوجه بصبغة نبوية، رغم أن الإسلام جاء ليرتقي بالجمال لا ليهدمه.`
+    },
+    { 
+        id: 41, 
+        title: "أصحاب الغار الثلاثة: استعارة الأدب القصصي الهندي", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/fjR41kRg", 
+        text: "انْطَلَقَ ثَلَاثَةُ رَهْطٍ مِمَّنْ كَانَ قَبْلَكُمْ حتَّى أَوَوُا المَبِيتَ إلى غَارٍ، فَدَخَلُوهُ فَانْحَدَرَتْ صَخْرَةٌ مِنَ الجَبَلِ، فَسَدَّتْ عليهمُ الغَارَ... فدعا كل واحد منهم بصالح عمله (بر الوالدين، العفة عن ابنة العم، أداء حق الأجير).. فانفرجت الصخرة فخرجوا يمشون.",
+        num: "2272", 
+        comparison: `<strong>بنية "الأدب القصصي العالمي" (البانتشاتانترا):</strong><br>
+        إن البنية القصصية لهذه الرواية (ثلاثة أشخاص، ثلاث محن، ثلاث فضائل، ونهاية إعجازية) هي بنية كلاسيكية في الأدب الهندي القديم مثل (بانتشاتانترا - Panchatantra) الذي يعود للقرن الثالث قبل الميلاد. هذا الموروث الذي انتقل للعربية لاحقاً (كليلة ودمنة) يقوم على فكرة "القصة الإطارية" التي تهدف لتعليم الأخلاق عبر حكايات أسطورية تستخدم معجزات الطبيعة كمكافأة فورية على الفضيلة، وهو بالضبط ما نراه في حركة الصخرة الميكانيكية استجابةً للحكايات.<br><br>
+        <strong>ثيمة "الصخرة المتحركة" في الفلكلور:</strong><br>
+        تكررت فكرة "الصخرة أو الباب الذي يُفتح ويُغلق بناءً على فعل أخلاقي أو كلمة سر" في موروثات عديدة في الشرق الأدنى (كما في قصص ألف ليلة وليلة وعلي بابا). هذه "الثيمة" الشعبية تهدف لتبسيط فكرة الجزاء الإلهي للعامة عبر تصويرها بشكل مادي ملموس (انفراج الصخرة شبرًا بشبر)، وهي رؤية تبتعد عن جلال الغيب في القرآن وتنزلق نحو "الدراما الشعبية".<br><br>
+        <strong>المسرحة المادية للدين:</strong><br>
+        تكمن "البصمة الأجنبية" هنا في تحويل الدين إلى مشهد "سينمائي"؛ فبدلاً من أن يكون الجزاء معنوياً أو بركة في الرزق، تُقدم الرواية حلاً فيزيائياً خارقاً لقوانين المادة بناءً على سرد قصصي. تفاصيل القصص الثلاث (خاصة قصة ابنة العم والـ 120 ديناراً) تحمل نفساً "حكواتياً" يهدف للإثارة والتشويق، وهو أسلوب يختلف عن رصانة الوحي القرآني الذي يُركز على القيم المطلقة لا على "المغامرات الفردية" ذات النهايات السحرية.<br><br>
+        <strong>تسلل النمط الأدبي للتدوين الإسلامي:</strong><br>
+        إن انتقال هذا النمط الأدبي من الهند وفارس إلى مدونات الحديث يُبين كيف استوعب التدوين "الأدب الشعبي" السائد في العصور الوسطى. لقد أراد الرواة تحويل المواعظ الأخلاقية العالمية إلى "سُنّة نبوية" لِيُعطوها سلطةً مُقدسة، مما جعل الإسلام يظهر وكأنه يعيد إنتاج أساطير الأمم السابقة بأثواب جديدة.<br><br>
+        <strong>المصادمة مع الواقعية القرآنية:</strong><br>
+        يُجازي الله الصالحين في القرآن بـ "السكينة" و"الفتح المبكر" و"الرزق الحلال" {وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا}. والمخرج في القرآن معنوي وقانوني وحياتي، أما "تحريك الصخور" في الجبال بأسلوب ميكانيكي يشبه قصص الخيال، فهو تصوير يُقزم من حكمة الله ويحولها إلى "آلية استجابة" فورية للحكايات، مما يتناقض مع منطق الابتلاء القرآني.`
+    },
+    { 
+        id: 42, 
+        title: "نعيم الجنة: تطابق حرفي مع رسائل بولس الرسول", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/NhfmjYhG", 
+        text: "قال اللهُ: أعدَدتُ لعِبادي الصَّالِحينَ ما لا عَينٌ رَأت، ولا أُذُنٌ سَمِعَت، ولا خَطَرَ على قَلبِ بَشَرٍ.",
+        num: "7498", 
+        comparison: `<strong>التطابق النصي مع العهد الجديد (رسالة كورنثوس):</strong><br>
+        يكشف الوقوف أمام هذا النص عن تطابق "كلمة بكلمة" مع نصوص العهد الجديد التي كُتبت قبل الإسلام بقرون. نجد هذا النص الحرفي في رسالة بولس الرسول الأولى إلى أهل كورنثوس (الإصحاح 2، العدد 9)، حيث يقول: (بَلْ كَمَا هُوَ مَكْتُوبٌ: «مَا لَمْ تَرَ عَيْنٌ، وَلَمْ تَسْمَعْ أُذُنٌ، وَلَمْ يَخْطُرْ عَلَى بَالِ بَشَرٍ: مَا أَعَدَّهُ اللهُ لِلَّذِينَ يُحِبُّونَهُ»). ومن الجدير بالذكر أن بولس نفسه كان يقتبس هذا المعنى من نبوءة أقدم وردت في سِفر إشعياء (64: 4).<br><br>
+        <strong>ظاهرة "الهجرة النصية" من الإنجيل للحديث:</strong><br>
+        نحن أمام حالة مذهلة من انتقال النصوص؛ فالتطابق ليس في "الفكرة" العامة للجنة فحسب، بل في "القالب اللفظي" الثلاثي (العين، الأذن، القلب). إن نِسبة هذا القول لله سبحانه في البخاري (كحديث قدسي) يطرح تساؤلاً معرفياً خطيراً: لماذا غاب هذا النص البليغ عن القرآن الكريم، وحضر بدلاً من ذلك في رسائل بولس الرسول إلى الكنائس النصرانية؟<br><br>
+        <strong>دور الرواة في "تعريب" الأدبيات الإنجيلية:</strong><br>
+        يُثبت هذا التماثل أن الرواة الأوائل (الذين كان لكثير منهم خلفيات نصرانية أو احتكاك وثيق بكتب أهل الشام ومصر) قد نقلوا "الأدبيات الإنجيلية" الرائعة ونسبوها للنبي كنوع من تعظيم وصف الجنة وتجميله بما يألفه المعتنقون الجدد. وبفعل الزمن وتراكم النقل، تحولت "كلمات بولس" البشرية إلى "كلمات الله" (حديث قدسي) في موروثنا الروائي.<br><br>
+        <strong>الاستغناء بالبيان القرآني:</strong><br>
+        نقدنا لهذا النص ليس تقليلاً من جمال المعنى، بل هو انتصار لـ "هوية الوحي"؛ فالإسلام الذي اكتمل بالقرآن لا يحتاج لاقتراض بلاغة الأناجيل أو رسائل الرسل السابقين لِيَصف نعيمه. القرآن الكريم وصف نعيم الجنة بأسلوب مستقل وفريد في سورة السجدة: {فَلَا تَعْلَمُ نَفْسٌ مَّا أُخْفِيَ لَهُم مِّن قُرَّةِ أَعْيُنٍ} [السجدة: 17]، وهو نص كافٍ ووافٍ، أما القالب الثلاثي المقتبس فهو "ملحق بشري" أُضيف لاحقاً.<br><br>
+        <strong>توهين موثوقية "الحديث القدسي":</strong><br>
+        إن وجود (نص بولس) في (بخاري المسلمين) ككلام إلهي، هو دليل قاطع على أن مدونات الحديث قد استوعبت بداخلها موروثات الأمم السابقة وصبغتها بصبغة الوحي. هذا يوجب علينا الحذر الشديد وتفعيل "ميزان القرآن" لتمييز كلام الله الخالص من كلام البشر المقتبس الذي تسلل عبر الرواة.`
+    },
+    { 
+        id: 43, 
+        title: "الأرواح جنود مجندة: اقتباس الفلسفة الزرادشتية", 
+        source: "مسلم", 
+        sourceUrl: "https://dorar.net/h/VtwLQ4BN", 
+        text: "الأرواحُ جُنودٌ مُجَنَّدةٌ، فما تَعارَفَ مِنها ائتَلَفَ، وما تَناكَرَ مِنها اختَلَفَ.",
+        num: "2638", 
+        comparison: `<strong>الجذور في اللاهوت الزرادشتي (عقيدة الفراشي):</strong><br>
+        يَنقلنا هذا النص من رحابة النفس الإنسانية في القرآن إلى "عقيدة التجنيد" الروحية التي سادت في بلاد فارس قبل الإسلام بآلاف السنين. تجد هذه الفكرة أصلها الجوهري في مفهوم "الفراشي" (Fravashi) في الديانة الزرادشتية؛ وهي الأرواح الخالدة والحامية التي خُلقت قبل الأجساد لتكون حائط صد ضد الشر.<br><br>
+        <strong>التطابق مع نصوص "الأفستا" و"البُندَهشن":</strong><br>
+        جاء في كتاب (الأفستا - يشت 13)، وتحديداً في "فروردين يشت"، وصفٌ تفصيلي للأرواح (الفراشي) بأنها كائنات "مُحاربة، قوية، ومنظمة كجيش" تساعد الخالق (أهورامزدا) في حماية الكون من قوى الظلام. كما يذكر كتاب (البُندَهشن - Bundahishn) —وهو كتاب نشأة الخلق الفارسي، الإصحاح 3— أن الخالق خيّر الأرواح في البداية لتنزل إلى الأرض وتعمل كـ "جنود" في جيشه، فانقسمت إلى فصائل ورتب بناءً على تآلفها السابق.<br><br>
+        <strong>عسكرة الغيب وضرب "الإرادة":</strong><br>
+        نحن أمام "استنساخ فلسفي" كامل للرؤية الفارسية للكون؛ ففكرة وصف الأرواح بـ "الجنود المجندة" هي محاكاة حرفية للمنطق الزرادشتي الذي "يُعسكر" عالم الغيب. إن هذا التصوير يجعل من الائتلاف والاختلاف بين البشر نتيجة لـ "فرز عسكري مسبق" في عالم الذر، مما يضرب في مقتل مفهوم "الاختيار الإنساني" والمسؤولية الفردية التي أكدها القرآن الكريم.<br><br>
+        <strong>المصادمة مع المبدأ القرآني للتعارف:</strong><br>
+        يُؤسس القرآن الكريم لعلاقة إنسانية قائمة على "التعارف" الإرادي والواعي: {يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا} [الحجرات: 13]. التعارف في القرآن هو "أمرٌ وعملٌ اجتماعي" يهدف لتحطيم الحواجز، بينما الرواية تجعل الائتلاف "قدراً جبرياً" مبرمجاً مسبقاً، فكأن الإنسان لا يملك إرادة في حب أو كره الآخرين، بل هو رهينة لتصنيفات "عسكرية غيبية" قديمة.<br><br>
+        <strong>تسلل التراتبية الفارسية للتراث:</strong><br>
+        يُبين نقد هذا النص كيف تماهت الرواية مع "المحيط الثقافي الفارسي" الذي كان يقدس التراتبية العسكرية والطبقية حتى في عالم الأرواح. لقد تحول "السر الإلهي" في الإنسان (الروح) إلى "فرقة عسكرية" في الموروث الروائي، مما يُثبت أن الرواة استقوا مفاهيمهم الغيبية من أساطير الجيران القدماء، ونسبوها للوحي ليُضفوا عليها صبغة القداسة، بينما الروح في القرآن {مِنْ أَمْرِ رَبِّي} وهي أكرم من أن تُحشر في ثكنات رمزية مستوردة.`
+    },
+    { 
+        id: 44, 
+        title: "المولود والفطرة: فلسفة الدهارما الهندية", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/SLbRdS88", 
+        text: "كُلُّ مَولودٍ يولَدُ على الفِطرةِ، فأبَواه يُهَوِّدانِه أو يُنَصِّرانِه أو يُمَجِّسانِه، كمَثَلِ البَهيمةِ تُنتَجُ البَهيمةَ، هل تَرى فيها جَدعاءَ؟",
+        num: "1385", 
+        comparison: `<strong>الجذور في الفلسفات الشرقية (مفهوم الدهارما):</strong><br>
+        يضعنا هذا النص أمام مفهوم "الطبيعة الأصلية" التي تتعرض للتشويه الخارجي، وهو مفهوم سكن لُبَّ الفلسفات الهندية (الهندوسية والبوذية) تحت مسمى "الدهارما" (Dharma)؛ والتي تعني "النظام الكوني الثابت" أو "الجودة الجوهرية" التي يولد بها الكائن. كما تلتقي الرواية مع "الطاوية" في الصين التي ترى أن الإنسان يولد حاملاً لقانون الوجود الصافي، وأن التقاليد الاجتماعية هي التي تحرفه عن مساره الطبيعي.<br><br>
+        <strong>استعارة "الأمثال الحيوانية" من مدرسة الحكمة القديمة:</strong><br>
+        إن استخدام "التمثيل بالحيوان" لتوضيح كمال الخلقة (البهيمة التي تُولد كاملة قبل أن يجدع البشرُ أذنها) هو أسلوب رمزي شاع في "أدب الحكمة" العالمي القديم. فالفيلسوف اليوناني (أبكتيتوس) والرواقيون كانوا يضربون الأمثال بالحيوانات التي تتبع فطرتها دون خلل، ليُبينوا أن "المجتمع البشري" هو المصدر الوحيد لابتداع "التشوهات" الفكرية والسلوكية.<br><br>
+        <strong>تحويل "الفطرة القرآنية" إلى "قالب تصنيفي":</strong><br>
+        يكمن الإشكال المعرفي هنا في تحوير المفهوم القرآني الواسع لـ "الفطرة"؛ فبينما يتحدث القرآن عنها كصبغة إلهية عامة تدل على الخالق وتجذب النفس نحو الحق والعدل {فِطْرَتَ اللَّهِ الَّتِي فَطَرَ النَّاسَ عَلَيْهَا} [الروم: 30]، تأتي الرواية لتستخدم المبدأ ذاته في صراع "الهويات الدينية". لقد جعلت الرواية من "الإسلام" (كمسمى طائفي) هو الفطرة، وما عداه (يهودية، نصرانية، مجوسية) هو محض "تغيير وتشويه"، وهو ما يخدم عقلية الانغلاق المذهبي.<br><br>
+        <strong>تسلل المخيال "المانوي" والزرادشتي:</strong><br>
+        ذكر "المجوسية" (يُمجّسانه) تحديداً يشير إلى البيئة الثقافية التي دُوّنت فيها هذه الروايات، حيث كان الاحتكاك بالفكر الفارسي والزرادشتي في أوجِه. الرواية تعكس رغبة "المتدينين" في إثبات أن دينهم هو "الأصل البيولوجي" للبشر، وأن الآخرين "منحرفون" عن أصل خلقتهم، وهو منطق استعلائي ساد في الديانات القديمة لتعزيز الولاء للجماعة.<br><br>
+        <strong>التصادم مع "حرية الاختيار" والمسؤولية:</strong><br>
+        يقرر القرآن أن الهداية والضلال هما نتاج "إعمال العقل" والابتلاء الشخصي، وليسا مجرد برمجة أبوية قسرية. الرواية تُصور الإنسان ككائن سلبي (كالباهيمة) يتم تشكيله بالكامل من قبل الوالدين، مما يُضعف من قيمة "المسؤولية الفردية" التي هي ركن الحساب في القرآن الكريم.`
+    },
+    { 
+        id: 45, 
+        title: "أطوار الجنين الأربعينية: استعارة لنظريات الطب القديم", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/dgTSNGBS", 
+        text: "حَدَّثَنا رَسولُ اللهِ صلَّى اللهُ عليه وسلَّم -وهو الصَّادِقُ المَصدوقُ- قال: إنَّ أحَدَكُم يُجمَعُ خَلقُه في بَطنِ أُمِّه أربَعينَ يَومًا، ثُمَّ يَكونُ عَلَقةً مِثلَ ذلك، ثُمَّ يَكونُ مُضغةً مِثلَ ذلك، ثُمَّ يَبعَثُ اللهُ مَلَكًا فيُؤمَرُ بأربَعِ كَلِماتٍ، ويُقالُ له: اكتُبْ عَمَلَه، ورِزقَه، وأجَلَه، وشَقيٌّ أو سَعيدٌ، ثُمَّ يُنفَخُ فيه الرُّوحُ.",
+        num: "3208", 
+        comparison: `<strong>التطابق مع "تاريخ الطب اليوناني" (جالينوس وأرسطو):</strong><br>
+        يُعد الطبيب اليوناني جالينوس (القرن الثاني الميلادي) —الذي أثرت كتاباته في كل أطباء الشرق الأدنى قبل الإسلام— الأب الحقيقي لفكرة "الأطوار الأربعة" للجنين. والأهم من ذلك أن أرسطو قبله، وجالينوس من بعده، جعلا من "رقم 40" ميزاناً حاسماً لتشكل الجنين وتميز أعضائه. هذا الحصر الحسابي (40+40+40 = 120 يوماً) هو صدى مباشر لتلك النظريات الطبية التي كانت تعتبر الرقم "40" رقماً مقدساً ورمزياً في تحولات الجسد والروح.<br><br>
+        <strong>الجذور في الطب الهندي القديم:</strong><br>
+        نجد في نصوص (سوشروتا سامهيتا - Sushruta Samhita)، وهي من أمهات كتب الطب الهندي القديم، وصفاً مشابهاً يربط بين مرور الفترات الزمنية وبين تحول النطفة إلى كتلة صلبة. لقد كان ولع الحضارات القديمة بالتقسيمات الأربعينية (نسبة للأربعين يوماً) جزءاً من منظومتها المعرفية التي تسللت عبر المترجمين والحكواتية إلى بيئة تدوين الحديث.<br><br>
+        <strong>المصادمة مع اليقين العلمي (علم الأجنة المعاصر):</strong><br>
+        أثبت العلم الحديث —عبر تقنيات السونار ثلاثي الأبعاد والمجاهر— أن مراحل تطور الجنين أسرع بكثير مما ادعته الرواية المستوردة؛ فالعلم يقطع بأن "نبض القلب" يبدأ في اليوم الـ 21، وأن تشكل جميع الأعضاء الرئيسية (Organogenesis) يكتمل بنهاية الأسبوع الثامن (أي قبل اليوم الـ 60). فكيف نصدق رواية تدعي أن الجنين يظل مجرد "علقة" (دم) حتى اليوم الـ 80، ومجرد "مضغة" (لحم) حتى اليوم الـ 120؟ في اليوم الـ 120 (نهاية الشهر الرابع)، يكون الجنين بشراً مكتمل الملامح والأطراف، وليس مجرد قطعة لحم تنتظر النفخ.<br><br>
+        <strong>إعجاز الصمت القرآني مقابل اضطراب الرواية:</strong><br>
+        تبرز المفارقة المعرفية عند مقارنة الرواية بالقرآن؛ فالله سبحانه في القرآن ذكر الأطوار (نطفة، علقة، مضغة..) كآيات واصفة لعملية الخلق، لكنه نزه وحيه المعصوم عن ذكر أي "توقيتات زمنية" بالأيام أو الشهور. هذا الصمت القرآني هو قمة الإعجاز؛ لأنه ترك الباب مفتوحاً لعلائق العلم المتغيرة، بينما سقطت الرواية البشرية في فخ "الرقم 40" المقتبس من موروثات اليونان والهند، مما جعل "أصح الكتب" ينطق بمعلومات طبية خاطئة تصدم الواقع التشريحي.<br><br>
+        <strong>توهين مقام النبوة:</strong><br>
+        إن نِسبة "أوهام الطب القديم" للنبي هي إساءة بالغة لمقامه؛ فالنبي الذي يوحى إليه من خالق الأرحام لا يمكن أن ينطق بما يخالف قوانين المادة والبيولوجيا التي وضعها الله. الرواية تعكس ثقافة الرواة "الشعبية" في العصور الوسطى، حيث ملأوا الفراغ المعرفي بتقديرات بشرية سائدة في عصرهم وألبسوها ثوب الحديث النبوي لتعزيز سلطتها.`
+    },
+    { 
+        id: 46, 
+        title: "طواف سليمان على مئة امرأة: مبالغات توراتية", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/vaqa0pq0", 
+        text: "قال سُلَيمانُ بنُ داوُدَ: لَأطوفَنَّ اللَّيلةَ على سَبعينَ امرَأةً. (وفي رواية أخرى: تسعين. وفي رواية أخرى: لَأطوفَنَّ اللَّيلةَ على مِئةِ امرَأةٍ، أو تِسعٍ وتِسعينَ، كُلُّهنَّ يَأتي بفارِسٍ يُجاهِدُ في سَبيلِ اللهِ.)",
+        num: "3424", 
+        comparison: `<strong>الجذور في التراث اليهودي (سِفر الملوك):</strong><br>
+        تجد صورة "سليمان ذي الزوجات المئات" أصلها الصريح في التراث اليهودي الذي ركز بشكل مفرط على عظمة ملكه المادي وكثرة نسائه لإظهار قوته السياسية. ففي سِفر الملوك الأول (الإصحاح 11، العدد 3) نجد وصفاً لنساء سليمان: (وكانت له سبعمئة من النساء السيدات وثلاثمئة من السراري). إن الرواية البخارية لم تكتفِ باستعارة نموذج "التعدد السليماني" من العهد القديم، بل أضافت عليه طابعاً درامياً وحسياً يتصادم مع جلال النبوة.<br><br>
+        <strong>استعارة "فانتازيا الفحولة" من المخيال الشعبي:</strong><br>
+        فكرة "الطواف على مئة امرأة في ليلة واحدة" (بواقع دقائق معدودة لكل واحدة) هي فكرة تنتمي لقصص "الفحولة الأسطورية" السائدة في الميثولوجيات القديمة (كالفارسية والهندية)، وليست وحياً يهدف لبناء القيم الروحية. إن تحويل ليلة نبي من أنبياء الله إلى "سباق جسدي" مفرط هو إساءة لمقام النبوة، وتصوير للأنبياء بمظهر المنشغلين بالرغبات المادية فوق انشغالهم بالوحي والحكمة.<br><br>
+        <strong>تحويل "القدر" إلى "عقوبة ميكانيكية":</strong><br>
+        تذكر الرواية أن سليمان نسي قول "إن شاء الله"، فكانت العقوبة هي ولادة "نصف إنسان". هذا التصوير يختزل العلاقة مع الله في "كلمات سحرية" يؤدي نسيانها إلى كوارث بيولوجية، وهو منطق يشبه الأساطير الشعبية التي تهدف لتخويف الناس، ويتناقض مع رحمة الله وحكمته في الخلق التي فصلها القرآن الكريم.<br><br>
+        <strong>المصادمة مع صورة سليمان في القرآن:</strong><br>
+        يُقدم القرآن الكريم النبي سليمان كملك حكيم، شاكر لربه، مسخر للريح والجن، ومنشغل بعمارة الأرض وإقامة التوحيد {نِعْمَ الْعَبْدُ ۖ إِنَّهُ أَوَّابٌ}. بينما الرواية المستعارة من التقاليد السابقة تنزل بوعي القارئ لتجعل "بيولوجيا النبي" وعدد نسائه هو مِحور القصة، مما يصرف النظر عن الجوهر الرسالي.<br><br>
+        <strong>تسلل "الأرقام التوراتية" والاضطراب الروائي:</strong><br>
+        يظهر التهافت في اختلاف الرواة على الرقم (70، 90، 100 امرأة)، مما يثبت أننا أمام "حكاية" تطورت مع الوقت وليست وحياً محفوظاً. إن الرواة تأثروا بالأرقام الفلكية الموجودة في العهد القديم ونقلوها لمدونات الحديث لإضفاء صبغة "الخوارق" على سيرة الأنبياء، دون إدراك لمدى الإساءة لمقامهم.`
+    },
+    { 
+        id: 47, 
+        title: "دابة الأرض وعصا موسى وخاتم سليمان", 
+        source: "الترمذي", 
+        sourceUrl: "https://dorar.net/h/9jVOMujV", 
+        text: "تَخرُجُ الدَّابَّةُ ومعَها خاتَمُ سُليمانَ بنِ دَاودَ، وعصَا مُوسَى بنِ عِمرانَ، فتَجْلو وجهَ المُؤمِنِ بالعَصا، وتَخطِمُ أنفَ الكافِرِ بالخاتَمِ، حتَّى إنَّ أهلَ الخِوانِ ليَجتمعونَ فيَقولونَ هذا: يا مؤمِنُ، ويقولُ هذا: يا كافرُ، ويقولونَ هذا: يا مؤمِنُ، ويقولون هذا: يا كافرُ.",
+        num: "3187", 
+        comparison: `<strong>استعارة "الأدوات السحرية" من الفلكلور اليهودي:</strong><br>
+        فكرة امتلاك "خاتم سحري" (سليمان) و"عصا سحرية" (موسى) هي فكرة مركزية في الأساطير التلمودية والقصص الشعبي لأهل الكتاب. الربط بين "الدابة" الغيبية وبين "أدوات مادية" لعملية الوسم (الختم والخطم) هو تصور مادي بدائي للتمييز بين الخير والشر.<br><br>
+        <strong>التطابق مع "سِفر الرؤيا":</strong><br>
+        تتشابه الدابة في الرواية مع "وحش الأرض" في سِفر الرؤيا (13: 11)، الذي يضع علامة على البشر. الرواية الإسلامية قامت بـ "تبيئة" هذا الوحش عبر تزويده بمقتنيات الأنبياء المذكورين في القرآن، لصبغ الأسطورة بصبغة إسلامية مقبولة.<br><br>
+        <strong>المصادمة مع المنهج القرآني:</strong><br>
+        ذكر القرآن الكريم {دَابَّةً مِّنَ الْأَرْضِ تُكَلِّمُهُمْ} [النمل: 82]. والآية جعلت وظيفتها "الكلام والبيان"، بينما حولتها الرواية إلى كائن يحمل "حقيبة أدوات" ويطارد الناس لِيَسِمَ جِباههم، وهو تحويل للآية القرآنية من (رسالة وعي) إلى (مشهد أسطوري حسي).`
+    },
+    { 
+        id: 48, 
+        title: "المسيح الدجال: أسطورة تميم الداري", 
+        source: "مسلم", 
+        sourceUrl: "https://dorar.net/h/oAfZ3DeL", 
+        text: "(رواية مطولة).. رَكِبَ في سَفينةٍ بَحريَّةٍ مع ثَلاثينَ رَجُلًا مِن لَخمٍ وجُذامَ.. فدَخَلوا الجَزيرةَ، فلَقيَتْهم دابَّةٌ أهلَبُ (الجسّاسة) كَثيرُ الشَّعَرِ.. دَخَلنا الدَّيرَ، فإذا فيه أعظَمُ إنسانٍ رَأيناه قَطُّ خَلقًا، وأشَدُّه وِثاقًا، مَجموعةٌ يَداه إلى عُنُقِه.. وإنِّي مُخبِرُكُم عَنِّي؛ إنِّي أنا المَسيحُ (الدجال)..",
+        num: "2942", 
+        comparison: `<strong>الجذور في أساطير "العملاق المحبوس":</strong><br>
+        تتطابق هذه القصة مع أساطير "العمالقة" أو "الآلهة المتمردة" المحبوسة في جزر نائية أو كهوف، مثل أسطورة "بروميثيوس" في الميثولوجيا اليونانية، أو أساطير "تيتان" المحبوسين تحت الأرض. فكرة "القيود المادية" لكائن غيبي جبار هي فكرة أسطورية عالمية سبقت الإسلام بآلاف السنين.<br><br>
+        <strong>التشابه مع أدب "الرحلات العجائبية":</strong><br>
+        تشبه الرواية قصص "السندباد" و"الأوديسة"، حيث يضيع البحارة ويجدون جزيرة بها كائنات غريبة. إن إقحام هذا النوع من "الأدب القصصي" في صلب العقيدة الإسلامية يوضح تأثر الرواة بالثقافة البحرية والأسطورية التي كانت شائعة في حوض المتوسط.<br><br>
+        <strong>التعارض مع قوانين المادة والغيب:</strong><br>
+        كيف يمكن لإنسان مادي أن يظل محبوساً بـ "سلاسل حديدية" لأكثر من ألف عام في جزيرة دون أكل أو شرب؟ والمنطق يسأل: لماذا لم ترصد الأقمار الصناعية هذه الجزيرة وهذا العملاق حتى يومنا هذا؟ إن الرواية تعكس "جغرافيا بدائية" للأرض كانت تظن أن البحر محاط بالمجهول، وهو ما يتناقض مع الحقيقة العلمية.`
+    },
+    { 
+        id: 49, 
+        title: "رجم الزاني: استنساخ شريعة موسى", 
+        source: "البخاري", 
+        sourceUrl: "https://dorar.net/h/mRvdilfh", 
+        text: "عن ابن عباس رضي الله عنهما أن عمر بن الخطاب قال: (إنَّ اللَّهَ بَعَثَ مُحَمَّدًا بالْحَقِّ، وأَنْزَلَ عليه الكِتَابَ، فَكانَ ممَّا أُنْزِلَ عليه آيَةُ الرَّجْمِ، فَقَرَأْنَاهَا ووَعَيْنَاهَا وعَقَلْنَاهَا، ورَجَمَ رَسولُ اللَّهِ ورَجَمْنَا بَعْدَهُ...) (وتدعي روايات أخرى أن آية الرجم كانت في القرآن \"الشيخ والشيخة إذا زنيا فارجموهما البتة\" ثم سقطت لأن \"الداجن أكلتها\".)",
+        num: "6830", 
+        comparison: "<strong>التطابق الحرفي مع شريعة موسى (التوراة):</strong><br>\n        تُعد عقوبة \"الرجم حتى الموت\" هي العقوبة الأصلية للزنا في شريعة العهد القديم. نجدها في سِفر التثنية (22: 22): (إِذَا وُجِدَ رَجُلٌ مُضْطَجِعًا مَعَ امْرَأَةٍ زَوْجَةِ بَعْل، يُقْتَلُ الاثْنَانِ: الرَّجُلُ الْمُضْطَجِعُ مَعَ الْمَرْأَةِ، وَالْمَرْأَةُ. فَتَنْزِعُ الشَّرَّ مِنْ إِسْرَائِيلَ). وفي سِفر اللاويين (20: 10): (يُقْتَلُ الزَّانِي وَالزَّانِيَةُ). والتقاليد اليهودية (التلمود) فصّلت أن القتل يكون بالرجم.<br><br>\n        <strong>المصادمة مع \"النسخ\" القرآني للرجم:</strong><br>\n        جاء القرآن الكريم ليضع عقوبة جديدة ومختلفة تماماً (وهي الجلد): {الزَّانِيَةُ وَالزَّانِي فَاجْلِدُوا كُلَّ وَاحِدٍ مِّنْهُمَا مِائَةَ جَلْدَةٍ} [النور: 2]. الآية عامة وشاملة، ولم تذكر رُجماً ولا تفريقاً بين متزوج وغيره. الرواية تحاول إعادة \"التشريع التوراتي\" الذي ألغاه القرآن، وإحياء عقوبة دموية نزه الله كتابه عنها.<br><br>\n        <strong>أسطورة \"الآية الضائعة\":</strong><br>\n        ادعاء الرواة بأن هناك \"آية رُفعت تلاوتها وبقي حكمها\" هو محاكاة لعقلية الأحبار الذين كانوا يضيفون للهوامش والتفاسير صفة \"الوحي\". والمنطق القرآني يرفض ذلك؛ فالله تعهد بحفظ \"الذكر\"، والقول بأن آية \"الرجم\" أكلتها (داجن/سخلة) كما في روايات أخرى هو إهانة لحرمة الوحي وتشكيك في كمال القرآن.<br><br>\n        <strong>تسلل الناموس اليهودي للفقه:</strong><br>\n        يثبت هذا التقارب أن الفقه الروائي قد تأثر بعمق بـ \"الناموس الموسوي\" الذي يميل للقسوة البدائية، وحاول الرواة إقحام هذه القسوة في الإسلام عبر بوابة \"السنة\"، متجاهلين أن الإسلام جاء بالرحمة وبالتخفيف من الآصار والأغلال التي كانت على بني إسرائيل."
+    }
+    ];
+ 
+    let currentPage = 1;
+    const perPage = 15;
+    let currentFontSizeRem = 1.15;
+
+    function normalizeArabic(text) {
+        if (!text) return "";
+        return text
+            .replace(/[\u064B-\u065F]/g, "") 
+            .replace(/[أإآ]/g, "ا")           
+            .replace(/ة/g, "ه")               
+            .replace(/ى/g, "ي")               
+            .trim();
+    }
+
+    function highlightText(text, query) {
+        if (!query) return text;
+        // Escape regex special characters
+        const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(${escapedQuery})`, 'gi');
+        return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    function toggleMobileMenu() {
+        const links = document.getElementById('navLinks');
+        const overlay = document.getElementById('navOverlay');
+        links.classList.toggle('show');
+        overlay.style.display = links.classList.contains('show') ? 'block' : 'none';
+        document.body.classList.toggle('no-scroll');
+    }
+
+    /* ==================== GLOBAL SEARCH LOGIC (Hybrid Version) ==================== */
+    let cachedPagesContent = null;
+    let isSearchInitialized = false;
+
+    async function loadAllPagesContent() {
+        if (cachedPagesContent) return cachedPagesContent;
+        try {
+            const response = await fetch('../site-map.json?v=' + new Date().getTime());
+            const pagesList = await response.json();
+            const promises = pagesList.map(async (item) => {
+                let originalUrl = typeof item === 'string' ? item : item.url;
+                let fetchUrl = '../' + originalUrl; 
+                
+                try {
+                    const pageResp = await fetch(fetchUrl);
+                    const html = await pageResp.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    let scriptDataText = "";
+                    doc.querySelectorAll('script:not([src])').forEach(script => {
+                        const arabicMatches = script.textContent.match(/[\u0600-\u06FF]+/g);
+                        if (arabicMatches) {
+                            scriptDataText += " " + arabicMatches.join(' ');
+                        }
+                    });
+
+                    doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                    const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                    
+                    const fullContent = mainContent.textContent + " " + scriptDataText;
+
+                    return { 
+                        page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                        url: fetchUrl, 
+                        content: fullContent.replace(/\s+/g, ' ').trim() 
+                    };
+                } catch (e) { return null; }
+            });
+            cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
+            return cachedPagesContent;
+        } catch (error) { return []; }
+    }
+
+    function getSafeRegex(searchTerm) {
+        let regexStr = '';
+        const cleanTerm = normalizeArabic(searchTerm);
+        for (let char of cleanTerm) {
+            if (char === 'ا') regexStr += '[اأإآ]';
+            else if (char === 'ه') regexStr += '[هة]';
+            else if (char === 'ي') regexStr += '[يىئ]';
+            else if (char === 'و') regexStr += '[وؤ]';
+            else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            regexStr += '[\\u064B-\\u065F\\u0670]*';
+        }
+        return new RegExp(regexStr, 'gi');
+    }
+
+    async function performCombinedSearch(query) {
+        const resultsContainer = document.getElementById('searchResults');
+        if (!query || query.length < 2) {
+            resultsContainer.style.display = 'none';
+            return;
+        }
+
+        resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+        resultsContainer.style.display = 'block';
+
+        const normQuery = normalizeArabic(query.toLowerCase());
+        const searchRegex = getSafeRegex(query);
+
+        let localResults = [];
+        novelsData.forEach((novel, index) => {
+            const searchField = normalizeArabic(novel.title + novel.text + novel.comparison).toLowerCase();
+            if (searchField.includes(normQuery)) {
+                localResults.push({ ...novel, originalIndex: index });
+            }
+        });
+
+        const globalData = await loadAllPagesContent();
+        const globalResults = globalData.filter(item => {
+            searchRegex.lastIndex = 0;
+            const titleMatch = searchRegex.test(item.page);
+            searchRegex.lastIndex = 0;
+            const contentMatch = searchRegex.test(item.content);
+            return titleMatch || contentMatch;
+        });
+
+        resultsContainer.innerHTML = '';
+        const totalCount = localResults.length + globalResults.length;
+
+        if (totalCount === 0) {
+            resultsContainer.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+            return;
+        }
+
+        const countDiv = document.createElement('div');
+        countDiv.className = 'search-count';
+        countDiv.textContent = `تم العثور على ${totalCount} نتيجة`;
+        resultsContainer.appendChild(countDiv);
+
+        localResults.slice(0, 10).forEach(result => {
+            const item = document.createElement('div');
+            item.className = 'search-item';
+            const highlightedTitle = highlightText(result.title, normQuery);
+            item.innerHTML = `<h3><i class="fas fa-book-open"></i> ${highlightedTitle}</h3><p style="font-size:0.85rem; color:#666;">(داخل هذه الصفحة - وجه التقارب)</p>`;
+            item.onclick = () => {
+                jumpToNovel(result.originalIndex, result.id, normQuery);
+                resultsContainer.style.display = 'none';
+                document.getElementById('globalSearch').value = '';
+            };
+            resultsContainer.appendChild(item);
+        });
+
+        globalResults.slice(0, 10).forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'search-item';
+            const highlightedTitle = item.page.replace(searchRegex, match => `<mark>${match}</mark>`);
+            searchRegex.lastIndex = 0;
+            const match = searchRegex.exec(item.content);
+            let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+            div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(searchRegex, match => `<mark>${match}</mark>`)}...</p>`;
+            div.onclick = () => window.location.href = item.url;
+            resultsContainer.appendChild(div);
+        });
+    }
+
+    function jumpToNovel(index, id, searchQuery = null) {
+        currentPage = Math.floor(index / perPage) + 1;
+        renderNovels(searchQuery);
+        setTimeout(() => {
+            const card = document.getElementById(`card-covenant-${id}`);
+            if (card) {
+                const details = card.querySelector('.hadith-details');
+                if (!details.classList.contains('open')) {
+                    toggleHadith(card.querySelector('.hadith-summary'));
+                }
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.style.boxShadow = "0 0 15px var(--accent-gold)";
+                setTimeout(() => card.style.boxShadow = "var(--shadow-sm)", 2000);
+            }
+        }, 300);
+    }
+
+    function renderNovels(searchQuery = null) {
+        const container = document.getElementById('hadithContainer');
+        container.innerHTML = "";
+        const start = (currentPage - 1) * perPage;
+        const end = start + perPage;
+        const pageData = novelsData.slice(start, end);
+
+        pageData.forEach((novel) => {
+            let titleText = novel.title;
+            let textText = novel.text;
+            let comparisonText = novel.comparison;
+            
+            if (searchQuery) {
+                titleText = highlightText(titleText, searchQuery);
+                textText = highlightText(textText, searchQuery);
+                comparisonText = highlightText(comparisonText, searchQuery);
+            }
+
+            container.innerHTML += `
+            <div class="hadith-row">
+                <div class="hadith-number-circle">${novel.id}</div>
+                <div class="hadith-card" id="card-covenant-${novel.id}">
+                    <i class="far fa-bookmark fav-header-icon" data-id="${novel.id}" onclick="toggleFavorite(event, ${novel.id})"></i>
+                    <div class="hadith-summary" onclick="toggleHadith(this)">
+                        <h3>${titleText}</h3>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <span class="source-tag">${novel.source}</span>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                    </div>
+                    <div class="hadith-details">
+                        <div class="detail-section">
+                            <div class="section-header"><i class="fas fa-quote-right"></i> الرواية</div>
+                            <div class="section-content">${textText}</div>
+                            ${novel.num ? `<div class="section-content"><b style="font-weight: bold;">رقم الرواية: ${novel.num}</b></div>` : ''}
+                            <div class="hadith-actions">
+                                <a href="${novel.sourceUrl}" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
+                                <div class="action-btn btn-report" onclick="openReportModal('${novel.title}', '${novel.num}')"><i class="fas fa-flag"></i> إبلاغ</div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-header"><i class="fas fa-code-branch"></i> وجه التقارب: المقارنة مع النصوص السابقة</div>
+                            <div class="section-content">${comparisonText}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        });
+        updatePaginationUI();
+        syncFavIcons();
+    }
+
+    function toggleHadith(el) {
+        const details = el.nextElementSibling;
+        const row = el.closest('.hadith-row');
+        details.classList.toggle('open');
+        row.classList.toggle('is-open');
+        const icon = el.querySelector('.toggle-icon');
+        if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
+    // ==================== دالة حفظ المفضلة ====================
+    function toggleFavorite(e, id) {
+        e.stopPropagation();
+        const cardId = 'covenant_' + id;
+        let favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
+        const idx = favs.findIndex(f => f.id === cardId);
+        if (idx > -1) {
+            favs.splice(idx, 1);
+        } else {
+            const novel = novelsData.find(n => n.id == id);
+            favs.push({ 
+                id: cardId,
+                title: novel.title, 
+                type: 'covenant',
+                novelId: id, 
+                page: 'hadith_covenants',
+                source: novel.source,
+                text: novel.text.substring(0, 100),
+                num: novel.num
+            });
+        }
+        localStorage.setItem('myFavorites', JSON.stringify(favs));
+        syncFavIcons();
+        
+        const toast = document.getElementById("successToast");
+        toast.querySelector('span').textContent = 'تم حفظ الرواية في المفضلة';
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
+    }
+
+    function syncFavIcons() {
+        const favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
+        document.querySelectorAll('.fav-header-icon').forEach(icon => {
+            const id = icon.getAttribute('data-id');
+            const isFav = favs.some(f => f.id === `covenant_${id}`);
+            icon.classList.toggle('fas', isFav);
+            icon.classList.toggle('far', !isFav);
+            icon.style.color = isFav ? "var(--accent-gold)" : "var(--text-secondary)";
+        });
+    }
+
+    function updateFontSize() {
+        document.documentElement.style.setProperty('--dynamic-content-size', currentFontSizeRem + 'rem');
+    }
+
+    document.getElementById('fontIncrease').onclick = () => { currentFontSizeRem += 0.1; updateFontSize(); };
+    document.getElementById('fontDecrease').onclick = () => { if(currentFontSizeRem > 0.8) currentFontSizeRem -= 0.1; updateFontSize(); };
+    document.getElementById('fontReset').onclick = () => { currentFontSizeRem = 1.15; updateFontSize(); };
+
+    function updatePaginationUI() {
+        const totalPages = Math.ceil(novelsData.length / perPage) || 1;
+        document.getElementById('pageInfo').textContent = `الصفحة ${currentPage} من ${totalPages}`;
+        document.getElementById('totalHadithCount').textContent = `عدد الروايات: ${novelsData.length}`;
+        document.getElementById('prevPage').disabled = (currentPage === 1);
+        document.getElementById('nextPage').disabled = (currentPage === totalPages);
+        document.getElementById('firstPage').disabled = (currentPage === 1);
+    }
+
+    document.getElementById('nextPage').onclick = () => { 
+        if(currentPage < Math.ceil(novelsData.length / perPage)) {
+            currentPage++; 
+            renderNovels(); 
+            window.scrollTo(0, 400);
+        }
+    };
+    document.getElementById('prevPage').onclick = () => { 
+        if(currentPage > 1) {
+            currentPage--; 
+            renderNovels(); 
+            window.scrollTo(0, 400);
+        }
+    };
+    document.getElementById('firstPage').onclick = () => { 
+        currentPage = 1; 
+        renderNovels(); 
+        window.scrollTo(0, 400);
+    };
+
+    function openReportModal(title, num) {
+        document.getElementById('hiddenHadithName').value = title;
+        document.getElementById('hiddenHadithNumber').value = num;
+        document.getElementById('modalHadithInfo').textContent = `أنت تبلغ عن: ${title} ${num ? '(رواية رقم ' + num + ')' : ''}`;
+        document.getElementById('reportModal').classList.add('show');
+        document.body.classList.add('no-scroll');
+    }
+    
+    function closeReportModal() {
+        document.getElementById('reportModal').classList.remove('show');
+        document.body.classList.remove('no-scroll');
+    }
+
+    document.getElementById("reportForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
+        }).then(() => {
+            closeReportModal();
+            const toast = document.getElementById("successToast");
+            toast.querySelector('span').textContent = 'شكراً لمساهمتك';
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3500);
+            this.reset();
+        }).catch(() => {
+            closeReportModal();
+            const toast = document.getElementById("successToast");
+            toast.querySelector('span').textContent = 'تم استلام البلاغ';
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3500);
+            this.reset();
+        });
+    });
+
+    window.addEventListener('scroll', () => {
+        const btt = document.getElementById('backToTop');
+        if (window.scrollY > 400) btt.classList.add('show');
+        else btt.classList.remove('show');
+    });
+
+    document.getElementById('backToTop').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderNovels();
+        updateFontSize();
+
+        const searchInput = document.getElementById('globalSearch');
+        if (searchInput) {
+            let sTimer;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(sTimer);
+                sTimer = setTimeout(() => performCombinedSearch(e.target.value.trim()), 500);
+            });
+            searchInput.addEventListener('focus', () => { 
+                if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } 
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            const results = document.getElementById('searchResults');
+            if(results && !document.querySelector('.universal-search').contains(e.target)) {
+                results.style.display = 'none';
+            }
+        });
+    });
+</script>
+</body>
+</html>
