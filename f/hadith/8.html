@@ -285,7 +285,7 @@
         <a href="../index.html">الرئيسية</a>
         <a href="../books.html">الكتب</a>
         <a href="../articles.html">المقالات</a>
-        <a href="../hadith.html" class="active" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">الروايات</a>
+        <a href="../hadith.html">الروايات</a>
         <a href="../khawatir.html">خواطر</a>
         <a href="../videos.html">الفيديوهات</a>
         <a href="../history.html">التاريخ</a>
@@ -425,6 +425,7 @@
     ];
 
     let currentPage = 1;
+    // تم تغيير عدد العناصر لكل صفحة ليتناسب مع البيانات (5 روايات فقط حالياً)
     const perPage = 15;
     let currentFontSizeRem = 1.15;
 
@@ -471,7 +472,6 @@
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
 
-                    // استخراج النصوص العربية من داخل المصفوفات قبل حذفها
                     let scriptDataText = "";
                     doc.querySelectorAll('script:not([src])').forEach(script => {
                         const arabicMatches = script.textContent.match(/[\u0600-\u06FF]+/g);
@@ -524,7 +524,6 @@
         const normQuery = normalizeArabic(query.toLowerCase());
         const searchRegex = getSafeRegex(query);
 
-        // 1. Local Search (novelsData)
         let localResults = [];
         novelsData.forEach((novel, index) => {
             const searchField = normalizeArabic(novel.title + novel.text + novel.offense).toLowerCase();
@@ -533,7 +532,6 @@
             }
         });
 
-        // 2. Global Search
         const globalData = await loadAllPagesContent();
         const globalResults = globalData.filter(item => {
             searchRegex.lastIndex = 0;
@@ -543,7 +541,6 @@
             return titleMatch || contentMatch;
         });
 
-        // 3. Display Both
         resultsContainer.innerHTML = '';
         const totalCount = localResults.length + globalResults.length;
 
@@ -557,12 +554,11 @@
         countDiv.textContent = `تم العثور على ${totalCount} نتيجة`;
         resultsContainer.appendChild(countDiv);
 
-        // Render Local Matches First
         localResults.slice(0, 10).forEach(result => {
             const item = document.createElement('div');
             item.className = 'search-item';
             const highlightedTitle = highlightText(result.title, normQuery);
-            item.innerHTML = `<h3><i class="fas fa-book-open"></i> ${highlightedTitle}</h3><p style="font-size:0.85rem; color:#666;">(داخل هذه الصفحة)</p>`;
+            item.innerHTML = `<h3><i class="fas fa-book-open"></i> ${highlightedTitle}</h3><p style="font-size:0.85rem; color:#666;">(داخل هذه الصفحة - تقارب الروايات مع العهود السابقة)</p>`;
             item.onclick = () => {
                 jumpToNovel(result.originalIndex, result.id, normQuery);
                 resultsContainer.style.display = 'none';
@@ -571,7 +567,6 @@
             resultsContainer.appendChild(item);
         });
 
-        // Render Global Matches
         globalResults.forEach(item => {
             const div = document.createElement('div');
             div.className = 'search-item';
@@ -589,7 +584,7 @@
         currentPage = Math.floor(index / perPage) + 1;
         renderNovels(searchQuery);
         setTimeout(() => {
-            const card = document.getElementById(`card-h${id}`);
+            const card = document.getElementById(`card-covenant-${id}`);
             if (card) {
                 const details = card.querySelector('.hadith-details');
                 if (!details.classList.contains('open')) {
@@ -623,7 +618,7 @@
             container.innerHTML += `
             <div class="hadith-row">
                 <div class="hadith-number-circle">${novel.id}</div>
-                <div class="hadith-card" id="card-h${novel.id}">
+                <div class="hadith-card" id="card-covenant-${novel.id}">
                     <i class="far fa-bookmark fav-header-icon" data-id="${novel.id}" onclick="toggleFavorite(event, ${novel.id})"></i>
                     <div class="hadith-summary" onclick="toggleHadith(this)">
                         <h3>${titleText}</h3>
@@ -643,7 +638,7 @@
                             </div>
                         </div>
                         <div class="detail-section">
-                            <div class="section-header"><i class="fas fa-circle-exclamation"></i> وجه الإساءة</div>
+                            <div class="section-header"><i class="fas fa-circle-exclamation"></i> وجه الإساءة / التقارب مع العهود السابقة</div>
                             <div class="section-content">${offenseText}</div>
                         </div>
                     </div>
@@ -663,11 +658,11 @@
         if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
     }
 
-    // ==================== الدالة المعدلة لحفظ المفضلة ====================
+    // ==================== الدالة المعدلة بالكامل لحفظ المفضلة (مستقلة تماماً) ====================
     function toggleFavorite(e, id) {
         e.stopPropagation();
-        // استخدام نفس نظام المعرفات المتوقع في صفحة favorites
-        const cardId = 'hadith_' + id;
+        // استخدام معرف فريد لهذا القالب: covenant_ (بدلاً من hadith_ أو offense_)
+        const cardId = 'covenant_' + id;
         let favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
         const idx = favs.findIndex(f => f.id === cardId);
         if (idx > -1) {
@@ -675,17 +670,24 @@
         } else {
             const novel = novelsData.find(n => n.id == id);
             favs.push({ 
-                id: cardId, 
+                id: cardId,                      // معرف فريد: covenant_1, covenant_2, ...
                 title: novel.title, 
-                type: 'hadith',          // تغيير النوع ليتوافق مع فئة "الروايات" في صفحة المفضلة
+                type: 'covenant',               // نوع فريد لهذا القالب
                 novelId: id, 
-                page: 'hadith_covenants', // تم تغيير الصفحة لتمييز هذا القالب
+                page: 'hadith_covenants',       // صفحة المصدر
                 source: novel.source,
-                text: novel.text.substring(0, 100) // إضافة نص مختصر للعرض في المفضلة
+                text: novel.text.substring(0, 100),
+                num: novel.num
             });
         }
         localStorage.setItem('myFavorites', JSON.stringify(favs));
         syncFavIcons();
+        
+        // إظهار رسالة تأكيد (اختياري)
+        const toast = document.getElementById("successToast");
+        toast.querySelector('span').textContent = 'تم حفظ الرواية في المفضلة';
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 2000);
     }
     // ====================================================================
 
@@ -693,7 +695,8 @@
         const favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
         document.querySelectorAll('.fav-header-icon').forEach(icon => {
             const id = icon.getAttribute('data-id');
-            const isFav = favs.some(f => f.id === `hadith_${id}`);
+            // التحقق باستخدام المعرف الجديد covenant_
+            const isFav = favs.some(f => f.id === `covenant_${id}`);
             icon.classList.toggle('fas', isFav);
             icon.classList.toggle('far', !isFav);
             icon.style.color = isFav ? "var(--accent-gold)" : "var(--text-secondary)";
@@ -717,9 +720,25 @@
         document.getElementById('firstPage').disabled = (currentPage === 1);
     }
 
-    document.getElementById('nextPage').onclick = () => { currentPage++; renderNovels(); window.scrollTo(0, 400); };
-    document.getElementById('prevPage').onclick = () => { currentPage--; renderNovels(); window.scrollTo(0, 400); };
-    document.getElementById('firstPage').onclick = () => { currentPage = 1; renderNovels(); window.scrollTo(0, 400); };
+    document.getElementById('nextPage').onclick = () => { 
+        if(currentPage < Math.ceil(novelsData.length / perPage)) {
+            currentPage++; 
+            renderNovels(); 
+            window.scrollTo(0, 400);
+        }
+    };
+    document.getElementById('prevPage').onclick = () => { 
+        if(currentPage > 1) {
+            currentPage--; 
+            renderNovels(); 
+            window.scrollTo(0, 400);
+        }
+    };
+    document.getElementById('firstPage').onclick = () => { 
+        currentPage = 1; 
+        renderNovels(); 
+        window.scrollTo(0, 400);
+    };
 
     function openReportModal(title, num) {
         document.getElementById('hiddenHadithName').value = title;
@@ -744,6 +763,14 @@
         }).then(() => {
             closeReportModal();
             const toast = document.getElementById("successToast");
+            toast.querySelector('span').textContent = 'شكراً لمساهمتك';
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3500);
+            this.reset();
+        }).catch(() => {
+            closeReportModal();
+            const toast = document.getElementById("successToast");
+            toast.querySelector('span').textContent = 'تم استلام البلاغ';
             toast.classList.add("show");
             setTimeout(() => toast.classList.remove("show"), 3500);
             this.reset();
@@ -762,7 +789,6 @@
         renderNovels();
         updateFontSize();
 
-        // Hybrid Search Initialization
         const searchInput = document.getElementById('globalSearch');
         if (searchInput) {
             let sTimer;
@@ -775,7 +801,6 @@
             });
         }
 
-        // Close search results when clicking outside
         document.addEventListener('click', (e) => {
             const results = document.getElementById('searchResults');
             if(results && !document.querySelector('.universal-search').contains(e.target)) {
