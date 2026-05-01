@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>الروايات - روايات أساءت للمرأة</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
+    
+    <!-- Favicon -->
+    <link href="../images/logo-small.png" rel="icon" type="image/png"/>
+    <link href="../images/logo-small.png" rel="apple-touch-icon"/>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==================== Shared Styles (Unified Identity) ==================== */
+        :root {
+            --primary-color: #5c4a24; 
+            --accent-gold: #d4af37; 
+            --bg-color: #f9f7f2; 
+            --ticker-footer-bg: #f1e4c0; 
+            --surface-color: #ffffff; 
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            
+            --shadow-sm: 0 4px 15px rgba(212, 175, 55, 0.1);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.1);
+            
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --nav-height: 75px;
+            --gradient-header: linear-gradient(135deg, #fdfcf8 0%, #f1e4c0 100%);
+            --dynamic-content-size: 1.15rem;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+            width: 100%;
+            animation: fadeInPage 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.no-scroll { overflow: hidden !important; height: 100vh; position: fixed; width: 100%; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* ==================== Navigation ==================== */
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
+            z-index: 998; display: none;
+        }
+
+        nav {
+            background: var(--ticker-footer-bg); 
+            padding: 0 5%;
+            position: fixed;
+            width: 100%; top: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            height: var(--nav-height);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .logo-container { order: 1; }
+        .logo-container img { height: 45px; width: auto; transition: transform 0.4s ease; }
+
+        .nav-links {
+            display: flex; flex: 1; justify-content: space-evenly; align-items: center; margin: 0 10px; order: 2;
+        }
+
+        .nav-links a {
+            color: var(--primary-color); font-weight: 700; font-size: 0.95rem; padding: 8px 12px; border-radius: 20px; white-space: nowrap;
+            display: flex; align-items: center; gap: 5px; transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.3); color: var(--accent-gold); transform: translateY(-2px); }
+
+        .hamburger { display: none; color: var(--primary-color); font-size: 1.5rem; cursor: pointer; order: 3; }
+
+        @media (max-width: 1200px) {
+            .hamburger { display: block; order: 1; }
+            .logo-container { order: 2; }
+            .nav-links {
+                position: fixed; top: var(--nav-height); right: -280px; width: 280px;
+                background: white; flex-direction: column; padding: 20px; height: calc(100vh - var(--nav-height));
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease;
+                overflow-y: auto; flex-wrap: nowrap; justify-content: flex-start;
+                gap: 10px; margin: 0; flex: unset; z-index: 1001; display: flex !important;
+            }
+            .nav-links.show { right: 0; }
+            .nav-links a { 
+                color: var(--text-primary); width: 100%; padding: 12px; 
+                border-radius: 8px; font-size: 1rem; justify-content: flex-start; 
+                border-bottom: 1px solid rgba(0,0,0,0.03);
+            }
+            .nav-links a:hover { background: rgba(212,175,55,0.1); color: var(--accent-gold); transform: none; }
+        }
+
+        /* ==================== Header & Search ==================== */
+        .unified-header {
+            background: var(--gradient-header);
+            padding: calc(var(--nav-height) + 40px) 20px 60px;
+            text-align: center; color: var(--primary-color);
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 30px; width: 100%;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .page-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
+        .page-subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; margin: 0 auto; padding: 0 20px; }
+
+        .universal-search { width: 100%; max-width: 600px; margin: 35px auto 0; position: relative; z-index: 900; }
+        #globalSearch { 
+            width: 100%; padding: 18px 25px; border-radius: 50px; border: 2px solid var(--accent-gold);
+            font-size: 1rem; box-shadow: var(--shadow-sm); outline: none; text-align: right;
+            font-family: 'Tajawal', sans-serif; background: white;
+            transition: all 0.3s;
+        }
+        #globalSearch:focus { border-color: var(--primary-color); box-shadow: var(--shadow-md); }
+        .search-results {
+            position: absolute; top: 110%; left: 0; right: 0; 
+            background: white; border-radius: 15px; max-height: 400px; 
+            overflow-y: auto; display: none; z-index: 901; color: var(--text-primary); 
+            text-align: right; box-shadow: var(--shadow-lg); border: 1px solid rgba(0,0,0,0.05);
+        }
+        .search-item { padding: 15px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
+        .search-item:hover { background: rgba(212,175,55,0.1); }
+        .search-count { padding: 12px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(212, 175, 55, 0.1); background: #f8fafc; font-weight: 700; }
+        mark { background-color: var(--accent-gold); color: var(--primary-color); padding: 0 2px; border-radius: 4px; font-weight: 600; }
+
+        /* ==================== Hadith Card Styling ==================== */
+        .container { max-width: 1150px; margin: 0 auto; padding: 0 20px 60px; width: 100%; }
+        .hadith-row { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px; width: 100%; transition: all 0.3s ease; }
+        
+        /* الدائرة والمربع باللون البيج والذهبي */
+        .hadith-number-circle { 
+            width: 46px; height: 46px; 
+            background-color: #fdfcf8; 
+            border: 2.5px solid var(--accent-gold); 
+            color: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-weight: 800; font-size: 1.3rem; flex-shrink: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.05); 
+            margin-top: 15px; z-index: 5;
+        }
+        
+        .hadith-card { 
+            background: var(--surface-color); border-radius: var(--radius-xl); 
+            box-shadow: var(--shadow-sm); border-right: 6px solid var(--accent-gold); 
+            overflow: hidden; transition: 0.3s; flex: 1; border: 1px solid rgba(0,0,0,0.05);
+            position: relative; 
+        }
+        
+        .hadith-summary { padding: 25px 25px 25px 45px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+        .hadith-summary h3 { font-size: 1.3rem; color: var(--primary-color); font-weight: 800; flex: 1; text-align: right; transition: all 0.3s ease; }
+        .hadith-summary:hover h3 { color: var(--accent-gold); transform: translateX(-5px); }
+        
+        .source-tag { 
+            background: #fdfcf8; 
+            padding: 5px 12px; border-radius: 8px; font-size: 0.85rem; 
+            font-weight: 800; color: var(--primary-color); 
+            border: 1px solid var(--accent-gold);
+        }
+        
+        .fav-header-icon { 
+            font-size: 1.6rem; color: var(--text-secondary); transition: all 0.3s ease; cursor: pointer; 
+            position: absolute; top: 0; left: 0; padding: 10px 15px; z-index: 10;
+        }
+        .fav-header-icon:hover { transform: scale(1.15); color: var(--accent-gold); }
+        .fav-header-icon.active { color: var(--accent-gold); }
+
+        .hadith-details { 
+            max-height: 0; opacity: 0; overflow: hidden; 
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out; 
+            background: #fefcf7; 
+        }
+        .hadith-details.open { max-height: 10000px; opacity: 1; padding: 10px 30px 50px; border-top: 1px solid rgba(0,0,0,0.05); }
+
+        .detail-section { margin-top: 25px; background: transparent; border: none; }
+        .section-header { 
+            padding-bottom: 8px; margin-bottom: 10px; font-weight: 800; font-size: 1.1rem; 
+            display: flex; align-items: center; gap: 10px; color: var(--primary-color);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .section-content { padding: 5px 0 10px; line-height: 1.9; font-size: var(--dynamic-content-size); color: var(--text-primary); }
+
+        .hadith-actions { display: flex; align-items: center; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(0,0,0,0.08); }
+        .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; text-decoration: none !important; }
+        .btn-source { background: rgba(92, 74, 36, 0.1); color: var(--primary-color); border: 1px solid rgba(92, 74, 36, 0.2); }
+        .btn-source:hover { background: var(--primary-color); color: white; }
+        .btn-report { background: rgba(225, 29, 72, 0.08); color: #e11d48; border: 1px solid rgba(225, 29, 72, 0.1); }
+        .btn-report:hover { background: #e11d48; color: white; }
+
+        /* ==================== Font Controls & Back to top ==================== */
+        .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
+        .font-btn { width: 45px; height: 45px; border-radius: 50%; background: white; border: 1px solid var(--accent-gold); color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: var(--shadow-sm); transition: 0.3s; }
+        .font-btn:hover { background: var(--accent-gold); color: white; transform: scale(1.1); }
+
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            background-color: var(--primary-color); border: 2px solid var(--accent-gold);
+            color: var(--accent-gold); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 1.2rem;
+            cursor: pointer; z-index: 1001; transition: all 0.4s ease;
+            opacity: 0; visibility: hidden; box-shadow: var(--shadow-md);
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover { transform: translateY(-5px) scale(1.05); background-color: var(--accent-gold); color: var(--primary-color); }
+
+        /* ==================== Pagination ==================== */
+        #pagination-wrapper { background: var(--surface-color); padding: 25px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); text-align: center; margin: 40px auto; border: 1px solid rgba(0,0,0,0.05); max-width: 500px; }
+        .pagination-btn { background: #fdfcf8; color: var(--primary-color); border: 1px solid var(--accent-gold); padding: 10px 20px; border-radius: 12px; cursor: pointer; margin: 0 5px; font-family: 'Tajawal'; font-weight: 600; transition: 0.3s; }
+        .pagination-btn:hover:not(:disabled) { background: var(--accent-gold); color: white; transform: translateY(-2px); }
+        .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: #e2e8f0; color: #94a3b8; border-color: #cbd5e1; }
+        .pagination-info-container { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 15px; font-weight: 700; color: var(--text-primary); }
+        .total-count-badge { background: var(--primary-color); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem; }
+
+        /* ==================== Footer ==================== */
+        footer { background: var(--ticker-footer-bg); color: var(--primary-color); padding: 60px 20px; text-align: center; width: 100%; margin-top: 50px; border-top: 3px solid var(--accent-gold); }
+        .footer-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; align-items: center; }
+        .footer-links a { color: var(--primary-color); font-weight: 700; opacity: 0.8; font-size: 0.95rem; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--accent-gold); opacity: 1; }
+        .footer-divider { color: var(--text-secondary); font-size: 0.8rem; user-select: none; margin: 0 5px;} 
+        .copyright { color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid rgba(92, 74, 36, 0.1); padding-top: 25px; margin-top: 25px; font-weight: 600; }
+
+        /* Social Links */
+        .social-links {
+            display: flex; justify-content: center; gap: 15px; margin: 30px 0 20px;
+        }
+        .social-links a {
+            width: 55px; height: 55px; border-radius: 50%; 
+            background: var(--ticker-footer-bg);
+            display: flex; align-items: center; justify-content: center; 
+            color: var(--primary-color); transition: 0.3s; font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .social-links a:hover { background: var(--accent-gold); color: white; transform: translateY(-8px) scale(1.1); }
+
+        /* ==================== Report Modal & Toast ==================== */
+        .report-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+        .report-modal.show { display: flex; }
+        .modal-box { background: white; width: 100%; max-width: 420px; border-radius: 20px; padding: 30px; box-shadow: var(--shadow-lg); animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .report-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 12px; cursor: pointer; }
+        .btn-send { flex: 2; background: var(--primary-color); color: white; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; font-weight: 700; cursor: pointer; }
+        .btn-cancel { flex: 1; background: #f1f5f9; color: #475569; border: none; padding: 14px; border-radius: 12px; font-family: 'Tajawal'; cursor: pointer; }
+        .success-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: white; padding: 14px 35px; border-radius: 50px; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 3000; transition: 0.5s; opacity: 0; display: flex; align-items: center; gap: 12px; }
+        .success-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* ==================== Mobile Design ==================== */
+        @media (max-width: 768px) {
+            .hadith-summary h3 { font-size: 1.05rem !important; }
+            .unified-header { padding: calc(var(--nav-height) + 20px) 15px 40px; border-radius: 0 0 35px 35px; }
+            .page-title { font-size: 1.7rem; }
+            .hadith-row { flex-direction: row; align-items: flex-start; gap: 10px; }
+            .hadith-row.is-open { flex-direction: column; }
+            .hadith-row.is-open .hadith-number-circle { margin-top: 0; margin-bottom: 5px; align-self: flex-start; }
+            .hadith-number-circle { width: 38px; height: 38px; font-size: 1rem; margin-top: 25px; }
+            .hadith-card { width: 100%; }
+            .hadith-details.open { padding: 15px 15px 40px; }
+            .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
+            .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-overlay" id="navOverlay" onclick="toggleMobileMenu()"></div>
+
+<nav>
+    <div class="logo-container"><a href="../index.html"><img src="../images/logo.png" alt="logo" /></a></div>
+    <div class="nav-links" id="navLinks">
+        <a href="../index.html">الرئيسية</a>
+        <a href="../books.html">الكتب</a>
+        <a href="../articles.html">المقالات</a>
+        <a href="../hadith.html" class="active" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">الروايات</a>
+        <a href="../khawatir.html">خواطر</a>
+        <a href="../videos.html">الفيديوهات</a>
+        <a href="../history.html">التاريخ</a>
+        <a href="../podcast.html">البودكاست</a>
+        <a href="../ask.html">الأسئلة</a>
+        <a href="../hewar.html">حوارات</a>
+        <a href="../inq.html">تساؤلات</a>
+        <a href="../manhaj.html">المنهج</a>
+        <a href="../favorites.html">المفضلة</a>
+        <a href="../support.html">دعم المحتوى</a>
+        <a href="../about.html">من نحن</a>
+    </div>
+    <div class="hamburger" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+</nav>
+
+<div class="font-controls-fixed">
+    <button class="font-btn" id="fontIncrease" title="تكبير"><i class="fas fa-plus"></i></button>
+    <button class="font-btn" id="fontReset" title="إعادة"><i class="fas fa-redo"></i></button>
+    <button class="font-btn" id="fontDecrease" title="تصغير"><i class="fas fa-minus"></i></button>
+</div>
+
+<button class="back-to-top" id="backToTop" title="العودة للأعلى"><i class="fas fa-chevron-up"></i></button>
+
+<header class="unified-header">
+    <h1 class="page-title">❖ روايات أساءت للمرأة</h1>
+    <p class="page-subtitle">رصد للمرويات التي تنتقص من كرامة المرأة وتتصادم مع التكريم القرآني والعدل الإلهي</p>
+    <div class="universal-search">
+        <input type="text" id="globalSearch" placeholder="ابحث في جميع المحتويات..." />
+        <div class="search-results" id="searchResults"></div>
+    </div>
+</header>
+
+<div class="container">
+    <div id="hadithContainer"></div>
+
+    <div id="pagination-wrapper">
+        <div class="pagination-info-container">
+            <span id="pageInfo">الصفحة 1 من 1</span>
+            <span class="total-count-badge" id="totalHadithCount">عدد الروايات: 0</span>
+        </div>
+        <div style="margin-top: 15px;">
+            <button id="firstPage" class="pagination-btn">الأولى</button>
+            <button id="prevPage" class="pagination-btn">السابق</button>
+            <button id="nextPage" class="pagination-btn">التالي</button>
+        </div>
+    </div>
+
+    <!-- قسم تابعنا -->
+    <div class="social-links" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.05);">
+        <a href="https://www.facebook.com/share/1C2wBZkwXH/?mibextid=wwXIfr" target="_blank" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/husseinalkhalil?igsh=YmNhZWdlOWQ5NGNm&utm_source=qr" target="_blank" title="انستغرام"><i class="fab fa-instagram"></i></a>
+        <a href="https://youtube.com/@husseinalkhalil" target="_blank" title="يوتيوب"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@h.alkhalil?_t=ZS-8vj5cEPU6jp&_r=1" target="_blank" title="تيك توك"><i class="fab fa-tiktok"></i></a>
+        <a href="https://snapchat.com/t/sFLWjw3K" target="_blank" title="سناب شات"><i class="fab fa-snapchat-ghost"></i></a>
+        <a href="https://t.me/tanoeer" target="_blank" title="تيليجرام"><i class="fab fa-telegram"></i></a>
+    </div>
+</div>
+
+<div class="report-modal" id="reportModal">
+    <div class="modal-box">
+        <h2>إبلاغ عن محتوى</h2>
+        <p id="modalHadithInfo" style="color: var(--text-secondary); margin-bottom: 15px;">أنت تبلغ عن: جاري التحديد...</p>
+        <form name="hadith-reports" id="reportForm" method="POST" data-netlify="true">
+            <input type="hidden" name="hadith_name" id="hiddenHadithName">
+            <input type="hidden" name="hadith_number" id="hiddenHadithNumber">
+            <label class="report-option"><input type="radio" name="issue_type" value="الرابط لا يعمل" required> <span>الرابط لا يعمل</span></label>
+            <label class="report-option"><input type="radio" name="issue_type" value="الحديث غير مطابق"> <span>الحديث غير مطابق</span></label>
+            <label class="report-option"><input type="radio" name="issue_type" value="رقم الحديث غير مطابق"> <span>رقم الحديث غير مطابق</span></label>
+            <div class="modal-footer" style="display:flex; gap:10px; margin-top:20px;">
+                <button type="submit" class="btn-send">إرسال البلاغ</button>
+                <button type="button" class="btn-cancel" onclick="closeReportModal()">إلغاء</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="success-toast" id="successToast"><i class="fas fa-check-circle"></i> <span>شكراً لمساهمتك</span></div>
+
+<footer>
+    <div class="footer-links">
+        <a href="../terms.html">الشروط والأحكام</a> <span class="footer-divider">|</span>
+        <a href="../privacy.html">سياسة الخصوصية</a> <span class="footer-divider">|</span>
+        <a href="../contact.html">اتصل بنا</a> <span class="footer-divider">|</span>
+        <a href="../feedback.html">شاركنا رأيك</a>
+    </div>
+    <div class="copyright">حسين الخليل - جميع الحقوق محفوظة © 2025</div>
+</footer>
+
+<script>
+    // ==================== البيانات والبرمجة ====================
+    const novelsData = [
+        { 
+    id: 1, 
+    title: "النساء أكثر أهل النار", 
+    source: "البخاري", 
+    sourceUrl: "https://dorar.net/h/pWqCjIe5", 
+    text: "يا مَعشَرَ النِّساءِ، تَصَدَّقنَ؛ فإنِّي رَأيتُكُنَّ أكثَرَ أهلِ النَّارِ. فقُلنَ: وبِمَ ذلك يا رَسولَ اللهِ؟ قال: تُكثِرنَ اللَّعنَ، وتَكفُرنَ العَشيرَ. (أي الزوج)", 
+    num: "1462", 
+    offense: "1. <b>غياب التوازن في معايير الجريمة والعقاب:</b> تضع الرواية \"كفران العشير\" (وهو سلوك انفعالي في علاقة خاصة) كسبب كافٍ لجعل جنس النساء \"أكثر أهل النار\"، بينما يتجاهل هذا المنطق الجرائم الكبرى التي ارتكبها الرجال عبر التاريخ. فالواقع يُثبت أن الرجال هم الغالبية العظمى من مرتكبي جرائم القتل، الحروب، الإبادات الجماعية، قيادة المافيات، تجارة الأعضاء، والفساد المالي والسياسي الممنهج. فكيف يستقيم في ميزان العدل أن تُدان النساء بـ \"الجحود العاطفي\" ويُغض الطرف عن الرجال الذين أشعلوا الحروب التي قتلت الملايين؟ <br><br>2. <b>التصادم مع النماذج القرآنية للخير والشر:</b> حين يذكر القرآن الكريم رموز \"الطغيان والجبروت\"، فإنه يذكر رجالاً (فرعون، هامان، قارون، نمرود، أبو لهب، أصحاب الأخدود). وفي المقابل، حين يذكر النساء، فإنه يذكرهن كرموز للنقاء والحكمة (مريم ابنة عمران، امرأة فرعون، ملكة سبأ). فالشاهد القرآني لا يؤيد أبداً فكرة أن النساء هن \"معدن الشر\"، بل يكشف أن أثقل الأوزار والآثام التاريخية حملها رجال، والنساء كُنَّ في الغالب ضحايا لطغيانهم. <br><br>3. <b>مغالطة \"الكيد\" ومفهومه:</b> حوّل الموروث الذكوري مفهوم \"الكيد\" في القرآن ليكون سمة نسائية سلبية، بينما سياق القرآن يوضح أن كيد النساء في سورة يوسف كان منبعُه \"الحب والعاطفة\"، في حين كان كيد الرجال (إخوة يوسف) منبعُه \"القتل والغل\": {لَا تَقْصُصْ رُؤْيَاكَ عَلَىٰ إِخْوَتِكَ فَيَكِيدُوا لَكَ كَيْدًا}، وهو كيد أدى لإلقاء طفل في البئر. <br><br>4. <b>التناقض مع \"منطق التكليف والقدرة\":</b> تأمر الرواية النساء بـ \"الصدقة\" للنجاة من النار، وهنا تبرز مفارقة مضحكة مبكية؛ فذات الموروث الذي يطالبهن بالصدقة هو الذي يمنعهن من الخروج والعمل والاستقلال المادي، فمن أين تتصدق امرأة \"حبيسة البيوت\"؟ كما أن الرواية تتجاهل (بحسب الروايات) أن أول ما يحاسب عليه العبد \"الصلاة\"، فبدلاً من حثهن على العبادات الأساسية، جعلت نجاتهن رهينة \"عطاء مادي\" وسلوك عاطفي مع الزوج. <br><br>5. <b>مخالفة مبدأ المساواة القرآنية في الحساب:</b> القرآن الكريم واضح في أن العقاب والثواب مرتبطان بـ \"العمل\" وليس بـ \"الجنس\": {مَنْ عَمِلَ صَالِحًا مِّن ذَكَرٍ أَوْ أُنثَىٰ وَهُوَ مُؤْمِنٌ فَلَنُحْيِيَنَّهُ حَيَاةً طَيِّبَةً}، وقوله: {فَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ * وَمَن يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ}. فكرة أن \"أكثر أهل النار\" من جنس واحد هي فكرة \"طائفية جنسية\" تتصادم مع العدل الإلهي المطلق الذي لا يحابي ذكراً على أنثى. <br><br>6. <b>احتكار الرجل لمنصب \"نصف الإله\" في البيت:</b> الرواية تجعل إرضاء الزوج معياراً لدخول الجنة أو النار، مما حول الزوج في الموروث إلى \"صنم\" يُعبد، وجعل من عدم رضاه \"كفراً\" يستوجب الخلود في الجحيم. هذا التوجه يخدم سلطة \"الكهنوت الذكوري\" التي تهدف لتدجين المرأة، بعيداً عن روح الإسلام التي جعلت المودة والرحمة هي أساس العلاقة، والتقوى هي معيار الفلاح عند الله وحده." 
+  },
+  { 
+    id: 2, 
+    title: "عورة الأمة والتمييز الطبقي في الستر", 
+    source: "البيهقي", 
+    sourceUrl: "https://dorar.net/h/nvHWCLVW", 
+    text: "كنَّ إماءُ عمرَ رضيَ اللهُ عنه يخدُمْنَنا كاشفاتٍ عن شعورهنَّ تضطربُ ثُدِيُّهُنَّ. (وفي روايات أخرى أن عمر بن الخطاب كان يضرب الأمة إذا تقنعت أو تغطت ويقول: \"لا تشبهي بالحرائر\". <a href=\"https://dorar.net/h/sUD8WTNm\" target=\"_blank\" style=\"color: blue; text-decoration: underline;\">المصدر</a>)", 
+    num: "3347", 
+    offense: "1. <b>امتهان كرامة الإنسان وتشييئه:</b> تُصور هذه الرواية المرأة \"الأَمة\" (المملوكة) ككائن منقوص الكرامة، حيث يُباح جسدها للنظر والوصف المادي المبتذل (تضطرب ثديهن) أثناء الخدمة. هذا التصوير ينزع صفة \"الحياء\" و\"الستر\" عن فئة من النساء لمجرد وضعهن الاجتماعي، مما يحولهن إلى \"سلع\" مكشوفة بدلاً من كونهن بشر مكرّمين، وهو ما يصدم قوله تعالى: {وَلَقَدْ كَرَّمْنَا بَنِي آدَمَ}[الإسراء: 70]؛ فالتكريم الإلهي شامل للإنسان لذاته لا لطبقته. <br><br>2. <b>التناقض مع عالمية الخطاب القرآني:</b> عندما أمر القرآن الكريم بالستر، خاطب \"نساء المؤمنين\" و\"المؤمنات\" بصفة العموم: {يَا أَيُّهَا النَّبِيُّ قُل لِّأَزْوَاجِكَ وَبَنَاتِكَ وَنِسَاءِ الْمُؤْمِنِينَ يُدْنِينَ عَلَيْهِنَّ مِن جَلَابِيبِهِنَّ} [الأحزاب: 59]. لم يضع القرآن استثناءً للأَمة أو الفقيرة، بل جعل الهدف من الستر هو \"التعريف بالعفة\" و\"الوقاية من الأذى\". الرواية تخرق هذا الأمر الإلهي وتجعل \"الحرية\" ثمناً للستر، و\"العبودية\" مبرراً للتعري الشائن. <br><br>3. <b>تهافت تبرير \"المشقة\" و\"الفتنة\":</b> يلجأ المدافعون عن الرواية لترقيعها بحجة أن فرض الحجاب على الإماء فيه \"مشقة\" عليهن أثناء الخدمة. وهذا عذر متهالك؛ فهل \"تغطية الرأس\" أو \"ستر الصدر\" هي التي تعيق العمل؟ بل إن المشقة الحقيقية هي تعريض هؤلاء النساء لنظرات الرجال ووصف أجسادهن. كما أن ادعاء \"عدم تشوف النفوس إليهن\" يصطدم مع ذات الرواية التي وصفت حركة أجسادهن بدقة، مما يثبت أن \"الفتنة\" قائمة، ولكن الموروث فضل حماية \"التمايز الطبقي\" على حماية الأخلاق والقيم. <br><br>4. <b>ازدواجية المعايير الأخلاقية:</b> تظهر الرواية تناقضاً أخلاقياً مرعباً؛ فإذا كان كشف الشعر والصدر \"فتنة\" تستوجب الحجاب للمرأة الغنية (الحرة)، فلماذا لا تكون فتنة للمرأة الفقيرة (الأَمة)؟ هل تتغير الغريزة البشرية بناءً على صك الملكية؟ إن جعل العورة مرتبطة بـ \"الثمن\" و\"الحالة الاجتماعية\" بدلاً من \"التقوى\" و\"الطهارة\" هو تحريف لجوهر الدين وتحويله إلى نظام إقطاعي يخدم السادة على حساب المستضعفين. <br><br>5. <b>الإساءة لعدل الإسلام وصورة الصحابة:</b> إن نِسبة فعل \"ضرب الإماء لمنعهن من الستر\" لعمر بن الخطاب هي إساءة بالغة لهذا القائد، وتصوير له بمظهر مَن يحارب الفطرة السوية ويدفع النساء نحو التبذل قسراً لكي لا يتشبهن بالطبقة الراقية. هذا الفكر \"الطبقي\" يتناقض مع ثورة الإسلام التي جاءت لتقول: (الناس سواسية كأسنان المشط). <br><br>6. <b>شرعنة التحرش والامتهان:</b> هذه المرويات كانت تاريخياً هي الغطاء الفقهي الذي سمح في أسواق النخاسة بتقليب الجواري وفحص أجسادهن كالدواب. والتمسك بصحة هذه الروايات اليوم هو اعتراف ضمني بأن الإسلام يقرر كرامات متفاوتة للبشر، وهو افتراء على القرآن الذي جعل المعيار الوحيد هو التقوى: {إِنَّ أَكرمكم عِندَ اللَّهِ أَتْقَاكُمْ}." 
+  },
+  { 
+    id: 3, 
+    title: "بيع أمهات الأولاد", 
+    source: "ابن حبان", 
+    sourceUrl: "https://dorar.net/h/gSjldHJw", 
+    text: "كنَّا نبيعُ أمَّهاتِ الأولادِ على عهدِ رسولِ اللهِ صلَّى اللهُ عليه وسلَّم وأبي بكرٍ فلمَّا كان عُمرُ نهى عن بيعِهنَّ.", 
+    num: "4324", 
+    offense: "1. <b>الجناية على مقام الرحمة النبوية:</b> تضع هذه الرواية النبي في موضع \"المُقرِّ\" لجريمة إنسانية كبرى؛ وهي بيع امرأة أصبحت \"أماً\" لابن سيدها. فكيف يُنسب لنبي الرحمة -الذي وصفه القرآن بـ {وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِلْعَالَمِينَ}- أنه رأى المسلمين يتاجرون بالأمهات ويفرقون بينهن وبين أطفالهن ويبيعونهن في أسواق النخاسة كالدواب ولم يحرّم ذلك؟ إن هذا التصوير يجعل \"عمر بن الخطاب\" يبدو في الرواية أكثر رحمةً وفهماً لمقاصد العدالة من النبي نفسه، وهو طعن صريح في كمال الرسالة. <br><br>2. <b>انتهاك الكرامة الإنسانية والأمومة:</b> الأمومة في القرآن والسنة الحقيقية هي أقدس الروابط الإنسانية. والادعاء بأن مجتمع \"خير القرون\" كان يرى في \"الأم\" مجرد \"سلعة\" تُباع وتُشترى لمجرد أنها كانت جارية، هو إهانة لكل قيم الفطرة السوية. فبأي منطق يُباح بيع امرأة حملت وأنجبت لمجرد \"صك ملكية\"؟ هذا التصوير يُحوّل الإسلام إلى نظام إقطاعي متوحش لا يراعي حقوق الإنسان. <br><br>3. <b>التصادم مع المنهج القرآني في التحرير:</b> جاء القرآن الكريم بخطة متكاملة لتجفيف منابع الرق وتحرير الإنسان، وحث على \"فك الرقاب\" وجعلها من أعظم القربات. الرواية تُعاكس هذا التوجه تماماً؛ فبدلاً من أن يكون إنجاب \"الأمة\" سبباً فورياً لنيل حريتها وكرامتها كما يقتضي العدل الإلهي، تَدّعي الرواية استمرار المتاجرة بها وبجسدها وبأمومتها. <br><br>4. <b>تزييف صورة \"المجتمع النبوي\":</b> تُصور الرواية مجتمع الصحابة الأوائل بمظهر المفتقر للحس الأخلاقي، حيث يمارسون تجارة الأمهات \"على عهد النبي\" دون أي وازع من ضمير أو وحي. وهذا يتناقض مع وصف القرآن لهم بأنهم {رُحَمَاءُ بَيْنَهُمْ}. فهل من الرحمة أن يبيع الرجل \"أم ولده\" لمشترٍ غريب يقتلعها من بيتها وأطفالها؟ <br><br>5. <b>توهين سلطة الوحي لصالح \"الاجتهاد البشري\":</b> إذا كان النبي قد ترك هذا الفعل القبيح ممارساً طوال حياته (كما تزعم الرواية)، فبأي سلطة حرّمه عمر؟ إن الرواية تحاول إيهام القارئ أن الدين اكتمل بآراء الرجال لا بوحي الله، وأن النبي سكت عن ظلم فجاء البشر من بعده ليعدلوا ميزان الأخلاق، وهو ما يضرب عصمة التشريع النبوي. <br><br>6. <b>تأسيس \"الدين الموازي\" للعبودية:</b> بقاء هذه الروايات في المدونات \"الصحيحة\" هو ما جعل فقهاء السلطان يشرعنون استرقاق النساء والمتاجرة بهن لقرون طويلة، متخذين من \"سكوت النبي\" المزعوم ذريعة لتعطيل قيم القرآن التي كرمت بني آدم ومنحت المرأة حق الحياة الكريمة." 
+  },
+  { 
+    id: 4, 
+    title: "المرأة شؤم", 
+    source: "البخاري", 
+    sourceUrl: "https://dorar.net/h/soinpJk8", 
+    text: "ذَكَروا الشُّؤمَ عِندَ النَّبيِّ صلَّى اللهُ عليه وسلَّم، فقال النَّبيُّ صلَّى اللهُ عليه وسلَّم: إن كان الشُّؤمُ في شَيءٍ ففي الدَّارِ، والمَرأةِ، والفَرَسِ.", 
+    num: "5094", 
+    offense: "1. <b>تناقض الغاية مع الوسيلة (المفارقة السلوكية):</b> تضع هذه الرواية العقل أمام تساؤل ساخر: إذا كانت المرأة \"شؤماً\" ونذير نحس بنص الرواية، فكيف يسعى العقلاء لامتلاك هذا الشؤم والارتباط به عبر \"الميثاق الغليظ\"؟ والأدهى هو موقف حراس الموروث الذين يستميتون في إثبات صحة الرواية، ثم يتسابقون للزواج بمثنى وثلاث ورباع؛ فهل من المنطق أن يجمع الإنسان أربعة \"أسباب للنحس\" في بيته بمحض إرادته؟ إن هذا التناقض يُثبت تهافت المعنى الروائي أمام الواقع البشري. <br><br>2. <b>الجناية على جلال الصنعة الإلهية وحكمة الخالق:</b> يقرر القرآن الكريم أن الله أحسن كل شيء خلقه: {الَّذِي أَحْسَنَ كُلَّ شَيْءٍ خَلَقَهُ}[السجدة: 7]. ونسبة \"الشؤم\" لذات المرأة هو طعن مبطن في حكمة الخالق؛ فكيف يخلق الله كائناً ليكون مصدراً للنكد والنحس لرفيقه في الاستخلاف؟ إن هذا الفكر يحول \"آية الله\" (المرأة) من سكن ورحمة إلى نقمة وشر، وهو ما يتنافى مع كمال التقدير الإلهي. <br><br>3. <b>نمطية التحقير وتشييئ المرأة:</b> إدراج المرأة في قائمة واحدة مع \"الفرس والدار\" يعكس عقلية ذكورية كانت تنظر للمرأة كـ \"متاع مادي\" أو مجرد ملكية ملحقة بالجمادات والحيوانات، وليست إنساناً كامل الأهلية والكرامة. هذا \"التشييئ\" (تحويل الإنسان لشيء) هو الذي مهد لظهور روايات أخرى تحقر من شأن المرأة أكثر وتجعلها في رتبة دونية، مما يصادم التكريم الإلهي لبني آدم بصفة العموم. <br><br>4. <b>التصادم مع فلسفة \"السكن والرحمة\" القرآنية:</b> جعل القرآن الكريم الغاية من خلق الزوجة هي \"السكن النفسي\": {وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا} [الروم: 21]. والشؤم يتناقض كلياً مع \"السكينة\"؛ فكيف يكون الكائن آية للسكن وفي الوقت ذاته سبباً للنحس؟ إننا نختار منطق القرآن الذي جعل المرأة مصدراً للمودة، ونرفض الرواية التي تجعل منها \"تابو\" يُخشى شره. <br><br>5. <b>تنزيه مقام النبوة من رواسب الجاهلية:</b> كان أهل الجاهلية يتشائمون من المرأة والطيور والحيوانات، وجاء الإسلام ليحرر العقول من هذه الخرافات. فنِسبة \"الطيرة\" والشؤم للنبي هي تصوير له كمن لم يتخلص من أوهام بيئته، بينما الحقيقة أنه جاء ليتمم مكارم الأخلاق وينشر اليقين بأن النفع والضر بيد الله وحده، لا في ذوات النساء أو جدران البيوت. <br><br>6. <b>إهدار السلم المجتمعي والنفسي:</b> التمسك بمثل هذه الروايات يزرع في نفوس الرجال ريبة تجاه زوجاتهم عند وقوع أي مكروه (خسارة مالية أو مرض)، فيحملونها مسؤولية \"النحس\" بدلاً من البحث عن الأسباب الحقيقية، مما يدمر البيوت ويحول العلاقة الزوجية إلى حقل ألغام من التوجس والظنون الجاهلية." 
+  },
+  { 
+    id: 5, 
+    title: "المرأة أضرُّ فتنة على الرجال", 
+    source: "البخاري", 
+    sourceUrl: "https://dorar.net/h/Ry7F148C", 
+    text: "ما تَرَكتُ بَعدي فِتنةً أضَرَّ على الرِّجالِ مِنَ النِّساءِ.", 
+    num: "5096", 
+    offense: "1. <b>غياب التناسب المنطقي في موازين \"الضرر\":</b> يضع هذا النص العقل أمام تساؤل قيمي وأخلاقي: كيف يمكن لـ \"وجود المرأة\" —وهي شطر الإنسان وآية السكن والمودة بنص القرآن— أن يكون \"أضرَّ\" على البشرية من فتن الحروب الطاحنة، والمجازر العرقية، والظلم السياسي، وفتنة المال والسلطة التي أبادت شعوباً؟ إن ادعاء أن النساء هنَّ \"الضرر الأكبر\" هو اختزال ساذج لشرور العالم، وتغافل عن الأسباب الحقيقية للخراب الإنساني التي غالباً ما يكون مشعلوها ومخططوها من الرجال أنفسهم. <br><br>2. <b>التناقض مع المفهوم القرآني الشامل لـ \"الفتنة\":</b> في القاموس القرآني، تُعتبر \"الفتنة\" اختباراً وتمحيصاً يشمل كل مقومات الحياة؛ فالمال فتنة، والأولاد فتنة، والخير والشر فتنة: {وَنَبْلُوكُم بِالشَّرِّ وَالْخَيْرِ فِتْنَةً} [الأنبياء: 35]. بل إن القرآن جعل الرجال والنساء فتنة لبعضهم البعض (بمعنى الاختبار الأخلاقي المتبادل). أما أن تنفرد الرواية بجعل المرأة هي \"الفتنة الأضر\"، فهي تخلق انحيازاً جنسياً يصطدم مع شمولية الابتلاء الإلهي لكل البشر. <br><br>3. <b>تجريد الرجل من إرادته (الاستلاب الأخلاقي):</b> تُصور الرواية الرجل كضحية \"ضعيفة\" لا يملك إرادة أمام كائن \"مفترس\" أو شيطاني يتربص بفضيلته، وهو ما يضرب في مقتل كرامة الطرفين. فالرجل في القرآن مكلف ومسؤول عن ضبط غريزته وبصره {قُل لِّلْمُؤْمِنِينَ يَغُضُّوا مِنْ أَبْصَارِهِمْ}، والرواية تحاول إعفاءه من هذه المسؤولية بإلقاء اللائمة والضرر على مجرد \"وجود المرأة\". <br><br>4. <b>التوظيف السياسي والاجتماعي للإقصاء:</b> إن الإصرار على ترديد هذه الرواية يُستخدم لشرعنة سياسات \"حبس المرأة\" وتغييبها من الفضاء العام وتجريدها من حقوقها الإنسانية والمدنية بدعوى \"حماية الرجال\". إنها رواية تهدف لتبرير التضييق والوصاية الكهنوتية، وتحول المرأة من شريكة في عمارة الأرض إلى \"عائق وباء\" يجب عزله. <br><br>5. <b>التصادم مع وصف المرأة بـ \"السكن والرحمة\":</b> جعل القرآن الكريم علاقة الرجل بالمرأة قائمة على \"السكن\": {لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً} [الروم: 21]. والرواية تجعلها علاقة قائمة على \"الضرر والمخافة\". فبأي منطق يجتمع \"السكن والرحمة\" مع وصف \"أضر فتنة\"؟ إن هذا التناقض يثبت أن الرواية تعكس ثقافة \"الريبة من الأنوثة\" التي سادت عصور التدوين، ولا تعبر عن جلال الرؤية القرآنية. <br><br>6. <b>الانتصار لعدالة الخالق:</b> نقدنا لهذه الرواية هو دفاع عن حكمة الله الذي لم يخلق نصف البشرية ليكون \"لعنة\" أو \"ضرراً\" على النصف الآخر. إننا نرفض تبرئة الرجال من خطاياهم عبر تعليقها على مشجب \"النساء\"، ونتمسك بالوقار النبوي الذي يترفع عن وصم أمهاتنا وبناتنا بأنهنَّ \"أضرُّ\" ما تُرِك في الأرض، مؤكدين أن الفتنة تكمن في \"انحراف السلوك\" لا في \"نوع الخلقة\"." 
+  }
+    ];
+
+    let currentPage = 1;
+    const perPage = 15;
+    let currentFontSizeRem = 1.15;
+
+    function normalizeArabic(text) {
+        if (!text) return "";
+        return text
+            .replace(/[\u064B-\u065F]/g, "") 
+            .replace(/[أإآ]/g, "ا")           
+            .replace(/ة/g, "ه")               
+            .replace(/ى/g, "ي")               
+            .trim();
+    }
+
+    function highlightText(text, query) {
+        if (!query) return text;
+        const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+        return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    function toggleMobileMenu() {
+        const links = document.getElementById('navLinks');
+        const overlay = document.getElementById('navOverlay');
+        links.classList.toggle('show');
+        overlay.style.display = links.classList.contains('show') ? 'block' : 'none';
+        document.body.classList.toggle('no-scroll');
+    }
+
+    /* ==================== GLOBAL SEARCH LOGIC (Hybrid Version) ==================== */
+    let cachedPagesContent = null;
+    let isSearchInitialized = false;
+
+    async function loadAllPagesContent() {
+        if (cachedPagesContent) return cachedPagesContent;
+        try {
+            const response = await fetch('../site-map.json?v=' + new Date().getTime());
+            const pagesList = await response.json();
+            const promises = pagesList.map(async (item) => {
+                let originalUrl = typeof item === 'string' ? item : item.url;
+                let fetchUrl = '../' + originalUrl; 
+                
+                try {
+                    const pageResp = await fetch(fetchUrl);
+                    const html = await pageResp.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    // استخراج النصوص العربية من داخل المصفوفات قبل حذفها
+                    let scriptDataText = "";
+                    doc.querySelectorAll('script:not([src])').forEach(script => {
+                        const arabicMatches = script.textContent.match(/[\u0600-\u06FF]+/g);
+                        if (arabicMatches) {
+                            scriptDataText += " " + arabicMatches.join(' ');
+                        }
+                    });
+
+                    doc.querySelectorAll('script, style, nav, footer, .no-search').forEach(el => el.remove());
+                    const mainContent = doc.querySelector('.container, main, body') || doc.body;
+                    
+                    const fullContent = mainContent.textContent + " " + scriptDataText;
+
+                    return { 
+                        page: doc.title.replace('حسين الخليل - ', '').replace('الموقع الرسمي', '').trim() || 'صفحة', 
+                        url: fetchUrl, 
+                        content: fullContent.replace(/\s+/g, ' ').trim() 
+                    };
+                } catch (e) { return null; }
+            });
+            cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
+            return cachedPagesContent;
+        } catch (error) { return []; }
+    }
+
+    function getSafeRegex(searchTerm) {
+        let regexStr = '';
+        const cleanTerm = normalizeArabic(searchTerm);
+        for (let char of cleanTerm) {
+            if (char === 'ا') regexStr += '[اأإآ]';
+            else if (char === 'ه') regexStr += '[هة]';
+            else if (char === 'ي') regexStr += '[يىئ]';
+            else if (char === 'و') regexStr += '[وؤ]';
+            else regexStr += char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            regexStr += '[\\u064B-\\u065F\\u0670]*';
+        }
+        return new RegExp(regexStr, 'gi');
+    }
+
+    async function performCombinedSearch(query) {
+        const resultsContainer = document.getElementById('searchResults');
+        if (!query || query.length < 2) {
+            resultsContainer.style.display = 'none';
+            return;
+        }
+
+        resultsContainer.innerHTML = '<div class="search-item"><p>جاري البحث...</p></div>';
+        resultsContainer.style.display = 'block';
+
+        const normQuery = normalizeArabic(query.toLowerCase());
+        const searchRegex = getSafeRegex(query);
+
+        // 1. Local Search (novelsData)
+        let localResults = [];
+        novelsData.forEach((novel, index) => {
+            const searchField = normalizeArabic(novel.title + novel.text + novel.offense).toLowerCase();
+            if (searchField.includes(normQuery)) {
+                localResults.push({ ...novel, originalIndex: index });
+            }
+        });
+
+        // 2. Global Search
+        const globalData = await loadAllPagesContent();
+        const globalResults = globalData.filter(item => {
+            searchRegex.lastIndex = 0;
+            const titleMatch = searchRegex.test(item.page);
+            searchRegex.lastIndex = 0;
+            const contentMatch = searchRegex.test(item.content);
+            return titleMatch || contentMatch;
+        });
+
+        // 3. Display Both
+        resultsContainer.innerHTML = '';
+        const totalCount = localResults.length + globalResults.length;
+
+        if (totalCount === 0) {
+            resultsContainer.innerHTML = '<div class="search-item"><p>⚠️ لم يتم العثور على نتائج</p></div>';
+            return;
+        }
+
+        const countDiv = document.createElement('div');
+        countDiv.className = 'search-count';
+        countDiv.textContent = `تم العثور على ${totalCount} نتيجة`;
+        resultsContainer.appendChild(countDiv);
+
+        // Render Local Matches First
+        localResults.slice(0, 10).forEach(result => {
+            const item = document.createElement('div');
+            item.className = 'search-item';
+            const highlightedTitle = highlightText(result.title, normQuery);
+            item.innerHTML = `<h3><i class="fas fa-book-open"></i> ${highlightedTitle}</h3><p style="font-size:0.85rem; color:#666;">(داخل هذه الصفحة)</p>`;
+            item.onclick = () => {
+                jumpToNovel(result.originalIndex, result.id, normQuery);
+                resultsContainer.style.display = 'none';
+                document.getElementById('globalSearch').value = '';
+            };
+            resultsContainer.appendChild(item);
+        });
+
+        // Render Global Matches
+        globalResults.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'search-item';
+            const highlightedTitle = item.page.replace(searchRegex, match => `<mark>${match}</mark>`);
+            searchRegex.lastIndex = 0;
+            const match = searchRegex.exec(item.content);
+            let snippet = match ? (item.content.substring(Math.max(0, match.index - 60), Math.min(item.content.length, match.index + 100))) : (item.content.substring(0, 150));
+            div.innerHTML = `<h3>${highlightedTitle}</h3><p>${snippet.replace(searchRegex, match => `<mark>${match}</mark>`)}...</p>`;
+            div.onclick = () => window.location.href = item.url;
+            resultsContainer.appendChild(div);
+        });
+    }
+
+    function jumpToNovel(index, id, searchQuery = null) {
+        currentPage = Math.floor(index / perPage) + 1;
+        renderNovels(searchQuery);
+        setTimeout(() => {
+            const card = document.getElementById(`card-h${id}`);
+            if (card) {
+                const details = card.querySelector('.hadith-details');
+                if (!details.classList.contains('open')) {
+                    toggleHadith(card.querySelector('.hadith-summary'));
+                }
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.style.boxShadow = "0 0 15px var(--accent-gold)";
+                setTimeout(() => card.style.boxShadow = "var(--shadow-sm)", 2000);
+            }
+        }, 300);
+    }
+
+    function renderNovels(searchQuery = null) {
+        const container = document.getElementById('hadithContainer');
+        container.innerHTML = "";
+        const start = (currentPage - 1) * perPage;
+        const end = start + perPage;
+        const pageData = novelsData.slice(start, end);
+
+        pageData.forEach((novel) => {
+            let titleText = novel.title;
+            let textText = novel.text;
+            let offenseText = novel.offense;
+            
+            if (searchQuery) {
+                titleText = highlightText(titleText, searchQuery);
+                textText = highlightText(textText, searchQuery);
+                offenseText = highlightText(offenseText, searchQuery);
+            }
+
+            container.innerHTML += `
+            <div class="hadith-row">
+                <div class="hadith-number-circle">${novel.id}</div>
+                <div class="hadith-card" id="card-h${novel.id}">
+                    <i class="far fa-bookmark fav-header-icon" data-id="${novel.id}" onclick="toggleFavorite(event, ${novel.id})"></i>
+                    <div class="hadith-summary" onclick="toggleHadith(this)">
+                        <h3>${titleText}</h3>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <span class="source-tag">${novel.source}</span>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                    </div>
+                    <div class="hadith-details">
+                        <div class="detail-section">
+                            <div class="section-header"><i class="fas fa-quote-right"></i> الرواية</div>
+                            <div class="section-content">${textText}</div>
+                            ${novel.num ? `<div class="section-content"><b style="font-weight: bold;">رقم الرواية: ${novel.num}</b></div>` : ''}
+                            <div class="hadith-actions">
+                                <a href="${novel.sourceUrl}" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
+                                <div class="action-btn btn-report" onclick="openReportModal('${novel.title}', '${novel.num}')"><i class="fas fa-flag"></i> إبلاغ</div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-header"><i class="fas fa-circle-exclamation"></i> وجه الإساءة</div>
+                            <div class="section-content">${offenseText}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        });
+        updatePaginationUI();
+        syncFavIcons();
+    }
+
+    function toggleHadith(el) {
+        const details = el.nextElementSibling;
+        const row = el.closest('.hadith-row');
+        details.classList.toggle('open');
+        row.classList.toggle('is-open');
+        const icon = el.querySelector('.toggle-icon');
+        if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
+    function toggleFavorite(e, id) {
+        e.stopPropagation();
+        const cardId = 'offense_novel_' + id;
+        let favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
+        const idx = favs.findIndex(f => f.id === cardId);
+        if (idx > -1) {
+            favs.splice(idx, 1);
+        } else {
+            const novel = novelsData.find(n => n.id == id);
+            favs.push({ id: cardId, title: novel.title, type: 'رواية مسيئة', novelId: id, page: 'hadith_offense' });
+        }
+        localStorage.setItem('myFavorites', JSON.stringify(favs));
+        syncFavIcons();
+    }
+
+    function syncFavIcons() {
+        const favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
+        document.querySelectorAll('.fav-header-icon').forEach(icon => {
+            const id = icon.getAttribute('data-id');
+            const isFav = favs.some(f => f.id === `offense_novel_${id}`);
+            icon.classList.toggle('fas', isFav);
+            icon.classList.toggle('far', !isFav);
+            icon.style.color = isFav ? "var(--accent-gold)" : "var(--text-secondary)";
+        });
+    }
+
+    function updateFontSize() {
+        document.documentElement.style.setProperty('--dynamic-content-size', currentFontSizeRem + 'rem');
+    }
+
+    document.getElementById('fontIncrease').onclick = () => { currentFontSizeRem += 0.1; updateFontSize(); };
+    document.getElementById('fontDecrease').onclick = () => { if(currentFontSizeRem > 0.8) currentFontSizeRem -= 0.1; updateFontSize(); };
+    document.getElementById('fontReset').onclick = () => { currentFontSizeRem = 1.15; updateFontSize(); };
+
+    function updatePaginationUI() {
+        const totalPages = Math.ceil(novelsData.length / perPage) || 1;
+        document.getElementById('pageInfo').textContent = `الصفحة ${currentPage} من ${totalPages}`;
+        document.getElementById('totalHadithCount').textContent = `عدد الروايات: ${novelsData.length}`;
+        document.getElementById('prevPage').disabled = (currentPage === 1);
+        document.getElementById('nextPage').disabled = (currentPage === totalPages);
+        document.getElementById('firstPage').disabled = (currentPage === 1);
+    }
+
+    document.getElementById('nextPage').onclick = () => { currentPage++; renderNovels(); window.scrollTo(0, 400); };
+    document.getElementById('prevPage').onclick = () => { currentPage--; renderNovels(); window.scrollTo(0, 400); };
+    document.getElementById('firstPage').onclick = () => { currentPage = 1; renderNovels(); window.scrollTo(0, 400); };
+
+    function openReportModal(title, num) {
+        document.getElementById('hiddenHadithName').value = title;
+        document.getElementById('hiddenHadithNumber').value = num;
+        document.getElementById('modalHadithInfo').textContent = `أنت تبلغ عن: ${title} ${num ? '(رواية رقم ' + num + ')' : ''}`;
+        document.getElementById('reportModal').classList.add('show');
+        document.body.classList.add('no-scroll');
+    }
+    
+    function closeReportModal() {
+        document.getElementById('reportModal').classList.remove('show');
+        document.body.classList.remove('no-scroll');
+    }
+
+    document.getElementById("reportForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
+        }).then(() => {
+            closeReportModal();
+            const toast = document.getElementById("successToast");
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3500);
+            this.reset();
+        });
+    });
+
+    window.addEventListener('scroll', () => {
+        const btt = document.getElementById('backToTop');
+        if (window.scrollY > 400) btt.classList.add('show');
+        else btt.classList.remove('show');
+    });
+
+    document.getElementById('backToTop').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderNovels();
+        updateFontSize();
+
+        // Hybrid Search Initialization
+        const searchInput = document.getElementById('globalSearch');
+        if (searchInput) {
+            let sTimer;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(sTimer);
+                sTimer = setTimeout(() => performCombinedSearch(e.target.value.trim()), 500);
+            });
+            searchInput.addEventListener('focus', () => { 
+                if(!isSearchInitialized) { loadAllPagesContent(); isSearchInitialized = true; } 
+            });
+        }
+
+        // Close search results when clicking outside
+        document.addEventListener('click', (e) => {
+            const results = document.getElementById('searchResults');
+            if(results && !document.querySelector('.universal-search').contains(e.target)) {
+                results.style.display = 'none';
+            }
+        });
+    });
+</script>
+</body>
+</html>
