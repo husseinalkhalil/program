@@ -169,7 +169,7 @@
         
         .hadith-row { 
             display: flex; 
-            align-items: center; /* توسيط عمودي */
+            align-items: center;
             gap: 25px; 
             margin-bottom: 35px; 
             width: 100%; 
@@ -250,7 +250,7 @@
 
         .fav-header-icon { 
             font-size: 1.6rem; 
-            color: #cbd5e1; /* لون رمادي فاتح افتراضي */
+            color: #cbd5e1;
             transition: all 0.3s ease; 
             cursor: pointer; 
             padding: 5px;
@@ -290,7 +290,6 @@
             background: var(--accent-gold);
         }
 
-        /* تنسيقات للتفاصيل في حال التوسع مستقبلاً */
         .hadith-details { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out; background: #fefcf7; }
         .hadith-details.open { max-height: 10000px; opacity: 1; padding: 10px 30px 50px; border-top: 1px solid rgba(0,0,0,0.05); }
         .detail-section { margin-top: 25px; background: transparent; border: none; }
@@ -404,7 +403,6 @@
             .card-action-icon { width: 35px; height: 35px; }
         }
 
-        /* إضافة مؤشرات تفاعل للأزرار */
         .font-btn:focus-visible {
             outline: 2px solid var(--accent-gold);
             outline-offset: 2px;
@@ -525,7 +523,7 @@
 
     let currentPage = 1;
     const perPage = 15;
-    let currentFontSizePercent = 100; // نسبة مئوية للحجم الأساسي (100% = 16px)
+    let currentFontSizePercent = 100;
 
     function normalizeArabic(text) {
         if (!text) return "";
@@ -552,9 +550,9 @@
         document.body.classList.toggle('no-scroll');
     }
 
-    /* ==================== Font Size Control (Fixed) ==================== */
-    function applyFontSize() {
-        // تطبيق حجم الخط على عنصر html بدلاً من :root لضمان التأثير على جميع العناصر
+    /* ==================== Font Size Control (Fixed - No auto messages) ==================== */
+    function applyFontSize(showMessage = false) {
+        // تطبيق حجم الخط على عنصر html
         const baseSize = 16 * (currentFontSizePercent / 100);
         document.documentElement.style.fontSize = baseSize + 'px';
         
@@ -565,23 +563,33 @@
         // حفظ الحجم في localStorage
         localStorage.setItem('preferredFontSize', currentFontSizePercent);
         
-        // إظهار رسالة تأكيد بصرية
-        showToastMessage(`تم ${currentFontSizePercent > 100 ? 'تكبير' : currentFontSizePercent < 100 ? 'تصغير' : 'إعادة تعيين'} الخط إلى ${currentFontSizePercent}%`);
+        // عرض رسالة فقط إذا طُلب ذلك (عند استخدام الأزرار فقط)
+        if (showMessage) {
+            let message = '';
+            if (currentFontSizePercent > 100) {
+                message = `تم تكبير الخط إلى ${currentFontSizePercent}%`;
+            } else if (currentFontSizePercent < 100) {
+                message = `تم تصغير الخط إلى ${currentFontSizePercent}%`;
+            } else {
+                message = `تم إعادة تعيين الخط إلى الحجم الطبيعي`;
+            }
+            showToastMessage(message);
+        }
     }
 
     function increaseFontSize() {
-        if (currentFontSizePercent < 200) { // حد أقصى 200%
+        if (currentFontSizePercent < 200) {
             currentFontSizePercent += 10;
-            applyFontSize();
+            applyFontSize(true); // عرض رسالة عند التكبير
         } else {
             showToastMessage('تم الوصول إلى أكبر حجم للخط', 1500);
         }
     }
 
     function decreaseFontSize() {
-        if (currentFontSizePercent > 60) { // حد أدنى 60%
+        if (currentFontSizePercent > 60) {
             currentFontSizePercent -= 10;
-            applyFontSize();
+            applyFontSize(true); // عرض رسالة عند التصغير
         } else {
             showToastMessage('تم الوصول إلى أصغر حجم للخط', 1500);
         }
@@ -589,7 +597,7 @@
 
     function resetFontSize() {
         currentFontSizePercent = 100;
-        applyFontSize();
+        applyFontSize(true); // عرض رسالة عند إعادة التعيين
     }
 
     function showToastMessage(message, duration = 2000) {
@@ -601,7 +609,7 @@
         }
     }
 
-    // تحميل الحجم المحفوظ من localStorage
+    // تحميل الحجم المحفوظ من localStorage (بدون عرض أي رسالة)
     function loadSavedFontSize() {
         const saved = localStorage.getItem('preferredFontSize');
         if (saved && !isNaN(saved)) {
@@ -609,7 +617,8 @@
         } else {
             currentFontSizePercent = 100;
         }
-        applyFontSize();
+        // تطبيق الحجم بدون عرض رسالة (showMessage = false)
+        applyFontSize(false);
     }
 
     /* ==================== GLOBAL SEARCH LOGIC ==================== */
@@ -822,7 +831,7 @@
     function openReportModal(title, num) {
         document.getElementById('hiddenHadithName').value = title;
         document.getElementById('hiddenHadithNumber').value = num;
-        document.getElementById('modalHadithInfo').textContent = `أنت تبلغ عن: ${title} ${num ? '(رواية رقم ' + num + ')' : ''}`;
+        document.getElementById('modalHadithInfo').innerHTML = `أنت تبلغ عن: <strong>${title}</strong> ${num ? '(رواية رقم ' + num + ')' : ''}`;
         document.getElementById('reportModal').classList.add('show');
         document.body.classList.add('no-scroll');
     }
@@ -834,7 +843,7 @@
 
     // ربط الأزرار بأحداث النقر
     document.addEventListener('DOMContentLoaded', () => {
-        // تهيئة حجم الخط
+        // تهيئة حجم الخط (بدون رسالة)
         loadSavedFontSize();
         
         // ربط أزرار التحكم بالخط
@@ -850,25 +859,37 @@
         renderNovels();
 
         // ربط أزرار التنقل
-        document.getElementById('nextPage').onclick = () => { 
-            if(currentPage < Math.ceil(novelsData.length / perPage)) {
-                currentPage++; 
+        const nextBtn = document.getElementById('nextPage');
+        const prevBtn = document.getElementById('prevPage');
+        const firstBtn = document.getElementById('firstPage');
+        
+        if (nextBtn) {
+            nextBtn.onclick = () => { 
+                if(currentPage < Math.ceil(novelsData.length / perPage)) {
+                    currentPage++; 
+                    renderNovels(); 
+                    window.scrollTo({ top: 400, behavior: 'smooth' });
+                }
+            };
+        }
+        
+        if (prevBtn) {
+            prevBtn.onclick = () => { 
+                if(currentPage > 1) {
+                    currentPage--; 
+                    renderNovels(); 
+                    window.scrollTo({ top: 400, behavior: 'smooth' });
+                }
+            };
+        }
+        
+        if (firstBtn) {
+            firstBtn.onclick = () => { 
+                currentPage = 1; 
                 renderNovels(); 
-                window.scrollTo(0, 400);
-            }
-        };
-        document.getElementById('prevPage').onclick = () => { 
-            if(currentPage > 1) {
-                currentPage--; 
-                renderNovels(); 
-                window.scrollTo(0, 400);
-            }
-        };
-        document.getElementById('firstPage').onclick = () => { 
-            currentPage = 1; 
-            renderNovels(); 
-            window.scrollTo(0, 400);
-        };
+                window.scrollTo({ top: 400, behavior: 'smooth' });
+            };
+        }
 
         // ربط البحث
         const searchInput = document.getElementById('globalSearch');
@@ -886,7 +907,8 @@
         // إغلاق نتائج البحث عند النقر خارجها
         document.addEventListener('click', (e) => {
             const results = document.getElementById('searchResults');
-            if(results && !document.querySelector('.universal-search').contains(e.target)) {
+            const searchWrapper = document.querySelector('.universal-search');
+            if(results && searchWrapper && !searchWrapper.contains(e.target)) {
                 results.style.display = 'none';
             }
         });
@@ -897,27 +919,34 @@
             if (window.scrollY > 400) btt.classList.add('show');
             else btt.classList.remove('show');
         });
-        document.getElementById('backToTop').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        const backToTopBtn = document.getElementById('backToTop');
+        if (backToTopBtn) {
+            backToTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     });
 
     // إرسال البلاغ
-    document.getElementById("reportForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        const formData = new FormData(this);
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString(),
-        }).then(() => {
-            closeReportModal();
-            showToastMessage('شكراً لمساهمتك');
-            this.reset();
-        }).catch(() => {
-            closeReportModal();
-            showToastMessage('تم استلام البلاغ');
-            this.reset();
+    const reportForm = document.getElementById("reportForm");
+    if (reportForm) {
+        reportForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString(),
+            }).then(() => {
+                closeReportModal();
+                showToastMessage('شكراً لمساهمتك');
+                this.reset();
+            }).catch(() => {
+                closeReportModal();
+                showToastMessage('تم استلام البلاغ');
+                this.reset();
+            });
         });
-    });
+    }
 </script>
 </body>
 </html>
