@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-    <title>الروايات - تحرير آيات الاستدلال</title>
+    <title>الآيات - تحرير آيات الاستدلال</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4459876088599546" crossorigin="anonymous"></script>
     
     <!-- Favicon -->
@@ -142,11 +142,10 @@
         .search-count { padding: 12px 20px; font-size: 0.9rem; color: var(--primary-color); border-bottom: 2px solid rgba(212, 175, 55, 0.1); background: #f8fafc; font-weight: 700; }
         mark { background-color: var(--accent-gold); color: var(--primary-color); padding: 0 2px; border-radius: 4px; font-weight: 600; }
 
-        /* ==================== Hadith Card Styling ==================== */
+        /* ==================== Hadith/Verse Card Styling ==================== */
         .container { max-width: 1150px; margin: 0 auto; padding: 0 20px 60px; width: 100%; }
         .hadith-row { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px; width: 100%; transition: all 0.3s ease; }
         
-        /* الدائرة والمربع باللون البيج والذهبي */
         .hadith-number-circle { 
             width: 46px; height: 46px; 
             background-color: #fdfcf8; 
@@ -163,7 +162,17 @@
             position: relative; 
         }
         
-        .hadith-summary { padding: 25px 25px 25px 45px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+        .hadith-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .hadith-summary { 
+            padding: 25px 25px 25px 45px; 
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; 
+            text-decoration: none; /* لأنها ستكون رابط */
+            color: inherit;
+        }
         .hadith-summary h3 { font-size: 1.3rem; color: var(--primary-color); font-weight: 800; flex: 1; text-align: right; transition: all 0.3s ease; }
         .hadith-summary:hover h3 { color: var(--accent-gold); transform: translateX(-5px); }
         
@@ -181,27 +190,12 @@
         .fav-header-icon:hover { transform: scale(1.15); color: var(--accent-gold); }
         .fav-header-icon.active { color: var(--accent-gold); }
 
-        .hadith-details { 
-            max-height: 0; opacity: 0; overflow: hidden; 
-            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out; 
-            background: #fefcf7; 
-        }
+        /* أبقيت هذه التنسيقات لضمان عدم حدوث أي خطأ في الأكواد السابقة رغم عدم استخدام التوسع هنا */
+        .hadith-details { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out; background: #fefcf7; }
         .hadith-details.open { max-height: 10000px; opacity: 1; padding: 10px 30px 50px; border-top: 1px solid rgba(0,0,0,0.05); }
-
         .detail-section { margin-top: 25px; background: transparent; border: none; }
-        .section-header { 
-            padding-bottom: 8px; margin-bottom: 10px; font-weight: 800; font-size: 1.1rem; 
-            display: flex; align-items: center; gap: 10px; color: var(--primary-color);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
+        .section-header { padding-bottom: 8px; margin-bottom: 10px; font-weight: 800; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; color: var(--primary-color); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .section-content { padding: 5px 0 10px; line-height: 1.9; font-size: var(--dynamic-content-size); color: var(--text-primary); }
-
-        .hadith-actions { display: flex; align-items: center; gap: 15px; margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(0,0,0,0.08); }
-        .action-btn { font-size: 0.9rem; font-weight: 700; padding: 10px 18px; border-radius: 8px; display: flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; text-decoration: none !important; }
-        .btn-source { background: rgba(92, 74, 36, 0.1); color: var(--primary-color); border: 1px solid rgba(92, 74, 36, 0.2); }
-        .btn-source:hover { background: var(--primary-color); color: white; }
-        .btn-report { background: rgba(225, 29, 72, 0.08); color: #e11d48; border: 1px solid rgba(225, 29, 72, 0.1); }
-        .btn-report:hover { background: #e11d48; color: white; }
 
         /* ==================== Font Controls & Back to top ==================== */
         .font-controls-fixed { position: fixed; top: 120px; left: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 990; }
@@ -265,11 +259,8 @@
             .unified-header { padding: calc(var(--nav-height) + 20px) 15px 40px; border-radius: 0 0 35px 35px; }
             .page-title { font-size: 1.7rem; }
             .hadith-row { flex-direction: row; align-items: flex-start; gap: 10px; }
-            .hadith-row.is-open { flex-direction: column; }
-            .hadith-row.is-open .hadith-number-circle { margin-top: 0; margin-bottom: 5px; align-self: flex-start; }
             .hadith-number-circle { width: 38px; height: 38px; font-size: 1rem; margin-top: 25px; }
             .hadith-card { width: 100%; }
-            .hadith-details.open { padding: 15px 15px 40px; }
             .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
             .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
         }
@@ -285,7 +276,7 @@
         <a href="../index.html">الرئيسية</a>
         <a href="../books.html">الكتب</a>
         <a href="../articles.html">المقالات</a>
-        <a href="../hadith.html" class="active" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">الروايات</a>
+        <a href="../hadith.html" class="active" style="background: rgba(212,175,55,0.1); color: var(--accent-gold);">الروايات والآيات</a>
         <a href="../khawatir.html">خواطر</a>
         <a href="../videos.html">الفيديوهات</a>
         <a href="../history.html">التاريخ</a>
@@ -324,7 +315,7 @@
     <div id="pagination-wrapper">
         <div class="pagination-info-container">
             <span id="pageInfo">الصفحة 1 من 1</span>
-            <span class="total-count-badge" id="totalHadithCount">عدد الروايات: 0</span>
+            <span class="total-count-badge" id="totalHadithCount">عدد الآيات: 0</span>
         </div>
         <div style="margin-top: 15px;">
             <button id="firstPage" class="pagination-btn">الأولى</button>
@@ -352,8 +343,8 @@
             <input type="hidden" name="hadith_name" id="hiddenHadithName">
             <input type="hidden" name="hadith_number" id="hiddenHadithNumber">
             <label class="report-option"><input type="radio" name="issue_type" value="الرابط لا يعمل" required> <span>الرابط لا يعمل</span></label>
-            <label class="report-option"><input type="radio" name="issue_type" value="الحديث غير مطابق"> <span>الحديث غير مطابق</span></label>
-            <label class="report-option"><input type="radio" name="issue_type" value="رقم الحديث غير مطابق"> <span>رقم الحديث غير مطابق</span></label>
+            <label class="report-option"><input type="radio" name="issue_type" value="الآية غير مطابقة"> <span>الآية غير مطابقة</span></label>
+            <label class="report-option"><input type="radio" name="issue_type" value="ملاحظات أخرى"> <span>ملاحظات أخرى</span></label>
             <div class="modal-footer" style="display:flex; gap:10px; margin-top:20px;">
                 <button type="submit" class="btn-send">إرسال البلاغ</button>
                 <button type="button" class="btn-cancel" onclick="closeReportModal()">إلغاء</button>
@@ -376,48 +367,16 @@
 
 <script>
     // ==================== البيانات - تحرير آيات الاستدلال ====================
-    const novelsData = [
-        { 
-            id: 1, 
-            title: "خلق المرأة من ضلع", 
-            source: "البخاري", 
-            sourceUrl: "https://dorar.net/h/6lg4eJzj", 
-            text: "استَوصوا بالنِّساءِ؛ فإنَّ المَرأةَ خُلِقَت مِن ضِلَعٍ، وإنَّ أعوجَ شَيءٍ في الضِّلَعِ أعلاه، فإن ذَهَبتَ تُقيمُه كَسَرتَه، وإن تَرَكتَه لم يَزَلْ أعوجَ؛ فاستَوصوا بالنِّساءِ.",
-            num: "3331", 
-            comparison: `<strong>التطابق النصي مع العهد القديم (التوراة):</strong><br>
-            يكتشف القارئ الفاحص أن هذا النص هو صدى مباشر لما ورد في "سِفر التكوين" (أول أسفار التوراة). جاء في الإصحاح الثاني (الآيتان 21-22): (فأوقع الربُّ الإلهُ سُباتاً على آدم فنام، فأخذ واحدةً من أضلاعه وملأ مكانها لحماً. وبنى الربُّ الإلهُ الضلعَ التي أخذها من آدم امرأةً وأحضرها إلى آدم). إن الفكرة المركزية بأن المرأة "جزء مقتطع" من الرجل، وأنها مدينة له بوجودها المادي، هي فكرة توراتية بامتياز تسربت عبر "الإسرائيليات" لتنسب لاحقاً للنبي ﷺ بصياغة عربية زادت عليها وصف "الاعوجاج" لترسيخ دونية المرأة.<br><br>
-            <strong>تطهير العقيدة من الدخيل:</strong><br>
-            إن كشف هذا التقارب النصي بين "صحيح البخاري" و"سفر التكوين" هو الخطوة الأولى لتطهير الفكر الإسلامي من الموروثات الدخيلة. فالله الذي كرّم بني آدم لم يخلق حواء من ضلع آدم، والقرآن كافٍ لتوضيح أصل الوجود دون الحاجة لاستعارة أساطير الأقدمين التي جعلت من جسد المرأة لغزاً أو عيباً طبيعياً.<br><br>
-            <strong>المفارقة العلمية:</strong><br>
-            يثبت العلم الحديث أن عدد أضلاع الرجل والمرأة متساوٍ، مما ينسف الأساس "الحسي" الذي قامت عليه الأسطورة، ويؤكد أنها مجرد حكاية رمزية في العهود القديمة أُقحمت في كتب الحديث كحقيقة بيولوجية وتشرعية.`
-        },
-        { 
-            id: 2, 
-            title: "طول آدم وتناقص الخلق", 
-            source: "البخاري", 
-            sourceUrl: "https://dorar.net/h/eHyVa3Hp", 
-            text: "خَلَقَ اللهُ آدَمَ وطولُه سِتُّونَ ذِراعًا، ... ، فلَم يَزَلِ الخَلقُ يَنقُصُ حتَّى الآنَ.",
-            num: "3326", 
-            comparison: `<strong>الجذور في العهد القديم (سِفر التكوين وسِفر العَدَد):</strong><br>
-            على الرغم من أن التوراة لم تذكر رقم "الستين ذراعاً" تحديداً لطول آدم، إلّا أنها هي من أسست لثقافة "العمالقة الجبابرة" الذين سكنوا الأرض قديماً. فنجد في سِفر التكوين (6: 4): (كَانَ فِي الأَرْضِ طُغَاةٌ [جَبَابِرَة] فِي تِلْكَ الأَيَّامِ... هؤُلاَءِ هُمُ الْجَبَابِرَةُ الَّذِينَ مُنْذُ الدَّهْرِ). وفي سِفر العَدَد (13: 33) وصفٌ لهؤلاء العمالقة (بني عناق) لدرجة أن البشر العاديين كانوا في أعينهم كـ "الجَراد".<br><br>
-            <strong>التطابق مع "التلمود" والتقاليد اليهودية:</strong><br>
-            تجد فكرة "طول آدم الخرافي" صدىً أوضح في التلمود (كتاب حجيجا 12أ - Hagigah 12a)؛ حيث تزعم الأساطير اليهودية أن آدم كان طوله يمتد "من الأرض إلى السماء"، وعندما أخطأ وضع الله يده عليه "فقزّمه". إن فكرة "التناقص المستمر" في القامة الجسدية (فلم يزل الخلق ينقص) هي فكرة يهودية مَحضة تهدف لتصوير البشرية في حالة انحدار جسدي وقِيَمي دائم، وهو ما استوعبه البخاري ونسبه للنبي ﷺ.<br><br>
-            <strong>المصادمة مع العلم والآثار:</strong><br>
-            أثبت علم "الأنثروبولوجيا" وعلم الحفريات أن أطوال البشر الأوائل لم تكن تختلف جذرياً عن أطوالنا الحالية، ولم يعثر العلماء طوال تاريخ التنقيب على هيكل عظمي بشري واحد يصل طوله لـ 30 متراً (60 ذراعاً). إن التمسك بهذه الرواية هو تمسك بـ "خيال ميثولوجي" يصادم الواقع المادي والحقائق الأثرية.<br><br>
-            <strong>غياب السند القرآني:</strong><br>
-            القرآن الكريم ذكر قوة الأقوام السابقة كقوم عاد {وَزَادَكُمْ فِي الْخَلْقِ بَسْطَةً}، لكنه لم يذهب أبداً لتلك الأرقام الفلكية التي تخرج بالبشر عن بشريتهم وتحولهم إلى كائنات أسطورية. القرآن يتسم بالواقعية والجلال، بينما تميل الإسرائيليات في الروايات إلى المبالغة العددية التي تثير العجب أكثر من الإيمان.<br><br>
-            <strong>تطهير العقيدة:</strong><br>
-            إن كشف "المنبع التلمودي" لهذه الرواية يحمي مقام النبوة من نِسبة معلومات جغرافية وطبية خاطئة إليه. الإسلام دين العقل والواقع، وتنزيه مروياته من ملحقات العهود السابقة هو ضرورة لاستعادة رصانة الفكر الإسلامي وربطه باليقين القرآني الذي نزه الأنبياء عن المبالغات.`
-        },
-        {  
-            id: 3, 
-            title: "رجم الزاني: استنساخ شريعة موسى", 
-            source: "البخاري", 
-            sourceUrl: "https://dorar.net/h/mRvdilfh", 
-            text: "عن ابن عباس رضي الله عنهما أن عمر بن الخطاب قال: (إنَّ اللَّهَ بَعَثَ مُحَمَّدًا بالْحَقِّ، وأَنْزَلَ عليه الكِتَابَ، فَكانَ ممَّا أُنْزِلَ عليه آيَةُ الرَّجْمِ، فَقَرَأْنَاهَا ووَعَيْنَاهَا وعَقَلْنَاهَا، ورَجَمَ رَسولُ اللَّهِ ورَجَمْنَا بَعْدَهُ...) (وتدعي روايات أخرى أن آية الرجم كانت في القرآن \"الشيخ والشيخة إذا زنيا فارجموهما البتة\" ثم سقطت لأن \"الداجن أكلتها\".)",
-            num: "6830", 
-            comparison: "<strong>التطابق الحرفي مع شريعة موسى (التوراة):</strong><br>\n            تُعد عقوبة \"الرجم حتى الموت\" هي العقوبة الأصلية للزنا في شريعة العهد القديم. نجدها في سِفر التثنية (22: 22): (إِذَا وُجِدَ رَجُلٌ مُضْطَجِعًا مَعَ امْرَأَةٍ زَوْجَةِ بَعْل، يُقْتَلُ الاثْنَانِ: الرَّجُلُ الْمُضْطَجِعُ مَعَ الْمَرْأَةِ، وَالْمَرْأَةُ. فَتَنْزِعُ الشَّرَّ مِنْ إِسْرَائِيلَ). وفي سِفر اللاويين (20: 10): (يُقْتَلُ الزَّانِي وَالزَّانِيَةُ). والتقاليد اليهودية (التلمود) فصّلت أن القتل يكون بالرجم.<br><br>\n            <strong>المصادمة مع \"النسخ\" القرآني للرجم:</strong><br>\n            جاء القرآن الكريم ليضع عقوبة جديدة ومختلفة تماماً (وهي الجلد): {الزَّانِيَةُ وَالزَّانِي فَاجْلِدُوا كُلَّ وَاحِدٍ مِّنْهُمَا مِائَةَ جَلْدَةٍ} [النور: 2]. الآية عامة وشاملة، ولم تذكر رُجماً ولا تفريقاً بين متزوج وغيره. الرواية تحاول إعادة \"التشريع التوراتي\" الذي ألغاه القرآن، وإحياء عقوبة دموية نزه الله كتابه عنها.<br><br>\n            <strong>أسطورة \"الآية الضائعة\":</strong><br>\n            ادعاء الرواة بأن هناك \"آية رُفعت تلاوتها وبقي حكمها\" هو محاكاة لعقلية الأحبار الذين كانوا يضيفون للهوامش والتفاسير صفة \"الوحي\". والمنطق القرآني يرفض ذلك؛ فالله تعهد بحفظ \"الذكر\"، والقول بأن آية \"الرجم\" أكلتها (داجن/سخلة) كما في روايات أخرى هو إهانة لحرمة الوحي وتشكيك في كمال القرآن.<br><br>\n            <strong>تسلل الناموس اليهودي للفقه:</strong><br>\n            يثبت هذا التقارب أن الفقه الروائي قد تأثر بعمق بـ \"الناموس الموسوي\" الذي يميل للقسوة البدائية، وحاول الرواة إقحام هذه القسوة في الإسلام عبر بوابة \"السنة\"، متجاهلين أن الإسلام جاء بالرحمة وبالتخفيف من الآصار والأغلال التي كانت على بني إسرائيل."
-        }
+    // تم الإبقاء على مسمى المتغير novelsData لضمان عدم تأثر وظائف الصفحة الأخرى
+    const novelsData =[
+        { id: 1, title: "وما ينطق عن الهوى", source: "سورة النجم", url: "ayat/hawa.html", text: "دراسة وتفصيل دلالات آية وما ينطق عن الهوى" },
+        { id: 2, title: "وما اتاكم الرسول فخذوه", source: "سورة الحشر", url: "ayat/atakum.html", text: "دراسة وتفصيل دلالات آية وما آتاكم الرسول فخذوه" },
+        { id: 3, title: "اطيعوا الله واطيعوا الرسول", source: "مواضع متعددة", url: "ayat/ateo.html", text: "دراسة وتفصيل دلالات آية أطيعوا الله وأطيعوا الرسول" },
+        { id: 4, title: "حتى يحكموك فيما شجر بينهم", source: "سورة النساء", url: "ayat/yahkomok.html", text: "دراسة وتفصيل دلالات آية فلا وربك لا يؤمنون حتى يحكموك" },
+        { id: 5, title: "فردوه إلى الله والرسول", source: "سورة النساء", url: "ayat/rodoh.html", text: "دراسة وتفصيل دلالات آية فإن تنازعتم في شيء فردوه" },
+        { id: 6, title: "لتبين لهم", source: "سورة النحل", url: "ayat/tobayen.html", text: "دراسة وتفصيل دلالات آية وأنزلنا إليك الذكر لتبين للناس" },
+        { id: 7, title: "الحكمة", source: "مواضع متعددة", url: "ayat/hekma.html", text: "تأصيل وتحرير معنى كلمة الحكمة في القرآن الكريم" },
+        { id: 8, title: "فليحذر الذين يخالفون عن أمره", source: "سورة النور", url: "ayat/yokhalefoon.html", text: "دراسة وتفصيل دلالات آية فليحذر الذين يخالفون عن أمره" }
     ];
 
     let currentPage = 1;
@@ -490,7 +449,7 @@
             });
             cachedPagesContent = (await Promise.all(promises)).filter(Boolean);
             return cachedPagesContent;
-        } catch (error) { return []; }
+        } catch (error) { return[]; }
     }
 
     function getSafeRegex(searchTerm) {
@@ -520,9 +479,9 @@
         const normQuery = normalizeArabic(query.toLowerCase());
         const searchRegex = getSafeRegex(query);
 
-        let localResults = [];
+        let localResults =[];
         novelsData.forEach((novel, index) => {
-            const searchField = normalizeArabic(novel.title + novel.text + novel.comparison).toLowerCase();
+            const searchField = normalizeArabic(novel.title + (novel.text || "")).toLowerCase();
             if (searchField.includes(normQuery)) {
                 localResults.push({ ...novel, originalIndex: index });
             }
@@ -556,9 +515,8 @@
             const highlightedTitle = highlightText(result.title, normQuery);
             item.innerHTML = `<h3><i class="fas fa-book-open"></i> ${highlightedTitle}</h3><p style="font-size:0.85rem; color:#666;">(داخل هذه الصفحة - تحرير آيات الاستدلال)</p>`;
             item.onclick = () => {
-                jumpToNovel(result.originalIndex, result.id, normQuery);
-                resultsContainer.style.display = 'none';
-                document.getElementById('globalSearch').value = '';
+                // بدلاً من التوسع، نقوم بالانتقال للرابط المخصص للآية
+                window.location.href = result.url;
             };
             resultsContainer.appendChild(item);
         });
@@ -576,16 +534,13 @@
         });
     }
 
+    // الدالة تم الإبقاء عليها كما طلبت لضمان عدم حذف أي كود، على الرغم من أن البطاقة أصبحت رابطاً
     function jumpToNovel(index, id, searchQuery = null) {
         currentPage = Math.floor(index / perPage) + 1;
         renderNovels(searchQuery);
         setTimeout(() => {
             const card = document.getElementById(`card-taweel-${id}`);
             if (card) {
-                const details = card.querySelector('.hadith-details');
-                if (!details.classList.contains('open')) {
-                    toggleHadith(card.querySelector('.hadith-summary'));
-                }
                 card.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 card.style.boxShadow = "0 0 15px var(--accent-gold)";
                 setTimeout(() => card.style.boxShadow = "var(--shadow-sm)", 2000);
@@ -602,42 +557,26 @@
 
         pageData.forEach((novel) => {
             let titleText = novel.title;
-            let textText = novel.text;
-            let comparisonText = novel.comparison;
             
             if (searchQuery) {
                 titleText = highlightText(titleText, searchQuery);
-                textText = highlightText(textText, searchQuery);
-                comparisonText = highlightText(comparisonText, searchQuery);
             }
 
             container.innerHTML += `
             <div class="hadith-row">
                 <div class="hadith-number-circle">${novel.id}</div>
                 <div class="hadith-card" id="card-taweel-${novel.id}">
-                    <i class="far fa-bookmark fav-header-icon" data-id="${novel.id}" onclick="toggleFavorite(event, ${novel.id})"></i>
-                    <div class="hadith-summary" onclick="toggleHadith(this)">
+                    <i class="far fa-bookmark fav-header-icon" data-id="${novel.id}" onclick="toggleFavorite(event, ${novel.id})" title="حفظ في المفضلة"></i>
+                    
+                    <!-- تم تحويل البطاقة إلى رابط (a tag) لفتح صفحة جديدة -->
+                    <a href="${novel.url}" class="hadith-summary">
                         <h3>${titleText}</h3>
                         <div style="display:flex; align-items:center; gap:12px;">
                             <span class="source-tag">${novel.source}</span>
-                            <i class="fas fa-chevron-down toggle-icon"></i>
+                            <i class="fas fa-flag" title="إبلاغ" onclick="event.preventDefault(); event.stopPropagation(); openReportModal('${novel.title}', '');" style="color: #e11d48; cursor: pointer; opacity: 0.6; padding: 5px; font-size: 0.9rem; transition: 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'"></i>
+                            <i class="fas fa-arrow-left toggle-icon" style="color: var(--primary-color); font-size: 1.1rem; margin-right: 5px;"></i>
                         </div>
-                    </div>
-                    <div class="hadith-details">
-                        <div class="detail-section">
-                            <div class="section-header"><i class="fas fa-quote-right"></i> الرواية</div>
-                            <div class="section-content">${textText}</div>
-                            ${novel.num ? `<div class="section-content"><b style="font-weight: bold;">رقم الرواية: ${novel.num}</b></div>` : ''}
-                            <div class="hadith-actions">
-                                <a href="${novel.sourceUrl}" target="_blank" class="action-btn btn-source"><i class="fas fa-external-link-alt"></i> مصدر الرواية</a>
-                                <div class="action-btn btn-report" onclick="openReportModal('${novel.title}', '${novel.num}')"><i class="fas fa-flag"></i> إبلاغ</div>
-                            </div>
-                        </div>
-                        <div class="detail-section">
-                            <div class="section-header"><i class="fas fa-code-branch"></i> وجه التقارب: المقارنة مع النصوص السابقة</div>
-                            <div class="section-content">${comparisonText}</div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>`;
         });
@@ -645,47 +584,49 @@
         syncFavIcons();
     }
 
+    // الدالة تم الإبقاء عليها كما طلبت تحسباً لاستخدامها المستقبلي
     function toggleHadith(el) {
         const details = el.nextElementSibling;
+        if(!details) return;
         const row = el.closest('.hadith-row');
         details.classList.toggle('open');
         row.classList.toggle('is-open');
         const icon = el.querySelector('.toggle-icon');
-        if(icon) icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+        if(icon && icon.classList.contains('fa-chevron-down')) {
+            icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
     }
 
-    // ==================== الدالة المعدلة لحفظ المفضلة (معرف فريد لهذا القالب) ====================
     function toggleFavorite(e, id) {
+        e.preventDefault(); // لمنع تفعيل الرابط الخاص بالآية
         e.stopPropagation();
-        // استخدام معرف فريد لهذا القالب: taweel_ (تحرير آيات الاستدلال)
+        
         const cardId = 'taweel_' + id;
-        let favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
+        let favs = JSON.parse(localStorage.getItem('myFavorites')) ||[];
         const idx = favs.findIndex(f => f.id === cardId);
         if (idx > -1) {
             favs.splice(idx, 1);
         } else {
             const novel = novelsData.find(n => n.id == id);
             favs.push({ 
-                id: cardId,                      // معرف فريد: taweel_1, taweel_2, ...
+                id: cardId,                      
                 title: novel.title, 
-                type: 'taweel',                 // نوع فريد لهذا القالب
+                type: 'taweel',                 
                 novelId: id, 
-                page: 'hadith_taweel',          // صفحة المصدر
+                page: 'hadith_taweel',          
                 source: novel.source,
-                text: novel.text.substring(0, 100),
-                num: novel.num
+                text: novel.text ? novel.text.substring(0, 100) : "",
+                url: novel.url // تم إضافة رابط الآية للمفضلة
             });
         }
         localStorage.setItem('myFavorites', JSON.stringify(favs));
         syncFavIcons();
         
-        // إظهار رسالة تأكيد
         const toast = document.getElementById("successToast");
-        toast.querySelector('span').textContent = 'تم حفظ الرواية في المفضلة';
+        toast.querySelector('span').textContent = 'تم الحفظ في المفضلة';
         toast.classList.add("show");
         setTimeout(() => toast.classList.remove("show"), 2000);
     }
-    // ====================================================================
 
     function syncFavIcons() {
         const favs = JSON.parse(localStorage.getItem('myFavorites')) || [];
