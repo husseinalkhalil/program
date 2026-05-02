@@ -243,6 +243,16 @@
             color: var(--accent-gold); 
         }
 
+        .hadith-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-top: 10px;
+            text-align: right;
+            border-top: 1px dashed rgba(0,0,0,0.05);
+            padding-top: 12px;
+        }
+
         .card-action-icon {
             background: rgba(212, 175, 55, 0.1);
             width: 45px;
@@ -254,19 +264,8 @@
             transition: all 0.3s ease;
         }
 
-        .toggle-icon {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
         .hadith-card:hover .card-action-icon {
             background: var(--accent-gold);
-        }
-
-        .hadith-card:hover .toggle-icon {
-            color: #ffffff;
-            transform: translateX(-5px);
         }
 
         /* تنسيقات للتفاصيل في حال التوسع مستقبلاً */
@@ -345,7 +344,6 @@
             .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
             .fav-header-icon { font-size: 1.4rem; }
             .card-action-icon { width: 35px; height: 35px; }
-            .toggle-icon { font-size: 1rem; }
         }
     </style>
 </head>
@@ -450,16 +448,15 @@
 
 <script>
     // ==================== البيانات - تحرير آيات الاستدلال ====================
-    // تم الإبقاء على مسمى المتغير novelsData وجميع بياناته كما طلبت
     const novelsData =[
-        { id: 1, title: "وما ينطق عن الهوى", source: "سورة النجم", url: "9.html", text: "دراسة وتفصيل دلالات آية وما ينطق عن الهوى" },
-        { id: 2, title: "وما اتاكم الرسول فخذوه", source: "سورة الحشر", url: "10.html", text: "دراسة وتفصيل دلالات آية وما آتاكم الرسول فخذوه" },
-        { id: 3, title: "اطيعوا الله واطيعوا الرسول", source: "مواضع متعددة", url: "11.html", text: "دراسة وتفصيل دلالات آية أطيعوا الله وأطيعوا الرسول" },
-        { id: 4, title: "حتى يحكموك فيما شجر بينهم", source: "سورة النساء", url: "12.html", text: "دراسة وتفصيل دلالات آية فلا وربك لا يؤمنون حتى يحكموك" },
-        { id: 5, title: "فردوه إلى الله والرسول", source: "سورة النساء", url: "13.html", text: "دراسة وتفصيل دلالات آية فإن تنازعتم في شيء فردوه" },
-        { id: 6, title: "لتبين لهم", source: "سورة النحل", url: "14.html", text: "دراسة وتفصيل دلالات آية وأنزلنا إليك الذكر لتبين للناس" },
-        { id: 7, title: "الحكمة", source: "مواضع متعددة", url: "15.html", text: "تأصيل وتحرير معنى كلمة الحكمة في القرآن الكريم" },
-        { id: 8, title: "فليحذر الذين يخالفون عن أمره", source: "سورة النور", url: "16.html", text: "دراسة وتفصيل دلالات آية فليحذر الذين يخالفون عن أمره" }
+        { id: 1, title: "وما ينطق عن الهوى", text: "دراسة وتفصيل دلالات آية وما ينطق عن الهوى" },
+        { id: 2, title: "وما اتاكم الرسول فخذوه", text: "دراسة وتفصيل دلالات آية وما آتاكم الرسول فخذوه" },
+        { id: 3, title: "اطيعوا الله واطيعوا الرسول", text: "دراسة وتفصيل دلالات آية أطيعوا الله وأطيعوا الرسول" },
+        { id: 4, title: "حتى يحكموك فيما شجر بينهم", text: "دراسة وتفصيل دلالات آية فلا وربك لا يؤمنون حتى يحكموك" },
+        { id: 5, title: "فردوه إلى الله والرسول", text: "دراسة وتفصيل دلالات آية فإن تنازعتم في شيء فردوه" },
+        { id: 6, title: "لتبين لهم", text: "دراسة وتفصيل دلالات آية وأنزلنا إليك الذكر لتبين للناس" },
+        { id: 7, title: "الحكمة", text: "تأصيل وتحرير معنى كلمة الحكمة في القرآن الكريم" },
+        { id: 8, title: "فليحذر الذين يخالفون عن أمره", text: "دراسة وتفصيل دلالات آية فليحذر الذين يخالفون عن أمره" }
     ];
 
     let currentPage = 1;
@@ -638,9 +635,11 @@
 
         pageData.forEach((novel) => {
             let titleText = novel.title;
+            let descText = novel.text;
             
             if (searchQuery) {
                 titleText = highlightText(titleText, searchQuery);
+                descText = highlightText(descText, searchQuery);
             }
 
             container.innerHTML += `
@@ -648,13 +647,12 @@
                 <div class="hadith-number-circle">${novel.id}</div>
                 <div class="hadith-card" id="card-taweel-${novel.id}">
                     <a href="${novel.url}" class="hadith-summary">
-                        <h3>${titleText}</h3>
+                        <div style="flex:1;">
+                            <h3>${titleText}</h3>
+                            <div class="hadith-description">${descText}</div>
+                        </div>
                         <div class="actions-wrapper">
-                            <!-- تم الإبقاء على المفضلة ونقلها لتكون متناسقة مع التصميم الجديد وتمت إزالة المصدر وزر البلاغ من العرض هنا -->
                             <i class="far fa-bookmark fav-header-icon" data-id="${novel.id}" onclick="toggleFavorite(event, ${novel.id})" title="حفظ في المفضلة"></i>
-                            <div class="card-action-icon">
-                                <i class="fas fa-arrow-left toggle-icon"></i>
-                            </div>
                         </div>
                     </a>
                 </div>
@@ -662,18 +660,6 @@
         });
         updatePaginationUI();
         syncFavIcons();
-    }
-
-    function toggleHadith(el) {
-        const details = el.nextElementSibling;
-        if(!details) return;
-        const row = el.closest('.hadith-row');
-        details.classList.toggle('open');
-        row.classList.toggle('is-open');
-        const icon = el.querySelector('.toggle-icon');
-        if(icon && icon.classList.contains('fa-chevron-down')) {
-            icon.style.transform = details.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
-        }
     }
 
     function toggleFavorite(e, id) {
@@ -693,9 +679,7 @@
                 type: 'taweel',                 
                 novelId: id, 
                 page: 'hadith_taweel',          
-                source: novel.source, // احتفظنا بالمصدر في البيانات للحفظ فقط
                 text: novel.text ? novel.text.substring(0, 100) : "",
-                url: novel.url 
             });
         }
         localStorage.setItem('myFavorites', JSON.stringify(favs));
@@ -730,7 +714,7 @@
     function updatePaginationUI() {
         const totalPages = Math.ceil(novelsData.length / perPage) || 1;
         document.getElementById('pageInfo').textContent = `الصفحة ${currentPage} من ${totalPages}`;
-        document.getElementById('totalHadithCount').textContent = `عدد الروايات: ${novelsData.length}`;
+        document.getElementById('totalHadithCount').textContent = `عدد الآيات: ${novelsData.length}`;
         document.getElementById('prevPage').disabled = (currentPage === 1);
         document.getElementById('nextPage').disabled = (currentPage === totalPages);
         document.getElementById('firstPage').disabled = (currentPage === 1);
