@@ -35,7 +35,9 @@
             --radius-xl: 1.5rem;
             --nav-height: 75px;
             --gradient-header: linear-gradient(135deg, #fdfcf8 0%, #f1e4c0 100%);
-            --dynamic-content-size: 1.15rem;
+            
+            /* حجم الخط الأساسي للمحتوى فقط */
+            --content-font-size: 1rem;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,6 +50,7 @@
             overflow-x: hidden;
             width: 100%;
             animation: fadeInPage 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            font-size: 16px;
         }
 
         @keyframes fadeInPage {
@@ -205,8 +208,9 @@
             color: inherit;
         }
         
+        /* المحتوى النصي الذي سيتأثر بالتكبير */
         .hadith-summary h3 { 
-            font-size: 1.4rem; 
+            font-size: calc(1.4rem * var(--content-font-size, 1));
             color: var(--primary-color); 
             font-weight: 800; 
             flex: 1; 
@@ -244,7 +248,7 @@
         }
 
         .hadith-description {
-            font-size: 0.85rem;
+            font-size: calc(0.85rem * var(--content-font-size, 1));
             color: var(--text-secondary);
             line-height: 1.6;
             margin-top: 10px;
@@ -271,8 +275,18 @@
         .hadith-details { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out; background: #fefcf7; }
         .hadith-details.open { max-height: 10000px; opacity: 1; padding: 10px 30px 50px; border-top: 1px solid rgba(0,0,0,0.05); }
         .detail-section { margin-top: 25px; background: transparent; border: none; }
-        .section-header { padding-bottom: 8px; margin-bottom: 10px; font-weight: 800; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; color: var(--primary-color); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .section-content { padding: 5px 0 10px; line-height: 1.9; font-size: var(--dynamic-content-size); color: var(--text-primary); }
+        .section-header { 
+            padding-bottom: 8px; margin-bottom: 10px; font-weight: 800; 
+            font-size: calc(1.1rem * var(--content-font-size, 1));
+            display: flex; align-items: center; gap: 10px; color: var(--primary-color);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .section-content { 
+            padding: 5px 0 10px; 
+            line-height: 1.9; 
+            font-size: calc(1rem * var(--content-font-size, 1));
+            color: var(--text-primary); 
+        }
 
         /* ==================== Font Controls & Back to top ==================== */
         .font-controls-fixed { 
@@ -358,7 +372,7 @@
 
         /* ==================== Mobile Design ==================== */
         @media (max-width: 768px) {
-            .hadith-summary h3 { font-size: 1.1rem; }
+            .hadith-summary h3 { font-size: calc(1.1rem * var(--content-font-size, 1)); }
             .unified-header { padding: calc(var(--nav-height) + 20px) 15px 40px; border-radius: 0 0 35px 35px; }
             .page-title { font-size: 1.7rem; }
             .hadith-row { flex-direction: row; gap: 15px; }
@@ -486,7 +500,7 @@
 
     let currentPage = 1;
     const perPage = 15;
-    let currentFontSizeRem = 1.15;
+    let currentContentFontSize = 1;
 
     function normalizeArabic(text) {
         if (!text) return "";
@@ -512,23 +526,60 @@
         document.body.classList.toggle('no-scroll');
     }
 
-    /* ==================== Font Size Control (Copied from Original Code) ==================== */
-    function updateFontSize() {
-        document.documentElement.style.setProperty('--dynamic-content-size', currentFontSizeRem + 'rem');
+    /* ==================== Font Size Control - يطبق فقط على المحتوى ==================== */
+    function applyContentFontSize() {
+        // تطبيق حجم الخط على متغير CSS الخاص بالمحتوى فقط
+        document.documentElement.style.setProperty('--content-font-size', currentContentFontSize);
+        
+        // حفظ الحجم في localStorage
+        localStorage.setItem('preferredContentFontSize', currentContentFontSize);
     }
 
-    document.getElementById('fontIncrease').onclick = () => { 
-        currentFontSizeRem += 0.1; 
-        updateFontSize(); 
-    };
-    document.getElementById('fontDecrease').onclick = () => { 
-        if(currentFontSizeRem > 0.8) currentFontSizeRem -= 0.1; 
-        updateFontSize(); 
-    };
-    document.getElementById('fontReset').onclick = () => { 
-        currentFontSizeRem = 1.15; 
-        updateFontSize(); 
-    };
+    function increaseFontSize() {
+        if (currentContentFontSize < 1.8) {
+            currentContentFontSize = Math.min(1.8, currentContentFontSize + 0.1);
+            applyContentFontSize();
+            showToastMessage(`تم تكبير الخط إلى ${Math.round(currentContentFontSize * 100)}%`);
+        } else {
+            showToastMessage('تم الوصول إلى أكبر حجم للخط', 1500);
+        }
+    }
+
+    function decreaseFontSize() {
+        if (currentContentFontSize > 0.7) {
+            currentContentFontSize = Math.max(0.7, currentContentFontSize - 0.1);
+            applyContentFontSize();
+            showToastMessage(`تم تصغير الخط إلى ${Math.round(currentContentFontSize * 100)}%`);
+        } else {
+            showToastMessage('تم الوصول إلى أصغر حجم للخط', 1500);
+        }
+    }
+
+    function resetFontSize() {
+        currentContentFontSize = 1;
+        applyContentFontSize();
+        showToastMessage('تم إعادة تعيين الخط إلى الحجم الطبيعي');
+    }
+
+    function showToastMessage(message, duration = 2000) {
+        const toast = document.getElementById("successToast");
+        if (toast) {
+            toast.querySelector('span').textContent = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), duration);
+        }
+    }
+
+    // تحميل الحجم المحفوظ من localStorage
+    function loadSavedFontSize() {
+        const saved = localStorage.getItem('preferredContentFontSize');
+        if (saved && !isNaN(saved)) {
+            currentContentFontSize = Math.min(1.8, Math.max(0.7, parseFloat(saved)));
+        } else {
+            currentContentFontSize = 1;
+        }
+        applyContentFontSize();
+    }
 
     /* ==================== GLOBAL SEARCH LOGIC ==================== */
     let cachedPagesContent = null;
@@ -700,10 +751,7 @@
         const idx = favs.findIndex(f => f.id === cardId);
         if (idx > -1) {
             favs.splice(idx, 1);
-            const toast = document.getElementById("successToast");
-            toast.querySelector('span').textContent = 'تمت الإزالة من المفضلة';
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 2000);
+            showToastMessage('تمت الإزالة من المفضلة');
         } else {
             const novel = novelsData.find(n => n.id == id);
             favs.push({ 
@@ -714,10 +762,7 @@
                 page: 'hadith_taweel',          
                 text: novel.text ? novel.text.substring(0, 100) : "",
             });
-            const toast = document.getElementById("successToast");
-            toast.querySelector('span').textContent = 'تم الحفظ في المفضلة';
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 2000);
+            showToastMessage('تم الحفظ في المفضلة');
         }
         localStorage.setItem('myFavorites', JSON.stringify(favs));
         syncFavIcons();
@@ -756,10 +801,22 @@
         document.body.classList.remove('no-scroll');
     }
 
-    // تهيئة الصفحة
+    // ربط الأزرار بأحداث النقر
     document.addEventListener('DOMContentLoaded', () => {
+        // تهيئة حجم الخط المحفوظ
+        loadSavedFontSize();
+        
+        // ربط أزرار التحكم بالخط
+        const fontIncreaseBtn = document.getElementById('fontIncrease');
+        const fontDecreaseBtn = document.getElementById('fontDecrease');
+        const fontResetBtn = document.getElementById('fontReset');
+        
+        if (fontIncreaseBtn) fontIncreaseBtn.addEventListener('click', increaseFontSize);
+        if (fontDecreaseBtn) fontDecreaseBtn.addEventListener('click', decreaseFontSize);
+        if (fontResetBtn) fontResetBtn.addEventListener('click', resetFontSize);
+        
+        // عرض البيانات
         renderNovels();
-        updateFontSize();
 
         // ربط أزرار التنقل
         const nextBtn = document.getElementById('nextPage');
@@ -841,17 +898,11 @@
                 body: new URLSearchParams(formData).toString(),
             }).then(() => {
                 closeReportModal();
-                const toast = document.getElementById("successToast");
-                toast.querySelector('span').textContent = 'شكراً لمساهمتك';
-                toast.classList.add("show");
-                setTimeout(() => toast.classList.remove("show"), 3000);
+                showToastMessage('شكراً لمساهمتك');
                 this.reset();
             }).catch(() => {
                 closeReportModal();
-                const toast = document.getElementById("successToast");
-                toast.querySelector('span').textContent = 'تم استلام البلاغ';
-                toast.classList.add("show");
-                setTimeout(() => toast.classList.remove("show"), 3000);
+                showToastMessage('تم استلام البلاغ');
                 this.reset();
             });
         });
