@@ -35,9 +35,6 @@
             --radius-xl: 1.5rem;
             --nav-height: 75px;
             --gradient-header: linear-gradient(135deg, #fdfcf8 0%, #f1e4c0 100%);
-            
-            /* حجم الخط الأساسي - سيتم تحديثه عبر JavaScript */
-            --base-font-size: 16px;
             --dynamic-content-size: 1.15rem;
         }
 
@@ -51,7 +48,6 @@
             overflow-x: hidden;
             width: 100%;
             animation: fadeInPage 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-            font-size: var(--base-font-size);
         }
 
         @keyframes fadeInPage {
@@ -61,24 +57,6 @@
 
         body.no-scroll { overflow: hidden !important; height: 100vh; position: fixed; width: 100%; }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
-
-        /* تطبيق حجم الخط على جميع العناصر النصية */
-        .hadith-summary h3,
-        .hadith-description,
-        .section-content,
-        .page-title,
-        .page-subtitle,
-        .search-item,
-        .modal-box,
-        .footer-links a,
-        .copyright,
-        .nav-links a,
-        .pagination-btn,
-        .report-option span,
-        .btn-send,
-        .btn-cancel {
-            transition: font-size 0.3s ease;
-        }
 
         /* ==================== Navigation ==================== */
         .nav-overlay {
@@ -305,25 +283,19 @@
             flex-direction: column; 
             gap: 10px; 
             z-index: 990; 
-            background: rgba(255,255,255,0.95);
-            padding: 10px;
-            border-radius: 60px;
-            box-shadow: var(--shadow-md);
-            backdrop-filter: blur(5px);
         }
         .font-btn { 
             width: 45px; 
             height: 45px; 
             border-radius: 50%; 
             background: white; 
-            border: 2px solid var(--accent-gold); 
+            border: 1px solid var(--accent-gold); 
             color: var(--primary-color); 
             cursor: pointer; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 1.2rem; 
-            font-weight: bold;
+            font-size: 1.1rem; 
             box-shadow: var(--shadow-sm); 
             transition: 0.3s; 
         }
@@ -331,10 +303,6 @@
             background: var(--accent-gold); 
             color: white; 
             transform: scale(1.1); 
-            border-color: var(--primary-color);
-        }
-        .font-btn:active {
-            transform: scale(0.95);
         }
 
         .back-to-top {
@@ -397,15 +365,10 @@
             .hadith-summary { padding: 20px; }
             .hadith-number-circle { width: 45px; height: 45px; font-size: 1.1rem; }
             .hadith-card { width: 100%; }
-            .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; background: rgba(255,255,255,0.95); border-radius: 50px; padding: 8px 15px; }
+            .font-controls-fixed { left: 15px; top: auto; bottom: 20px; flex-direction: row; }
             .back-to-top { bottom: 80px; right: 20px; width: 45px; height: 45px; }
             .fav-header-icon { font-size: 1.4rem; }
             .card-action-icon { width: 35px; height: 35px; }
-        }
-
-        .font-btn:focus-visible {
-            outline: 2px solid var(--accent-gold);
-            outline-offset: 2px;
         }
     </style>
 </head>
@@ -436,9 +399,9 @@
 </nav>
 
 <div class="font-controls-fixed">
-    <button class="font-btn" id="fontIncrease" title="تكبير الخط" aria-label="تكبير الخط"><i class="fas fa-plus"></i></button>
-    <button class="font-btn" id="fontReset" title="إعادة تعيين حجم الخط" aria-label="إعادة تعيين حجم الخط"><i class="fas fa-redo"></i></button>
-    <button class="font-btn" id="fontDecrease" title="تصغير الخط" aria-label="تصغير الخط"><i class="fas fa-minus"></i></button>
+    <button class="font-btn" id="fontIncrease" title="تكبير"><i class="fas fa-plus"></i></button>
+    <button class="font-btn" id="fontReset" title="إعادة"><i class="fas fa-redo"></i></button>
+    <button class="font-btn" id="fontDecrease" title="تصغير"><i class="fas fa-minus"></i></button>
 </div>
 
 <button class="back-to-top" id="backToTop" title="العودة للأعلى"><i class="fas fa-chevron-up"></i></button>
@@ -523,7 +486,7 @@
 
     let currentPage = 1;
     const perPage = 15;
-    let currentFontSizePercent = 100;
+    let currentFontSizeRem = 1.15;
 
     function normalizeArabic(text) {
         if (!text) return "";
@@ -537,8 +500,7 @@
 
     function highlightText(text, query) {
         if (!query) return text;
-        const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const regex = new RegExp(`(${escapedQuery})`, 'gi');
+        const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
         return text.replace(regex, '<mark>$1</mark>');
     }
 
@@ -550,76 +512,23 @@
         document.body.classList.toggle('no-scroll');
     }
 
-    /* ==================== Font Size Control (Fixed - No auto messages) ==================== */
-    function applyFontSize(showMessage = false) {
-        // تطبيق حجم الخط على عنصر html
-        const baseSize = 16 * (currentFontSizePercent / 100);
-        document.documentElement.style.fontSize = baseSize + 'px';
-        
-        // تحديث المتغير المخصص للعناصر التي تستخدم rem
-        const remSize = 1.15 * (currentFontSizePercent / 100);
-        document.documentElement.style.setProperty('--dynamic-content-size', remSize + 'rem');
-        
-        // حفظ الحجم في localStorage
-        localStorage.setItem('preferredFontSize', currentFontSizePercent);
-        
-        // عرض رسالة فقط إذا طُلب ذلك (عند استخدام الأزرار فقط)
-        if (showMessage) {
-            let message = '';
-            if (currentFontSizePercent > 100) {
-                message = `تم تكبير الخط إلى ${currentFontSizePercent}%`;
-            } else if (currentFontSizePercent < 100) {
-                message = `تم تصغير الخط إلى ${currentFontSizePercent}%`;
-            } else {
-                message = `تم إعادة تعيين الخط إلى الحجم الطبيعي`;
-            }
-            showToastMessage(message);
-        }
+    /* ==================== Font Size Control (Copied from Original Code) ==================== */
+    function updateFontSize() {
+        document.documentElement.style.setProperty('--dynamic-content-size', currentFontSizeRem + 'rem');
     }
 
-    function increaseFontSize() {
-        if (currentFontSizePercent < 200) {
-            currentFontSizePercent += 10;
-            applyFontSize(true); // عرض رسالة عند التكبير
-        } else {
-            showToastMessage('تم الوصول إلى أكبر حجم للخط', 1500);
-        }
-    }
-
-    function decreaseFontSize() {
-        if (currentFontSizePercent > 60) {
-            currentFontSizePercent -= 10;
-            applyFontSize(true); // عرض رسالة عند التصغير
-        } else {
-            showToastMessage('تم الوصول إلى أصغر حجم للخط', 1500);
-        }
-    }
-
-    function resetFontSize() {
-        currentFontSizePercent = 100;
-        applyFontSize(true); // عرض رسالة عند إعادة التعيين
-    }
-
-    function showToastMessage(message, duration = 2000) {
-        const toast = document.getElementById("successToast");
-        if (toast) {
-            toast.querySelector('span').textContent = message;
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), duration);
-        }
-    }
-
-    // تحميل الحجم المحفوظ من localStorage (بدون عرض أي رسالة)
-    function loadSavedFontSize() {
-        const saved = localStorage.getItem('preferredFontSize');
-        if (saved && !isNaN(saved)) {
-            currentFontSizePercent = Math.min(200, Math.max(60, parseFloat(saved)));
-        } else {
-            currentFontSizePercent = 100;
-        }
-        // تطبيق الحجم بدون عرض رسالة (showMessage = false)
-        applyFontSize(false);
-    }
+    document.getElementById('fontIncrease').onclick = () => { 
+        currentFontSizeRem += 0.1; 
+        updateFontSize(); 
+    };
+    document.getElementById('fontDecrease').onclick = () => { 
+        if(currentFontSizeRem > 0.8) currentFontSizeRem -= 0.1; 
+        updateFontSize(); 
+    };
+    document.getElementById('fontReset').onclick = () => { 
+        currentFontSizeRem = 1.15; 
+        updateFontSize(); 
+    };
 
     /* ==================== GLOBAL SEARCH LOGIC ==================== */
     let cachedPagesContent = null;
@@ -791,7 +700,10 @@
         const idx = favs.findIndex(f => f.id === cardId);
         if (idx > -1) {
             favs.splice(idx, 1);
-            showToastMessage('تمت الإزالة من المفضلة');
+            const toast = document.getElementById("successToast");
+            toast.querySelector('span').textContent = 'تمت الإزالة من المفضلة';
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 2000);
         } else {
             const novel = novelsData.find(n => n.id == id);
             favs.push({ 
@@ -802,7 +714,10 @@
                 page: 'hadith_taweel',          
                 text: novel.text ? novel.text.substring(0, 100) : "",
             });
-            showToastMessage('تم الحفظ في المفضلة');
+            const toast = document.getElementById("successToast");
+            toast.querySelector('span').textContent = 'تم الحفظ في المفضلة';
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 2000);
         }
         localStorage.setItem('myFavorites', JSON.stringify(favs));
         syncFavIcons();
@@ -841,22 +756,10 @@
         document.body.classList.remove('no-scroll');
     }
 
-    // ربط الأزرار بأحداث النقر
+    // تهيئة الصفحة
     document.addEventListener('DOMContentLoaded', () => {
-        // تهيئة حجم الخط (بدون رسالة)
-        loadSavedFontSize();
-        
-        // ربط أزرار التحكم بالخط
-        const fontIncreaseBtn = document.getElementById('fontIncrease');
-        const fontDecreaseBtn = document.getElementById('fontDecrease');
-        const fontResetBtn = document.getElementById('fontReset');
-        
-        if (fontIncreaseBtn) fontIncreaseBtn.addEventListener('click', increaseFontSize);
-        if (fontDecreaseBtn) fontDecreaseBtn.addEventListener('click', decreaseFontSize);
-        if (fontResetBtn) fontResetBtn.addEventListener('click', resetFontSize);
-        
-        // عرض البيانات
         renderNovels();
+        updateFontSize();
 
         // ربط أزرار التنقل
         const nextBtn = document.getElementById('nextPage');
@@ -938,11 +841,17 @@
                 body: new URLSearchParams(formData).toString(),
             }).then(() => {
                 closeReportModal();
-                showToastMessage('شكراً لمساهمتك');
+                const toast = document.getElementById("successToast");
+                toast.querySelector('span').textContent = 'شكراً لمساهمتك';
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 3000);
                 this.reset();
             }).catch(() => {
                 closeReportModal();
-                showToastMessage('تم استلام البلاغ');
+                const toast = document.getElementById("successToast");
+                toast.querySelector('span').textContent = 'تم استلام البلاغ';
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 3000);
                 this.reset();
             });
         });
